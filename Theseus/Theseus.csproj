@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Gu.Wpf.NumericInput" Version="0.5.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
@@ -43,10 +44,6 @@
     <Resource Include="Resources\Icons\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Code\CustomStyles\" />
   </ItemGroup>
 
 </Project>

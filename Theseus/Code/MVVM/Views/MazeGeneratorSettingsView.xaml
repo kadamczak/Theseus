@@ -4,8 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Theseus.Code.MVVM.Views"
+             xmlns:numeric="http://gu.se/NumericInput"
+             xmlns:commands="clr-namespace:Theseus.Code.Commands"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <commands:MultiParameterCommandConverter x:Key="MultiParameterCommandConverter" />
+    </UserControl.Resources>
+    
+    
     <Grid Background="WhiteSmoke" Margin="40 40 40 40">
 
         <Grid.RowDefinitions>
@@ -19,19 +27,44 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.ColumnSpan="2" Content="Generate a maze" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
 
-        <ListBox Grid.Row="1" Grid.Column="0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectedItem="{Binding SelectedAlgorithm, Mode=OneWayToSource}">
-            <ListBoxItem IsSelected="True">Binary</ListBoxItem>
-            <ListBoxItem>Sidewinder</ListBoxItem>
-            <ListBoxItem>Kruskal</ListBoxItem>
-            <ListBoxItem>Prim's</ListBoxItem>
-            <ListBoxItem>Funny</ListBoxItem>
+            <Label Grid.Column="0" Content="Generate a maze" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
+
+            <StackPanel Grid.Column="1" Margin="70 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Label Content="Height" FontSize="16" FontWeight="Bold" />
+                <numeric:IntBox Height="40" Width="40" ValidationTrigger="PropertyChanged" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MinValue="2" MaxValue="99" Value="{Binding MazeHeight}"/>
+            </StackPanel>
+
+            <Label Grid.Column="1" VerticalAlignment="Center" Content="X" FontSize="23" FontFamily="Arial"/>
+
+
+            <StackPanel Grid.Column="1" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Label Content="Width" FontSize="16" FontWeight="Bold" />
+                <numeric:IntBox Height="40" Width="40" ValidationTrigger="PropertyChanged" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MinValue="2" MaxValue="99" Value="{Binding MazeWidth}"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <ListBox Grid.Row="1" Grid.Column="0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectedIndex="0" SelectedItem="{Binding SelectedAlgorithm, Mode=OneWayToSource}" ItemsSource="{Binding AvailableAlgorithms}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <ListBoxItem Content="{Binding DisplayName}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="50 0 0 0" TextWrapping="Wrap" FontSize="20" TextAlignment="Justify" Text="{Binding AlgorithmDescription}"/>
 
-        <Button Grid.Row="2" Grid.Column="1" Content="Generate" Margin="0 70 0 0" HorizontalAlignment="Center" Padding="10" FontSize="30" />
+        <Button Style="{StaticResource Generic}" Grid.Row="2" Grid.Column="1" Content="Generate" Margin="0 70 0 0" HorizontalAlignment="Center" Command="{Binding GenerateMaze}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource MultiParameterCommandConverter}">
+                    <Binding Path="SelectedAlgorithm.Algorithm" />
+                    <Binding Path="MazeHeight" />
+                    <Binding Path="MazeWidth" />
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
 
     </Grid>
 </UserControl>

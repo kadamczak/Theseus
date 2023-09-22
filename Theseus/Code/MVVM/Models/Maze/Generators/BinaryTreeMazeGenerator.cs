@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Theseus.Code.MVVM.Models.Maze.Enums;
+using Theseus.Code.MVVM.Models.Maze.GridStructure;
 
-namespace Theseus.Code.MVVM.Models.Maze
+namespace Theseus.Code.MVVM.Models.Maze.Generators
 {
-    public class BinaryTreeMazeGenerator
+    public class BinaryTreeMazeGenerator : MazeGenerator
     {
-        public BinaryTreeMazeGenerator()
-        {
-        }
+        public BinaryTreeMazeGenerator() {}
 
-        public void GenerateMaze(Grid mazeGrid)
+        public override void ApplyAlgorithm(Grid mazeGrid, Random rnd)
         {
-            Random rnd = new Random();
-
             foreach (var cell in mazeGrid)
             {
                 var cellNeighbours = cell.GetAdjecentCells(Direction.North, Direction.East);

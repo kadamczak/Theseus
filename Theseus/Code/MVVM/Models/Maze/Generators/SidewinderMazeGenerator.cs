@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Theseus.Code.MVVM.Models.Maze.Enums;
+using Theseus.Code.MVVM.Models.Maze.GridStructure;
 
-namespace Theseus.Code.MVVM.Models.Maze
+namespace Theseus.Code.MVVM.Models.Maze.Generators
 {
-    public class SidewinderMazeGenerator
+    public class SidewinderMazeGenerator : MazeGenerator
     {
-        public SidewinderMazeGenerator()
-        {
-        }
+        public SidewinderMazeGenerator() {}
 
-        public void GenerateMaze(Grid mazeGrid)
+        public override void ApplyAlgorithm(Grid mazeGrid, Random rnd)
         {
-            Random rnd = new Random();
-
             foreach (var row in mazeGrid.IterateRows())
             {
                 List<Cell> cellRun = new List<Cell>();
@@ -35,6 +30,7 @@ namespace Theseus.Code.MVVM.Models.Maze
                 }
             }
         }
+
 
         private bool CheckIfShouldEndRun(Cell currentCell, Random rnd)
         {
