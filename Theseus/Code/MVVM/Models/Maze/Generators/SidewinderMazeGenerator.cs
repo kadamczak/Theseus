@@ -9,7 +9,7 @@ namespace Theseus.Code.MVVM.Models.Maze.Generators
     {
         public SidewinderMazeGenerator() {}
 
-        public override void ApplyAlgorithm(Grid mazeGrid, Random rnd)
+        public override void ApplyAlgorithm(MazeGrid mazeGrid, Random rnd)
         {
             foreach (var row in mazeGrid.IterateRows())
             {

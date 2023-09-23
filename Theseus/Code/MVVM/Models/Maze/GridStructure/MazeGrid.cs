@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Theseus.Code.MVVM.Models.Maze.Enums;
 
 namespace Theseus.Code.MVVM.Models.Maze.GridStructure
 {
-    public class Grid : IEnumerable<Cell>
+    public class MazeGrid : IEnumerable<Cell>
     {
         //Grid info
         public int RowAmount { get; }           //Y
@@ -19,7 +16,7 @@ namespace Theseus.Code.MVVM.Models.Maze.GridStructure
         List<List<Cell>> CellMatrix { get; } = new List<List<Cell>>();
 
         //INITIALIZATION===========================
-        public Grid(int rows, int columns)
+        public MazeGrid(int rows, int columns)
         {
             if (rows <= 0)
             {

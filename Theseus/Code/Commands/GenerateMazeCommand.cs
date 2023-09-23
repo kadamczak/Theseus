@@ -28,7 +28,7 @@ namespace Theseus.Code.Commands
             int height = Int32.Parse(_viewModel.MazeHeight);
             int width = Int32.Parse(_viewModel.MazeWidth);
 
-            Grid maze = generator.GenerateMaze(height, width);
+            MazeGrid maze = generator.GenerateMaze(height, width);
 
             _mazeDetailNavigationService.Navigate();
         }
