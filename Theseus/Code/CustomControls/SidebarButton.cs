@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Theseus.Code.CustomControls
@@ -32,13 +28,13 @@ namespace Theseus.Code.CustomControls
             set { SetValue(TextProperty, value); }
         }
 
-        //public static readonly DependencyProperty NavUriProperty = DependencyProperty.Register("NavUri", typeof(Uri), typeof(SidebarButton), new PropertyMetadata(null));
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(SidebarButton), new PropertyMetadata(null));
 
-        //public Uri NavUri
-        //{
-        //    get { return (Uri)GetValue(NavUriProperty); }
-        //    set { SetValue(NavUriProperty, value); }
-        //}
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
 
     }
 }

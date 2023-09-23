@@ -33,7 +33,7 @@
 
             <StackPanel Grid.Column="1" Margin="70 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Label Content="Height" FontSize="16" FontWeight="Bold" />
-                <numeric:IntBox Height="40" Width="40" ValidationTrigger="PropertyChanged" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MinValue="2" MaxValue="99" Value="{Binding MazeHeight}"/>
+                <TextBox Height="40" Width="40" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MaxLength="2"  Text="{Binding MazeHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <Label Grid.Column="1" VerticalAlignment="Center" Content="X" FontSize="23" FontFamily="Arial"/>
@@ -41,7 +41,7 @@
 
             <StackPanel Grid.Column="1" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Label Content="Width" FontSize="16" FontWeight="Bold" />
-                <numeric:IntBox Height="40" Width="40" ValidationTrigger="PropertyChanged" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MinValue="2" MaxValue="99" Value="{Binding MazeWidth}"/>
+                <TextBox Height="40" Width="40" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MaxLength="2" Text="{Binding MazeWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
         </StackPanel>
@@ -56,15 +56,7 @@
 
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="50 0 0 0" TextWrapping="Wrap" FontSize="20" TextAlignment="Justify" Text="{Binding AlgorithmDescription}"/>
 
-        <Button Style="{StaticResource Generic}" Grid.Row="2" Grid.Column="1" Content="Generate" Margin="0 70 0 0" HorizontalAlignment="Center" Command="{Binding GenerateMaze}">
-            <Button.CommandParameter>
-                <MultiBinding Converter="{StaticResource MultiParameterCommandConverter}">
-                    <Binding Path="SelectedAlgorithm.Algorithm" />
-                    <Binding Path="MazeHeight" />
-                    <Binding Path="MazeWidth" />
-                </MultiBinding>
-            </Button.CommandParameter>
-        </Button>
+        <Button Style="{StaticResource Generic}" Grid.Row="2" Grid.Column="1" Content="Generate" Margin="0 70 0 0" HorizontalAlignment="Center" Command="{Binding GenerateMaze}" />
 
     </Grid>
 </UserControl>

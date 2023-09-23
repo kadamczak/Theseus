@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Theseus.Code.MVVM.Views.NavigationBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:custom="clr-namespace:Theseus.Code.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="784.04" d:DesignWidth="300">
+    
+    <Grid Background="Gainsboro">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Margin="0 50 0 30" Grid.Row="0" Content="Theseus" FontSize="57" HorizontalAlignment="Center" FontFamily="Microsoft YaHei Light"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" Margin="0 0 10 0">
+            <StackPanel Margin="10 0 0 0">
+                <custom:SidebarButton Text="Begin Test" ImageSource="/Resources/Icons/exam.png" />
+                <custom:SidebarButton Text="View Data" ImageSource="/Resources/Icons/database.png" />
+                <custom:SidebarButton Command="{Binding NavigateToMazeGenSettings}" Text="Create Mazes" ImageSource="/Resources/Icons/maze.png" />
+                <custom:SidebarButton Text="Create Sets" ImageSource="/Resources/Icons/documentation.png" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal" Height="60" Margin="0 10 0 10">
+            <custom:IconButton ImageSource="/Resources/Icons/settings.png" />
+            <custom:IconButton Command="{Binding NavigateToHome}" Margin="15 0 0 0" ImageSource="/Resources/Icons/information.png" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Theseus.Code.Commands;
 using Theseus.Code.MVVM.Models.Maze.Enums;
 using Theseus.Code.MVVM.ViewModels.Bindings;
+using Theseus.Code.Services;
 
 namespace Theseus.Code.MVVM.ViewModels
 {
@@ -13,8 +13,8 @@ namespace Theseus.Code.MVVM.ViewModels
     {
         private AlgorithmViewModel _selectedAlgorithm;
         private string _algorithmDescription = string.Empty;
-        private int _mazeHeight = 10;
-        private int _mazeWidth = 10;
+        private string _mazeHeight = "10";
+        private string _mazeWidth = "10";
 
         public ReadOnlyCollection<AlgorithmViewModel> AvailableAlgorithms { get; } = new List<AlgorithmViewModel> {
                                 new AlgorithmViewModel("Binary", MazeGenAlgorithm.Binary),
@@ -43,7 +43,7 @@ namespace Theseus.Code.MVVM.ViewModels
             }
         }
 
-        public int MazeHeight
+        public string MazeHeight
         {
             get => _mazeHeight;
             set
@@ -53,7 +53,7 @@ namespace Theseus.Code.MVVM.ViewModels
             }
         }
 
-        public int MazeWidth
+        public string MazeWidth
         {
             get => _mazeWidth;
             set
@@ -65,9 +65,9 @@ namespace Theseus.Code.MVVM.ViewModels
 
         public ICommand GenerateMaze { get; }
 
-        public MazeGeneratorSettingsViewModel()
+        public MazeGeneratorSettingsViewModel(NavigationService mazeDetailNavigationService)
         {
-            GenerateMaze = new GenerateMazeCommand();
+            GenerateMaze = new GenerateMazeCommand(this, mazeDetailNavigationService);
 
             PropertyChanged += HandlePropertyChange;
         }
@@ -90,18 +90,6 @@ namespace Theseus.Code.MVVM.ViewModels
             string algorithm = SelectedAlgorithm.Algorithm.ToString();
             AlgorithmDescription = (string)(App.Current.Resources[algorithm]);
         }
-
-        //protected override void OnPreviewTextInput(TextCompositionEventArgs e)
-        //{
-        //    char c = Convert.ToChar(e.Text);
-        //    if (Char.IsNumber(c))
-        //        e.Handled = false;
-        //    else
-        //        e.Handled = true;
-
-        //    base.OnPreviewTextInput(e);
-        //}
-
 
     }
 }

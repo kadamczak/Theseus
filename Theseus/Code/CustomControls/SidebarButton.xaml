@@ -16,7 +16,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SidebarButton}" >
                     
-                    <Button Background="GhostWhite" BorderThickness="0" >
+                    <Button Command="{TemplateBinding Command}" Background="GhostWhite" BorderThickness="0" >
                         <DockPanel Width="190" LastChildFill="False">
                             <Image DockPanel.Dock="Left" Source="{TemplateBinding ImageSource}" Width="30"/>
                             <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Text="{TemplateBinding Text}"></TextBlock>
