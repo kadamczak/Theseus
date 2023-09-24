@@ -147,19 +147,15 @@ namespace Theseus.Code.MVVM.Models.Maze.GridStructure
 
         private string GetCellEastText(Cell cell)
         {
-            Cell? eastCell = cell.AdjecentCellSpaces[Direction.East];
-
             string cellMiddle = "   ";
-            string cellEastBoundary = cell.IsLinked(eastCell) ? " " : "|";
+            string cellEastBoundary = cell.IsLinkedToNeighbour(Direction.East) ? " " : "|";
 
             return cellMiddle + cellEastBoundary;
         }
 
         private string GetCellSouthText(Cell cell)
         {
-            Cell? southCell = cell.AdjecentCellSpaces[Direction.South];
-
-            string cellSouthBoundary = cell.IsLinked(southCell) ? "   " : "---";
+            string cellSouthBoundary = cell.IsLinkedToNeighbour(Direction.South) ? "   " : "---";
             string cellCorner = "+";
 
             return cellSouthBoundary + cellCorner;

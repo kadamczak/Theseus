@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Theseus.Code.MVVM.Models.Maze.Enums
+﻿namespace Theseus.Code.MVVM.Models.Maze.Enums
 {
     public enum Direction
     {
-        East,
-        North,
-        West,
-        South
+        West = 8,
+        North = 4,
+        East = 2,
+        South = 1
     }
 }

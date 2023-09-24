@@ -21,8 +21,8 @@ namespace Theseus.Code.MVVM.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int mazeHeight = 20;
-            int mazeWidth = 25;
+            int mazeHeight = 10;
+            int mazeWidth = 12;
 
             MazeGenerator generator = MazeGeneratorFactory.Create(MazeGenAlgorithm.Sidewinder);
             MazeGrid maze = generator.GenerateMaze(mazeHeight, mazeWidth);
@@ -31,7 +31,7 @@ namespace Theseus.Code.MVVM.Views
 
             canvas.Children.Clear();
             
-            int cellSize = 15;
+            int cellSize = 30;
 
             int imageHeight = cellSize * mazeHeight;
             int imageWidth = cellSize * mazeWidth;
@@ -59,10 +59,10 @@ namespace Theseus.Code.MVVM.Views
                 if (!cell.HasNeighbour(Direction.West))
                     this.AddWall(canvas, x1, y1, x1, y2);
 
-                if (!cell.IsLinked(cell.AdjecentCellSpaces[Direction.East]))
+                if (!cell.IsLinkedToNeighbour(Direction.East))
                     this.AddWall(canvas, x2, y1, x2, y2);
 
-                if (!cell.IsLinked(cell.AdjecentCellSpaces[Direction.South]))
+                if (!cell.IsLinkedToNeighbour(Direction.South))
                     this.AddWall(canvas, x1, y2, x2, y2);
 
             }

@@ -26,7 +26,7 @@ namespace Theseus.Code.MVVM.Models.Maze.Generators
             int index = rnd.Next(0, cellNeighbours.Count());
             Cell randomCell = cellNeighbours.ElementAt(index);
 
-            currentCell.LinkToAnotherCell(randomCell);
+            currentCell.LinkTo(randomCell);
         }
 
     }

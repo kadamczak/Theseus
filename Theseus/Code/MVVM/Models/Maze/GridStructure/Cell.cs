@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Theseus.Code.MVVM.Models.Maze.Enums;
 
 namespace Theseus.Code.MVVM.Models.Maze.GridStructure
@@ -35,6 +33,11 @@ namespace Theseus.Code.MVVM.Models.Maze.GridStructure
         }
 
         //CELL LINKING==============================
+        public bool IsLinkedToNeighbour(Direction direction)
+        {
+            return this.IsLinked(this.AdjecentCellSpaces[direction]);
+        }
+
         public bool IsLinked(Cell? anotherCell)
         {
             if (anotherCell is null)
@@ -43,23 +46,43 @@ namespace Theseus.Code.MVVM.Models.Maze.GridStructure
             return LinkedCells.Contains(anotherCell);
         }
 
-        public void LinkToAnotherCell(Cell anotherCell, bool bidirectional = true)
+        public void LinkToNeighbour(Direction direction)
         {
+            Cell? neighbourCell = this.AdjecentCellSpaces[direction];
+
+            this.LinkTo(neighbourCell);
+        }
+
+        public void LinkTo(Cell anotherCell, bool bidirectional = true)
+        {
+            if (anotherCell is null)
+                throw new ArgumentException("Can't link cell to a null space.");
+
             LinkedCells.Add(anotherCell);
 
             if (bidirectional)
             {
-                anotherCell.LinkToAnotherCell(this, false);
+                anotherCell.LinkTo(this, false);
             }
         }
 
-        public void UnlinkFromAnotherCell(Cell anotherCell, bool bidirectional = true)
+        public void UnlinkFromNeighbour(Direction direction)
         {
+            Cell? neighbourCell = this.AdjecentCellSpaces[direction];
+
+            this.UnlinkFrom(neighbourCell);
+        }
+
+        public void UnlinkFrom(Cell anotherCell, bool bidirectional = true)
+        {
+            if (anotherCell is null)
+                throw new ArgumentException("Can't unlink cell from empty space.");
+
             LinkedCells.Remove(anotherCell);
 
             if (bidirectional)
             {
-                anotherCell.UnlinkFromAnotherCell(this, false);
+                anotherCell.UnlinkFrom(this, false);
             }
         }
 
