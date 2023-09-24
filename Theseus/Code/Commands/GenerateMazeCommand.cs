@@ -30,7 +30,7 @@ namespace Theseus.Code.Commands
 
             MazeGrid maze = generator.GenerateMaze(height, width);
 
-            _mazeDetailNavigationService.Navigate();
+            _mazeDetailNavigationService.Navigate(); //TODO
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

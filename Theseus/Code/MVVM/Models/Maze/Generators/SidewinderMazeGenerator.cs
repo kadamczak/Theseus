@@ -19,14 +19,10 @@ namespace Theseus.Code.MVVM.Models.Maze.Generators
                 {
                     cellRun.Add(cell);
 
-                    if (CheckIfShouldEndRun(cell, rnd)) //Links North
-                    {
-                        EndCellRun(cellRun, rnd);
-                    }
-                    else //Links East
-                    {
+                    if (CheckIfShouldEndRun(cell, rnd)) 
+                        EndCellRun(cellRun, rnd); //Links North
+                    else
                         LinkCellEast(cell);
-                    }
                 }
             }
         }
@@ -34,14 +30,11 @@ namespace Theseus.Code.MVVM.Models.Maze.Generators
 
         private bool CheckIfShouldEndRun(Cell currentCell, Random rnd)
         {
-            bool hasEastNeighbour = currentCell.AdjecentCellSpaces[Direction.East] is not null;
-            bool hasNorthNeighbour = currentCell.AdjecentCellSpaces[Direction.North] is not null;
-
-            if (!hasEastNeighbour)
+            if (!currentCell.HasNeighbour(Direction.East))
             {
                 return true;
             }
-            else if (hasNorthNeighbour && ShouldEraseNorthBorder(rnd))
+            else if (currentCell.HasNeighbour(Direction.North) && ShouldEraseNorthBorder(rnd))
             {
                 return true;
             }
@@ -73,6 +66,5 @@ namespace Theseus.Code.MVVM.Models.Maze.Generators
             if (eastCell is not null)
                 currentCell.LinkToAnotherCell(eastCell);
         }
-
     }
 }

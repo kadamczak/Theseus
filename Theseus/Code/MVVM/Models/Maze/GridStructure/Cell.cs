@@ -63,7 +63,7 @@ namespace Theseus.Code.MVVM.Models.Maze.GridStructure
             }
         }
 
-        //GETTING ADJECENT CELLS ON THE GRID=====================
+        //ADJECENT CELLS ON THE GRID=====================
         public IEnumerable<Cell> GetAdjecentCells()
         {
             return AdjecentCellSpaces.Values
@@ -76,6 +76,11 @@ namespace Theseus.Code.MVVM.Models.Maze.GridStructure
             return AdjecentCellSpaces.Where(c => directions.Contains(c.Key))
                                           .Where(c => c.Value is not null)
                                           .Select(c => c.Value!);
+        }
+
+        public bool HasNeighbour(Direction direction)
+        {
+            return this.AdjecentCellSpaces[direction] is not null;
         }
 
     }
