@@ -1,13 +1,17 @@
-﻿namespace Theseus.Code.MVVM.Models.Maze.Entity
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Theseus.Code.MVVM.Models.Maze.Dto
 {
-    public class MazeEntity
+    public class MazeDto
     {
-        public int Id { get; set; } = default!;
+        [Key]
+        public Guid Id { get; set; } = default!;
         public int Height { get; set; } = default!;
         public int Width { get; set; } = default!;
         public byte[] Data { get; set; } = default!;
 
-        public MazeEntity(int height, int width, byte[] data)
+        public MazeDto(int height, int width, byte[] data)
         {        
             Height = height;
             Width = width;

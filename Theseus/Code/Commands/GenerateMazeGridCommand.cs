@@ -8,12 +8,12 @@ using Theseus.Code.Services;
 
 namespace Theseus.Code.Commands
 {
-    public class GenerateMazeCommand : CommandBase
+    public class GenerateMazeGridCommand : CommandBase
     {
         private readonly MazeGeneratorSettingsViewModel _viewModel;
         private readonly NavigationService _mazeDetailNavigationService;
 
-        public GenerateMazeCommand(MazeGeneratorSettingsViewModel viewModel, NavigationService mazeDetailNavigationService)
+        public GenerateMazeGridCommand(MazeGeneratorSettingsViewModel viewModel, NavigationService mazeDetailNavigationService)
         {
             this._viewModel = viewModel;
             this._mazeDetailNavigationService = mazeDetailNavigationService;

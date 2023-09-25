@@ -1,16 +1,16 @@
 ﻿using Theseus.Code.Extensions;
-using Theseus.Code.MVVM.Models.Maze.Entity;
+using Theseus.Code.MVVM.Models.Maze.Dto;
 using Theseus.Code.MVVM.Models.Maze.Enums;
 using Theseus.Code.MVVM.Models.Maze.GridStructure;
 
 namespace Theseus.Code.MVVM.Models.Maze.Converters
 {
 
-    public class MazeGridToMazeEntityConverter
+    public class MazeGridToMazeDtoConverter
     {
-        static Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
+        static Direction[] directions = new Direction[2] { Direction.East, Direction.South };
 
-        public static MazeEntity Convert(MazeGrid mazeGrid)
+        public static MazeDto Convert(MazeGrid mazeGrid)
         {
             byte[] mazeCells = new byte[mazeGrid.CellAmount];
 
@@ -19,7 +19,7 @@ namespace Theseus.Code.MVVM.Models.Maze.Converters
                 mazeCells[index] = ConvertCellToByte(cell);
             }
 
-            return new MazeEntity(height: mazeGrid.RowAmount, width: mazeGrid.ColumnAmount, data: mazeCells);
+            return new MazeDto(height: mazeGrid.RowAmount, width: mazeGrid.ColumnAmount, data: mazeCells);
         }
 
         private static byte ConvertCellToByte(Cell cell)

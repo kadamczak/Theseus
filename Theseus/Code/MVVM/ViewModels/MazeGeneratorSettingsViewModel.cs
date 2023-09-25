@@ -67,7 +67,7 @@ namespace Theseus.Code.MVVM.ViewModels
 
         public MazeGeneratorSettingsViewModel(NavigationService mazeDetailNavigationService)
         {
-            GenerateMaze = new GenerateMazeCommand(this, mazeDetailNavigationService);
+            GenerateMaze = new GenerateMazeGridCommand(this, mazeDetailNavigationService);
 
             PropertyChanged += HandlePropertyChange;
         }

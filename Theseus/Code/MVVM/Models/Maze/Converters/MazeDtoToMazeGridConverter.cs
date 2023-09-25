@@ -1,21 +1,21 @@
 ﻿using Theseus.Code.Extensions;
-using Theseus.Code.MVVM.Models.Maze.Entity;
+using Theseus.Code.MVVM.Models.Maze.Dto;
 using Theseus.Code.MVVM.Models.Maze.Enums;
 using Theseus.Code.MVVM.Models.Maze.GridStructure;
 
 namespace Theseus.Code.MVVM.Models.Maze.Converters
 {
-    public class MazeEntityToMazeGridConverter
+    public class MazeDtoToMazeGridConverter
     {
-        static Direction[] directions = new Direction[4] { Direction.South, Direction.East, Direction.North, Direction.West };
+        static Direction[] directions = new Direction[2] { Direction.South, Direction.East };
 
-        public static MazeGrid Convert(MazeEntity mazeEntity)
+        public static MazeGrid Convert(MazeDto mazeDto)
         {
-            MazeGrid mazeGrid = new MazeGrid(mazeEntity.Height, mazeEntity.Width);
+            MazeGrid mazeGrid = new MazeGrid(mazeDto.Height, mazeDto.Width);
             
             foreach (var (cell, index) in mazeGrid.WithIndex())
             {
-                byte cellValue = mazeEntity.Data[index];
+                byte cellValue = mazeDto.Data[index];
 
                 LinkToNeighboursWhoseBitIsSetToOne(cell, cellValue);
             }
