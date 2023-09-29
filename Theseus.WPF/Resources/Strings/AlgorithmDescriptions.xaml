@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <system:String x:Key="Binary">Binary algorithm is very binary and funny and abc djasdsajhd ajksad and uhhh deltarune chapter 2 and spamton and bruh and aaaaa lol something something kris susie noelle</system:String>
+
+    <system:String x:Key="Sidewinder">Sidewinder algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
+
+    <system:String x:Key="Kruskal">Kruskal algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
+
+    <system:String x:Key="Prim">Prim's algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
+
+</ResourceDictionary>

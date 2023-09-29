@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Theseus.WPF.Code.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="784.04" d:DesignWidth="1000">
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Theseus" HorizontalAlignment="Center" Margin="40,215,40,0" VerticalAlignment="Top" FontSize="80" FontFamily="Microsoft YaHei Light"  />
+
+
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="A funny program that does mazes etc sadasdasios asdsadasioio siadias something asasa kjsajksakj djds dsdsnmsmjd dsjhdsjhjhsd dsjhdhsjjhs sdhjhdsjjhsdsjhsdjh" MaxWidth="600" Foreground="DimGray" Margin="40 0 40 0" HorizontalAlignment="Center" FontSize="20"  TextAlignment="Center"/>
+    </Grid>
+</UserControl>
