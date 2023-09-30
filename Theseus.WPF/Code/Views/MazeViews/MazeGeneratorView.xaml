@@ -4,10 +4,57 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
+             xmlns:commands="clr-namespace:Theseus.WPF.Code.Commands"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
-    <Grid Background="WhiteSmoke">
-        <Label Content="MAZE GENERATOR" HorizontalAlignment="Left" Margin="197,95,0,0" VerticalAlignment="Top"/>
+    
+    <Grid Background="WhiteSmoke" Margin="40 40 40 40">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+
+            <Label Grid.Column="0" Content="Generate a maze" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
+
+            <StackPanel Grid.Column="1" Margin="70 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Label Content="Height" FontSize="16" FontWeight="Bold" />
+                <TextBox Height="40" Width="40" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MaxLength="2"  Text="{Binding MazeHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <Label Grid.Column="1" VerticalAlignment="Center" Content="X" FontSize="23" FontFamily="Arial"/>
+
+
+            <StackPanel Grid.Column="1" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Label Content="Width" FontSize="16" FontWeight="Bold" />
+                <TextBox Height="40" Width="40" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MaxLength="2" Text="{Binding MazeWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <ListBox Grid.Row="1" Grid.Column="0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectedIndex="0" SelectedItem="{Binding SelectedAlgorithm, Mode=OneWayToSource}" ItemsSource="{Binding AvailableAlgorithms}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <ListBoxItem Content="{Binding DisplayName}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="50 0 0 0" TextWrapping="Wrap" FontSize="20" TextAlignment="Justify" Text="{Binding AlgorithmDescription}"/>
+
+        <Button Style="{StaticResource Generic}" Grid.Row="2" Grid.Column="1" Content="Generate" Margin="0 70 0 0" HorizontalAlignment="Center" Command="{Binding GenerateMaze}" />
+
+        <!--<Canvas Name="MazeCanvas" Grid.Row="3" Width="400" Height="400" Background="White"/>-->
+        <!--<Button Grid.Row="3" Grid.Column="1" Width="150" Height="50" Click="Button_Click" />-->
 
     </Grid>
 </UserControl>
