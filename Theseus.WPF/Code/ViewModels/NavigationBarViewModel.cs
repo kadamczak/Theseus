@@ -2,6 +2,7 @@
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.ViewModels
 {
