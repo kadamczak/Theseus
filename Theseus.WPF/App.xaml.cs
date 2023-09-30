@@ -40,6 +40,9 @@ namespace Theseus.WPF
         {
             _host.Start();
 
+            NavigationService<HomeViewModel> startNavigationService = _host.Services.GetRequiredService<NavigationService<HomeViewModel>>();
+            startNavigationService.Navigate();
+
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 

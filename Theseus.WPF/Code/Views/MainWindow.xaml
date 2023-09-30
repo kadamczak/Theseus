@@ -17,9 +17,24 @@
         </Grid.ColumnDefinitions>
 
         <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:BeginTestViewModel}">
+                <views:BeginTestView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ViewDataViewModel}">
+                <views:ViewDataView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:BrowseSetsViewModel}">
+                <views:BrowseSetsView/>
+            </DataTemplate>
+            
+            
+            <DataTemplate DataType="{x:Type vms:SettingsViewModel}">
+                <views:SettingsView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vms:HomeViewModel}">
                 <views:HomeView/>
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:MazeGeneratorViewModel}">
                 <views:MazeGeneratorView/>
             </DataTemplate>

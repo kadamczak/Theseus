@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="784.04" d:DesignWidth="1000">
-    <Grid Background="WhiteSmoke">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Theseus" HorizontalAlignment="Center" Margin="40,215,40,0" VerticalAlignment="Top" FontSize="80" FontFamily="Microsoft YaHei Light"  />
+             d:DesignHeight="784.04" d:DesignWidth="1040">
+    <Grid Background="WhiteSmoke" >
 
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 60">
+            
+            <Label Content="Theseus" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="80" FontFamily="Microsoft YaHei Light"  />
 
-        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="A funny program that does mazes etc sadasdasios asdsadasioio siadias something asasa kjsajksakj djds dsdsnmsmjd dsjhdsjhjhsd dsjhdhsjjhs sdhjhdsjjhsdsjhsdjh" MaxWidth="600" Foreground="DimGray" Margin="40 0 40 0" HorizontalAlignment="Center" FontSize="20"  TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="A funny program that does mazes etc sadasdasios asdsadasioio siadias something asasa kjsajksakj djds dsdsnmsmjd dsjhdsjhjhsd dsjhdhsjjhs sdhjhdsjjhsdsjhsdjh" MaxWidth="600" Foreground="DimGray" Margin="40 0 40 0" HorizontalAlignment="Center" FontSize="20"  TextAlignment="Center"/>
+            
+        </StackPanel>
     </Grid>
 </UserControl>

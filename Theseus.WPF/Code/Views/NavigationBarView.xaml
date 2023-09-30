@@ -18,16 +18,18 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" Margin="0 0 10 0">
             <StackPanel Margin="10 0 0 0">
-                <custom:IconTextButton Text="Begin Test" ImageSource="/Resources/Icons/exam.png" />
-                <custom:IconTextButton Text="View Data" ImageSource="/Resources/Icons/database.png" />
-                <custom:IconTextButton Command="{Binding NavigateToMazeGenSettings}" Text="Create Mazes" ImageSource="/Resources/Icons/maze.png" />
-                <custom:IconTextButton Text="Create Sets" ImageSource="/Resources/Icons/documentation.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBeginTest}" Text="Begin Test" ImageSource="/Resources/Icons/exam.png" />
+                <custom:IconTextButton Command="{Binding NavigateToViewData}" Text="View Data" ImageSource="/Resources/Icons/database.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBrowseMazes}" Text="Browse Mazes" ImageSource="/Resources/Icons/maze.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBrowseSets}" Text="Browse Sets" ImageSource="/Resources/Icons/documentation.png" />
             </StackPanel>
         </ScrollViewer>
 
-        <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal" Height="60" Margin="0 10 0 10">
-            <custom:IconButton ImageSource="/Resources/Icons/settings.png" />
-            <custom:IconButton Command="{Binding NavigateToHome}" Margin="15 0 0 0" ImageSource="/Resources/Icons/information.png" />
-        </StackPanel>
+        <Grid Grid.Row="2" Background="LightGray">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0 7 0 7">
+                <custom:IconButton Command="{Binding NavigateToSettings}" ImageSource="/Resources/Icons/settings.png" />
+                <custom:IconButton Command="{Binding NavigateToHome}" Margin="15 0 0 0" ImageSource="/Resources/Icons/information.png" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

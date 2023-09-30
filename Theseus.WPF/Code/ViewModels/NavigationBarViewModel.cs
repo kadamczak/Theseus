@@ -7,13 +7,28 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class NavigationBarViewModel : ViewModelBase
     {
-        public ICommand NavigateToHome { get; }
-        public ICommand NavigateToMazeGenSettings { get; }
+        public ICommand NavigateToBeginTest { get; }
+        public ICommand NavigateToViewData { get; }
+        public ICommand NavigateToBrowseMazes { get; }
+        public ICommand NavigateToBrowseSets { get; }
 
-        public NavigationBarViewModel(NavigationService<HomeViewModel> homeNavigationService, NavigationService<MazeGeneratorViewModel> mazeGenNavigationService)
+        public ICommand NavigateToSettings { get; }
+        public ICommand NavigateToHome { get; }
+
+        public NavigationBarViewModel(NavigationService<BeginTestViewModel> beginTestNavigationService,
+                                      NavigationService<ViewDataViewModel> viewDataNavigationService,
+                                      NavigationService<MazeGeneratorViewModel> browseMazeNavigationService,
+                                      NavigationService<BrowseSetsViewModel> browseSetsNavigationService,
+                                      NavigationService<SettingsViewModel> settingsNavigationService,
+                                      NavigationService<HomeViewModel> homeNavigationService)
         {
+            NavigateToBeginTest = new NavigateCommand<BeginTestViewModel>(beginTestNavigationService);
+            NavigateToViewData = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
+            NavigateToBrowseMazes = new NavigateCommand<MazeGeneratorViewModel>(browseMazeNavigationService);
+            NavigateToBrowseSets = new NavigateCommand<BrowseSetsViewModel>(browseSetsNavigationService);
+
+            NavigateToSettings = new NavigateCommand<SettingsViewModel>(settingsNavigationService);
             NavigateToHome = new NavigateCommand<HomeViewModel>(homeNavigationService);
-            NavigateToMazeGenSettings = new NavigateCommand<MazeGeneratorViewModel>(mazeGenNavigationService);
         }
     }
 }

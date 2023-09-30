@@ -7,7 +7,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:IconButton}" >
 
-                    <Button Command="{TemplateBinding Command}" Background="Transparent" BorderThickness="0" Height="50" Width="50" Cursor="Hand" >
+                    <Button Command="{TemplateBinding Command}" Background="Transparent" BorderThickness="0" Height="35" Width="35" Cursor="Hand" Padding="10" >
                         <Image Source="{TemplateBinding ImageSource}"/>
 
                         <Button.Resources>
