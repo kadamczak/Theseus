@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Theseus.Domain\Theseus.Domain.csproj" />
+    <ProjectReference Include="..\Theseus.Infrastructure\Theseus.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +54,12 @@
     <Resource Include="Resources\Icons\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

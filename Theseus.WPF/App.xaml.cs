@@ -1,12 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using Theseus.Infrastructure.DbContexts;
 using Theseus.WPF.Code.HostBuilders;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
@@ -24,14 +21,16 @@ namespace Theseus.WPF
         public App()
         {
             _host = Host.CreateDefaultBuilder()
+                .AddDbContext()
                 .AddViewModels()
-                .ConfigureServices(services => {
-                services.AddSingleton<NavigationStore>();
-
-                services.AddSingleton<MainWindow>((services) => new MainWindow()
+                .ConfigureServices(services =>
                 {
-                    DataContext = services.GetRequiredService<MainViewModel>()
-                });
+                    services.AddSingleton<NavigationStore>();
+
+                    services.AddSingleton<MainWindow>((services) => new MainWindow()
+                    {
+                        DataContext = services.GetRequiredService<MainViewModel>()
+                    });
             })
             .Build();
         }
@@ -40,13 +39,28 @@ namespace Theseus.WPF
         {
             _host.Start();
 
-            NavigationService<HomeViewModel> startNavigationService = _host.Services.GetRequiredService<NavigationService<HomeViewModel>>();
-            startNavigationService.Navigate();
+            MigrateDatabase();
+            NavigateToHomeViewModel();
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        private void MigrateDatabase()
+        {
+            TheseusDbContextFactory theseusDbContextFactory = _host.Services.GetRequiredService<TheseusDbContextFactory>();
+            using (TheseusDbContext context = theseusDbContextFactory.Create())
+            {
+                context.Database.Migrate();
+            }
+        }
+
+        private void NavigateToHomeViewModel()
+        {
+            NavigationService<HomeViewModel> startNavigationService = _host.Services.GetRequiredService<NavigationService<HomeViewModel>>();
+            startNavigationService.Navigate();
         }
     }
 }
