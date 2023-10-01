@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Code\Stores\DataStores\" />
-    <Folder Include="Code\Views\Components\" />
   </ItemGroup>
 
   <ItemGroup>

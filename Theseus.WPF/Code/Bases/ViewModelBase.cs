@@ -10,5 +10,7 @@ namespace Theseus.WPF.Code.Bases
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        protected virtual void Dispose() { }
     }
 }

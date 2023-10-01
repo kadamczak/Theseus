@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Theseus.Domain.Models.MazeRelated.Enums;
+using Theseus.Domain.Models.MazeRelated.Generators;
+using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Views
 {

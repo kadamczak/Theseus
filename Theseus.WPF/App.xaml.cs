@@ -26,6 +26,7 @@ namespace Theseus.WPF
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<NavigationStore>();
+                    services.AddSingleton<MazeDetailsStore>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {

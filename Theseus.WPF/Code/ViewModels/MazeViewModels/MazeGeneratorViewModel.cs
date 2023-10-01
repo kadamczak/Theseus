@@ -6,6 +6,7 @@ using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -67,13 +68,18 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand GenerateMaze { get; }
 
-        public MazeGeneratorViewModel(NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
+        public MazeGeneratorViewModel(MazeDetailsStore mazeDetailsStore, NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
-            GenerateMaze = new GenerateMazeCommand(this, mazeDetailNavigationService);
+            GenerateMaze = new GenerateMazeCommand(this, mazeDetailsStore, mazeDetailNavigationService);
 
             PropertyChanged += HandlePropertyChange;
         }
 
+        protected override void Dispose()
+        {
+            PropertyChanged -= HandlePropertyChange;
+            base.Dispose();
+        }
 
         public void HandlePropertyChange(object? sender, PropertyChangedEventArgs e)
         {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Media.Media3D;
 using Theseus.Domain.Models.MazeRelated.Generators;
 using Theseus.Domain.Models.MazeRelated.MazeStructure;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands
@@ -12,14 +12,18 @@ namespace Theseus.WPF.Code.Commands
     public class GenerateMazeCommand : CommandBase
     {
         private readonly MazeGeneratorViewModel _viewModel;
+        private readonly MazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
         private const int MaxMazeDimension = 99;
         private const int MinMazeDimension = 2;
 
-        public GenerateMazeCommand(MazeGeneratorViewModel viewModel, NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
+        public GenerateMazeCommand(MazeGeneratorViewModel viewModel,
+                                   MazeDetailsStore mazeDetailsStore,
+                                   NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
             this._viewModel = viewModel;
+            this._mazeDetailsStore = mazeDetailsStore;
             this._mazeDetailNavigationService = mazeDetailNavigationService;
 
             _viewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -33,6 +37,8 @@ namespace Theseus.WPF.Code.Commands
             int width = Int32.Parse(_viewModel.MazeWidth);
 
             Maze maze = generator.GenerateMaze(height, width);
+
+            _mazeDetailsStore.UpdateMazeDetails(id: null, maze, unsavedChanges: true);
 
             _mazeDetailNavigationService.Navigate();
         }
