@@ -6,8 +6,20 @@
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
-    <Grid Background="WhiteSmoke">
-        <Label Content="MAZE DETAILS" HorizontalAlignment="Left" Margin="416,70,0,0" VerticalAlignment="Top"/>
-        <local:MazeCanvasView DataContext="{Binding CanvasViewModel}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="400"/>
+    <Grid Background="WhiteSmoke" Margin="40 40 40 40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Content="Maze Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
+        
+        <local:MazeCanvasView Grid.Row="1" DataContext="{Binding CanvasViewModel}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button Style="{StaticResource Generic}" Content="Save" Command="{Binding SaveMaze}" />
+            <Button Style="{StaticResource Generic}" Content="Edit" Margin="40 0 0 0" />
+        </StackPanel>
     </Grid>
 </UserControl>

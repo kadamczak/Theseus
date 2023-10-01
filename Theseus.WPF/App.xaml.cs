@@ -3,7 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
+using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.QueryInterfaces;
+using Theseus.Infrastructure.Commands;
 using Theseus.Infrastructure.DbContexts;
+using Theseus.Infrastructure.Queries;
 using Theseus.WPF.Code.HostBuilders;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
@@ -27,6 +31,9 @@ namespace Theseus.WPF
                 {
                     services.AddSingleton<NavigationStore>();
                     services.AddSingleton<MazeDetailsStore>();
+
+                    services.AddSingleton<IGetAllMazesQuery, GetAllMazesQuery>();
+                    services.AddSingleton<ICreateMazeCommand, CreateMazeCommand>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {
@@ -52,7 +59,7 @@ namespace Theseus.WPF
         private void MigrateDatabase()
         {
             TheseusDbContextFactory theseusDbContextFactory = _host.Services.GetRequiredService<TheseusDbContextFactory>();
-            using (TheseusDbContext context = theseusDbContextFactory.Create())
+            using (TheseusDbContext context = theseusDbContextFactory.CreateDbContext())
             {
                 context.Database.Migrate();
             }

@@ -1,6 +1,8 @@
 ﻿using System;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using System.Windows.Input;
+using Theseus.Domain.CommandInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -8,17 +10,18 @@ namespace Theseus.WPF.Code.ViewModels
     public class MazeDetailsViewModel : ViewModelBase
     {
         public MazeCanvasViewModel CanvasViewModel { get; }
-
         private readonly MazeDetailsStore _mazeDetailsStore;
 
-        public Maze SelectedMaze => _mazeDetailsStore.SelectedMaze;
+        public ICommand SaveMaze { get; }
 
-        public MazeDetailsViewModel(MazeDetailsStore mazeDetailsStore, MazeCanvasViewModel canvasViewModel)
+        public MazeDetailsViewModel(MazeDetailsStore mazeDetailsStore, MazeCanvasViewModel canvasViewModel, ICreateMazeCommand createMazeCommand)
         {
             _mazeDetailsStore = mazeDetailsStore;
-            CanvasViewModel = canvasViewModel;
 
-            CanvasViewModel.Maze = SelectedMaze;
+            CanvasViewModel = canvasViewModel;
+            CanvasViewModel.Maze = _mazeDetailsStore.SelectedMaze;
+
+            SaveMaze = new SaveMazeCommand(this, mazeDetailsStore, createMazeCommand);
         }
     }
 }

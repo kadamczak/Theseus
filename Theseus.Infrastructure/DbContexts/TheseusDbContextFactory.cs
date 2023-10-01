@@ -11,7 +11,7 @@ namespace Theseus.Infrastructure.DbContexts
             _options = options;
         }
 
-        public TheseusDbContext Create()
+        public TheseusDbContext CreateDbContext()
         {
             return new TheseusDbContext(_options);
         }

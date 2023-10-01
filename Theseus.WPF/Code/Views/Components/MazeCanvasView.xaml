@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Canvas Name="Maze" Loaded="Maze_Loaded">
+        <Canvas Name="Maze" Background="White" Loaded="Maze_Loaded">
             
         </Canvas>
     </Grid>

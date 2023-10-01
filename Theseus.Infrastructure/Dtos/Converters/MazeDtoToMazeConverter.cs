@@ -4,7 +4,7 @@ using Theseus.Infrastructure.Extensions;
 
 namespace Theseus.Infrastructure.Dtos.Converters
 {
-    public class MazeDtoToMazeGridConverter
+    public class MazeDtoToMazeConverter
     {
         static Direction[] directions = new Direction[2] { Direction.South, Direction.East };
 
