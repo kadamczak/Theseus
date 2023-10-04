@@ -4,8 +4,8 @@
     {
         Binary,
         Sidewinder,
-        Kruskal,
+        AldousBroder,
         HuntAndKill,
-        RecursiveBacktracker
+        Kruskal
     }
 }

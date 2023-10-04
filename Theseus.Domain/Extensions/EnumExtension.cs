@@ -1,4 +1,4 @@
-﻿namespace Theseus.Infrastructure.Extensions
+﻿namespace Theseus.Domain.Extensions
 {
     public static class EnumExtension
     {

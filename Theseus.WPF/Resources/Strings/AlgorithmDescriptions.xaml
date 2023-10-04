@@ -6,10 +6,10 @@
 
     <system:String x:Key="Sidewinder">Sidewinder algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
 
-    <system:String x:Key="Kruskal">Kruskal algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
+    <system:String x:Key="AldousBroder">Aldous-Broder algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
 
     <system:String x:Key="HuntAndKill">Hunt And Kill algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
 
-    <system:String x:Key="RecursiveBacktracker">Recursive Backtracker algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
+    <system:String x:Key="Kruskal">Kruskal's algorithm is very sidewindery and epic and abc djasdsajhd ajksad and uhhh deltarune chapter 3 and spamton 2 and bruh and aaaaa lol something something kris susie noelle</system:String>
 
 </ResourceDictionary>

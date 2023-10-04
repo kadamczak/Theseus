@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.MazeRelated.Enums;
+﻿using Theseus.Domain.Extensions;
+using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeStructure;
 
 namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
@@ -17,7 +18,7 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
                 {
                     cellRun.Add(cell);
 
-                    if (CheckIfShouldEndRun(cell, rnd))
+                    if (ShouldEndCellRun(cell, rnd))
                         this.EndCellRun(cellRun, rnd); //Links North
                     else
                         cell.LinkToNeighbour(Direction.East);
@@ -26,7 +27,7 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
         }
 
 
-        private bool CheckIfShouldEndRun(Cell currentCell, Random rnd)
+        private bool ShouldEndCellRun(Cell currentCell, Random rnd)
         {
             if (!currentCell.HasNeighbour(Direction.East))
             {
@@ -40,16 +41,11 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
             return false;
         }
 
-        private bool ShouldEraseNorthBorder(Random rnd)
-        {
-            return rnd.Next(0, 2) == 1;
-        }
+        private bool ShouldEraseNorthBorder(Random rnd) => rnd.Next(0, 2) == 1;
 
         private void EndCellRun(List<Cell> cellRun, Random rnd)
         {
-            int index = rnd.Next(0, cellRun.Count);
-            Cell randomCell = cellRun[index];
-
+            Cell randomCell = cellRun.GetRandomItem(rnd);
             Cell? northCell = randomCell.AdjecentCellSpaces[Direction.North];
 
             if (northCell is not null)

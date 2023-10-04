@@ -21,9 +21,9 @@ namespace Theseus.WPF.Code.ViewModels
         public ReadOnlyCollection<AlgorithmViewModel> AvailableAlgorithms { get; } = new List<AlgorithmViewModel> {
                                 new AlgorithmViewModel("Binary", MazeGenAlgorithm.Binary),
                                 new AlgorithmViewModel("Sidewinder", MazeGenAlgorithm.Sidewinder),
-                                new AlgorithmViewModel("Kruskal", MazeGenAlgorithm.Kruskal),
+                                new AlgorithmViewModel("Aldous-Broder", MazeGenAlgorithm.AldousBroder),
                                 new AlgorithmViewModel("Hunt and Kill", MazeGenAlgorithm.HuntAndKill),
-                                new AlgorithmViewModel("Recursive Backtracker", MazeGenAlgorithm.RecursiveBacktracker)
+                                new AlgorithmViewModel("Kruskal's", MazeGenAlgorithm.Kruskal),
                                 }.AsReadOnly();
 
         public AlgorithmViewModel SelectedAlgorithm

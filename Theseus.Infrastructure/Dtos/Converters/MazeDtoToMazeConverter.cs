@@ -1,6 +1,6 @@
-﻿using Theseus.Domain.Models.MazeRelated.Enums;
+﻿using Theseus.Domain.Extensions;
+using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeStructure;
-using Theseus.Infrastructure.Extensions;
 
 namespace Theseus.Infrastructure.Dtos.Converters
 {
@@ -10,16 +10,16 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
         public static Maze Convert(MazeDto mazeDto)
         {
-            Maze mazeGrid = new Maze(mazeDto.Height, mazeDto.Width);
+            Maze maze = new Maze(mazeDto.Height, mazeDto.Width);
 
-            foreach (var (cell, index) in mazeGrid.WithIndex())
+            foreach (var (cell, index) in maze.WithIndex())
             {
                 byte cellValue = mazeDto.Data[index];
 
                 LinkToNeighboursWhoseBitIsSetToOne(cell, cellValue);
             }
 
-            return mazeGrid;
+            return maze;
         }
 
         private static void LinkToNeighboursWhoseBitIsSetToOne(Cell cell, byte cellValue)
