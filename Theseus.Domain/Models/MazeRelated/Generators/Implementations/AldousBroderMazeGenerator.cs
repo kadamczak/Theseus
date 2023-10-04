@@ -31,6 +31,5 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
         }
 
         private bool IsUnvisited(Cell cell) => !cell.LinkedCells.Any();
-
     }
 }

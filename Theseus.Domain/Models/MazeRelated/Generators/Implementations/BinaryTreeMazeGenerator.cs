@@ -13,7 +13,9 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
                 var cellNeighbours = cell.GetAdjecentCells(Direction.North, Direction.East);
 
                 if (cellNeighbours.Any())
+                {
                     LinkToRandomAdjecentCell(cell, cellNeighbours, rnd);
+                }
             }
         }
 

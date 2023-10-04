@@ -19,9 +19,13 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
                     cellRun.Add(cell);
 
                     if (ShouldEndCellRun(cell, rnd))
+                    {
                         this.EndCellRun(cellRun, rnd); //Links North
+                    }
                     else
+                    {
                         cell.LinkToNeighbour(Direction.East);
+                    }
                 }
             }
         }
@@ -37,7 +41,7 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
             {
                 return true;
             }
-
+            
             return false;
         }
 
@@ -49,7 +53,9 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
             Cell? northCell = randomCell.AdjecentCellSpaces[Direction.North];
 
             if (northCell is not null)
+            {
                 randomCell.LinkTo(northCell);
+            }
 
             cellRun.Clear();
         }
