@@ -1,5 +1,4 @@
-﻿using System;
-using Theseus.Domain.Extensions;
+﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeStructure;
 
@@ -10,19 +9,24 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
         public override void ApplyAlgorithm(Maze maze, Random rnd)
         {
             AlgorithmState algorithmState = new AlgorithmState(maze);
-
             var shuffledNeighbours = algorithmState.NeighbourPairs.FisherYatesShuffle();
 
             while (shuffledNeighbours.Any())
             {
-                var (firstCell, secondCell) = shuffledNeighbours.Last();
-                shuffledNeighbours.Remove(shuffledNeighbours.Last());
+                var (firstCell, secondCell) = PopLastPair(shuffledNeighbours);
 
                 if (algorithmState.AreInDifferentSets(firstCell, secondCell))
                 {
                     algorithmState.MergeSets(firstCell, secondCell);
                 }
             }
+        }
+
+        private (Cell, Cell) PopLastPair(IList<(Cell, Cell)> cellPairs)
+        {
+            var lastPair = cellPairs.Last();
+            cellPairs.Remove(lastPair);
+            return lastPair;
         }
 
         class AlgorithmState
@@ -36,17 +40,24 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
             {        
                 foreach(var (cell, setIdentifier) in maze.WithIndex())
                 {
-                    _cellToSetIdentifier.Add(cell, setIdentifier);
+                    AddCellToNewSet(cell, setIdentifier);
+                    SaveNeighbourPairsOfCell(cell);
+                }
+            }
 
-                    _setIdentifierToCells.Add(setIdentifier, new HashSet<Cell>());
-                    _setIdentifierToCells[setIdentifier].Add(cell);
+            private void AddCellToNewSet(Cell currentCell, int setIdentifier)
+            {
+                _cellToSetIdentifier.Add(currentCell, setIdentifier);
+                _setIdentifierToCells.Add(setIdentifier, new HashSet<Cell>() { currentCell });
+            }
 
-                    var neighbours = cell.GetAdjecentCells(Direction.South, Direction.East);
-                    
-                    foreach (var neighbour in neighbours)
-                    {
-                        NeighbourPairs.Add((cell, neighbour));
-                    }
+            private void SaveNeighbourPairsOfCell(Cell currentCell)
+            {
+                var neighbours = currentCell.GetAdjecentCells(Direction.South, Direction.East);
+
+                foreach (var neighbour in neighbours)
+                {
+                    NeighbourPairs.Add((currentCell, neighbour));
                 }
             }
 
