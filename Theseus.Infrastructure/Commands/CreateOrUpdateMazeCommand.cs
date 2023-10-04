@@ -6,22 +6,24 @@ using Theseus.Infrastructure.Dtos.Converters;
 
 namespace Theseus.Infrastructure.Commands
 {
-    public class CreateMazeCommand : ICreateMazeCommand
+    public class CreateOrUpdateMazeCommand : ICreateOrUpdateMazeCommand
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
 
-        public CreateMazeCommand(TheseusDbContextFactory dbContextFactory)
+        public CreateOrUpdateMazeCommand(TheseusDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task CreateMaze(Maze maze)
+        public async Task CreateOrUpdateMaze(Maze maze)
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
                 MazeDto mazeDto = MazeToMazeDtoConverter.Convert(maze);
-                context.Mazes.Add(mazeDto);
+                context.Mazes.Update(mazeDto);
                 await context.SaveChangesAsync();
+
+                maze.Id = mazeDto.Id;
             }
         }
     }

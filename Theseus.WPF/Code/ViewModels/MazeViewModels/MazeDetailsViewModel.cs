@@ -14,7 +14,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand SaveMaze { get; }
 
-        public MazeDetailsViewModel(MazeDetailsStore mazeDetailsStore, MazeCanvasViewModel canvasViewModel, ICreateMazeCommand createMazeCommand)
+        public MazeDetailsViewModel(MazeDetailsStore mazeDetailsStore, MazeCanvasViewModel canvasViewModel, ICreateOrUpdateMazeCommand createMazeCommand)
         {
             _mazeDetailsStore = mazeDetailsStore;
 

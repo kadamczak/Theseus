@@ -33,7 +33,7 @@ namespace Theseus.WPF
                     services.AddSingleton<MazeDetailsStore>();
 
                     services.AddSingleton<IGetAllMazesQuery, GetAllMazesQuery>();
-                    services.AddSingleton<ICreateMazeCommand, CreateMazeCommand>();
+                    services.AddSingleton<ICreateOrUpdateMazeCommand, CreateOrUpdateMazeCommand>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {

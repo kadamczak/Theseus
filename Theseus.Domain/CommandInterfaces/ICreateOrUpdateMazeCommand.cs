@@ -2,8 +2,8 @@
 
 namespace Theseus.Domain.CommandInterfaces
 {
-    public interface ICreateMazeCommand
+    public interface ICreateOrUpdateMazeCommand
     {
-        Task CreateMaze(Maze maze);
+        Task CreateOrUpdateMaze(Maze maze);
     }
 }

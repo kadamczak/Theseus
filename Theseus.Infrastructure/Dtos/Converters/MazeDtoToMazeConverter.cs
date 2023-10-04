@@ -10,7 +10,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
         public static Maze Convert(MazeDto mazeDto)
         {
-            Maze maze = new Maze(mazeDto.Height, mazeDto.Width);
+            Maze maze = new Maze(mazeDto.Height, mazeDto.Width, mazeDto.Id);
 
             foreach (var (cell, index) in maze.WithIndex())
             {

@@ -9,11 +9,11 @@ namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
         public override void ApplyAlgorithm(Maze maze, Random rnd)
         {
             AlgorithmState algorithmState = new AlgorithmState(maze);
-            var shuffledNeighbours = algorithmState.NeighbourPairs.FisherYatesShuffle();
+            var shuffledNeighbourPairs = algorithmState.NeighbourPairs.FisherYatesShuffle();
 
-            while (shuffledNeighbours.Any())
+            while (shuffledNeighbourPairs.Any())
             {
-                var (firstCell, secondCell) = PopLastPair(shuffledNeighbours);
+                var (firstCell, secondCell) = PopLastPair(shuffledNeighbourPairs);
 
                 if (algorithmState.AreInDifferentSets(firstCell, secondCell))
                 {

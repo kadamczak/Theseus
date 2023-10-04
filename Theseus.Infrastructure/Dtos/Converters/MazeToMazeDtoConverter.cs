@@ -10,14 +10,14 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
         public static MazeDto Convert(Maze maze)
         {
-            byte[] mazeCells = new byte[maze.CellAmount];
+            byte[] cellsAsBytes = new byte[maze.CellAmount];
 
             foreach (var (cell, index) in maze.WithIndex())
             {
-                mazeCells[index] = ConvertCellToByte(cell);
+                cellsAsBytes[index] = ConvertCellToByte(cell);
             }
 
-            return new MazeDto(height: maze.RowAmount, width: maze.ColumnAmount, data: mazeCells);
+            return new MazeDto(maze, cellsAsBytes);
         }
 
         private static byte ConvertCellToByte(Cell cell)

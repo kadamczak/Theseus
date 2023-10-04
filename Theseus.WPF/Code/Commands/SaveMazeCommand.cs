@@ -10,13 +10,13 @@ namespace Theseus.WPF.Code.Commands
     {
         private readonly MazeDetailsViewModel _mazeDetailsViewModel;
         private readonly MazeDetailsStore _mazeDetailsStore;
-        private readonly ICreateMazeCommand _createMazeCommand;
+        private readonly ICreateOrUpdateMazeCommand _createOrUpdateMazeCommand;
 
-        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, MazeDetailsStore mazeDetailsStore, ICreateMazeCommand createMazeCommand)
+        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, MazeDetailsStore mazeDetailsStore, ICreateOrUpdateMazeCommand createOrUpdateMazeCommand)
         {
             this._mazeDetailsViewModel = mazeDetailViewModel;
             this._mazeDetailsStore = mazeDetailsStore;
-            this._createMazeCommand = createMazeCommand;
+            this._createOrUpdateMazeCommand = createOrUpdateMazeCommand;
 
             _mazeDetailsStore.SaveStateChanged += OnMazeSaveStateChanged;
         }
@@ -28,7 +28,7 @@ namespace Theseus.WPF.Code.Commands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await _createMazeCommand.CreateMaze(_mazeDetailsStore.SelectedMaze);
+            await _createOrUpdateMazeCommand.CreateOrUpdateMaze(_mazeDetailsStore.SelectedMaze);
             this._mazeDetailsStore.HasUnsavedChanges = false;
         }
 
