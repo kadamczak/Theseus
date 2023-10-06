@@ -8,8 +8,6 @@ namespace Theseus.WPF.Code.Stores
         public event Action MazeStructureChanged;
         public event Action SaveStateChanged;
 
-        public Guid? SelectedMazeId { get; set; }
-
         private Maze? _selectedMaze = null;
         private bool _hasUnsavedChanges = true;
 
@@ -33,9 +31,8 @@ namespace Theseus.WPF.Code.Stores
             }
         }
 
-        public void UpdateMazeDetails(Guid? id, Maze? maze, bool unsavedChanges)
+        public void UpdateMazeDetails(Maze? maze, bool unsavedChanges)
         {
-            this.SelectedMazeId = id;
             this.SelectedMaze = maze;
             this.HasUnsavedChanges = unsavedChanges;
         }

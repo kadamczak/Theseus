@@ -31,6 +31,7 @@ namespace Theseus.WPF
                 {
                     services.AddSingleton<NavigationStore>();
                     services.AddSingleton<MazeDetailsStore>();
+                    services.AddSingleton<LastMazeGeneratorInputStore>();
 
                     services.AddSingleton<IGetAllMazesQuery, GetAllMazesQuery>();
                     services.AddSingleton<ICreateOrUpdateMazeCommand, CreateOrUpdateMazeCommand>();

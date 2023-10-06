@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.WPF.Code.Bases;
@@ -14,9 +15,12 @@ namespace Theseus.WPF.Code.ViewModels
     public class MazeGeneratorViewModel : ViewModelBase
     {
         private AlgorithmViewModel _selectedAlgorithm;
+        private string _mazeHeight;
+        private string _mazeWidth;
+
         private string _algorithmDescription = string.Empty;
-        private string _mazeHeight = "10";
-        private string _mazeWidth = "10";
+
+        private readonly LastMazeGeneratorInputStore _lastMazeGeneratorSettingsStore;
 
         public ReadOnlyCollection<AlgorithmViewModel> AvailableAlgorithms { get; } = new List<AlgorithmViewModel> {
                                 new AlgorithmViewModel("Binary", MazeGenAlgorithm.Binary),
@@ -68,11 +72,22 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand GenerateMaze { get; }
 
-        public MazeGeneratorViewModel(MazeDetailsStore mazeDetailsStore, NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
+        public MazeGeneratorViewModel(MazeDetailsStore mazeDetailsStore,
+                                      NavigationService<MazeDetailsViewModel> mazeDetailNavigationService,
+                                      LastMazeGeneratorInputStore lastMazeGeneratorSettingsStore)
         {
-            GenerateMaze = new GenerateMazeCommand(this, mazeDetailsStore, mazeDetailNavigationService);
-
+            this.GenerateMaze = new GenerateMazeCommand(this, mazeDetailsStore, mazeDetailNavigationService);
+            this._lastMazeGeneratorSettingsStore = lastMazeGeneratorSettingsStore;
             PropertyChanged += HandlePropertyChange;
+
+            GetStartValuesFromStore();
+        }
+
+        private void GetStartValuesFromStore()
+        {
+            this.SelectedAlgorithm = AvailableAlgorithms.Where(a => a.Algorithm == this._lastMazeGeneratorSettingsStore.Algorithm).First();
+            this.MazeHeight = this._lastMazeGeneratorSettingsStore.Height;
+            this.MazeWidth = this._lastMazeGeneratorSettingsStore.Width;
         }
 
         protected override void Dispose()
@@ -86,8 +101,16 @@ namespace Theseus.WPF.Code.ViewModels
             if (e.PropertyName == nameof(SelectedAlgorithm))
             {
                 UpdateAlgorithmDescription();
+                _lastMazeGeneratorSettingsStore.Algorithm = SelectedAlgorithm.Algorithm;
             }
-
+            else if (e.PropertyName == nameof(MazeHeight))
+            {
+                _lastMazeGeneratorSettingsStore.Height = MazeHeight;
+            }
+            else if (e.PropertyName == nameof(MazeWidth))
+            {
+                _lastMazeGeneratorSettingsStore.Width = MazeWidth;
+            }
         }
 
         private void UpdateAlgorithmDescription()

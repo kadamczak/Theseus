@@ -44,7 +44,7 @@ namespace Theseus.WPF.Code.Commands
 
             Maze maze = generator.GenerateMaze(height, width);
 
-            _mazeDetailsStore.UpdateMazeDetails(id: null, maze, unsavedChanges: true);
+            _mazeDetailsStore.UpdateMazeDetails(maze, unsavedChanges: true);
 
             _mazeDetailNavigationService.Navigate();
         }
