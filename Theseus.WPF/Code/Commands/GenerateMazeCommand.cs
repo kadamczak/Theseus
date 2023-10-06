@@ -11,7 +11,7 @@ namespace Theseus.WPF.Code.Commands
 {
     public class GenerateMazeCommand : CommandBase
     {
-        private readonly MazeGeneratorViewModel _viewModel;
+        private readonly MazeGeneratorViewModel _mazeGenViewModel;
         private readonly MazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
@@ -22,19 +22,25 @@ namespace Theseus.WPF.Code.Commands
                                    MazeDetailsStore mazeDetailsStore,
                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
-            this._viewModel = viewModel;
+            this._mazeGenViewModel = viewModel;
             this._mazeDetailsStore = mazeDetailsStore;
             this._mazeDetailNavigationService = mazeDetailNavigationService;
 
-            _viewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _mazeGenViewModel.PropertyChanged += OnViewModelPropertyChanged;
+        }
+
+        protected override void Dispose()
+        {
+            _mazeGenViewModel.PropertyChanged -= OnViewModelPropertyChanged;
+            base.Dispose();
         }
 
         public override void Execute(object? parameter)
         {
-            var generator = MazeGeneratorFactory.Create(_viewModel.SelectedAlgorithm.Algorithm);
+            var generator = MazeGeneratorFactory.Create(_mazeGenViewModel.SelectedAlgorithm.Algorithm);
 
-            int height = Int32.Parse(_viewModel.MazeHeight);
-            int width = Int32.Parse(_viewModel.MazeWidth);
+            int height = Int32.Parse(_mazeGenViewModel.MazeHeight);
+            int width = Int32.Parse(_mazeGenViewModel.MazeWidth);
 
             Maze maze = generator.GenerateMaze(height, width);
 
@@ -47,7 +53,7 @@ namespace Theseus.WPF.Code.Commands
         {
             string property = e.PropertyName;
 
-            if (property == nameof(_viewModel.MazeWidth) || property == nameof(_viewModel.MazeHeight))
+            if (property == nameof(_mazeGenViewModel.MazeWidth) || property == nameof(_mazeGenViewModel.MazeHeight))
             {
                 OnCanExecuteChanged();
             }
@@ -55,10 +61,10 @@ namespace Theseus.WPF.Code.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            if (!IsMazeDimensionValid(_viewModel.MazeHeight))
+            if (!IsMazeDimensionValid(_mazeGenViewModel.MazeHeight))
                 return false;
 
-            if (!IsMazeDimensionValid(_viewModel.MazeWidth))
+            if (!IsMazeDimensionValid(_mazeGenViewModel.MazeWidth))
                 return false;
 
             return base.CanExecute(parameter);

@@ -18,5 +18,7 @@ namespace Theseus.WPF.Code.Bases
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        protected virtual void Dispose() { }
     }
 }

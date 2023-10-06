@@ -21,10 +21,11 @@ namespace Theseus.WPF.Code.Commands
             _mazeDetailsStore.SaveStateChanged += OnMazeSaveStateChanged;
         }
 
-        //protected override void Dispose()
-        //{
-        //    //TODO?
-        //}
+        protected override void Dispose()
+        {
+            _mazeDetailsStore.SaveStateChanged -= OnMazeSaveStateChanged;
+            base.Dispose();
+        }
 
         public override async Task ExecuteAsync(object parameter)
         {
