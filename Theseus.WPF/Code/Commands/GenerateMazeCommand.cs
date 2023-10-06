@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Theseus.Domain.Models.MazeRelated.Generators;
+using Theseus.Domain.Models.MazeRelated.MazeGenerators;
 using Theseus.Domain.Models.MazeRelated.MazeStructure;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
@@ -37,11 +37,10 @@ namespace Theseus.WPF.Code.Commands
 
         public override void Execute(object? parameter)
         {
-            var generator = MazeGeneratorFactory.Create(_mazeGenViewModel.SelectedAlgorithm.Algorithm);
-
             int height = Int32.Parse(_mazeGenViewModel.MazeHeight);
             int width = Int32.Parse(_mazeGenViewModel.MazeWidth);
 
+            var generator = MazeGeneratorFactory.Create(_mazeGenViewModel.SelectedAlgorithm.Algorithm);
             Maze maze = generator.GenerateMaze(height, width);
 
             _mazeDetailsStore.UpdateMazeDetails(maze, unsavedChanges: true);

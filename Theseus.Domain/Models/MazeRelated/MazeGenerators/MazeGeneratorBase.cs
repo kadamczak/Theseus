@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeStructure;
 
-namespace Theseus.Domain.Models.MazeRelated.Generators
+namespace Theseus.Domain.Models.MazeRelated.MazeGenerators
 {
     public abstract class MazeGeneratorBase
     {
@@ -9,7 +9,7 @@ namespace Theseus.Domain.Models.MazeRelated.Generators
             Maze maze = new Maze(rows, cols);
             Random rnd = new Random();
 
-            this.ApplyAlgorithm(maze, rnd);
+            ApplyAlgorithm(maze, rnd);
 
             return maze;
         }

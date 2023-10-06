@@ -1,8 +1,9 @@
 ﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
+using Theseus.Domain.Models.MazeRelated.MazeGenerators;
 using Theseus.Domain.Models.MazeRelated.MazeStructure;
 
-namespace Theseus.Domain.Models.MazeRelated.Generators.Implementations
+namespace Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations
 {
     public class SidewinderMazeGenerator : MazeGeneratorBase
     {

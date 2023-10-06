@@ -15,6 +15,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructure
         //Storage
         List<List<Cell>> CellMatrix { get; } = new List<List<Cell>>();
 
+        public Maze(Maze maze) : this(maze.RowAmount, maze.ColumnAmount, maze.Id) {}
+
         public Maze(int rows, int columns, Guid? id = null)
         {
             if (rows <= 0)
@@ -106,6 +108,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructure
 
             return GetCell(rowIndex, columnIndex)!;
         }
+
+        //SOLUTION==================================
+
+
 
         //VISUALIZATION ASCII==============================================
         public override string ToString()

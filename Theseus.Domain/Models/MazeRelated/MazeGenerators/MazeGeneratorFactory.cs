@@ -1,7 +1,7 @@
 ﻿using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.Generators.Implementations;
+using Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations;
 
-namespace Theseus.Domain.Models.MazeRelated.Generators
+namespace Theseus.Domain.Models.MazeRelated.MazeGenerators
 {
     public class MazeGeneratorFactory
     {
