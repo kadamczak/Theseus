@@ -1,5 +1,5 @@
 ﻿using Theseus.Domain.CommandInterfaces;
-using Theseus.Domain.Models.MazeRelated.Maze;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 using Theseus.Infrastructure.Dtos.Converters;
@@ -15,7 +15,7 @@ namespace Theseus.Infrastructure.Commands
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task CreateOrUpdateMaze(MazeGrid maze)
+        public async Task CreateOrUpdateMaze(Maze maze)
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {

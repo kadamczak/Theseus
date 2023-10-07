@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Theseus.Domain.Models.MazeRelated.Maze;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
@@ -16,7 +16,7 @@ namespace Theseus.Infrastructure.Queries
             this._dbContextFactory = dbContextFactory;
         }
 
-        public async Task<IEnumerable<MazeGrid>> GetAllMazes()
+        public async Task<IEnumerable<Maze>> GetAllMazes()
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {

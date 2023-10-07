@@ -1,5 +1,5 @@
 ﻿using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.Maze;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.MazeRelated.MazeGenerators;
 using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators;
 
@@ -7,27 +7,35 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
 {
     public class MazeCreator
     {
-        public MazeGrid CreateMazeGrid(int height, int width, MazeStructureGenAlgorithm algorithm)
+        public Maze CreateMaze(int height, int width, MazeStructureGenAlgorithm algorithm)
         {
-            MazeGrid grid = new MazeGrid(height, width);
-
-            var generator = MazeStructureGeneratorFactory.Create(algorithm);
-            generator.GenerateMazeStructureInGrid(grid);
-
-            return grid;
+            Maze maze = new Maze(height, width);
+            GenerateMazeStructure(maze, algorithm);
+            return maze;
         }
 
-        public SolvableMaze CreateSolvableMaze(int height,
-                                               int width,
-                                               MazeStructureGenAlgorithm structureAlgorithm,
-                                               MazeSolutionGenAlgorithm solutionAlgorithm)
+        public MazeWithSolution CreateMazeWithSolution(int height,
+                                                       int width,
+                                                       MazeStructureGenAlgorithm structureAlgorithm,
+                                                       MazeSolutionGenAlgorithm solutionAlgorithm)
         {
-            SolvableMaze maze = CreateMazeGrid(height, width, structureAlgorithm);
+            Maze maze = CreateMaze(height, width, structureAlgorithm);
 
-            var generator = MazeSolutionGeneratorFactory.Create(solutionAlgorithm);
+            MazeWithSolution mazeWithSolution = new MazeWithSolution(maze);
+            GenerateMazeSolution(mazeWithSolution, solutionAlgorithm);
+            return mazeWithSolution;
+        }
+
+        private void GenerateMazeStructure(Maze grid, MazeStructureGenAlgorithm algorithm)
+        {
+            var generator = MazeStructureGeneratorFactory.Create(algorithm);
+            generator.GenerateMazeStructureInGrid(grid);
+        }
+
+        private void GenerateMazeSolution(MazeWithSolution maze, MazeSolutionGenAlgorithm algorithm)
+        {
+            var generator = MazeSolutionGeneratorFactory.Create(algorithm);
             generator.GenerateSolutionInMaze(maze);
-
-            return maze;
         }
     }
 }

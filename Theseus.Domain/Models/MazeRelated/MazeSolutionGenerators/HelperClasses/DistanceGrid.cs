@@ -1,4 +1,4 @@
-﻿using Theseus.Domain.Models.MazeRelated.Maze;
+﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {

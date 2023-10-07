@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using Theseus.Domain.Models.MazeRelated.Enums;
 
-namespace Theseus.Domain.Models.MazeRelated.Maze
+namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 {
-    public class MazeGrid : IEnumerable<Cell>
+    public class Maze : IEnumerable<Cell>
     {
-        public Guid? Id { get; set; } = default;
-
         //Grid info
         public int RowAmount { get; }           //Y
         public int ColumnAmount { get; }        //X
@@ -15,7 +13,7 @@ namespace Theseus.Domain.Models.MazeRelated.Maze
         //Storage
         List<List<Cell>> CellMatrix { get; } = new List<List<Cell>>();
 
-        public MazeGrid(int rows, int columns, Guid? id = null)
+        public Maze(int rows, int columns)
         {
             if (rows <= 0)
                 throw new ArgumentException("Row amount in a grid must be a positive number.");
@@ -23,7 +21,6 @@ namespace Theseus.Domain.Models.MazeRelated.Maze
             if (columns <= 0)
                 throw new ArgumentException("Column amount in a grid must be a positive number.");
 
-            Id = id;
             RowAmount = rows;
             ColumnAmount = columns;
             CellAmount = rows * columns;

@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.Maze;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
@@ -8,7 +8,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
     {
         public SidewinderMazeStructureGenerator() { }
 
-        public override void GenerateMazeStructureInGrid(MazeGrid mazeGrid)
+        public override void GenerateMazeStructureInGrid(Maze mazeGrid)
         {
             Random rnd = new Random();
 

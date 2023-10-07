@@ -1,13 +1,13 @@
 ﻿using Theseus.Domain.Extensions;
-using Theseus.Domain.Models.MazeRelated.Maze;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
     public class HuntAndKillMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void GenerateMazeStructureInGrid(MazeGrid maze)
+        public override void GenerateMazeStructureInGrid(Maze mazeGrid)
         {
-            Cell? currentCell = maze.GetRandomCell();
+            Cell? currentCell = mazeGrid.GetRandomCell();
             Random rnd = new Random();
 
             while (currentCell is not null)
@@ -22,7 +22,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
                 }
                 else
                 {
-                    currentCell = HuntForNewCurrentCell(maze, rnd);
+                    currentCell = HuntForNewCurrentCell(mazeGrid, rnd);
                 }
             }
         }
@@ -31,9 +31,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 
         private IEnumerable<Cell> GetNeighbours(Cell cell, Func<Cell, bool> predicate) => cell.GetAdjecentCells().Where(predicate);
 
-        private Cell? HuntForNewCurrentCell(MazeGrid maze, Random rnd)
+        private Cell? HuntForNewCurrentCell(Maze mazeGrid, Random rnd)
         {
-            foreach (var cell in maze)
+            foreach (var cell in mazeGrid)
             {
                 if (!HasBeenVisited(cell))
                 {

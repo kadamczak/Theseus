@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.MazeRelated.Enums;
 
-namespace Theseus.Domain.Models.MazeRelated.Maze
+namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 {
     public class Cell
     {
