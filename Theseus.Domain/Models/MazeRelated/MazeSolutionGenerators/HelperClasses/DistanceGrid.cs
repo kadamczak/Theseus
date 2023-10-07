@@ -1,6 +1,6 @@
-﻿using Theseus.Domain.Models.MazeRelated.MazeStructure;
+﻿using Theseus.Domain.Models.MazeRelated.Maze;
 
-namespace Theseus.Domain.Models.MazeRelated.SolutionGenerators
+namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
     public class DistanceGrid
     {
@@ -9,7 +9,7 @@ namespace Theseus.Domain.Models.MazeRelated.SolutionGenerators
 
         public DistanceGrid(Cell startCell)
         {
-            this.StartCell = startCell;
+            StartCell = startCell;
 
         }
 

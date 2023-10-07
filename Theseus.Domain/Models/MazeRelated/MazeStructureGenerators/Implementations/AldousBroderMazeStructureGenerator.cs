@@ -1,13 +1,13 @@
 ﻿using Theseus.Domain.Extensions;
-using Theseus.Domain.Models.MazeRelated.MazeGenerators;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.Maze;
 
-namespace Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations
+namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
-    public class AldousBroderMazeGenerator : MazeGeneratorBase
+    public class AldousBroderMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void ApplyAlgorithm(Maze maze, Random rnd)
+        public override void GenerateMazeStructureInGrid(MazeGrid maze)
         {
+            Random rnd = new Random();
             Cell currentCell = maze.GetRandomCell();
             int unvisitedCellAmount = maze.CellAmount - 1;
 

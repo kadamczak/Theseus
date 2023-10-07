@@ -25,7 +25,7 @@ namespace Theseus.WPF.Code.Views
         private void DrawMaze()
         {
             var viewModel = (MazeCanvasViewModel)this.DataContext;
-            Maze maze = viewModel.Maze;
+            MazeGrid maze = viewModel.Maze;
 
             Canvas canvas = this.FindName("Maze") as Canvas;
             canvas.Children.Clear();

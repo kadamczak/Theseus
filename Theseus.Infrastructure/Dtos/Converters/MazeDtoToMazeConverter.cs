@@ -8,9 +8,9 @@ namespace Theseus.Infrastructure.Dtos.Converters
     {
         static Direction[] directions = new Direction[2] { Direction.South, Direction.East };
 
-        public static Maze Convert(MazeDto mazeDto)
+        public static MazeGrid Convert(MazeDto mazeDto)
         {
-            Maze maze = new Maze(mazeDto.Height, mazeDto.Width, mazeDto.Id);
+            MazeGrid maze = new MazeGrid(mazeDto.Height, mazeDto.Width, mazeDto.Id);
 
             foreach (var (cell, index) in maze.WithIndex())
             {

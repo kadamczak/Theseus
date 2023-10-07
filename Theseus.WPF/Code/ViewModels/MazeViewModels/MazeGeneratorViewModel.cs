@@ -23,11 +23,11 @@ namespace Theseus.WPF.Code.ViewModels
         private readonly LastMazeGeneratorInputStore _lastMazeGeneratorSettingsStore;
 
         public ReadOnlyCollection<AlgorithmViewModel> AvailableAlgorithms { get; } = new List<AlgorithmViewModel> {
-                                new AlgorithmViewModel("Binary", MazeGenAlgorithm.Binary),
-                                new AlgorithmViewModel("Sidewinder", MazeGenAlgorithm.Sidewinder),
-                                new AlgorithmViewModel("Aldous-Broder", MazeGenAlgorithm.AldousBroder),
-                                new AlgorithmViewModel("Hunt and Kill", MazeGenAlgorithm.HuntAndKill),
-                                new AlgorithmViewModel("Kruskal's", MazeGenAlgorithm.Kruskal),
+                                new AlgorithmViewModel("Binary", MazeStructureGenAlgorithm.Binary),
+                                new AlgorithmViewModel("Sidewinder", MazeStructureGenAlgorithm.Sidewinder),
+                                new AlgorithmViewModel("Aldous-Broder", MazeStructureGenAlgorithm.AldousBroder),
+                                new AlgorithmViewModel("Hunt and Kill", MazeStructureGenAlgorithm.HuntAndKill),
+                                new AlgorithmViewModel("Kruskal's", MazeStructureGenAlgorithm.Kruskal),
                                 }.AsReadOnly();
 
         public AlgorithmViewModel SelectedAlgorithm

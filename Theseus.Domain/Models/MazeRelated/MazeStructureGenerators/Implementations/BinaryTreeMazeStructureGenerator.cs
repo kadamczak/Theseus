@@ -1,14 +1,14 @@
 ﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.MazeGenerators;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.Maze;
 
-namespace Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations
+namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
-    public class BinaryTreeMazeGenerator : MazeGeneratorBase
+    public class BinaryTreeMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void ApplyAlgorithm(Maze mazeGrid, Random rnd)
+        public override void GenerateMazeStructureInGrid(MazeGrid mazeGrid)
         {
+            Random rnd = new Random();
             foreach (var cell in mazeGrid)
             {
                 var cellNeighbours = cell.GetAdjecentCells(Direction.North, Direction.East);

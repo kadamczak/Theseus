@@ -1,13 +1,12 @@
 ﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.MazeGenerators;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.Maze;
 
-namespace Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations
+namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
-    public class KruskalMazeGenerator : MazeGeneratorBase
+    public class KruskalMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void ApplyAlgorithm(Maze maze, Random rnd)
+        public override void GenerateMazeStructureInGrid(MazeGrid maze)
         {
             AlgorithmState algorithmState = new AlgorithmState(maze);
             var shuffledNeighbourPairs = algorithmState.NeighbourPairs.FisherYatesShuffle();
@@ -37,7 +36,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations
             private Dictionary<Cell, int> _cellToSetIdentifier = new();
             private Dictionary<int, HashSet<Cell>> _setIdentifierToCells = new();
 
-            public AlgorithmState(Maze maze)
+            public AlgorithmState(MazeGrid maze)
             {        
                 foreach(var (cell, setIdentifier) in maze.WithIndex())
                 {

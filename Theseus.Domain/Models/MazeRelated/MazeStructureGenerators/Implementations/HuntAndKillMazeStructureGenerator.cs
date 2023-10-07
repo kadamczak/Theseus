@@ -1,14 +1,14 @@
 ﻿using Theseus.Domain.Extensions;
-using Theseus.Domain.Models.MazeRelated.MazeGenerators;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.Maze;
 
-namespace Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations
+namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
-    public class HuntAndKillMazeGenerator : MazeGeneratorBase
+    public class HuntAndKillMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void ApplyAlgorithm(Maze maze, Random rnd)
+        public override void GenerateMazeStructureInGrid(MazeGrid maze)
         {
             Cell? currentCell = maze.GetRandomCell();
+            Random rnd = new Random();
 
             while (currentCell is not null)
             {
@@ -31,7 +31,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeGenerators.Implementations
 
         private IEnumerable<Cell> GetNeighbours(Cell cell, Func<Cell, bool> predicate) => cell.GetAdjecentCells().Where(predicate);
 
-        private Cell? HuntForNewCurrentCell(Maze maze, Random rnd)
+        private Cell? HuntForNewCurrentCell(MazeGrid maze, Random rnd)
         {
             foreach (var cell in maze)
             {

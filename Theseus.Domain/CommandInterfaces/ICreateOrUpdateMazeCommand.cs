@@ -1,9 +1,9 @@
-﻿using Theseus.Domain.Models.MazeRelated.MazeStructure;
+﻿using Theseus.Domain.Models.MazeRelated.Maze;
 
 namespace Theseus.Domain.CommandInterfaces
 {
     public interface ICreateOrUpdateMazeCommand
     {
-        Task CreateOrUpdateMaze(Maze maze);
+        Task CreateOrUpdateMaze(MazeGrid maze);
     }
 }

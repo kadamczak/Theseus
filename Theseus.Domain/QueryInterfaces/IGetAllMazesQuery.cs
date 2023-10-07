@@ -1,9 +1,9 @@
-﻿using Theseus.Domain.Models.MazeRelated.MazeStructure;
+﻿using Theseus.Domain.Models.MazeRelated.Maze;
 
 namespace Theseus.Domain.QueryInterfaces
 {
     public interface IGetAllMazesQuery
     {
-        Task<IEnumerable<Maze>> GetAllMazes();
+        Task<IEnumerable<MazeGrid>> GetAllMazes();
     }
 }

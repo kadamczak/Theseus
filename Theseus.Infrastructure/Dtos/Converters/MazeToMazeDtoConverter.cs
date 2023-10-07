@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.Maze;
 
 namespace Theseus.Infrastructure.Dtos.Converters
 {
@@ -8,7 +8,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
     {
         static Direction[] directions = new Direction[2] { Direction.East, Direction.South };
 
-        public static MazeDto Convert(Maze maze)
+        public static MazeDto Convert(MazeGrid maze)
         {
             byte[] cellsAsBytes = new byte[maze.CellAmount];
 

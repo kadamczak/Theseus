@@ -11,7 +11,7 @@ namespace Theseus.Infrastructure.Dtos
         public int Width { get; set; } = default!;
         public byte[] Data { get; set; } = default!;
 
-        public MazeDto(Maze maze, byte[] cellsAsBytes)
+        public MazeDto(MazeGrid maze, byte[] cellsAsBytes)
         {
             Id = maze.Id;
             Height = maze.RowAmount;

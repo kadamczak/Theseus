@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using Theseus.Domain.Models.MazeRelated.Enums;
 
-namespace Theseus.Domain.Models.MazeRelated.MazeStructure
+namespace Theseus.Domain.Models.MazeRelated.Maze
 {
-    public class Maze : IEnumerable<Cell>
+    public class MazeGrid : IEnumerable<Cell>
     {
         public Guid? Id { get; set; } = default;
 
@@ -15,9 +15,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructure
         //Storage
         List<List<Cell>> CellMatrix { get; } = new List<List<Cell>>();
 
-        public Maze(Maze maze) : this(maze.RowAmount, maze.ColumnAmount, maze.Id) {}
-
-        public Maze(int rows, int columns, Guid? id = null)
+        public MazeGrid(int rows, int columns, Guid? id = null)
         {
             if (rows <= 0)
                 throw new ArgumentException("Row amount in a grid must be a positive number.");
@@ -108,10 +106,6 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructure
 
             return GetCell(rowIndex, columnIndex)!;
         }
-
-        //SOLUTION==================================
-
-
 
         //VISUALIZATION ASCII==============================================
         public override string ToString()

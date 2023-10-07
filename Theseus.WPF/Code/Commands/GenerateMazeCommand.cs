@@ -40,8 +40,8 @@ namespace Theseus.WPF.Code.Commands
             int height = Int32.Parse(_mazeGenViewModel.MazeHeight);
             int width = Int32.Parse(_mazeGenViewModel.MazeWidth);
 
-            var generator = MazeGeneratorFactory.Create(_mazeGenViewModel.SelectedAlgorithm.Algorithm);
-            Maze maze = generator.GenerateMaze(height, width);
+            var generator = MazeStructureGeneratorFactory.Create(_mazeGenViewModel.SelectedAlgorithm.Algorithm);
+            MazeGrid maze = generator.GenerateMaze(height, width);
 
             _mazeDetailsStore.UpdateMazeDetails(maze, unsavedChanges: true);
 

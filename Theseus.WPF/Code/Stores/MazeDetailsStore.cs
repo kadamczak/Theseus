@@ -8,10 +8,10 @@ namespace Theseus.WPF.Code.Stores
         public event Action MazeStructureChanged;
         public event Action SaveStateChanged;
 
-        private Maze? _selectedMaze = null;
+        private MazeGrid? _selectedMaze = null;
         private bool _hasUnsavedChanges = true;
 
-        public Maze? SelectedMaze
+        public MazeGrid? SelectedMaze
         {
             get => _selectedMaze;
             set
@@ -31,7 +31,7 @@ namespace Theseus.WPF.Code.Stores
             }
         }
 
-        public void UpdateMazeDetails(Maze? maze, bool unsavedChanges)
+        public void UpdateMazeDetails(MazeGrid? maze, bool unsavedChanges)
         {
             this.SelectedMaze = maze;
             this.HasUnsavedChanges = unsavedChanges;

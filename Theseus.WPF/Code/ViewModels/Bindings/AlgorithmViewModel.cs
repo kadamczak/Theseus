@@ -5,9 +5,9 @@ namespace Theseus.WPF.Code.ViewModels.Bindings
     public class AlgorithmViewModel
     {
         public string DisplayName { get; }
-        public MazeGenAlgorithm Algorithm { get; }
+        public MazeStructureGenAlgorithm Algorithm { get; }
 
-        public AlgorithmViewModel(string name, MazeGenAlgorithm alg)
+        public AlgorithmViewModel(string name, MazeStructureGenAlgorithm alg)
         {
             DisplayName = name;
             Algorithm = alg;
