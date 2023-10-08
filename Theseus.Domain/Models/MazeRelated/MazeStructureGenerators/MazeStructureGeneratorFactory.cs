@@ -6,7 +6,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeGenerators
 {
     public class MazeStructureGeneratorFactory
     {
-        public static MazeStructureGeneratorBase Create(MazeStructureGenAlgorithm algorithm)
+        public MazeStructureGeneratorBase Create(MazeStructureGenAlgorithm algorithm)
         {
             switch (algorithm)
             {

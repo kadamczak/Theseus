@@ -7,6 +7,16 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
 {
     public class MazeCreator
     {
+        private readonly MazeStructureGeneratorFactory _mazeStructureGeneratorFactory;
+        private readonly MazeSolutionGeneratorFactory _mazeSolutionGeneratorFactory;
+
+        public MazeCreator(MazeStructureGeneratorFactory mazeStructureGeneratorFactory,
+                           MazeSolutionGeneratorFactory mazeSolutionGeneratorFactory)
+        {
+            this._mazeStructureGeneratorFactory = mazeStructureGeneratorFactory;
+            this._mazeSolutionGeneratorFactory = mazeSolutionGeneratorFactory;
+        }
+
         public Maze CreateMaze(int height, int width, MazeStructureGenAlgorithm algorithm)
         {
             Maze maze = new Maze(height, width);
@@ -28,13 +38,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
 
         private void GenerateMazeStructure(Maze grid, MazeStructureGenAlgorithm algorithm)
         {
-            var generator = MazeStructureGeneratorFactory.Create(algorithm);
+            var generator = _mazeStructureGeneratorFactory.Create(algorithm);
             generator.GenerateMazeStructureInGrid(grid);
         }
 
         private void GenerateMazeSolution(MazeWithSolution maze, MazeSolutionGenAlgorithm algorithm)
         {
-            var generator = MazeSolutionGeneratorFactory.Create(algorithm);
+            var generator = _mazeSolutionGeneratorFactory.Create(algorithm);
             generator.GenerateSolutionInMaze(maze);
         }
     }

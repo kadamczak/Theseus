@@ -87,6 +87,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         }
 
         //INTERACTION===============================
+        public Cell? GetCell((int, int) coordinates) => this.GetCell(coordinates.Item1, coordinates.Item2);
+
         public Cell? GetCell(int row, int column)
         {
             if (row < 0 || row >= RowAmount) return null;
