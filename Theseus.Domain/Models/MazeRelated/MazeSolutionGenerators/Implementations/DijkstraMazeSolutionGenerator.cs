@@ -19,6 +19,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementatio
             Cell endCell = distanceGridFromRoot.FindFarthestCells().GetRandomItem(rnd);
 
             maze.SolutionPath = distanceGridFromRoot.FindPathTo(endCell);
+            maze.StartDirection = ChooseRandomExitDirection(rootCell, rnd);
+            maze.EndDirection = ChooseRandomExitDirection(endCell, rnd);
         }
 
         private Cell FindRootCell(MazeWithSolution maze, Random rnd)

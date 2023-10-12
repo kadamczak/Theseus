@@ -9,17 +9,20 @@ namespace Theseus.Infrastructure.Commands
     public class CreateOrUpdateMazeCommand : ICreateOrUpdateMazeCommand
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
+        private readonly MazeWithSolutionToMazeDtoConverter _toMazeDtoConverter;
 
-        public CreateOrUpdateMazeCommand(TheseusDbContextFactory dbContextFactory)
+        public CreateOrUpdateMazeCommand(TheseusDbContextFactory dbContextFactory,
+                                         MazeWithSolutionToMazeDtoConverter ToMazeDtoConverter)
         {
-            _dbContextFactory = dbContextFactory;
+            this._dbContextFactory = dbContextFactory;
+            this._toMazeDtoConverter = ToMazeDtoConverter;
         }
 
-        public async Task CreateOrUpdateMaze(MazeWithSolution maze)
+        public async Task CreateOrUpdateMazeWithSolution(MazeWithSolution maze)
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
-                MazeDto mazeDto = MazeWithSolutionToMazeDtoConverter.Convert(maze);
+                MazeDto mazeDto = this._toMazeDtoConverter.Convert(maze);
                 context.Mazes.Update(mazeDto);
                 await context.SaveChangesAsync();
 

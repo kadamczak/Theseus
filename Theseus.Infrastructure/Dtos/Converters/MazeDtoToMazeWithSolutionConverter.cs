@@ -14,7 +14,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
             foreach (var (cell, index) in maze.WithIndex())
             {
-                byte cellValue = mazeDto.Data[index];
+                byte cellValue = mazeDto.Structure[index];
 
                 LinkToNeighboursWhoseBitIsSetToOne(cell, cellValue);
             }

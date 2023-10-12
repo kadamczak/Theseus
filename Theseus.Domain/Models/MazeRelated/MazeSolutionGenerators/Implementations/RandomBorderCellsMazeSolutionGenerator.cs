@@ -30,7 +30,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementatio
             Cell endCell = maze.Grid.GetCell(endCellCoordinates)!;
 
             DistanceGrid distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell);
+
             maze.SolutionPath = distanceGrid.FindPathTo(endCell);
+            maze.StartDirection = ChooseRandomExitDirection(rootCell, rnd);
+            maze.EndDirection = ChooseRandomExitDirection(endCell, rnd);
         }
 
         private (int, int) GetRandomPair(int max1, int max2, Random rnd)

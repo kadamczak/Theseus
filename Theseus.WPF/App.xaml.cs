@@ -1,16 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Windows;
-using Theseus.Domain.CommandInterfaces;
-using Theseus.Domain.QueryInterfaces;
-using Theseus.Infrastructure.Commands;
 using Theseus.Infrastructure.DbContexts;
-using Theseus.Infrastructure.Queries;
 using Theseus.WPF.Code.HostBuilders;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF

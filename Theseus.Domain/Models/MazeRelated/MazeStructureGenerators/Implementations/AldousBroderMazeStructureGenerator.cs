@@ -5,7 +5,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 {
     public class AldousBroderMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void GenerateMazeStructureInGrid(MazeWithSolution mazeGrid)
+        public override void GenerateMazeStructureInGrid(Maze mazeGrid)
         {
             Random rnd = new Random();
             Cell currentCell = mazeGrid.GetRandomCell();

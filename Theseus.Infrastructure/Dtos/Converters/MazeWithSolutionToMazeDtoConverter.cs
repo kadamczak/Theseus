@@ -6,43 +6,66 @@ namespace Theseus.Infrastructure.Dtos.Converters
 {
     public class MazeWithSolutionToMazeDtoConverter
     {
-        static Direction[] directions = new Direction[2] { Direction.East, Direction.South };
+        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
 
-        public static MazeDto Convert(MazeWithSolution maze)
+        public MazeDto Convert(MazeWithSolution maze)
         {
-            byte[] cellsAsBytes = CreateCellByteArray(maze.Grid);
+            byte[] structureAsBytes = CreateStructureByteArray(maze.Grid);
+            byte[] solutionAsBytes = CreateSolutionByteArray(maze.SolutionPath, maze.StartDirection, maze.EndDirection);
 
-
-            return new MazeDto(maze, cellsAsBytes);
+            return new MazeDto(maze, structureAsBytes, solutionAsBytes);
         }
 
-        private static byte[] CreateCellByteArray(MazeWithSolution maze)
+        private  byte[] CreateStructureByteArray(Maze maze)
         {
-            byte[] cellsAsBytes = new byte[maze.CellAmount];
+            byte[] structureAsBytes = new byte[maze.CellAmount];
 
             foreach (var (cell, index) in maze.WithIndex())
             {
-                cellsAsBytes[index] = ConvertCellToByte(cell);
+                structureAsBytes[index] = ConvertCellToByte(cell);
             }
 
-            return cellsAsBytes;
+            return structureAsBytes;
         }
 
-        private static byte ConvertCellToByte(Cell cell)
+        private byte ConvertCellToByte(Cell cell)
         {
             byte cellAsByte = 0b0000_0000;
-
-            foreach (var direction in directions)
-            {
-                cellAsByte += GetEnumValueIfLinkExists(cell, direction);
-            }
-
+            cellAsByte += GetEnumValueIfLinkExists(cell, Direction.East);
+            cellAsByte += GetEnumValueIfLinkExists(cell, Direction.South);
             return cellAsByte;
         }
 
-        private static byte GetEnumValueIfLinkExists(Cell cell, Direction direction)
+        private byte GetEnumValueIfLinkExists(Cell cell, Direction direction)
         {
             return cell.IsLinkedToNeighbour(direction) ? (byte)direction : (byte)0;
+        }
+
+        private byte[] CreateSolutionByteArray(List<Cell> solutionPath, Direction startDirection, Direction endDirection)
+        {
+            int byteArrayLength = solutionPath.Count() + 1;
+            byte[] solutionAsBytes = new byte[byteArrayLength];
+
+            solutionAsBytes[0] = (byte)startDirection;
+            for(int i = 0; i < solutionPath.Count() - 1; i++)
+            {
+                var currentCell = solutionPath[i];
+                var nextCell = solutionPath[i + 1];
+                solutionAsBytes[i + 1] = GetBetweenDirectionValue(currentCell, nextCell);
+            }
+            solutionAsBytes[byteArrayLength - 1] = (byte)endDirection;
+
+            return solutionAsBytes;
+        }
+
+        private byte GetBetweenDirectionValue(Cell currentCell, Cell nextCell)
+        {
+            foreach(var direction in directions)
+            {
+                if (currentCell.AdjecentCellSpaces[direction] == nextCell)
+                    return (byte)direction;
+            }
+            throw new ArgumentException("Next cell needs to be adjecent to current cell.");
         }
     }
 }

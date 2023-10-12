@@ -3,7 +3,7 @@ using Theseus.Domain.Models.MazeRelated.Enums;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 {
-    public class MazeWithSolution : IEnumerable<Cell>
+    public class Maze : IEnumerable<Cell>
     {
         //Grid info
         public int RowAmount { get; }           //Y
@@ -13,7 +13,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         //Storage
         List<List<Cell>> CellMatrix { get; } = new List<List<Cell>>();
 
-        public MazeWithSolution(int rows, int columns)
+        public Maze(int rows, int columns)
         {
             if (rows <= 0)
                 throw new ArgumentException("Row amount in a grid must be a positive number.");
