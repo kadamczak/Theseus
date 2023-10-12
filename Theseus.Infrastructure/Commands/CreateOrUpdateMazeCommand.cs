@@ -15,11 +15,11 @@ namespace Theseus.Infrastructure.Commands
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task CreateOrUpdateMaze(Maze maze)
+        public async Task CreateOrUpdateMaze(MazeWithSolution maze)
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
-                MazeDto mazeDto = MazeToMazeDtoConverter.Convert(maze);
+                MazeDto mazeDto = MazeWithSolutionToMazeDtoConverter.Convert(maze);
                 context.Mazes.Update(mazeDto);
                 await context.SaveChangesAsync();
 

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
@@ -26,7 +25,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 
             while (currentCell != RootCell)
             {
-                Cell closerCell = FindCellWithShortestDistance(currentCell);
+                Cell closerCell = FindCloserCell(currentCell);
                 path.Add(closerCell);
                 currentCell = closerCell;
             }
@@ -35,7 +34,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             return path;
         }
 
-        private Cell FindCellWithShortestDistance(Cell currentCell)
+        private Cell FindCloserCell(Cell currentCell)
         {
             int currentCellDistance = Distance[currentCell];
             foreach (var linkedCell in currentCell.LinkedCells)
@@ -46,6 +45,12 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
                 }
             }
             return currentCell;
+        }
+
+        public IEnumerable<Cell> FindFarthestCells()
+        {
+            int maxDistance = Distance.Values.Max();
+            return Distance.Where(d => d.Value == maxDistance).Select(d => d.Key);
         }
     }
 }

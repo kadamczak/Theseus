@@ -27,15 +27,12 @@ namespace Theseus.WPF
             _host = Host.CreateDefaultBuilder()
                 .AddDbContext()
                 .AddViewModels()
+                .AddStores()
+                .AddCommands()
+                .AddFactories()
+                .AddConverters()
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton<NavigationStore>();
-                    services.AddSingleton<MazeDetailsStore>();
-                    services.AddSingleton<LastMazeGeneratorInputStore>();
-
-                    services.AddSingleton<IGetAllMazesQuery, GetAllMazesQuery>();
-                    services.AddSingleton<ICreateOrUpdateMazeCommand, CreateOrUpdateMazeCommand>();
-
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {
                         DataContext = services.GetRequiredService<MainViewModel>()

@@ -4,6 +4,6 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators
 {
     public abstract class MazeStructureGeneratorBase
     {
-        public abstract void GenerateMazeStructureInGrid(Maze mazeGrid);
+        public abstract void GenerateMazeStructureInGrid(MazeWithSolution mazeGrid);
     }
 }

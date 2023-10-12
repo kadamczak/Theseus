@@ -1,16 +1,16 @@
 ﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos.Converters
 {
-    public class MazeDtoToMazeConverter
+    public class MazeDtoToMazeWithSolutionConverter
     {
         static Direction[] directions = new Direction[2] { Direction.South, Direction.East };
 
-        public static MazeGrid Convert(MazeDto mazeDto)
+        public static MazeWithSolution Convert(MazeDto mazeDto)
         {
-            MazeGrid maze = new MazeGrid(mazeDto.Height, mazeDto.Width, mazeDto.Id);
+            MazeWithSolution maze = new MazeWithSolution(mazeDto.Height, mazeDto.Width, mazeDto.Id);
 
             foreach (var (cell, index) in maze.WithIndex())
             {

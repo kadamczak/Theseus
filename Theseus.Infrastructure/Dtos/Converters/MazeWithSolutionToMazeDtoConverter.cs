@@ -4,11 +4,19 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos.Converters
 {
-    public class MazeToMazeDtoConverter
+    public class MazeWithSolutionToMazeDtoConverter
     {
         static Direction[] directions = new Direction[2] { Direction.East, Direction.South };
 
-        public static MazeDto Convert(Maze maze)
+        public static MazeDto Convert(MazeWithSolution maze)
+        {
+            byte[] cellsAsBytes = CreateCellByteArray(maze.Grid);
+
+
+            return new MazeDto(maze, cellsAsBytes);
+        }
+
+        private static byte[] CreateCellByteArray(MazeWithSolution maze)
         {
             byte[] cellsAsBytes = new byte[maze.CellAmount];
 
@@ -17,7 +25,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
                 cellsAsBytes[index] = ConvertCellToByte(cell);
             }
 
-            return new MazeDto(maze, cellsAsBytes);
+            return cellsAsBytes;
         }
 
         private static byte ConvertCellToByte(Cell cell)

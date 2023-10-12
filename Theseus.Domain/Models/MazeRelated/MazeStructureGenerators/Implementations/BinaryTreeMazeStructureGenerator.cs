@@ -6,7 +6,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 {
     public class BinaryTreeMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void GenerateMazeStructureInGrid(Maze mazeGrid)
+        public override void GenerateMazeStructureInGrid(MazeWithSolution mazeGrid)
         {
             Random rnd = new Random();
             foreach (var cell in mazeGrid)

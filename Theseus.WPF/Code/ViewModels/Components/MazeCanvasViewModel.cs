@@ -10,7 +10,7 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class MazeCanvasViewModel : ViewModelBase
     {
-        public Maze Maze { get; set; }
+        public MazeWithSolution Maze { get; set; }
 
         public MazeCanvasViewModel()
         {
