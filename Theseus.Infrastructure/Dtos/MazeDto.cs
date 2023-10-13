@@ -15,8 +15,11 @@ namespace Theseus.Infrastructure.Dtos
         public int SolutionStartRow { get; set; } = default!;
         public int SolutionStartColumn { get; set; } = default!;
         public byte[] Solution { get; set; } = default!;
+        public byte StartDirection { get; set; } = default!;
+        public byte EndDirection { get; set; } = default!;
 
-        public MazeDto(Guid? id, int height, int width, byte[] structure, int solutionStartRow, int solutionStartColumn, byte[] solution)
+        //TODO
+        public MazeDto(Guid? id, int height, int width, byte[] structure, int solutionStartRow, int solutionStartColumn, byte[] solution, byte startDirection, byte endDirection)
         {
             Id = id;
             Height = height;
@@ -25,6 +28,8 @@ namespace Theseus.Infrastructure.Dtos
             SolutionStartRow = solutionStartRow;
             SolutionStartColumn = solutionStartColumn;
             Solution = solution;
+            StartDirection = startDirection;
+            EndDirection = endDirection;
         }
 
         public MazeDto(MazeWithSolution maze, byte[] structureAsBytes, byte[] solutionAsBytes)
@@ -36,6 +41,8 @@ namespace Theseus.Infrastructure.Dtos
             SolutionStartColumn = maze.SolutionPath[0].ColumnIndex;
             Structure = structureAsBytes;
             Solution = solutionAsBytes;
+            StartDirection = (byte)maze.StartDirection;
+            EndDirection = (byte)maze.EndDirection;
         }
     }
 }

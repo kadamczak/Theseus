@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using Theseus.Domain.Models.MazeRelated.MazeCreators;
 using Theseus.Domain.Models.MazeRelated.MazeGenerators;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
@@ -12,10 +13,11 @@ namespace Theseus.WPF.Code.Commands
     public class GenerateMazeCommand : CommandBase
     {
         private readonly MazeGeneratorViewModel _mazeGenViewModel;
+        private readonly MazeCreator _mazeCreator;
         private readonly MazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
-        private const int MaxMazeDimension = 99;
+        private const int MaxMazeDimension = 50;
         private const int MinMazeDimension = 2;
 
         public GenerateMazeCommand(MazeGeneratorViewModel viewModel,

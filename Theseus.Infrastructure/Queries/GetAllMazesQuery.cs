@@ -10,18 +10,20 @@ namespace Theseus.Infrastructure.Queries
     public class GetAllMazesQuery : IGetAllMazesQuery
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
+        private readonly MazeDtoToMazeWithSolutionConverter _toMazeWithSolutionConverter;
 
-        public GetAllMazesQuery(TheseusDbContextFactory dbContextFactory)
+        public GetAllMazesQuery(TheseusDbContextFactory dbContextFactory, MazeDtoToMazeWithSolutionConverter toMazeWithSolutionConverter)
         {
             this._dbContextFactory = dbContextFactory;
+            this._toMazeWithSolutionConverter = toMazeWithSolutionConverter;
         }
 
-        public async Task<IEnumerable<MazeWithSolution>> GetAllMazes()
+        public async Task<IEnumerable<MazeWithSolution>> GetAllMazesWithSolution()
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<MazeDto> mazeEntities = await context.Mazes.ToListAsync();
-                return mazeEntities.Select(m => MazeDtoToMazeWithSolutionConverter.Convert(m));
+                return mazeEntities.Select(m => this._toMazeWithSolutionConverter.Convert(m));
             }
         }
     }

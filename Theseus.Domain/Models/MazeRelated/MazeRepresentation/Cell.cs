@@ -49,7 +49,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         public void LinkTo(Cell anotherCell, bool bidirectional = true)
         {
             if (anotherCell is null)
-                throw new ArgumentException("Can't link cell to a null space.");
+                throw new ArgumentNullException("Can't link cell to a null space.");
 
             LinkedCells.Add(anotherCell);
 
@@ -69,7 +69,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         public void UnlinkFrom(Cell anotherCell, bool bidirectional = true)
         {
             if (anotherCell is null)
-                throw new ArgumentException("Can't unlink cell from empty space.");
+                throw new ArgumentNullException("Can't unlink cell from empty space.");
 
             LinkedCells.Remove(anotherCell);
 

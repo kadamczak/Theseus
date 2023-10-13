@@ -11,7 +11,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
         public MazeDto Convert(MazeWithSolution maze)
         {
             byte[] structureAsBytes = CreateStructureByteArray(maze.Grid);
-            byte[] solutionAsBytes = CreateSolutionByteArray(maze.SolutionPath, maze.StartDirection, maze.EndDirection);
+            byte[] solutionAsBytes = CreateSolutionByteArray(maze.SolutionPath);
 
             return new MazeDto(maze, structureAsBytes, solutionAsBytes);
         }
@@ -41,24 +41,21 @@ namespace Theseus.Infrastructure.Dtos.Converters
             return cell.IsLinkedToNeighbour(direction) ? (byte)direction : (byte)0;
         }
 
-        private byte[] CreateSolutionByteArray(List<Cell> solutionPath, Direction startDirection, Direction endDirection)
+        private byte[] CreateSolutionByteArray(List<Cell> solutionPath)
         {
-            int byteArrayLength = solutionPath.Count() + 1;
-            byte[] solutionAsBytes = new byte[byteArrayLength];
+            byte[] solutionAsBytes = new byte[solutionPath.Count()];
 
-            solutionAsBytes[0] = (byte)startDirection;
             for(int i = 0; i < solutionPath.Count() - 1; i++)
             {
                 var currentCell = solutionPath[i];
                 var nextCell = solutionPath[i + 1];
-                solutionAsBytes[i + 1] = GetBetweenDirectionValue(currentCell, nextCell);
+                solutionAsBytes[i] = GetValueOfDirectionBetweenCells(currentCell, nextCell);
             }
-            solutionAsBytes[byteArrayLength - 1] = (byte)endDirection;
 
             return solutionAsBytes;
         }
 
-        private byte GetBetweenDirectionValue(Cell currentCell, Cell nextCell)
+        private byte GetValueOfDirectionBetweenCells(Cell currentCell, Cell nextCell)
         {
             foreach(var direction in directions)
             {
