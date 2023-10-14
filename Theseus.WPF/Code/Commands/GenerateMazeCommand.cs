@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
-using Theseus.Domain.Models.MazeRelated.MazeGenerators;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
@@ -20,11 +19,13 @@ namespace Theseus.WPF.Code.Commands
         private const int MaxMazeDimension = 50;
         private const int MinMazeDimension = 2;
 
-        public GenerateMazeCommand(MazeGeneratorViewModel viewModel,
+        public GenerateMazeCommand(MazeGeneratorViewModel mazeGenViewModel,
+                                   MazeCreator mazeCreator,  
                                    MazeDetailsStore mazeDetailsStore,
                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
-            this._mazeGenViewModel = viewModel;
+            this._mazeGenViewModel = mazeGenViewModel;
+            this._mazeCreator = mazeCreator;
             this._mazeDetailsStore = mazeDetailsStore;
             this._mazeDetailNavigationService = mazeDetailNavigationService;
 
@@ -42,11 +43,12 @@ namespace Theseus.WPF.Code.Commands
             int height = Int32.Parse(_mazeGenViewModel.MazeHeight);
             int width = Int32.Parse(_mazeGenViewModel.MazeWidth);
 
-            var generator = MazeStructureGeneratorFactory.Create(_mazeGenViewModel.SelectedAlgorithm.Algorithm);
-            MazeGrid maze = generator.GenerateMaze(height, width);
+            var structureAlgorithm = _mazeGenViewModel.SelectedStructureAlgorithm.Algorithm;
+            var solutionAlgorithm = MazeSolutionGenAlgorithm.Dijkstra;
 
-            _mazeDetailsStore.UpdateMazeDetails(maze, unsavedChanges: true);
+            var mazeWithSolution = this._mazeCreator.CreateMazeWithSolution(height, width, structureAlgorithm, solutionAlgorithm);
 
+            _mazeDetailsStore.UpdateMazeDetails(mazeWithSolution, unsavedChanges: true);
             _mazeDetailNavigationService.Navigate();
         }
 
@@ -73,9 +75,7 @@ namespace Theseus.WPF.Code.Commands
 
         private bool IsMazeDimensionValid(string userInput)
         {
-            int userInputValue;
-
-            if (!Int32.TryParse(userInput, out userInputValue))
+            if (!Int32.TryParse(userInput, out int userInputValue))
             {
                 return false;
             }

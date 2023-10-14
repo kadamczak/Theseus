@@ -1,5 +1,5 @@
 ﻿using System;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.WPF.Code.Stores
 {
@@ -8,15 +8,15 @@ namespace Theseus.WPF.Code.Stores
         public event Action MazeStructureChanged;
         public event Action SaveStateChanged;
 
-        private MazeGrid? _selectedMaze = null;
+        private MazeWithSolution? _selectedMazeWithSolution = null;
         private bool _hasUnsavedChanges = true;
 
-        public MazeGrid? SelectedMaze
+        public MazeWithSolution? SelectedMazeWithSolution
         {
-            get => _selectedMaze;
+            get => _selectedMazeWithSolution;
             set
             {
-                _selectedMaze = value;  
+                _selectedMazeWithSolution = value;  
                 MazeStructureChanged?.Invoke();
             }
         }
@@ -31,9 +31,9 @@ namespace Theseus.WPF.Code.Stores
             }
         }
 
-        public void UpdateMazeDetails(MazeGrid? maze, bool unsavedChanges)
+        public void UpdateMazeDetails(MazeWithSolution? mazeWithSolution, bool unsavedChanges)
         {
-            this.SelectedMaze = maze;
+            this.SelectedMazeWithSolution = mazeWithSolution;
             this.HasUnsavedChanges = unsavedChanges;
         }
     }

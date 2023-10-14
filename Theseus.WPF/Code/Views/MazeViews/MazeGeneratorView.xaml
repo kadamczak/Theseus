@@ -41,7 +41,7 @@
 
         </StackPanel>
 
-        <ListBox Grid.Row="1" Grid.Column="0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableAlgorithms}" SelectedItem="{Binding SelectedAlgorithm, Mode=TwoWay}">
+        <ListBox Grid.Row="1" Grid.Column="0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableStructureAlgorithms}" SelectedItem="{Binding SelectedStructureAlgorithm, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding DisplayName}" />

@@ -19,7 +19,7 @@ namespace Theseus.WPF.Code.ViewModels
             _mazeDetailsStore = mazeDetailsStore;
 
             CanvasViewModel = canvasViewModel;
-            CanvasViewModel.Maze = _mazeDetailsStore.SelectedMaze;
+            CanvasViewModel.Maze = _mazeDetailsStore.SelectedMazeWithSolution;
 
             SaveMaze = new SaveMazeCommand(this, mazeDetailsStore, createMazeCommand);
         }

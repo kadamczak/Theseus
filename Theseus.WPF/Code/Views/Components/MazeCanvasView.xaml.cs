@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Theseus.Domain.Models.MazeRelated.Enums;
-using Theseus.Domain.Models.MazeRelated.MazeStructure;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Views
@@ -25,20 +25,20 @@ namespace Theseus.WPF.Code.Views
         private void DrawMaze()
         {
             var viewModel = (MazeCanvasViewModel)this.DataContext;
-            MazeGrid maze = viewModel.Maze;
+            MazeWithSolution maze = viewModel.Maze;
 
             Canvas canvas = this.FindName("Maze") as Canvas;
             canvas.Children.Clear();
 
             int cellSize = 30;
 
-            int imageHeight = cellSize * maze.RowAmount;
-            int imageWidth = cellSize * maze.ColumnAmount;
+            int imageHeight = cellSize * maze.Grid.RowAmount;
+            int imageWidth = cellSize * maze.Grid.ColumnAmount;
 
             if (imageHeight > canvas.Height || imageWidth > canvas.Width)
                 return;
 
-            foreach (var cell in maze)
+            foreach (var cell in maze.Grid)
             {
                 int x1 = cell.ColumnIndex * cellSize;
                 int y1 = cell.RowIndex * cellSize;

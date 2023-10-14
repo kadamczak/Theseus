@@ -29,7 +29,7 @@ namespace Theseus.WPF.Code.Commands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await _createOrUpdateMazeCommand.CreateOrUpdateMaze(_mazeDetailsStore.SelectedMaze);
+            await _createOrUpdateMazeCommand.CreateOrUpdateMazeWithSolution(_mazeDetailsStore.SelectedMazeWithSolution);
             this._mazeDetailsStore.HasUnsavedChanges = false;
         }
 
