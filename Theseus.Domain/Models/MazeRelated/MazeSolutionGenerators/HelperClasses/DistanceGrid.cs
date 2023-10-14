@@ -4,12 +4,18 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
     public class DistanceGrid
     {
+        public int RowAmount { get; } = 0;
+        public int ColumnAmount { get; } = 0;
+
         public Cell RootCell { get; }
         public Dictionary<Cell, int> Distance { get; } = new Dictionary<Cell, int>();
 
-        public DistanceGrid(Cell rootCell)
+        public DistanceGrid(Cell rootCell, int rowAmount, int columnAmount)
         {
-            RootCell = rootCell;
+            this.RootCell = rootCell;
+            this.RowAmount = rowAmount;
+            this.ColumnAmount = columnAmount;
+
             Distance.Add(rootCell, 0);
         }
 
@@ -47,10 +53,15 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             return currentCell;
         }
 
-        public IEnumerable<Cell> FindFarthestCells()
+        //TODO
+        //Areas?
+        public IEnumerable<Cell> FindFarthestBorderCells()
         {
-            int maxDistance = Distance.Values.Max();
-            return Distance.Where(d => d.Value == maxDistance).Select(d => d.Key);
+            var borderCellDistances = Distance.Where(c => c.Key.IsOnBorder(RowAmount, ColumnAmount)).ToDictionary(x => x.Key, x => x.Value);
+
+            int maxDistance = borderCellDistances.Values.Max();
+            var farthestBorderCells = borderCellDistances.Where(d => d.Value == maxDistance).ToDictionary(x => x.Key, x => x.Value);
+            return farthestBorderCells.Keys;
         }
     }
 }

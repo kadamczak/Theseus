@@ -29,7 +29,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementatio
             Cell rootCell = maze.Grid.GetCell(rootCellCoordinates)!;
             Cell endCell = maze.Grid.GetCell(endCellCoordinates)!;
 
-            DistanceGrid distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell);
+            DistanceGrid distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell, maze.Grid.RowAmount, maze.Grid.ColumnAmount);
 
             maze.SolutionPath = distanceGrid.FindPathTo(endCell);
             maze.StartDirection = ChooseRandomExitDirection(rootCell, rnd);

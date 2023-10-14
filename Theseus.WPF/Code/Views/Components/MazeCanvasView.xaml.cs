@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Theseus.Domain.Models.MazeRelated.Enums;
@@ -40,34 +42,62 @@ namespace Theseus.WPF.Code.Views
 
             foreach (var cell in maze.Grid)
             {
-                int x1 = cell.ColumnIndex * cellSize;
-                int y1 = cell.RowIndex * cellSize;
+                Direction? mazeEntry;
+                mazeEntry = (cell == maze.SolutionPath.First()) ? maze.StartDirection : null;
+                mazeEntry = (cell == maze.SolutionPath.Last()) ? maze.EndDirection : mazeEntry;
+                DrawWallsOfCell(canvas, cell, cellSize, mazeEntry);
 
-                int x2 = x1 + cellSize;
-                int y2 = y1 + cellSize;
+                if(maze.SolutionPath.Contains(cell))
+                {
+                    int x1 = cell.ColumnIndex * cellSize;
+                    int y1 = cell.RowIndex * cellSize;
 
-                if (!cell.HasNeighbour(Direction.North))
-                    this.AddWall(canvas, x1, y1, x2, y1);
+                    int x2 = x1 + cellSize;
+                    int y2 = y1 + cellSize;
 
-                if (!cell.HasNeighbour(Direction.West))
-                    this.AddWall(canvas, x1, y1, x1, y2);
-
-                if (!cell.IsLinkedToNeighbour(Direction.East))
-                    this.AddWall(canvas, x2, y1, x2, y2);
-
-                if (!cell.IsLinkedToNeighbour(Direction.South))
-                    this.AddWall(canvas, x1, y2, x2, y2);
-
+                    this.AddWall(canvas, x1, y1, x2, y2, Colors.LightGray);
+                    this.AddWall(canvas, x2, y1, x1, y2, Colors.LightGray);
+                }
             }
         }
 
+        private void DrawWallsOfCell(Canvas canvas, Cell cell, int cellSize, Direction? mazeEntry)
+        {
+            int x1 = cell.ColumnIndex * cellSize;
+            int y1 = cell.RowIndex * cellSize;
+
+            int x2 = x1 + cellSize;
+            int y2 = y1 + cellSize;
+
+            if (OnClosedBorder(cell, Direction.North, mazeEntry))
+                this.AddWall(canvas, x1, y1, x2, y1);
+
+            if (OnClosedBorder(cell, Direction.West, mazeEntry))
+                this.AddWall(canvas, x1, y1, x1, y2);
+
+            if (NotLinkedToNeighbour(cell, Direction.East, mazeEntry))
+                this.AddWall(canvas, x2, y1, x2, y2);
+
+            if (NotLinkedToNeighbour(cell, Direction.South, mazeEntry))
+                this.AddWall(canvas, x1, y2, x2, y2);
+        }
+
+        private bool OnClosedBorder(Cell cell, Direction neighbourDirection, Direction? mazeEntry)
+        {
+            return !cell.HasNeighbour(neighbourDirection) && neighbourDirection != mazeEntry;
+        }
+
+        private bool NotLinkedToNeighbour(Cell cell, Direction neighbourDirection, Direction? mazeEntry)
+        {
+            return !cell.IsLinkedToNeighbour(neighbourDirection) && neighbourDirection != mazeEntry;
+        }
 
         //x1,y1---->x2,y1
         //|
         //|
         //V
         //x1,y2     x2,y2
-        private void AddWall(Canvas canvas, int startX, int startY, int endX, int endY)
+        private void AddWall(Canvas canvas, int startX, int startY, int endX, int endY, Color? color = null)
         {
             Line wall = new Line()
             {
@@ -78,7 +108,7 @@ namespace Theseus.WPF.Code.Views
             };
 
             wall.StrokeThickness = 2;
-            wall.Stroke = new SolidColorBrush(Colors.Black);
+            wall.Stroke = new SolidColorBrush(color ?? Colors.Black);
 
             canvas.Children.Add(wall);
         }

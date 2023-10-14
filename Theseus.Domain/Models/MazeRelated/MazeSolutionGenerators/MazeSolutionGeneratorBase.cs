@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Theseus.Domain.Extensions;
+﻿using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses;
@@ -15,12 +14,12 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
         }
 
         public abstract void GenerateSolutionInMaze(MazeWithSolution maze);
-        public Direction ChooseRandomExitDirection(Cell cell, Random rnd)
-        {
-            var availableDirections = GetAdjecentEmptySpaces(cell);
-            return availableDirections.GetRandomItem(rnd);
-        }
+        public Direction ChooseRandomExitDirection(Cell cell, Random rnd) => GetAdjecentEmptySpaces(cell).GetRandomItem(rnd);
 
-        private IEnumerable<Direction> GetAdjecentEmptySpaces(Cell cell) => cell.AdjecentCellSpaces.Where(c => c.Value == null).Select(c => c.Key);
+        private IEnumerable<Direction> GetAdjecentEmptySpaces(Cell cell)
+        {
+            var emptySpaces = cell.AdjecentCellSpaces.Where(c => c.Value == null).ToDictionary(x => x.Key, x => x.Value);
+            return emptySpaces.Keys;
+        }
     }
 }
