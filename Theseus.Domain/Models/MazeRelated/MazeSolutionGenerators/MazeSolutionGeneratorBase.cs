@@ -15,11 +15,6 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
 
         public abstract void GenerateSolutionInMaze(MazeWithSolution maze);
         public Direction ChooseRandomExitDirection(Cell cell, Random rnd) => GetAdjecentEmptySpaces(cell).GetRandomItem(rnd);
-
-        private IEnumerable<Direction> GetAdjecentEmptySpaces(Cell cell)
-        {
-            var emptySpaces = cell.AdjecentCellSpaces.Where(c => c.Value == null).ToDictionary(x => x.Key, x => x.Value);
-            return emptySpaces.Keys;
-        }
+        private IEnumerable<Direction> GetAdjecentEmptySpaces(Cell cell) => cell.AdjecentCellSpaces.Where(c => c.Value == null).ToDictionary(x => x.Key, x => x.Value).Keys;
     }
 }
