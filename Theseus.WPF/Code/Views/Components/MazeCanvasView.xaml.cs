@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -42,44 +43,84 @@ namespace Theseus.WPF.Code.Views
 
             foreach (var cell in maze.Grid)
             {
-                Direction? mazeEntry;
-                mazeEntry = (cell == maze.SolutionPath.First()) ? maze.StartDirection : null;
-                mazeEntry = (cell == maze.SolutionPath.Last()) ? maze.EndDirection : mazeEntry;
+                Direction? mazeEntry = FindMazeEntryDirectionInCell(cell, maze);
                 DrawWallsOfCell(canvas, cell, cellSize, mazeEntry);
+            }
 
-                if(maze.SolutionPath.Contains(cell))
+            Cell? previousCell = null;
+            for(int i = 0; i < maze.SolutionPath.Count(); i++)
+            {
+                Cell currentCell = maze.SolutionPath[i];
+                Cell? nextCell = (i != maze.SolutionPath.Count() - 1) ? maze.SolutionPath[i + 1] : null;
+
+                DrawSolutionPathInCell(previousCell, currentCell, nextCell, cellSize, canvas);
+                previousCell = currentCell;
+            }
+        }
+
+        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
+
+        private void DrawSolutionPathInCell(Cell? previousCell, Cell currentCell, Cell? nextCell, int cellSize, Canvas canvas)
+        {
+            int halfCellSize = cellSize / 2;
+            (int x, int y) cellCenterPoint = (x: currentCell.ColumnIndex * cellSize + halfCellSize,
+                                              y: currentCell.RowIndex * cellSize + halfCellSize);
+
+            (int x, int y) cellSolutionEntryPoint = FindBorderPoint(previousCell, currentCell, cellCenterPoint, halfCellSize);
+            (int x, int y) cellSolutionExitPoint = FindBorderPoint(nextCell, currentCell, cellCenterPoint, halfCellSize);
+
+            DrawLine(canvas, cellSolutionEntryPoint, cellCenterPoint, Colors.LightSkyBlue, 3);
+            DrawLine(canvas, cellCenterPoint, cellSolutionExitPoint, Colors.LightSkyBlue, 3);
+        }
+
+        private (int, int) FindBorderPoint(Cell? comparedCell, Cell currentCell, (int x, int y) cellCenterPoint, int halfCellSize)
+        {
+            foreach (var direction in directions)
+            {
+                if (comparedCell == currentCell.AdjecentCellSpaces[direction])
                 {
-                    int x1 = cell.ColumnIndex * cellSize;
-                    int y1 = cell.RowIndex * cellSize;
-
-                    int x2 = x1 + cellSize;
-                    int y2 = y1 + cellSize;
-
-                    this.AddWall(canvas, x1, y1, x2, y2, Colors.LightGray);
-                    this.AddWall(canvas, x2, y1, x1, y2, Colors.LightGray);
+                    return CalculateSolutionCellBorderPoint(direction, cellCenterPoint, halfCellSize);
                 }
             }
+            throw new ArgumentException("lol");
+        }
+
+        private (int x, int y) CalculateSolutionCellBorderPoint(Direction direction, (int x, int y) center, int halfCellSize)
+        {
+            return direction switch
+            {
+                Direction.West => (x: center.x - halfCellSize, y: center.y),
+                Direction.North => (x: center.x, y: center.y - halfCellSize),
+                Direction.East => (x: center.x + halfCellSize, y: center.y),
+                Direction.South => (x: center.x, y: center.y + halfCellSize),
+            };
+        }
+
+        private Direction? FindMazeEntryDirectionInCell(Cell cell, MazeWithSolution maze)
+        {
+            Direction? mazeEntry = (cell == maze.SolutionPath.First()) ? maze.StartDirection : null;
+            return (cell == maze.SolutionPath.Last()) ? maze.EndDirection : mazeEntry;
         }
 
         private void DrawWallsOfCell(Canvas canvas, Cell cell, int cellSize, Direction? mazeEntry)
         {
-            int x1 = cell.ColumnIndex * cellSize;
-            int y1 = cell.RowIndex * cellSize;
+            (int x, int y) start = (x: cell.ColumnIndex * cellSize,
+                                      y: cell.RowIndex * cellSize);
 
-            int x2 = x1 + cellSize;
-            int y2 = y1 + cellSize;
+            (int x, int y) end = (x: start.x + cellSize,
+                                          y: start.y + cellSize);
 
             if (OnClosedBorder(cell, Direction.North, mazeEntry))
-                this.AddWall(canvas, x1, y1, x2, y1);
+                this.DrawLine(canvas, start.x, start.y, end.x, start.y);
 
             if (OnClosedBorder(cell, Direction.West, mazeEntry))
-                this.AddWall(canvas, x1, y1, x1, y2);
+                this.DrawLine(canvas, start.x, start.y, start.x, end.y);
 
             if (NotLinkedToNeighbour(cell, Direction.East, mazeEntry))
-                this.AddWall(canvas, x2, y1, x2, y2);
+                this.DrawLine(canvas, end.x, start.y, end.x, end.y);
 
             if (NotLinkedToNeighbour(cell, Direction.South, mazeEntry))
-                this.AddWall(canvas, x1, y2, x2, y2);
+                this.DrawLine(canvas, start.x, end.y, end.x, end.y);
         }
 
         private bool OnClosedBorder(Cell cell, Direction neighbourDirection, Direction? mazeEntry)
@@ -97,20 +138,25 @@ namespace Theseus.WPF.Code.Views
         //|
         //V
         //x1,y2     x2,y2
-        private void AddWall(Canvas canvas, int startX, int startY, int endX, int endY, Color? color = null)
+        private void DrawLine(Canvas canvas, int x1, int y1, int x2, int y2, Color? color = null, int strokeThickness = 2)
         {
-            Line wall = new Line()
+            DrawLine(canvas, (x1, y1), (x2, y2), color, strokeThickness);
+        }
+
+        private void DrawLine(Canvas canvas, (int x, int y) start, (int x, int y) end, Color? color = null, int strokeThickness = 2)
+        {
+            Line line = new Line()
             {
-                X1 = startX,
-                Y1 = startY,
-                X2 = endX,
-                Y2 = endY
+                X1 = start.x,
+                Y1 = start.y,
+                X2 = end.x,
+                Y2 = end.y
             };
 
-            wall.StrokeThickness = 2;
-            wall.Stroke = new SolidColorBrush(color ?? Colors.Black);
+            line.StrokeThickness = strokeThickness;
+            line.Stroke = new SolidColorBrush(color ?? Colors.Black);
 
-            canvas.Children.Add(wall);
+            canvas.Children.Add(line);
         }
     }
 }

@@ -71,16 +71,16 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             var rowExclusionZone = CalculateExclusionZone(this.RootCell.RowIndex, this.RowAmount);
             var columnExclusionZone = CalculateExclusionZone(this.RootCell.ColumnIndex, this.ColumnAmount);
 
-            return cells.Where(c => (OutsideOfExclusionZone(c.Key.RowIndex, rowExclusionZone)) &&
-                                    (OutsideOfExclusionZone(c.Key.ColumnIndex, columnExclusionZone))).ToDictionary(x => x.Key, x => x.Value);
+            return cells.Where(c => (IsOutsideOfExclusionZone(c.Key.RowIndex, rowExclusionZone)) &&
+                                    (IsOutsideOfExclusionZone(c.Key.ColumnIndex, columnExclusionZone))).ToDictionary(x => x.Key, x => x.Value);
         }
 
         private (int Beginning, int End) CalculateExclusionZone(int index, int dimensionLength)
         {
-            return (index - dimensionLength / 2, index + dimensionLength / 2);
+            return (Beginning: index - dimensionLength / 2, End: index + dimensionLength / 2);
         }
 
-        private bool OutsideOfExclusionZone(int index, (int Beginning, int End) exclusionZone)
+        private bool IsOutsideOfExclusionZone(int index, (int Beginning, int End) exclusionZone)
         {
             return (index <= exclusionZone.Beginning ||  index >= exclusionZone.End);
         }
