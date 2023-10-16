@@ -69,8 +69,8 @@ namespace Theseus.WPF.Code.Views
             (int x, int y) cellSolutionEntryPoint = FindBorderPoint(previousCell, currentCell, cellCenterPoint, halfCellSize);
             (int x, int y) cellSolutionExitPoint = FindBorderPoint(nextCell, currentCell, cellCenterPoint, halfCellSize);
 
-            DrawLine(canvas, cellSolutionEntryPoint, cellCenterPoint, Colors.LightSkyBlue, 3);
-            DrawLine(canvas, cellCenterPoint, cellSolutionExitPoint, Colors.LightSkyBlue, 3);
+            DrawLine(canvas, cellSolutionEntryPoint, cellCenterPoint, Colors.LightSkyBlue, 15);
+            DrawLine(canvas, cellCenterPoint, cellSolutionExitPoint, Colors.LightSkyBlue, 15);
         }
 
         private (int, int) FindBorderPoint(Cell? comparedCell, Cell currentCell, (int x, int y) cellCenterPoint, int halfCellSize)
@@ -152,6 +152,10 @@ namespace Theseus.WPF.Code.Views
                 X2 = end.x,
                 Y2 = end.y
             };
+
+            line.StrokeDashCap = PenLineCap.Round;
+            line.StrokeStartLineCap = PenLineCap.Round;
+            line.StrokeEndLineCap = PenLineCap.Round;
 
             line.StrokeThickness = strokeThickness;
             line.Stroke = new SolidColorBrush(color ?? Colors.Black);

@@ -77,7 +77,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 
         private (int Beginning, int End) CalculateExclusionZone(int index, int dimensionLength)
         {
-            return (Beginning: index - dimensionLength / 2, End: index + dimensionLength / 2);
+            return (Beginning: index - dimensionLength / 3, End: index + dimensionLength / 3);
         }
 
         private bool IsOutsideOfExclusionZone(int index, (int Beginning, int End) exclusionZone)
