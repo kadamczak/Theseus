@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
+             xmlns:canvases="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
     <Grid Background="WhiteSmoke" Margin="40 40 40 40">
@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Content="Maze Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
-        
-        <local:MazeCanvasView Grid.Row="1" DataContext="{Binding CanvasViewModel}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <canvases:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="MazeWithSolutionCanvasView_Loaded"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Button Style="{StaticResource Generic}" Content="Save" Command="{Binding SaveMaze}" />

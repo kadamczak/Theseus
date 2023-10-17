@@ -6,6 +6,7 @@ using Theseus.Infrastructure.DbContexts;
 using Theseus.WPF.Code.HostBuilders;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
+using Theseus.WPF.Code.Views.HelperClasses;
 
 namespace Theseus.WPF
 {
