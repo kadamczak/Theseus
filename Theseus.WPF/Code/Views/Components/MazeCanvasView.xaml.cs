@@ -15,6 +15,8 @@ namespace Theseus.WPF.Code.Views
     /// </summary>
     public partial class MazeCanvasView : UserControl
     {
+        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
+
         public MazeCanvasView()
         {
             InitializeComponent();
@@ -53,47 +55,10 @@ namespace Theseus.WPF.Code.Views
                 Cell currentCell = maze.SolutionPath[i];
                 Cell? nextCell = (i != maze.SolutionPath.Count() - 1) ? maze.SolutionPath[i + 1] : null;
 
-                DrawSolutionPathInCell(previousCell, currentCell, nextCell, cellSize, canvas);
+                Direction? mazeEntry = FindMazeEntryDirectionInCell(currentCell, maze);
+                DrawSolutionPathInCell(previousCell, currentCell, nextCell, mazeEntry, cellSize, canvas);
                 previousCell = currentCell;
             }
-        }
-
-        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
-
-        private void DrawSolutionPathInCell(Cell? previousCell, Cell currentCell, Cell? nextCell, int cellSize, Canvas canvas)
-        {
-            int halfCellSize = cellSize / 2;
-            (int x, int y) cellCenterPoint = (x: currentCell.ColumnIndex * cellSize + halfCellSize,
-                                              y: currentCell.RowIndex * cellSize + halfCellSize);
-
-            (int x, int y) cellSolutionEntryPoint = FindBorderPoint(previousCell, currentCell, cellCenterPoint, halfCellSize);
-            (int x, int y) cellSolutionExitPoint = FindBorderPoint(nextCell, currentCell, cellCenterPoint, halfCellSize);
-
-            DrawLine(canvas, cellSolutionEntryPoint, cellCenterPoint, Colors.LightSkyBlue, 15);
-            DrawLine(canvas, cellCenterPoint, cellSolutionExitPoint, Colors.LightSkyBlue, 15);
-        }
-
-        private (int, int) FindBorderPoint(Cell? comparedCell, Cell currentCell, (int x, int y) cellCenterPoint, int halfCellSize)
-        {
-            foreach (var direction in directions)
-            {
-                if (comparedCell == currentCell.AdjecentCellSpaces[direction])
-                {
-                    return CalculateSolutionCellBorderPoint(direction, cellCenterPoint, halfCellSize);
-                }
-            }
-            throw new ArgumentException("lol");
-        }
-
-        private (int x, int y) CalculateSolutionCellBorderPoint(Direction direction, (int x, int y) center, int halfCellSize)
-        {
-            return direction switch
-            {
-                Direction.West => (x: center.x - halfCellSize, y: center.y),
-                Direction.North => (x: center.x, y: center.y - halfCellSize),
-                Direction.East => (x: center.x + halfCellSize, y: center.y),
-                Direction.South => (x: center.x, y: center.y + halfCellSize),
-            };
         }
 
         private Direction? FindMazeEntryDirectionInCell(Cell cell, MazeWithSolution maze)
@@ -161,6 +126,45 @@ namespace Theseus.WPF.Code.Views
             line.Stroke = new SolidColorBrush(color ?? Colors.Black);
 
             canvas.Children.Add(line);
+        }
+
+        private void DrawSolutionPathInCell(Cell? previousCell, Cell currentCell, Cell? nextCell, Direction? mazeEntry, int cellSize, Canvas canvas)
+        {
+            int halfCellSize = cellSize / 2;
+            (int x, int y) cellCenterPoint = (x: currentCell.ColumnIndex * cellSize + halfCellSize,
+                                              y: currentCell.RowIndex * cellSize + halfCellSize);
+
+            (int x, int y) cellSolutionEntryPoint = FindBorderPoint(previousCell, currentCell, mazeEntry, cellCenterPoint, halfCellSize);
+            (int x, int y) cellSolutionExitPoint = FindBorderPoint(nextCell, currentCell, mazeEntry, cellCenterPoint, halfCellSize);
+
+            DrawLine(canvas, cellSolutionEntryPoint, cellCenterPoint, Colors.Lavender, 15);
+            DrawLine(canvas, cellCenterPoint, cellSolutionExitPoint, Colors.Lavender, 15);
+        }
+
+        private (int, int) FindBorderPoint(Cell? comparedCell, Cell currentCell, Direction? mazeEntry, (int x, int y) cellCenterPoint, int halfCellSize)
+        {
+            if (comparedCell is null)
+                return CalculateSolutionCellBorderPoint(mazeEntry!.Value, cellCenterPoint, halfCellSize);
+
+            foreach (var direction in directions)
+            {
+                if (comparedCell == currentCell.AdjecentCellSpaces[direction])
+                {
+                    return CalculateSolutionCellBorderPoint(direction, cellCenterPoint, halfCellSize);
+                }
+            }
+            throw new ArgumentException("lol");
+        }
+
+        private (int x, int y) CalculateSolutionCellBorderPoint(Direction direction, (int x, int y) center, int halfCellSize)
+        {
+            return direction switch
+            {
+                Direction.West => (x: center.x - halfCellSize, y: center.y),
+                Direction.North => (x: center.x, y: center.y - halfCellSize),
+                Direction.East => (x: center.x + halfCellSize, y: center.y),
+                Direction.South => (x: center.x, y: center.y + halfCellSize),
+            };
         }
     }
 }
