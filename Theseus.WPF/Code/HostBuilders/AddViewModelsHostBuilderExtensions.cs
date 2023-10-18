@@ -32,10 +32,6 @@ namespace Theseus.WPF.Code.HostBuilders
 
             services.AddTransient<MazeDetailsViewModel>();
             services.AddTransient<MazeGeneratorViewModel>();
-
-            //services.AddTransient<MazeCanvasViewModel>();
-            //services.AddTransient<SolutionCanvasViewModel>();
-            //services.AddTransient<MazeWithSolutionCanvasViewModel>();
         }
 
         private static void AddSingletonViewModels(IServiceCollection services)

@@ -25,7 +25,6 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         {
             var viewModel = (MazeCanvasViewModel)this.DataContext;
             Maze maze = viewModel.Maze;
-
             Canvas.Children.Clear();
 
             int cellSize = 30;

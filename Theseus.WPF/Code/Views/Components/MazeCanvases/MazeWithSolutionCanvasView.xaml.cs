@@ -35,6 +35,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         {
             _mazeCanvasView.DrawMaze();
             RemoveMazeEntryWalls();
+            _solutionCanvasView.DrawSolutionPath();
         }
 
         private void RemoveMazeEntryWalls()
