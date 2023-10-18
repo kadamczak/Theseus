@@ -6,17 +6,24 @@ namespace Theseus.WPF.Code.Views.HelperClasses
 {
     public class LineDrawer
     {
+        private readonly Canvas _canvas;
+
+        public LineDrawer(Canvas canvas)
+        {
+            _canvas = canvas;
+        }
+
         //x1,y1---->x2,y1
         //|
         //|
         //V
         //x1,y2     x2,y2
-        public void DrawLine(Canvas canvas, int x1, int y1, int x2, int y2, Color? color = null, int strokeThickness = 2, string? tag = null)
+        public void DrawLine(int x1, int y1, int x2, int y2, Color? color = null, int strokeThickness = 2, string? tag = null)
         {
-            DrawLine(canvas, (x1, y1), (x2, y2), color, strokeThickness, tag);
+            DrawLine((x1, y1), (x2, y2), color, strokeThickness, tag);
         }
 
-        public void DrawLine(Canvas canvas, (int x, int y) start, (int x, int y) end, Color? color = null, int strokeThickness = 2, string? tag = null)
+        public void DrawLine((int x, int y) start, (int x, int y) end, Color? color = null, int strokeThickness = 2, string? tag = null)
         {
             Line line = new Line()
             {
@@ -36,7 +43,7 @@ namespace Theseus.WPF.Code.Views.HelperClasses
             line.StrokeThickness = strokeThickness;
             line.Stroke = new SolidColorBrush(color ?? Colors.Black);
 
-            canvas.Children.Add(line);
+            this._canvas.Children.Add(line);
         }
     }
 }

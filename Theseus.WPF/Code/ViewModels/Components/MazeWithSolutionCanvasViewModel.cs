@@ -13,7 +13,7 @@ namespace Theseus.WPF.Code.ViewModels
         {
             this.MazeWithSolution = mazeWithSolution;
             this.MazeCanvasViewModel = new MazeCanvasViewModel(mazeWithSolution.Grid);
-            this.SolutionCanvasViewModel = new SolutionCanvasViewModel();
+            this.SolutionCanvasViewModel = new SolutionCanvasViewModel(mazeWithSolution);
         }
     }
 }

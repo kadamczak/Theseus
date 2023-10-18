@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using Theseus.Domain.Models.MazeRelated.Enums;
@@ -16,18 +13,23 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
     public partial class MazeWithSolutionCanvasView : UserControl
     {
         private readonly MazeCanvasView _mazeCanvasView;
+        private readonly SolutionCanvasView _solutionCanvasView;
 
         public MazeWithSolutionCanvasView()
         {
             InitializeComponent();
             this._mazeCanvasView = this.FindName("MazeCanvasView")! as MazeCanvasView;
+            this._solutionCanvasView = this.FindName("SolutionCanvasView")! as SolutionCanvasView;
         }
 
         public void InitializeDataContexts()
         {
             var mazeWithSolutionCanvasViewModel = GetDataContext();
             _mazeCanvasView.DataContext = mazeWithSolutionCanvasViewModel.MazeCanvasViewModel;
+            _solutionCanvasView.DataContext = mazeWithSolutionCanvasViewModel.SolutionCanvasViewModel;
         }
+
+        private MazeWithSolutionCanvasViewModel GetDataContext() => (MazeWithSolutionCanvasViewModel)this.DataContext;
 
         public void DrawMazeWithSolution()
         {
@@ -38,23 +40,25 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         private void RemoveMazeEntryWalls()
         {
             MazeWithSolution mazeWithSolution = GetDataContext().MazeWithSolution;
-            Cell firstCell = mazeWithSolution.SolutionPath.First();
-            Cell lastCell = mazeWithSolution.SolutionPath.Last();
-            Direction startDirection = mazeWithSolution.StartDirection;
-            Direction endDirection = mazeWithSolution.EndDirection;
-
-            string entryWallTag = CreateMazeWallTag(firstCell.RowIndex, firstCell.ColumnIndex, startDirection);
-            string exitWallTag = CreateMazeWallTag(lastCell.RowIndex, lastCell.ColumnIndex, endDirection);
-
-            var walls = _mazeCanvasView.Canvas.Children.OfType<Line>();
-            Line entryWall = walls.Where(w => w.Tag.ToString() == entryWallTag).First();
-            Line exitWall = walls.Where(w => w.Tag.ToString() == exitWallTag).First();
-
-            _mazeCanvasView.Canvas.Children.Remove(entryWall);
-            _mazeCanvasView.Canvas.Children.Remove(exitWall);
+            (Line StartWall, Line EndWall) = FindMazeEntryWalls(mazeWithSolution);
+            _mazeCanvasView.Canvas.Children.Remove(StartWall);
+            _mazeCanvasView.Canvas.Children.Remove(EndWall);
         }
 
-        private MazeWithSolutionCanvasViewModel GetDataContext() => (MazeWithSolutionCanvasViewModel)this.DataContext;
-        private string CreateMazeWallTag(int row, int column, Direction direction) => $"{row}-{column}-{(int)direction}";
+        private (Line StartWall, Line EndWall) FindMazeEntryWalls(MazeWithSolution mazeWithSolution)
+        {
+            string startWallTag = CreateWallTag(mazeWithSolution.SolutionPath.First(), mazeWithSolution.StartDirection);
+            string endWallTag = CreateWallTag(mazeWithSolution.SolutionPath.Last(), mazeWithSolution.EndDirection);
+
+            return (GetWallByTag(startWallTag), GetWallByTag(endWallTag));
+        }
+
+        private Line GetWallByTag(string tag)
+        {
+            var walls = _mazeCanvasView.Canvas.Children.OfType<Line>();
+            return walls.Where(w => w.Tag.ToString() == tag).First();
+        }
+
+        private string CreateWallTag(Cell cell, Direction direction) => $"{cell.RowIndex}-{cell.ColumnIndex}-{(int)direction}";
     }
 }

@@ -17,8 +17,8 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         public MazeCanvasView()
         {
             InitializeComponent();
-            this._lineDrawer = new LineDrawer();
-            this.Canvas = this.FindName("MazeGridCanvas")! as Canvas;
+            this.Canvas = this.FindName("MazeCanvas")! as Canvas;
+            this._lineDrawer = new LineDrawer(this.Canvas!);
         }
 
         public void DrawMaze()
@@ -53,18 +53,18 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             string cellTag = $"{cell.RowIndex}-{cell.ColumnIndex}";
 
             if (!cell.HasNeighbour(Direction.North))
-                _lineDrawer.DrawLine(Canvas, start.x, start.y, end.x, start.y, tag: CreateMazeWallTag(cellTag, Direction.North));
+                _lineDrawer.DrawLine(start.x, start.y, end.x, start.y, tag: CreateWallTag(cellTag, Direction.North));
 
             if (!cell.HasNeighbour(Direction.West))
-                _lineDrawer.DrawLine(Canvas, start.x, start.y, start.x, end.y, tag: CreateMazeWallTag(cellTag, Direction.West));
+                _lineDrawer.DrawLine(start.x, start.y, start.x, end.y, tag: CreateWallTag(cellTag, Direction.West));
 
             if (!cell.IsLinkedToNeighbour(Direction.East))
-                _lineDrawer.DrawLine(Canvas, end.x, start.y, end.x, end.y, tag: CreateMazeWallTag(cellTag, Direction.East));
+                _lineDrawer.DrawLine(end.x, start.y, end.x, end.y, tag: CreateWallTag(cellTag, Direction.East));
 
             if (!cell.IsLinkedToNeighbour(Direction.South))
-                _lineDrawer.DrawLine(Canvas, start.x, end.y, end.x, end.y, tag: CreateMazeWallTag(cellTag, Direction.South));
+                _lineDrawer.DrawLine(start.x, end.y, end.x, end.y, tag: CreateWallTag(cellTag, Direction.South));
         }
 
-        private string CreateMazeWallTag(string cellTag, Direction direction) => cellTag + "-" + (int)direction;
+        private string CreateWallTag(string cellTag, Direction direction) => cellTag + "-" + (int)direction;
     }
 }
