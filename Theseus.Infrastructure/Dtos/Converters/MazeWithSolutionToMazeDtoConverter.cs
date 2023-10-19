@@ -43,7 +43,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
         private byte[] CreateSolutionByteArray(List<Cell> solutionPath)
         {
-            byte[] solutionAsBytes = new byte[solutionPath.Count()];
+            byte[] solutionAsBytes = new byte[solutionPath.Count() - 1];
 
             for(int i = 0; i < solutionPath.Count() - 1; i++)
             {
