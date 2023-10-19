@@ -69,12 +69,8 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             if (comparedCell is null)
                 return CalculateCellBorderPoint(entryDirection!.Value, cellCenterPoint, cellSize);
 
-            foreach (var direction in directions)
-            {
-                if (comparedCell == currentCell.AdjecentCellSpaces[direction])
-                    return CalculateCellBorderPoint(direction, cellCenterPoint, cellSize);
-            }
-            throw new ArgumentException("Compared cell must be adjecent to current cell.");
+            Direction directionToComparedCell = currentCell.GetNeighbourDirection(comparedCell);
+            return CalculateCellBorderPoint(directionToComparedCell, cellCenterPoint, cellSize);
         }
 
 

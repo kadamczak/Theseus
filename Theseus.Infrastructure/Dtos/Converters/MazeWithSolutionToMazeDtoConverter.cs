@@ -49,20 +49,10 @@ namespace Theseus.Infrastructure.Dtos.Converters
             {
                 var currentCell = solutionPath[i];
                 var nextCell = solutionPath[i + 1];
-                solutionAsBytes[i] = GetValueOfDirectionBetweenCells(currentCell, nextCell);
+                solutionAsBytes[i] = (byte)currentCell.GetNeighbourDirection(nextCell);
             }
 
             return solutionAsBytes;
-        }
-
-        private byte GetValueOfDirectionBetweenCells(Cell currentCell, Cell nextCell)
-        {
-            foreach(var direction in directions)
-            {
-                if (currentCell.AdjecentCellSpaces[direction] == nextCell)
-                    return (byte)direction;
-            }
-            throw new ArgumentException("Next cell needs to be adjecent to current cell.");
         }
     }
 }

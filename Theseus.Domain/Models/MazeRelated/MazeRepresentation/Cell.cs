@@ -99,6 +99,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             return this.AdjecentCellSpaces[direction] is not null;
         }
 
+        public Direction GetNeighbourDirection(Cell neighbour) => this.AdjecentCellSpaces.First(s => s.Value == neighbour).Key;
+
         public bool IsOnBorder(int rows, int cols) => RowIndex == 0 || RowIndex == rows - 1 || ColumnIndex == 0 || ColumnIndex == cols - 1;
     }
 }
