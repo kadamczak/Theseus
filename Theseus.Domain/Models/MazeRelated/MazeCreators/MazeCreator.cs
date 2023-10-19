@@ -27,12 +27,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
         public MazeWithSolution CreateMazeWithSolution(int height,
                                                        int width,
                                                        MazeStructureGenAlgorithm structureAlgorithm,
-                                                       MazeSolutionGenAlgorithm solutionAlgorithm)
+                                                       MazeSolutionGenAlgorithm solutionAlgorithm,
+                                                       bool shouldExcludeCellsCloseToRoot)
         {
             Maze maze = CreateMaze(height, width, structureAlgorithm);
 
             MazeWithSolution mazeWithSolution = new MazeWithSolution(maze);
-            GenerateMazeSolution(mazeWithSolution, solutionAlgorithm);
+            GenerateMazeSolution(mazeWithSolution, solutionAlgorithm, shouldExcludeCellsCloseToRoot);
             return mazeWithSolution;
         }
 
@@ -42,9 +43,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
             generator.GenerateMazeStructureInGrid(grid);
         }
 
-        private void GenerateMazeSolution(MazeWithSolution maze, MazeSolutionGenAlgorithm algorithm)
+        private void GenerateMazeSolution(MazeWithSolution maze, MazeSolutionGenAlgorithm algorithm, bool shouldExcludeCellsCloseToRoot)
         {
-            var generator = _mazeSolutionGeneratorFactory.Create(algorithm);
+            var generator = _mazeSolutionGeneratorFactory.Create(algorithm, shouldExcludeCellsCloseToRoot);
             generator.GenerateSolutionInMaze(maze);
         }
     }

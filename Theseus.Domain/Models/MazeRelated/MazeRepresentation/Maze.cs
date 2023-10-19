@@ -15,11 +15,11 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 
         public Maze(int rows, int columns)
         {
-            if (rows <= 0)
-                throw new ArgumentException("Row amount in a grid must be a positive number.");
+            if (rows < 2)
+                throw new ArgumentException("Row amount must be at least 2.");
 
-            if (columns <= 0)
-                throw new ArgumentException("Column amount in a grid must be a positive number.");
+            if (columns < 2)
+                throw new ArgumentException("Column amount must be at least 2.");
 
             RowAmount = rows;
             ColumnAmount = columns;
@@ -104,6 +104,27 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             int columnIndex = rnd.Next(0, ColumnAmount);
 
             return GetCell(rowIndex, columnIndex)!;
+        }
+
+        public IEnumerable<Cell> GetBorderCells() => this.Where(c => c.IsOnBorder(RowAmount, CellAmount));
+
+        public IEnumerable<Cell> ExcludeCellsCloseTo(Cell rootCell, IEnumerable<Cell> cellList)
+        {
+            var rowExclusionZone = CalculateExclusionZone(rootCell.RowIndex, this.RowAmount);
+            var columnExclusionZone = CalculateExclusionZone(rootCell.ColumnIndex, this.ColumnAmount);
+
+            return cellList.Where(c => (IsOutsideOfExclusionZone(c.RowIndex, rowExclusionZone)) &&
+                                       (IsOutsideOfExclusionZone(c.ColumnIndex, columnExclusionZone)));
+        }
+
+        private (int Beginning, int End) CalculateExclusionZone(int index, int dimensionLength)
+        {
+            return (Beginning: index - dimensionLength / 3, End: index + dimensionLength / 3);
+        }
+
+        private bool IsOutsideOfExclusionZone(int index, (int Beginning, int End) exclusionZone)
+        {
+            return (index <= exclusionZone.Beginning || index >= exclusionZone.End);
         }
 
         //VISUALIZATION ASCII==============================================

@@ -4,18 +4,12 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
     public class DistanceGrid
     {
-        public int RowAmount { get; } = 0;
-        public int ColumnAmount { get; } = 0;
-
         public Cell RootCell { get; }
         public Dictionary<Cell, int> Distance { get; } = new Dictionary<Cell, int>();
 
-        public DistanceGrid(Cell rootCell, int rowAmount, int columnAmount)
+        public DistanceGrid(Cell rootCell)
         {
             this.RootCell = rootCell;
-            this.RowAmount = rowAmount;
-            this.ColumnAmount = columnAmount;
-
             Distance.Add(rootCell, 0);
         }
 
@@ -53,36 +47,11 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             return currentCell;
         }
 
-        public IEnumerable<Cell> FindFarthestBorderCells(bool shouldExcludeCellsCloseToRoot = false)
+        public IEnumerable<Cell> FindFarthestCells(IEnumerable<Cell> cellList)
         {
-            var borderCellDistances = Distance.Where(c => c.Key.IsOnBorder(RowAmount, ColumnAmount)).ToDictionary(x => x.Key, x => x.Value);
-
-            if(shouldExcludeCellsCloseToRoot)
-            {
-                borderCellDistances = ExcludeCellsCloseToRoot(borderCellDistances);
-            }
-
-            int maxDistance = borderCellDistances.Values.Max();
-            return borderCellDistances.Where(d => d.Value == maxDistance).ToDictionary(x => x.Key, x => x.Value).Keys;
-        }
-
-        private Dictionary<Cell, int> ExcludeCellsCloseToRoot(Dictionary<Cell, int> cells)
-        {
-            var rowExclusionZone = CalculateExclusionZone(this.RootCell.RowIndex, this.RowAmount);
-            var columnExclusionZone = CalculateExclusionZone(this.RootCell.ColumnIndex, this.ColumnAmount);
-
-            return cells.Where(c => (IsOutsideOfExclusionZone(c.Key.RowIndex, rowExclusionZone)) &&
-                                    (IsOutsideOfExclusionZone(c.Key.ColumnIndex, columnExclusionZone))).ToDictionary(x => x.Key, x => x.Value);
-        }
-
-        private (int Beginning, int End) CalculateExclusionZone(int index, int dimensionLength)
-        {
-            return (Beginning: index - dimensionLength / 3, End: index + dimensionLength / 3);
-        }
-
-        private bool IsOutsideOfExclusionZone(int index, (int Beginning, int End) exclusionZone)
-        {
-            return (index <= exclusionZone.Beginning ||  index >= exclusionZone.End);
+            var cellDistances = Distance.Where(c => cellList.Contains(c.Key)).ToDictionary(x => x.Key, x => x.Value);
+            int maxDistance = cellDistances.Values.Max();
+            return cellDistances.Where(d => d.Value == maxDistance).ToDictionary(x => x.Key, x => x.Value).Keys;
         }
     }
 }

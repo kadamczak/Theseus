@@ -4,9 +4,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
     public class DistanceGridFactory
     {
-        public DistanceGrid CreateDistanceGrid(Cell rootCell, int rows, int columns)
+        public DistanceGrid CreateDistanceGrid(Cell rootCell)
         {
-            DistanceGrid distanceGrid = new DistanceGrid(rootCell, rows, columns);
+            DistanceGrid distanceGrid = new DistanceGrid(rootCell);
             var frontier = new List<Cell>() { rootCell };
 
             while (frontier.Any())

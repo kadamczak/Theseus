@@ -6,28 +6,33 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementatio
 {
     public class DijkstraMazeSolutionGenerator : MazeSolutionGeneratorBase
     {
-        public DijkstraMazeSolutionGenerator(DistanceGridFactory distanceGridFactory) : base(distanceGridFactory){}
+        public DijkstraMazeSolutionGenerator(DistanceGridFactory distanceGridFactory, bool shouldExcludeCellsCloseToRoot)
+            : base(distanceGridFactory, shouldExcludeCellsCloseToRoot){}
 
         public override void GenerateSolutionInMaze(MazeWithSolution maze)
         {
             maze.SolutionPath.Clear();
             Random rnd = new Random();
 
-            Cell rootCell = FindRootCell(maze, rnd);
+            List<Cell> borderCells = maze.Grid.GetBorderCells().ToList();
+            Cell rootCell = FindRootCell(maze, rnd, borderCells);
+            var distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell);
 
-            var distanceGridFromRoot = DistanceGridFactory.CreateDistanceGrid(rootCell, maze.Grid.RowAmount, maze.Grid.ColumnAmount);
-            Cell endCell = distanceGridFromRoot.FindFarthestBorderCells(true).GetRandomItem(rnd);
+            if (ShouldExcludeCellsCloseToRoot)
+                borderCells = maze.Grid.ExcludeCellsCloseTo(rootCell, borderCells).ToList();
 
-            maze.SolutionPath = distanceGridFromRoot.FindPathTo(endCell);
+            Cell endCell = distanceGrid.FindFarthestCells(borderCells).GetRandomItem(rnd);
+
+            maze.SolutionPath = distanceGrid.FindPathTo(endCell);
             maze.StartDirection = ChooseRandomExitDirection(rootCell, rnd);
             maze.EndDirection = ChooseRandomExitDirection(endCell, rnd);
         }
 
-        private Cell FindRootCell(MazeWithSolution maze, Random rnd)
+        private Cell FindRootCell(MazeWithSolution maze, Random rnd, List<Cell> borderCells)
         {
             Cell firstCell = maze.Grid.GetCell(0, 0)!;
-            var distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell: firstCell, maze.Grid.RowAmount, maze.Grid.ColumnAmount);
-            return distanceGrid.FindFarthestBorderCells(true).GetRandomItem(rnd);
+            var distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell: firstCell);
+            return distanceGrid.FindFarthestCells(borderCells).GetRandomItem(rnd);
         }
     }
 }

@@ -12,14 +12,14 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
             this._distanceGridFactory = distanceGridFactory;
         }
 
-        public MazeSolutionGeneratorBase Create(MazeSolutionGenAlgorithm algorithm)
+        public MazeSolutionGeneratorBase Create(MazeSolutionGenAlgorithm algorithm, bool shouldExcludeCellsCloseToRoot)
         {
             switch (algorithm)
             {
                 case MazeSolutionGenAlgorithm.Dijkstra:
-                    return new DijkstraMazeSolutionGenerator(_distanceGridFactory);
+                    return new DijkstraMazeSolutionGenerator(_distanceGridFactory, shouldExcludeCellsCloseToRoot);
                 case MazeSolutionGenAlgorithm.RandomBorderCells:
-                    return new RandomBorderCellsMazeSolutionGenerator(_distanceGridFactory);
+                    return new RandomBorderCellsMazeSolutionGenerator(_distanceGridFactory, shouldExcludeCellsCloseToRoot);
                 default:
                     throw new NotImplementedException("Asked to generate a maze solution with algorithm that has not been implemented yet.");
             }

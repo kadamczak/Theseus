@@ -8,9 +8,12 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
     public abstract class MazeSolutionGeneratorBase
     {
         public DistanceGridFactory DistanceGridFactory { get; }
-        public MazeSolutionGeneratorBase(DistanceGridFactory distanceGridFactory)
+        public bool ShouldExcludeCellsCloseToRoot { get; }
+
+        public MazeSolutionGeneratorBase(DistanceGridFactory distanceGridFactory, bool shouldExcludeCellsCloseToRoot)
         {
             this.DistanceGridFactory = distanceGridFactory;
+            this.ShouldExcludeCellsCloseToRoot = shouldExcludeCellsCloseToRoot;
         }
 
         public abstract void GenerateSolutionInMaze(MazeWithSolution maze);

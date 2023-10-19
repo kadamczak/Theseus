@@ -17,38 +17,26 @@ namespace Theseus.WPF.Code.ViewModels
     {
         private string _mazeHeight;
         private string _mazeWidth;
-        private AlgorithmViewModel _selectedStructureAlgorithm;
-        private string _algorithmDescription = string.Empty;
+        private StructureAlgorithmViewModel _selectedStructureAlgorithm;
+        private SolutionAlgorithmViewModel _selectedSolutionAlgorithm;
+        private bool _shouldExcludeCellsCloseToRoot = true;
+
+        private string _structureAlgorithmDescription = string.Empty;
 
         private readonly LastMazeGeneratorInputStore _lastMazeGeneratorSettingsStore;
 
-        public ReadOnlyCollection<AlgorithmViewModel> AvailableStructureAlgorithms { get; } = new List<AlgorithmViewModel> {
-                                new AlgorithmViewModel("Binary", MazeStructureGenAlgorithm.Binary),
-                                new AlgorithmViewModel("Sidewinder", MazeStructureGenAlgorithm.Sidewinder),
-                                new AlgorithmViewModel("Aldous-Broder", MazeStructureGenAlgorithm.AldousBroder),
-                                new AlgorithmViewModel("Hunt and Kill", MazeStructureGenAlgorithm.HuntAndKill),
-                                new AlgorithmViewModel("Kruskal's", MazeStructureGenAlgorithm.Kruskal),
+        public ReadOnlyCollection<StructureAlgorithmViewModel> AvailableStructureAlgorithms { get; } = new List<StructureAlgorithmViewModel> {
+                                new StructureAlgorithmViewModel("Binary", MazeStructureGenAlgorithm.Binary),
+                                new StructureAlgorithmViewModel("Sidewinder", MazeStructureGenAlgorithm.Sidewinder),
+                                new StructureAlgorithmViewModel("Aldous-Broder", MazeStructureGenAlgorithm.AldousBroder),
+                                new StructureAlgorithmViewModel("Hunt and Kill", MazeStructureGenAlgorithm.HuntAndKill),
+                                new StructureAlgorithmViewModel("Kruskal's", MazeStructureGenAlgorithm.Kruskal),
                                 }.AsReadOnly();
 
-        public AlgorithmViewModel SelectedStructureAlgorithm
-        {
-            get => _selectedStructureAlgorithm;
-            set
-            {
-                _selectedStructureAlgorithm = value;
-                OnPropertyChanged(nameof(SelectedStructureAlgorithm));
-            }
-        }
-
-        public string AlgorithmDescription
-        {
-            get => _algorithmDescription;
-            set
-            {
-                _algorithmDescription = value;
-                OnPropertyChanged(nameof(AlgorithmDescription));
-            }
-        }
+        public ReadOnlyCollection<SolutionAlgorithmViewModel> AvailableSolutionAlgorithms { get; } = new List<SolutionAlgorithmViewModel> {
+                                new SolutionAlgorithmViewModel("Random border cells", MazeSolutionGenAlgorithm.RandomBorderCells),
+                                new SolutionAlgorithmViewModel("Dijkstra (longest path)", MazeSolutionGenAlgorithm.Dijkstra),
+                                }.AsReadOnly();
 
         public string MazeHeight
         {
@@ -70,6 +58,46 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+        public StructureAlgorithmViewModel SelectedStructureAlgorithm
+        {
+            get => _selectedStructureAlgorithm;
+            set
+            {
+                _selectedStructureAlgorithm = value;
+                OnPropertyChanged(nameof(SelectedStructureAlgorithm));
+            }
+        }
+
+        public SolutionAlgorithmViewModel SelectedSolutionAlgorithm
+        {
+            get => _selectedSolutionAlgorithm;
+            set
+            {
+                _selectedSolutionAlgorithm = value;
+                OnPropertyChanged(nameof(SelectedSolutionAlgorithm));
+            }
+        }
+
+        public bool ShouldExcludeCellsCloseToRoot
+        {
+            get => _shouldExcludeCellsCloseToRoot;
+            set
+            {
+                _shouldExcludeCellsCloseToRoot = value;
+                OnPropertyChanged(nameof(ShouldExcludeCellsCloseToRoot));
+            }
+        }
+
+        public string StructureAlgorithmDescription
+        {
+            get => _structureAlgorithmDescription;
+            set
+            {
+                _structureAlgorithmDescription = value;
+                OnPropertyChanged(nameof(StructureAlgorithmDescription));
+            }
+        }
+
         public ICommand GenerateMaze { get; }
 
         public MazeGeneratorViewModel(MazeCreator mazeCreator,
@@ -86,9 +114,11 @@ namespace Theseus.WPF.Code.ViewModels
 
         private void GetStartValuesFromStore()
         {
-            this.SelectedStructureAlgorithm = AvailableStructureAlgorithms.Where(a => a.Algorithm == this._lastMazeGeneratorSettingsStore.StructureAlgorithm).First();
             this.MazeHeight = this._lastMazeGeneratorSettingsStore.Height;
             this.MazeWidth = this._lastMazeGeneratorSettingsStore.Width;
+            this.SelectedStructureAlgorithm = AvailableStructureAlgorithms.Where(a => a.Algorithm == this._lastMazeGeneratorSettingsStore.StructureAlgorithm).First();
+            this.SelectedSolutionAlgorithm = AvailableSolutionAlgorithms.Where(a => a.Algorithm == this._lastMazeGeneratorSettingsStore.SolutionAlgorithm).First();
+            this.ShouldExcludeCellsCloseToRoot = this._lastMazeGeneratorSettingsStore.ShouldExcludeCellsCloseToRoot;
         }
 
         protected override void Dispose()
@@ -103,6 +133,14 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 UpdateAlgorithmDescription();
                 _lastMazeGeneratorSettingsStore.StructureAlgorithm = SelectedStructureAlgorithm.Algorithm;
+            }
+            else if (e.PropertyName == nameof(SelectedSolutionAlgorithm))
+            {
+                _lastMazeGeneratorSettingsStore.SolutionAlgorithm = SelectedSolutionAlgorithm.Algorithm;
+            }
+            else if (e.PropertyName == nameof(ShouldExcludeCellsCloseToRoot))
+            {
+                _lastMazeGeneratorSettingsStore.ShouldExcludeCellsCloseToRoot = ShouldExcludeCellsCloseToRoot;
             }
             else if (e.PropertyName == nameof(MazeHeight))
             {
@@ -120,7 +158,7 @@ namespace Theseus.WPF.Code.ViewModels
                 return;
 
             string algorithm = SelectedStructureAlgorithm.Algorithm.ToString();
-            AlgorithmDescription = (string)(App.Current.Resources[algorithm]);
+            StructureAlgorithmDescription = (string)(App.Current.Resources[algorithm]);
         }
     }
 }
