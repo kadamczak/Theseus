@@ -14,6 +14,8 @@
     <None Remove="Resources\Icons\exam.png" />
     <None Remove="Resources\Icons\information.png" />
     <None Remove="Resources\Icons\maze.png" />
+    <None Remove="Resources\Icons\page.png" />
+    <None Remove="Resources\Icons\plus.png" />
     <None Remove="Resources\Icons\settings.png" />
   </ItemGroup>
 
@@ -49,7 +51,16 @@
     <Resource Include="Resources\Icons\maze.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Icons\plus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Icons\settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icons\page.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

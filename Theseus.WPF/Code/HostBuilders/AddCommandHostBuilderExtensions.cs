@@ -13,8 +13,8 @@ namespace Theseus.WPF.Code.HostBuilders
         {
             hostBuilder.ConfigureServices((context, services) =>
             {
-                services.AddSingleton<IGetAllMazesQuery, GetAllMazesQuery>();
-                services.AddSingleton<ICreateOrUpdateMazeCommand, CreateOrUpdateMazeCommand>();
+                services.AddSingleton<IGetAllMazesWithSolutionQuery, GetAllMazesWithSolutionQuery>();
+                services.AddSingleton<ICreateOrUpdateMazeWithSolutionCommand, CreateOrUpdateMazeWithSolutionCommand>();
             });
 
             return hostBuilder;

@@ -2,8 +2,8 @@
 
 namespace Theseus.Domain.QueryInterfaces
 {
-    public interface IGetAllMazesQuery
+    public interface IGetMazeWithSolutionByIdQuery
     {
-        Task<IEnumerable<MazeWithSolution>> GetAllMazesWithSolution();
+        Task<MazeWithSolution> GetMazeWithSolutionById(Guid id);
     }
 }

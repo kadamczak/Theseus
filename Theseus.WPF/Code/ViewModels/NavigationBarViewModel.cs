@@ -2,7 +2,6 @@
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -10,6 +9,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ICommand NavigateToBeginTest { get; }
         public ICommand NavigateToViewData { get; }
+        public ICommand NavigateToGenerateMaze { get; }
         public ICommand NavigateToBrowseMazes { get; }
         public ICommand NavigateToBrowseSets { get; }
 
@@ -18,6 +18,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public NavigationBarViewModel(NavigationService<BeginTestViewModel> beginTestNavigationService,
                                       NavigationService<ViewDataViewModel> viewDataNavigationService,
+                                      NavigationService<MazeGeneratorViewModel> generateMazeNavigationService,
                                       NavigationService<MazeGeneratorViewModel> browseMazeNavigationService,
                                       NavigationService<BrowseSetsViewModel> browseSetsNavigationService,
                                       NavigationService<SettingsViewModel> settingsNavigationService,
@@ -25,6 +26,7 @@ namespace Theseus.WPF.Code.ViewModels
         {
             NavigateToBeginTest = new NavigateCommand<BeginTestViewModel>(beginTestNavigationService);
             NavigateToViewData = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
+            NavigateToGenerateMaze = new NavigateCommand<MazeGeneratorViewModel>(generateMazeNavigationService);
             NavigateToBrowseMazes = new NavigateCommand<MazeGeneratorViewModel>(browseMazeNavigationService);
             NavigateToBrowseSets = new NavigateCommand<BrowseSetsViewModel>(browseSetsNavigationService);
 

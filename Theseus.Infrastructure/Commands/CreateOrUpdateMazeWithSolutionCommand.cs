@@ -6,12 +6,12 @@ using Theseus.Infrastructure.Dtos.Converters;
 
 namespace Theseus.Infrastructure.Commands
 {
-    public class CreateOrUpdateMazeCommand : ICreateOrUpdateMazeCommand
+    public class CreateOrUpdateMazeWithSolutionCommand : ICreateOrUpdateMazeWithSolutionCommand
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
         private readonly MazeWithSolutionToMazeDtoConverter _toMazeDtoConverter;
 
-        public CreateOrUpdateMazeCommand(TheseusDbContextFactory dbContextFactory,
+        public CreateOrUpdateMazeWithSolutionCommand(TheseusDbContextFactory dbContextFactory,
                                          MazeWithSolutionToMazeDtoConverter ToMazeDtoConverter)
         {
             this._dbContextFactory = dbContextFactory;

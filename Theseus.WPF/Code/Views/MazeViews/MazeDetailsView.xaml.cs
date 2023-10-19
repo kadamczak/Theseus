@@ -20,7 +20,7 @@ namespace Theseus.WPF.Code.Views
         private void MazeWithSolutionCanvasView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             _mazeWithSolutionCanvasView.InitializeDataContexts();
-            _mazeWithSolutionCanvasView.DrawMazeWithSolution();
+            _mazeWithSolutionCanvasView.DrawMazeWithVisibleSolutionPath();
         }
     }
 }

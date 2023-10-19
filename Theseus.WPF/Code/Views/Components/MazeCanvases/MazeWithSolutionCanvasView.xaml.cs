@@ -31,11 +31,16 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private MazeWithSolutionCanvasViewModel GetDataContext() => (MazeWithSolutionCanvasViewModel)this.DataContext;
 
-        public void DrawMazeWithSolution()
+        public void DrawMazeWithVisibleSolutionPath()
+        {
+            DrawMaze();
+            _solutionCanvasView.DrawSolutionPath();
+        }
+
+        public void DrawMaze()
         {
             _mazeCanvasView.DrawMaze();
             RemoveMazeEntryWalls();
-            _solutionCanvasView.DrawSolutionPath();
         }
 
         private void RemoveMazeEntryWalls()

@@ -7,12 +7,12 @@ using Theseus.Infrastructure.Dtos.Converters;
 
 namespace Theseus.Infrastructure.Queries
 {
-    public class GetAllMazesQuery : IGetAllMazesQuery
+    public class GetAllMazesWithSolutionQuery : IGetAllMazesWithSolutionQuery
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
         private readonly MazeDtoToMazeWithSolutionConverter _toMazeWithSolutionConverter;
 
-        public GetAllMazesQuery(TheseusDbContextFactory dbContextFactory, MazeDtoToMazeWithSolutionConverter toMazeWithSolutionConverter)
+        public GetAllMazesWithSolutionQuery(TheseusDbContextFactory dbContextFactory, MazeDtoToMazeWithSolutionConverter toMazeWithSolutionConverter)
         {
             this._dbContextFactory = dbContextFactory;
             this._toMazeWithSolutionConverter = toMazeWithSolutionConverter;
