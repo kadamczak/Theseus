@@ -23,6 +23,15 @@
             <DataTemplate DataType="{x:Type vms:ViewDataViewModel}">
                 <views:ViewDataView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:CreateMazeViewModel}">
+                <views:CreateMazeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:CreateSetViewModel}">
+                <views:CreateSetView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:BrowseMazesViewModel}">
+                <views:BrowseMazesView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vms:BrowseSetsViewModel}">
                 <views:BrowseSetsView/>
             </DataTemplate>

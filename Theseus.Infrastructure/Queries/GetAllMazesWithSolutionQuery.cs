@@ -18,11 +18,11 @@ namespace Theseus.Infrastructure.Queries
             this._toMazeWithSolutionConverter = toMazeWithSolutionConverter;
         }
 
-        public async Task<IEnumerable<MazeWithSolution>> GetAllMazesWithSolution()
+        public IEnumerable<MazeWithSolution> GetAllMazesWithSolution()
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<MazeDto> mazeEntities = await context.Mazes.ToListAsync();
+                IEnumerable<MazeDto> mazeEntities = context.Mazes.ToList();
                 return mazeEntities.Select(m => this._toMazeWithSolutionConverter.Convert(m));
             }
         }

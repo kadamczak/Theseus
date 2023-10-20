@@ -9,7 +9,8 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ICommand NavigateToBeginTest { get; }
         public ICommand NavigateToViewData { get; }
-        public ICommand NavigateToGenerateMaze { get; }
+        public ICommand NavigateToCreateMaze { get; }
+        public ICommand NavigateToCreateSet { get; }
         public ICommand NavigateToBrowseMazes { get; }
         public ICommand NavigateToBrowseSets { get; }
 
@@ -18,16 +19,18 @@ namespace Theseus.WPF.Code.ViewModels
 
         public NavigationBarViewModel(NavigationService<BeginTestViewModel> beginTestNavigationService,
                                       NavigationService<ViewDataViewModel> viewDataNavigationService,
-                                      NavigationService<MazeGeneratorViewModel> generateMazeNavigationService,
-                                      NavigationService<MazeGeneratorViewModel> browseMazeNavigationService,
+                                      NavigationService<CreateMazeViewModel> createMazeNavigationService,
+                                      NavigationService<CreateSetViewModel> createSetNavigationService,
+                                      NavigationService<BrowseMazesViewModel> browseMazesNavigationService,
                                       NavigationService<BrowseSetsViewModel> browseSetsNavigationService,
                                       NavigationService<SettingsViewModel> settingsNavigationService,
                                       NavigationService<HomeViewModel> homeNavigationService)
         {
             NavigateToBeginTest = new NavigateCommand<BeginTestViewModel>(beginTestNavigationService);
             NavigateToViewData = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
-            NavigateToGenerateMaze = new NavigateCommand<MazeGeneratorViewModel>(generateMazeNavigationService);
-            NavigateToBrowseMazes = new NavigateCommand<MazeGeneratorViewModel>(browseMazeNavigationService);
+            NavigateToCreateMaze = new NavigateCommand<CreateMazeViewModel>(createMazeNavigationService);
+            NavigateToCreateSet = new NavigateCommand<CreateSetViewModel>(createSetNavigationService);
+            NavigateToBrowseMazes = new NavigateCommand<BrowseMazesViewModel>(browseMazesNavigationService);
             NavigateToBrowseSets = new NavigateCommand<BrowseSetsViewModel>(browseSetsNavigationService);
 
             NavigateToSettings = new NavigateCommand<SettingsViewModel>(settingsNavigationService);

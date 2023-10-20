@@ -17,11 +17,11 @@ namespace Theseus.Infrastructure.Queries
             this._toMazeWithSolutionConverter = toMazeWithSolutionConverter;
         }
 
-        public async Task<MazeWithSolution> GetMazeWithSolutionById(Guid id)
+        public MazeWithSolution GetMazeWithSolutionById(Guid id)
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
-                MazeDto mazeEntity = await context.Mazes.FindAsync(id) ?? throw new KeyNotFoundException($"Maze entity with the id {id} has not been found in the database.");
+                MazeDto mazeEntity = context.Mazes.Find(id) ?? throw new KeyNotFoundException($"Maze entity with the id {id} has not been found in the database.");
                 return this._toMazeWithSolutionConverter.Convert(mazeEntity);
             }
         }

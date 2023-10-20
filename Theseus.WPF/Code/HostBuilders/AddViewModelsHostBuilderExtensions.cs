@@ -25,6 +25,9 @@ namespace Theseus.WPF.Code.HostBuilders
         {
             services.AddTransient<BeginTestViewModel>();
             services.AddTransient<ViewDataViewModel>();
+            services.AddTransient<CreateMazeViewModel>();
+            services.AddTransient<CreateSetViewModel>();
+            services.AddTransient<BrowseMazesViewModel>();
             services.AddTransient<BrowseSetsViewModel>();
 
             services.AddTransient<HomeViewModel>();
@@ -44,6 +47,9 @@ namespace Theseus.WPF.Code.HostBuilders
         {            
             services.AddSingleton<Func<BeginTestViewModel>>((s) => () => s.GetRequiredService<BeginTestViewModel>());
             services.AddSingleton<Func<ViewDataViewModel>>((s) => () => s.GetRequiredService<ViewDataViewModel>());
+            services.AddSingleton<Func<CreateMazeViewModel>>((s) => () => s.GetRequiredService<CreateMazeViewModel>());
+            services.AddSingleton<Func<CreateSetViewModel>>((s) => () => s.GetRequiredService<CreateSetViewModel>());
+            services.AddSingleton<Func<BrowseMazesViewModel>>((s) => () => s.GetRequiredService<BrowseMazesViewModel>());
             services.AddSingleton<Func<BrowseSetsViewModel>>((s) => () => s.GetRequiredService<BrowseSetsViewModel>());
 
             services.AddSingleton<Func<HomeViewModel>>((s) => () => s.GetRequiredService<HomeViewModel>());
@@ -57,6 +63,9 @@ namespace Theseus.WPF.Code.HostBuilders
         {
             services.AddSingleton<NavigationService<BeginTestViewModel>>();
             services.AddSingleton<NavigationService<ViewDataViewModel>>();
+            services.AddSingleton<NavigationService<CreateMazeViewModel>>();
+            services.AddSingleton<NavigationService<CreateSetViewModel>>();
+            services.AddSingleton<NavigationService<BrowseMazesViewModel>>();
             services.AddSingleton<NavigationService<BrowseSetsViewModel>>();
 
             services.AddSingleton<NavigationService<HomeViewModel>>();
