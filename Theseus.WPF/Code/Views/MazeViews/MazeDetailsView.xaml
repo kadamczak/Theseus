@@ -6,20 +6,22 @@
              xmlns:canvases="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
-    <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged" >
+    <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged" Loaded="MazeWithSolutionCanvasView_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Content="Maze Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 30" FontFamily="Microsoft YaHei Light"/>
+        <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
+            <Label DockPanel.Dock="Left" Content="Maze Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
 
-        <canvases:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}" Loaded="MazeWithSolutionCanvasView_Loaded" Margin="10"/>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource Generic}" FontSize="22" Content="Save" Command="{Binding SaveMaze}" />
+                <Button Style="{StaticResource Generic}" FontSize="22" Content="Edit" Margin="40 0 0 0" />
+            </StackPanel>
+        </DockPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0 20 0 0" HorizontalAlignment="Center">
-            <Button Style="{StaticResource Generic}" Content="Save" Command="{Binding SaveMaze}" />
-            <Button Style="{StaticResource Generic}" Content="Edit" Margin="40 0 0 0" />
-        </StackPanel>
+        <canvases:MazeWithSolutionCanvasView Margin="30" x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}"/>
+
     </Grid>
 </UserControl>
