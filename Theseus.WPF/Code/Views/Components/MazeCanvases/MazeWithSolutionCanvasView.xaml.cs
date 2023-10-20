@@ -33,14 +33,11 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public void DrawScaledMazeWithVisibleSolutionPath(float minCellSize)
         {
-            DrawScaledMaze(minCellSize);
-
-            float cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
+            float cellSize = DrawScaledMaze(minCellSize);
             _solutionCanvasView.DrawSolutionPath(cellSize);
-            this.Margin = new System.Windows.Thickness(cellSize * 0.8);
         }
 
-        public void DrawScaledMaze(float minCellSize)
+        public float DrawScaledMaze(float minCellSize)
         {
             float cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
 
@@ -48,6 +45,9 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             RemoveMazeEntryWalls();
             _solutionCanvasView.Clear();
             _solutionCanvasView.DrawEntryArrows(cellSize);
+            this.Margin = new System.Windows.Thickness(cellSize * 0.8);
+
+            return cellSize;
         }
 
         private void RemoveMazeEntryWalls()
