@@ -22,19 +22,46 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             this._lineDrawer = new LineDrawer(this.Canvas!);
         }
 
-        public void DrawMaze()
+        public int CalculateCellSize(int minCellSize)
+        {
+            Maze maze = GetDataContext().Maze;
+            bool resizeToHeight = maze.RowAmount > maze.ColumnAmount;
+            int cellSize = CalculateCellSizeBasingOnDimension(maze, resizeToHeight);
+            cellSize = RecalculateCellSizeIfOtherDimensionDoesntFit(maze, resizeToHeight, cellSize);
+
+            if (cellSize < minCellSize)
+            {
+                cellSize = minCellSize;
+                //TODO
+            }
+            return cellSize;
+        }
+
+        private int CalculateCellSizeBasingOnDimension(Maze maze, bool resizeToHeight)
+        {
+            double dimensionLength = (resizeToHeight) ? this.ActualHeight : this.ActualWidth;
+            int cellsInDimension = (resizeToHeight) ? maze.RowAmount : maze.ColumnAmount;
+            return (int)(dimensionLength / cellsInDimension);
+        }
+
+        private int RecalculateCellSizeIfOtherDimensionDoesntFit(Maze maze, bool resizeToHeight, int cellSize)
+        {
+            int otherDimensionMazeLength = (resizeToHeight) ? cellSize * maze.ColumnAmount : cellSize * maze.RowAmount;
+            double otherDimensionLength = (resizeToHeight) ? this.ActualWidth : this.ActualHeight;
+            return (otherDimensionMazeLength <= otherDimensionLength) ? cellSize : CalculateCellSizeBasingOnDimension(maze, !resizeToHeight);
+        }
+
+        public void DrawScaledMaze(int minCellSize)
+        {
+            int cellSize = CalculateCellSize(minCellSize);
+            DrawMaze(cellSize);
+        }
+
+        public void DrawMaze(int cellSize)
         {
             var viewModel = (MazeCanvasViewModel)this.DataContext;
             Maze maze = viewModel.Maze;
             Canvas.Children.Clear();
-
-            int cellSize = 30;
-
-            int imageHeight = cellSize * maze.RowAmount;
-            int imageWidth = cellSize * maze.ColumnAmount;
-
-            if (imageHeight > Canvas.Height || imageWidth > Canvas.Width)
-                return;
 
             foreach (var cell in maze)
             {
@@ -66,5 +93,6 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         }
 
         private string CreateWallTag(string cellTag, Direction direction) => cellTag + "-" + (int)direction;
+        private MazeCanvasViewModel GetDataContext() => (MazeCanvasViewModel)this.DataContext;
     }
 }

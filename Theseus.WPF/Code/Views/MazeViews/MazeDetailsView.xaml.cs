@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.Views.Components.MazeCanvases;
 
 namespace Theseus.WPF.Code.Views
@@ -10,6 +9,7 @@ namespace Theseus.WPF.Code.Views
     public partial class MazeDetailsView : UserControl
     {
         private readonly MazeWithSolutionCanvasView _mazeWithSolutionCanvasView;
+        private bool _mazeCanvasLoaded = false;
 
         public MazeDetailsView()
         {
@@ -19,8 +19,19 @@ namespace Theseus.WPF.Code.Views
 
         private void MazeWithSolutionCanvasView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            int minCellSize = 2;
+
             _mazeWithSolutionCanvasView.InitializeDataContexts();
-            _mazeWithSolutionCanvasView.DrawMazeWithVisibleSolutionPath();
+            _mazeWithSolutionCanvasView.DrawScaledMazeWithVisibleSolutionPath(minCellSize);
+            _mazeCanvasLoaded = true;
+        }
+
+        private void Grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            int minCellSize = 2;
+
+            if(_mazeCanvasLoaded)
+                _mazeWithSolutionCanvasView.DrawScaledMazeWithVisibleSolutionPath(minCellSize);
         }
     }
 }

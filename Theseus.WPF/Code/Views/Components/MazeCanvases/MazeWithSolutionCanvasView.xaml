@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="15">
+    <Grid>
         <local:MazeCanvasView x:Name="MazeCanvasView" DataContext="{Binding MazeCanvasViewModel}" />
-        <local:SolutionCanvasView x:Name="SolutionCanvasView" DataContext="{Binding SolutionCanvasViewModel}"/>
+        <local:SolutionCanvasView x:Name="SolutionCanvasView"  DataContext="{Binding SolutionCanvasViewModel}"/>
     </Grid>
 </UserControl>

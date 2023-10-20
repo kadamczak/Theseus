@@ -19,10 +19,9 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
     {
         private readonly LineDrawer _lineDrawer;
         public Canvas Canvas { get; }
-        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
 
-        private readonly System.Windows.Media.Color lineColor = Colors.Lavender;
-        private readonly int lineThickness = 15;
+        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
+        private readonly System.Windows.Media.Color lineColor = Colors.LightBlue;
 
         public SolutionCanvasView()
         {
@@ -33,10 +32,9 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public void Clear() => Canvas.Children.Clear();
 
-        public void DrawEntryArrows()
+        public void DrawEntryArrows(int cellSize)
         {
             var viewModel = (SolutionCanvasViewModel)this.DataContext;
-            int cellSize = 30;
             DrawArrow(viewModel.SolutionPath.First(), viewModel.StartDirection, cellSize, pointToMaze: true);
             DrawArrow(viewModel.SolutionPath.Last(), viewModel.EndDirection, cellSize, pointToMaze: false);
         }
@@ -79,10 +77,9 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             };
         }
 
-        public void DrawSolutionPath()
+        public void DrawSolutionPath(int cellSize)
         {
             var viewModel = (SolutionCanvasViewModel)this.DataContext;
-            int cellSize = 30;
 
             Cell? previousCell = null;
             for (int i = 0; i < viewModel.SolutionPath.Count(); i++)
@@ -108,6 +105,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             Point entryPoint = FindCellBorderPoint(previousCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
             Point exitPoint = FindCellBorderPoint(nextCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
 
+            int lineThickness = (int)(cellSize * 0.6);
             _lineDrawer.DrawLine(entryPoint, centerPoint, lineColor, lineThickness);
             _lineDrawer.DrawLine(centerPoint, exitPoint, lineColor, lineThickness);
         }

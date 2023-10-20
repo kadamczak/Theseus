@@ -31,18 +31,23 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private MazeWithSolutionCanvasViewModel GetDataContext() => (MazeWithSolutionCanvasViewModel)this.DataContext;
 
-        public void DrawMazeWithVisibleSolutionPath()
+        public void DrawScaledMazeWithVisibleSolutionPath(int minCellSize)
         {
-            DrawMaze();
-            _solutionCanvasView.DrawSolutionPath();
+            DrawScaledMaze(minCellSize);
+
+            int cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
+            _solutionCanvasView.DrawSolutionPath(cellSize);
+            this.Margin = new System.Windows.Thickness((int)(cellSize * 0.8));
         }
 
-        public void DrawMaze()
+        public void DrawScaledMaze(int minCellSize)
         {
-            _mazeCanvasView.DrawMaze();
+            int cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
+
+            _mazeCanvasView.DrawMaze(cellSize);
             RemoveMazeEntryWalls();
             _solutionCanvasView.Clear();
-            _solutionCanvasView.DrawEntryArrows();
+            _solutionCanvasView.DrawEntryArrows(cellSize);
         }
 
         private void RemoveMazeEntryWalls()
