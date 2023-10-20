@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,7 +20,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         public Canvas Canvas { get; }
         Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
 
-        private readonly Color lineColor = Colors.Lavender;
+        private readonly System.Windows.Media.Color lineColor = Colors.Lavender;
         private readonly int lineThickness = 15;
 
         public SolutionCanvasView()
@@ -29,11 +30,22 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             this._lineDrawer = new LineDrawer(this.Canvas!);
         }
 
+        public void Clear() => Canvas.Children.Clear();
+
+        public void DrawEntryArrows()
+        {
+            var viewModel = (SolutionCanvasViewModel)this.DataContext;
+            Cell startCell = viewModel.SolutionPath.First();
+            Cell endCell = viewModel.SolutionPath.Last();
+
+            //(int x, int y)
+
+            //Canvas.Children.Add();
+        }
+
         public void DrawSolutionPath()
         {
             var viewModel = (SolutionCanvasViewModel)this.DataContext;
-            Canvas.Children.Clear();
-
             int cellSize = 30;
 
             Cell? previousCell = null;
@@ -56,15 +68,15 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private void DrawSolutionPathInCell(Cell? previousCell, Cell currentCell, Cell? nextCell, Direction? mazeEntryDirection, int cellSize)
         {
-            (int x, int y) centerPoint = CalculateCellCenter(currentCell, cellSize);
-            (int x, int y) entryPoint = FindCellBorderPoint(previousCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
-            (int x, int y) exitPoint = FindCellBorderPoint(nextCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
+            Point centerPoint = CalculateCellCenter(currentCell, cellSize);
+            Point entryPoint = FindCellBorderPoint(previousCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
+            Point exitPoint = FindCellBorderPoint(nextCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
 
             _lineDrawer.DrawLine(entryPoint, centerPoint, lineColor, lineThickness);
             _lineDrawer.DrawLine(centerPoint, exitPoint, lineColor, lineThickness);
         }
 
-        private (int, int) FindCellBorderPoint(Cell? comparedCell, Cell currentCell, (int x, int y) cellCenterPoint, Direction? entryDirection, int cellSize)
+        private Point FindCellBorderPoint(Cell? comparedCell, Cell currentCell, Point cellCenterPoint, Direction? entryDirection, int cellSize)
         {
             if (comparedCell is null)
                 return CalculateCellBorderPoint(entryDirection!.Value, cellCenterPoint, cellSize);
@@ -74,18 +86,18 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         }
 
 
-        private (int x, int y) CalculateCellCenter(Cell cell, int cellSize) => (x: cell.ColumnIndex * cellSize + cellSize / 2,
+        private Point CalculateCellCenter(Cell cell, int cellSize) => new Point(x: cell.ColumnIndex * cellSize + cellSize / 2,
                                                                                 y: cell.RowIndex * cellSize + cellSize / 2);
 
-        private (int x, int y) CalculateCellBorderPoint(Direction direction, (int x, int y) center, int cellSize)
+        private Point CalculateCellBorderPoint(Direction direction, Point center, int cellSize)
         {
             int halfCellSize = cellSize / 2;
             return direction switch
             {
-                Direction.West => (x: center.x - halfCellSize, y: center.y),
-                Direction.North => (x: center.x, y: center.y - halfCellSize),
-                Direction.East => (x: center.x + halfCellSize, y: center.y),
-                Direction.South => (x: center.x, y: center.y + halfCellSize),
+                Direction.West => new Point(x: center.X - halfCellSize, y: center.Y),
+                Direction.North => new Point(x: center.X, y: center.Y - halfCellSize),
+                Direction.East => new Point(x: center.X + halfCellSize, y: center.Y),
+                Direction.South => new Point(x: center.X, y: center.Y + halfCellSize),
             };
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Drawing;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -18,19 +19,19 @@ namespace Theseus.WPF.Code.Views.HelperClasses
         //|
         //V
         //x1,y2     x2,y2
-        public void DrawLine(int x1, int y1, int x2, int y2, Color? color = null, int strokeThickness = 2, string? tag = null)
+        public void DrawLine(int x1, int y1, int x2, int y2, System.Windows.Media.Color? color = null, int strokeThickness = 2, string? tag = null)
         {
-            DrawLine((x1, y1), (x2, y2), color, strokeThickness, tag);
+            DrawLine(new Point(x1, y1), new Point(x2, y2), color, strokeThickness, tag);
         }
 
-        public void DrawLine((int x, int y) start, (int x, int y) end, Color? color = null, int strokeThickness = 2, string? tag = null)
+        public void DrawLine(Point start, Point end, System.Windows.Media.Color? color = null, int strokeThickness = 2, string? tag = null)
         {
             Line line = new Line()
             {
-                X1 = start.x,
-                Y1 = start.y,
-                X2 = end.x,
-                Y2 = end.y
+                X1 = start.X,
+                Y1 = start.Y,
+                X2 = end.X,
+                Y2 = end.Y
             };
 
             line.StrokeDashCap = PenLineCap.Round;

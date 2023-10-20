@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Drawing;
+using System.Windows.Controls;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.ViewModels;
@@ -43,25 +44,25 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private void DrawWallsOfCell(Cell cell, int cellSize)
         {
-            (int x, int y) start = (x: cell.ColumnIndex * cellSize,
+            Point start = new Point(x: cell.ColumnIndex * cellSize,
                                     y: cell.RowIndex * cellSize);
 
-            (int x, int y) end = (x: start.x + cellSize,
-                                  y: start.y + cellSize);
+            Point end = new Point(x: start.X + cellSize,
+                                  y: start.Y + cellSize);
 
             string cellTag = $"{cell.RowIndex}-{cell.ColumnIndex}";
 
             if (!cell.HasNeighbour(Direction.North))
-                _lineDrawer.DrawLine(start.x, start.y, end.x, start.y, tag: CreateWallTag(cellTag, Direction.North));
+                _lineDrawer.DrawLine(start.X, start.Y, end.X, start.Y, tag: CreateWallTag(cellTag, Direction.North));
 
             if (!cell.HasNeighbour(Direction.West))
-                _lineDrawer.DrawLine(start.x, start.y, start.x, end.y, tag: CreateWallTag(cellTag, Direction.West));
+                _lineDrawer.DrawLine(start.X, start.Y, start.X, end.Y, tag: CreateWallTag(cellTag, Direction.West));
 
             if (!cell.IsLinkedToNeighbour(Direction.East))
-                _lineDrawer.DrawLine(end.x, start.y, end.x, end.y, tag: CreateWallTag(cellTag, Direction.East));
+                _lineDrawer.DrawLine(end.X, start.Y, end.X, end.Y, tag: CreateWallTag(cellTag, Direction.East));
 
             if (!cell.IsLinkedToNeighbour(Direction.South))
-                _lineDrawer.DrawLine(start.x, end.y, end.x, end.y, tag: CreateWallTag(cellTag, Direction.South));
+                _lineDrawer.DrawLine(start.X, end.Y, end.X, end.Y, tag: CreateWallTag(cellTag, Direction.South));
         }
 
         private string CreateWallTag(string cellTag, Direction direction) => cellTag + "-" + (int)direction;
