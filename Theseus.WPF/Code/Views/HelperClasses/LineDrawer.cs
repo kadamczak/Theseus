@@ -19,12 +19,12 @@ namespace Theseus.WPF.Code.Views.HelperClasses
         //|
         //V
         //x1,y2     x2,y2
-        public void DrawLine(int x1, int y1, int x2, int y2, System.Windows.Media.Color? color = null, int strokeThickness = 2, string? tag = null)
+        public void DrawLine(float x1, float y1, float x2, float y2, System.Windows.Media.Color? color = null, float strokeThickness = 2, string? tag = null)
         {
-            DrawLine(new Point(x1, y1), new Point(x2, y2), color, strokeThickness, tag);
+            DrawLine(new PointF(x1, y1), new PointF(x2, y2), color, strokeThickness, tag);
         }
 
-        public void DrawLine(Point start, Point end, System.Windows.Media.Color? color = null, int strokeThickness = 2, string? tag = null)
+        public void DrawLine(PointF start, PointF end, System.Windows.Media.Color? color = null, float strokeThickness = 2, string? tag = null)
         {
             Line line = new Line()
             {

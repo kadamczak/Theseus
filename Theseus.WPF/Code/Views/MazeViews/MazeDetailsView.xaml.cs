@@ -19,7 +19,7 @@ namespace Theseus.WPF.Code.Views
 
         private void MazeWithSolutionCanvasView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            int minCellSize = 2;
+            float minCellSize = 2;
 
             _mazeWithSolutionCanvasView.InitializeDataContexts();
             _mazeWithSolutionCanvasView.DrawScaledMazeWithVisibleSolutionPath(minCellSize);
@@ -28,7 +28,7 @@ namespace Theseus.WPF.Code.Views
 
         private void Grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
         {
-            int minCellSize = 2;
+            float minCellSize = 2;
 
             if(_mazeCanvasLoaded)
                 _mazeWithSolutionCanvasView.DrawScaledMazeWithVisibleSolutionPath(minCellSize);
