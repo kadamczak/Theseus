@@ -24,7 +24,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public float CalculateCellSize(float minCellSize)
         {
-            Maze maze = GetDataContext().Maze;
+            Maze maze = GetMaze();
             bool resizeToHeight = maze.RowAmount > maze.ColumnAmount;
             float cellSize = CalculateCellSizeBasingOnDimension(maze, resizeToHeight);
             cellSize = RecalculateCellSizeIfOtherDimensionDoesntFit(maze, resizeToHeight, cellSize);
@@ -46,10 +46,15 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private float RecalculateCellSizeIfOtherDimensionDoesntFit(Maze maze, bool resizeToHeight, float cellSize)
         {
-            float otherDimensionMazeLength = (resizeToHeight) ? cellSize * maze.ColumnAmount : cellSize * maze.RowAmount;
+            float otherDimensionMazeLength = (resizeToHeight) ? CalculateMazeWidth(cellSize) : CalculateMazeHeight(cellSize);
             double otherDimensionLength = (resizeToHeight) ? this.ActualWidth : this.ActualHeight;
             return (otherDimensionMazeLength <= otherDimensionLength) ? cellSize : CalculateCellSizeBasingOnDimension(maze, !resizeToHeight);
         }
+
+        public int GetMazeRowAmount() => GetMaze().RowAmount;
+        public int GetMazeColumnAmount() => GetMaze().ColumnAmount;
+        public float CalculateMazeHeight(float cellSize) => GetMaze().RowAmount * cellSize;
+        public float CalculateMazeWidth(float cellSize) => GetMaze().ColumnAmount * cellSize;
 
         public void DrawScaledMaze(float minCellSize)
         {
@@ -59,8 +64,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public void DrawMaze(float cellSize)
         {
-            var viewModel = (MazeCanvasViewModel)this.DataContext;
-            Maze maze = viewModel.Maze;
+            Maze maze = GetMaze();
             Canvas.Children.Clear();
 
             foreach (var cell in maze)
@@ -94,5 +98,6 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private string CreateWallTag(string cellTag, Direction direction) => cellTag + "-" + (int)direction;
         private MazeCanvasViewModel GetDataContext() => (MazeCanvasViewModel)this.DataContext;
+        private Maze GetMaze() => GetDataContext().Maze;
     }
 }

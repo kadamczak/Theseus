@@ -43,14 +43,14 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         {
             PointF cellCenter = CalculateCellCenter(cell, cellSize);
             PointF borderPoint = CalculatePointInDirection(entryDirection, origin: cellCenter, distance: cellSize);
-            PointF awayPoint = CalculatePointInDirection(entryDirection, origin: borderPoint, distance: cellSize);
+            PointF awayPoint = CalculatePointInDirection(entryDirection, origin: borderPoint, distance: cellSize * 0.7f);
 
             Direction arrowDirection = (pointToMaze) ? entryDirection.Reverse() : entryDirection;
             PointF arrowBeginning = (pointToMaze) ? awayPoint : borderPoint;
             PointF arrowTip = (pointToMaze) ? borderPoint : awayPoint;
 
-            PointF arrowLeftWing = CalculateLeftWingPoint(arrowTip, arrowDirection, cellSize / 3);
-            PointF arrowRightWing = CalculateRightWingPoint(arrowTip, arrowDirection, cellSize / 3);
+            PointF arrowLeftWing = CalculateLeftWingPoint(arrowTip, arrowDirection, cellSize / 4);
+            PointF arrowRightWing = CalculateRightWingPoint(arrowTip, arrowDirection, cellSize / 4);
 
             _lineDrawer.DrawLine(arrowBeginning, arrowTip);
             _lineDrawer.DrawLine(arrowTip, arrowLeftWing);

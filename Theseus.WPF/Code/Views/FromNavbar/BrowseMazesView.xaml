@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged">
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            
+        </ScrollViewer>
         <canvases:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="MazeWithSolutionCanvasView_Loaded" />
     </Grid>
 </UserControl>

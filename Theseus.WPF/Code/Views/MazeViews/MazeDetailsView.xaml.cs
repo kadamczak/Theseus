@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using Theseus.WPF.Code.Views.Components.MazeCanvases;
 
 namespace Theseus.WPF.Code.Views
