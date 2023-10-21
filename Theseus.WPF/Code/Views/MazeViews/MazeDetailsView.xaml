@@ -10,7 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="25" />
+            <RowDefinition Height="15" />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
@@ -22,7 +22,7 @@
             </StackPanel>
         </DockPanel>
 
-        <canvases:MazeWithSolutionCanvasView Margin="30" x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}"/>
+        <canvases:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}"/>
 
     </Grid>
 </UserControl>

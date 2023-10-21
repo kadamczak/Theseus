@@ -24,6 +24,8 @@ namespace Theseus.WPF.Code.Views
             _mazeWithSolutionCanvasView.InitializeDataContexts();
             _mazeCanvasLoaded = true;
             RedrawMaze();
+            UpdateLayout();
+            RedrawMaze();
         }
 
         private void Grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)

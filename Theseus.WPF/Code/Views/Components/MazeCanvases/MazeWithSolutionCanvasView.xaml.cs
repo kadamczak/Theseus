@@ -39,6 +39,9 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public float DrawScaledMaze(float minCellSize)
         {
+            this.MaxWidth = (this._mazeCanvasView.GetMazeRowAmount() >= this._mazeCanvasView.GetMazeColumnAmount()) ? 500 : double.PositiveInfinity;
+            UpdateLayout();
+
             float cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
             this.Margin = CalculateMargin(cellSize);
 
@@ -56,7 +59,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             float mazeWidth = _mazeCanvasView.CalculateMazeWidth(cellSize);
           
             float leftMargin = availableWidth / 2 - mazeWidth / 2 + cellSize;
-            return new System.Windows.Thickness(leftMargin, cellSize, 0, cellSize);
+            return new System.Windows.Thickness(leftMargin, cellSize, cellSize, cellSize);
         }
 
         private void RemoveMazeEntryWalls()
