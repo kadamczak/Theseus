@@ -25,18 +25,18 @@ namespace Theseus.WPF.Code.ViewModels
 
         private readonly LastMazeGeneratorInputStore _lastMazeGeneratorSettingsStore;
 
-        public ReadOnlyCollection<StructureAlgorithmViewModel> AvailableStructureAlgorithms { get; } = new List<StructureAlgorithmViewModel> {
+        public ObservableCollection<StructureAlgorithmViewModel> AvailableStructureAlgorithms { get; } = new ObservableCollection<StructureAlgorithmViewModel> {
                                 new StructureAlgorithmViewModel("Binary", MazeStructureGenAlgorithm.Binary),
                                 new StructureAlgorithmViewModel("Sidewinder", MazeStructureGenAlgorithm.Sidewinder),
                                 new StructureAlgorithmViewModel("Aldous-Broder", MazeStructureGenAlgorithm.AldousBroder),
                                 new StructureAlgorithmViewModel("Hunt and Kill", MazeStructureGenAlgorithm.HuntAndKill),
                                 new StructureAlgorithmViewModel("Kruskal's", MazeStructureGenAlgorithm.Kruskal),
-                                }.AsReadOnly();
+                                };
 
-        public ReadOnlyCollection<SolutionAlgorithmViewModel> AvailableSolutionAlgorithms { get; } = new List<SolutionAlgorithmViewModel> {
+        public ObservableCollection<SolutionAlgorithmViewModel> AvailableSolutionAlgorithms { get; } = new ObservableCollection<SolutionAlgorithmViewModel> {
                                 new SolutionAlgorithmViewModel("Random border cells", MazeSolutionGenAlgorithm.RandomBorderCells),
                                 new SolutionAlgorithmViewModel("Dijkstra (longest path)", MazeSolutionGenAlgorithm.Dijkstra),
-                                }.AsReadOnly();
+                                };
 
         public string MazeHeight
         {

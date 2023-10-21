@@ -15,6 +15,8 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         private readonly MazeCanvasView _mazeCanvasView;
         private readonly SolutionCanvasView _solutionCanvasView;
 
+        private const int VerticalMazeMaxWidth = 600;
+
         public MazeWithSolutionCanvasView()
         {
             InitializeComponent();
@@ -39,12 +41,16 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public float DrawScaledMaze(float minCellSize)
         {
-            this.MaxWidth = (this._mazeCanvasView.GetMazeRowAmount() >= this._mazeCanvasView.GetMazeColumnAmount()) ? 500 : double.PositiveInfinity;
+            float cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
+            if (this._mazeCanvasView.GetMazeRowAmount() >= this._mazeCanvasView.GetMazeColumnAmount()) //X
+            {
+                this.MaxWidth = (VerticalMazeMaxWidth < this.MaxWidth) ? VerticalMazeMaxWidth : this.MaxWidth;
+            }
+
             UpdateLayout();
 
-            float cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
-            this.Margin = CalculateMargin(cellSize);
-
+            this.Margin = CalculateMargin(cellSize); //X
+            //this.Margin = new System.Windows.Thickness(cellSize * 1.5);
             _mazeCanvasView.DrawMaze(cellSize);
             RemoveMazeEntryWalls();
             _solutionCanvasView.Clear();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces;
 using Theseus.WPF.Code.Bases;
@@ -7,14 +8,17 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class BrowseMazesViewModel : ViewModelBase
     {
-        public MazeWithSolutionCanvasViewModel MazeWithSolutionCanvasViewModel { get; }
-        private readonly IGetMazeWithSolutionByIdQuery _getMazeWithSolutionByIdQuery;
+        private readonly IGetAllMazesWithSolutionQuery _getMazeWithSolutionByIdQuery;
+        public ObservableCollection<MazeWithSolutionCanvasViewModel> MazesWithSolution { get; } = new ObservableCollection<MazeWithSolutionCanvasViewModel>();
 
-        public BrowseMazesViewModel(IGetMazeWithSolutionByIdQuery getMazeWithSolutionByIdQuery)
+        public BrowseMazesViewModel(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery)
         {
-            Guid id = new Guid("b879799d-af75-4ce4-734d-08dbd14fb5c2");
-            MazeWithSolution maze = getMazeWithSolutionByIdQuery.GetMazeWithSolutionById(id);       
-            this.MazeWithSolutionCanvasViewModel = new MazeWithSolutionCanvasViewModel(maze);
+            var mazesWithSolution = getAllMazesWithSolutionQuery.GetAllMazesWithSolution();
+
+            foreach(var maze in mazesWithSolution)
+            {
+                MazesWithSolution.Add(new MazeWithSolutionCanvasViewModel(maze));
+            }
         }
     }
 }
