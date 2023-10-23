@@ -49,7 +49,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock Grid.Row="1" Grid.Column="1" Margin="50 0 0 0" TextWrapping="Wrap" FontSize="20" TextAlignment="Justify" Text="{Binding StructureAlgorithmDescription}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="50 0 0 0" TextWrapping="Wrap" FontSize="18" TextAlignment="Justify" Text="{Binding StructureAlgorithmDescription}"/>
 
         <ListBox Grid.Row="2" Grid.Column="0" Margin="0 30 0 0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableSolutionAlgorithms}" SelectedItem="{Binding SelectedSolutionAlgorithm, Mode=TwoWay}">
             <ListBox.ItemTemplate>

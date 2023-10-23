@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+﻿using System.Linq;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 
 namespace Theseus.WPF.Code.ViewModels.Components
@@ -6,10 +7,16 @@ namespace Theseus.WPF.Code.ViewModels.Components
     public class ExamMazeCanvasViewModel : ViewModelBase
     {
         public MazeWithSolutionCanvasViewModel MazeWithSolutionCanvasViewModel { get; }
+        public Cell CurrentCell { get; }
+        public Cell TargetCell { get; }
 
         public ExamMazeCanvasViewModel(MazeWithSolution mazeWithSolution)
         {
             this.MazeWithSolutionCanvasViewModel = new MazeWithSolutionCanvasViewModel(mazeWithSolution);
+            this.CurrentCell = GetMazeWithSolution().SolutionPath.First();
+            this.TargetCell = GetMazeWithSolution().SolutionPath.Last();
         }
+
+        private MazeWithSolution GetMazeWithSolution() => MazeWithSolutionCanvasViewModel.MazeWithSolution;
     }
 }

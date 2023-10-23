@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using Theseus.Domain.Models.MazeRelated.Enums;
@@ -14,8 +15,6 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
     {
         private readonly MazeCanvasView _mazeCanvasView;
         private readonly SolutionCanvasView _solutionCanvasView;
-
-        private const int VerticalMazeMaxWidth = 600;
 
         public MazeWithSolutionCanvasView()
         {
@@ -33,39 +32,42 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private MazeWithSolutionCanvasViewModel GetDataContext() => (MazeWithSolutionCanvasViewModel)this.DataContext;
 
-        public void DrawScaledMazeWithVisibleSolutionPath(float minCellSize)
+        public void DrawScaledMazeWithVisibleSolutionPath(float minCellSize, bool centerMaze = true)
         {
-            float cellSize = DrawScaledMaze(minCellSize);
+            float cellSize = CalculateCellSize(minCellSize);
+            DrawMazeWithVisibleSolutionPath(cellSize, centerMaze);
+        }
+
+        public void DrawScaledMaze(float minCellSize, bool centerMaze = true)
+        {
+            float cellSize = CalculateCellSize(minCellSize);
+            DrawMaze(cellSize, centerMaze);
+        }
+
+        public void DrawMazeWithVisibleSolutionPath(float cellSize, bool centerMaze = true)
+        {
+            DrawMaze(cellSize, centerMaze);
             _solutionCanvasView.DrawSolutionPath(cellSize);
         }
 
-        public float DrawScaledMaze(float minCellSize)
+        public void DrawMaze(float cellSize, bool centerMaze = true)
         {
-            float cellSize = _mazeCanvasView.CalculateCellSize(minCellSize);
-            if (this._mazeCanvasView.GetMazeRowAmount() >= this._mazeCanvasView.GetMazeColumnAmount()) //X
-            {
-                this.MaxWidth = (VerticalMazeMaxWidth < this.MaxWidth) ? VerticalMazeMaxWidth : this.MaxWidth;
-            }
-
-            UpdateLayout();
-
-            this.Margin = CalculateMargin(cellSize); //X
-            //this.Margin = new System.Windows.Thickness(cellSize * 1.5);
             _mazeCanvasView.DrawMaze(cellSize);
             RemoveMazeEntryWalls();
             _solutionCanvasView.Clear();
             _solutionCanvasView.DrawEntryArrows(cellSize);
-
-            return cellSize;
+            this.Margin = (centerMaze) ? CalculateCenterMargin(cellSize) : new Thickness(0);
         }
 
-        private System.Windows.Thickness CalculateMargin(float cellSize)
+        public float CalculateCellSize(float minCellSize) => this._mazeCanvasView.CalculateCellSize(minCellSize);
+
+        public Thickness CalculateCenterMargin(float cellSize)
         {
             float availableWidth = (float)this.ActualWidth;
             float mazeWidth = _mazeCanvasView.CalculateMazeWidth(cellSize);
-          
+
             float leftMargin = availableWidth / 2 - mazeWidth / 2 + cellSize;
-            return new System.Windows.Thickness(leftMargin, cellSize, cellSize, cellSize);
+            return new Thickness(leftMargin, cellSize, cellSize, cellSize);
         }
 
         private void RemoveMazeEntryWalls()

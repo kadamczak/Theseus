@@ -17,10 +17,11 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
     /// </summary>
     public partial class SolutionCanvasView : UserControl
     {
-        private readonly LineDrawer _lineDrawer;
         public Canvas Canvas { get; }
+        private readonly LineDrawer _lineDrawer;
+        private readonly PointCalculator _pointCalculator;
 
-        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
+        private readonly Direction[] _directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
         private readonly System.Windows.Media.Color lineColor = Colors.LightBlue;
 
         public SolutionCanvasView()
@@ -28,22 +29,23 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             InitializeComponent();
             this.Canvas = this.FindName("SolutionCanvas")! as Canvas;
             this._lineDrawer = new LineDrawer(this.Canvas!);
+            this._pointCalculator = new PointCalculator();
         }
 
         public void Clear() => Canvas.Children.Clear();
 
         public void DrawEntryArrows(float cellSize)
         {
-            var viewModel = (SolutionCanvasViewModel)this.DataContext;
+            var viewModel = GetDataContext();
             DrawArrow(viewModel.SolutionPath.First(), viewModel.StartDirection, cellSize, pointToMaze: true);
             DrawArrow(viewModel.SolutionPath.Last(), viewModel.EndDirection, cellSize, pointToMaze: false);
         }
 
         private void DrawArrow(Cell cell, Direction entryDirection, float cellSize, bool pointToMaze)
         {
-            PointF cellCenter = CalculateCellCenter(cell, cellSize);
-            PointF borderPoint = CalculatePointInDirection(entryDirection, origin: cellCenter, distance: cellSize);
-            PointF awayPoint = CalculatePointInDirection(entryDirection, origin: borderPoint, distance: cellSize * 0.7f);
+            PointF cellCenter = _pointCalculator.CalculateCellCenter(cell, cellSize);
+            PointF borderPoint = _pointCalculator.CalculatePointInDirection(entryDirection, origin: cellCenter, distance: cellSize);
+            PointF awayPoint = _pointCalculator.CalculatePointInDirection(entryDirection, origin: borderPoint, distance: cellSize * 0.7f);
 
             Direction arrowDirection = (pointToMaze) ? entryDirection.Reverse() : entryDirection;
             PointF arrowBeginning = (pointToMaze) ? awayPoint : borderPoint;
@@ -79,7 +81,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public void DrawSolutionPath(float cellSize)
         {
-            var viewModel = (SolutionCanvasViewModel)this.DataContext;
+            var viewModel = GetDataContext();
 
             Cell? previousCell = null;
             for (int i = 0; i < viewModel.SolutionPath.Count(); i++)
@@ -101,11 +103,11 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private void DrawSolutionPathInCell(Cell? previousCell, Cell currentCell, Cell? nextCell, Direction? mazeEntryDirection, float cellSize)
         {
-            PointF centerPoint = CalculateCellCenter(currentCell, cellSize);
+            PointF centerPoint = _pointCalculator.CalculateCellCenter(currentCell, cellSize);
             PointF entryPoint = FindCellBorderPoint(previousCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
             PointF exitPoint = FindCellBorderPoint(nextCell, currentCell, centerPoint, mazeEntryDirection, cellSize);
 
-            float lineThickness = (float)(cellSize * 0.6);
+            float lineThickness = cellSize * 0.6f;
             _lineDrawer.DrawLine(entryPoint, centerPoint, lineColor, lineThickness);
             _lineDrawer.DrawLine(centerPoint, exitPoint, lineColor, lineThickness);
         }
@@ -113,25 +115,12 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         private PointF FindCellBorderPoint(Cell? comparedCell, Cell currentCell, PointF cellCenterPoint, Direction? entryDirection, float cellSize)
         {
             if (comparedCell is null)
-                return CalculatePointInDirection(entryDirection!.Value, cellCenterPoint, cellSize / 2);
+                return _pointCalculator.CalculatePointInDirection(entryDirection!.Value, cellCenterPoint, cellSize / 2);
 
             Direction directionToComparedCell = currentCell.GetNeighbourDirection(comparedCell);
-            return CalculatePointInDirection(directionToComparedCell, cellCenterPoint, cellSize / 2);
+            return _pointCalculator.CalculatePointInDirection(directionToComparedCell, cellCenterPoint, cellSize / 2);
         }
 
-
-        private PointF CalculateCellCenter(Cell cell, float cellSize) => new PointF(x: cell.ColumnIndex * cellSize + cellSize / 2,
-                                                                                    y: cell.RowIndex * cellSize + cellSize / 2);
-
-        private PointF CalculatePointInDirection(Direction direction, PointF origin, float distance)
-        {
-            return direction switch
-            {
-                Direction.West => new PointF(x: origin.X - distance, y: origin.Y),
-                Direction.North => new PointF(x: origin.X, y: origin.Y - distance),
-                Direction.East => new PointF(x: origin.X + distance, y: origin.Y),
-                Direction.South => new PointF(x: origin.X, y: origin.Y + distance),
-            };
-        }
+        private SolutionCanvasViewModel GetDataContext() => (SolutionCanvasViewModel)this.DataContext;
     }
 }

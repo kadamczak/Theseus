@@ -6,7 +6,7 @@
              xmlns:canvases="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
-    <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged" Loaded="MazeWithSolutionCanvasView_Loaded">
+    <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -22,7 +22,7 @@
             </StackPanel>
         </DockPanel>
 
-        <canvases:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}"/>
+        <canvases:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView" Grid.Row="1" DataContext="{Binding MazeWithSolutionCanvasViewModel}" Loaded="MazeWithSolutionCanvasView_Loaded"/>
 
     </Grid>
 </UserControl>

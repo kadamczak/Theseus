@@ -12,8 +12,8 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
     /// </summary>
     public partial class MazeCanvasView : UserControl
     {
-        private readonly LineDrawer _lineDrawer;
         public Canvas Canvas { get; }
+        private readonly LineDrawer _lineDrawer;
 
         public MazeCanvasView()
         {
@@ -21,40 +21,6 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             this.Canvas = this.FindName("MazeCanvas")! as Canvas;
             this._lineDrawer = new LineDrawer(this.Canvas!);
         }
-
-        public float CalculateCellSize(float minCellSize)
-        {
-            Maze maze = GetMaze();
-            bool resizeToHeight = maze.RowAmount > maze.ColumnAmount;
-            float cellSize = CalculateCellSizeBasingOnDimension(maze, resizeToHeight);
-            cellSize = RecalculateCellSizeIfOtherDimensionDoesntFit(maze, resizeToHeight, cellSize);
-
-            if (cellSize < minCellSize)
-            {
-                cellSize = minCellSize;
-                //TODO
-            }
-            return cellSize;
-        }
-
-        private float CalculateCellSizeBasingOnDimension(Maze maze, bool resizeToHeight)
-        {
-            float dimensionLength = (float)((resizeToHeight) ? this.ActualHeight : this.ActualWidth);
-            int cellsInDimension = (resizeToHeight) ? maze.RowAmount : maze.ColumnAmount;
-            return dimensionLength / cellsInDimension;
-        }
-
-        private float RecalculateCellSizeIfOtherDimensionDoesntFit(Maze maze, bool resizeToHeight, float cellSize)
-        {
-            float otherDimensionMazeLength = (resizeToHeight) ? CalculateMazeWidth(cellSize) : CalculateMazeHeight(cellSize);
-            double otherDimensionLength = (resizeToHeight) ? this.ActualWidth : this.ActualHeight;
-            return (otherDimensionMazeLength <= otherDimensionLength) ? cellSize : CalculateCellSizeBasingOnDimension(maze, !resizeToHeight);
-        }
-
-        public int GetMazeRowAmount() => GetMaze().RowAmount;
-        public int GetMazeColumnAmount() => GetMaze().ColumnAmount;
-        public float CalculateMazeHeight(float cellSize) => GetMaze().RowAmount * cellSize;
-        public float CalculateMazeWidth(float cellSize) => GetMaze().ColumnAmount * cellSize;
 
         public void DrawScaledMaze(float minCellSize)
         {
@@ -64,7 +30,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public void DrawMaze(float cellSize)
         {
-            Maze maze = GetMaze();
+            Maze maze = GetMazeFromDataContext();
             Canvas.Children.Clear();
 
             foreach (var cell in maze)
@@ -97,7 +63,42 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         }
 
         private string CreateWallTag(string cellTag, Direction direction) => cellTag + "-" + (int)direction;
+
+        public float CalculateCellSize(float minCellSize)
+        {
+            Maze maze = GetMazeFromDataContext();
+            bool resizeToHeight = maze.RowAmount > maze.ColumnAmount;
+            float cellSize = CalculateCellSizeBasingOnDimension(maze, resizeToHeight);
+            cellSize = RecalculateCellSizeIfOtherDimensionDoesntFit(maze, resizeToHeight, cellSize);
+
+            if (cellSize < minCellSize)
+            {
+                cellSize = minCellSize;
+                //TODO
+            }
+            return cellSize;
+        }
+
+        private float CalculateCellSizeBasingOnDimension(Maze maze, bool resizeToHeight)
+        {
+            float dimensionLength = (float)((resizeToHeight) ? this.ActualHeight : this.ActualWidth);
+            int cellsInDimension = (resizeToHeight) ? maze.RowAmount : maze.ColumnAmount;
+            return dimensionLength / cellsInDimension;
+        }
+
+        private float RecalculateCellSizeIfOtherDimensionDoesntFit(Maze maze, bool resizeToHeight, float cellSize)
+        {
+            float otherDimensionMazeLength = (resizeToHeight) ? CalculateMazeWidth(cellSize) : CalculateMazeHeight(cellSize);
+            double otherDimensionLength = (resizeToHeight) ? this.ActualWidth : this.ActualHeight;
+            return (otherDimensionMazeLength <= otherDimensionLength) ? cellSize : CalculateCellSizeBasingOnDimension(maze, !resizeToHeight);
+        }
+
+        public float CalculateMazeHeight(float cellSize) => GetMazeRowAmount() * cellSize;
+        public float CalculateMazeWidth(float cellSize) => GetMazeColumnAmount() * cellSize;
+        public int GetMazeRowAmount() => GetMazeFromDataContext().RowAmount;
+        public int GetMazeColumnAmount() => GetMazeFromDataContext().ColumnAmount;
+
         private MazeCanvasViewModel GetDataContext() => (MazeCanvasViewModel)this.DataContext;
-        private Maze GetMaze() => GetDataContext().Maze;
+        private Maze GetMazeFromDataContext() => GetDataContext().Maze;
     }
 }
