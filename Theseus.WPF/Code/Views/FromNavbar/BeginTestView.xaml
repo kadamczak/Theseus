@@ -7,15 +7,29 @@
              xmlns:canvases="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
+
     <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged" FocusManager.FocusedElement="{Binding ElementName=ExamMazeCanvasView}">
 
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Solve Maze" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
-        
+        <DockPanel Grid.Row="0" Margin="0 0 0 40">
+            <Label DockPanel.Dock="Left" Content="Solve Maze" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontFamily="Microsoft YaHei Light"/>
+
+            <StackPanel Visibility="{Binding ExamMazeCanvasViewModel.MazeExamFinished, Converter={StaticResource BoolToVisibility}}" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Label Content="Maze finished! Next screen in:" VerticalAlignment="Center" FontSize="22" FontFamily="Microsoft YaHei Light"/>
+                <Label Content="{Binding CountdownValue}" FontSize="32" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei Light"/>
+            </StackPanel>
+        </DockPanel>
+
         <canvases:ExamMazeCanvasView Grid.Row="1" x:Name="ExamMazeCanvasView" DataContext="{Binding ExamMazeCanvasViewModel}" Loaded="ExamMazeCanvasView_Loaded"/>
     </Grid>
+
 </UserControl>

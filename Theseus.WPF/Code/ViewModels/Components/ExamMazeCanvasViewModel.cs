@@ -23,6 +23,17 @@ namespace Theseus.WPF.Code.ViewModels.Components
         public event Action SuccesfullyMoved;
         public event Action CompletedMaze;
 
+        private bool _mazeExamFinished = false;
+        public bool MazeExamFinished
+        {
+            get => _mazeExamFinished;
+            set
+            {
+                _mazeExamFinished = value;
+                OnPropertyChanged(nameof(MazeExamFinished));
+            }
+        }
+
         public ExamMazeCanvasViewModel(MazeWithSolution mazeWithSolution)
         {
             this.MazeWithSolutionCanvasViewModel = new MazeWithSolutionCanvasViewModel(mazeWithSolution);
@@ -30,7 +41,6 @@ namespace Theseus.WPF.Code.ViewModels.Components
             this.TargetCell = GetMazeWithSolution().SolutionPath.Last();
             this.StartDirection = GetMazeWithSolution().StartDirection;
             this.EndDirection = GetMazeWithSolution().EndDirection;
-
             this.UserSolution = new List<Cell>() { CurrentCell };
 
             this.PerformMove = new PerformMoveCommand(this);
@@ -52,6 +62,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
 
         public void OnCompletedMaze()
         {
+            this.MazeExamFinished = true;
             this.CompletedMaze?.Invoke();
         }
 

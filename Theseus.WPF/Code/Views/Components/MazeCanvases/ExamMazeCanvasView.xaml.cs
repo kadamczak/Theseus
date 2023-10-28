@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.ViewModels.Components;
 using Theseus.WPF.Code.Views.HelperClasses;
@@ -37,12 +39,8 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             _mazeWithSolutionCanvasView.InitializeDataContexts();
 
             examMazeCanvasViewModel.SuccesfullyMoved += DrawUserSolution;
+            examMazeCanvasViewModel.CompletedMaze += EndMazeExam;
         }
-
-        //protected virtual override void Dispose()
-        //{
-
-        //}
 
         public void DrawScaledExamMaze(float minCellSize)
         {
@@ -60,20 +58,21 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             this._examSolutionCanvas.Children.Clear();
             List<Cell> userSolution = GetDataContext().UserSolution;
 
-            DrawStartLine();
+            Cell startCell = GetDataContext().UserSolution.First();
+            DrawLineToBorder(startCell, GetDataContext().StartDirection);
+
             for(int i = 0; i < userSolution.Count - 1; i++)
             {
                 DrawLineBetweenCellCenters(userSolution[i], userSolution[i + 1]);
             }
         }
 
-        private void DrawStartLine()
+        private void DrawLineToBorder(Cell cell, Direction direction)
         {
-            Cell startCell = GetDataContext().UserSolution.First();
-            PointF startCellCenter = _pointCalculator.CalculateCellCenter(startCell, _cellSize);
-            PointF borderCenter = _pointCalculator.CalculatePointInDirection(GetMazeWithSolution().StartDirection, startCellCenter, _cellSize / 2);
+            PointF cellCenter = _pointCalculator.CalculateCellCenter(cell, _cellSize);
+            PointF borderCenter = _pointCalculator.CalculatePointInDirection(direction, cellCenter, _cellSize / 2);
 
-            DrawSolutionLine(borderCenter, startCellCenter);
+            DrawSolutionLine(cellCenter, borderCenter);
         }
 
         private void DrawLineBetweenCellCenters(Cell previousCell, Cell nextCell)
@@ -83,9 +82,15 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             DrawSolutionLine(previousCellCenter, nextCellCenter);
         }
 
+        private void EndMazeExam()
+        {
+            DrawLineToBorder(GetDataContext().TargetCell, GetDataContext().EndDirection);       
+        }
+
         private void DrawSolutionLine(PointF start, PointF end) => this._lineDrawer.DrawLine(start, end, Colors.LightBlue, _cellSize * 0.6f);
 
         private ExamMazeCanvasViewModel GetDataContext() => (ExamMazeCanvasViewModel)this.DataContext;
         private MazeWithSolution GetMazeWithSolution() => GetDataContext().MazeWithSolutionCanvasViewModel.MazeWithSolution;
+
     }
 }

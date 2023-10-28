@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Documents;
 using Theseus.Domain.Models.MazeRelated.Enums;
@@ -16,6 +17,13 @@ namespace Theseus.WPF.Code.Commands
         public PerformMoveCommand(ExamMazeCanvasViewModel examMazeCanvasViewModel)
         {
             _viewModel = examMazeCanvasViewModel;
+            _viewModel.PropertyChanged += OnViewModelPropertyChanged;
+        }
+
+        protected override void Dispose()
+        {
+            _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
+            base.Dispose();
         }
 
         public override void Execute(object? parameter)
@@ -53,5 +61,18 @@ namespace Theseus.WPF.Code.Commands
         }
 
         private bool MazeCompleted(Direction moveDirection) => _viewModel.CurrentCell == _viewModel.TargetCell && moveDirection == _viewModel.EndDirection;
+
+        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(_viewModel.MazeExamFinished))
+            {
+                OnCanExecuteChanged();
+            }
+        }
+
+        public override bool CanExecute(object? parameter)
+        {
+            return !_viewModel.MazeExamFinished && base.CanExecute(parameter);
+        }
     }
 }
