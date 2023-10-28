@@ -7,7 +7,15 @@
              xmlns:canvases="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
-    <Grid Background="WhiteSmoke">
-        <Label Content="BEGIN TEST" HorizontalAlignment="Left" Margin="416,70,0,0" VerticalAlignment="Top"/>
+    <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged" FocusManager.FocusedElement="{Binding ElementName=ExamMazeCanvasView}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Solve Maze" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
+        
+        <canvases:ExamMazeCanvasView Grid.Row="1" x:Name="ExamMazeCanvasView" DataContext="{Binding ExamMazeCanvasViewModel}" Loaded="ExamMazeCanvasView_Loaded"/>
     </Grid>
 </UserControl>

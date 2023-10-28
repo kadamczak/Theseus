@@ -1,6 +1,9 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.ViewModels.Components;
 using Theseus.WPF.Code.Views.HelperClasses;
@@ -12,7 +15,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
     /// </summary>
     public partial class ExamMazeCanvasView : UserControl
     {
-        private readonly MazeWithSolutionCanvasView _mazeCanvasView;
+        private readonly MazeWithSolutionCanvasView _mazeWithSolutionCanvasView;
         private readonly Canvas _examSolutionCanvas;
         private readonly LineDrawer _lineDrawer;
         private readonly PointCalculator _pointCalculator;
@@ -21,7 +24,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         public ExamMazeCanvasView()
         {
             InitializeComponent();
-            this._mazeCanvasView = this.FindName("MazeWithSolutionCanvasView")! as MazeWithSolutionCanvasView;
+            this._mazeWithSolutionCanvasView = this.FindName("MazeWithSolutionCanvasView")! as MazeWithSolutionCanvasView;
             this._examSolutionCanvas = this.FindName("ExamSolutionCanvas")! as Canvas;
             this._lineDrawer = new LineDrawer(_examSolutionCanvas!);
             this._pointCalculator = new PointCalculator();
@@ -30,27 +33,57 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
         public void InitializeDataContexts()
         {
             var examMazeCanvasViewModel = GetDataContext();
-            _mazeCanvasView.DataContext = examMazeCanvasViewModel.MazeWithSolutionCanvasViewModel;
+            _mazeWithSolutionCanvasView.DataContext = examMazeCanvasViewModel.MazeWithSolutionCanvasViewModel;
+            _mazeWithSolutionCanvasView.InitializeDataContexts();
+
+            examMazeCanvasViewModel.SuccesfullyMoved += DrawUserSolution;
         }
+
+        //protected virtual override void Dispose()
+        //{
+
+        //}
 
         public void DrawScaledExamMaze(float minCellSize)
         {
-            this._cellSize = this._mazeCanvasView.CalculateCellSize(minCellSize);
-            Thickness margin = this._mazeCanvasView.CalculateCenterMargin(_cellSize);
+            this._cellSize = this._mazeWithSolutionCanvasView.CalculateCellSize(minCellSize);
+            Thickness margin = this._mazeWithSolutionCanvasView.CalculateCenterMargin(_cellSize);
 
-            this._mazeCanvasView.DrawMaze(_cellSize, centerMaze: false);
-            DrawStartLine();
+            this._mazeWithSolutionCanvasView.DrawMaze(_cellSize, centerMaze: false);
+            DrawUserSolution();
+
             this.Margin = margin;
+        }
+
+        private void DrawUserSolution()
+        {
+            this._examSolutionCanvas.Children.Clear();
+            List<Cell> userSolution = GetDataContext().UserSolution;
+
+            DrawStartLine();
+            for(int i = 0; i < userSolution.Count - 1; i++)
+            {
+                DrawLineBetweenCellCenters(userSolution[i], userSolution[i + 1]);
+            }
         }
 
         private void DrawStartLine()
         {
-            Cell startCell = GetDataContext().CurrentCell;
+            Cell startCell = GetDataContext().UserSolution.First();
             PointF startCellCenter = _pointCalculator.CalculateCellCenter(startCell, _cellSize);
             PointF borderCenter = _pointCalculator.CalculatePointInDirection(GetMazeWithSolution().StartDirection, startCellCenter, _cellSize / 2);
 
-
+            DrawSolutionLine(borderCenter, startCellCenter);
         }
+
+        private void DrawLineBetweenCellCenters(Cell previousCell, Cell nextCell)
+        {
+            PointF previousCellCenter = _pointCalculator.CalculateCellCenter(previousCell, _cellSize);
+            PointF nextCellCenter = _pointCalculator.CalculateCellCenter(nextCell, _cellSize);
+            DrawSolutionLine(previousCellCenter, nextCellCenter);
+        }
+
+        private void DrawSolutionLine(PointF start, PointF end) => this._lineDrawer.DrawLine(start, end, Colors.LightBlue, _cellSize * 0.6f);
 
         private ExamMazeCanvasViewModel GetDataContext() => (ExamMazeCanvasViewModel)this.DataContext;
         private MazeWithSolution GetMazeWithSolution() => GetDataContext().MazeWithSolutionCanvasViewModel.MazeWithSolution;

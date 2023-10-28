@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Focusable="True">
     <Grid>
-        <local:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView"  DataContext="{Binding MazeCanvasViewModel}"/>
+        <local:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView"  DataContext="{Binding MazeWithSolutionCanvasViewModel}"/>
         <Canvas Name="ExamSolutionCanvas" />
     </Grid>
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Left" Command="{Binding PerformMove}" CommandParameter="8"/>
+        <KeyBinding Key="Up" Command="{Binding PerformMove}" CommandParameter="4"/>
+        <KeyBinding Key="Right" Command="{Binding PerformMove}" CommandParameter="2"/>
+        <KeyBinding Key="Down" Command="{Binding PerformMove}" CommandParameter="1"/>
+    </UserControl.InputBindings>
 </UserControl>
