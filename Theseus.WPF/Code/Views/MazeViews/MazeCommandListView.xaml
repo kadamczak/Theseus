@@ -23,7 +23,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <canvases:MazeWithSolutionCanvasView Grid.Row="0" Grid.Column="0" Width="400" Height="150"  Margin="0 10 0 10" x:Name="MazeCanvas" DataContext="{Binding MazeWithSolutionCanvasViewModel}" Loaded="MazesWithSolutionListBox_Loaded"/>
+                            <canvases:MazeWithSolutionCanvasView Grid.Row="0" Grid.Column="0" Width="400" Height="150"  Margin="0 10 0 10" x:Name="MazeCanvas" DataContext="{Binding MazeWithSolutionCanvasViewModel}" Tag="{Binding MazeWithSolution.Id}" Loaded="MazesWithSolutionCanvasView_Loaded"/>
                             <Button Grid.Row="0" Grid.Column="1" Command="{Binding Command}" FontSize="15" Padding="10 5 10 5" Height="30" Content="Details" />
                             <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" MaxWidth="200" TextWrapping="Wrap" Grid.Row="0" Grid.Column="2" Text="Stats jdksajkdasjk dkjasjkdsakj dasjdassakjdkjasjkdasjkdasjkdakjsdkjasdkjaskjdakjdjsakakjsdaskkdaskjjasdjsakjdkjaskjdsajk"/>
                         </Grid>
