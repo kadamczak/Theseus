@@ -1,4 +1,5 @@
-﻿using Theseus.WPF.Code.Commands;
+﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings;
@@ -28,11 +29,15 @@ namespace Theseus.WPF.Code.ViewModels
 
             foreach (var mazeWithSolution in _mazeListStore.MazesInList)
             {
-                MazeWithSolutionCommandViewModel actionableMaze = new MazeWithSolutionCommandViewModel(mazeWithSolution);
-                ShowDetailsCommand command = new ShowDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
-                actionableMaze.Command = command;
-                this.ActionableMazes.Add(actionableMaze);
+                AddMazeWithCommandToList(mazeWithSolution);
             }
+        }
+
+        private void AddMazeWithCommandToList(MazeWithSolution mazeWithSolution)
+        {
+            MazeWithSolutionCommandViewModel actionableMaze = new MazeWithSolutionCommandViewModel(mazeWithSolution);
+            actionableMaze.Command = new ShowDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
+            this.ActionableMazes.Add(actionableMaze);
         }
     }
 }
