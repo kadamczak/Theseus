@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+﻿using System.Windows.Input;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 
 namespace Theseus.WPF.Code.ViewModels

@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="Code\Stores\DataStores\" />
+    <Folder Include="Code\ViewModels\SetViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

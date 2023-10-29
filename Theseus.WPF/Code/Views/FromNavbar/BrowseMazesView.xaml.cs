@@ -28,28 +28,19 @@ namespace Theseus.WPF.Code.Views
             this._mazeWithSolutionViews = GetMazeWithSolutionViews();
             foreach (var mazeView in _mazeWithSolutionViews)
             {
-                //mazeView.InitializeDataContexts();
+                mazeView.InitializeDataContexts();
             }
 
             _mazeCanvasesLoaded = true;
-            RedrawMazes();
-            UpdateLayout();
-            RedrawMazes();
+            DrawMazes();
         }
 
-        private void Grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
-        {
-            RedrawMazes();
-        }
 
-        private void RedrawMazes()
+        private void DrawMazes()
         {
-            if (!_mazeCanvasesLoaded)
-                return;
-
             foreach (var mazeView in _mazeWithSolutionViews)
             {
-                //mazeView.DrawScaledMazeWithVisibleSolutionPath(2);
+                mazeView.DrawScaledMazeWithVisibleSolutionPath(2);
             }
         }
 
