@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
 
@@ -33,6 +34,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<HomeViewModel>();
             services.AddTransient<SettingsViewModel>();
 
+            services.AddTransient<ShowDetailsMazeCommandListViewModel>();
             services.AddTransient<MazeDetailsViewModel>();
             services.AddTransient<MazeGeneratorViewModel>();
         }
@@ -55,6 +57,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<HomeViewModel>>((s) => () => s.GetRequiredService<HomeViewModel>());
             services.AddSingleton<Func<SettingsViewModel>>((s) => () => s.GetRequiredService<SettingsViewModel>());
 
+            services.AddSingleton<Func<ShowDetailsMazeCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsMazeCommandListViewModel>());
             services.AddSingleton<Func<MazeDetailsViewModel>>((s) => () => s.GetRequiredService<MazeDetailsViewModel>());
             services.AddSingleton<Func<MazeGeneratorViewModel>>((s) => () => s.GetRequiredService<MazeGeneratorViewModel>());
         }
@@ -71,6 +74,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<HomeViewModel>>();
             services.AddSingleton<NavigationService<SettingsViewModel>>();
 
+            services.AddSingleton<NavigationService<ShowDetailsMazeCommandListViewModel>>();
             services.AddSingleton<NavigationService<MazeDetailsViewModel>>();
             services.AddSingleton<NavigationService<MazeGeneratorViewModel>>();
         }

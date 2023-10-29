@@ -1,30 +1,32 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Theseus.Domain.QueryInterfaces;
+﻿using Theseus.Domain.QueryInterfaces;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Commands;
-using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class BrowseMazesViewModel : ViewModelBase
     {
-        private readonly IGetAllMazesWithSolutionQuery _getMazeWithSolutionByIdQuery;
-        public ObservableCollection<MazeWithSolutionCanvasViewModel> MazesWithSolution { get; } = new ObservableCollection<MazeWithSolutionCanvasViewModel>();
+        public ShowDetailsMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
+        private readonly MazeListStore _mazeListStore;
+        private readonly IGetAllMazesWithSolutionQuery _getAllMazesWithSolutionQuery;
 
-        public BrowseMazesViewModel(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery,
-                                    MazeDetailsStore mazeDetailsStore,
-                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
+        public BrowseMazesViewModel(MazeListStore mazeListStore,
+                                    IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery,
+                                    ShowDetailsMazeCommandListViewModel showDetailsMazeCommandListViewModel)
         {
-            var mazesWithSolution = getAllMazesWithSolutionQuery.GetAllMazesWithSolution();
+            this._mazeListStore = mazeListStore;
+            this._getAllMazesWithSolutionQuery = getAllMazesWithSolutionQuery;
 
-            //ShowDetails = new ShowDetailsCommand(mazeDetailsStore, mazeDetailNavigationService);
+            LoadFullMazeList();
 
-            foreach(var maze in mazesWithSolution)
-            {
-                MazesWithSolution.Add(new MazeWithSolutionCanvasViewModel(maze));
-            }
+            this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel;
+            this.ShowDetailsMazeCommandViewModel.LoadMazesFromMazeListStore();
+        }
+
+        private void LoadFullMazeList()
+        {
+            var fullMazeList = _getAllMazesWithSolutionQuery.GetAllMazesWithSolution();
+            _mazeListStore.MazesInList = fullMazeList;
         }
     }
 }
