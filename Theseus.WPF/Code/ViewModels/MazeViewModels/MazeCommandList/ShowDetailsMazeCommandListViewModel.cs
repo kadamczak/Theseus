@@ -37,6 +37,7 @@ namespace Theseus.WPF.Code.ViewModels
         {
             MazeWithSolutionCommandViewModel actionableMaze = new MazeWithSolutionCommandViewModel(mazeWithSolution);
             actionableMaze.Command = new ShowDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
+            actionableMaze.CommandName = "Details";
             this.ActionableMazes.Add(actionableMaze);
         }
     }

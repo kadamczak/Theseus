@@ -9,10 +9,52 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid >
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0 10 0 10">
-            <ListBox ItemsSource="{Binding ActionableMazes}" Name="MazesWithSolutionListBox" >
-                <ListBox.ItemTemplate >
+            <ListBox ItemsSource="{Binding ActionableMazes}" Name="MazesWithSolutionListBox" HorizontalContentAlignment="Stretch" AlternationCount="2">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="{TemplateBinding BorderThickness}" 
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter />
+                                    </Border>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Trigger>
+                                        <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
+                                            <Setter Property="Background" Value="Transparent" />
+                                        </Trigger>
+                                        <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                                            <Setter Property="Background" Value="AliceBlue" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBox.ItemTemplate>
                     <DataTemplate >
                         <Grid>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Selected}" Value="true">
+                                            <Setter Property="Background" Value="PowderBlue"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Selected}" Value="false">
+                                            <Setter Property="Background" Value="Transparent"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+
+
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="260" />
                             </Grid.RowDefinitions>
@@ -20,12 +62,12 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="470"/>
                                 <ColumnDefinition Width="75"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <canvases:MazeWithSolutionCanvasView Grid.Row="0" Grid.Column="0" Width="400" Height="150"  Margin="0 10 0 10" x:Name="MazeCanvas" DataContext="{Binding MazeWithSolutionCanvasViewModel}" Tag="{Binding MazeWithSolution.Id}" Loaded="MazesWithSolutionCanvasView_Loaded"/>
-                            <Button Grid.Row="0" Grid.Column="1" Command="{Binding Command}" FontSize="15" Padding="10 5 10 5" Height="30" Content="Details" />
-                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" MaxWidth="200" TextWrapping="Wrap" Grid.Row="0" Grid.Column="2" Text="Stats jdksajkdasjk dkjasjkdsakj dasjdassakjdkjasjkdasjkdasjkdakjsdkjasdkjaskjdakjdjsakakjsdaskkdaskjjasdjsakjdkjaskjdsajk"/>
+                            <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Command="{Binding Command}" Style="{StaticResource Generic}" FontSize="15" Padding="10 5 10 5" Height="30" Content="{Binding CommandName}" />
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="2" MaxWidth="260" Text="Stats jdksajkdasjk dkjasjkdsakj dasjdassakjdkjasjkdasjkdasjkdakjsdkjasdkjaskjdakjdjsakakjsdaskkdaskjjasdjsakjdkjaskjdsajk"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

@@ -4,6 +4,7 @@ using System;
 using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
+using Theseus.WPF.Code.ViewModels.SetViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
@@ -37,6 +38,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<ShowDetailsMazeCommandListViewModel>();
             services.AddTransient<MazeDetailsViewModel>();
             services.AddTransient<MazeGeneratorViewModel>();
+
+            services.AddTransient<SetGeneratorViewModel>();
         }
 
         private static void AddSingletonViewModels(IServiceCollection services)
@@ -60,6 +63,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<ShowDetailsMazeCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsMazeCommandListViewModel>());
             services.AddSingleton<Func<MazeDetailsViewModel>>((s) => () => s.GetRequiredService<MazeDetailsViewModel>());
             services.AddSingleton<Func<MazeGeneratorViewModel>>((s) => () => s.GetRequiredService<MazeGeneratorViewModel>());
+
+            services.AddSingleton<Func<SetGeneratorViewModel>>((s) => () => s.GetRequiredService<SetGeneratorViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -77,6 +82,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<ShowDetailsMazeCommandListViewModel>>();
             services.AddSingleton<NavigationService<MazeDetailsViewModel>>();
             services.AddSingleton<NavigationService<MazeGeneratorViewModel>>();
+
+            services.AddSingleton<NavigationService<SetGeneratorViewModel>>();
         }
     }
 }

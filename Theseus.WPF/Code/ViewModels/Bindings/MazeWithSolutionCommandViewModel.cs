@@ -7,6 +7,8 @@ namespace Theseus.WPF.Code.ViewModels.Bindings
     {
         public MazeWithSolutionCanvasViewModel MazeWithSolutionCanvasViewModel { get; }
         public ICommand Command { get; set; }
+        public string CommandName { get; set; }
+        public bool Selected { get; set; } = false;
 
         public MazeWithSolutionCommandViewModel(MazeWithSolution mazeWithSolution)
         {
