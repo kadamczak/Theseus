@@ -9,14 +9,14 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid >
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0 10 0 10">
-            <ListBox ItemsSource="{Binding ActionableMazes}" Name="MazesWithSolutionListBox" HorizontalContentAlignment="Stretch" AlternationCount="2">
+            <ListBox ItemsSource="{Binding ActionableMazes}" Name="MazesWithSolutionListBox" HorizontalContentAlignment="Stretch">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
                                     <Border BorderBrush="{TemplateBinding BorderBrush}" 
-                                            BorderThickness="{TemplateBinding BorderThickness}" 
+                                            BorderThickness="0"
                                             Background="{TemplateBinding Background}">
                                         <ContentPresenter />
                                     </Border>
@@ -24,12 +24,6 @@
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="Transparent"/>
-                                        </Trigger>
-                                        <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
-                                            <Setter Property="Background" Value="Transparent" />
-                                        </Trigger>
-                                        <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
-                                            <Setter Property="Background" Value="AliceBlue" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -45,7 +39,7 @@
                                 <Style TargetType="Grid">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Selected}" Value="true">
-                                            <Setter Property="Background" Value="PowderBlue"></Setter>
+                                            <Setter Property="Background" Value="Linen"></Setter>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Selected}" Value="false">
                                             <Setter Property="Background" Value="Transparent"></Setter>

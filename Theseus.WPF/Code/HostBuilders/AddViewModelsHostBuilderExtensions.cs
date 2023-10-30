@@ -36,10 +36,12 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<SettingsViewModel>();
 
             services.AddTransient<ShowDetailsMazeCommandListViewModel>();
+            services.AddTransient<AddToSetMazeCommandListViewModel>();
             services.AddTransient<MazeDetailsViewModel>();
             services.AddTransient<MazeGeneratorViewModel>();
 
             services.AddTransient<SetGeneratorViewModel>();
+            services.AddTransient<CreateSetManuallyViewModel>();
         }
 
         private static void AddSingletonViewModels(IServiceCollection services)
@@ -61,10 +63,12 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<SettingsViewModel>>((s) => () => s.GetRequiredService<SettingsViewModel>());
 
             services.AddSingleton<Func<ShowDetailsMazeCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsMazeCommandListViewModel>());
+            services.AddSingleton<Func<AddToSetMazeCommandListViewModel>>((s) => () => s.GetRequiredService<AddToSetMazeCommandListViewModel>());
             services.AddSingleton<Func<MazeDetailsViewModel>>((s) => () => s.GetRequiredService<MazeDetailsViewModel>());
             services.AddSingleton<Func<MazeGeneratorViewModel>>((s) => () => s.GetRequiredService<MazeGeneratorViewModel>());
 
             services.AddSingleton<Func<SetGeneratorViewModel>>((s) => () => s.GetRequiredService<SetGeneratorViewModel>());
+            services.AddSingleton<Func<CreateSetManuallyViewModel>>((s) => () => s.GetRequiredService<CreateSetManuallyViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -80,10 +84,12 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<SettingsViewModel>>();
 
             services.AddSingleton<NavigationService<ShowDetailsMazeCommandListViewModel>>();
+            services.AddSingleton<NavigationService<AddToSetMazeCommandListViewModel>>();
             services.AddSingleton<NavigationService<MazeDetailsViewModel>>();
             services.AddSingleton<NavigationService<MazeGeneratorViewModel>>();
 
             services.AddSingleton<NavigationService<SetGeneratorViewModel>>();
+            services.AddSingleton<NavigationService<CreateSetManuallyViewModel>>();
         }
     }
 }

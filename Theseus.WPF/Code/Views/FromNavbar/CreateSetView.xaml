@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Style="{StaticResource Generic}" FontSize="16" Grid.Row="0" HorizontalAlignment="Right" Content="Create using Maze Database" />
+        <Button Style="{StaticResource Generic}" Command="{Binding NavigateToCreateSetManually}" FontSize="16" Grid.Row="0" HorizontalAlignment="Right" Content="Create using Maze Database" />
         <local:SetGeneratorView Grid.Row="1" DataContext="{Binding SetGeneratorViewModel}"/>
     </Grid>
 </UserControl>

@@ -44,9 +44,11 @@
                 <views:HomeView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vms:ShowDetailsMazeCommandListViewModel}">
-                <views:MazeCommandListView/>
+      
+            <DataTemplate DataType="{x:Type vms:CreateSetManuallyViewModel}">
+                <views:CreateSetManuallyView/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type vms:MazeGeneratorViewModel}">
                 <views:MazeGeneratorView/>
             </DataTemplate>
