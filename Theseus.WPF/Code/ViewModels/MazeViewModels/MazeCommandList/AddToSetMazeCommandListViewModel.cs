@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Stores;
@@ -8,7 +8,7 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class AddToSetMazeCommandListViewModel : MazeCommandListViewModel
     {
-        public List<MazeWithSolution> SelectedMazes { get; } = new List<MazeWithSolution>();
+        public ObservableCollection<MazeWithSolution> SelectedMazes = new ObservableCollection<MazeWithSolution>();
 
         public AddToSetMazeCommandListViewModel(MazeListStore mazeListStore) : base(mazeListStore)
         {
