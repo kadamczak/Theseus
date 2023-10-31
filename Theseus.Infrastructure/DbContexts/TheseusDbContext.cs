@@ -8,5 +8,6 @@ namespace Theseus.Infrastructure.DbContexts
         public TheseusDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<MazeDto> Mazes { get; set; }
+        public DbSet<ExamSetDto> ExamSets { get; set; }
     }
 }

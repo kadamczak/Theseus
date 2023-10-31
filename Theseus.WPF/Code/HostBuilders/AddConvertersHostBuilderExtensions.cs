@@ -12,6 +12,8 @@ namespace Theseus.WPF.Code.HostBuilders
             {
                 services.AddSingleton<MazeDtoToMazeWithSolutionConverter>();
                 services.AddSingleton<MazeWithSolutionToMazeDtoConverter>();
+                services.AddSingleton<ExamSetDtoToExamSetConverter>();
+                services.AddSingleton<ExamSetToExamSetDtoConverter>();
             });
 
             return hostBuilder;

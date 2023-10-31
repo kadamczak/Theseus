@@ -11,6 +11,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         public Direction StartDirection { get; set; }
         public Direction EndDirection { get; set; }
 
+        //todo - constructor with only id?
+
         public MazeWithSolution(Maze grid, Guid? id = null)
         {
             Id = id;

@@ -18,7 +18,14 @@ namespace Theseus.Infrastructure.Dtos
         public byte StartDirection { get; set; } = default!;
         public byte EndDirection { get; set; } = default!;
 
+        public ICollection<ExamSetDto> ExamSets { get; set; } = default!;
+
         //TODO
+        public MazeDto(Guid? id)
+        {
+            Id = id;
+        }
+
         public MazeDto(Guid? id, int height, int width, byte[] structure, int solutionStartRow, int solutionStartColumn, byte[] solution, byte startDirection, byte endDirection)
         {
             Id = id;

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.Models.SetRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands
@@ -12,10 +12,16 @@ namespace Theseus.WPF.Code.Commands
     public class CreateSetManuallyCommand : CommandBase
     {
         private readonly AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
+        private readonly ICreateExamSetCommand _createExamSetCommand;
+        private readonly NavigationService<CreateSetViewModel> _createSetNavigationService;
 
-        public CreateSetManuallyCommand(AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
+        public CreateSetManuallyCommand(AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel,
+                                        ICreateExamSetCommand createExamSetCommand,
+                                        NavigationService<CreateSetViewModel> createSetNavigationService)
         {
             this._addToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
+            this._createExamSetCommand = createExamSetCommand;
+            this._createSetNavigationService = createSetNavigationService;
             _addToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
         }
 
@@ -27,7 +33,12 @@ namespace Theseus.WPF.Code.Commands
 
         public override void Execute(object? parameter)
         {
-            int a = 5;
+            var selectedMazes = _addToSetMazeCommandListViewModel.SelectedMazes.ToList();
+            ExamSet examSet = new ExamSet(Guid.NewGuid(), selectedMazes);
+
+            this._createExamSetCommand.CreateExamSet(examSet);
+
+            this._createSetNavigationService.Navigate();
         }
 
         private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

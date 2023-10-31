@@ -1,7 +1,9 @@
 ﻿using System.Windows.Input;
+using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.QueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -13,16 +15,18 @@ namespace Theseus.WPF.Code.ViewModels
 
         public CreateSetManuallyViewModel(MazeListStore mazeListStore,
                                           IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery,
+                                          ICreateExamSetCommand createExamSetCommand,
+                                          NavigationService<CreateSetViewModel> createSetNavigationService,
                                           AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
         {
-            LoadFullMazeList(getAllMazesWithSolutionQuery, mazeListStore);
-            this.CreateSetManually = new CreateSetManuallyCommand(addToSetMazeCommandListViewModel);
+            LoadFullMazeListToStore(getAllMazesWithSolutionQuery, mazeListStore);
+            this.CreateSetManually = new CreateSetManuallyCommand(addToSetMazeCommandListViewModel, createExamSetCommand, createSetNavigationService);
 
             this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
             this.AddToSetMazeCommandListViewModel.LoadMazesFromMazeListStore();
         }
 
-        private void LoadFullMazeList(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery, MazeListStore mazeListStore)
+        private void LoadFullMazeListToStore(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery, MazeListStore mazeListStore)
         {
             var fullMazeList = getAllMazesWithSolutionQuery.GetAllMazesWithSolution();
             mazeListStore.MazesInList = fullMazeList;
