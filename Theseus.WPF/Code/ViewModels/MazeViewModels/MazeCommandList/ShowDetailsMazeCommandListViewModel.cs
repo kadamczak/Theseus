@@ -8,12 +8,12 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class ShowDetailsMazeCommandListViewModel : MazeCommandListViewModel
     {
-        private MazeDetailsStore _mazeDetailsStore;
+        private SelectedMazeDetailsStore _mazeDetailsStore;
         private NavigationService<MazeDetailsViewModel> _mazeDetailsNavigationService;
 
 
-        public ShowDetailsMazeCommandListViewModel(MazeListStore mazeListStore,
-                                                   MazeDetailsStore mazeDetailsStore,
+        public ShowDetailsMazeCommandListViewModel(SelectedMazeListStore mazeListStore,
+                                                   SelectedMazeDetailsStore mazeDetailsStore,
                                                    NavigationService<MazeDetailsViewModel> mazeDetailsNavigationService) : base(mazeListStore)
         {
             this._mazeDetailsStore = mazeDetailsStore;

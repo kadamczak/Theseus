@@ -10,7 +10,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ObservableCollection<MazeWithSolution> SelectedMazes = new ObservableCollection<MazeWithSolution>();
 
-        public AddToSetMazeCommandListViewModel(MazeListStore mazeListStore) : base(mazeListStore)
+        public AddToSetMazeCommandListViewModel(SelectedMazeListStore mazeListStore) : base(mazeListStore)
         {
         }
 

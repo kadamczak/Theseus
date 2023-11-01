@@ -12,7 +12,7 @@ namespace Theseus.WPF.Code.Commands
     {
         private readonly MazeGeneratorViewModel _mazeGenViewModel;
         private readonly MazeCreator _mazeCreator;
-        private readonly MazeDetailsStore _mazeDetailsStore;
+        private readonly SelectedMazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
         private const int MaxMazeDimension = 50;
@@ -20,7 +20,7 @@ namespace Theseus.WPF.Code.Commands
 
         public GenerateMazeCommand(MazeGeneratorViewModel mazeGenViewModel,
                                    MazeCreator mazeCreator,  
-                                   MazeDetailsStore mazeDetailsStore,
+                                   SelectedMazeDetailsStore mazeDetailsStore,
                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
             this._mazeGenViewModel = mazeGenViewModel;

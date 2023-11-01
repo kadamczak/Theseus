@@ -13,7 +13,7 @@ namespace Theseus.WPF.Code.ViewModels
         public AddToSetMazeCommandListViewModel AddToSetMazeCommandListViewModel { get; }
         public ICommand CreateSetManually { get; }
 
-        public CreateSetManuallyViewModel(MazeListStore mazeListStore,
+        public CreateSetManuallyViewModel(SelectedMazeListStore mazeListStore,
                                           IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery,
                                           ICreateExamSetCommand createExamSetCommand,
                                           NavigationService<CreateSetViewModel> createSetNavigationService,
@@ -26,7 +26,7 @@ namespace Theseus.WPF.Code.ViewModels
             this.AddToSetMazeCommandListViewModel.LoadMazesFromMazeListStore();
         }
 
-        private void LoadFullMazeListToStore(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery, MazeListStore mazeListStore)
+        private void LoadFullMazeListToStore(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery, SelectedMazeListStore mazeListStore)
         {
             var fullMazeList = getAllMazesWithSolutionQuery.GetAllMazesWithSolution();
             mazeListStore.MazesInList = fullMazeList;

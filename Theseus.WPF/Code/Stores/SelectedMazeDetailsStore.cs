@@ -3,7 +3,7 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.WPF.Code.Stores
 {
-    public class MazeDetailsStore
+    public class SelectedMazeDetailsStore
     {
         public event Action MazeStructureChanged;
         public event Action SaveStateChanged;

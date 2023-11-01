@@ -11,8 +11,8 @@ namespace Theseus.WPF.Code.HostBuilders
             hostBuilder.ConfigureServices((context, services) =>
             {
                 services.AddSingleton<NavigationStore>();
-                services.AddSingleton<MazeListStore>();
-                services.AddSingleton<MazeDetailsStore>();
+                services.AddSingleton<SelectedMazeListStore>();
+                services.AddSingleton<SelectedMazeDetailsStore>();
                 services.AddSingleton<LastMazeGeneratorInputStore>();
             });
 

@@ -10,11 +10,11 @@ namespace Theseus.WPF.Code.Commands
     public class ShowDetailsCommand : CommandBase
     {
         private readonly MazeWithSolutionCommandViewModel _mazeWithSolutionCommandViewModel;
-        private readonly MazeDetailsStore _mazeDetailsStore;
+        private readonly SelectedMazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
         public ShowDetailsCommand(MazeWithSolutionCommandViewModel mazeWithSolutionCommandViewModel,
-                                  MazeDetailsStore mazeDetailsStore,
+                                  SelectedMazeDetailsStore mazeDetailsStore,
                                   NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
             this._mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;

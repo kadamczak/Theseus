@@ -9,10 +9,10 @@ namespace Theseus.WPF.Code.Commands
     public class SaveMazeCommand : AsyncCommandBase
     {
         private readonly MazeDetailsViewModel _mazeDetailsViewModel;
-        private readonly MazeDetailsStore _mazeDetailsStore;
+        private readonly SelectedMazeDetailsStore _mazeDetailsStore;
         private readonly ICreateOrUpdateMazeWithSolutionCommand _createOrUpdateMazeCommand;
 
-        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, MazeDetailsStore mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createOrUpdateMazeCommand)
+        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, SelectedMazeDetailsStore mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createOrUpdateMazeCommand)
         {
             this._mazeDetailsViewModel = mazeDetailViewModel;
             this._mazeDetailsStore = mazeDetailsStore;

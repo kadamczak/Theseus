@@ -8,7 +8,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ShowDetailsMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
 
-        public BrowseMazesViewModel(MazeListStore mazeListStore,
+        public BrowseMazesViewModel(SelectedMazeListStore mazeListStore,
                                     IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery,
                                     ShowDetailsMazeCommandListViewModel showDetailsMazeCommandListViewModel)
         {
@@ -18,7 +18,7 @@ namespace Theseus.WPF.Code.ViewModels
             this.ShowDetailsMazeCommandViewModel.LoadMazesFromMazeListStore();
         }
 
-        private void LoadFullMazeList(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery, MazeListStore mazeListStore)
+        private void LoadFullMazeList(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery, SelectedMazeListStore mazeListStore)
         {
             var fullMazeList = getAllMazesWithSolutionQuery.GetAllMazesWithSolution();
             mazeListStore.MazesInList = fullMazeList;

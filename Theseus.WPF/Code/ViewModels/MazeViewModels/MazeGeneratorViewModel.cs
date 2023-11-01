@@ -101,7 +101,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand GenerateMaze { get; }
 
         public MazeGeneratorViewModel(MazeCreator mazeCreator,
-                                      MazeDetailsStore mazeDetailsStore,
+                                      SelectedMazeDetailsStore mazeDetailsStore,
                                       NavigationService<MazeDetailsViewModel> mazeDetailNavigationService,
                                       LastMazeGeneratorInputStore lastMazeGeneratorSettingsStore)
         {

@@ -9,11 +9,11 @@ namespace Theseus.WPF.Code.ViewModels
     public class MazeDetailsViewModel : ViewModelBase
     {
         public MazeWithSolutionCanvasViewModel MazeWithSolutionCanvasViewModel { get; }
-        private readonly MazeDetailsStore _mazeDetailsStore;
+        private readonly SelectedMazeDetailsStore _mazeDetailsStore;
 
         public ICommand SaveMaze { get; }
 
-        public MazeDetailsViewModel(MazeDetailsStore mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createMazeCommand)
+        public MazeDetailsViewModel(SelectedMazeDetailsStore mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createMazeCommand)
         {
             _mazeDetailsStore = mazeDetailsStore;
             this.MazeWithSolutionCanvasViewModel = new MazeWithSolutionCanvasViewModel(_mazeDetailsStore.SelectedMazeWithSolution);
