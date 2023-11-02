@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="BeginTest">Zacznij Test</system:String>
+    <system:String x:Key="ViewData">Zobacz Dane</system:String>
+    <system:String x:Key="CreateMaze">Stwórz Labirynt</system:String>
+    <system:String x:Key="CreateSet">Stwórz Zestaw</system:String>
+    <system:String x:Key="BrowseMazes">Labirynty</system:String>
+    <system:String x:Key="BrowseSets">Zestawy</system:String>
+
+    <system:String x:Key="Save">Zapisz</system:String>
+    <system:String x:Key="Change">Zmień</system:String>
+
+    <system:String x:Key="Settings">Ustawienia</system:String>
+
+    <system:String x:Key="MinimalAllowedCellSize">Najmniejszy dozwolony rozmiar kratki:</system:String>
+
+    <system:String x:Key="ApplicationLanguage">Język aplikacji:</system:String>
+
+    <system:String x:Key="Binary">BINARY PL Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>
+
+    <system:String x:Key="Sidewinder">SIDEWINDER PL Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>
+
+    <system:String x:Key="AldousBroder" xml:space="preserve">Algorytm Aldousa-Brodera generuje labirynty bez konkretnych preferencji. Jest z tego powodu traktowany jako punkt referencji do porównywania właściwości innych algorytmów.
+
+Właściwości:
+• około 30% kratek to ślepe uliczki,
+• średnia długość rozwiązania,
+• około 24% kratek wymaga podjęcia decyzji.
+ </system:String>
+
+    <system:String x:Key="HuntAndKill" xml:space="preserve">Algorytm "Hunt and Kill" generuje labirynty o długich, wijących się ścieżkach. Jego rozwiązania są najczęściej dłuższe niż rozwiązania innych typów labiryntów.
+    
+Właściwości:
+• około 10% kratek to ślepe uliczki,
+• duża długość rozwiązania,
+• około 9% kratek wymaga podjęcia decyzji.        
+    </system:String>
+
+    <system:String x:Key="Kruskal">KRUSKAL PL Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>
+
+</ResourceDictionary>

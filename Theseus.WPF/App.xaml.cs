@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Windows;
 using Theseus.Infrastructure.DbContexts;
+using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.HostBuilders;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
@@ -40,6 +42,7 @@ namespace Theseus.WPF
         {
             _host.Start();
 
+            LoadStringResources();
             MigrateDatabase();
             NavigateToHomeViewModel();
 
@@ -47,6 +50,12 @@ namespace Theseus.WPF
             MainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        private void LoadStringResources()
+        {
+            LoadStringResourcesCommand loadStringResourcesCommand = new LoadStringResourcesCommand();
+            loadStringResourcesCommand.Execute();
         }
 
         private void MigrateDatabase()

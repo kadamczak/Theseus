@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Theseus.WPF.Code.Views
+namespace Theseus.WPF.Code.Views.MazeViews
 {
     /// <summary>
-    /// Interaction logic for NavigationBarView.xaml
+    /// Interaction logic for MinimalCellSizeSetterView.xaml
     /// </summary>
-    public partial class NavigationBarView : UserControl
+    public partial class MinimalCellSizeSetterView : UserControl
     {
-        public NavigationBarView()
+        public MinimalCellSizeSetterView()
         {
             InitializeComponent();
-        }
-
-        private void IconTextButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -12,7 +12,7 @@
             
             <Label Content="Theseus" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="80" FontFamily="Microsoft YaHei Light"  />
 
-            <TextBlock TextWrapping="Wrap" Text="A funny program that does mazes etc sadasdasios asdsadasioio siadias something asasa kjsajksakj djds dsdsnmsmjd dsjhdsjhjhsd dsjhdhsjjhs sdhjhdsjjhsdsjhsdjh" MaxWidth="600" Foreground="DimGray" Margin="40 0 40 0" HorizontalAlignment="Center" FontSize="20"  TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="A program for conducting the digital version of the Porteus Test. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis. " MaxWidth="600" Foreground="DimGray" Margin="40 0 40 0" HorizontalAlignment="Center" FontSize="20"  TextAlignment="Center"/>
             
         </StackPanel>
     </Grid>

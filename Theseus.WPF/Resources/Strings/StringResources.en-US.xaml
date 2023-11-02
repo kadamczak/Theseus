@@ -2,6 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <system:String x:Key="BeginTest">Begin Test</system:String>
+    <system:String x:Key="ViewData">View Data</system:String>
+    <system:String x:Key="CreateMaze">Create Maze</system:String>
+    <system:String x:Key="CreateSet">Create Set</system:String>
+    <system:String x:Key="BrowseMazes">Browse Mazes</system:String>
+    <system:String x:Key="BrowseSets">Browse Sets</system:String>
+
+    <system:String x:Key="Save">Save</system:String>
+    <system:String x:Key="Change">Change</system:String>
+
+    <system:String x:Key="Settings">Settings</system:String>
+
+    <system:String x:Key="MinimalAllowedCellSize">Allowed minimal cell size:</system:String>
+
+    <system:String x:Key="ApplicationLanguage">Application language:</system:String>
+    
     <system:String x:Key="Binary">BINARY ENG Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>
 
     <system:String x:Key="Sidewinder">SIDEWINDER ENG Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>

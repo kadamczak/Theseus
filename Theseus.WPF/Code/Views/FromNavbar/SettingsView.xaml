@@ -3,10 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Theseus.WPF.Code.CustomUI.CustomConverters"
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
-    <Grid Background="WhiteSmoke">
-        <Label Content="SETTINGS" HorizontalAlignment="Left" Margin="416,70,0,0" VerticalAlignment="Top"/>
+    <Grid Background="WhiteSmoke" Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="{DynamicResource Settings}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="50" Margin="0 0 0 30" FontFamily="Microsoft YaHei Light"/>
+
+        <StackPanel Margin="0 0 0 50" Grid.Row="1">
+            <StackPanel.Resources>
+                <converters:ComparisonConverter x:Key="ComparisonConverter" />
+            </StackPanel.Resources>
+
+            <Label FontSize="18" FontWeight="Bold" Margin="0 0 0 10" Content="{DynamicResource ApplicationLanguage}"/>
+            <RadioButton IsChecked="{Binding Path=ChosenLanguage, Converter={StaticResource ComparisonConverter}, ConverterParameter=en-US}" VerticalContentAlignment="Center" FontSize="16" GroupName="Language" Margin="0 0 0 10" >English</RadioButton>
+            <RadioButton IsChecked="{Binding Path=ChosenLanguage, Converter={StaticResource ComparisonConverter}, ConverterParameter=pl}"  VerticalContentAlignment="Center" FontSize="16" GroupName="Language">Polski</RadioButton>
+
+            <Button Margin="0 21 0 0" Padding="7 5" Cursor="Hand" FontSize="16" Content="{DynamicResource Save}" Command="{Binding ChangeLanguage}" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock VerticalAlignment="Center" FontSize="18" Text="{DynamicResource MinimalAllowedCellSize}" />
+            <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" FontWeight="Bold" FontSize="18" Text="{Binding MinimalCellSize}" />
+            <Button Margin="50 0 0 0" Grid.Row="2" Cursor="Hand" FontSize="16" Padding="10 14"  Content="{DynamicResource Change}" HorizontalAlignment="Left" />
+        </StackPanel>
     </Grid>
 </UserControl>

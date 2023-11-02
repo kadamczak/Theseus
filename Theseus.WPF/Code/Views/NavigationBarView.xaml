@@ -18,12 +18,12 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" Margin="0 0 10 0">
             <StackPanel Margin="10 0 0 0">
-                <custom:IconTextButton Command="{Binding NavigateToBeginTest}" Text="Begin Test" ImageSource="/Resources/Icons/exam.png" />
-                <custom:IconTextButton Command="{Binding NavigateToViewData}" Text="View Data" ImageSource="/Resources/Icons/database.png" />
-                <custom:IconTextButton Command="{Binding NavigateToCreateMaze}" Text="Create Maze" ImageSource="/Resources/Icons/plus.png" />
-                <custom:IconTextButton Command="{Binding NavigateToCreateSet}" Text="Create Set" ImageSource="/Resources/Icons/page.png" />
-                <custom:IconTextButton Command="{Binding NavigateToBrowseMazes}" Text="Browse Mazes" ImageSource="/Resources/Icons/maze.png" />
-                <custom:IconTextButton Command="{Binding NavigateToBrowseSets}" Text="Browse Sets" ImageSource="/Resources/Icons/documentation.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBeginTest}" Text="{DynamicResource BeginTest}" ImageSource="/Resources/Icons/exam.png" />
+                <custom:IconTextButton Command="{Binding NavigateToViewData}" Text="{DynamicResource ViewData}" ImageSource="/Resources/Icons/database.png" />
+                <custom:IconTextButton Command="{Binding NavigateToCreateMaze}" Text="{DynamicResource CreateMaze}" ImageSource="/Resources/Icons/plus.png" />
+                <custom:IconTextButton Command="{Binding NavigateToCreateSet}" Text="{DynamicResource CreateSet}" ImageSource="/Resources/Icons/page.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBrowseMazes}" Text="{DynamicResource BrowseMazes}" ImageSource="/Resources/Icons/maze.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBrowseSets}" Text="{DynamicResource BrowseSets}" ImageSource="/Resources/Icons/documentation.png" />
             </StackPanel>
         </ScrollViewer>
 

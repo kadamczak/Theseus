@@ -6,7 +6,6 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Strings/AlgorithmDescriptions.xaml" />
                 <ResourceDictionary Source="Code/CustomUI/CustomStyles/GenericButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
