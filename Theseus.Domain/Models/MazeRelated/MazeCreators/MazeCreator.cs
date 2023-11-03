@@ -17,10 +17,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
             this._mazeSolutionGeneratorFactory = mazeSolutionGeneratorFactory;
         }
 
-        public Maze CreateMaze(int height, int width, MazeStructureGenAlgorithm algorithm)
+        public Maze CreateMaze(int height, int width, MazeStructureGenAlgorithm algorithm, int? rndSeed = null)
         {
             Maze maze = new Maze(height, width);
-            GenerateMazeStructure(maze, algorithm);
+            GenerateMazeStructure(maze, algorithm, rndSeed);
             return maze;
         }
 
@@ -28,25 +28,26 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
                                                        int width,
                                                        MazeStructureGenAlgorithm structureAlgorithm,
                                                        MazeSolutionGenAlgorithm solutionAlgorithm,
-                                                       bool shouldExcludeCellsCloseToRoot)
+                                                       bool shouldExcludeCellsCloseToRoot,
+                                                       int? rndSeed = null)
         {
-            Maze maze = CreateMaze(height, width, structureAlgorithm);
+            Maze maze = CreateMaze(height, width, structureAlgorithm, rndSeed);
 
             MazeWithSolution mazeWithSolution = new MazeWithSolution(maze);
             GenerateMazeSolution(mazeWithSolution, solutionAlgorithm, shouldExcludeCellsCloseToRoot);
             return mazeWithSolution;
         }
 
-        private void GenerateMazeStructure(Maze grid, MazeStructureGenAlgorithm algorithm)
+        private void GenerateMazeStructure(Maze grid, MazeStructureGenAlgorithm algorithm, int? rndSeed = null)
         {
             var generator = _mazeStructureGeneratorFactory.Create(algorithm);
-            generator.GenerateMazeStructureInGrid(grid);
+            generator.GenerateMazeStructureInGrid(grid, rndSeed);
         }
 
-        private void GenerateMazeSolution(MazeWithSolution maze, MazeSolutionGenAlgorithm algorithm, bool shouldExcludeCellsCloseToRoot)
+        private void GenerateMazeSolution(MazeWithSolution maze, MazeSolutionGenAlgorithm algorithm, bool shouldExcludeCellsCloseToRoot, int? rndSeed = null)
         {
             var generator = _mazeSolutionGeneratorFactory.Create(algorithm, shouldExcludeCellsCloseToRoot);
-            generator.GenerateSolutionInMaze(maze);
+            generator.GenerateSolutionInMaze(maze, rndSeed);
         }
     }
 }

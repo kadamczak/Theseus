@@ -6,9 +6,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 {
     public class BinaryTreeMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void GenerateMazeStructureInGrid(Maze mazeGrid)
+        public override void GenerateMazeStructureInGrid(Maze mazeGrid, int? rndSeed = null)
         {
-            Random rnd = new Random();
+            Random rnd = CreateRandom(rndSeed);
             foreach (var cell in mazeGrid)
             {
                 var cellNeighbours = cell.GetAdjecentCells(Direction.North, Direction.East);

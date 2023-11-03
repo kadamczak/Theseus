@@ -55,6 +55,9 @@
             <DataTemplate DataType="{x:Type vms:MazeDetailsViewModel}">
                 <views:MazeDetailsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:MinimalCellSizeSetterViewModel}">
+                <views:MinimalCellSizeSetterView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <views:NavigationBarView Grid.Column="0" DataContext="{Binding NavigationBarViewModel}" />

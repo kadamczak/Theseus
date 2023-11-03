@@ -97,9 +97,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             return CellMatrix[row][column];
         }
 
-        public Cell GetRandomCell()
+        public Cell GetRandomCell(Random rnd)
         {
-            Random rnd = new Random();
             int rowIndex = rnd.Next(0, RowAmount);
             int columnIndex = rnd.Next(0, ColumnAmount);
 

@@ -2,15 +2,13 @@
 {
     public static class ListExtension
     {
-        private static Random rng = new Random();
-
-        public static IList<T> FisherYatesShuffle<T>(this IList<T> list)
+        public static IList<T> FisherYatesShuffle<T>(this IList<T> list, Random rnd)
         {
             int n = list.Count;
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
+                int k = rnd.Next(n + 1);
                 list.Swap(k, n);
             }
             return list;

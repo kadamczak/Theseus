@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Services;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -29,13 +30,15 @@ namespace Theseus.WPF.Code.ViewModels
         }
         
         public ICommand ChangeLanguage { get; }
+        public ICommand NavigateToMinimalCellSizeSetter { get; }
 
-        public SettingsViewModel()
+        public SettingsViewModel(NavigationService<MinimalCellSizeSetterViewModel> minimalCellSizeSetterNavigationService)
         {
             ChosenLanguage = Properties.Settings.Default.AppLanguage;
             MinimalCellSize = Properties.Settings.Default.MinimalCellSize;
 
             ChangeLanguage = new ChangeLanguageCommand(this, new LoadStringResourcesCommand());
+            NavigateToMinimalCellSizeSetter = new NavigateCommand<MinimalCellSizeSetterViewModel>(minimalCellSizeSetterNavigationService);
         }
     }
 }

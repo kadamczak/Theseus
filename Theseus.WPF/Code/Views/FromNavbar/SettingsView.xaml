@@ -31,7 +31,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <TextBlock VerticalAlignment="Center" FontSize="18" Text="{DynamicResource MinimalAllowedCellSize}" />
             <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" FontWeight="Bold" FontSize="18" Text="{Binding MinimalCellSize}" />
-            <Button Margin="50 0 0 0" Grid.Row="2" Cursor="Hand" FontSize="16" Padding="10 14"  Content="{DynamicResource Change}" HorizontalAlignment="Left" />
+            <Button Margin="50 0 0 0" Grid.Row="2" Cursor="Hand" FontSize="16" Padding="10 14"  Content="{DynamicResource Change}" HorizontalAlignment="Left" Command="{Binding NavigateToMinimalCellSizeSetter}"/>
         </StackPanel>
     </Grid>
 </UserControl>

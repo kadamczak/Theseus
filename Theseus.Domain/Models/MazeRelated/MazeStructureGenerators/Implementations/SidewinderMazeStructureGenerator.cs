@@ -6,9 +6,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 {
     public class SidewinderMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void GenerateMazeStructureInGrid(Maze mazeGrid)
+        public override void GenerateMazeStructureInGrid(Maze mazeGrid, int? rndSeed = null)
         {
-            Random rnd = new Random();
+            Random rnd = CreateRandom(rndSeed);
 
             foreach (var row in mazeGrid.IterateRows())
             {

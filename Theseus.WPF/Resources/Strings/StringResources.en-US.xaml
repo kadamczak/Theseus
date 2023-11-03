@@ -26,7 +26,7 @@
 
 Properties:
 • around 30% of cells are dead ends,
-• around 17% of cells are included in the solution path,
+• medium length solution,
 • around 24% of cells require making a decision.  
  </system:String>
 
@@ -34,7 +34,7 @@ Properties:
     
 Properties:
 • around 10% of cells are dead ends,
-• around 26% of cells are included in the solution path,
+• high length solution,
 • around 9% of cells require making a decision.
     </system:String>
 

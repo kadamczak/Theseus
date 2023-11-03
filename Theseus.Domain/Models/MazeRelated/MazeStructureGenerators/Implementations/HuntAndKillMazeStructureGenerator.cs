@@ -5,10 +5,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 {
     public class HuntAndKillMazeStructureGenerator : MazeStructureGeneratorBase
     {
-        public override void GenerateMazeStructureInGrid(Maze mazeGrid)
+        public override void GenerateMazeStructureInGrid(Maze mazeGrid, int? rndSeed = null)
         {
-            Cell? currentCell = mazeGrid.GetRandomCell();
-            Random rnd = new Random();
+            Random rnd = CreateRandom(rndSeed);
+            Cell? currentCell = mazeGrid.GetRandomCell(rnd);
 
             while (currentCell is not null)
             {

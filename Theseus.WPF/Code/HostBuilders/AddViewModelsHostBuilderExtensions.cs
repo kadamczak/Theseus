@@ -39,6 +39,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<AddToSetMazeCommandListViewModel>();
             services.AddTransient<MazeDetailsViewModel>();
             services.AddTransient<MazeGeneratorViewModel>();
+            services.AddTransient<MinimalCellSizeSetterViewModel>();
 
             services.AddTransient<SetGeneratorViewModel>();
             services.AddTransient<CreateSetManuallyViewModel>();
@@ -66,6 +67,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<AddToSetMazeCommandListViewModel>>((s) => () => s.GetRequiredService<AddToSetMazeCommandListViewModel>());
             services.AddSingleton<Func<MazeDetailsViewModel>>((s) => () => s.GetRequiredService<MazeDetailsViewModel>());
             services.AddSingleton<Func<MazeGeneratorViewModel>>((s) => () => s.GetRequiredService<MazeGeneratorViewModel>());
+            services.AddSingleton<Func<MinimalCellSizeSetterViewModel>>((s) => () => s.GetRequiredService<MinimalCellSizeSetterViewModel>());
 
             services.AddSingleton<Func<SetGeneratorViewModel>>((s) => () => s.GetRequiredService<SetGeneratorViewModel>());
             services.AddSingleton<Func<CreateSetManuallyViewModel>>((s) => () => s.GetRequiredService<CreateSetManuallyViewModel>());
@@ -87,6 +89,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<AddToSetMazeCommandListViewModel>>();
             services.AddSingleton<NavigationService<MazeDetailsViewModel>>();
             services.AddSingleton<NavigationService<MazeGeneratorViewModel>>();
+            services.AddSingleton<NavigationService<MinimalCellSizeSetterViewModel>>();
 
             services.AddSingleton<NavigationService<SetGeneratorViewModel>>();
             services.AddSingleton<NavigationService<CreateSetManuallyViewModel>>();

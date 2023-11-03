@@ -9,10 +9,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementatio
         public RandomBorderCellsMazeSolutionGenerator(DistanceGridFactory distanceGridFactory, bool shouldExcludeCellsCloseToRoot)
             : base(distanceGridFactory, shouldExcludeCellsCloseToRoot) {}
 
-        public override void GenerateSolutionInMaze(MazeWithSolution maze)
+        public override void GenerateSolutionInMaze(MazeWithSolution maze, int? rndSeed = null)
         {
             maze.SolutionPath.Clear();
-            Random rnd = new Random();
+            Random rnd = CreateRandom(rndSeed);
 
             List<Cell> borderCells = maze.Grid.GetBorderCells().ToList();
             Cell rootCell = borderCells.GetRandomItem(rnd);

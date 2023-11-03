@@ -12,12 +12,12 @@
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </UserControl.Resources>
 
-    <Grid>
+    <!--<Grid>
         
-    </Grid>
+    </Grid>-->
     
     
-    <!--<Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged" FocusManager.FocusedElement="{Binding ElementName=ExamMazeCanvasView}">
+    <Grid Background="WhiteSmoke" Margin="40 40 40 40" SizeChanged="Grid_SizeChanged" FocusManager.FocusedElement="{Binding ElementName=ExamMazeCanvasView}">
 
         
         <Grid.RowDefinitions>
@@ -35,6 +35,6 @@
         </DockPanel>
 
         <canvases:ExamMazeCanvasView Grid.Row="1" x:Name="ExamMazeCanvasView" DataContext="{Binding ExamMazeCanvasViewModel}" Loaded="ExamMazeCanvasView_Loaded"/>
-    </Grid>-->
+    </Grid>
 
 </UserControl>
