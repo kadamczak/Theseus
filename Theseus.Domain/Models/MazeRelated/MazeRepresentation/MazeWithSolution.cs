@@ -1,4 +1,5 @@
 ﻿using Theseus.Domain.Models.MazeRelated.Enums;
+using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 {
@@ -10,8 +11,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         public List<Cell> SolutionPath { get; set; } = new List<Cell>();
         public Direction StartDirection { get; set; }
         public Direction EndDirection { get; set; }
-
-        //todo - constructor with only id?
+        public StaffMember StaffMember { get; set; }
 
         public MazeWithSolution(Maze grid, Guid? id = null)
         {

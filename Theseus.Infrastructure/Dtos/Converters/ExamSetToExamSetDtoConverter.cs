@@ -5,6 +5,26 @@ namespace Theseus.Infrastructure.Dtos.Converters
 {
     public class ExamSetToExamSetDtoConverter
     {
+        private readonly MazeWithSolutionToMazeDtoConverter _toMazeDto;
+
+        public ExamSetToExamSetDtoConverter(MazeWithSolutionToMazeDtoConverter toMazeDto)
+        {
+            this._toMazeDto = toMazeDto;
+        }
+
+        public ExamSetDto Convert(ExamSet examSet)
+        {
+            List<MazeDto> mazeDtos = new List<MazeDto>();
+
+            foreach (var maze in examSet.MazesWithSolution)
+            {
+                MazeDto mazeDto = _toMazeDto.Convert(maze);
+                mazeDtos.Add(mazeDto);
+            }
+
+            return new ExamSetDto(examSet.Id, mazeDtos);
+        }
+
         public ExamSetDto ConvertUsingAttach(ExamSet examSet, TheseusDbContext context)
         {
             List<MazeDto> mazeDtos = new List<MazeDto>();

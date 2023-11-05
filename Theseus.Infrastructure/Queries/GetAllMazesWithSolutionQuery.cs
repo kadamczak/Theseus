@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;

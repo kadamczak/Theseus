@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.SetRelated;
 
 namespace Theseus.Domain.Models.UserRelated
 {
     public class StaffMember
     {
-        [Key]
         public Guid Id { get; set; } = default!;
         public string Username { get; } = default!;
         public string PasswordHash { get; } = default!;
@@ -15,6 +14,7 @@ namespace Theseus.Domain.Models.UserRelated
         public DateTime DateCreated { get; } = DateTime.Now;
 
         public ICollection<Patient> Patients { get; set; } = default!;
-        //public ICollection<ExamSet> ExamSets { get; set; } = default!;
+        public ICollection<MazeWithSolution> MazesWithSolutions { get; set; } = default!;
+        public ICollection<ExamSet> ExamSets { get; set; } = default!;
     }
 }

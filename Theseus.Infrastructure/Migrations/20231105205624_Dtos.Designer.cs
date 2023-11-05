@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Theseus.Infrastructure.DbContexts;
 
@@ -11,9 +12,11 @@ using Theseus.Infrastructure.DbContexts;
 namespace Theseus.Infrastructure.Migrations
 {
     [DbContext(typeof(TheseusDbContext))]
-    partial class TheseusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231105205624_Dtos")]
+    partial class Dtos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,12 +203,17 @@ namespace Theseus.Infrastructure.Migrations
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.MazeDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.StaffMemberDto", "Owner")
-                        .WithMany()
+                        .WithMany("MazeDtos")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.StaffMemberDto", b =>
+                {
+                    b.Navigation("MazeDtos");
                 });
 #pragma warning restore 612, 618
         }

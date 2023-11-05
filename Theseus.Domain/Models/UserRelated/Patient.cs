@@ -5,7 +5,6 @@ namespace Theseus.Domain.Models.UserRelated
 {
     public class Patient
     {
-        [Key]
         public Guid Id { get; set; } = default!;
         public string Username { get; } = default!;
         public int? Age { get; set; }

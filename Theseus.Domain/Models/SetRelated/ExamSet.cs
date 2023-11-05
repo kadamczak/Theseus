@@ -1,4 +1,5 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Domain.Models.SetRelated
 {
@@ -6,6 +7,7 @@ namespace Theseus.Domain.Models.SetRelated
     {
         public Guid Id { get; set; } = default;
         public List<MazeWithSolution> MazesWithSolution { get; } = new List<MazeWithSolution>();
+        //public StaffMember StaffMember { get; set; } = default!;
 
         public ExamSet(Guid id, List<MazeWithSolution> mazesWithSolution)
         {
