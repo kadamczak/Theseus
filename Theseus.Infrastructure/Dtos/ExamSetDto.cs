@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Infrastructure.Dtos
 {
@@ -7,6 +8,7 @@ namespace Theseus.Infrastructure.Dtos
         [Key]
         public Guid Id { get; set; } = default;
         public IEnumerable<MazeDto> MazeDtos { get; set; } = default!;
+        //public StaffMember StaffMember { get; set; } = default!;
 
         public ExamSetDto() { }
 

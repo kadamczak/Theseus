@@ -31,6 +31,8 @@ namespace Theseus.Infrastructure.DbContexts
                 .Entity<Patient>()
                 .Property(d => d.Sex)
                 .HasConversion(new EnumToStringConverter<Sex>());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

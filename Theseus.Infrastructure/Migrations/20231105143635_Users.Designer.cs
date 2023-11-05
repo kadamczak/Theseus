@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Theseus.Infrastructure.DbContexts;
 
@@ -11,9 +12,11 @@ using Theseus.Infrastructure.DbContexts;
 namespace Theseus.Infrastructure.Migrations
 {
     [DbContext(typeof(TheseusDbContext))]
-    partial class TheseusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231105143635_Users")]
+    partial class Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,21 +38,6 @@ namespace Theseus.Infrastructure.Migrations
                     b.HasIndex("MazeDtosId");
 
                     b.ToTable("ExamSetDtoMazeDto");
-                });
-
-            modelBuilder.Entity("PatientStaffMember", b =>
-                {
-                    b.Property<Guid>("PatientsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("StaffMembersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PatientsId", "StaffMembersId");
-
-                    b.HasIndex("StaffMembersId");
-
-                    b.ToTable("PatientStaffMember");
                 });
 
             modelBuilder.Entity("Theseus.Domain.Models.UserRelated.Patient", b =>
@@ -157,21 +145,6 @@ namespace Theseus.Infrastructure.Migrations
                     b.HasOne("Theseus.Infrastructure.Dtos.MazeDto", null)
                         .WithMany()
                         .HasForeignKey("MazeDtosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PatientStaffMember", b =>
-                {
-                    b.HasOne("Theseus.Domain.Models.UserRelated.Patient", null)
-                        .WithMany()
-                        .HasForeignKey("PatientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Theseus.Domain.Models.UserRelated.StaffMember", null)
-                        .WithMany()
-                        .HasForeignKey("StaffMembersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
