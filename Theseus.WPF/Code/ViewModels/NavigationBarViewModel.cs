@@ -16,6 +16,10 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand NavigateToSettings { get; }
         public ICommand NavigateToHome { get; }
+        public ICommand NavigateToAccount { get; }
+
+        public bool LoggedIn { get; } = false;
+        public bool LoggedInAsStaff { get; } = false;
 
         public NavigationBarViewModel(NavigationService<BeginTestViewModel> beginTestNavigationService,
                                       NavigationService<ViewDataViewModel> viewDataNavigationService,
@@ -24,7 +28,8 @@ namespace Theseus.WPF.Code.ViewModels
                                       NavigationService<BrowseMazesViewModel> browseMazesNavigationService,
                                       NavigationService<BrowseSetsViewModel> browseSetsNavigationService,
                                       NavigationService<SettingsViewModel> settingsNavigationService,
-                                      NavigationService<HomeViewModel> homeNavigationService)
+                                      NavigationService<HomeViewModel> homeNavigationService,
+                                      NavigationService<AccountViewModel> accountNavigationService)
         {
             NavigateToBeginTest = new NavigateCommand<BeginTestViewModel>(beginTestNavigationService);
             NavigateToViewData = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
@@ -35,6 +40,7 @@ namespace Theseus.WPF.Code.ViewModels
 
             NavigateToSettings = new NavigateCommand<SettingsViewModel>(settingsNavigationService);
             NavigateToHome = new NavigateCommand<HomeViewModel>(homeNavigationService);
+            NavigateToAccount = new NavigateCommand<AccountViewModel>(accountNavigationService);
         }
     }
 }

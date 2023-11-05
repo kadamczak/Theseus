@@ -4,9 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
+             xmlns:converters="clr-namespace:Theseus.WPF.Code.CustomUI.CustomConverters"
              xmlns:custom="clr-namespace:Theseus.WPF.Code.CustomUI.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="260">
+
+    <UserControl.Resources>
+        <converters:BooleanVisibilityConverter x:Key="BoolToVisibility"/>
+        <converters:BooleanVisibilityConverter x:Key="InvertedBoolToVisibility" True="Collapsed" False="Visible"/>
+    </UserControl.Resources>
+
     <Grid Background="Gainsboro">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -14,16 +21,17 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Margin="0 50 0 30" Grid.Row="0" Content="Theseus" FontSize="57" HorizontalAlignment="Center" FontFamily="Microsoft YaHei Light"/>
+        <Label Margin="0 50 0 40" Grid.Row="0" Content="Theseus" FontSize="57" HorizontalAlignment="Center" FontFamily="Microsoft YaHei Light"/>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" Margin="0 0 10 0">
             <StackPanel Margin="10 0 0 0">
-                <custom:IconTextButton Command="{Binding NavigateToBeginTest}" Text="{DynamicResource BeginTest}" ImageSource="/Resources/Icons/exam.png" />
-                <custom:IconTextButton Command="{Binding NavigateToViewData}" Text="{DynamicResource ViewData}" ImageSource="/Resources/Icons/database.png" />
-                <custom:IconTextButton Command="{Binding NavigateToCreateMaze}" Text="{DynamicResource CreateMaze}" ImageSource="/Resources/Icons/plus.png" />
-                <custom:IconTextButton Command="{Binding NavigateToCreateSet}" Text="{DynamicResource CreateSet}" ImageSource="/Resources/Icons/page.png" />
-                <custom:IconTextButton Command="{Binding NavigateToBrowseMazes}" Text="{DynamicResource BrowseMazes}" ImageSource="/Resources/Icons/maze.png" />
-                <custom:IconTextButton Command="{Binding NavigateToBrowseSets}" Text="{DynamicResource BrowseSets}" ImageSource="/Resources/Icons/documentation.png" />
+                <TextBlock FontSize="21" TextWrapping="Wrap" HorizontalAlignment="Center" Visibility="{Binding LoggedIn, Converter={StaticResource InvertedBoolToVisibility}}" Text="Please enter caretaker name or log-in to access the program." TextAlignment="Center" Width="150"/>
+                <custom:IconTextButton Command="{Binding NavigateToBeginTest}" Visibility="{Binding LoggedIn, Converter={StaticResource BoolToVisibility}}" Text="{DynamicResource BeginTest}" ImageSource="/Resources/Icons/exam.png"/>
+                <custom:IconTextButton Command="{Binding NavigateToViewData}" Text="{DynamicResource ViewData}" Visibility="{Binding LoggedInAsStaff, Converter={StaticResource BoolToVisibility}}" ImageSource="/Resources/Icons/database.png" />
+                <custom:IconTextButton Command="{Binding NavigateToCreateMaze}" Text="{DynamicResource CreateMaze}" Visibility="{Binding LoggedInAsStaff, Converter={StaticResource BoolToVisibility}}" ImageSource="/Resources/Icons/plus.png" />
+                <custom:IconTextButton Command="{Binding NavigateToCreateSet}" Text="{DynamicResource CreateSet}" Visibility="{Binding LoggedInAsStaff, Converter={StaticResource BoolToVisibility}}" ImageSource="/Resources/Icons/page.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBrowseMazes}" Text="{DynamicResource BrowseMazes}" Visibility="{Binding LoggedInAsStaff, Converter={StaticResource BoolToVisibility}}" ImageSource="/Resources/Icons/maze.png" />
+                <custom:IconTextButton Command="{Binding NavigateToBrowseSets}" Text="{DynamicResource BrowseSets}" Visibility="{Binding LoggedInAsStaff, Converter={StaticResource BoolToVisibility}}" ImageSource="/Resources/Icons/documentation.png" />
             </StackPanel>
         </ScrollViewer>
 
@@ -31,6 +39,7 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0 7 0 7">
                 <custom:IconButton Command="{Binding NavigateToSettings}" ImageSource="/Resources/Icons/settings.png" />
                 <custom:IconButton Command="{Binding NavigateToHome}" Margin="15 0 0 0" ImageSource="/Resources/Icons/information.png" />
+                <custom:IconButton Command="{Binding NavigateToAccount}" Margin="15 0 0 0" ImageSource="/Resources/Icons/person.png" />
             </StackPanel>
         </Grid>
     </Grid>
