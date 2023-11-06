@@ -5,7 +5,14 @@ namespace Theseus.Domain.Models.MazeRelated.Exceptions
 {
     public class CellException : Exception
     {
-        public CellException(string message, int row, int column) : base($"An exception occured with the ({row}, {column}) cell: {message}") { }
+        public int Row { get; set; }
+        public int Column { get; set; }
+
+        public CellException(string message, int row, int column) : base($"An exception occured with the ({row}, {column}) cell: {message}")
+        {
+            Row = row;
+            Column = column;
+        }
         public CellException(string message, (int row, int column) coordinates) : this(message, coordinates.row, coordinates.column) { }
         public CellException(string message, Cell cell, Direction directionOfNeighbour) : this(message,
                                                                                                CalculateRow(cell.RowIndex, directionOfNeighbour),

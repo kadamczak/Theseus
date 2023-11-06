@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Theseus.Domain.Models.SetRelated;
+using Theseus.Domain.QueryInterfaces;
 
 namespace Theseus.Infrastructure.Queries
 {
-    internal class GetAllExamSetsQuery
+    public class GetAllExamSetsQuery : IGetAllExamsQuery
     {
+        public IEnumerable<ExamSet> GetAllExamSets()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

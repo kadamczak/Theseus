@@ -40,7 +40,11 @@ namespace Theseus.WPF.Code.ViewModels
         {
             Guid guid = new Guid("b879799d-af75-4ce4-734d-08dbd14fb5c2");
             GetMazeById = new GetMazeWithSolutionByIdQuery(factory, converter);
-            MazeWithSolution m = GetMazeById.GetMazeWithSolutionById(guid);
+            MazeWithSolution? m = GetMazeById.GetMazeWithSolutionById(guid);
+
+            if (m is null)
+                throw new Exception("Maze doesn't exist.");
+
             ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(m);
 
             ExamMazeCanvasViewModel.CompletedMaze += StartSecondCountdown;

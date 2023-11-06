@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -26,10 +27,14 @@ namespace Theseus.WPF
                 .AddViewModels()
                 .AddStores()
                 .AddCommands()
+                .AddQueries()
                 .AddFactories()
                 .AddConverters()
+                .AddServices()
                 .ConfigureServices(services =>
                 {
+                    services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {
                         DataContext = services.GetRequiredService<MainViewModel>()
