@@ -3,7 +3,7 @@ using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.Exceptions;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
-namespace Theseus.Infrastructure.Dtos.Converters
+namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 {
     public class MazeDtoToMazeWithSolutionConverter
     {
@@ -46,7 +46,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
         private bool IsBitSetToOne(byte value, int position)
         {
-            return (value & (1 << position)) != 0;
+            return (value & 1 << position) != 0;
         }
 
         private MazeWithSolution CreateMazeWithSolution(MazeDto mazeDto, Maze mazeGrid)
@@ -66,7 +66,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
         {
             Cell startCell = mazeGrid.GetCell(startCoordinates) ?? throw new CellDoesNotExistException(startCoordinates);
             List<Cell> solutionPath = new List<Cell>() { startCell };
-  
+
             var currentCell = startCell;
             foreach (byte directionToNextCell in solutionAsBytes)
             {

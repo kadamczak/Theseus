@@ -12,8 +12,8 @@ using Theseus.Infrastructure.DbContexts;
 namespace Theseus.Infrastructure.Migrations
 {
     [DbContext(typeof(TheseusDbContext))]
-    [Migration("20231105210010_Dtos2")]
-    partial class Dtos2
+    [Migration("20231105212541_StaffSetFK")]
+    partial class StaffSetFK
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,7 +192,7 @@ namespace Theseus.Infrastructure.Migrations
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.StaffMemberDto", "Owner")
-                        .WithMany()
+                        .WithMany("ExamSetDtos")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -203,12 +203,19 @@ namespace Theseus.Infrastructure.Migrations
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.MazeDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.StaffMemberDto", "Owner")
-                        .WithMany()
+                        .WithMany("MazeDtos")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.StaffMemberDto", b =>
+                {
+                    b.Navigation("ExamSetDtos");
+
+                    b.Navigation("MazeDtos");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,8 @@
 ﻿using Theseus.Domain.Models.SetRelated;
 using Theseus.Infrastructure.DbContexts;
+using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 
-namespace Theseus.Infrastructure.Dtos.Converters
+namespace Theseus.Infrastructure.Dtos.Converters.ExamSetConverters
 {
     public class ExamSetToExamSetDtoConverter
     {
@@ -9,7 +10,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
         public ExamSetToExamSetDtoConverter(MazeWithSolutionToMazeDtoConverter toMazeDto)
         {
-            this._toMazeDto = toMazeDto;
+            _toMazeDto = toMazeDto;
         }
 
         public ExamSetDto Convert(ExamSet examSet)

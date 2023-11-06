@@ -18,29 +18,6 @@ namespace Theseus.Infrastructure.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //MazeWithSolutionToMazeDtoConverter toMazeDtoConverter = new MazeWithSolutionToMazeDtoConverter();
-            //MazeDtoToMazeWithSolutionConverter toMazeWithSolutionConverter = new MazeDtoToMazeWithSolutionConverter();
-
-            //modelBuilder
-            //    .Entity<StaffMember>()
-            //    .Property(d => d.MazesWithSolutions)
-            //    .HasConversion(new CollectionConverter(toMazeDtoConverter, toMazeWithSolutionConverter));
-
-            //modelBuilder
-            //    .Entity<Patient>()
-            //    .Property(d => d.ProfessionType)
-            //    .HasConversion(new EnumToStringConverter<ProfessionType>());
-
-            //modelBuilder
-            //    .Entity<Patient>()
-            //    .Property(d => d.EducationLevel)
-            //    .HasConversion(new EnumToStringConverter<EducationLevel>());
-
-            //modelBuilder
-            //    .Entity<Patient>()
-            //    .Property(d => d.Sex)
-            //    .HasConversion(new EnumToStringConverter<Sex>());
-
             base.OnModelCreating(modelBuilder);
         }
     }

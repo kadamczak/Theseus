@@ -2,7 +2,7 @@
 using Theseus.Domain.Models.SetRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
-using Theseus.Infrastructure.Dtos.Converters;
+using Theseus.Infrastructure.Dtos.Converters.ExamSetConverters;
 
 namespace Theseus.Infrastructure.Commands
 {

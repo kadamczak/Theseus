@@ -6,12 +6,12 @@ namespace Theseus.Infrastructure.Dtos
     {
         [Key]
         public Guid Id { get; set; } = default!;
-        public string Username { get; } = default!;
+        public string Username { get; set; } = default!;
         public int? Age { get; set; }
         public string? Sex { get; set; }
         public string? ProfessionType { get; set; }
         public string? EducationLevel { get; set; }
-        public DateTime DateCreated { get; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public ICollection<StaffMemberDto> StaffMemberDtos { get; set; } = default!;
     }

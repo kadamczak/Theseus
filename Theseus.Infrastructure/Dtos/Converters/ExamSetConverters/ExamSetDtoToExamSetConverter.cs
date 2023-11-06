@@ -1,7 +1,8 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.SetRelated;
+using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 
-namespace Theseus.Infrastructure.Dtos.Converters
+namespace Theseus.Infrastructure.Dtos.Converters.ExamSetConverters
 {
     public class ExamSetDtoToExamSetConverter
     {
@@ -9,7 +10,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
 
         public ExamSetDtoToExamSetConverter(MazeDtoToMazeWithSolutionConverter toMazeWithSolution)
         {
-            this._toMazeWithSolution = toMazeWithSolution;
+            _toMazeWithSolution = toMazeWithSolution;
         }
 
         public ExamSet Convert(ExamSetDto examSetDto)

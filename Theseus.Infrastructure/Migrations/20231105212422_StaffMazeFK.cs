@@ -5,7 +5,7 @@
 namespace Theseus.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Dtos2 : Migration
+    public partial class StaffMazeFK : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

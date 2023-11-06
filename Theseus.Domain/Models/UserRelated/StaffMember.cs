@@ -6,12 +6,12 @@ namespace Theseus.Domain.Models.UserRelated
     public class StaffMember
     {
         public Guid Id { get; set; } = default!;
-        public string Username { get; } = default!;
-        public string PasswordHash { get; } = default!;
+        public string Username { get; set; } = default!;
+        public string PasswordHash { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Name { get; set; } = default!;
         public string Surname { get; set; } = default!;
-        public DateTime DateCreated { get; } = DateTime.Now;
+        public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public ICollection<Patient> Patients { get; set; } = default!;
         public ICollection<MazeWithSolution> MazesWithSolutions { get; set; } = default!;

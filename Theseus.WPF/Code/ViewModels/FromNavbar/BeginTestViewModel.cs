@@ -3,7 +3,7 @@ using System.Timers;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
-using Theseus.Infrastructure.Dtos.Converters;
+using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 using Theseus.Infrastructure.Queries;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.ViewModels.Components;

@@ -2,7 +2,7 @@
 using Theseus.Domain.QueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
-using Theseus.Infrastructure.Dtos.Converters;
+using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 
 namespace Theseus.Infrastructure.Queries
 {

@@ -2,7 +2,7 @@
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
-namespace Theseus.Infrastructure.Dtos.Converters
+namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 {
     public class MazeWithSolutionToMazeDtoConverter
     {
@@ -16,7 +16,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
             return new MazeDto(maze, structureAsBytes, solutionAsBytes);
         }
 
-        private  byte[] CreateStructureByteArray(Maze maze)
+        private byte[] CreateStructureByteArray(Maze maze)
         {
             byte[] structureAsBytes = new byte[maze.CellAmount];
 
@@ -45,7 +45,7 @@ namespace Theseus.Infrastructure.Dtos.Converters
         {
             byte[] solutionAsBytes = new byte[solutionPath.Count() - 1];
 
-            for(int i = 0; i < solutionPath.Count() - 1; i++)
+            for (int i = 0; i < solutionPath.Count() - 1; i++)
             {
                 var currentCell = solutionPath[i];
                 var nextCell = solutionPath[i + 1];

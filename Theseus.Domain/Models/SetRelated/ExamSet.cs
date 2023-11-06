@@ -1,5 +1,4 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Domain.Models.SetRelated
 {
