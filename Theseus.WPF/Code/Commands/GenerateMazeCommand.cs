@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands

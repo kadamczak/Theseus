@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Theseus.Domain.CommandInterfaces;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands

@@ -1,7 +1,7 @@
 ﻿using System;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
-namespace Theseus.WPF.Code.Stores
+namespace Theseus.WPF.Code.Stores.Mazes
 {
     public class SelectedMazeDetailsStore
     {
@@ -16,7 +16,7 @@ namespace Theseus.WPF.Code.Stores
             get => _selectedMazeWithSolution;
             set
             {
-                _selectedMazeWithSolution = value;  
+                _selectedMazeWithSolution = value;
                 MazeStructureChanged?.Invoke();
             }
         }
@@ -33,8 +33,8 @@ namespace Theseus.WPF.Code.Stores
 
         public void UpdateMazeDetails(MazeWithSolution? mazeWithSolution, bool unsavedChanges)
         {
-            this.SelectedMazeWithSolution = mazeWithSolution;
-            this.HasUnsavedChanges = unsavedChanges;
+            SelectedMazeWithSolution = mazeWithSolution;
+            HasUnsavedChanges = unsavedChanges;
         }
     }
 }

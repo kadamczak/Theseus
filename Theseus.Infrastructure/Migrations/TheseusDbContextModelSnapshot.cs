@@ -22,7 +22,7 @@ namespace Theseus.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ExamSetDtoMazeDto", b =>
+            modelBuilder.Entity("ExamSetDto_MazeDto", b =>
                 {
                     b.Property<Guid>("ExamSetDtosId")
                         .HasColumnType("uniqueidentifier");
@@ -34,10 +34,10 @@ namespace Theseus.Infrastructure.Migrations
 
                     b.HasIndex("MazeDtosId");
 
-                    b.ToTable("ExamSetDtoMazeDto");
+                    b.ToTable("ExamSetDto_MazeDto");
                 });
 
-            modelBuilder.Entity("PatientDtoStaffMemberDto", b =>
+            modelBuilder.Entity("StaffMemberDto_PatientDto", b =>
                 {
                     b.Property<Guid>("PatientDtosId")
                         .HasColumnType("uniqueidentifier");
@@ -49,7 +49,7 @@ namespace Theseus.Infrastructure.Migrations
 
                     b.HasIndex("StaffMemberDtosId");
 
-                    b.ToTable("PatientDtoStaffMemberDto");
+                    b.ToTable("StaffMemberDto_PatientDto");
                 });
 
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto", b =>
@@ -119,6 +119,9 @@ namespace Theseus.Infrastructure.Migrations
                     b.Property<int?>("Age")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("EducationLevel")
                         .HasColumnType("nvarchar(max)");
 
@@ -126,6 +129,10 @@ namespace Theseus.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sex")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -139,6 +146,9 @@ namespace Theseus.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -147,7 +157,15 @@ namespace Theseus.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -156,33 +174,33 @@ namespace Theseus.Infrastructure.Migrations
                     b.ToTable("StaffMembers");
                 });
 
-            modelBuilder.Entity("ExamSetDtoMazeDto", b =>
+            modelBuilder.Entity("ExamSetDto_MazeDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.ExamSetDto", null)
                         .WithMany()
                         .HasForeignKey("ExamSetDtosId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Theseus.Infrastructure.Dtos.MazeDto", null)
                         .WithMany()
                         .HasForeignKey("MazeDtosId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PatientDtoStaffMemberDto", b =>
+            modelBuilder.Entity("StaffMemberDto_PatientDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.PatientDto", null)
                         .WithMany()
                         .HasForeignKey("PatientDtosId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Theseus.Infrastructure.Dtos.StaffMemberDto", null)
                         .WithMany()
                         .HasForeignKey("StaffMemberDtosId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

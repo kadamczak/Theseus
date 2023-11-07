@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.QueryInterfaces;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
 {

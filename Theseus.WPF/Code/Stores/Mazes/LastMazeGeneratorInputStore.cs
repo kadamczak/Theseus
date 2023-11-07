@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.MazeRelated.Enums;
 
-namespace Theseus.WPF.Code.Stores
+namespace Theseus.WPF.Code.Stores.Mazes
 {
     public class LastMazeGeneratorInputStore
     {

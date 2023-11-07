@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.SetRelated;
 
-namespace Theseus.WPF.Code.Stores
+namespace Theseus.WPF.Code.Stores.ExamSets
 {
     public class SelectedExamSetStore
     {

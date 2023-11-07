@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Commands;
-using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
