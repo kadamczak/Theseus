@@ -3,10 +3,10 @@ using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.WPF.Code.Stores.Authentication
 {
-    public class CurrentUser : ICurrentUser
+    public class CurrentUserStore : ICurrentUserStore
     {
-        private StaffMember _currentStaffMember;
-        public StaffMember CurrentStaffMember
+        private StaffMember? _currentStaffMember;
+        public StaffMember? CurrentStaffMember
         {
             get
             {

@@ -8,34 +8,42 @@ namespace Theseus.WPF.Code.Stores.Authentication
     public class Authenticator : IAuthenticator
     {
         private readonly IStaffMemberAuthenticationService _staffMemberAuthenticationService;
-        private readonly ICurrentUser _currentUser;
+        private readonly ICurrentUserStore _currentUserStore;
 
-        public Authenticator(IStaffMemberAuthenticationService staffMemberAuthenticationService, ICurrentUser currentUser)
+        public Authenticator(IStaffMemberAuthenticationService staffMemberAuthenticationService, ICurrentUserStore currentUserStore)
         {
             this._staffMemberAuthenticationService = staffMemberAuthenticationService;
-            this._currentUser = currentUser;
+            this._currentUserStore = currentUserStore;
         }
 
 
-        public StaffMember CurrentStaffMember => throw new NotImplementedException();
-
-        public bool IsLoggedIn => throw new NotImplementedException();
-
-        public event Action StateChanged;
-
-        public Task LoginStaffMember(string username, string password)
+        public StaffMember? CurrentStaffMember
         {
-            throw new NotImplementedException();
+            get => _currentUserStore.CurrentStaffMember;
+            set
+            {
+                this._currentUserStore.CurrentStaffMember = value;
+                AuthenticationStateChanged?.Invoke();
+            }
+        }
+
+        public bool IsLoggedInAsStaffMember => CurrentStaffMember is not null;
+
+        public event Action AuthenticationStateChanged;
+
+        public async Task LoginStaffMember(string username, string password)
+        {
+            CurrentStaffMember = await _staffMemberAuthenticationService.Login(username, password);
         }
 
         public void LogoutStaffMember()
         {
-            throw new NotImplementedException();
+            CurrentStaffMember = null;
         }
 
-        public Task<RegistrationResult> RegisterStaffMember(StaffMember newStaffMember, string confirmPassword)
+        public async Task<RegistrationResult> RegisterStaffMember(StaffMember newStaffMember, string confirmPassword)
         {
-            throw new NotImplementedException();
+            return await _staffMemberAuthenticationService.Register(newStaffMember, confirmPassword);
         }
     }
 }

@@ -36,6 +36,13 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<AccountViewModel>();
 
+            services.AddTransient<LoggedInViewModel>();
+            services.AddTransient<NotLoggedInViewModel>();
+
+            services.AddTransient<StaffMemberLoginRegisterViewModel>();
+            services.AddTransient<StaffMemberLoginViewModel>();
+            services.AddTransient<StaffMemberRegisterViewModel>();
+
             services.AddTransient<ShowDetailsMazeCommandListViewModel>();
             services.AddTransient<AddToSetMazeCommandListViewModel>();
             services.AddTransient<MazeDetailsViewModel>();
@@ -65,6 +72,13 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<SettingsViewModel>>((s) => () => s.GetRequiredService<SettingsViewModel>());
             services.AddSingleton<Func<AccountViewModel>>((s) => () => s.GetRequiredService<AccountViewModel>());
 
+            services.AddSingleton<Func<LoggedInViewModel>>((s) => () => s.GetRequiredService<LoggedInViewModel>());
+            services.AddSingleton<Func<NotLoggedInViewModel>>((s) => () => s.GetRequiredService<NotLoggedInViewModel>());
+
+            services.AddSingleton<Func<StaffMemberLoginRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginRegisterViewModel>());
+            services.AddSingleton<Func<StaffMemberLoginViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginViewModel>());
+            services.AddSingleton<Func<StaffMemberRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberRegisterViewModel>());
+
             services.AddSingleton<Func<ShowDetailsMazeCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsMazeCommandListViewModel>());
             services.AddSingleton<Func<AddToSetMazeCommandListViewModel>>((s) => () => s.GetRequiredService<AddToSetMazeCommandListViewModel>());
             services.AddSingleton<Func<MazeDetailsViewModel>>((s) => () => s.GetRequiredService<MazeDetailsViewModel>());
@@ -87,6 +101,13 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<HomeViewModel>>();
             services.AddSingleton<NavigationService<SettingsViewModel>>();
             services.AddSingleton<NavigationService<AccountViewModel>>();
+
+            services.AddSingleton<NavigationService<LoggedInViewModel>>();
+            services.AddSingleton<NavigationService<NotLoggedInViewModel>>();
+
+            services.AddSingleton<NavigationService<StaffMemberLoginRegisterViewModel>>();
+            services.AddSingleton<NavigationService<StaffMemberLoginViewModel>>();
+            services.AddSingleton<NavigationService<StaffMemberRegisterViewModel>>();
 
             services.AddSingleton<NavigationService<ShowDetailsMazeCommandListViewModel>>();
             services.AddSingleton<NavigationService<AddToSetMazeCommandListViewModel>>();

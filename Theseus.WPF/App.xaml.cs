@@ -49,7 +49,7 @@ namespace Theseus.WPF
 
             LoadStringResources();
             MigrateDatabase();
-            NavigateToHomeViewModel();
+            NavigateToNotLoggedInView();
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -72,9 +72,9 @@ namespace Theseus.WPF
             }
         }
 
-        private void NavigateToHomeViewModel()
+        private void NavigateToNotLoggedInView()
         {
-            NavigationService<HomeViewModel> startNavigationService = _host.Services.GetRequiredService<NavigationService<HomeViewModel>>();
+            NavigationService<NotLoggedInViewModel> startNavigationService = _host.Services.GetRequiredService<NavigationService<NotLoggedInViewModel>>();
             startNavigationService.Navigate();
         }
     }

@@ -43,10 +43,23 @@
             <DataTemplate DataType="{x:Type vms:HomeViewModel}">
                 <views:HomeView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:AccountViewModel}">
-                <views:AccountView/>
+            
+            <DataTemplate DataType="{x:Type vms:LoggedInViewModel}">
+                <views:LoggedInView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:NotLoggedInViewModel}">
+                <views:NotLoggedInView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:StaffMemberLoginRegisterViewModel}">
+                <views:StaffMemberLoginRegisterView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:StaffMemberLoginViewModel}">
+                <views:StaffMemberLoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:StaffMemberRegisterViewModel}">
+                <views:StaffMemberRegisterView/>
+            </DataTemplate>
       
             <DataTemplate DataType="{x:Type vms:CreateSetManuallyViewModel}">
                 <views:CreateSetManuallyView/>

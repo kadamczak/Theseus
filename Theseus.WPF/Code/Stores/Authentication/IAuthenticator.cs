@@ -7,10 +7,10 @@ namespace Theseus.WPF.Code.Stores.Authentication
 {
     public interface IAuthenticator
     {
-        StaffMember CurrentStaffMember { get; }
-        bool IsLoggedIn { get; }
+        StaffMember? CurrentStaffMember { get; }
+        bool IsLoggedInAsStaffMember { get; }
 
-        event Action StateChanged;
+        event Action AuthenticationStateChanged;
 
         Task<RegistrationResult> RegisterStaffMember(StaffMember newStaffMember, string confirmPassword);
         Task LoginStaffMember(string username, string password);

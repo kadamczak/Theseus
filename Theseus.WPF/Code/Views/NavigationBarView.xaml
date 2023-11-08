@@ -39,7 +39,7 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0 7 0 7">
                 <custom:IconButton Command="{Binding NavigateToSettings}" ImageSource="/Resources/Icons/settings.png" />
                 <custom:IconButton Command="{Binding NavigateToHome}" Margin="15 0 0 0" ImageSource="/Resources/Icons/information.png" />
-                <custom:IconButton Command="{Binding NavigateToAccount}" Margin="15 0 0 0" ImageSource="/Resources/Icons/person.png" />
+                <custom:IconButton Command="{Binding OpenAccount}" Margin="15 0 0 0" ImageSource="/Resources/Icons/person.png" />
             </StackPanel>
         </Grid>
     </Grid>

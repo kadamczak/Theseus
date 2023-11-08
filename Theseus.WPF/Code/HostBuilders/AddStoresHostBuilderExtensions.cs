@@ -18,7 +18,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<LastMazeGeneratorInputStore>();
 
                 services.AddSingleton<IAuthenticator, Authenticator>();
-                services.AddSingleton<ICurrentUser, CurrentUser>();
+                services.AddSingleton<ICurrentUserStore, CurrentUserStore>();
             });
 
             return hostBuilder;
