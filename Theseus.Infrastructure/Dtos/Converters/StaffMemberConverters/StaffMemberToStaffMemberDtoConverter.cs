@@ -1,5 +1,4 @@
-﻿using Theseus.Domain.Models.SetRelated;
-using Theseus.Domain.Models.UserRelated;
+﻿using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.Dtos.Converters.ExamSetConverters;
 using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 using Theseus.Infrastructure.Dtos.Converters.PatientConverters;
