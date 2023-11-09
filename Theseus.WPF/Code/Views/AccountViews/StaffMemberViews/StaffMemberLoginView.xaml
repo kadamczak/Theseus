@@ -5,7 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
-    <Grid>
-        <Label Grid.Row="0" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
+    <Grid Margin="30 20 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 15" FontFamily="Microsoft YaHei Light"/>
+        
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 8 0 0">
+            <TextBlock Text="Username" FontSize="22" Margin="0 0 0 10"/>
+            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="250" Style="{StaticResource GenericTextBox}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0 8 0 0">
+            <TextBlock Text="Password" FontSize="22" Margin="0 0 0 10"/>
+            <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="250" Style="{StaticResource GenericTextBox}"/>
+        </StackPanel>
+
+        <Button Grid.Row="3" Style="{StaticResource Generic}" Margin="0 40 0 0" Content="Login" HorizontalAlignment="Left" Command="{Binding Login}"/>
+
     </Grid>
 </UserControl>

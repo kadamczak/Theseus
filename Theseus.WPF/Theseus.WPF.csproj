@@ -84,8 +84,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Code\ViewModels\AccountViewModels\PatientViews\" />
-  </ItemGroup>
-
 </Project>

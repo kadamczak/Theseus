@@ -1,28 +1,28 @@
-﻿using Theseus.Domain.CommandInterfaces;
+﻿using AutoMapper;
+using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
-using Theseus.Infrastructure.Dtos.Converters.StaffMemberConverters;
 
 namespace Theseus.Infrastructure.Commands
 {
     public class CreateStaffMemberCommand : ICreateStaffMemberCommand
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly StaffMemberToStaffMemberDtoConverter _toStaffMemberDtoConverter;
+        private readonly IMapper _mapper;
 
         public CreateStaffMemberCommand(TheseusDbContextFactory dbContextFactory,
-                                        StaffMemberToStaffMemberDtoConverter toStaffMemberDtoConverter)
+                                        IMapper mapper)
         {
             this._dbContextFactory = dbContextFactory;
-            this._toStaffMemberDtoConverter = toStaffMemberDtoConverter;
+            this._mapper = mapper;
         }
 
         public async Task Create(StaffMember staffMember)
         {
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
-                StaffMemberDto staffMemberDto = _toStaffMemberDtoConverter.Convert(staffMember);
+                var staffMemberDto = _mapper.Map<StaffMemberDto>(staffMember);
                 context.StaffMembers.Add(staffMemberDto);
                 await context.SaveChangesAsync();
             }

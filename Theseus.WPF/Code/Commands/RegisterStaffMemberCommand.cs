@@ -43,7 +43,7 @@ namespace Theseus.WPF.Code.Commands
             //TODO
             if(registrationResult == RegistrationResult.Success)
             {
-                this._loggedInNavigationService.Navigate();
+                //this._loggedInNavigationService.Navigate();
             }
         }
 

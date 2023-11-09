@@ -97,11 +97,11 @@ namespace Theseus.WPF.Code.ViewModels
             !string.IsNullOrEmpty(Password) &&
             !string.IsNullOrEmpty(ConfirmPassword);
 
-        public ICommand RegisterCommand { get; }
+        public ICommand Register { get; }
 
         public StaffMemberRegisterViewModel(IAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInViewModel)
         {
-            RegisterCommand = new RegisterStaffMemberCommand(this, authenticator, loggedInViewModel);
+            Register = new RegisterStaffMemberCommand(this, authenticator, loggedInViewModel);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Theseus.Domain.Models.UserRelated
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public ICollection<Patient> Patients { get; set; } = default!;
-        public ICollection<MazeWithSolution> MazesWithSolutions { get; set; } = default!;
-        public ICollection<ExamSet> ExamSets { get; set; } = default!;
+        //public ICollection<MazeWithSolution> MazesWithSolutions { get; set; } = default!;
+        //public ICollection<ExamSet> ExamSets { get; set; } = default!;
     }
 }

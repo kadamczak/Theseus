@@ -64,7 +64,7 @@ namespace Theseus.Domain.Services.Authentication
 
             if (result == RegistrationResult.Success)
             {
-                string hashedPassword = _passwordHasher.HashPassword(newAccount.PasswordHash);
+                newAccount.PasswordHash = _passwordHasher.HashPassword(newAccount.PasswordHash);
                 await _createStaffMemberCommand.Create(newAccount);
             }
 

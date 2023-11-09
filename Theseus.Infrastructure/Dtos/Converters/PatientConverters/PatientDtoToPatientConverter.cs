@@ -24,7 +24,7 @@ namespace Theseus.Infrastructure.Dtos.Converters.PatientConverters
                 ProfessionType = (patientDto.ProfessionType is null) ? null : Enum.Parse<ProfessionType>(patientDto.ProfessionType),
                 EducationLevel = (patientDto.EducationLevel is null) ? null : Enum.Parse<EducationLevel>(patientDto.EducationLevel),
                 DateCreated = patientDto.DateCreated,
-                StaffMembers = patientDto.StaffMemberDtos.Select(_toStaffMemberConverter.Convert) as ICollection<StaffMember>
+                StaffMembers = patientDto.StaffMemberDtos.Select(_toStaffMemberConverter.Convert).ToList()
             };
         }
     }

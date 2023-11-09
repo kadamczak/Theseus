@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Services;
@@ -8,6 +9,8 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class NavigationBarViewModel : ViewModelBase
     {
+        private readonly ICurrentUserStore _currentUserStore;
+
         public ICommand NavigateToBeginTest { get; }
         public ICommand NavigateToViewData { get; }
         public ICommand NavigateToCreateMaze { get; }
@@ -19,8 +22,27 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand NavigateToHome { get; }
         public ICommand OpenAccount { get; }
 
-        public bool LoggedIn { get; } = false;
-        public bool LoggedInAsStaff { get; } = false;
+        public bool _loggedIn = false;
+        public bool LoggedIn
+        {
+            get => _loggedIn;
+            set
+            {
+                _loggedIn = value;
+                OnPropertyChanged(nameof(LoggedIn));
+            }
+        }
+
+        private bool _loggedInAsStaff = false;
+        public bool LoggedInAsStaff
+        {
+            get => _loggedInAsStaff;
+            set
+            {
+                _loggedInAsStaff = value;
+                OnPropertyChanged(nameof(LoggedInAsStaff));
+            }
+        }
 
         public NavigationBarViewModel(NavigationService<BeginTestViewModel> beginTestNavigationService,
                                       NavigationService<ViewDataViewModel> viewDataNavigationService,
@@ -44,6 +66,23 @@ namespace Theseus.WPF.Code.ViewModels
             NavigateToSettings = new NavigateCommand<SettingsViewModel>(settingsNavigationService);
             NavigateToHome = new NavigateCommand<HomeViewModel>(homeNavigationService);
             OpenAccount = new OpenAccountViewModelCommand(loggedInNavigationService, notLoggedInNavigationService, currentUserStore);
+
+            this._currentUserStore = currentUserStore;
+            this._currentUserStore.StaffMemberStateChanged += StaffMemberStateChanged;
         }
+
+        private void StaffMemberStateChanged()
+        {
+            if(_currentUserStore.CurrentStaffMember is null)
+            {
+                LoggedInAsStaff = false;
+            }
+            else
+            {
+                LoggedIn = true;
+                LoggedInAsStaff = true;
+            }
+        }
+
     }
 }

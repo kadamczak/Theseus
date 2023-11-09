@@ -13,6 +13,6 @@ namespace Theseus.Domain.Models.UserRelated
         public EducationLevel? EducationLevel { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public ICollection<StaffMember> StaffMembers { get; set; } = default!;
+        public List<StaffMember> StaffMembers { get; set; } = default!;
     }
 }

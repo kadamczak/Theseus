@@ -6,6 +6,9 @@ namespace Theseus.WPF.Code.Stores.Authentication
     public interface ICurrentUserStore
     {
         StaffMember? CurrentStaffMember { get; set; }
-        event Action StateChanged;
+        Patient? CurrentPatient { get; set; }
+
+        event Action StaffMemberStateChanged;
+        event Action PatientStateChanged;
     }
 }

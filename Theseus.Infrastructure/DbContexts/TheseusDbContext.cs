@@ -20,6 +20,9 @@ namespace Theseus.Infrastructure.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
+
             modelBuilder.Entity<MazeDto>()
                         .HasMany(m => m.ExamSetDtos)
                         .WithMany(e => e.MazeDtos)

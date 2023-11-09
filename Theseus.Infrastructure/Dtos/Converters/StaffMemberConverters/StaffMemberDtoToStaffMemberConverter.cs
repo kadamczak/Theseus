@@ -34,8 +34,8 @@ namespace Theseus.Infrastructure.Dtos.Converters.StaffMemberConverters
                 Surname = dto.Surname,
                 DateCreated = dto.DateCreated,
                 Patients = dto.PatientDtos.Select(_toPatientConverter.Convert) as ICollection<Patient>,
-                MazesWithSolutions = dto.MazeDtos.Select(_toMazeConverter.Convert) as ICollection<MazeWithSolution>,
-                ExamSets = dto.ExamSetDtos.Select(_toExamSetConverter.Convert) as ICollection<ExamSet>
+                //MazesWithSolutions = dto.MazeDtos.Select(_toMazeConverter.Convert) as ICollection<MazeWithSolution>,
+                //ExamSets = dto.ExamSetDtos.Select(_toExamSetConverter.Convert) as ICollection<ExamSet>
             };
         }
     }
