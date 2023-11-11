@@ -25,13 +25,11 @@
                 <views:PatientDetailsNotLoggedInView/>
             </DataTemplate>
         </Grid.Resources>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--<views:PatientLoggedInView Grid.Column="0"  DataContext="{Binding PatientLoggedInViewModel}" />-->
-        <!--<views:StaffMemberLoggedInView Grid.Column="1" DataContext="{Binding StaffMemberLoggedInViewModel}" />-->
 
         <ContentControl Grid.Column="0" Content="{Binding PatientDetailsViewModel}"/>
         <ContentControl Grid.Column="1" Content="{Binding StaffMemberDetailsViewModel}"/>

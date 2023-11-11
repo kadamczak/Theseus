@@ -1,6 +1,6 @@
 ﻿using Theseus.WPF.Code.Bases;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 {
     public class LogoutPatientCommand : CommandBase
     {

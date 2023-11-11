@@ -9,6 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Code/CustomUI/CustomStyles/GenericButton.xaml" />
                 <ResourceDictionary Source="Code/CustomUI/CustomStyles/GenericTextBox.xaml" />
+                <ResourceDictionary Source="Code/CustomUI/CustomStyles/GenericPasswordBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

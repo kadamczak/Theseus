@@ -5,7 +5,7 @@ using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.MazeCommands
 {
     public class ShowDetailsCommand : CommandBase
     {
@@ -17,9 +17,9 @@ namespace Theseus.WPF.Code.Commands
                                   SelectedMazeDetailsStore mazeDetailsStore,
                                   NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
-            this._mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;
-            this._mazeDetailsStore = mazeDetailsStore;
-            this._mazeDetailNavigationService = mazeDetailNavigationService;
+            _mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;
+            _mazeDetailsStore = mazeDetailsStore;
+            _mazeDetailNavigationService = mazeDetailNavigationService;
         }
 
         public override void Execute(object? parameter)

@@ -7,7 +7,7 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.ViewModels.Components;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.ExamCommands
 {
     public class PerformMoveCommand : CommandBase
     {
@@ -28,17 +28,17 @@ namespace Theseus.WPF.Code.Commands
         public override void Execute(object? parameter)
         {
             string parameterText = (string)parameter!;
-            Direction moveDirection = (Direction)(Int32.Parse(parameterText));
+            Direction moveDirection = (Direction)int.Parse(parameterText);
 
             Cell currentCell = _viewModel.CurrentCell;
-            if(MazeCompleted(moveDirection))
+            if (MazeCompleted(moveDirection))
             {
                 _viewModel.OnCompletedMaze();
                 return;
             }
 
             Cell? nextCell = currentCell.AdjecentCellSpaces[moveDirection];
-            if(currentCell.IsLinked(nextCell))
+            if (currentCell.IsLinked(nextCell))
             {
                 MoveTo(nextCell!);
             }

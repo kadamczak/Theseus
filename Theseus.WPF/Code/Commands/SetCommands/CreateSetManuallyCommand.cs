@@ -7,7 +7,7 @@ using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.SetCommands
 {
     public class CreateSetManuallyCommand : CommandBase
     {
@@ -19,9 +19,9 @@ namespace Theseus.WPF.Code.Commands
                                         ICreateExamSetCommand createExamSetCommand,
                                         NavigationService<CreateSetViewModel> createSetNavigationService)
         {
-            this._addToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
-            this._createExamSetCommand = createExamSetCommand;
-            this._createSetNavigationService = createSetNavigationService;
+            _addToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
+            _createExamSetCommand = createExamSetCommand;
+            _createSetNavigationService = createSetNavigationService;
             _addToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
         }
 
@@ -36,9 +36,9 @@ namespace Theseus.WPF.Code.Commands
             var selectedMazes = _addToSetMazeCommandListViewModel.SelectedMazes.ToList();
             ExamSet examSet = new ExamSet(Guid.NewGuid(), selectedMazes);
 
-            this._createExamSetCommand.CreateExamSet(examSet);
+            _createExamSetCommand.CreateExamSet(examSet);
 
-            this._createSetNavigationService.Navigate();
+            _createSetNavigationService.Navigate();
         }
 
         private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

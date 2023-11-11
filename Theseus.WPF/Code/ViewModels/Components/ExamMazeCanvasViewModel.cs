@@ -5,7 +5,7 @@ using System.Windows.Input;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Commands.ExamCommands;
 
 namespace Theseus.WPF.Code.ViewModels.Components
 {

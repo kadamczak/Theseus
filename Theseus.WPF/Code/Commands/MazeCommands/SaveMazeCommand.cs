@@ -4,7 +4,7 @@ using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.MazeCommands
 {
     public class SaveMazeCommand : AsyncCommandBase
     {
@@ -14,9 +14,9 @@ namespace Theseus.WPF.Code.Commands
 
         public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, SelectedMazeDetailsStore mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createOrUpdateMazeCommand)
         {
-            this._mazeDetailsViewModel = mazeDetailViewModel;
-            this._mazeDetailsStore = mazeDetailsStore;
-            this._createOrUpdateMazeCommand = createOrUpdateMazeCommand;
+            _mazeDetailsViewModel = mazeDetailViewModel;
+            _mazeDetailsStore = mazeDetailsStore;
+            _createOrUpdateMazeCommand = createOrUpdateMazeCommand;
 
             _mazeDetailsStore.SaveStateChanged += OnMazeSaveStateChanged;
         }
@@ -30,7 +30,7 @@ namespace Theseus.WPF.Code.Commands
         public override async Task ExecuteAsync(object parameter)
         {
             await _createOrUpdateMazeCommand.CreateOrUpdateMazeWithSolution(_mazeDetailsStore.SelectedMazeWithSolution);
-            this._mazeDetailsStore.HasUnsavedChanges = false;
+            _mazeDetailsStore.HasUnsavedChanges = false;
         }
 
         public override bool CanExecute(object parameter)

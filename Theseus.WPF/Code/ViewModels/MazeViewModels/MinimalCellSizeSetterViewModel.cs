@@ -3,7 +3,7 @@ using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Commands.SettingsCommands;
 using Theseus.WPF.Code.Services;
 
 namespace Theseus.WPF.Code.ViewModels

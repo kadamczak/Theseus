@@ -3,9 +3,8 @@ using System;
 using Theseus.WPF.Code.Bases;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.SettingsCommands
 {
     public class LoadStringResourcesCommand : CommandBase
     {
@@ -14,7 +13,7 @@ namespace Theseus.WPF.Code.Commands
 
         public LoadStringResourcesCommand()
         {
-            this._applicationResources = Application.Current.Resources;
+            _applicationResources = Application.Current.Resources;
         }
 
         public override void Execute(object? parameter = null)
@@ -22,17 +21,17 @@ namespace Theseus.WPF.Code.Commands
             RemovePreviousStringResourceDictionary();
             ResourceDictionary stringResourceDictionary = SelectStringResourceDictionary();
 
-            this._applicationResources.MergedDictionaries.Add(stringResourceDictionary);
+            _applicationResources.MergedDictionaries.Add(stringResourceDictionary);
         }
 
         private void RemovePreviousStringResourceDictionary()
         {
             Regex stringResourceRegex = new Regex(@$"StringResources\..+\.xaml$");
-            var stringResourceDictionaries = this._applicationResources.MergedDictionaries.Where(d => stringResourceRegex.IsMatch(d.Source.OriginalString));
+            var stringResourceDictionaries = _applicationResources.MergedDictionaries.Where(d => stringResourceRegex.IsMatch(d.Source.OriginalString));
 
             foreach (var dictionary in stringResourceDictionaries)
             {
-                this._applicationResources.Remove(dictionary);
+                _applicationResources.Remove(dictionary);
             }
         }
 

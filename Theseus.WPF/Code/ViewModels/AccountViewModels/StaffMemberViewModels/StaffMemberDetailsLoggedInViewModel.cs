@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.Interfaces;

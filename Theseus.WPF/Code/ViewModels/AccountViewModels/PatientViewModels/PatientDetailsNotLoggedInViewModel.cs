@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.Interfaces;
 

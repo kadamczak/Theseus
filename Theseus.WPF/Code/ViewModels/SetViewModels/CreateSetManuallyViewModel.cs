@@ -2,7 +2,7 @@
 using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.QueryInterfaces;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Commands.SetCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Mazes;
 

@@ -25,7 +25,7 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" Margin="0 0 10 0">
             <StackPanel Margin="10 0 0 0">
-                <TextBlock FontSize="21" TextWrapping="Wrap" HorizontalAlignment="Center" Visibility="{Binding LoggedIn, Converter={StaticResource InvertedBoolToVisibility}}" Text="Please enter caretaker name or log-in to access the program." TextAlignment="Center" Width="150"/>
+                <TextBlock FontSize="21" TextWrapping="Wrap" HorizontalAlignment="Center" Visibility="{Binding LoggedIn, Converter={StaticResource InvertedBoolToVisibility}}" Text="Please log-in to access the program." TextAlignment="Center" Width="150"/>
                 <custom:IconTextButton Command="{Binding NavigateToBeginTest}" Visibility="{Binding LoggedIn, Converter={StaticResource BoolToVisibility}}" Text="{DynamicResource BeginTest}" ImageSource="/Resources/Icons/exam.png"/>
                 <custom:IconTextButton Command="{Binding NavigateToViewData}" Text="{DynamicResource ViewData}" Visibility="{Binding LoggedInAsStaff, Converter={StaticResource BoolToVisibility}}" ImageSource="/Resources/Icons/database.png" />
                 <custom:IconTextButton Command="{Binding NavigateToCreateMaze}" Text="{DynamicResource CreateMaze}" Visibility="{Binding LoggedInAsStaff, Converter={StaticResource BoolToVisibility}}" ImageSource="/Resources/Icons/plus.png" />

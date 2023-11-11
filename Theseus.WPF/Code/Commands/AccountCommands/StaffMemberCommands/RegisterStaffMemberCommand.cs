@@ -8,7 +8,7 @@ using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication;
 using Theseus.WPF.Code.ViewModels;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 {
     public class RegisterStaffMemberCommand : AsyncCommandBase
     {
@@ -20,9 +20,9 @@ namespace Theseus.WPF.Code.Commands
                                           IAuthenticator authenticator,
                                           NavigationService<LoggedInViewModel> loggedInViewModel)
         {
-            this._staffMemberRegisterViewModel = staffMemberRegisterViewModel;
-            this._authenticator = authenticator;
-            this._loggedInNavigationService = loggedInViewModel;
+            _staffMemberRegisterViewModel = staffMemberRegisterViewModel;
+            _authenticator = authenticator;
+            _loggedInNavigationService = loggedInViewModel;
 
             _staffMemberRegisterViewModel.PropertyChanged += ViewModelPropertyChanged;
         }
@@ -39,9 +39,9 @@ namespace Theseus.WPF.Code.Commands
                 PasswordHash = _staffMemberRegisterViewModel.Password
             };
 
-            RegistrationResult registrationResult = await _authenticator.RegisterStaffMember(newStaffMember, this._staffMemberRegisterViewModel.ConfirmPassword);
+            RegistrationResult registrationResult = await _authenticator.RegisterStaffMember(newStaffMember, _staffMemberRegisterViewModel.ConfirmPassword);
             //TODO
-            if(registrationResult == RegistrationResult.Success)
+            if (registrationResult == RegistrationResult.Success)
             {
                 //this._loggedInNavigationService.Navigate();
             }

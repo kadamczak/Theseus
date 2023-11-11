@@ -6,7 +6,7 @@ using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.MazeCommands
 {
     public class GenerateMazeCommand : CommandBase
     {
@@ -19,14 +19,14 @@ namespace Theseus.WPF.Code.Commands
         private const int MinMazeDimension = 2;
 
         public GenerateMazeCommand(MazeGeneratorViewModel mazeGenViewModel,
-                                   MazeCreator mazeCreator,  
+                                   MazeCreator mazeCreator,
                                    SelectedMazeDetailsStore mazeDetailsStore,
                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
-            this._mazeGenViewModel = mazeGenViewModel;
-            this._mazeCreator = mazeCreator;
-            this._mazeDetailsStore = mazeDetailsStore;
-            this._mazeDetailNavigationService = mazeDetailNavigationService;
+            _mazeGenViewModel = mazeGenViewModel;
+            _mazeCreator = mazeCreator;
+            _mazeDetailsStore = mazeDetailsStore;
+            _mazeDetailNavigationService = mazeDetailNavigationService;
 
             _mazeGenViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -39,14 +39,14 @@ namespace Theseus.WPF.Code.Commands
 
         public override void Execute(object? parameter)
         {
-            int height = Int32.Parse(_mazeGenViewModel.MazeHeight);
-            int width = Int32.Parse(_mazeGenViewModel.MazeWidth);
+            int height = int.Parse(_mazeGenViewModel.MazeHeight);
+            int width = int.Parse(_mazeGenViewModel.MazeWidth);
 
             var structureAlgorithm = _mazeGenViewModel.SelectedStructureAlgorithm.Algorithm;
             var solutionAlgorithm = _mazeGenViewModel.SelectedSolutionAlgorithm.Algorithm;
             bool shouldExcludeCellsCloseToRoot = _mazeGenViewModel.ShouldExcludeCellsCloseToRoot;
 
-            var mazeWithSolution = this._mazeCreator.CreateMazeWithSolution(height,
+            var mazeWithSolution = _mazeCreator.CreateMazeWithSolution(height,
                                                                             width,
                                                                             structureAlgorithm,
                                                                             solutionAlgorithm,
@@ -79,12 +79,12 @@ namespace Theseus.WPF.Code.Commands
 
         private bool IsMazeDimensionValid(string userInput)
         {
-            if (!Int32.TryParse(userInput, out int userInputValue))
+            if (!int.TryParse(userInput, out int userInputValue))
             {
                 return false;
             }
 
-            return (userInputValue >= MinMazeDimension && userInputValue <= MaxMazeDimension);
+            return userInputValue >= MinMazeDimension && userInputValue <= MaxMazeDimension;
         }
     }
 }

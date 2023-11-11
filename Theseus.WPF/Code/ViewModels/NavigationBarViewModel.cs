@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands;
+using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication;
 
@@ -68,21 +69,14 @@ namespace Theseus.WPF.Code.ViewModels
             OpenAccount = new OpenAccountViewModelCommand(loggedInNavigationService, notLoggedInNavigationService, currentUserStore);
 
             this._currentUserStore = currentUserStore;
-            this._currentUserStore.StaffMemberStateChanged += StaffMemberStateChanged;
+            this._currentUserStore.StaffMemberStateChanged += CurrentUserStateChanged;
+            this._currentUserStore.PatientStateChanged += CurrentUserStateChanged;
         }
 
-        private void StaffMemberStateChanged()
+        private void CurrentUserStateChanged()
         {
-            if(_currentUserStore.CurrentStaffMember is null)
-            {
-                LoggedInAsStaff = false;
-            }
-            else
-            {
-                LoggedIn = true;
-                LoggedInAsStaff = true;
-            }
+            LoggedInAsStaff = _currentUserStore.CurrentStaffMember is not null;
+            LoggedIn = _currentUserStore.CurrentStaffMember is not null || _currentUserStore.CurrentPatient is not null;
         }
-
     }
 }

@@ -21,7 +21,7 @@
 
         <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0 8 0 0">
             <TextBlock Text="Password" FontSize="22" Margin="0 0 0 10"/>
-            <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="250" Style="{StaticResource GenericTextBox}"/>
+            <PasswordBox Style="{StaticResource GenericPasswordBox}" FontSize="22" PasswordChar="*" Width="250" PasswordChanged="PasswordBox_PasswordChanged" />
         </StackPanel>
 
         <Button Grid.Row="3" Style="{StaticResource Generic}" Margin="0 40 0 0" Content="Login" HorizontalAlignment="Left" Command="{Binding Login}"/>

@@ -7,7 +7,7 @@ using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication;
 using Theseus.WPF.Code.ViewModels;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 {
     public class LoginStaffMemberCommand : AsyncCommandBase
     {
@@ -23,7 +23,7 @@ namespace Theseus.WPF.Code.Commands
             _authenticator = authenticator;
             _loggedInNavigationService = loggedInNavigationService;
 
-            this._staffMemberLoginViewModel.PropertyChanged += ViewModelPropertyChanged;
+            _staffMemberLoginViewModel.PropertyChanged += ViewModelPropertyChanged;
         }
 
         public override async Task ExecuteAsync(object parameter)
@@ -33,7 +33,7 @@ namespace Theseus.WPF.Code.Commands
                 await _authenticator.LoginStaffMember(_staffMemberLoginViewModel.Username,
                                                       _staffMemberLoginViewModel.Password);
 
-                this._loggedInNavigationService.Navigate();
+                _loggedInNavigationService.Navigate();
             }
             catch (UserNotFoundException)
             {

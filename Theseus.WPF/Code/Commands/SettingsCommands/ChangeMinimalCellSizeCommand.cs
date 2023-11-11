@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
-using System.Windows.Controls;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.SettingsCommands
 {
     public class ChangeMinimalCellSizeCommand : CommandBase
     {
@@ -14,8 +13,8 @@ namespace Theseus.WPF.Code.Commands
         public ChangeMinimalCellSizeCommand(MinimalCellSizeSetterViewModel minimalCellSizeSetterViewModel,
                                             NavigationService<SettingsViewModel> navigateToService)
         {
-            this._minimalCellSizeSetterViewModel = minimalCellSizeSetterViewModel;
-            this._navigateToSettings = navigateToService;
+            _minimalCellSizeSetterViewModel = minimalCellSizeSetterViewModel;
+            _navigateToSettings = navigateToService;
 
             _minimalCellSizeSetterViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }

@@ -1,7 +1,7 @@
 ﻿using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 
-namespace Theseus.WPF.Code.Commands
+namespace Theseus.WPF.Code.Commands.NavigationCommands
 {
     public class NavigateCommand<TViewModel> : CommandBase where TViewModel : ViewModelBase
     {
