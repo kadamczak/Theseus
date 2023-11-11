@@ -23,13 +23,13 @@ namespace Theseus.WPF.Code.Stores.Authentication
             set
             {
                 this._currentUserStore.CurrentStaffMember = value;
-                AuthenticationStateChanged?.Invoke();
+                StaffMemberStateChanged?.Invoke();
             }
         }
 
         public bool IsLoggedInAsStaffMember => CurrentStaffMember is not null;
 
-        public event Action AuthenticationStateChanged;
+        public event Action StaffMemberStateChanged;
 
         public async Task LoginStaffMember(string username, string password)
         {

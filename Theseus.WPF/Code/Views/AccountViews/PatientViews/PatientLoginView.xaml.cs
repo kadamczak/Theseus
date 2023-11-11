@@ -3,11 +3,11 @@
 namespace Theseus.WPF.Code.Views
 {
     /// <summary>
-    /// Interaction logic for PatientLoggedInView.xaml
+    /// Interaction logic for PatientLoginView.xaml
     /// </summary>
-    public partial class PatientLoggedInView : UserControl
+    public partial class PatientLoginView : UserControl
     {
-        public PatientLoggedInView()
+        public PatientLoginView()
         {
             InitializeComponent();
         }

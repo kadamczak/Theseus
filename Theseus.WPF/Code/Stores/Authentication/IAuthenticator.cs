@@ -10,7 +10,7 @@ namespace Theseus.WPF.Code.Stores.Authentication
         StaffMember? CurrentStaffMember { get; }
         bool IsLoggedInAsStaffMember { get; }
 
-        event Action AuthenticationStateChanged;
+        event Action StaffMemberStateChanged;
 
         Task<RegistrationResult> RegisterStaffMember(StaffMember newStaffMember, string confirmPassword);
         Task LoginStaffMember(string username, string password);

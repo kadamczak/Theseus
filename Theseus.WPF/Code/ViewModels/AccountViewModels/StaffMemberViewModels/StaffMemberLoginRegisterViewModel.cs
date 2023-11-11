@@ -12,7 +12,5 @@ namespace Theseus.WPF.Code.ViewModels
             StaffMemberLoginViewModel = staffMemberLoginViewModel;
             StaffMemberRegisterViewModel = staffMemberRegisterViewModel;
         }
-
-
     }
 }

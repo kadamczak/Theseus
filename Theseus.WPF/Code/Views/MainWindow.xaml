@@ -54,11 +54,8 @@
             <DataTemplate DataType="{x:Type vms:StaffMemberLoginRegisterViewModel}">
                 <views:StaffMemberLoginRegisterView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:StaffMemberLoginViewModel}">
-                <views:StaffMemberLoginView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:StaffMemberRegisterViewModel}">
-                <views:StaffMemberRegisterView/>
+            <DataTemplate DataType="{x:Type vms:PatientLoginRegisterViewModel}">
+                <views:PatientLoginRegisterView/>
             </DataTemplate>
       
             <DataTemplate DataType="{x:Type vms:CreateSetManuallyViewModel}">

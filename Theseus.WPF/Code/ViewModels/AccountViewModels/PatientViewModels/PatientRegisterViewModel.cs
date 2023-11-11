@@ -2,7 +2,8 @@
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class PatientLoggedInViewModel : ViewModelBase
+    public class PatientRegisterViewModel : ViewModelBase
     {
+
     }
 }

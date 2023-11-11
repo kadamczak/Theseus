@@ -39,12 +39,19 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<LoggedInViewModel>();
             services.AddTransient<NotLoggedInViewModel>();
 
-            services.AddTransient<PatientLoggedInViewModel>();
+            services.AddTransient<PatientDetailsLoggedInViewModel>();
+            services.AddTransient<PatientDetailsNotLoggedInViewModel>();
+
+            services.AddTransient<PatientLoginRegisterViewModel>();
+            services.AddTransient<PatientLoginViewModel>();
+            services.AddTransient<PatientRegisterViewModel>();
+
+            services.AddTransient<StaffMemberDetailsLoggedInViewModel>();
+            services.AddTransient<StaffMemberDetailsNotLoggedInViewModel>();
 
             services.AddTransient<StaffMemberLoginRegisterViewModel>();
             services.AddTransient<StaffMemberLoginViewModel>();
             services.AddTransient<StaffMemberRegisterViewModel>();
-            services.AddTransient<StaffMemberLoggedInViewModel>();
 
             services.AddTransient<ShowDetailsMazeCommandListViewModel>();
             services.AddTransient<AddToSetMazeCommandListViewModel>();
@@ -78,12 +85,19 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<LoggedInViewModel>>((s) => () => s.GetRequiredService<LoggedInViewModel>());
             services.AddSingleton<Func<NotLoggedInViewModel>>((s) => () => s.GetRequiredService<NotLoggedInViewModel>());
 
-            services.AddSingleton<Func<PatientLoggedInViewModel>>((s) => () => s.GetRequiredService<PatientLoggedInViewModel>());
+            services.AddSingleton<Func<PatientDetailsLoggedInViewModel>>((s) => () => s.GetRequiredService<PatientDetailsLoggedInViewModel>());
+            services.AddSingleton<Func<PatientDetailsNotLoggedInViewModel>>((s) => () => s.GetRequiredService<PatientDetailsNotLoggedInViewModel>());
+
+            services.AddSingleton<Func<PatientLoginRegisterViewModel>>((s) => () => s.GetRequiredService<PatientLoginRegisterViewModel>());
+            services.AddSingleton<Func<PatientLoginViewModel>>((s) => () => s.GetRequiredService<PatientLoginViewModel>());
+            services.AddSingleton<Func<PatientRegisterViewModel>>((s) => () => s.GetRequiredService<PatientRegisterViewModel>());
+
+            services.AddSingleton<Func<StaffMemberDetailsLoggedInViewModel>>((s) => () => s.GetRequiredService<StaffMemberDetailsLoggedInViewModel>());
+            services.AddSingleton<Func<StaffMemberDetailsNotLoggedInViewModel>>((s) => () => s.GetRequiredService<StaffMemberDetailsNotLoggedInViewModel>());
 
             services.AddSingleton<Func<StaffMemberLoginRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginRegisterViewModel>());
             services.AddSingleton<Func<StaffMemberLoginViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginViewModel>());
             services.AddSingleton<Func<StaffMemberRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberRegisterViewModel>());
-            services.AddSingleton<Func<StaffMemberLoggedInViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoggedInViewModel>());
 
             services.AddSingleton<Func<ShowDetailsMazeCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsMazeCommandListViewModel>());
             services.AddSingleton<Func<AddToSetMazeCommandListViewModel>>((s) => () => s.GetRequiredService<AddToSetMazeCommandListViewModel>());
@@ -111,12 +125,19 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<LoggedInViewModel>>();
             services.AddSingleton<NavigationService<NotLoggedInViewModel>>();
 
-            services.AddSingleton<NavigationService<PatientLoggedInViewModel>>();
+            services.AddSingleton<NavigationService<PatientDetailsLoggedInViewModel>>();
+            services.AddSingleton<NavigationService<PatientDetailsNotLoggedInViewModel>>();
+
+            services.AddSingleton<NavigationService<PatientLoginRegisterViewModel>>();
+            services.AddSingleton<NavigationService<PatientLoginViewModel>>();
+            services.AddSingleton<NavigationService<PatientRegisterViewModel>>();
+
+            services.AddSingleton<NavigationService<StaffMemberDetailsLoggedInViewModel>>();
+            services.AddSingleton<NavigationService<StaffMemberDetailsNotLoggedInViewModel>>();
 
             services.AddSingleton<NavigationService<StaffMemberLoginRegisterViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberLoginViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberRegisterViewModel>>();
-            services.AddSingleton<NavigationService<StaffMemberLoggedInViewModel>>();
 
             services.AddSingleton<NavigationService<ShowDetailsMazeCommandListViewModel>>();
             services.AddSingleton<NavigationService<AddToSetMazeCommandListViewModel>>();
