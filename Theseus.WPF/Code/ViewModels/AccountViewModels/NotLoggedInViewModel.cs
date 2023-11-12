@@ -7,13 +7,17 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class NotLoggedInViewModel : ViewModelBase
     {
+        public PatientLoginViewModel PatientLoginViewModel { get; }
+        public PatientRegisterViewModel PatientRegisterViewModel { get; }
         public ICommand NavigateToStaffMemberLoginRegister { get; }
 
-        public NotLoggedInViewModel(NavigationService<StaffMemberLoginRegisterViewModel> navigateToStaffMemberLoginRegister)
+        public NotLoggedInViewModel(PatientLoginViewModel patientLoginViewModel,
+                                    PatientRegisterViewModel patientRegisterViewModel,
+                                    NavigationService<StaffMemberLoginRegisterViewModel> navigateToStaffMemberLoginRegister)
         {
+            PatientLoginViewModel = patientLoginViewModel;
+            PatientRegisterViewModel = patientRegisterViewModel;
             NavigateToStaffMemberLoginRegister = new NavigateCommand<StaffMemberLoginRegisterViewModel>(navigateToStaffMemberLoginRegister);
         }
-
-
     }
 }

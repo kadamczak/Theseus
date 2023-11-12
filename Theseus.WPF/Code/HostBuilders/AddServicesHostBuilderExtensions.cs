@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Reflection;
+using Theseus.Domain.Services.Authentication.PatientAuthentication;
 using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 using Theseus.Infrastructure.Mappings;
 
@@ -16,6 +16,7 @@ namespace Theseus.WPF.Code.HostBuilders
             {
                 services.AddSingleton<IPasswordHasher, PasswordHasher>();
                 services.AddSingleton<IStaffMemberAuthenticationService, StaffMemberAuthenticationService>();
+                services.AddSingleton<IPatientAuthenticationService, PatientAuthenticationService>();
 
                 var config = new MapperConfiguration(cfg => {
                     cfg.AddProfile<TheseusMappingProfile>();

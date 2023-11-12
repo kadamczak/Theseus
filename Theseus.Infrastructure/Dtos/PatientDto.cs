@@ -8,9 +8,9 @@ namespace Theseus.Infrastructure.Dtos
         public Guid Id { get; set; } = default!;
         public string Username { get; set; } = default!;
         public int? Age { get; set; }
-        public string? Sex { get; set; }
-        public string? ProfessionType { get; set; }
-        public string? EducationLevel { get; set; }
+        public string Sex { get; set; }
+        public string ProfessionType { get; set; }
+        public string EducationLevel { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public virtual ICollection<StaffMemberDto> StaffMemberDtos { get; set; } = default!;

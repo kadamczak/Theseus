@@ -8,11 +8,11 @@ namespace Theseus.Domain.Models.UserRelated
         public Guid Id { get; set; } = default!;
         public string Username { get; set; } = default!;
         public int? Age { get; set; }
-        public Sex? Sex { get; set; }
-        public ProfessionType? ProfessionType { get; set; }
-        public EducationLevel? EducationLevel { get; set; }
+        public Sex Sex { get; set; }
+        public ProfessionType ProfessionType { get; set; }
+        public EducationLevel EducationLevel { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public List<StaffMember> StaffMembers { get; set; } = default!;
+        public ICollection<StaffMember> StaffMembers { get; set; } = new List<StaffMember>();
     }
 }

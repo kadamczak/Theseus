@@ -14,6 +14,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<ICreateOrUpdateMazeWithSolutionCommand, CreateOrUpdateMazeWithSolutionCommand>();
                 services.AddSingleton<ICreateExamSetCommand, CreateExamSetCommand>();
                 services.AddSingleton<ICreateStaffMemberCommand, CreateStaffMemberCommand>();
+                services.AddSingleton<ICreatePatientCommand, CreatePatientCommand>();
             });
 
             return hostBuilder;

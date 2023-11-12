@@ -13,7 +13,7 @@ namespace Theseus.Domain.Models.UserRelated
         public string Surname { get; set; } = default!;
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public ICollection<Patient> Patients { get; set; } = default!;
+        public ICollection<Patient> Patients { get; set; } = new List<Patient>();
         //public ICollection<MazeWithSolution> MazesWithSolutions { get; set; } = default!;
         //public ICollection<ExamSet> ExamSets { get; set; } = default!;
     }

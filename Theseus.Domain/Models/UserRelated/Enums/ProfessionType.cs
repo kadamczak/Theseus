@@ -2,6 +2,7 @@
 {
     public enum ProfessionType
     {
+        Undisclosed,
         None,
         Physical,
         Mental

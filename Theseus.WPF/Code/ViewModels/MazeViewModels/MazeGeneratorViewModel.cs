@@ -115,8 +115,8 @@ namespace Theseus.WPF.Code.ViewModels
         {
             this.MazeHeight = this._lastMazeGeneratorSettingsStore.Height;
             this.MazeWidth = this._lastMazeGeneratorSettingsStore.Width;
-            this.SelectedStructureAlgorithm = AvailableStructureAlgorithms.Where(a => a.Algorithm == this._lastMazeGeneratorSettingsStore.StructureAlgorithm).First();
-            this.SelectedSolutionAlgorithm = AvailableSolutionAlgorithms.Where(a => a.Algorithm == this._lastMazeGeneratorSettingsStore.SolutionAlgorithm).First();
+            this.SelectedStructureAlgorithm = AvailableStructureAlgorithms.Where(a => a.Value == this._lastMazeGeneratorSettingsStore.StructureAlgorithm).First();
+            this.SelectedSolutionAlgorithm = AvailableSolutionAlgorithms.Where(a => a.Value == this._lastMazeGeneratorSettingsStore.SolutionAlgorithm).First();
             this.ShouldExcludeCellsCloseToRoot = this._lastMazeGeneratorSettingsStore.ShouldExcludeCellsCloseToRoot;
         }
 
@@ -131,11 +131,11 @@ namespace Theseus.WPF.Code.ViewModels
             if (e.PropertyName == nameof(SelectedStructureAlgorithm))
             {
                 UpdateAlgorithmDescription();
-                _lastMazeGeneratorSettingsStore.StructureAlgorithm = SelectedStructureAlgorithm.Algorithm;
+                _lastMazeGeneratorSettingsStore.StructureAlgorithm = SelectedStructureAlgorithm.Value;
             }
             else if (e.PropertyName == nameof(SelectedSolutionAlgorithm))
             {
-                _lastMazeGeneratorSettingsStore.SolutionAlgorithm = SelectedSolutionAlgorithm.Algorithm;
+                _lastMazeGeneratorSettingsStore.SolutionAlgorithm = SelectedSolutionAlgorithm.Value;
             }
             else if (e.PropertyName == nameof(ShouldExcludeCellsCloseToRoot))
             {
@@ -156,7 +156,7 @@ namespace Theseus.WPF.Code.ViewModels
             if (SelectedStructureAlgorithm is null)
                 return;
 
-            string algorithm = SelectedStructureAlgorithm.Algorithm.ToString();
+            string algorithm = SelectedStructureAlgorithm.Value.ToString();
             StructureAlgorithmDescription = (string)(App.Current.Resources[algorithm]);
         }
     }

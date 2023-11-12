@@ -2,6 +2,7 @@
 {
     public enum EducationLevel
     {
+        Undisclosed,
         Primary,
         LowerSecondary,
         Vocational,

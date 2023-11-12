@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Services.Authentication;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
@@ -14,15 +13,12 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
     {
         private readonly StaffMemberRegisterViewModel _staffMemberRegisterViewModel;
         private readonly IStaffMemberAuthenticator _authenticator;
-        private readonly NavigationService<LoggedInViewModel> _loggedInNavigationService;
 
         public RegisterStaffMemberCommand(StaffMemberRegisterViewModel staffMemberRegisterViewModel,
-                                          IStaffMemberAuthenticator authenticator,
-                                          NavigationService<LoggedInViewModel> loggedInViewModel)
+                                          IStaffMemberAuthenticator authenticator)
         {
             _staffMemberRegisterViewModel = staffMemberRegisterViewModel;
             _authenticator = authenticator;
-            _loggedInNavigationService = loggedInViewModel;
 
             _staffMemberRegisterViewModel.PropertyChanged += ViewModelPropertyChanged;
         }

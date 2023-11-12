@@ -22,6 +22,12 @@ namespace Theseus.Infrastructure.Commands
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
                 var patientDto = _mapper.Map<PatientDto>(patient);
+
+                foreach(var staffMember in patientDto.StaffMemberDtos)
+                {
+                    context.Attach(staffMember);
+                }
+
                 context.Patients.Add(patientDto);
                 await context.SaveChangesAsync();
             }

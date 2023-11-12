@@ -99,9 +99,9 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand Register { get; }
 
-        public StaffMemberRegisterViewModel(IStaffMemberAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInViewModel)
+        public StaffMemberRegisterViewModel(IStaffMemberAuthenticator authenticator)
         {
-            Register = new RegisterStaffMemberCommand(this, authenticator, loggedInViewModel);
+            Register = new RegisterStaffMemberCommand(this, authenticator);
         }
     }
 }

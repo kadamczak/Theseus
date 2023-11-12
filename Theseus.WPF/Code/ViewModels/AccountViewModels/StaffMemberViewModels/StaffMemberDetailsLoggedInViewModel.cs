@@ -62,7 +62,9 @@ namespace Theseus.WPF.Code.ViewModels
         public StaffMemberDetailsLoggedInViewModel(IStaffMemberAuthenticator authenticator,
                                                    NavigationService<StaffMemberLoginRegisterViewModel> staffMemberLoginRegisterNavigationService)
         {
-            LoadStaffMemberInfo(authenticator.CurrentStaffMember!);
+            if(authenticator.IsLoggedInAsStaffMember)
+                LoadStaffMemberInfo(authenticator.CurrentStaffMember!);
+
             Logout = new LogoutStaffMemberCommand(authenticator, staffMemberLoginRegisterNavigationService);
         }
 
