@@ -17,11 +17,11 @@ namespace Theseus.WPF.Code.ViewModels
                                  ICurrentStaffMemberStore currentStaffMemberStore,
                                  ICurrentPatientStore currentPatientStore)
         {
-            PatientDetailsViewModel = (currentPatientStore.IsPatientLoggedIn) ? patientDetailsNotLoggedInViewModel
-                                                                              : patientDetailsLoggedInViewModel;
+            PatientDetailsViewModel = (currentPatientStore.IsPatientLoggedIn) ? patientDetailsLoggedInViewModel
+                                                                              : patientDetailsNotLoggedInViewModel;
 
-            StaffMemberDetailsViewModel = (currentStaffMemberStore.IsStaffMemberLoggedIn) ? staffMemberDetailsNotLoggedInViewModel
-                                                                                          : staffMemberDetailsLoggedInViewModel;
+            StaffMemberDetailsViewModel = (currentStaffMemberStore.IsStaffMemberLoggedIn) ? staffMemberDetailsLoggedInViewModel
+                                                                                          : staffMemberDetailsNotLoggedInViewModel;
         }
     }
 }

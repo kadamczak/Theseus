@@ -28,11 +28,11 @@ namespace Theseus.WPF.Code.Commands.NavigationCommands
         {
             if (_currentPatientStore.IsPatientLoggedIn || _currentStaffMemberStore.IsStaffMemberLoggedIn)
             {
-                _notLoggedInNavigationService.Navigate();
+                _loggedInNavigationService.Navigate();
             }
             else
             {
-                _loggedInNavigationService.Navigate();
+                _notLoggedInNavigationService.Navigate();
             }
         }
     }
