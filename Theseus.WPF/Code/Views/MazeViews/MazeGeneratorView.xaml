@@ -44,7 +44,7 @@
         <ListBox Grid.Row="1" Grid.Column="0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableStructureAlgorithms}" SelectedItem="{Binding SelectedStructureAlgorithm, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding DisplayName}" />
+                    <Label Content="{Binding Label}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -54,7 +54,7 @@
         <ListBox Grid.Row="2" Grid.Column="0" Margin="0 30 0 0" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableSolutionAlgorithms}" SelectedItem="{Binding SelectedSolutionAlgorithm, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding DisplayName}" />
+                    <Label Content="{Binding Label}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

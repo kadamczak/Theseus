@@ -15,11 +15,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Grid.Resources>
-            <converters:ComparisonConverter x:Key="ComparisonConverter" />
-        </Grid.Resources>
 
         <Label Grid.Row="0" Content="Patient Info" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 15" FontFamily="Microsoft YaHei Light"/>
 
@@ -35,35 +32,41 @@
 
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0 12 0 0">
 
-            <TextBlock Text="Gender" FontSize="22" Margin="0 0 0 10" VerticalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton IsChecked="{Binding Path=Gender, Converter={StaticResource ComparisonConverter}, ConverterParameter=Male}" VerticalContentAlignment="Center" FontSize="18" GroupName="Gender" >Male</RadioButton>
-                <RadioButton IsChecked="{Binding Path=Gender, Converter={StaticResource ComparisonConverter}, ConverterParameter=Female}" Margin="30 0 0 0"  VerticalContentAlignment="Center" FontSize="18" GroupName="Gender">Female</RadioButton>
-                <RadioButton IsChecked="{Binding Path=Gender, Converter={StaticResource ComparisonConverter}, ConverterParameter=NoInformation}" Margin="30 0 0 0"  VerticalContentAlignment="Center" FontSize="18" GroupName="Gender">Do not disclose</RadioButton>
-            </StackPanel>
+            <TextBlock Text="Gender" FontSize="22" Margin="0 0 0 10" HorizontalAlignment="Left"/>
+            <ListBox FontSize="20" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Sexes}" SelectedItem="{Binding SelectedSex, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Label}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Vertical" Margin="0 12 0 0">
-            <TextBlock Text="Profession Type" FontSize="22" Margin="0 0 0 10" VerticalAlignment="Center"/>
-            <Grid HorizontalAlignment="Left">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="6"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <TextBlock Text="Education Level" FontSize="22" Margin="0 0 0 10" VerticalAlignment="Center"/>
 
-                <RadioButton Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=Gender, Converter={StaticResource ComparisonConverter}, ConverterParameter=Physical}" VerticalContentAlignment="Center" FontSize="18" GroupName="Gender" >Physical</RadioButton>
-                <RadioButton Grid.Row="0" Grid.Column="2" IsChecked="{Binding Path=Gender, Converter={StaticResource ComparisonConverter}, ConverterParameter=Mental}"  VerticalContentAlignment="Center" FontSize="18" GroupName="Gender">Mental</RadioButton>
-                <RadioButton Grid.Row="2" Grid.Column="0" IsChecked="{Binding Path=Gender, Converter={StaticResource ComparisonConverter}, ConverterParameter=Unemployed}"  VerticalContentAlignment="Center" FontSize="18" GroupName="Gender">None</RadioButton>
-                <RadioButton Grid.Row="2" Grid.Column="2" IsChecked="{Binding Path=Gender, Converter={StaticResource ComparisonConverter}, ConverterParameter=NoInformation}"  VerticalContentAlignment="Center" FontSize="18" GroupName="Gender">Do not disclose</RadioButton>
-            </Grid>
+            <ListBox FontSize="20" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding EducationLevels}" SelectedItem="{Binding SelectedEducationLevel, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Label}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
 
-        <Button Grid.Row="5" Margin="0 40 0 0" Style="{StaticResource Generic}" Content="Logout" HorizontalAlignment="Center" Command="{Binding Logout}"/>
+        <StackPanel Grid.Row="5" Orientation="Vertical" Margin="0 12 0 0">
+            <TextBlock Text="Profession Type" FontSize="22" Margin="0 0 0 10" VerticalAlignment="Center"/>
+
+            <ListBox FontSize="20" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding ProfessionTypes}" SelectedItem="{Binding SelectedProfessionType, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Label}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <Button Grid.Row="6" Margin="0 40 0 0" Style="{StaticResource Generic}" Content="Logout" HorizontalAlignment="Center" Command="{Binding Logout}"/>
     </Grid>
 </UserControl>

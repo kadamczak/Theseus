@@ -42,8 +42,8 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
             int height = int.Parse(_mazeGenViewModel.MazeHeight);
             int width = int.Parse(_mazeGenViewModel.MazeWidth);
 
-            var structureAlgorithm = _mazeGenViewModel.SelectedStructureAlgorithm.Algorithm;
-            var solutionAlgorithm = _mazeGenViewModel.SelectedSolutionAlgorithm.Algorithm;
+            var structureAlgorithm = _mazeGenViewModel.SelectedStructureAlgorithm.Value;
+            var solutionAlgorithm = _mazeGenViewModel.SelectedSolutionAlgorithm.Value;
             bool shouldExcludeCellsCloseToRoot = _mazeGenViewModel.ShouldExcludeCellsCloseToRoot;
 
             var mazeWithSolution = _mazeCreator.CreateMazeWithSolution(height,

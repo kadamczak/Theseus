@@ -60,6 +60,39 @@ namespace Theseus.WPF.Code.ViewModels
                                 new EducationLevelViewModel("Higher", EducationLevel.Higher)
                                 };
 
+        private SexViewModel _selectedSex;
+        private ProfessionTypeViewModel _selectedProfessionType;
+        private EducationLevelViewModel _selectedEducationLevel;
+
+        public SexViewModel SelectedSex
+        {
+            get => _selectedSex;
+            set
+            {
+                _selectedSex = value;
+                OnPropertyChanged(nameof(SelectedSex));
+            }
+        }
+
+        public ProfessionTypeViewModel SelectedProfessionType
+        {
+            get => _selectedProfessionType;
+            set
+            {
+                _selectedProfessionType = value;
+                OnPropertyChanged(nameof(SelectedProfessionType));
+            }
+        }
+
+        public EducationLevelViewModel SelectedEducationLevel
+        {
+            get => _selectedEducationLevel;
+            set
+            {
+                _selectedEducationLevel = value;
+                OnPropertyChanged(nameof(SelectedEducationLevel));
+            }
+        }
 
         public ICommand Logout { get; }
 

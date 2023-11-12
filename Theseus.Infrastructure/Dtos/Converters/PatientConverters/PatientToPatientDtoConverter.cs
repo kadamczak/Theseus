@@ -20,9 +20,9 @@ namespace Theseus.Infrastructure.Dtos.Converters.PatientConverters
                 Id = patient.Id,
                 Username = patient.Username,
                 Age = patient.Age,
-                Sex = (patient.Sex is null) ? null : patient.Sex.ToString(),
-                ProfessionType = (patient.ProfessionType is null) ? null : patient.ProfessionType.ToString(),
-                EducationLevel = (patient.EducationLevel is null) ? null : patient.EducationLevel.ToString(),
+                Sex = patient.Sex.ToString(),
+                ProfessionType = patient.ProfessionType.ToString(),
+                EducationLevel = patient.EducationLevel.ToString(),
                 DateCreated = patient.DateCreated,
                 StaffMemberDtos = patient.StaffMembers.Select(_toStaffMemberDtoConverter.Convert) as ICollection<StaffMemberDto>
             };

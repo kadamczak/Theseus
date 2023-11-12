@@ -21,7 +21,6 @@ namespace Theseus.WPF.Code.ViewModels
         private bool _shouldExcludeCellsCloseToRoot = true;
 
         private string _structureAlgorithmDescription = string.Empty;
-
         private readonly LastMazeGeneratorInputStore _lastMazeGeneratorSettingsStore;
 
         public ObservableCollection<StructureAlgorithmViewModel> AvailableStructureAlgorithms { get; } = new ObservableCollection<StructureAlgorithmViewModel> {

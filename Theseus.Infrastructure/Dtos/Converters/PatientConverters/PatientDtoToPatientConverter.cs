@@ -20,9 +20,9 @@ namespace Theseus.Infrastructure.Dtos.Converters.PatientConverters
                 Id = patientDto.Id,
                 Username = patientDto.Username,
                 Age = patientDto.Age,
-                Sex = (patientDto.Sex is null) ? null : Enum.Parse<Sex>(patientDto.Sex),
-                ProfessionType = (patientDto.ProfessionType is null) ? null : Enum.Parse<ProfessionType>(patientDto.ProfessionType),
-                EducationLevel = (patientDto.EducationLevel is null) ? null : Enum.Parse<EducationLevel>(patientDto.EducationLevel),
+                Sex = Enum.Parse<Sex>(patientDto.Sex),
+                ProfessionType = Enum.Parse<ProfessionType>(patientDto.ProfessionType),
+                EducationLevel = Enum.Parse<EducationLevel>(patientDto.EducationLevel),
                 DateCreated = patientDto.DateCreated,
                 StaffMembers = patientDto.StaffMemberDtos.Select(_toStaffMemberConverter.Convert).ToList()
             };
