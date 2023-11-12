@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.SetRelated;
 
-namespace Theseus.Domain.QueryInterfaces
+namespace Theseus.Domain.QueryInterfaces.ExamQueryInterfaces
 {
     public interface IGetAllExamsQuery
     {

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Authentication;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.Interfaces;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -59,20 +59,19 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand Logout { get; }
 
-        public StaffMemberDetailsLoggedInViewModel(ICurrentUserStore currentUserStore,
-                                                   IAuthenticator authenticator,
+        public StaffMemberDetailsLoggedInViewModel(IStaffMemberAuthenticator authenticator,
                                                    NavigationService<StaffMemberLoginRegisterViewModel> staffMemberLoginRegisterNavigationService)
         {
-            LoadStaffMemberInfo(currentUserStore);
+            LoadStaffMemberInfo(authenticator.CurrentStaffMember!);
             Logout = new LogoutStaffMemberCommand(authenticator, staffMemberLoginRegisterNavigationService);
         }
 
-        private void LoadStaffMemberInfo(ICurrentUserStore currentUserStore)
+        private void LoadStaffMemberInfo(StaffMember staffMember)
         {
-            this.Username = currentUserStore.CurrentStaffMember.Username;
-            this.Email = currentUserStore.CurrentStaffMember.Email;
-            this.Name = currentUserStore.CurrentStaffMember.Name;
-            this.Surname = currentUserStore.CurrentStaffMember.Surname;
+            this.Username = staffMember.Username;
+            this.Email = staffMember.Email;
+            this.Name = staffMember.Name;
+            this.Surname = staffMember.Surname;
         }
     }
 }

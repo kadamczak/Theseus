@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="400">
-    <Grid Margin="30 20 0 0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,10 +16,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="0" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light" Margin="0 0 0 15"/>
+        <Label Grid.Row="0" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="47" FontFamily="Microsoft YaHei Light" />
 
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Username" FontSize="22" Margin="0 0 0 10"/>
+            <TextBlock Text="Username" FontSize="20" Margin="0 0 0 10"/>
             <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="250" Style="{StaticResource GenericTextBox}"/>
         </StackPanel>
 
@@ -30,31 +30,31 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0 8 15 0" >
-                <TextBlock Text="First Name" FontSize="22" Margin="0 0 0 10"/>
+                <TextBlock Text="First Name" FontSize="20" Margin="0 0 0 10"/>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource GenericTextBox}" HorizontalAlignment="Stretch"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0 8 0 0">
-                <TextBlock Text="Surname" FontSize="22" Margin="0 0 0 10"/>
+                <TextBlock Text="Surname" FontSize="20" Margin="0 0 0 10"/>
                 <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource GenericTextBox}" HorizontalAlignment="Stretch"/>
             </StackPanel>
         </Grid>
 
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Email" FontSize="22" Margin="0 0 0 10"/>
+            <TextBlock Text="Email" FontSize="20" Margin="0 0 0 10"/>
             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="250" Style="{StaticResource GenericTextBox}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Password" FontSize="22" Margin="0 0 0 10"/>
+            <TextBlock Text="Password" FontSize="20" Margin="0 0 0 10"/>
             <PasswordBox Style="{StaticResource GenericPasswordBox}" FontSize="22" PasswordChar="*" Width="250" PasswordChanged="PasswordBox_PasswordChanged" />
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Confirm Password" FontSize="22" Margin="0 0 0 10"/>
+            <TextBlock Text="Confirm Password" FontSize="20" Margin="0 0 0 10"/>
             <PasswordBox Style="{StaticResource GenericPasswordBox}" FontSize="22" PasswordChar="*" Width="250" PasswordChanged="ConfirmPasswordBox_PasswordChanged"  />
         </StackPanel>
 
-        <Button Grid.Row="6" Style="{StaticResource Generic}" Margin="0 40 0 0" Content="Register" HorizontalAlignment="Center" Command="{Binding Register}"/>
+        <Button Grid.Row="6" Style="{StaticResource Generic}" Margin="0 30 0 0" Content="Register" HorizontalAlignment="Center" Command="{Binding Register}"/>
     </Grid>
 </UserControl>

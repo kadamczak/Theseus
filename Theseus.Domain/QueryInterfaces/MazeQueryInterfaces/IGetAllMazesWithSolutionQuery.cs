@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
-namespace Theseus.Domain.QueryInterfaces
+namespace Theseus.Domain.QueryInterfaces.MazeQueryInterfaces
 {
     public interface IGetAllMazesWithSolutionQuery
     {

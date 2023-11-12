@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Theseus.Domain.QueryInterfaces;
-using Theseus.Infrastructure.Queries;
+using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
+using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
+using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
+using Theseus.Infrastructure.Queries.ExamQueries;
+using Theseus.Infrastructure.Queries.MazeQueries;
+using Theseus.Infrastructure.Queries.StaffMemberQueries;
 
 namespace Theseus.WPF.Code.HostBuilders
 {

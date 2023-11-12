@@ -1,16 +1,16 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Commands;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Authentication;
+using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class NavigationBarViewModel : ViewModelBase
     {
-        private readonly ICurrentUserStore _currentUserStore;
+        private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
+        private readonly ICurrentPatientStore _currentPatientStore;
 
         public ICommand NavigateToBeginTest { get; }
         public ICommand NavigateToViewData { get; }
@@ -55,7 +55,8 @@ namespace Theseus.WPF.Code.ViewModels
                                       NavigationService<HomeViewModel> homeNavigationService,
                                       NavigationService<LoggedInViewModel> loggedInNavigationService,
                                       NavigationService<NotLoggedInViewModel> notLoggedInNavigationService,
-                                      ICurrentUserStore currentUserStore)
+                                      ICurrentStaffMemberStore currentStaffMemberStore,
+                                      ICurrentPatientStore currentPatientStore)
         {
             NavigateToBeginTest = new NavigateCommand<BeginTestViewModel>(beginTestNavigationService);
             NavigateToViewData = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
@@ -66,17 +67,22 @@ namespace Theseus.WPF.Code.ViewModels
 
             NavigateToSettings = new NavigateCommand<SettingsViewModel>(settingsNavigationService);
             NavigateToHome = new NavigateCommand<HomeViewModel>(homeNavigationService);
-            OpenAccount = new OpenAccountViewModelCommand(loggedInNavigationService, notLoggedInNavigationService, currentUserStore);
 
-            this._currentUserStore = currentUserStore;
-            this._currentUserStore.StaffMemberStateChanged += CurrentUserStateChanged;
-            this._currentUserStore.PatientStateChanged += CurrentUserStateChanged;
+            OpenAccount = new OpenAccountViewModelCommand(loggedInNavigationService,
+                                                          notLoggedInNavigationService,
+                                                          currentPatientStore,
+                                                          currentStaffMemberStore);
+
+            this._currentStaffMemberStore = currentStaffMemberStore;
+            this._currentPatientStore = currentPatientStore;
+            this._currentStaffMemberStore.StaffMemberStateChanged += CurrentUserStateChanged;
+            this._currentPatientStore.PatientStateChanged += CurrentUserStateChanged;
         }
 
         private void CurrentUserStateChanged()
         {
-            LoggedInAsStaff = _currentUserStore.CurrentStaffMember is not null;
-            LoggedIn = _currentUserStore.CurrentStaffMember is not null || _currentUserStore.CurrentPatient is not null;
+            LoggedInAsStaff = _currentStaffMemberStore.IsStaffMemberLoggedIn;
+            LoggedIn = _currentStaffMemberStore.IsStaffMemberLoggedIn || _currentPatientStore.IsPatientLoggedIn; ;
         }
     }
 }

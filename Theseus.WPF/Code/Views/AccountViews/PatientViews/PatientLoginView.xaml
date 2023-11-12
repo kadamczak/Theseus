@@ -10,7 +10,7 @@
         <StackPanel Grid.Row="0" Orientation="Vertical" MaxWidth="350">
             <Separator Height="30" Background="Transparent"/>
 
-            <Label Grid.Row="0" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="55" FontFamily="Microsoft YaHei Light" Margin="0 0 0 12"/>
+            <Label Grid.Row="0" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="55" FontFamily="Microsoft YaHei Light" Margin="0 0 0 20"/>
 
             <Label Content="Your Username:" FontSize="20" Margin="20 0 20 0"/>
             <TextBox Style="{StaticResource GenericTextBox}" HorizontalAlignment="Stretch" Margin="20 10 20 0"/>

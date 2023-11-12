@@ -1,10 +1,10 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.QueryInterfaces;
+using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 
-namespace Theseus.Infrastructure.Queries
+namespace Theseus.Infrastructure.Queries.MazeQueries
 {
     public class GetAllMazesWithSolutionQuery : IGetAllMazesWithSolutionQuery
     {
@@ -13,8 +13,8 @@ namespace Theseus.Infrastructure.Queries
 
         public GetAllMazesWithSolutionQuery(TheseusDbContextFactory dbContextFactory, MazeDtoToMazeWithSolutionConverter toMazeWithSolutionConverter)
         {
-            this._dbContextFactory = dbContextFactory;
-            this._toMazeWithSolutionConverter = toMazeWithSolutionConverter;
+            _dbContextFactory = dbContextFactory;
+            _toMazeWithSolutionConverter = toMazeWithSolutionConverter;
         }
 
         public IEnumerable<MazeWithSolution> GetAllMazesWithSolution()
@@ -22,7 +22,7 @@ namespace Theseus.Infrastructure.Queries
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<MazeDto> mazeEntities = context.Mazes.ToList();
-                return mazeEntities.Select(m => this._toMazeWithSolutionConverter.Convert(m));
+                return mazeEntities.Select(m => _toMazeWithSolutionConverter.Convert(m));
             }
         }
     }

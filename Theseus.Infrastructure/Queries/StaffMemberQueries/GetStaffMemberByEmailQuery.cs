@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Theseus.Domain.Models.UserRelated;
-using Theseus.Domain.QueryInterfaces;
+using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
-namespace Theseus.Infrastructure.Queries
+namespace Theseus.Infrastructure.Queries.StaffMemberQueries
 {
     public class GetStaffMemberByEmailQuery : IGetStaffMemberByEmailQuery
     {
@@ -15,8 +15,8 @@ namespace Theseus.Infrastructure.Queries
         public GetStaffMemberByEmailQuery(TheseusDbContextFactory dbContextFactory,
                                           IMapper mapper)
         {
-            this._dbContextFactory = dbContextFactory;
-            this._mapper = mapper;
+            _dbContextFactory = dbContextFactory;
+            _mapper = mapper;
         }
 
         public async Task<StaffMember?> GetStaffMember(string email)
@@ -24,7 +24,7 @@ namespace Theseus.Infrastructure.Queries
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
                 StaffMemberDto? staffMemberDto = await context.StaffMembers.FirstOrDefaultAsync(user => user.Email == email);
-                return (staffMemberDto is null) ? null : this._mapper.Map<StaffMember>(staffMemberDto);
+                return staffMemberDto is null ? null : _mapper.Map<StaffMember>(staffMemberDto);
             }
         }
     }

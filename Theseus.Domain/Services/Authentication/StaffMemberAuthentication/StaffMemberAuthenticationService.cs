@@ -2,9 +2,9 @@
 using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
-using Theseus.Domain.QueryInterfaces;
+using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 
-namespace Theseus.Domain.Services.Authentication
+namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 {
     public class StaffMemberAuthenticationService : IStaffMemberAuthenticationService
     {
@@ -18,10 +18,10 @@ namespace Theseus.Domain.Services.Authentication
                                      ICreateStaffMemberCommand createStaffMemberCommand,
                                      IPasswordHasher passwordHasher)
         {
-            this._getStaffMemberByUsernameQuery = getStaffMemberByUsernameQuery;
-            this._getStaffMemberByEmailQuery = getStaffMemberByEmailQuery;
-            this._createStaffMemberCommand = createStaffMemberCommand;
-            this._passwordHasher = passwordHasher;
+            _getStaffMemberByUsernameQuery = getStaffMemberByUsernameQuery;
+            _getStaffMemberByEmailQuery = getStaffMemberByEmailQuery;
+            _createStaffMemberCommand = createStaffMemberCommand;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<StaffMember> Login(string username, string password)

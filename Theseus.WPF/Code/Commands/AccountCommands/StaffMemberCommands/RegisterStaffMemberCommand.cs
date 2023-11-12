@@ -5,7 +5,7 @@ using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Services.Authentication;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Authentication;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
@@ -13,11 +13,11 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
     public class RegisterStaffMemberCommand : AsyncCommandBase
     {
         private readonly StaffMemberRegisterViewModel _staffMemberRegisterViewModel;
-        private readonly IAuthenticator _authenticator;
+        private readonly IStaffMemberAuthenticator _authenticator;
         private readonly NavigationService<LoggedInViewModel> _loggedInNavigationService;
 
         public RegisterStaffMemberCommand(StaffMemberRegisterViewModel staffMemberRegisterViewModel,
-                                          IAuthenticator authenticator,
+                                          IStaffMemberAuthenticator authenticator,
                                           NavigationService<LoggedInViewModel> loggedInViewModel)
         {
             _staffMemberRegisterViewModel = staffMemberRegisterViewModel;
@@ -39,7 +39,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
                 PasswordHash = _staffMemberRegisterViewModel.Password
             };
 
-            RegistrationResult registrationResult = await _authenticator.RegisterStaffMember(newStaffMember, _staffMemberRegisterViewModel.ConfirmPassword);
+            RegistrationResult registrationResult = await _authenticator.Register(newStaffMember, _staffMemberRegisterViewModel.ConfirmPassword);
             //TODO
             if (registrationResult == RegistrationResult.Success)
             {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Authentication;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
@@ -12,11 +12,11 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
     public class LoginStaffMemberCommand : AsyncCommandBase
     {
         private readonly StaffMemberLoginViewModel _staffMemberLoginViewModel;
-        private readonly IAuthenticator _authenticator;
+        private readonly IStaffMemberAuthenticator _authenticator;
         private readonly NavigationService<LoggedInViewModel> _loggedInNavigationService;
 
         public LoginStaffMemberCommand(StaffMemberLoginViewModel staffMemberLoginViewModel,
-                                       IAuthenticator authenticator,
+                                       IStaffMemberAuthenticator authenticator,
                                        NavigationService<LoggedInViewModel> loggedInNavigationService)
         {
             _staffMemberLoginViewModel = staffMemberLoginViewModel;
@@ -30,8 +30,8 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
         {
             try
             {
-                await _authenticator.LoginStaffMember(_staffMemberLoginViewModel.Username,
-                                                      _staffMemberLoginViewModel.Password);
+                await _authenticator.Login(_staffMemberLoginViewModel.Username,
+                                           _staffMemberLoginViewModel.Password);
 
                 _loggedInNavigationService.Navigate();
             }

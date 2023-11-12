@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Timers;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.QueryInterfaces;
+using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
-using Theseus.Infrastructure.Queries;
+using Theseus.Infrastructure.Queries.MazeQueries;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.ViewModels.Components;
 

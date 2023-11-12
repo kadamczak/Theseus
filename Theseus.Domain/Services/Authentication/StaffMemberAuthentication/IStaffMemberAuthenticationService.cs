@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.UserRelated;
 
-namespace Theseus.Domain.Services.Authentication
+namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 {
     public interface IStaffMemberAuthenticationService
     {

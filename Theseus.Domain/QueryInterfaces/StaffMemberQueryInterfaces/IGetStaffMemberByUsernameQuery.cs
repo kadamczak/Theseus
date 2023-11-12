@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.UserRelated;
 
-namespace Theseus.Domain.QueryInterfaces
+namespace Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces
 {
     public interface IGetStaffMemberByUsernameQuery
     {

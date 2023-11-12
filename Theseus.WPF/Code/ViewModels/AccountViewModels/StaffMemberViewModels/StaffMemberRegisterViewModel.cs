@@ -2,7 +2,7 @@
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Authentication;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -99,7 +99,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand Register { get; }
 
-        public StaffMemberRegisterViewModel(IAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInViewModel)
+        public StaffMemberRegisterViewModel(IStaffMemberAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInViewModel)
         {
             Register = new RegisterStaffMemberCommand(this, authenticator, loggedInViewModel);
         }

@@ -1,4 +1,4 @@
-﻿using Theseus.Domain.QueryInterfaces;
+﻿using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Mazes;
 

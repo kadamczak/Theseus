@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces;
-using Theseus.Domain.QueryInterfaces;
+using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.SetCommands;
 using Theseus.WPF.Code.Services;
