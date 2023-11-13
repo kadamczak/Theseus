@@ -18,7 +18,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Patient Info" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 15" FontFamily="Microsoft YaHei Light"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 15">
+            <Label Grid.Row="0" Content="Patient Info" VerticalAlignment="Center" FontSize="45"  FontFamily="Microsoft YaHei Light"/>
+            <Button Content="Save" Style="{StaticResource Generic}" Command="{Binding Save}" VerticalAlignment="Center" Margin=" 20 0 0 0"/>
+        </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 8 0 0">
             <TextBlock Text="Username" FontSize="22" Margin="0 0 0 10"/>
@@ -27,44 +30,44 @@
 
         <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0 12 0 0">
             <TextBlock Text="Age" FontSize="22" Margin="0 0 0 10" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding Age}" Width="70" Style="{StaticResource GenericTextBox}" IsReadOnly="True"/>
+            <TextBox Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="70" Style="{StaticResource GenericTextBox}" MaxLength="3"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0 12 0 0">
 
             <TextBlock Text="Gender" FontSize="22" Margin="0 0 0 10" HorizontalAlignment="Left"/>
-            <ListBox FontSize="20" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Sexes}" SelectedItem="{Binding SelectedSex, Mode=TwoWay}">
-                <ListBox.ItemTemplate>
+            <ComboBox FontSize="16" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top"  ItemsSource="{Binding Sexes}" SelectedItem="{Binding SelectedSex, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding Label}" />
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Vertical" Margin="0 12 0 0">
             <TextBlock Text="Education Level" FontSize="22" Margin="0 0 0 10" VerticalAlignment="Center"/>
 
-            <ListBox FontSize="20" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding EducationLevels}" SelectedItem="{Binding SelectedEducationLevel, Mode=TwoWay}">
-                <ListBox.ItemTemplate>
+            <ComboBox FontSize="16" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding EducationLevels}" SelectedItem="{Binding SelectedEducationLevel, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding Label}" />
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Vertical" Margin="0 12 0 0">
             <TextBlock Text="Profession Type" FontSize="22" Margin="0 0 0 10" VerticalAlignment="Center"/>
 
-            <ListBox FontSize="20" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding ProfessionTypes}" SelectedItem="{Binding SelectedProfessionType, Mode=TwoWay}">
-                <ListBox.ItemTemplate>
+            <ComboBox FontSize="16" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding ProfessionTypes}" SelectedItem="{Binding SelectedProfessionType, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding Label}" />
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
 
         <Button Grid.Row="6" Margin="0 40 0 0" Style="{StaticResource Generic}" Content="Logout" HorizontalAlignment="Center" Command="{Binding Logout}"/>
