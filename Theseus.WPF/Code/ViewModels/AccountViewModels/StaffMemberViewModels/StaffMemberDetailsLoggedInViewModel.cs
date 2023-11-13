@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Services;
@@ -57,23 +58,67 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+        public StaffMember CurrentStaffMember { get; }
+        private readonly IEmailValidator _emailValidator;
+
+        public ICommand Save { get; }
         public ICommand Logout { get; }
 
         public StaffMemberDetailsLoggedInViewModel(IStaffMemberAuthenticator authenticator,
+                                                   IEmailValidator emailValidator,
+                                                   IUpdateStaffMemberCommand updateStaffMemberCommand,
                                                    NavigationService<StaffMemberLoginRegisterViewModel> staffMemberLoginRegisterNavigationService)
         {
-            if(authenticator.IsLoggedInAsStaffMember)
-                LoadStaffMemberInfo(authenticator.CurrentStaffMember!);
+            if (!authenticator.IsLoggedInAsStaffMember)
+                return;
 
+            this._emailValidator = emailValidator;
+
+            this.CurrentStaffMember = authenticator.CurrentStaffMember!;
+            LoadStaffMemberInfo(authenticator.CurrentStaffMember!);
+
+            Save = new SaveStaffMemberInfoCommand(this, updateStaffMemberCommand);
             Logout = new LogoutStaffMemberCommand(authenticator, staffMemberLoginRegisterNavigationService);
         }
 
         private void LoadStaffMemberInfo(StaffMember staffMember)
         {
-            this.Username = staffMember.Username;
-            this.Email = staffMember.Email;
-            this.Name = staffMember.Name;
-            this.Surname = staffMember.Surname;
+            this._username = staffMember.Username;
+            this._email = staffMember.Email;
+            this._name = staffMember.Name;
+            this._surname = staffMember.Surname;
+        }
+
+        public void UpdateCurrentStaffMemberInfoFromViewModel()
+        {
+            CurrentStaffMember.Email = Email.Trim();
+            CurrentStaffMember.Name = Name.Trim();
+            CurrentStaffMember.Surname = Surname.Trim();
+        }
+
+        public bool CheckIfStaffMemberCanSaveChanges()
+        {
+            if (!AllFieldsAreValid())
+                return false;
+
+            var currentStaffMemberInfo = (CurrentStaffMember.Email, CurrentStaffMember.Name, CurrentStaffMember.Surname);
+            var infoFromViewModel = (Email, Name, Surname);
+
+            return currentStaffMemberInfo != infoFromViewModel;
+        }
+
+        private bool AllFieldsAreValid()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+                return false;
+
+            if (string.IsNullOrWhiteSpace(Surname))
+                return false;
+
+            if (!_emailValidator.IsValid(Email))
+                return false;
+
+            return true;
         }
     }
 }

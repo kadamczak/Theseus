@@ -28,10 +28,11 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <ContentControl Grid.Column="0" Content="{Binding PatientDetailsViewModel}"/>
-        <ContentControl Grid.Column="1" Content="{Binding StaffMemberDetailsViewModel}"/>
+        <ContentControl Grid.Column="2" Content="{Binding StaffMemberDetailsViewModel}"/>
     </Grid>
 </UserControl>
