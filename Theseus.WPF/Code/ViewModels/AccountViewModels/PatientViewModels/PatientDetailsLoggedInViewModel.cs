@@ -14,7 +14,7 @@ using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class PatientDetailsLoggedInViewModel : ViewModelBase
+    public class PatientDetailsLoggedInViewModel : ErrorCheckingViewModel
     {
         private string _username = string.Empty;
 
@@ -62,6 +62,21 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _age = value;
                 OnPropertyChanged(nameof(Age));
+
+                ClearErrors(nameof(Age));
+
+                if (int.TryParse(Age, out int ageValue))
+                {
+                    if (!AgeHasValidValue(ageValue))
+                        AddError(nameof(Age), "Age outside of range.");
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(Age))
+                        AddError(nameof(Age), "Age contains invalid characters.");
+                }
+
+                OnPropertyChanged(nameof(CanUpdatePatient));
             }
         }
 
@@ -100,6 +115,8 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand Save { get; }
         public ICommand Logout { get; }
 
+        public bool CanUpdatePatient => !HasErrors && FormHasChanges();
+
         public PatientDetailsLoggedInViewModel(IPatientAuthenticator authenticator,
                                                IUpdatePatientCommand updatePatientCommand,
                                                NavigationService<PatientLoginRegisterViewModel> patientLoginRegisterNavigationService)
@@ -131,35 +148,14 @@ namespace Theseus.WPF.Code.ViewModels
             CurrentPatient.ProfessionType = SelectedProfessionType.Value;
         }
 
-        public bool CheckIfPatientCanSaveChanges()
+        public bool FormHasChanges()
         {
-            if (!IsAgeValid())
-                return false;
-
             var currentPatientInfo = (CurrentPatient.Age, CurrentPatient.Sex, CurrentPatient.EducationLevel, CurrentPatient.ProfessionType);
             var infoFromViewModel = (StringToNullableInt(Age), SelectedSex.Value, SelectedEducationLevel.Value, SelectedProfessionType.Value);
-
             return currentPatientInfo != infoFromViewModel;
         }
 
-        public bool IsAgeValid()
-        {
-            if (int.TryParse(Age, out int ageValue))
-            {
-                if (!AgeHasValidValue(ageValue))
-                    return false;
-            }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(Age))
-                    return false;
-            }
-
-            return true;
-        }
-
         private bool AgeHasValidValue(int age) => age > 0 && age <= 125;
-
         private int? StringToNullableInt(string str) => (string.IsNullOrWhiteSpace(str)) ? null : int.Parse(str);
     }
 }

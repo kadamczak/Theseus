@@ -28,12 +28,13 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            OnCanExecuteChanged();
+            if (e.PropertyName == nameof(_patientDetailsLoggedInViewModel.CanUpdatePatient))
+                OnCanExecuteChanged();
         }
 
         public override bool CanExecute(object? parameter)
         {
-            return _patientDetailsLoggedInViewModel.CheckIfPatientCanSaveChanges() && base.CanExecute(parameter);
+            return _patientDetailsLoggedInViewModel.CanUpdatePatient && base.CanExecute(parameter);
         }
     }
 }
