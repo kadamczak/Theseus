@@ -5,16 +5,16 @@ using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Enums;
+using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
-using Theseus.WPF.Code.ViewModels.AccountViewModels.Interfaces;
 using Theseus.WPF.Code.ViewModels.Bindings;
 using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class PatientDetailsLoggedInViewModel : AccountDetailsViewModel
+    public class PatientDetailsLoggedInViewModel : ViewModelBase
     {
         private string _username = string.Empty;
 

@@ -7,11 +7,32 @@
         <Setter Property="FontSize" Value="18" />
         <Setter Property="HorizontalAlignment" Value="Left" />
 
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder />
+                        <ItemsControl
+                             Margin="0 4 0 0"
+                              FontSize="13"
+                              ItemsSource="{Binding}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Red" Text="{Binding ErrorContent}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
         <Style.Resources>
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="3"/>
             </Style>
         </Style.Resources>
+
     </Style>
 
 </ResourceDictionary>

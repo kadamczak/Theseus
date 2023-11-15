@@ -28,13 +28,13 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            OnCanExecuteChanged();
+            if(e.PropertyName == nameof(_staffMemberDetailsLoggedInViewModel.CanUpdateStaffMember))
+                OnCanExecuteChanged();
         }
 
         public override bool CanExecute(object? parameter)
         {
-            return _staffMemberDetailsLoggedInViewModel.CheckIfStaffMemberCanSaveChanges()
-                && base.CanExecute(parameter);
+            return _staffMemberDetailsLoggedInViewModel.CanUpdateStaffMember && base.CanExecute(parameter);
         }
     }
 }

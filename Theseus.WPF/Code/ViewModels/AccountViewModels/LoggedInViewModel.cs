@@ -1,14 +1,13 @@
 ﻿using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.ViewModels.AccountViewModels.Interfaces;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class LoggedInViewModel : ViewModelBase
     {
-        public AccountDetailsViewModel PatientDetailsViewModel { get; }
-        public AccountDetailsViewModel StaffMemberDetailsViewModel { get; }     
+        public ViewModelBase PatientDetailsViewModel { get; }
+        public ViewModelBase StaffMemberDetailsViewModel { get; }     
 
         public LoggedInViewModel(PatientDetailsLoggedInViewModel patientDetailsLoggedInViewModel,
                                  PatientDetailsNotLoggedInViewModel patientDetailsNotLoggedInViewModel,

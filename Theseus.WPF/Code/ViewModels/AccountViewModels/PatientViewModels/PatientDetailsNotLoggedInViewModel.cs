@@ -1,11 +1,11 @@
 ﻿using System.Windows.Input;
+using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.ViewModels.AccountViewModels.Interfaces;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class PatientDetailsNotLoggedInViewModel : AccountDetailsViewModel
+    public class PatientDetailsNotLoggedInViewModel : ViewModelBase
     {
         public ICommand NavigateToPatientLoginRegister { get; }
 

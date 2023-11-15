@@ -1,14 +1,19 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
+using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.ViewModels.AccountViewModels.Interfaces;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class StaffMemberDetailsLoggedInViewModel : AccountDetailsViewModel
+    public class StaffMemberDetailsLoggedInViewModel : ErrorCheckingViewModel
     {
         private string _username = string.Empty;
 
@@ -31,6 +36,15 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _email = value;
                 OnPropertyChanged(nameof(Email));
+
+                ClearErrors(nameof(Email));
+
+                if (!_emailValidator.IsValid(Email))
+                {
+                    AddError(nameof(Email), "Email is invalid.");
+                }
+
+                OnPropertyChanged(nameof(CanUpdateStaffMember));
             }
         }
 
@@ -43,6 +57,15 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
+
+                ClearErrors(nameof(Name));
+
+                if (string.IsNullOrWhiteSpace(Name))
+                {
+                    AddError(nameof(Name), "Name can't be empty.");
+                }
+
+                OnPropertyChanged(nameof(CanUpdateStaffMember));
             }
         }
 
@@ -55,14 +78,25 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _surname = value;
                 OnPropertyChanged(nameof(Surname));
+
+                ClearErrors(nameof(Surname));  
+                
+                if(string.IsNullOrWhiteSpace(Surname))
+                {
+                    AddError(nameof(Surname), "Surname can't be empty.");
+                }
+
+                OnPropertyChanged(nameof(CanUpdateStaffMember));
             }
         }
 
         public StaffMember CurrentStaffMember { get; }
-        private readonly IEmailValidator _emailValidator;
 
         public ICommand Save { get; }
         public ICommand Logout { get; }
+
+        private readonly IEmailValidator _emailValidator;
+        public bool CanUpdateStaffMember => !HasErrors && FormHasChanges();
 
         public StaffMemberDetailsLoggedInViewModel(IStaffMemberAuthenticator authenticator,
                                                    IEmailValidator emailValidator,
@@ -73,7 +107,6 @@ namespace Theseus.WPF.Code.ViewModels
                 return;
 
             this._emailValidator = emailValidator;
-
             this.CurrentStaffMember = authenticator.CurrentStaffMember!;
             LoadStaffMemberInfo(authenticator.CurrentStaffMember!);
 
@@ -96,29 +129,11 @@ namespace Theseus.WPF.Code.ViewModels
             CurrentStaffMember.Surname = Surname.Trim();
         }
 
-        public bool CheckIfStaffMemberCanSaveChanges()
+        public bool FormHasChanges()
         {
-            if (!AllFieldsAreValid())
-                return false;
-
             var currentStaffMemberInfo = (CurrentStaffMember.Email, CurrentStaffMember.Name, CurrentStaffMember.Surname);
             var infoFromViewModel = (Email, Name, Surname);
-
             return currentStaffMemberInfo != infoFromViewModel;
-        }
-
-        private bool AllFieldsAreValid()
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-                return false;
-
-            if (string.IsNullOrWhiteSpace(Surname))
-                return false;
-
-            if (!_emailValidator.IsValid(Email))
-                return false;
-
-            return true;
         }
     }
 }
