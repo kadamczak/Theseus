@@ -3,11 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Infrastructure.DbContexts;
+using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
 using Theseus.WPF.Code.Commands.SettingsCommands;
 using Theseus.WPF.Code.HostBuilders;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.Views.HelperClasses;
 
@@ -49,7 +52,7 @@ namespace Theseus.WPF
 
             LoadStringResources();
             MigrateDatabase();
-            NavigateToNotLoggedInView();
+            AttemptToLogInPatientAutomatically();
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -72,10 +75,16 @@ namespace Theseus.WPF
             }
         }
 
-        private void NavigateToNotLoggedInView()
+        private async Task AttemptToLogInPatientAutomatically()
         {
-            NavigationService<NotLoggedInViewModel> startNavigationService = _host.Services.GetRequiredService<NavigationService<NotLoggedInViewModel>>();
-            startNavigationService.Navigate();
+            NavigationService<LoggedInViewModel> loggedInNavigationService = _host.Services.GetRequiredService<NavigationService<LoggedInViewModel>>();
+            NavigationService<NotLoggedInViewModel> notLoggedInNavigationService = _host.Services.GetRequiredService<NavigationService<NotLoggedInViewModel>>();
+            IPatientAuthenticator patientAuthenticator = _host.Services.GetRequiredService<IPatientAuthenticator>();
+
+            AttemptToLogInAutomaticallyCommand automaticLogInCommand = new AttemptToLogInAutomaticallyCommand(loggedInNavigationService,
+                                                                                                              notLoggedInNavigationService,
+                                                                                                              patientAuthenticator);
+            await automaticLogInCommand.ExecuteAsync();
         }
     }
 }

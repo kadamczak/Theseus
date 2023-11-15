@@ -32,6 +32,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
                 await _authenticator.Login(_patientLoginViewModel.Username);
 
                 _loggedInNavigationService.Navigate();
+                UpdateLastStoredPatientUsernames();
             }
             catch (UserNotFoundException)
             {
@@ -43,6 +44,24 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
             }
         }
 
+        private void UpdateLastStoredPatientUsernames()
+        {
+            string currentUsername = _patientLoginViewModel.Username;
+            Properties.Settings.Default.LogInUsername = currentUsername;
+
+            if(Properties.Settings.Default.PastUsernameFirst != currentUsername)
+            {
+                UpdateRecentUsernameList(currentUsername);
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
+        private void UpdateRecentUsernameList(string username)
+        {
+            Properties.Settings.Default.PastUsernameSecond = Properties.Settings.Default.PastUsernameFirst;
+            Properties.Settings.Default.PastUsernameFirst = username;
+        }
 
         private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {

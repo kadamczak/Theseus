@@ -18,8 +18,8 @@
             <Button Style="{StaticResource Generic}" Command="{Binding Login}" HorizontalAlignment="Center" Content="Enter" Margin="0 30 0 0"/>
 
             <Label Content="Last used patient usernames:" FontSize="17" Margin="20 30 20 0"/>
-            <Label Content="Dayoman1000" FontSize="17" Margin="20 0 20 0"/>
-            <Label Content="Dayoman2000" FontSize="17" Margin="20 0 20 0"/>
+            <Label Content="{Binding PastUsernameFirst}" FontSize="17" Margin="20 0 20 0"/>
+            <Label Content="{Binding PastUsernameSecond}"  FontSize="17" Margin="20 0 20 0"/>
         </StackPanel>
     </Grid>
 </UserControl>

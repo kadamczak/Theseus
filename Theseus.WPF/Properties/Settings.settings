@@ -8,5 +8,14 @@
     <Setting Name="MinimalCellSize" Type="System.Single" Scope="User">
       <Value Profile="(Default)">25</Value>
     </Setting>
+    <Setting Name="LogInUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PastUsernameFirst" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PastUsernameSecond" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

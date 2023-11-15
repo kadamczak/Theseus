@@ -46,5 +46,41 @@ namespace Theseus.WPF.Properties {
                 this["MinimalCellSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LogInUsername {
+            get {
+                return ((string)(this["LogInUsername"]));
+            }
+            set {
+                this["LogInUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PastUsernameFirst {
+            get {
+                return ((string)(this["PastUsernameFirst"]));
+            }
+            set {
+                this["PastUsernameFirst"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PastUsernameSecond {
+            get {
+                return ((string)(this["PastUsernameSecond"]));
+            }
+            set {
+                this["PastUsernameSecond"] = value;
+            }
+        }
     }
 }

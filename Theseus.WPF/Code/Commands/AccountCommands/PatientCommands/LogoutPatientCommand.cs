@@ -18,8 +18,16 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 
         public override void Execute(object? parameter)
         {
+            RemoveUserFromAutomaticLogIn();
+
             _authenticator.Logout();
             _patientLoginRegisterNavigationService.Navigate();
+        }
+
+        private void RemoveUserFromAutomaticLogIn()
+        {
+            Properties.Settings.Default.LogInUsername = string.Empty;
+            Properties.Settings.Default.Save();
         }
     }
 }
