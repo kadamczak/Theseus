@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated;
-using Theseus.Domain.Services.Authentication;
 using Theseus.Domain.Services.Authentication.PatientAuthentication;
 
 namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
@@ -42,7 +41,7 @@ namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
             CurrentPatient = null;
         }
 
-        public async Task<RegistrationResult> Register(Patient newPatient, string staffMemberUsername)
+        public async Task<PatientRegistrationResult> Register(Patient newPatient, string staffMemberUsername)
         {
             return await _patientAuthenticationService.Register(newPatient, staffMemberUsername);
         }

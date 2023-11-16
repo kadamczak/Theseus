@@ -7,7 +7,7 @@ using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class PatientLoginViewModel : ViewModelBase
+    public class PatientLoginViewModel : ErrorCheckingViewModel
     {
         private string _username = string.Empty;
 
@@ -18,6 +18,14 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
+
+                ClearErrors(nameof(Username));
+
+                if (string.IsNullOrWhiteSpace(Username))
+                {
+                    AddError(nameof(Username), "Field can't be empty.");
+                }
+
                 OnPropertyChanged(nameof(CanLogin));
             }
         }
@@ -44,14 +52,31 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
-        public bool CanLogin => !string.IsNullOrEmpty(Username);
+        private string _loginResponse = string.Empty;
+        public string LoginResponse
+        {
+            get => _loginResponse;
+            set
+            {
+                _loginResponse = value;
+                OnPropertyChanged(nameof(LoginResponse));
+            }
+        }
+
+        public bool CanLogin => !HasErrors;
         public ICommand Login { get; }
 
         public PatientLoginViewModel(IPatientAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInNavigationService)
         {
+            ClearFields();
             LoadPastUsernames();
 
             Login = new LoginPatientCommand(this, authenticator, loggedInNavigationService);
+        }
+
+        private void ClearFields()
+        {
+            Username = string.Empty;
         }
 
         private void LoadPastUsernames()

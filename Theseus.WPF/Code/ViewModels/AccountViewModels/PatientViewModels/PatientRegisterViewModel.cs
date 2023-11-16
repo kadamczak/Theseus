@@ -1,13 +1,11 @@
 ﻿using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
-using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
-using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class PatientRegisterViewModel : ViewModelBase
+    public class PatientRegisterViewModel : ErrorCheckingViewModel
     {
         private string _patientUsername = string.Empty;
 
@@ -18,6 +16,14 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _patientUsername = value;
                 OnPropertyChanged(nameof(PatientUsername));
+
+                ClearErrors(nameof(PatientUsername));
+
+                if (string.IsNullOrWhiteSpace(PatientUsername))
+                {
+                    AddError(nameof(PatientUsername), "Field can't be empty.");
+                }
+
                 OnPropertyChanged(nameof(CanRegister));
             }
         }
@@ -31,17 +37,43 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _staffMemberUsername = value;
                 OnPropertyChanged(nameof(StaffMemberUsername));
+
+                ClearErrors(nameof(StaffMemberUsername));
+
+                if (string.IsNullOrWhiteSpace(StaffMemberUsername))
+                {
+                    AddError(nameof(StaffMemberUsername), "Field can't be empty.");
+                }
+
                 OnPropertyChanged(nameof(CanRegister));
             }
         }
 
-        public bool CanRegister => !string.IsNullOrEmpty(PatientUsername) && !string.IsNullOrEmpty(StaffMemberUsername);
+        private string _registrationResponse = string.Empty;
+        public string RegistrationResponse
+        {
+            get => _registrationResponse;
+            set
+            {
+                _registrationResponse = value;
+                OnPropertyChanged(nameof(RegistrationResponse));
+            }
+        }
+
+        public bool CanRegister => !HasErrors;
 
         public ICommand Register { get; }
 
         public PatientRegisterViewModel(IPatientAuthenticator authenticator)
         {
+            ClearFields();
             Register = new RegisterPatientCommand(this, authenticator);
+        }
+
+        private void ClearFields()
+        {
+            PatientUsername = string.Empty;
+            StaffMemberUsername = string.Empty;
         }
     }
 }

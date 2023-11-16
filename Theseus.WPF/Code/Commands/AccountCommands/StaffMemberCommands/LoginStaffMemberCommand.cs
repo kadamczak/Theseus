@@ -37,15 +37,15 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
             }
             catch (UserNotFoundException)
             {
-                //_loginViewModel.ErrorMessage = "Username does not exist.";
+                _staffMemberLoginViewModel.LoginResponse = "Username does not exist.";
             }
             catch (InvalidPasswordException)
             {
-                //_loginViewModel.ErrorMessage = "Incorrect password.";
+                _staffMemberLoginViewModel.LoginResponse = "Incorrect password.";
             }
             catch (Exception)
             {
-                //_loginViewModel.ErrorMessage = "Login failed.";
+                _staffMemberLoginViewModel.LoginResponse = "Login failed.";
             }
         }
 

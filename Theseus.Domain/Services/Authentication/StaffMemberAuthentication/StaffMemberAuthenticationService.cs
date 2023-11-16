@@ -41,28 +41,28 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
             return existingAccount;
         }
 
-        public async Task<RegistrationResult> Register(StaffMember newAccount, string confirmPassword)
+        public async Task<StaffMemberRegistrationResult> Register(StaffMember newAccount, string confirmPassword)
         {
-            RegistrationResult result = RegistrationResult.Success;
+            StaffMemberRegistrationResult result = StaffMemberRegistrationResult.Success;
 
             if (newAccount.PasswordHash != confirmPassword)
             {
-                result = RegistrationResult.PasswordsDoNotMatch;
+                result = StaffMemberRegistrationResult.PasswordsDoNotMatch;
             }
 
             StaffMember? emailAccount = await _getStaffMemberByEmailQuery.GetStaffMember(newAccount.Email);
             if (emailAccount is not null)
             {
-                result = RegistrationResult.EmailAlreadyExists;
+                result = StaffMemberRegistrationResult.EmailAlreadyExists;
             }
 
             StaffMember? usernameAccount = await _getStaffMemberByUsernameQuery.GetStaffMember(newAccount.Username);
             if (usernameAccount is not null)
             {
-                result = RegistrationResult.UsernameAlreadyExists;
+                result = StaffMemberRegistrationResult.UsernameAlreadyExists;
             }
 
-            if (result == RegistrationResult.Success)
+            if (result == StaffMemberRegistrationResult.Success)
             {
                 newAccount.PasswordHash = _passwordHasher.HashPassword(newAccount.PasswordHash);
                 await _createStaffMemberCommand.Create(newAccount);

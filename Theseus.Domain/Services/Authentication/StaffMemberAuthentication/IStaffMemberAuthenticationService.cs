@@ -4,7 +4,7 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 {
     public interface IStaffMemberAuthenticationService
     {
-        Task<RegistrationResult> Register(StaffMember newAccount, string confirmPassword);
+        Task<StaffMemberRegistrationResult> Register(StaffMember newAccount, string confirmPassword);
         Task<StaffMember> Login(string username, string password);
     }
 }

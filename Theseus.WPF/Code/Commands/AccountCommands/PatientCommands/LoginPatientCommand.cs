@@ -36,11 +36,11 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
             }
             catch (UserNotFoundException)
             {
-                //_loginViewModel.ErrorMessage = "Username does not exist.";
+                _patientLoginViewModel.LoginResponse = "Username does not exist.";
             }
             catch (Exception)
             {
-                //_loginViewModel.ErrorMessage = "Login failed.";
+                _patientLoginViewModel.LoginResponse = "Login failed.";
             }
         }
 

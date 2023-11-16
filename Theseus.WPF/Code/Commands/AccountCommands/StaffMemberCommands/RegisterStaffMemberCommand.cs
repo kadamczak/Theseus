@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated;
-using Theseus.Domain.Services.Authentication;
+using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
@@ -35,12 +35,19 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
                 PasswordHash = _staffMemberRegisterViewModel.Password
             };
 
-            RegistrationResult registrationResult = await _authenticator.Register(newStaffMember, _staffMemberRegisterViewModel.ConfirmPassword);
-            //TODO
-            if (registrationResult == RegistrationResult.Success)
-            {
-                //this._loggedInNavigationService.Navigate();
-            }
+            StaffMemberRegistrationResult registrationResult = await _authenticator.Register(newStaffMember, _staffMemberRegisterViewModel.ConfirmPassword);
+            this._staffMemberRegisterViewModel.RegistrationResponse = GetRegistrationResponse(registrationResult);
+        }
+
+        private string GetRegistrationResponse(StaffMemberRegistrationResult registrationResult)
+        {
+            return registrationResult switch {
+                StaffMemberRegistrationResult.Success => "Succesfully registered.",
+                StaffMemberRegistrationResult.UsernameAlreadyExists => "Username already exists.",
+                StaffMemberRegistrationResult.EmailAlreadyExists => "Email already exists.",
+                StaffMemberRegistrationResult.PasswordsDoNotMatch => "Passwords do not match.",
+                _ => throw new ArgumentException("Invalid parameter.")
+            };
         }
 
         private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

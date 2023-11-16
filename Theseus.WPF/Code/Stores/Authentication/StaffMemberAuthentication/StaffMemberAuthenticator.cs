@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated;
-using Theseus.Domain.Services.Authentication;
 using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication
@@ -42,7 +41,7 @@ namespace Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication
             CurrentStaffMember = null;
         }
 
-        public async Task<RegistrationResult> Register(StaffMember newStaffMember, string confirmPassword)
+        public async Task<StaffMemberRegistrationResult> Register(StaffMember newStaffMember, string confirmPassword)
         {
             return await _staffMemberAuthenticationService.Register(newStaffMember, confirmPassword);
         }

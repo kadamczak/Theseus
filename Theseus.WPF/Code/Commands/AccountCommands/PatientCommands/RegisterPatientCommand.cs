@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated;
-using Theseus.Domain.Services.Authentication;
+using Theseus.Domain.Services.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.ViewModels;
@@ -32,12 +32,19 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 
             string staffMemberUsername = _patientRegisterViewModel.StaffMemberUsername;
 
-            RegistrationResult registrationResult = await _authenticator.Register(newPatient, staffMemberUsername);
-            //TODO
-            if (registrationResult == RegistrationResult.Success)
+            PatientRegistrationResult registrationResult = await _authenticator.Register(newPatient, staffMemberUsername);
+            this._patientRegisterViewModel.RegistrationResponse = GetRegistrationResponse(registrationResult);
+        }
+
+        private string GetRegistrationResponse(PatientRegistrationResult registrationResult)
+        {
+            return registrationResult switch
             {
-                //this._loggedInNavigationService.Navigate();
-            }
+                PatientRegistrationResult.Success => "Succesfully registered.",
+                PatientRegistrationResult.UsernameAlreadyExists => "Patient username already exists.",
+                PatientRegistrationResult.StaffMemberDoesNotExist => "Staff member does not exist.",
+                _ => throw new ArgumentException("Invalid parameter.")
+            };
         }
 
         private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

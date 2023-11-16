@@ -3,6 +3,7 @@ using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
+using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.Domain.Services.Authentication.PatientAuthentication
 {
@@ -33,23 +34,23 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
             return existingPatient;
         }
 
-        public async Task<RegistrationResult> Register(Patient newAccount, string staffMemberUsername)
+        public async Task<PatientRegistrationResult> Register(Patient newAccount, string staffMemberUsername)
         {
-            RegistrationResult result = RegistrationResult.Success;
+            PatientRegistrationResult result = PatientRegistrationResult.Success;
 
             Patient? patientWithSameUsername = await _getPatientByUsernameQuery.GetPatient(newAccount.Username);
             if (patientWithSameUsername is not null)
             {
-                result = RegistrationResult.UsernameAlreadyExists;
+                result = PatientRegistrationResult.UsernameAlreadyExists;
             }
 
             StaffMember? staffMember = await _getStaffMemberByUsernameQuery.GetStaffMember(staffMemberUsername);
             if (staffMember is null)
             {
-                result = RegistrationResult.StaffMemberDoesNotExist;
+                result = PatientRegistrationResult.StaffMemberDoesNotExist;
             }
 
-            if (result == RegistrationResult.Success)
+            if (result == PatientRegistrationResult.Success)
             {
                 newAccount.StaffMembers.Add(staffMember!);
                 await _createPatientCommand.Create(newAccount);
