@@ -19,8 +19,8 @@ namespace Theseus.Infrastructure.Dtos.Converters.ExamSetConverters
 
             foreach (var maze in examSet.MazesWithSolution)
             {
-                MazeDto mazeDto = _toMazeDto.Convert(maze);
-                mazeDtos.Add(mazeDto);
+                //MazeDto mazeDto = _toMazeDto.Convert(maze);
+                //mazeDtos.Add(mazeDto);
             }
 
             return new ExamSetDto(examSet.Id, mazeDtos);

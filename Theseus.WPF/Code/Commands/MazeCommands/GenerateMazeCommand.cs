@@ -1,8 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
+using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 
@@ -13,6 +14,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
         private readonly MazeGeneratorViewModel _mazeGenViewModel;
         private readonly MazeCreator _mazeCreator;
         private readonly SelectedMazeDetailsStore _mazeDetailsStore;
+        private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
         private const int MaxMazeDimension = 50;
@@ -21,11 +23,13 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
         public GenerateMazeCommand(MazeGeneratorViewModel mazeGenViewModel,
                                    MazeCreator mazeCreator,
                                    SelectedMazeDetailsStore mazeDetailsStore,
+                                   ICurrentStaffMemberStore currentStaffMemberStore,
                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
             _mazeGenViewModel = mazeGenViewModel;
             _mazeCreator = mazeCreator;
             _mazeDetailsStore = mazeDetailsStore;
+            _currentStaffMemberStore = currentStaffMemberStore;
             _mazeDetailNavigationService = mazeDetailNavigationService;
 
             _mazeGenViewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -47,10 +51,12 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
             bool shouldExcludeCellsCloseToRoot = _mazeGenViewModel.ShouldExcludeCellsCloseToRoot;
 
             var mazeWithSolution = _mazeCreator.CreateMazeWithSolution(height,
-                                                                            width,
-                                                                            structureAlgorithm,
-                                                                            solutionAlgorithm,
-                                                                            shouldExcludeCellsCloseToRoot);
+                                                                       width,
+                                                                       structureAlgorithm,
+                                                                       solutionAlgorithm,
+                                                                       shouldExcludeCellsCloseToRoot);
+
+            mazeWithSolution.StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException();
 
             _mazeDetailsStore.UpdateMazeDetails(mazeWithSolution, unsavedChanges: true);
             _mazeDetailNavigationService.Navigate();

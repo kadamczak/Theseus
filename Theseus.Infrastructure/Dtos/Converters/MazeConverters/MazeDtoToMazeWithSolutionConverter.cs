@@ -1,18 +1,19 @@
-﻿using Theseus.Domain.Extensions;
+﻿using AutoMapper;
+using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.Exceptions;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 {
-    public class MazeDtoToMazeWithSolutionConverter
+    public class MazeDtoToMazeWithSolutionConverter : ITypeConverter<MazeDto, MazeWithSolution>
     {
         Direction[] directions = new Direction[2] { Direction.South, Direction.East };
 
-        public MazeWithSolution Convert(MazeDto mazeDto)
+        public MazeWithSolution Convert(MazeDto source, MazeWithSolution destination, ResolutionContext context)
         {
-            Maze maze = CreateMaze(mazeDto);
-            MazeWithSolution mazeWithSolution = CreateMazeWithSolution(mazeDto, maze);
+            Maze maze = CreateMaze(source);
+            MazeWithSolution mazeWithSolution = CreateMazeWithSolution(source, maze);
 
             return mazeWithSolution;
         }

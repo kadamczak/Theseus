@@ -1,19 +1,20 @@
-﻿using Theseus.Domain.Extensions;
+﻿using AutoMapper;
+using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 {
-    public class MazeWithSolutionToMazeDtoConverter
+    public class MazeWithSolutionToMazeDtoConverter : ITypeConverter<MazeWithSolution, MazeDto>
     {
         Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
 
-        public MazeDto Convert(MazeWithSolution maze)
+        public MazeDto Convert(MazeWithSolution source, MazeDto destination, ResolutionContext context)
         {
-            byte[] structureAsBytes = CreateStructureByteArray(maze.Grid);
-            byte[] solutionAsBytes = CreateSolutionByteArray(maze.SolutionPath);
+            byte[] structureAsBytes = CreateStructureByteArray(source.Grid);
+            byte[] solutionAsBytes = CreateSolutionByteArray(source.SolutionPath);
 
-            return new MazeDto(maze, structureAsBytes, solutionAsBytes);
+            return new MazeDto(source, structureAsBytes, solutionAsBytes);
         }
 
         private byte[] CreateStructureByteArray(Maze maze)

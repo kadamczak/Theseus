@@ -1,4 +1,6 @@
-﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+﻿using AutoMapper;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
@@ -9,12 +11,12 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
     public class GetMazeWithSolutionByIdQuery : IGetMazeWithSolutionByIdQuery
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly MazeDtoToMazeWithSolutionConverter _toMazeWithSolutionConverter;
+        private readonly IMapper _mapper;
 
-        public GetMazeWithSolutionByIdQuery(TheseusDbContextFactory dbContextFactory, MazeDtoToMazeWithSolutionConverter toMazeWithSolutionConverter)
+        public GetMazeWithSolutionByIdQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper)
         {
             _dbContextFactory = dbContextFactory;
-            _toMazeWithSolutionConverter = toMazeWithSolutionConverter;
+            _mapper = mapper;
         }
 
         public MazeWithSolution? GetMazeWithSolutionById(Guid id)
@@ -22,7 +24,17 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
             using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
             {
                 MazeDto? mazeEntity = context.Mazes.Find(id);
-                return mazeEntity is null ? null : _toMazeWithSolutionConverter.Convert(mazeEntity);
+
+                if(mazeEntity is null)
+                {
+                    return null;
+                }
+                else
+                {
+                    MazeWithSolution mazeWithSolution = _mapper.Map<MazeWithSolution>(mazeEntity);
+                    mazeWithSolution.StaffMember = _mapper.Map<StaffMember>(mazeEntity.Owner);
+                    return mazeWithSolution;
+                }
             }
         }
     }

@@ -14,7 +14,7 @@ namespace Theseus.Infrastructure.Dtos
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public virtual ICollection<PatientDto> PatientDtos { get; set; } = default!;
-        //public virtual ICollection<MazeDto> MazeDtos { get; set; } = default!;
-        //public virtual ICollection<ExamSetDto> ExamSetDtos { get; set; } = default!;
+        public virtual ICollection<MazeDto> MazeDtos { get; set; } = default!;
+        public virtual ICollection<ExamSetDto> ExamSetDtos { get; set; } = default!;
     }
 }

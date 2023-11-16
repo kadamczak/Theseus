@@ -3,8 +3,10 @@ using System.Collections.Specialized;
 using System.Linq;
 using Theseus.Domain.CommandInterfaces;
 using Theseus.Domain.Models.SetRelated;
+using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.SetCommands
@@ -13,14 +15,17 @@ namespace Theseus.WPF.Code.Commands.SetCommands
     {
         private readonly AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
         private readonly ICreateExamSetCommand _createExamSetCommand;
+        private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
         private readonly NavigationService<CreateSetViewModel> _createSetNavigationService;
 
         public CreateSetManuallyCommand(AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel,
                                         ICreateExamSetCommand createExamSetCommand,
+                                        ICurrentStaffMemberStore currentStaffMemberStore,
                                         NavigationService<CreateSetViewModel> createSetNavigationService)
         {
             _addToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
             _createExamSetCommand = createExamSetCommand;
+            _currentStaffMemberStore = currentStaffMemberStore;
             _createSetNavigationService = createSetNavigationService;
             _addToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
         }
@@ -36,8 +41,9 @@ namespace Theseus.WPF.Code.Commands.SetCommands
             var selectedMazes = _addToSetMazeCommandListViewModel.SelectedMazes.ToList();
             ExamSet examSet = new ExamSet(Guid.NewGuid(), selectedMazes);
 
-            _createExamSetCommand.CreateExamSet(examSet);
+            examSet.StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException();
 
+            _createExamSetCommand.CreateExamSet(examSet);
             _createSetNavigationService.Navigate();
         }
 

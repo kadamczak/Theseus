@@ -9,6 +9,8 @@ namespace Theseus.Domain.Models.SetRelated
         public List<MazeWithSolution> MazesWithSolution { get; } = new List<MazeWithSolution>();
         public StaffMember StaffMember { get; set; } = default!;
 
+        public ExamSet() { }
+
         public ExamSet(Guid id, List<MazeWithSolution> mazesWithSolution)
         {
             Id = id;

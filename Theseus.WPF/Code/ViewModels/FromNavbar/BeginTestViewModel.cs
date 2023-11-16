@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Timers;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
@@ -36,10 +37,10 @@ namespace Theseus.WPF.Code.ViewModels
         }
         private Timer _transitionTimer = new Timer() { Interval = 1000 };
 
-        public BeginTestViewModel(TheseusDbContextFactory factory, MazeDtoToMazeWithSolutionConverter converter)
+        public BeginTestViewModel(TheseusDbContextFactory factory, IMapper mapper)
         {
             Guid guid = new Guid("b879799d-af75-4ce4-734d-08dbd14fb5c2");
-            GetMazeById = new GetMazeWithSolutionByIdQuery(factory, converter);
+            GetMazeById = new GetMazeWithSolutionByIdQuery(factory, mapper);
             MazeWithSolution? m = GetMazeById.GetMazeWithSolutionById(guid);
 
             if (m is null)

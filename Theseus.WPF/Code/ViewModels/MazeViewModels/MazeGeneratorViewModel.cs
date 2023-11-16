@@ -7,6 +7,7 @@ using Theseus.Domain.Models.MazeRelated.MazeCreators;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.MazeCommands;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
@@ -100,10 +101,11 @@ namespace Theseus.WPF.Code.ViewModels
 
         public MazeGeneratorViewModel(MazeCreator mazeCreator,
                                       SelectedMazeDetailsStore mazeDetailsStore,
+                                      ICurrentStaffMemberStore currentStaffMemberStore,
                                       NavigationService<MazeDetailsViewModel> mazeDetailNavigationService,
                                       LastMazeGeneratorInputStore lastMazeGeneratorSettingsStore)
         {
-            this.GenerateMaze = new GenerateMazeCommand(this, mazeCreator, mazeDetailsStore, mazeDetailNavigationService);
+            this.GenerateMaze = new GenerateMazeCommand(this, mazeCreator, mazeDetailsStore, currentStaffMemberStore, mazeDetailNavigationService);
             this._lastMazeGeneratorSettingsStore = lastMazeGeneratorSettingsStore;
             PropertyChanged += HandlePropertyChange;
 
