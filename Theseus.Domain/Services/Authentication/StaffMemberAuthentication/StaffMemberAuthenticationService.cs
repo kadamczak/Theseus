@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;

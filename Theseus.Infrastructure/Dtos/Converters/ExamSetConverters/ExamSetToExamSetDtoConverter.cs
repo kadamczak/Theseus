@@ -1,4 +1,4 @@
-﻿using Theseus.Domain.Models.SetRelated;
+﻿using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 

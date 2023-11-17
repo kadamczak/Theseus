@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.WPF.Code.Commands.SetCommands;
+using Theseus.WPF.Code.Commands.ExamSetCommands;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
@@ -17,7 +17,7 @@ namespace Theseus.WPF.Code.ViewModels
         protected override void AddMazeWithCommandToActionableMazes(MazeWithSolution mazeWithSolution)
         {
             MazeWithSolutionCommandViewModel actionableMaze = new MazeWithSolutionCommandViewModel(mazeWithSolution);
-            actionableMaze.Command = new AddToSetCommand(actionableMaze, this);
+            actionableMaze.Command = new AddToExamSetCommand(actionableMaze, this);
             actionableMaze.CommandName = "Add";
             this.ActionableMazes.Add(actionableMaze);
         }

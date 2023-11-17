@@ -1,5 +1,5 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.Models.SetRelated;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.Dtos.Converters.ExamSetConverters;
 using Theseus.Infrastructure.Dtos.Converters.MazeConverters;

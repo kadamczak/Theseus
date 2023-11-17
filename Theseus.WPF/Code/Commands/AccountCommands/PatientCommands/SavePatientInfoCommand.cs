@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Threading.Tasks;
-using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.ViewModels;
 

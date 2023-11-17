@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.MazeCommandInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.MazeCommands;
 using Theseus.WPF.Code.Stores.Mazes;

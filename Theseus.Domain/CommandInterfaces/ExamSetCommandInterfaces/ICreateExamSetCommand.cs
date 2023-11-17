@@ -1,6 +1,6 @@
-﻿using Theseus.Domain.Models.SetRelated;
+﻿using Theseus.Domain.Models.ExamSetRelated;
 
-namespace Theseus.Domain.CommandInterfaces
+namespace Theseus.Domain.ExamSetCommandInterfaces
 {
     public interface ICreateExamSetCommand
     {

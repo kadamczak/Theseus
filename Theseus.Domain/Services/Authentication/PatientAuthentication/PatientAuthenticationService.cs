@@ -1,4 +1,4 @@
-﻿using Theseus.Domain.CommandInterfaces;
+﻿using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;

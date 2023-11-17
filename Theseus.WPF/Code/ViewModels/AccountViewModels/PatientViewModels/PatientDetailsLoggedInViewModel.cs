@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Enums;
 using Theseus.WPF.Code.Bases;

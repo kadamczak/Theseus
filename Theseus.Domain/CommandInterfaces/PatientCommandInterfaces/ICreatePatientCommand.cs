@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.UserRelated;
 
-namespace Theseus.Domain.CommandInterfaces
+namespace Theseus.Domain.CommandInterfaces.PatientCommandInterfaces
 {
     public interface ICreatePatientCommand
     {

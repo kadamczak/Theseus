@@ -1,16 +1,16 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.ViewModels.Bindings;
 using Theseus.WPF.Code.ViewModels;
+using Theseus.WPF.Code.ViewModels.Bindings;
 
-namespace Theseus.WPF.Code.Commands.SetCommands
+namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
-    class AddToSetCommand : CommandBase
+    class AddToExamSetCommand : CommandBase
     {
         private readonly MazeWithSolutionCommandViewModel _mazeWithSolutionCommandViewModel;
         private AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
 
-        public AddToSetCommand(MazeWithSolutionCommandViewModel mazeWithSolutionCommandViewModel,
+        public AddToExamSetCommand(MazeWithSolutionCommandViewModel mazeWithSolutionCommandViewModel,
                                AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
         {
             _mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;

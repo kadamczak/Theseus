@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
-namespace Theseus.Infrastructure.Commands
+namespace Theseus.Infrastructure.Commands.StaffMemberCommands
 {
-    public class UpdateStaffMemberCommand : IUpdateStaffMemberCommand
+    public class UpdateStaffMemberCommand : StaffMemberCommand, IUpdateStaffMemberCommand
     {
         private readonly TheseusDbContextFactory _dbContextFactory;
         private readonly IMapper _mapper;
@@ -23,10 +23,7 @@ namespace Theseus.Infrastructure.Commands
             {
                 var staffMemberDto = _mapper.Map<StaffMemberDto>(staffMember);
 
-                foreach(var patientDto in staffMemberDto.PatientDtos)
-                {
-                    context.Attach(patientDto);
-                }
+                AttachRelatedEntities(staffMemberDto, context);
 
                 context.StaffMembers.Update(staffMemberDto);
                 await context.SaveChangesAsync();

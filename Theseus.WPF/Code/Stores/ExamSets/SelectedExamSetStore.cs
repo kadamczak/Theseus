@@ -1,4 +1,4 @@
-﻿using Theseus.Domain.Models.SetRelated;
+﻿using Theseus.Domain.Models.ExamSetRelated;
 
 namespace Theseus.WPF.Code.Stores.ExamSets
 {

@@ -1,7 +1,7 @@
-﻿using Theseus.Domain.Models.SetRelated;
-using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
+﻿using Theseus.Domain.Models.ExamSetRelated;
+using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 
-namespace Theseus.Infrastructure.Queries.ExamQueries
+namespace Theseus.Infrastructure.Queries.ExamSetQueries
 {
     public class GetAllExamSetsQuery : IGetAllExamsQuery
     {

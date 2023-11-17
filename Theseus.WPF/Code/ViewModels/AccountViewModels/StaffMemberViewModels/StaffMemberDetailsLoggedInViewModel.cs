@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using Theseus.Domain.CommandInterfaces;
+using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
+using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
-using Theseus.Infrastructure.Queries.ExamQueries;
+using Theseus.Infrastructure.Queries.ExamSetQueries;
 using Theseus.Infrastructure.Queries.MazeQueries;
 using Theseus.Infrastructure.Queries.PatientQueries;
 using Theseus.Infrastructure.Queries.StaffMemberQueries;

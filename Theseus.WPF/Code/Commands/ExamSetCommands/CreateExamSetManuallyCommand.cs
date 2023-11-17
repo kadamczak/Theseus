@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Linq;
-using Theseus.Domain.CommandInterfaces;
-using Theseus.Domain.Models.SetRelated;
+using Theseus.Domain.ExamSetCommandInterfaces;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
-namespace Theseus.WPF.Code.Commands.SetCommands
+namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
-    public class CreateSetManuallyCommand : CommandBase
+    public class CreateExamSetManuallyCommand : CommandBase
     {
         private readonly AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
         private readonly ICreateExamSetCommand _createExamSetCommand;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
         private readonly NavigationService<CreateSetViewModel> _createSetNavigationService;
 
-        public CreateSetManuallyCommand(AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel,
+        public CreateExamSetManuallyCommand(AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel,
                                         ICreateExamSetCommand createExamSetCommand,
                                         ICurrentStaffMemberStore currentStaffMemberStore,
                                         NavigationService<CreateSetViewModel> createSetNavigationService)
