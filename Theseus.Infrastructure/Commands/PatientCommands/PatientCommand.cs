@@ -7,6 +7,9 @@ namespace Theseus.Infrastructure.Commands.PatientCommands
     {
         protected void AttachRelatedEntities(PatientDto patientDto, TheseusDbContext context)
         {
+            if (patientDto.StaffMemberDtos is null)
+                return;
+
             foreach (var staffMember in patientDto.StaffMemberDtos)
             {
                 context.Attach(staffMember);

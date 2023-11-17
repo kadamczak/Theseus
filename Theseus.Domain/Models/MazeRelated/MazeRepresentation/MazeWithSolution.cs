@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.MazeRelated.Enums;
+﻿using Theseus.Domain.Models.ExamSetRelated;
+using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
@@ -12,6 +13,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         public Direction StartDirection { get; set; }
         public Direction EndDirection { get; set; }
         public StaffMember StaffMember { get; set; }
+        public List<ExamSet> ExamSets { get; } = new List<ExamSet>();
 
         public MazeWithSolution(Maze grid, Guid? id = null)
         {

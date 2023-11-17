@@ -9,6 +9,9 @@ namespace Theseus.Infrastructure.Commands.MazeCommands
         {
             context.Attach(mazeDto.Owner);
 
+            if (mazeDto.ExamSetDtos is null)
+                return;
+
             foreach (var examSet in mazeDto.ExamSetDtos)
             {
                 context.Attach(examSet);

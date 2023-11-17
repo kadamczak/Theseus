@@ -18,6 +18,7 @@ namespace Theseus.WPF.Code.HostBuilders
             hostBuilder.ConfigureServices((context, services) =>
             {
                 services.AddSingleton<IGetAllMazesWithSolutionQuery, GetAllMazesWithSolutionQuery>();
+                services.AddSingleton<IGetAllMazesWithSolutionOfStaffMemberQuery, GetAllMazesWithSolutionOfStaffMemberQuery>();
                 services.AddSingleton<IGetMazeWithSolutionByIdQuery, GetMazeWithSolutionByIdQuery>();
                 services.AddSingleton<IGetAllExamsQuery, GetAllExamSetsQuery>();
                 services.AddSingleton<IGetStaffMemberByUsernameQuery, GetStaffMemberByUsernameQuery>();

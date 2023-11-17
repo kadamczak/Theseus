@@ -7,17 +7,22 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
     {
         protected void AttachRelatedEntities(StaffMemberDto staffMemberDto, TheseusDbContext context)
         {
-            foreach (var patient in staffMemberDto.PatientDtos)
+            if(staffMemberDto.PatientDtos is not null)
             {
-                context.Attach(patient);
+                foreach (var patient in staffMemberDto.PatientDtos)
+                    context.Attach(patient);
             }
-            foreach (var examSet in staffMemberDto.ExamSetDtos)
+
+            if (staffMemberDto.ExamSetDtos is not null)
             {
-                context.Attach(examSet);
+                foreach (var examSet in staffMemberDto.ExamSetDtos)
+                    context.Attach(examSet);
             }
-            foreach (var maze in staffMemberDto.MazeDtos)
+
+            if (staffMemberDto.PatientDtos is not null)
             {
-                context.Attach(maze);
+                foreach (var maze in staffMemberDto.MazeDtos)
+                    context.Attach(maze);
             }
         }
     }

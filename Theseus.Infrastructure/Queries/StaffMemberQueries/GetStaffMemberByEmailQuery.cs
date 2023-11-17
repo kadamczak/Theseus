@@ -7,24 +7,16 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.StaffMemberQueries
 {
-    public class GetStaffMemberByEmailQuery : IGetStaffMemberByEmailQuery
+    public class GetStaffMemberByEmailQuery : StaffMemberQuery, IGetStaffMemberByEmailQuery
     {
-        private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly IMapper _mapper;
+        public GetStaffMemberByEmailQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
 
-        public GetStaffMemberByEmailQuery(TheseusDbContextFactory dbContextFactory,
-                                          IMapper mapper)
+        public async Task<StaffMember?> GetStaffMember(string email, bool loadExamSets = false, bool loadPatients = false, bool loadMazes = false)
         {
-            _dbContextFactory = dbContextFactory;
-            _mapper = mapper;
-        }
-
-        public async Task<StaffMember?> GetStaffMember(string email)
-        {
-            using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
+            using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 StaffMemberDto? staffMemberDto = await context.StaffMembers.FirstOrDefaultAsync(user => user.Email == email);
-                return staffMemberDto is null ? null : _mapper.Map<StaffMember>(staffMemberDto);
+                return staffMemberDto is null ? null : GetStaffMember(context, staffMemberDto, loadExamSets, loadPatients, loadMazes);
             }
         }
     }

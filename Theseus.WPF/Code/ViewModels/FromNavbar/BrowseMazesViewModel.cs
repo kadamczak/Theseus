@@ -1,5 +1,8 @@
-﻿using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
+﻿using System;
+using Theseus.Domain.Models.UserRelated.Exceptions;
+using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -9,18 +12,24 @@ namespace Theseus.WPF.Code.ViewModels
         public ShowDetailsMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
 
         public BrowseMazesViewModel(SelectedMazeListStore mazeListStore,
-                                    IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery,
+                                    IGetAllMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
+                                    ICurrentStaffMemberStore currentStaffMemberStore,
                                     ShowDetailsMazeCommandListViewModel showDetailsMazeCommandListViewModel)
         {
-            LoadFullMazeList(getAllMazesWithSolutionQuery, mazeListStore);
+            if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
+                throw new StaffMemberNotLoggedInException();
+
+            LoadFullMazeList(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
 
             this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel;
             this.ShowDetailsMazeCommandViewModel.LoadMazesFromMazeListStore();
         }
 
-        private void LoadFullMazeList(IGetAllMazesWithSolutionQuery getAllMazesWithSolutionQuery, SelectedMazeListStore mazeListStore)
+        private void LoadFullMazeList(IGetAllMazesWithSolutionOfStaffMemberQuery query,
+                                      Guid staffMemberId,
+                                      SelectedMazeListStore mazeListStore)
         {
-            var fullMazeList = getAllMazesWithSolutionQuery.GetAllMazesWithSolution();
+            var fullMazeList = query.GetAllMazesWithSolutionOfStaffMemberQuery(staffMemberId);
             mazeListStore.MazesInList = fullMazeList;
         }
     }

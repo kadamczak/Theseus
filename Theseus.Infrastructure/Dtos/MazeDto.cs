@@ -19,7 +19,7 @@ namespace Theseus.Infrastructure.Dtos
         public byte StartDirection { get; set; } = default!;
         public byte EndDirection { get; set; } = default!;
 
-        public StaffMemberDto Owner { get; set; } = default!;
+        public virtual StaffMemberDto Owner { get; set; } = default!;
         public virtual ICollection<ExamSetDto> ExamSetDtos { get; set; } = default!;
 
         

@@ -7,7 +7,7 @@ namespace Theseus.Infrastructure.Dtos
         [Key]
         public Guid Id { get; set; } = default;
         public virtual IEnumerable<MazeDto> MazeDtos { get; set; } = default!;
-        public StaffMemberDto Owner { get; set; } = default!;
+        public virtual StaffMemberDto Owner { get; set; } = default!;
 
         public ExamSetDto() { }
 
