@@ -15,6 +15,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         public StaffMember StaffMember { get; set; }
         public List<ExamSet> ExamSets { get; } = new List<ExamSet>();
 
+        public MazeWithSolution() { }
+
         public MazeWithSolution(Maze grid, Guid? id = null)
         {
             Id = id;

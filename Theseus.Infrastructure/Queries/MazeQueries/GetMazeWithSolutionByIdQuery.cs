@@ -10,12 +10,12 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
     {
         public GetMazeWithSolutionByIdQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
 
-        public MazeWithSolution? GetMazeWithSolutionById(Guid id, bool loadOwner = false, bool loadExamSets = false)
+        public MazeWithSolution? GetMazeWithSolutionById(Guid id)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 MazeDto? mazeDto = context.Mazes.Find(id);
-                return (mazeDto is null) ? null : GetMazeWithSolution(context, mazeDto, loadOwner, loadExamSets);
+                return (mazeDto is null) ? null : MapMazeWithSolution(mazeDto);
             }
         }
     }

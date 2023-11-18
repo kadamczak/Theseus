@@ -16,7 +16,8 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                ExamSetDto examSetDto = Mapper.Map<ExamSetDto>(examSet);
+                ExamSetDto examSetDto = new ExamSetDto();
+                Mapper.Map(examSet, examSetDto);
                 AttachRelatedEntities(examSetDto, context);
                 context.ExamSets.Add(examSetDto);
                 await context.SaveChangesAsync();

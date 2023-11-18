@@ -52,5 +52,9 @@ namespace Theseus.Infrastructure.Dtos
             StartDirection = (byte)maze.StartDirection;
             EndDirection = (byte)maze.EndDirection;
         }
+
+        public MazeDto()
+        {
+        }
     }
 }

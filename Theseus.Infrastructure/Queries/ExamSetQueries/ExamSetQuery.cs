@@ -11,30 +11,21 @@ namespace Theseus.Infrastructure.Queries.ExamSetQueries
         {
         }
 
-        protected List<ExamSet> GetExamSets(TheseusDbContext context, IEnumerable<ExamSetDto> examSetDtos, bool loadOwner, bool loadMazes, bool loadGroups)
+        protected List<ExamSet> MapExamSets(IEnumerable<ExamSetDto> examSetDtos)
         {
             List<ExamSet> examSets = new List<ExamSet>();
             foreach (var examSet in examSetDtos)
             {
-                examSets.Add(GetExamSet(context, examSet, loadOwner, loadMazes, loadGroups));
+                examSets.Add(MapExamSet(examSet));
             }
             return examSets;
         }
 
-        protected ExamSet GetExamSet(TheseusDbContext context, ExamSetDto examSetDto, bool loadOwner, bool loadMazes, bool loadGroups)
+        protected ExamSet MapExamSet(ExamSetDto examSetDto)
         {
-            if (loadOwner)
-                context.Entry(examSetDto).Reference(p => p.Owner).Load();
-
-            if (loadMazes)
-                context.Entry(examSetDto).Collection(p => p.MazeDtos).Load();
-
-            if (loadGroups)
-                context.Entry(examSetDto).Collection(p => p.GroupDtos).Load();
-
-            return MapToExamSet(examSetDto);
+            ExamSet examSet = new ExamSet();
+            Mapper.Map(examSetDto, examSet);
+            return examSet;
         }
-
-        private ExamSet MapToExamSet(ExamSetDto groupDto) => Mapper.Map<ExamSet>(groupDto);
     }
 }

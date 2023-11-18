@@ -18,9 +18,7 @@ namespace Theseus.Infrastructure.Commands.PatientCommands
             {
                 PatientDto patientDto = new PatientDto();
                 Mapper.Map(patient, patientDto);
-
                 AttachRelatedEntities(patientDto, context);
-
                 context.Patients.Update(patientDto);
                 await context.SaveChangesAsync();
             }

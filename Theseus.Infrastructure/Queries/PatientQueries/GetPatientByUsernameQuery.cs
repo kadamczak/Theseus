@@ -11,12 +11,12 @@ namespace Theseus.Infrastructure.Queries.PatientQueries
     {
         public GetPatientByUsernameQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
 
-        public async Task<Patient?> GetPatient(string username, bool loadGroup = false)
+        public async Task<Patient?> GetPatient(string username)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 PatientDto? patientDto = await context.Patients.AsNoTracking().FirstOrDefaultAsync(user => user.Username == username);
-                return patientDto is null ? null : GetPatient(context, patientDto, loadGroup);
+                return patientDto is null ? null : MapPatient(patientDto);
             }
         }
     }

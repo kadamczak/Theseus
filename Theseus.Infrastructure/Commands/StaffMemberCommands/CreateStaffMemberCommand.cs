@@ -16,10 +16,9 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                var staffMemberDto = Mapper.Map<StaffMemberDto>(staffMember);
-
+                StaffMemberDto staffMemberDto = new StaffMemberDto();
+                Mapper.Map(staffMember, staffMemberDto);
                 AttachRelatedEntities(staffMemberDto, context);
-
                 context.StaffMembers.Add(staffMemberDto);
                 await context.SaveChangesAsync();
             }

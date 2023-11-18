@@ -11,33 +11,21 @@ namespace Theseus.Infrastructure.Queries.GroupQueries
         {
         }
 
-        protected List<Group> GetGroups(TheseusDbContext context, IEnumerable<GroupDto> groupDtos, bool loadStaffMembers, bool loadPatients, bool loadExamSets, bool loadOwner)
+        protected List<Group> MapGroups(IEnumerable<GroupDto> groupDtos)
         {
             List<Group> groups = new List<Group>();
             foreach (var group in groupDtos)
             {
-                groups.Add(GetGroup(context, group, loadStaffMembers, loadPatients, loadExamSets, loadOwner));
+                groups.Add(MapGroup(group));
             }
             return groups;
         }
 
-        protected Group GetGroup(TheseusDbContext context, GroupDto groupDto, bool loadStaffMembers, bool loadPatients, bool loadExamSets, bool loadOwner)
+        protected Group MapGroup(GroupDto groupDto)
         {
-            if (loadStaffMembers)
-                context.Entry(groupDto).Collection(p => p.StaffMemberDtos).Load();
-
-            if (loadPatients)
-                context.Entry(groupDto).Collection(p => p.PatientDtos).Load();
-
-            if (loadExamSets)
-                context.Entry(groupDto).Collection(p => p.ExamSetDtos).Load();
-
-            if (loadOwner)
-                context.Entry(groupDto).Reference(p => p.Owner).Load();
-
-            return MapToGroup(groupDto);
+            Group group = new Group();
+            Mapper.Map(groupDto, group);
+            return group;
         }
-
-        private Group MapToGroup(GroupDto groupDto) => Mapper.Map<Group>(groupDto);
     }
 }

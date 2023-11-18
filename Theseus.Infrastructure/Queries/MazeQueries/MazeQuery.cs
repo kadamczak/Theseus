@@ -13,39 +13,31 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
         {
         }
 
-        protected List<MazeWithSolution> GetMazesWithSolution(TheseusDbContext context, IEnumerable<MazeDto> mazeDtos, bool loadOwner, bool loadExamSets)
+        protected List<MazeWithSolution> MapMazesWithSolution(IEnumerable<MazeDto> mazeDtos)
         {
             List<MazeWithSolution> mazes = new List<MazeWithSolution>();
             foreach (var mazeDto in mazeDtos)
             {
-                mazes.Add(GetMazeWithSolution(context, mazeDto, loadOwner, loadExamSets));
+                mazes.Add(MapMazeWithSolution(mazeDto));
             }
             return mazes;
         }
 
-        protected MazeWithSolution GetMazeWithSolution(TheseusDbContext context, MazeDto mazeDto, bool loadOwner, bool loadExamSets)
+        protected MazeWithSolution MapMazeWithSolution(MazeDto mazeDto)
         {
-            if (loadOwner)
-                context.Entry(mazeDto).Reference(p => p.Owner).Load();
+            MazeWithSolution mazeWithSolution = new MazeWithSolution();
+            Mapper.Map(mazeDto, mazeWithSolution);
+            //Mapper.Map(mazeDto.Owner, mazeWithSolution.StaffMember);
 
-            if (loadExamSets)
-                context.Entry(mazeDto).Collection(p => p.ExamSetDtos).Load();
+            //if (mazeDto.ExamSetDtos is null)
+            //    return mazeWithSolution;
 
-            return MapToMazeWithSolution(mazeDto);
-        }
-
-        protected MazeWithSolution MapToMazeWithSolution(MazeDto mazeDto)
-        {
-            MazeWithSolution mazeWithSolution = Mapper.Map<MazeWithSolution>(mazeDto);
-            mazeWithSolution.StaffMember = Mapper.Map<StaffMember>(mazeDto.Owner);
-
-            if (mazeDto.ExamSetDtos is null)
-                return mazeWithSolution;
-
-            foreach (var examSet in mazeDto.ExamSetDtos)
-            {
-                mazeWithSolution.ExamSets.Add(Mapper.Map<ExamSet>(examSet));
-            }
+            //foreach (var examSetDto in mazeDto.ExamSetDtos)
+            //{
+            //    ExamSet examSet = new ExamSet();
+            //    Mapper.Map(examSetDto, examSet);
+            //    mazeWithSolution.ExamSets.Add(examSet);
+            //}
 
             return mazeWithSolution;
         }

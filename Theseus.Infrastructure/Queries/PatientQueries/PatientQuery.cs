@@ -11,27 +11,17 @@ namespace Theseus.Infrastructure.Queries.PatientQueries
         {
         }
 
-        protected List<Patient> GetPatients(TheseusDbContext context, IEnumerable<PatientDto> patientDtos, bool loadGroup)
+        protected List<Patient> MapPatients(IEnumerable<PatientDto> patientDtos)
         {
             List<Patient> patients = new List<Patient>();
             foreach (var patient in patientDtos)
             {
-                patients.Add(GetPatient(context, patient, loadGroup));
+                patients.Add(MapPatient(patient));
             }
             return patients;
         }
 
-        protected Patient GetPatient(TheseusDbContext context, PatientDto patientDto, bool loadGroup)
-        {
-            //if (loadGroup)
-            //    context.Entry(patientDto).Reference(p => p.GroupDto).Load();
-
-            Patient patient = MapToPatient(patientDto);
-            context.Entry(patientDto).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-            return patient;
-        }
-
-        private Patient MapToPatient(PatientDto patientDto)
+        protected Patient MapPatient(PatientDto patientDto)
         {
             Patient patient = new Patient();
             Mapper.Map(patientDto, patient);

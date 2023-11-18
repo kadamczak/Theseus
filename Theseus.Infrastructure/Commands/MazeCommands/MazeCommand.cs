@@ -12,14 +12,15 @@ namespace Theseus.Infrastructure.Commands.MazeCommands
 
         protected void AttachRelatedEntities(MazeDto mazeDto, TheseusDbContext context)
         {
-            context.Attach(mazeDto.Owner);
+            if (mazeDto.Owner is not null)
+                context.Attach(mazeDto.Owner);
 
-            if (mazeDto.ExamSetDtos is null)
-                return;
-
-            foreach (var examSet in mazeDto.ExamSetDtos)
+            if (mazeDto.ExamSetDtos is not null)
             {
-                context.Attach(examSet);
+                foreach (var examSet in mazeDto.ExamSetDtos)
+                {
+                    context.Attach(examSet);
+                }
             }
         }
     }

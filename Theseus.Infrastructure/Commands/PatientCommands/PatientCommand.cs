@@ -12,7 +12,8 @@ namespace Theseus.Infrastructure.Commands.PatientCommands
 
         protected void AttachRelatedEntities(PatientDto patientDto, TheseusDbContext context)
         {
-            //context.Attach(patientDto.GroupDto);
+            if (patientDto.GroupDto is not null)
+                context.Attach(patientDto.GroupDto);
         }
     }
 }

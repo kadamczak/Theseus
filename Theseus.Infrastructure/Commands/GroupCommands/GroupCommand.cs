@@ -31,7 +31,8 @@ namespace Theseus.Infrastructure.Commands.GroupCommands
                     context.Attach(examSet);
             }
 
-            context.Attach(groupDto.Owner);
+            if (groupDto.Owner is not null)
+                context.Attach(groupDto.Owner);
         }
     }
 }

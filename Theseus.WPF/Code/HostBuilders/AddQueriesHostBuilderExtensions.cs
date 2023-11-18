@@ -27,6 +27,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IGetStaffMemberByEmailQuery, GetStaffMemberByEmailQuery>();
                 services.AddSingleton<IGetPatientByUsernameQuery, GetPatientByUsernameQuery>();
                 services.AddSingleton<IGetGroupByNameQuery, GetGroupByNameQuery>();
+                services.AddSingleton<IGetGroupByPatientQuery, GetGroupByPatientQuery>();
             });
 
             return hostBuilder;

@@ -16,11 +16,11 @@ namespace Theseus.Infrastructure.Commands.MazeCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                MazeDto mazeDto = Mapper.Map<MazeDto>(maze);
-                mazeDto.Owner = Mapper.Map<StaffMemberDto>(maze.StaffMember);
+                MazeDto mazeDto = new MazeDto();
+                Mapper.Map(maze, mazeDto);
+                Mapper.Map(maze.StaffMember, mazeDto.Owner);
 
                 AttachRelatedEntities(mazeDto, context);
-
                 context.Mazes.Update(mazeDto);
                 await context.SaveChangesAsync();
 

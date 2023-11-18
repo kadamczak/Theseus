@@ -11,7 +11,7 @@ namespace Theseus.Infrastructure.Queries.ExamSetQueries
         {
         }
 
-        public IEnumerable<ExamSet> GetAllExamSets(bool loadOwner = false, bool loadMazes = false, bool loadGroups = false)
+        public IEnumerable<ExamSet> GetAllExamSets()
         {
             throw new NotImplementedException();
         }

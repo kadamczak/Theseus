@@ -2,8 +2,8 @@
 
 namespace Theseus.Domain.QueryInterfaces.GroupQueryInterfaces
 {
-    public interface IGetGroupByNameQuery
+    public interface IGetGroupByPatientQuery
     {
-        Task<Group?> GetGroup(string name);
+        Task<Group?> GetGroup(Guid patientId);
     }
 }

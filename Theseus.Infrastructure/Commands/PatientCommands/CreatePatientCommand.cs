@@ -16,10 +16,9 @@ namespace Theseus.Infrastructure.Commands.PatientCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                var patientDto = Mapper.Map<PatientDto>(patient);
-
+                PatientDto patientDto = new PatientDto();
+                Mapper.Map(patient, patientDto);
                 AttachRelatedEntities(patientDto, context);
-
                 context.Patients.Add(patientDto);
                 await context.SaveChangesAsync();
             }

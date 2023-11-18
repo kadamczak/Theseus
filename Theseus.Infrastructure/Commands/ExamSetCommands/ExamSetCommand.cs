@@ -12,14 +12,15 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
 
         protected void AttachRelatedEntities(ExamSetDto examSetDto, TheseusDbContext context)
         {
-            context.Attach(examSetDto.Owner);
+            if (examSetDto.Owner is not null)
+                context.Attach(examSetDto.Owner);
 
             if (examSetDto.MazeDtos is null)
-                return;
-
-            foreach (var maze in examSetDto.MazeDtos)
             {
-                context.Attach(maze);
+                foreach (var maze in examSetDto.MazeDtos)
+                {
+                    context.Attach(maze);
+                }
             }
         }
     }

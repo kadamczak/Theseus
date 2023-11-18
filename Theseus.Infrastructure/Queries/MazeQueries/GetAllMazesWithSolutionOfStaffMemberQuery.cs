@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
@@ -10,12 +11,12 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
     {
         public GetAllMazesWithSolutionOfStaffMemberQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
 
-        IEnumerable<MazeWithSolution> IGetAllMazesWithSolutionOfStaffMemberQuery.GetAllMazesWithSolutionOfStaffMemberQuery(Guid staffMemberId, bool loadOwner, bool loadExamSets)
+        IEnumerable<MazeWithSolution> IGetAllMazesWithSolutionOfStaffMemberQuery.GetAllMazesWithSolutionOfStaffMemberQuery(Guid staffMemberId)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                IEnumerable<MazeDto> mazeDtos = context.Mazes.Where(m => m.Owner.Id == staffMemberId).ToList();
-                return GetMazesWithSolution(context, mazeDtos, loadOwner, loadExamSets);
+                IEnumerable<MazeDto> mazeDtos = context.Mazes.Where(m => m.Owner.Id == staffMemberId).AsNoTracking();
+                return MapMazesWithSolution(mazeDtos);
             }
         }
     }

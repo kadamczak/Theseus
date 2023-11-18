@@ -16,7 +16,8 @@ namespace Theseus.Infrastructure.Commands.GroupCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                GroupDto groupDto = Mapper.Map<GroupDto>(group);
+                GroupDto groupDto = new GroupDto();
+                Mapper.Map(group, groupDto);
                 AttachRelatedEntities(groupDto, context);
                 context.Groups.Add(groupDto);
                 await context.SaveChangesAsync();

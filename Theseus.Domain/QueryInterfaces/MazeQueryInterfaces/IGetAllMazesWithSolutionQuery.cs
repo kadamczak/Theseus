@@ -4,6 +4,6 @@ namespace Theseus.Domain.QueryInterfaces.MazeQueryInterfaces
 {
     public interface IGetAllMazesWithSolutionQuery
     {
-        IEnumerable<MazeWithSolution> GetAllMazesWithSolution(bool loadOwner = false, bool loadExamSets = false);
+        IEnumerable<MazeWithSolution> GetAllMazesWithSolution();
     }
 }
