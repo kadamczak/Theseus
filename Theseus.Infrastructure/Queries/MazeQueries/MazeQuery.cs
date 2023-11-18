@@ -7,15 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.MazeQueries
 {
-    public abstract class MazeQuery
+    public abstract class MazeQuery : Query
     {
-        protected TheseusDbContextFactory DbContextFactory { get; }
-        protected IMapper Mapper { get; }
-
-        public MazeQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper)
+        protected MazeQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
-            DbContextFactory = dbContextFactory;
-            Mapper = mapper;
         }
 
         protected List<MazeWithSolution> GetMazesWithSolution(TheseusDbContext context, IEnumerable<MazeDto> mazeDtos, bool loadOwner, bool loadExamSets)

@@ -1,10 +1,15 @@
-﻿using Theseus.Infrastructure.DbContexts;
+﻿using AutoMapper;
+using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.MazeCommands
 {
-    public abstract class MazeCommand
+    public abstract class MazeCommand : Command
     {
+        protected MazeCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        {
+        }
+
         protected void AttachRelatedEntities(MazeDto mazeDto, TheseusDbContext context)
         {
             context.Attach(mazeDto.Owner);

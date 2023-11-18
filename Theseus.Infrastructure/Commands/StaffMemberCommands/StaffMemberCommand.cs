@@ -1,16 +1,21 @@
-﻿using Theseus.Infrastructure.DbContexts;
+﻿using AutoMapper;
+using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.StaffMemberCommands
 {
-    public abstract class StaffMemberCommand
+    public abstract class StaffMemberCommand : Command
     {
+        protected StaffMemberCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        {
+        }
+
         protected void AttachRelatedEntities(StaffMemberDto staffMemberDto, TheseusDbContext context)
         {
-            if(staffMemberDto.PatientDtos is not null)
+            if(staffMemberDto.GroupDtos is not null)
             {
-                foreach (var patient in staffMemberDto.PatientDtos)
-                    context.Attach(patient);
+                foreach (var group in staffMemberDto.GroupDtos)
+                    context.Attach(group);
             }
 
             if (staffMemberDto.ExamSetDtos is not null)
@@ -19,7 +24,7 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
                     context.Attach(examSet);
             }
 
-            if (staffMemberDto.PatientDtos is not null)
+            if (staffMemberDto.MazeDtos is not null)
             {
                 foreach (var maze in staffMemberDto.MazeDtos)
                     context.Attach(maze);

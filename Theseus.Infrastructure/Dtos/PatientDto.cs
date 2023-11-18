@@ -13,6 +13,6 @@ namespace Theseus.Infrastructure.Dtos
         public string EducationLevel { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public virtual ICollection<StaffMemberDto> StaffMemberDtos { get; set; } = default!;
+        public virtual GroupDto GroupDto { get; set; } = default!;
     }
 }

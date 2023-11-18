@@ -8,20 +8,15 @@ namespace Theseus.Infrastructure.Commands.PatientCommands
 {
     public class CreatePatientCommand : PatientCommand, ICreatePatientCommand
     {
-        private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly IMapper _mapper;
-
-        public CreatePatientCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper)
+        public CreatePatientCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
-            _dbContextFactory = dbContextFactory;
-            _mapper = mapper;
         }
 
         public async Task Create(Patient patient)
         {
-            using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
+            using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                var patientDto = _mapper.Map<PatientDto>(patient);
+                var patientDto = Mapper.Map<PatientDto>(patient);
 
                 AttachRelatedEntities(patientDto, context);
 

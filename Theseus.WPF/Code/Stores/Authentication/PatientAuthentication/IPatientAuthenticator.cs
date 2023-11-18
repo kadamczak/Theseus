@@ -11,8 +11,8 @@ namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
         bool IsLoggedInAsPatient { get; }
         event Action PatientStateChanged;
 
-        Task<PatientRegistrationResult> Register(Patient newPatient, string staffMemberUsername);
-        Task Login(string username);
+        Task<PatientRegistrationResult> Register(Patient newPatient, string groupName);
+        Task Login(string username, string groupName);
         void Logout();
     }
 }

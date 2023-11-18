@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated.Enums;
 
 namespace Theseus.Domain.Models.UserRelated
@@ -13,6 +13,6 @@ namespace Theseus.Domain.Models.UserRelated
         public EducationLevel EducationLevel { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public ICollection<StaffMember> StaffMembers { get; set; } = new List<StaffMember>();
+        public Group Group { get; set; } = default!;
     }
 }

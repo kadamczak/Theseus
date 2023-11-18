@@ -4,7 +4,7 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
 {
     public interface IPatientAuthenticationService
     {
-        Task<PatientRegistrationResult> Register(Patient newAccount, string staffMemberUsername);
-        Task<Patient> Login(string username);
+        Task<PatientRegistrationResult> Register(Patient newAccount, string groupName);
+        Task<Patient> Login(string username, string groupName);
     }
 }

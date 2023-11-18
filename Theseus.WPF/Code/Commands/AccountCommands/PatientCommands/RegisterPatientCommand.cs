@@ -42,7 +42,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
             {
                 PatientRegistrationResult.Success => "Succesfully registered.",
                 PatientRegistrationResult.UsernameAlreadyExists => "Patient username already exists.",
-                PatientRegistrationResult.StaffMemberDoesNotExist => "Staff member does not exist.",
+                PatientRegistrationResult.GroupDoesNotExist => "Group does not exist.",
                 _ => throw new ArgumentException("Invalid parameter.")
             };
         }

@@ -82,5 +82,41 @@ namespace Theseus.WPF.Properties {
                 this["PastUsernameSecond"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LogInGroup {
+            get {
+                return ((string)(this["LogInGroup"]));
+            }
+            set {
+                this["LogInGroup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PastGroupFirst {
+            get {
+                return ((string)(this["PastGroupFirst"]));
+            }
+            set {
+                this["PastGroupFirst"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PastGroupSecond {
+            get {
+                return ((string)(this["PastGroupSecond"]));
+            }
+            set {
+                this["PastGroupSecond"] = value;
+            }
+        }
     }
 }

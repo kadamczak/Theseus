@@ -1,19 +1,18 @@
-﻿using Theseus.Infrastructure.DbContexts;
+﻿using AutoMapper;
+using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.PatientCommands
 {
-    public abstract class PatientCommand
+    public abstract class PatientCommand : Command
     {
+        protected PatientCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        {
+        }
+
         protected void AttachRelatedEntities(PatientDto patientDto, TheseusDbContext context)
         {
-            if (patientDto.StaffMemberDtos is null)
-                return;
-
-            foreach (var staffMember in patientDto.StaffMemberDtos)
-            {
-                context.Attach(staffMember);
-            }
+            context.Attach(patientDto.GroupDto);
         }
     }
 }

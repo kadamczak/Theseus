@@ -6,39 +6,22 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.PatientCommands
 {
-    public class UpdatePatientCommand : IUpdatePatientCommand
+    public class UpdatePatientCommand : PatientCommand, IUpdatePatientCommand
     {
-        private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly IMapper _mapper;
-
-        public UpdatePatientCommand(TheseusDbContextFactory theseusDbContextFactory, IMapper mapper)
+        public UpdatePatientCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
-            _dbContextFactory = theseusDbContextFactory;
-            _mapper = mapper;
         }
 
         public async Task Update(Patient patient)
         {
-            using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
+            using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                var patientDto = _mapper.Map<PatientDto>(patient);
+                var patientDto = Mapper.Map<PatientDto>(patient);
 
                 AttachRelatedEntities(patientDto, context);
-                foreach (var staffMember in patientDto.StaffMemberDtos)
-                {
-                    context.Attach(staffMember);
-                }
 
                 context.Patients.Update(patientDto);
                 await context.SaveChangesAsync();
-            }
-        }
-
-        private void AttachRelatedEntities(PatientDto patientDto, TheseusDbContext context)
-        {
-            foreach (var staffMember in patientDto.StaffMemberDtos)
-            {
-                context.Attach(staffMember);
             }
         }
     }

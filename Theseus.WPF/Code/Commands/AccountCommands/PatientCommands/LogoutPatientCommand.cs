@@ -27,6 +27,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
         private void RemoveUserFromAutomaticLogIn()
         {
             Properties.Settings.Default.LogInUsername = string.Empty;
+            Properties.Settings.Default.LogInGroup = string.Empty;
             Properties.Settings.Default.Save();
         }
     }

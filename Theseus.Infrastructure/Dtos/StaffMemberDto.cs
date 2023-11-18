@@ -13,8 +13,8 @@ namespace Theseus.Infrastructure.Dtos
         public string Surname { get; set; } = default!;
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public virtual ICollection<PatientDto> PatientDtos { get; set; }
-        public virtual ICollection<MazeDto> MazeDtos { get; set; }
-        public virtual ICollection<ExamSetDto> ExamSetDtos { get; set; }
+        public virtual ICollection<GroupDto> GroupDtos { get; set; } = default!;
+        public virtual ICollection<MazeDto> MazeDtos { get; set; } = default!;
+        public virtual ICollection<ExamSetDto> ExamSetDtos { get; set; } = default!;
     }
 }

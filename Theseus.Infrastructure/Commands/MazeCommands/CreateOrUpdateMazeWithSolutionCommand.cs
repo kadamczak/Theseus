@@ -8,22 +8,16 @@ namespace Theseus.Infrastructure.Commands.MazeCommands
 {
     public class CreateOrUpdateMazeWithSolutionCommand : MazeCommand, ICreateOrUpdateMazeWithSolutionCommand
     {
-        private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly IMapper _mapper;
-
-        public CreateOrUpdateMazeWithSolutionCommand(TheseusDbContextFactory dbContextFactory,
-                                                     IMapper mapper)
+        public CreateOrUpdateMazeWithSolutionCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
-            _dbContextFactory = dbContextFactory;
-            _mapper = mapper;
         }
 
         public async Task CreateOrUpdateMazeWithSolution(MazeWithSolution maze)
         {
-            using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
+            using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                MazeDto mazeDto = _mapper.Map<MazeDto>(maze);
-                mazeDto.Owner = _mapper.Map<StaffMemberDto>(maze.StaffMember);
+                MazeDto mazeDto = Mapper.Map<MazeDto>(maze);
+                mazeDto.Owner = Mapper.Map<StaffMemberDto>(maze.StaffMember);
 
                 AttachRelatedEntities(mazeDto, context);
 

@@ -46,6 +46,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
                 StaffMemberRegistrationResult.UsernameAlreadyExists => "Username already exists.",
                 StaffMemberRegistrationResult.EmailAlreadyExists => "Email already exists.",
                 StaffMemberRegistrationResult.PasswordsDoNotMatch => "Passwords do not match.",
+                StaffMemberRegistrationResult.UsernameNotAllowed => "Username can't end with \"-gr\".",
                 _ => throw new ArgumentException("Invalid parameter.")
             };
         }

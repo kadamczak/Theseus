@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
+using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
+using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
@@ -11,16 +13,19 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
         private readonly IGetStaffMemberByUsernameQuery _getStaffMemberByUsernameQuery;
         private readonly IGetStaffMemberByEmailQuery _getStaffMemberByEmailQuery;
         private readonly ICreateStaffMemberCommand _createStaffMemberCommand;
+        private readonly ICreateGroupCommand _createGroupCommand;
         private readonly IPasswordHasher _passwordHasher;
 
         public StaffMemberAuthenticationService(IGetStaffMemberByUsernameQuery getStaffMemberByUsernameQuery,
                                      IGetStaffMemberByEmailQuery getStaffMemberByEmailQuery,
                                      ICreateStaffMemberCommand createStaffMemberCommand,
+                                     ICreateGroupCommand createGroupCommand,
                                      IPasswordHasher passwordHasher)
         {
             _getStaffMemberByUsernameQuery = getStaffMemberByUsernameQuery;
             _getStaffMemberByEmailQuery = getStaffMemberByEmailQuery;
             _createStaffMemberCommand = createStaffMemberCommand;
+            _createGroupCommand = createGroupCommand;
             _passwordHasher = passwordHasher;
         }
 
@@ -45,30 +50,53 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
         {
             StaffMemberRegistrationResult result = StaffMemberRegistrationResult.Success;
 
+            if (newAccount.Username.EndsWith("-gr"))
+            {
+                result = StaffMemberRegistrationResult.UsernameNotAllowed;
+                return result;
+            }
+
             if (newAccount.PasswordHash != confirmPassword)
             {
                 result = StaffMemberRegistrationResult.PasswordsDoNotMatch;
+                return result;
             }
 
             StaffMember? emailAccount = await _getStaffMemberByEmailQuery.GetStaffMember(newAccount.Email);
             if (emailAccount is not null)
             {
                 result = StaffMemberRegistrationResult.EmailAlreadyExists;
+                return result;
             }
 
             StaffMember? usernameAccount = await _getStaffMemberByUsernameQuery.GetStaffMember(newAccount.Username);
             if (usernameAccount is not null)
             {
                 result = StaffMemberRegistrationResult.UsernameAlreadyExists;
+                return result;
             }
 
             if (result == StaffMemberRegistrationResult.Success)
             {
                 newAccount.PasswordHash = _passwordHasher.HashPassword(newAccount.PasswordHash);
+
+                Group defaultGroup = CreateDefaultGroupForStaffMember(newAccount.Username);
+                await _createGroupCommand.CreateGroup(defaultGroup);
+
+                newAccount.Groups.Add(defaultGroup);
                 await _createStaffMemberCommand.Create(newAccount);
             }
 
             return result;
+        }
+
+        private Group CreateDefaultGroupForStaffMember(string username)
+        {
+            return new Group()
+            {
+                Id = Guid.NewGuid(),
+                Name = username + "-gr"
+            };
         }
     }
 }

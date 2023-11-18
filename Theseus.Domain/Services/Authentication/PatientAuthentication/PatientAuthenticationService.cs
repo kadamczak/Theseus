@@ -1,40 +1,46 @@
 ﻿using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
+using Theseus.Domain.Models.GroupRelated;
+using Theseus.Domain.Models.GroupRelated.Exceptions;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
+using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
-using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
-using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.Domain.Services.Authentication.PatientAuthentication
 {
     public class PatientAuthenticationService : IPatientAuthenticationService
     {
         private readonly IGetPatientByUsernameQuery _getPatientByUsernameQuery;
-        private readonly IGetStaffMemberByUsernameQuery _getStaffMemberByUsernameQuery;
+        private readonly IGetGroupByNameQuery _getGroupByNameQuery;
         private readonly ICreatePatientCommand _createPatientCommand;
 
         public PatientAuthenticationService(IGetPatientByUsernameQuery getPatientByUsernameQuery,
-                                            IGetStaffMemberByUsernameQuery getStaffMemberByUsernameQuery,
+                                            IGetGroupByNameQuery getGroupByNameQuery,
                                             ICreatePatientCommand createPatientCommand)
         {
             _getPatientByUsernameQuery = getPatientByUsernameQuery;
-            _getStaffMemberByUsernameQuery = getStaffMemberByUsernameQuery;
+            _getGroupByNameQuery = getGroupByNameQuery;
             _createPatientCommand = createPatientCommand;
         }
 
-        public async Task<Patient> Login(string username)
+        public async Task<Patient> Login(string username, string groupName)
         {
-            Patient? existingPatient = await _getPatientByUsernameQuery.GetPatient(username);
+            Patient? existingPatient = await _getPatientByUsernameQuery.GetPatient(username, loadGroup: true);
 
             if (existingPatient is null)
             {
                 throw new UserNotFoundException(username);
             }
 
+            if (existingPatient.Group.Name != groupName)
+            {
+                throw new WrongGroupNameForPatientException(groupName, existingPatient.Username);
+            }
+
             return existingPatient;
         }
 
-        public async Task<PatientRegistrationResult> Register(Patient newAccount, string staffMemberUsername)
+        public async Task<PatientRegistrationResult> Register(Patient newAccount, string groupName)
         {
             PatientRegistrationResult result = PatientRegistrationResult.Success;
 
@@ -44,15 +50,15 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
                 result = PatientRegistrationResult.UsernameAlreadyExists;
             }
 
-            StaffMember? staffMember = await _getStaffMemberByUsernameQuery.GetStaffMember(staffMemberUsername);
-            if (staffMember is null)
+            Group? group = await _getGroupByNameQuery.GetGroup(groupName);
+            if (group is null)
             {
-                result = PatientRegistrationResult.StaffMemberDoesNotExist;
+                result = PatientRegistrationResult.GroupDoesNotExist;
             }
 
             if (result == PatientRegistrationResult.Success)
             {
-                newAccount.StaffMembers.Add(staffMember!);
+                newAccount.Group = group!;
                 await _createPatientCommand.Create(newAccount);
             }
 

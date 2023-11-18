@@ -5,6 +5,7 @@
         Success,
         PasswordsDoNotMatch,
         EmailAlreadyExists,
-        UsernameAlreadyExists
+        UsernameAlreadyExists,
+        UsernameNotAllowed
     }
 }

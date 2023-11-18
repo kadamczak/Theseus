@@ -1,11 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Reflection.Metadata;
-using Theseus.Domain.Models.UserRelated;
-using Theseus.Domain.Models.UserRelated.Enums;
+﻿using Microsoft.EntityFrameworkCore;
 using Theseus.Infrastructure.Dtos;
-using Theseus.Infrastructure.Dtos.Converters;
 
 namespace Theseus.Infrastructure.DbContexts
 {
@@ -17,12 +11,10 @@ namespace Theseus.Infrastructure.DbContexts
         public DbSet<ExamSetDto> ExamSets { get; set; }
         public DbSet<StaffMemberDto> StaffMembers { get; set; }
         public DbSet<PatientDto> Patients { get; set; }
+        public DbSet<GroupDto> Groups { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
-
             modelBuilder.Entity<MazeDto>()
                         .HasMany(m => m.ExamSetDtos)
                         .WithMany(e => e.MazeDtos)
@@ -38,17 +30,32 @@ namespace Theseus.Infrastructure.DbContexts
                                 .OnDelete(DeleteBehavior.NoAction)
                         );
 
-            modelBuilder.Entity<PatientDto>()
-                        .HasMany(m => m.StaffMemberDtos)
-                        .WithMany(e => e.PatientDtos)
+            modelBuilder.Entity<StaffMemberDto>()
+                        .HasMany(m => m.GroupDtos)
+                        .WithMany(e => e.StaffMemberDtos)
                         .UsingEntity<Dictionary<string, object>>(
-                            "StaffMemberDto_PatientDto",
+                            "StaffMember_Group",
                             j => j
-                                .HasOne<StaffMemberDto>()
+                                .HasOne<GroupDto>()
                                 .WithMany()
                                 .OnDelete(DeleteBehavior.NoAction),
                             j => j
-                                .HasOne<PatientDto>()
+                                .HasOne<StaffMemberDto>()
+                                .WithMany()
+                                .OnDelete(DeleteBehavior.NoAction)
+                        );
+
+            modelBuilder.Entity<ExamSetDto>()
+                        .HasMany(m => m.GroupDtos)
+                        .WithMany(e => e.ExamSetDtos)
+                        .UsingEntity<Dictionary<string, object>>(
+                            "ExamSet_Group",
+                            j => j
+                                .HasOne<GroupDto>()
+                                .WithMany()
+                                .OnDelete(DeleteBehavior.NoAction),
+                            j => j
+                                .HasOne<ExamSetDto>()
                                 .WithMany()
                                 .OnDelete(DeleteBehavior.NoAction)
                         );

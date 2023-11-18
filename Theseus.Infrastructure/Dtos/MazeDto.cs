@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos

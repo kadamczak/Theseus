@@ -8,23 +8,16 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
 {
     public class CreateExamSetCommand : ExamSetCommand, ICreateExamSetCommand
     {
-        private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly IMapper _mapper;
-
-        public CreateExamSetCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper)
+        public CreateExamSetCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
-            _dbContextFactory = dbContextFactory;
-            _mapper = mapper;
         }
 
         public async Task CreateExamSet(ExamSet examSet)
         {
-            using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
+            using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                ExamSetDto examSetDto = _mapper.Map<ExamSetDto>(examSet);
-
+                ExamSetDto examSetDto = Mapper.Map<ExamSetDto>(examSet);
                 AttachRelatedEntities(examSetDto, context);
-
                 context.ExamSets.Add(examSetDto);
                 await context.SaveChangesAsync();
             }

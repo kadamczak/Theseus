@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Theseus.Domain.Models.GroupRelated.Exceptions;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
@@ -29,14 +30,18 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
         {
             try
             {
-                await _authenticator.Login(_patientLoginViewModel.Username);
+                await _authenticator.Login(_patientLoginViewModel.Username, _patientLoginViewModel.GroupName);
 
                 _loggedInNavigationService.Navigate();
-                UpdateLastStoredPatientUsernames();
+                UpdateLastStoredPatientData();
             }
             catch (UserNotFoundException)
             {
                 _patientLoginViewModel.LoginResponse = "Username does not exist.";
+            }
+            catch (WrongGroupNameForPatientException)
+            {
+                _patientLoginViewModel.LoginResponse = "Incorrect group name.";
             }
             catch (Exception)
             {
@@ -44,23 +49,37 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
             }
         }
 
-        private void UpdateLastStoredPatientUsernames()
+        private void UpdateLastStoredPatientData()
         {
             string currentUsername = _patientLoginViewModel.Username;
-            Properties.Settings.Default.LogInUsername = currentUsername;
+            string currentGroup = _patientLoginViewModel.GroupName;
+            UpdateLogInList(currentUsername, currentGroup);
 
             if(Properties.Settings.Default.PastUsernameFirst != currentUsername)
             {
                 UpdateRecentUsernameList(currentUsername);
+                UpdateRecentGroupList(currentGroup);
             }
 
             Properties.Settings.Default.Save();
+        }
+
+        private void UpdateLogInList(string currentUsername, string currentGroup)
+        {
+            Properties.Settings.Default.LogInUsername = currentUsername;
+            Properties.Settings.Default.LogInGroup = currentGroup;
         }
 
         private void UpdateRecentUsernameList(string username)
         {
             Properties.Settings.Default.PastUsernameSecond = Properties.Settings.Default.PastUsernameFirst;
             Properties.Settings.Default.PastUsernameFirst = username;
+        }
+
+        private void UpdateRecentGroupList(string group)
+        {
+            Properties.Settings.Default.PastGroupSecond = Properties.Settings.Default.PastGroupFirst;
+            Properties.Settings.Default.PastGroupFirst = group;
         }
 
         private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

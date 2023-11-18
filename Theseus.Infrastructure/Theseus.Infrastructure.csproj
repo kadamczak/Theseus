@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\GroupCommands\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

@@ -7,23 +7,16 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.PatientQueries
 {
-    public class GetPatientByUsernameQuery : IGetPatientByUsernameQuery
+    public class GetPatientByUsernameQuery : PatientQuery, IGetPatientByUsernameQuery
     {
-        private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly IMapper _mapper;
+        public GetPatientByUsernameQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
 
-        public GetPatientByUsernameQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper)
+        public async Task<Patient?> GetPatient(string username, bool loadGroup = false)
         {
-            _dbContextFactory = dbContextFactory;
-            _mapper = mapper;
-        }
-
-        public async Task<Patient?> GetPatient(string username)
-        {
-            using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
+            using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 PatientDto? patientDto = await context.Patients.FirstOrDefaultAsync(user => user.Username == username);
-                return patientDto is null ? null : _mapper.Map<Patient>(patientDto);
+                return patientDto is null ? null : GetPatient(context, patientDto, loadGroup);
             }
         }
     }

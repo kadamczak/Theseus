@@ -30,6 +30,27 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+        private string _groupName = string.Empty;
+
+        public string GroupName
+        {
+            get => _groupName;
+            set
+            {
+                _groupName = value;
+                OnPropertyChanged(nameof(GroupName));
+
+                ClearErrors(nameof(GroupName));
+
+                if (string.IsNullOrWhiteSpace(GroupName))
+                {
+                    AddError(nameof(GroupName), "Field can't be empty.");
+                }
+
+                OnPropertyChanged(nameof(CanLogin));
+            }
+        }
+
         public string _pastUsernameFirst = string.Empty;
         public string PastUsernameFirst
         {
@@ -41,6 +62,18 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+
+        public string _pastGroupFirst = string.Empty;
+        public string PastGroupFirst
+        {
+            get => _pastGroupFirst;
+            set
+            {
+                _pastGroupFirst = value;
+                OnPropertyChanged(nameof(PastGroupFirst));
+            }
+        }
+
         public string _pastUsernameSecond = string.Empty;
         public string PastUsernameSecond
         {
@@ -49,6 +82,17 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _pastUsernameSecond = value;
                 OnPropertyChanged(nameof(PastUsernameSecond));
+            }
+        }
+
+        public string _pastGroupSecond = string.Empty;
+        public string PastGroupSecond
+        {
+            get => _pastGroupSecond;
+            set
+            {
+                _pastGroupSecond = value;
+                OnPropertyChanged(nameof(PastGroupSecond));
             }
         }
 
@@ -69,7 +113,7 @@ namespace Theseus.WPF.Code.ViewModels
         public PatientLoginViewModel(IPatientAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInNavigationService)
         {
             ClearFields();
-            LoadPastUsernames();
+            LoadPastLogInInfo();
 
             Login = new LoginPatientCommand(this, authenticator, loggedInNavigationService);
         }
@@ -77,12 +121,15 @@ namespace Theseus.WPF.Code.ViewModels
         private void ClearFields()
         {
             Username = string.Empty;
+            GroupName = string.Empty;
         }
 
-        private void LoadPastUsernames()
+        private void LoadPastLogInInfo()
         {
             PastUsernameFirst = Properties.Settings.Default.PastUsernameFirst;
+            PastGroupFirst = Properties.Settings.Default.PastGroupFirst;
             PastUsernameSecond = Properties.Settings.Default.PastUsernameSecond;
+            PastGroupSecond = Properties.Settings.Default.PastGroupSecond;
         }
     }
 }

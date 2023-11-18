@@ -4,6 +4,6 @@
     {
         Success,
         UsernameAlreadyExists,
-        StaffMemberDoesNotExist
+        GroupDoesNotExist
     }
 }

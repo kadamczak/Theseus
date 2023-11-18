@@ -25,14 +25,15 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
         public override async Task ExecuteAsync(object? parameter = null)
         {
             string loggedInPatientUsername = Properties.Settings.Default.LogInUsername;
+            string loggedInGroup = Properties.Settings.Default.LogInGroup;
 
-            if(string.IsNullOrWhiteSpace(loggedInPatientUsername))
+            if (string.IsNullOrWhiteSpace(loggedInPatientUsername) || string.IsNullOrWhiteSpace(loggedInGroup))
             {
                 _notLoggedInNavigationService.Navigate();
             }
             else
             {
-                await _authenticator.Login(loggedInPatientUsername);
+                await _authenticator.Login(loggedInPatientUsername, loggedInGroup);
                 _loggedInNavigationService.Navigate();
             }
         }

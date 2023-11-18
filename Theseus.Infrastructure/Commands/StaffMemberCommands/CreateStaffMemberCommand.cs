@@ -8,21 +8,15 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
 {
     public class CreateStaffMemberCommand : StaffMemberCommand, ICreateStaffMemberCommand
     {
-        private readonly TheseusDbContextFactory _dbContextFactory;
-        private readonly IMapper _mapper;
-
-        public CreateStaffMemberCommand(TheseusDbContextFactory dbContextFactory,
-                                        IMapper mapper)
+        public CreateStaffMemberCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
-            _dbContextFactory = dbContextFactory;
-            _mapper = mapper;
         }
 
         public async Task Create(StaffMember staffMember)
         {
-            using (TheseusDbContext context = _dbContextFactory.CreateDbContext())
+            using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                var staffMemberDto = _mapper.Map<StaffMemberDto>(staffMember);
+                var staffMemberDto = Mapper.Map<StaffMemberDto>(staffMember);
 
                 AttachRelatedEntities(staffMemberDto, context);
 

@@ -31,9 +31,9 @@ namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
 
         public event Action PatientStateChanged;
 
-        public async Task Login(string username)
+        public async Task Login(string username, string groupName)
         {
-            CurrentPatient = await _patientAuthenticationService.Login(username);
+            CurrentPatient = await _patientAuthenticationService.Login(username, groupName);
         }
 
         public void Logout()
@@ -41,9 +41,9 @@ namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
             CurrentPatient = null;
         }
 
-        public async Task<PatientRegistrationResult> Register(Patient newPatient, string staffMemberUsername)
+        public async Task<PatientRegistrationResult> Register(Patient newPatient, string groupName)
         {
-            return await _patientAuthenticationService.Register(newPatient, staffMemberUsername);
+            return await _patientAuthenticationService.Register(newPatient, groupName);
         }
     }
 }
