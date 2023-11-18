@@ -107,6 +107,8 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+        public bool HasPastLogins { get; } = false;
+
         public bool CanLogin => !HasErrors;
         public ICommand Login { get; }
 
@@ -114,6 +116,7 @@ namespace Theseus.WPF.Code.ViewModels
         {
             ClearFields();
             LoadPastLogInInfo();
+            HasPastLogins = !string.IsNullOrWhiteSpace(PastUsernameFirst);
 
             Login = new LoginPatientCommand(this, authenticator, loggedInNavigationService);
         }

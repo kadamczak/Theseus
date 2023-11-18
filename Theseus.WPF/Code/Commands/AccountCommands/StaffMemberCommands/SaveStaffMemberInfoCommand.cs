@@ -20,7 +20,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
             _staffMemberDetailsLoggedInViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
-        public override async Task ExecuteAsync(object parameter)
+        public override async Task ExecuteAsync(object? parameter)
         {
             _staffMemberDetailsLoggedInViewModel.UpdateCurrentStaffMemberInfoFromViewModel();
             await _updateStaffMemberCommand.Update(_staffMemberDetailsLoggedInViewModel.CurrentStaffMember);

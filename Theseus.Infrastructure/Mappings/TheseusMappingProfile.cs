@@ -19,11 +19,13 @@ namespace Theseus.Infrastructure.Mappings
                 .ConvertUsing(new MazeWithSolutionToMazeDtoConverter());
 
             CreateMap<GroupDto, Group>()
+                .ForMember(p => p.Owner, c => c.MapFrom(p => p.Owner))
                 .ForMember(p => p.StaffMembers, c => c.MapFrom(p => p.StaffMemberDtos))
                 .ForMember(p => p.Patients, c => c.MapFrom(p => p.PatientDtos))
                 .ForMember(p => p.ExamSets, c => c.MapFrom(p => p.ExamSetDtos));
 
             CreateMap<Group, GroupDto>()
+                .ForMember(p => p.Owner, c => c.MapFrom(p => p.Owner))
                 .ForMember(p => p.StaffMemberDtos, c => c.MapFrom(p => p.StaffMembers))
                 .ForMember(p => p.PatientDtos, c => c.MapFrom(p => p.Patients))
                 .ForMember(p => p.ExamSetDtos, c => c.MapFrom(p => p.ExamSets));
@@ -39,11 +41,13 @@ namespace Theseus.Infrastructure.Mappings
                 .ForMember(p => p.GroupDtos, c => c.MapFrom(p => p.Groups));
 
             CreateMap<StaffMemberDto, StaffMember>()
+                .ForMember(p => p.OwnedGroups, c => c.MapFrom(p => p.OwnedGroupDtos))
                 .ForMember(p => p.Groups, c => c.MapFrom(p => p.GroupDtos))
                 .ForMember(p => p.MazesWithSolutions, c => c.MapFrom(p => p.MazeDtos))
                 .ForMember(p => p.ExamSets, c => c.MapFrom(p => p.ExamSetDtos));
 
             CreateMap<StaffMember, StaffMemberDto>()
+                .ForMember(p => p.OwnedGroupDtos, c => c.MapFrom(p => p.OwnedGroups))
                 .ForMember(p => p.GroupDtos, c => c.MapFrom(p => p.Groups))
                 .ForMember(p => p.MazeDtos, c => c.MapFrom(p => p.MazesWithSolutions))
                 .ForMember(p => p.ExamSetDtos, c => c.MapFrom(p => p.ExamSets));

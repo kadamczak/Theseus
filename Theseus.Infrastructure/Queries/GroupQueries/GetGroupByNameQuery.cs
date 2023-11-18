@@ -13,12 +13,12 @@ namespace Theseus.Infrastructure.Queries.GroupQueries
         {
         }
 
-        public async Task<Group?> GetGroup(string name, bool loadStaffMembers = false, bool loadPatients = false, bool loadExamSets = false)
+        public async Task<Group?> GetGroup(string name, bool loadStaffMembers = false, bool loadPatients = false, bool loadExamSets = false, bool loadOwner = false)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 GroupDto? groupDto = await context.Groups.FirstOrDefaultAsync(g => g.Name == name);
-                return groupDto is null ? null : GetGroup(context, groupDto, loadStaffMembers, loadPatients, loadExamSets);
+                return groupDto is null ? null : GetGroup(context, groupDto, loadStaffMembers, loadPatients, loadExamSets, loadOwner);
             }
         }
     }

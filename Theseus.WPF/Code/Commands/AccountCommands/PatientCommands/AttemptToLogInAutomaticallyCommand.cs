@@ -24,6 +24,14 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 
         public override async Task ExecuteAsync(object? parameter = null)
         {
+            //Properties.Settings.Default.LogInUsername = "";
+            //Properties.Settings.Default.LogInGroup = "";
+            //Properties.Settings.Default.PastGroupFirst = "";
+            //Properties.Settings.Default.PastGroupSecond = "";
+            //Properties.Settings.Default.PastUsernameFirst = "";
+            //Properties.Settings.Default.PastUsernameSecond = "";
+            //Properties.Settings.Default.Save();
+
             string loggedInPatientUsername = Properties.Settings.Default.LogInUsername;
             string loggedInGroup = Properties.Settings.Default.LogInGroup;
 

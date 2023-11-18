@@ -23,12 +23,19 @@ namespace Theseus.Infrastructure.Queries.PatientQueries
 
         protected Patient GetPatient(TheseusDbContext context, PatientDto patientDto, bool loadGroup)
         {
-            if (loadGroup)
-                context.Entry(patientDto).Reference(p => p.GroupDto).Load();
+            //if (loadGroup)
+            //    context.Entry(patientDto).Reference(p => p.GroupDto).Load();
 
-            return MapToPatient(patientDto);
+            Patient patient = MapToPatient(patientDto);
+            context.Entry(patientDto).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            return patient;
         }
 
-        private Patient MapToPatient(PatientDto patientDto) => Mapper.Map<Patient>(patientDto);
+        private Patient MapToPatient(PatientDto patientDto)
+        {
+            Patient patient = new Patient();
+            Mapper.Map(patientDto, patient);
+            return patient;
+        }
     }
 }

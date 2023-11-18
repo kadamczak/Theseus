@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
@@ -29,6 +30,8 @@ namespace Theseus.Infrastructure.Commands.GroupCommands
                 foreach (var examSet in groupDto.ExamSetDtos)
                     context.Attach(examSet);
             }
+
+            context.Attach(groupDto.Owner);
         }
     }
 }

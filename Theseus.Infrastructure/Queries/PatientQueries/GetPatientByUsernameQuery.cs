@@ -15,7 +15,7 @@ namespace Theseus.Infrastructure.Queries.PatientQueries
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                PatientDto? patientDto = await context.Patients.FirstOrDefaultAsync(user => user.Username == username);
+                PatientDto? patientDto = await context.Patients.AsNoTracking().FirstOrDefaultAsync(user => user.Username == username);
                 return patientDto is null ? null : GetPatient(context, patientDto, loadGroup);
             }
         }

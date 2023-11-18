@@ -79,23 +79,22 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
             if (result == StaffMemberRegistrationResult.Success)
             {
                 newAccount.PasswordHash = _passwordHasher.HashPassword(newAccount.PasswordHash);
-
-                Group defaultGroup = CreateDefaultGroupForStaffMember(newAccount.Username);
-                await _createGroupCommand.CreateGroup(defaultGroup);
-
-                newAccount.Groups.Add(defaultGroup);
                 await _createStaffMemberCommand.Create(newAccount);
+
+                Group defaultGroup = CreateDefaultGroupForStaffMember(newAccount);
+                await _createGroupCommand.CreateGroup(defaultGroup);
             }
 
             return result;
         }
 
-        private Group CreateDefaultGroupForStaffMember(string username)
+        private Group CreateDefaultGroupForStaffMember(StaffMember staffMember)
         {
             return new Group()
             {
                 Id = Guid.NewGuid(),
-                Name = username + "-gr"
+                Name = staffMember.Username + "-gr",
+                Owner = staffMember
             };
         }
     }

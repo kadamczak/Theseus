@@ -11,17 +11,17 @@ namespace Theseus.Infrastructure.Queries.StaffMemberQueries
         {
         }
 
-        protected List<StaffMember> GetStaffMembers(TheseusDbContext context, IEnumerable<StaffMemberDto> staffMemberDtos, bool loadExamSets, bool loadGroups, bool loadMazes)
+        protected List<StaffMember> GetStaffMembers(TheseusDbContext context, IEnumerable<StaffMemberDto> staffMemberDtos, bool loadExamSets, bool loadGroups, bool loadMazes, bool loadOwnedGroups)
         {
             List<StaffMember> staffMembers = new List<StaffMember>();
             foreach (var staffMemberDto in staffMemberDtos)
             {
-                staffMembers.Add(GetStaffMember(context, staffMemberDto, loadExamSets, loadGroups, loadMazes));
+                staffMembers.Add(GetStaffMember(context, staffMemberDto, loadExamSets, loadGroups, loadMazes, loadOwnedGroups));
             }
             return staffMembers;
         }
 
-        protected StaffMember GetStaffMember(TheseusDbContext context, StaffMemberDto staffMemberDto, bool loadExamSets, bool loadGroups, bool loadMazes)
+        protected StaffMember GetStaffMember(TheseusDbContext context, StaffMemberDto staffMemberDto, bool loadExamSets, bool loadGroups, bool loadMazes, bool loadOwnedGroups)
         {
             if (loadExamSets)
                 context.Entry(staffMemberDto).Collection(p => p.ExamSetDtos).Load();
@@ -31,6 +31,9 @@ namespace Theseus.Infrastructure.Queries.StaffMemberQueries
 
             if (loadMazes)
                 context.Entry(staffMemberDto).Collection(p => p.MazeDtos).Load();
+
+            if (loadOwnedGroups)
+                context.Entry(staffMemberDto).Collection(p => p.OwnedGroupDtos).Load();
 
             return MapToStaffMember(staffMemberDto);
         }

@@ -4,8 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
+             xmlns:converters="clr-namespace:Theseus.WPF.Code.CustomUI.CustomConverters"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="400">
+    <UserControl.Resources>
+        <converters:BooleanVisibilityConverter x:Key="BooleanVisibility" True="Visible" False="Collapsed"/>
+        <converters:BooleanVisibilityConverter x:Key="ReverseBooleanVisibility" True="Collapsed" False="Visible"/>
+    </UserControl.Resources>
+
+
     <Grid>
         <StackPanel Grid.Row="0" Orientation="Vertical" MaxWidth="350">
             <Separator Height="30" Background="Transparent"/>
@@ -22,19 +29,32 @@
 
             <Button Style="{StaticResource Generic}" Command="{Binding Login}" HorizontalAlignment="Center" Content="Enter" Margin="0 10 0 0"/>
 
-            <Label Content="Last patient log-ins:" FontSize="17" Margin="20 30 20 0"/>
-           
-            <StackPanel Orientation="Horizontal">
-                <Label Content="{Binding PastUsernameFirst}" FontSize="17"/>
-                <Label Content="-" FontSize="17" Margin="5 0 0 0"/>
-                <Label Content="{Binding PastGroupFirst}" FontSize="17"  Margin="5 0 0 0"/>
-            </StackPanel>
+            <Label Content="Last patient log-ins:" FontSize="17" FontWeight="Bold" Margin="20 30 20 0"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <Label Content="{Binding PastUsernameSecond}" FontSize="17"/>
-                <Label Content="-" FontSize="17" Margin="5 0 0 0"/>
-                <Label Content="{Binding PastGroupSecond}" FontSize="17"  Margin="5 0 0 0"/>
-            </StackPanel>
+            <Grid Margin="20 0 0 0" Visibility="{Binding HasPastLogins, Converter={StaticResource BooleanVisibility}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Username" FontSize="17" Grid.Row="0" Grid.Column="0"/>
+                <Label Content="Group" FontSize="17" Grid.Row="0" Grid.Column="1"/>
+
+                <Label Content="{Binding PastUsernameFirst}" Grid.Row="1" Grid.Column="0"/>
+                <Label Content="{Binding PastGroupFirst}" Grid.Row="1" Grid.Column="1"/>
+
+                <Label Content="{Binding PastUsernameSecond}" Grid.Row="2" Grid.Column="0"/>
+                <Label Content="{Binding PastGroupSecond}" Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+
+            <Label Content="No past logins." FontSize="17" Margin="20 0 0 0" Visibility="{Binding HasPastLogins, Converter={StaticResource ReverseBooleanVisibility}}" />
+
         </StackPanel>
     </Grid>
 </UserControl>

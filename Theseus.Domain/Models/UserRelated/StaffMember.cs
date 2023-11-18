@@ -14,6 +14,7 @@ namespace Theseus.Domain.Models.UserRelated
         public string Surname { get; set; } = default!;
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
+        public List<Group> OwnedGroups { get; set; } = new List<Group>();
         public List<Group> Groups { get; set; } = new List<Group>();
         public List<MazeWithSolution> MazesWithSolutions { get; set; } = new List<MazeWithSolution>();
         public List<ExamSet> ExamSets { get; set; } = new List<ExamSet>();

@@ -11,12 +11,12 @@ namespace Theseus.Infrastructure.Queries.StaffMemberQueries
     {
         public GetStaffMemberByUsernameQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
 
-        public async Task<StaffMember?> GetStaffMember(string username, bool loadExamSets = false, bool loadPatients = false, bool loadMazes = false)
+        public async Task<StaffMember?> GetStaffMember(string username, bool loadExamSets = false, bool loadPatients = false, bool loadMazes = false, bool loadOwnedGroups = false)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                StaffMemberDto? staffMemberDto = await context.StaffMembers.FirstOrDefaultAsync(user => user.Username == username);
-                return staffMemberDto is null ? null : GetStaffMember(context, staffMemberDto, loadExamSets, loadPatients, loadMazes);
+                StaffMemberDto? staffMemberDto = await context.StaffMembers.AsNoTracking().FirstOrDefaultAsync(user => user.Username == username);
+                return staffMemberDto is null ? null : GetStaffMember(context, staffMemberDto, loadExamSets, loadPatients, loadMazes, loadOwnedGroups);
             }
         }
     }

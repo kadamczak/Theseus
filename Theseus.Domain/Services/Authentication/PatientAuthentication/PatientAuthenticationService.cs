@@ -32,10 +32,10 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
                 throw new UserNotFoundException(username);
             }
 
-            if (existingPatient.Group.Name != groupName)
-            {
-                throw new WrongGroupNameForPatientException(groupName, existingPatient.Username);
-            }
+            //if (existingPatient.Group.Name != groupName)
+            //{
+            //    throw new WrongGroupNameForPatientException(groupName, existingPatient.Username);
+            //}
 
             return existingPatient;
         }

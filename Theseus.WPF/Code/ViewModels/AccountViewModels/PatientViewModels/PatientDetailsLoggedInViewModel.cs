@@ -87,6 +87,7 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _selectedSex = value;
                 OnPropertyChanged(nameof(SelectedSex));
+                OnPropertyChanged(nameof(CanUpdatePatient));
             }
         }
 
@@ -97,6 +98,7 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _selectedProfessionType = value;
                 OnPropertyChanged(nameof(SelectedProfessionType));
+                OnPropertyChanged(nameof(CanUpdatePatient));
             }
         }
 
@@ -107,6 +109,7 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _selectedEducationLevel = value;
                 OnPropertyChanged(nameof(SelectedEducationLevel));
+                OnPropertyChanged(nameof(CanUpdatePatient));
             }
         }
 

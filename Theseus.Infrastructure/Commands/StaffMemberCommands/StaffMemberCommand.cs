@@ -29,6 +29,12 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
                 foreach (var maze in staffMemberDto.MazeDtos)
                     context.Attach(maze);
             }
+
+            if (staffMemberDto.OwnedGroupDtos is not null)
+            {
+                foreach (var group in staffMemberDto.OwnedGroupDtos)
+                    context.Attach(group);
+            }
         }
     }
 }

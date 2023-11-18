@@ -11,17 +11,17 @@ namespace Theseus.Infrastructure.Queries.GroupQueries
         {
         }
 
-        protected List<Group> GetGroups(TheseusDbContext context, IEnumerable<GroupDto> groupDtos, bool loadStaffMembers, bool loadPatients, bool loadExamSets)
+        protected List<Group> GetGroups(TheseusDbContext context, IEnumerable<GroupDto> groupDtos, bool loadStaffMembers, bool loadPatients, bool loadExamSets, bool loadOwner)
         {
             List<Group> groups = new List<Group>();
             foreach (var group in groupDtos)
             {
-                groups.Add(GetGroup(context, group, loadStaffMembers, loadPatients, loadExamSets));
+                groups.Add(GetGroup(context, group, loadStaffMembers, loadPatients, loadExamSets, loadOwner));
             }
             return groups;
         }
 
-        protected Group GetGroup(TheseusDbContext context, GroupDto groupDto, bool loadStaffMembers, bool loadPatients, bool loadExamSets)
+        protected Group GetGroup(TheseusDbContext context, GroupDto groupDto, bool loadStaffMembers, bool loadPatients, bool loadExamSets, bool loadOwner)
         {
             if (loadStaffMembers)
                 context.Entry(groupDto).Collection(p => p.StaffMemberDtos).Load();
@@ -31,6 +31,9 @@ namespace Theseus.Infrastructure.Queries.GroupQueries
 
             if (loadExamSets)
                 context.Entry(groupDto).Collection(p => p.ExamSetDtos).Load();
+
+            if (loadOwner)
+                context.Entry(groupDto).Reference(p => p.Owner).Load();
 
             return MapToGroup(groupDto);
         }

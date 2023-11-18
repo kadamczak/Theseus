@@ -12,7 +12,7 @@ namespace Theseus.Infrastructure.Commands.PatientCommands
 
         protected void AttachRelatedEntities(PatientDto patientDto, TheseusDbContext context)
         {
-            context.Attach(patientDto.GroupDto);
+            //context.Attach(patientDto.GroupDto);
         }
     }
 }

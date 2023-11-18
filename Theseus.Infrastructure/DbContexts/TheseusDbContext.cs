@@ -60,6 +60,9 @@ namespace Theseus.Infrastructure.DbContexts
                                 .OnDelete(DeleteBehavior.NoAction)
                         );
 
+            modelBuilder.Entity<StaffMemberDto>()
+                        .HasMany(m => m.OwnedGroupDtos)
+                        .WithOne(e => e.Owner);
 
             base.OnModelCreating(modelBuilder);
         }
