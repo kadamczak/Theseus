@@ -16,9 +16,8 @@ namespace Theseus.Infrastructure.Commands.MazeCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                MazeDto mazeDto = new MazeDto();
-                Mapper.Map(maze, mazeDto);
-                Mapper.Map(maze.StaffMember, mazeDto.Owner);
+                MazeDto mazeDto = Mapper.Map<MazeDto>(maze);
+                mazeDto.Owner = Mapper.Map<StaffMemberDto>(maze.StaffMember);
 
                 AttachRelatedEntities(mazeDto, context);
                 context.Mazes.Update(mazeDto);

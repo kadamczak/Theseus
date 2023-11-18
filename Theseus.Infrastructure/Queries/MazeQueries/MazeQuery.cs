@@ -25,10 +25,6 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
 
         protected MazeWithSolution MapMazeWithSolution(MazeDto mazeDto)
         {
-            MazeWithSolution mazeWithSolution = new MazeWithSolution();
-            Mapper.Map(mazeDto, mazeWithSolution);
-            //Mapper.Map(mazeDto.Owner, mazeWithSolution.StaffMember);
-
             //if (mazeDto.ExamSetDtos is null)
             //    return mazeWithSolution;
 
@@ -39,7 +35,7 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
             //    mazeWithSolution.ExamSets.Add(examSet);
             //}
 
-            return mazeWithSolution;
+            return Mapper.Map<MazeWithSolution>(mazeDto);
         }
     }
 }
