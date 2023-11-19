@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Windows.Input;
 using Theseus.Domain.ExamSetCommandInterfaces;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated.Exceptions;
+using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
@@ -14,11 +19,27 @@ namespace Theseus.WPF.Code.ViewModels
     public class CreateSetManuallyViewModel : ViewModelBase
     {
         public AddToSetMazeCommandListViewModel AddToSetMazeCommandListViewModel { get; }
+        
+        private string _examSetName = string.Empty;
+        public string ExamSetName
+        {
+            get => _examSetName;
+            set
+            {
+                _examSetName = value;
+                OnPropertyChanged(nameof(ExamSetName));
+                OnPropertyChanged(nameof(CanCreate));
+            }
+        }
+
+        public List<MazeWithSolution> SelectedMazes => AddToSetMazeCommandListViewModel.SelectedMazes.ToList();
+        public bool CanCreate => !string.IsNullOrEmpty(_examSetName) && AddToSetMazeCommandListViewModel.SelectedMazes.Any();
         public ICommand CreateSetManually { get; }
 
         public CreateSetManuallyViewModel(SelectedMazeListStore mazeListStore,
                                           IGetAllMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
                                           ICreateExamSetCommand createExamSetCommand,
+                                          IGetGroupByNameQuery getGroupByNameQuery,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
                                           NavigationService<CreateSetViewModel> createSetNavigationService,
                                           AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
@@ -26,17 +47,23 @@ namespace Theseus.WPF.Code.ViewModels
             if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
                 throw new StaffMemberNotLoggedInException();
 
-            LoadFullMazeListToStore(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember.Id, mazeListStore);
-            this.CreateSetManually = new CreateExamSetManuallyCommand(addToSetMazeCommandListViewModel, createExamSetCommand, currentStaffMemberStore, createSetNavigationService);
+            LoadFullMazeListToStore(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
+            this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, getGroupByNameQuery, currentStaffMemberStore, createSetNavigationService);
 
             this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
             this.AddToSetMazeCommandListViewModel.LoadMazesFromMazeListStore();
+            this.AddToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
         }
 
         private void LoadFullMazeListToStore(IGetAllMazesWithSolutionOfStaffMemberQuery query, Guid staffMemberId, SelectedMazeListStore mazeListStore)
         {
             var fullMazeList = query.GetAllMazesWithSolutionOfStaffMemberQuery(staffMemberId);
             mazeListStore.MazesInList = fullMazeList;
+        }
+
+        private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(CanCreate));
         }
     }
 }

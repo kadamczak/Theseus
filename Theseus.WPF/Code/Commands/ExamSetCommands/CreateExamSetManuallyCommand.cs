@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Linq;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using Theseus.Domain.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
+using Theseus.Domain.Models.GroupRelated;
+using Theseus.Domain.Models.GroupRelated.Exceptions;
 using Theseus.Domain.Models.UserRelated.Exceptions;
+using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -11,50 +14,59 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
-    public class CreateExamSetManuallyCommand : CommandBase
+    public class CreateExamSetManuallyCommand : AsyncCommandBase
     {
-        private readonly AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
+        private readonly CreateSetManuallyViewModel _createSetManuallyViewModel;
         private readonly ICreateExamSetCommand _createExamSetCommand;
+        private readonly IGetGroupByNameQuery _getGroupByNameQuery;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
         private readonly NavigationService<CreateSetViewModel> _createSetNavigationService;
 
-        public CreateExamSetManuallyCommand(AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel,
-                                        ICreateExamSetCommand createExamSetCommand,
-                                        ICurrentStaffMemberStore currentStaffMemberStore,
-                                        NavigationService<CreateSetViewModel> createSetNavigationService)
+        public CreateExamSetManuallyCommand(CreateSetManuallyViewModel createSetManuallyViewModel,
+                                            ICreateExamSetCommand createExamSetCommand,
+                                            IGetGroupByNameQuery getGroupByNameQuery,
+                                            ICurrentStaffMemberStore currentStaffMemberStore,
+                                            NavigationService<CreateSetViewModel> createSetNavigationService)
         {
-            _addToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
+            _createSetManuallyViewModel = createSetManuallyViewModel;
             _createExamSetCommand = createExamSetCommand;
+            _getGroupByNameQuery = getGroupByNameQuery;
             _currentStaffMemberStore = currentStaffMemberStore;
             _createSetNavigationService = createSetNavigationService;
-            _addToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
+            _createSetManuallyViewModel.PropertyChanged += OnPropertyChanged;
         }
 
         protected override void Dispose()
         {
-            _addToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged -= OnCollectionChanged;
+            _createSetManuallyViewModel.PropertyChanged -= OnPropertyChanged;
             base.Dispose();
         }
 
-        public override void Execute(object? parameter)
+        public override async Task ExecuteAsync(object? parameter)
         {
-            var selectedMazes = _addToSetMazeCommandListViewModel.SelectedMazes.ToList();
-            ExamSet examSet = new ExamSet(Guid.NewGuid(), selectedMazes);
+            ExamSet examSet = new ExamSet(Guid.NewGuid(), _createSetManuallyViewModel.SelectedMazes)
+            {
+                Name = _createSetManuallyViewModel.ExamSetName,
+                StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException()
+            };
 
-            examSet.StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException();
+            string defaultGroupName = examSet.StaffMember.Username + "-gr";
+            Group defaultGroup = await _getGroupByNameQuery.GetGroup(defaultGroupName) ?? throw new GroupNotFoundException(defaultGroupName);
+            examSet.Groups.Add(defaultGroup);
 
-            _createExamSetCommand.CreateExamSet(examSet);
+            await _createExamSetCommand.CreateExamSet(examSet);
             _createSetNavigationService.Navigate();
         }
 
-        private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            OnCanExecuteChanged();
+            if (e.PropertyName == nameof(_createSetManuallyViewModel.CanCreate))
+                OnCanExecuteChanged();
         }
 
         public override bool CanExecute(object? parameter)
         {
-            return _addToSetMazeCommandListViewModel.SelectedMazes.Any() && base.CanExecute(parameter);
+            return _createSetManuallyViewModel.CanCreate && base.CanExecute(parameter);
         }
     }
 }

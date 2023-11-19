@@ -84,7 +84,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             var viewModel = GetDataContext();
 
             Cell? previousCell = null;
-            for (int i = 0; i < viewModel.SolutionPath.Count(); i++)
+            for (int i = 0; i < viewModel.SolutionPath.Count; i++)
             {
                 Cell currentCell = viewModel.SolutionPath[i];
                 Cell? nextCell = viewModel.SolutionPath.ElementAtOrDefault(i + 1);

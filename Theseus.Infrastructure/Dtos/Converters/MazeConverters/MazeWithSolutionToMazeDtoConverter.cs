@@ -7,7 +7,7 @@ namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 {
     public class MazeWithSolutionToMazeDtoConverter : ITypeConverter<MazeWithSolution, MazeDto>
     {
-        Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
+        readonly Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };
 
         public MazeDto Convert(MazeWithSolution source, MazeDto destination, ResolutionContext context)
         {
@@ -44,9 +44,9 @@ namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 
         private byte[] CreateSolutionByteArray(List<Cell> solutionPath)
         {
-            byte[] solutionAsBytes = new byte[solutionPath.Count() - 1];
+            byte[] solutionAsBytes = new byte[solutionPath.Count - 1];
 
-            for (int i = 0; i < solutionPath.Count() - 1; i++)
+            for (int i = 0; i < solutionPath.Count - 1; i++)
             {
                 var currentCell = solutionPath[i];
                 var nextCell = solutionPath[i + 1];

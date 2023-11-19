@@ -15,11 +15,19 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
             if (examSetDto.Owner is not null)
                 context.Attach(examSetDto.Owner);
 
-            if (examSetDto.MazeDtos is null)
+            if (examSetDto.MazeDtos is not null)
             {
-                foreach (var maze in examSetDto.MazeDtos)
+                foreach (var maze in examSetDto.MazeDtos!)
                 {
                     context.Attach(maze);
+                }
+            }
+
+            if (examSetDto.GroupDtos is not null)
+            {
+                foreach (var group in examSetDto.GroupDtos)
+                {
+                    context.Attach(group);
                 }
             }
         }

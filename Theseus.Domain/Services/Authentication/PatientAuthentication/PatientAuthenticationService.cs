@@ -28,11 +28,7 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
 
         public async Task<Patient> Login(string username, string groupName)
         {
-            Patient? existingPatient = await _getPatientByUsernameQuery.GetPatient(username);
-            if (existingPatient is null)
-            {
-                throw new UserNotFoundException(username);
-            }
+            Patient? existingPatient = await _getPatientByUsernameQuery.GetPatient(username) ?? throw new UserNotFoundException(username);
 
             Group? group = await _getGroupByPatientQuery.GetGroup(existingPatient.Id);
             if (group is null || group.Name != groupName)

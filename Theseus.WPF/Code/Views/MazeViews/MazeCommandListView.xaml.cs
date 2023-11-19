@@ -18,7 +18,7 @@ namespace Theseus.WPF.Code.Views
         {
             MazeWithSolutionCanvasView mazeCanvas = sender as MazeWithSolutionCanvasView;
             mazeCanvas.InitializeDataContexts();
-            mazeCanvas.DrawScaledMazeWithVisibleSolutionPath(2);
+            mazeCanvas.DrawScaledMazeWithVisibleSolutionPath(2, centerMaze: true);
         }
     }
 }
