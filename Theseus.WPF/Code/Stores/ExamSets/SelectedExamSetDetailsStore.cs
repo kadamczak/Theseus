@@ -2,9 +2,9 @@
 
 namespace Theseus.WPF.Code.Stores.ExamSets
 {
-    public class SelectedExamSetStore
+    public class SelectedExamSetDetailsStore
     {
         public ExamSet SelectedExamSet { get; set; }
-        public int CurrentMazeIndex { get; set; } = 0;
+        //public int CurrentMazeIndex { get; set; } = 0;
     }
 }

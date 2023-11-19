@@ -7,11 +7,11 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.MazeQueries
 {
-    public class GetAllMazesWithSolutionOfStaffMemberQuery : MazeQuery, IGetAllMazesWithSolutionOfStaffMemberQuery
+    public class GetMazesWithSolutionOfStaffMemberQuery : MazeQuery, IGetMazesWithSolutionOfStaffMemberQuery
     {
-        public GetAllMazesWithSolutionOfStaffMemberQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
+        public GetMazesWithSolutionOfStaffMemberQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }
 
-        IEnumerable<MazeWithSolution> IGetAllMazesWithSolutionOfStaffMemberQuery.GetAllMazesWithSolutionOfStaffMemberQuery(Guid staffMemberId)
+        public IEnumerable<MazeWithSolution> GetMazesWithSolution(Guid staffMemberId)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
@@ -19,5 +19,7 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
                 return MapMazesWithSolution(mazeDtos);
             }
         }
+
+
     }
 }

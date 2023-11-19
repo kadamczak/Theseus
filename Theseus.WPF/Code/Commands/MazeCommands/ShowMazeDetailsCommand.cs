@@ -7,13 +7,13 @@ using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.Commands.MazeCommands
 {
-    public class ShowDetailsCommand : CommandBase
+    public class ShowMazeDetailsCommand : CommandBase
     {
         private readonly MazeWithSolutionCommandViewModel _mazeWithSolutionCommandViewModel;
         private readonly SelectedMazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
-        public ShowDetailsCommand(MazeWithSolutionCommandViewModel mazeWithSolutionCommandViewModel,
+        public ShowMazeDetailsCommand(MazeWithSolutionCommandViewModel mazeWithSolutionCommandViewModel,
                                   SelectedMazeDetailsStore mazeDetailsStore,
                                   NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {

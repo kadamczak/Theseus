@@ -2,8 +2,8 @@
 
 namespace Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces
 {
-    public interface IGetAllExamsQuery
+    public interface IGetAllExamSetsOfStaffMemberQuery
     {
-        IEnumerable<ExamSet> GetAllExamSets();
+        IEnumerable<ExamSet> GetExamSets(Guid staffMemberId);
     }
 }

@@ -14,14 +14,14 @@ namespace Theseus.WPF.Code.ViewModels
         public MazeCommandListViewModel(SelectedMazeListStore mazeListStore)
         {
             this._mazeListStore = mazeListStore;
-            LoadMazesFromMazeListStore();
+            //CreateMazeCommandViewModels();
         }
 
-        public void LoadMazesFromMazeListStore()
+        public void CreateMazeCommandViewModels()
         {
             this.ActionableMazes.Clear();
 
-            foreach (var mazeWithSolution in _mazeListStore.MazesInList)
+            foreach (var mazeWithSolution in _mazeListStore.Mazes)
             {
                 AddMazeWithCommandToActionableMazes(mazeWithSolution);
             }

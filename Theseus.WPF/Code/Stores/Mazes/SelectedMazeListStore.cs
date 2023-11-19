@@ -5,6 +5,6 @@ namespace Theseus.WPF.Code.Stores.Mazes
 {
     public class SelectedMazeListStore
     {
-        public IEnumerable<MazeWithSolution> MazesInList { get; set; } = new List<MazeWithSolution>();
+        public IEnumerable<MazeWithSolution> Mazes { get; set; } = new List<MazeWithSolution>();
     }
 }

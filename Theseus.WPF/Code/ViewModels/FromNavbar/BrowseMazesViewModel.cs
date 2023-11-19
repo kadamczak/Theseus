@@ -12,25 +12,25 @@ namespace Theseus.WPF.Code.ViewModels
         public ShowDetailsMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
 
         public BrowseMazesViewModel(SelectedMazeListStore mazeListStore,
-                                    IGetAllMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
+                                    IGetMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
                                     ICurrentStaffMemberStore currentStaffMemberStore,
                                     ShowDetailsMazeCommandListViewModel showDetailsMazeCommandListViewModel)
         {
             if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
                 throw new StaffMemberNotLoggedInException();
 
-            LoadFullMazeList(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
+            LoadMazesOfStaffMember(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
 
             this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel;
-            this.ShowDetailsMazeCommandViewModel.LoadMazesFromMazeListStore();
+            this.ShowDetailsMazeCommandViewModel.CreateMazeCommandViewModels();
         }
 
-        private void LoadFullMazeList(IGetAllMazesWithSolutionOfStaffMemberQuery query,
-                                      Guid staffMemberId,
-                                      SelectedMazeListStore mazeListStore)
+        private void LoadMazesOfStaffMember(IGetMazesWithSolutionOfStaffMemberQuery query,
+                                            Guid staffMemberId,
+                                            SelectedMazeListStore mazeListStore)
         {
-            var fullMazeList = query.GetAllMazesWithSolutionOfStaffMemberQuery(staffMemberId);
-            mazeListStore.MazesInList = fullMazeList;
+            var mazeList = query.GetMazesWithSolution(staffMemberId);
+            mazeListStore.Mazes = mazeList;
         }
     }
 }
