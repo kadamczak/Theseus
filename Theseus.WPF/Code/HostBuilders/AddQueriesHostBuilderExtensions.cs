@@ -29,6 +29,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IGetGroupByNameQuery, GetGroupByNameQuery>();
                 services.AddSingleton<IGetGroupByPatientQuery, GetGroupByPatientQuery>();
                 services.AddSingleton<IGetMazesWithSolutionOfExamSetQuery, GetMazesWithSolutionOfExamSetQuery>();
+                services.AddSingleton<IGetGroupsOfStaffMemberQuery, GetGroupsOfStaffMemberQuery>();
             });
 
             return hostBuilder;

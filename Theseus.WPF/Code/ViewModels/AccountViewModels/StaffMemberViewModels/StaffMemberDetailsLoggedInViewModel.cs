@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
+using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
@@ -93,6 +89,7 @@ namespace Theseus.WPF.Code.ViewModels
         public StaffMember CurrentStaffMember { get; }
 
         public ICommand Save { get; }
+        public ICommand ShowGroups { get; }
         public ICommand Logout { get; }
 
         private readonly IEmailValidator _emailValidator;
@@ -101,6 +98,7 @@ namespace Theseus.WPF.Code.ViewModels
         public StaffMemberDetailsLoggedInViewModel(IStaffMemberAuthenticator authenticator,
                                                    IEmailValidator emailValidator,
                                                    IUpdateStaffMemberCommand updateStaffMemberCommand,
+                                                   NavigationService<StaffMemberGroupsViewModel> groupsNavigationService,
                                                    NavigationService<StaffMemberLoginRegisterViewModel> staffMemberLoginRegisterNavigationService)
         {
             if (!authenticator.IsLoggedInAsStaffMember)
@@ -111,6 +109,7 @@ namespace Theseus.WPF.Code.ViewModels
             LoadStaffMemberInfo(authenticator.CurrentStaffMember!);
 
             Save = new SaveStaffMemberInfoCommand(this, updateStaffMemberCommand);
+            ShowGroups = new NavigateCommand<StaffMemberGroupsViewModel>(groupsNavigationService);
             Logout = new LogoutStaffMemberCommand(authenticator, staffMemberLoginRegisterNavigationService);
         }
 

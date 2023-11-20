@@ -32,6 +32,7 @@ namespace Theseus.WPF
                 .AddMazeViewModels()
                 .AddExamSetViewModels()
                 .AddAuthenticationViewModels()
+                .AddGroupViewModels()
                 .AddStores()
                 .AddCommands()
                 .AddQueries()

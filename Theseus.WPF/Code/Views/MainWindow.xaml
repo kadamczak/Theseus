@@ -74,6 +74,13 @@
             <DataTemplate DataType="{x:Type vms:MinimalCellSizeSetterViewModel}">
                 <views:MinimalCellSizeSetterView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:StaffMemberGroupsViewModel}">
+                <views:StaffMemberGroupsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:GroupDetailsViewModel}">
+                <views:GroupDetailsView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <views:NavigationBarView Grid.Column="0" DataContext="{Binding NavigationBarViewModel}" />
