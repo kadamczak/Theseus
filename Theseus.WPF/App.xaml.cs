@@ -27,7 +27,11 @@ namespace Theseus.WPF
         {
             _host = Host.CreateDefaultBuilder()
                 .AddDbContext()
-                .AddViewModels()
+                .AddSingletonViewModels()
+                .AddNavbarViewModels()
+                .AddMazeViewModels()
+                .AddExamSetViewModels()
+                .AddAuthenticationViewModels()
                 .AddStores()
                 .AddCommands()
                 .AddQueries()
@@ -46,13 +50,13 @@ namespace Theseus.WPF
             .Build();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             _host.Start();
 
             LoadStringResources();
             MigrateDatabase();
-            AttemptToLogInPatientAutomatically();
+            await AttemptToLogInPatientAutomatically();
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
