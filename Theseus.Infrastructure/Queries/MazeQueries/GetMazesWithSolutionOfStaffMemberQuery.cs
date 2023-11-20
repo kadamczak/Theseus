@@ -19,7 +19,5 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
                 return MapMazesWithSolution(mazeDtos);
             }
         }
-
-
     }
 }

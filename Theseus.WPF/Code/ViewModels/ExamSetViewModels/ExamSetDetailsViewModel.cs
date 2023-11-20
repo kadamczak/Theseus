@@ -31,7 +31,8 @@ namespace Theseus.WPF.Code.ViewModels
                                                   Guid examSetId,
                                                   SelectedMazeListStore mazeListStore)
         {
-            throw new NotImplementedException();
+            var mazes = getAllMazesOfExamSetQuery.GetMazesWithSolution(examSetId);
+            mazeListStore.Mazes = mazes;
         }
     }
 }

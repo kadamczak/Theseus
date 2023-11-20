@@ -61,7 +61,10 @@
             <DataTemplate DataType="{x:Type vms:CreateSetManuallyViewModel}">
                 <views:CreateSetManuallyView/>
             </DataTemplate>
-            
+            <DataTemplate DataType="{x:Type vms:ExamSetDetailsViewModel}">
+                <views:ExamSetDetailsView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type vms:MazeGeneratorViewModel}">
                 <views:MazeGeneratorView/>
             </DataTemplate>
