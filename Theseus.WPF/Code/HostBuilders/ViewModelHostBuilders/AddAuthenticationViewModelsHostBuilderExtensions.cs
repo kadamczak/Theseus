@@ -31,6 +31,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<PatientLoginRegisterViewModel>();
             services.AddTransient<PatientLoginViewModel>();
             services.AddTransient<PatientRegisterViewModel>();
+            services.AddTransient<PatientDetailsViewModel>();
+            services.AddTransient<RemovePatientCommandListViewModel>();
 
             services.AddTransient<StaffMemberDetailsLoggedInViewModel>();
             services.AddTransient<StaffMemberDetailsNotLoggedInViewModel>();
@@ -49,6 +51,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<PatientLoginRegisterViewModel>>((s) => () => s.GetRequiredService<PatientLoginRegisterViewModel>());
             services.AddSingleton<Func<PatientLoginViewModel>>((s) => () => s.GetRequiredService<PatientLoginViewModel>());
             services.AddSingleton<Func<PatientRegisterViewModel>>((s) => () => s.GetRequiredService<PatientRegisterViewModel>());
+            services.AddSingleton<Func<PatientDetailsViewModel>>((s) => () => s.GetRequiredService<PatientDetailsViewModel>());
+            services.AddSingleton<Func<RemovePatientCommandListViewModel>>((s) => () => s.GetRequiredService<RemovePatientCommandListViewModel>());
 
             services.AddSingleton<Func<StaffMemberDetailsLoggedInViewModel>>((s) => () => s.GetRequiredService<StaffMemberDetailsLoggedInViewModel>());
             services.AddSingleton<Func<StaffMemberDetailsNotLoggedInViewModel>>((s) => () => s.GetRequiredService<StaffMemberDetailsNotLoggedInViewModel>());
@@ -67,6 +71,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<PatientLoginRegisterViewModel>>();
             services.AddSingleton<NavigationService<PatientLoginViewModel>>();
             services.AddSingleton<NavigationService<PatientRegisterViewModel>>();
+            services.AddSingleton<NavigationService<PatientDetailsViewModel>>();
+            services.AddSingleton<NavigationService<RemovePatientCommandListViewModel>>();
 
             services.AddSingleton<NavigationService<StaffMemberDetailsLoggedInViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberDetailsNotLoggedInViewModel>>();

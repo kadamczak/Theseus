@@ -3,10 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
+             xmlns:views="clr-namespace:Theseus.WPF.Code.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="750" d:DesignWidth="800">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" FontSize="25" Content="{Binding CurrentGroup.Name}" />
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" FontSize="25" Content="Patients" />
+            <views:PatientCommandListView Grid.Row="1" DataContext="{Binding RemovePatientCommandListViewModel}" />
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" FontSize="25" Content="Exam Sets" />
+            <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding ShowDetailsExamSetCommandListViewModel}" />
+        </Grid>
     </Grid>
 </UserControl>
