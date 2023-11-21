@@ -84,8 +84,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Code\Views\ExamViews\" />
-  </ItemGroup>
-
 </Project>

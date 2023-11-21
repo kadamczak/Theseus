@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Theseus.WPF.Code.Bases;
 
-namespace Theseus.WPF.Code.ViewModels.ExamViewModels
+namespace Theseus.WPF.Code.ViewModels
 {
-    internal class ExamEndViewModel
+    public class ExamEndViewModel : ViewModelBase
     {
     }
 }

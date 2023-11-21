@@ -1,0 +1,42 @@
+﻿using System.Windows.Controls;
+using Theseus.WPF.Code.Views.Components.MazeCanvases;
+
+namespace Theseus.WPF.Code.Views
+{
+    /// <summary>
+    /// Interaction logic for ExamPageView.xaml
+    /// </summary>
+    public partial class ExamPageView : UserControl
+    {
+        private readonly ExamMazeCanvasView _examMazeCanvasView;
+        private bool _mazeCanvasLoaded = false;
+
+        public ExamPageView()
+        {
+            InitializeComponent();
+            this._examMazeCanvasView = this.FindName("ExamMazeCanvasView") as ExamMazeCanvasView;
+        }
+
+        private void ExamMazeCanvasView_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _examMazeCanvasView.InitializeDataContexts();
+            _mazeCanvasLoaded = true;
+            RedrawMaze();
+            UpdateLayout();
+            RedrawMaze();
+        }
+
+        private void Grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            RedrawMaze();
+        }
+
+        private void RedrawMaze()
+        {
+            float minCellSize = 2;
+
+            if (_mazeCanvasLoaded)
+                _examMazeCanvasView.DrawScaledExamMaze(minCellSize);
+        }
+    }
+}
