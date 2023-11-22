@@ -1,7 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Timers;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
@@ -27,9 +28,20 @@ namespace Theseus.WPF.Code.ViewModels
                 OnPropertyChanged(nameof(CountdownValue));
             }
         }
-        private Timer _transitionTimer = new Timer() { Interval = 1000 };
-        public ICommand GoToNextPage;
 
+        public ICommand GoToNextPage { get; }
+        private bool _canGoToNextPage = true;
+        public bool CanGoToNextPage
+        {
+            get => _canGoToNextPage;
+            set
+            {
+                _canGoToNextPage = value;
+                OnPropertyChanged(nameof(CanGoToNextPage));
+            }
+        }
+
+        private Timer _transitionTimer = new Timer() { Interval = 1000 };
 
         public ExamPageViewModel(CurrentExamStore currentExamStore,
                                  NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
@@ -38,13 +50,14 @@ namespace Theseus.WPF.Code.ViewModels
             MazeWithSolution currentMaze = currentExamStore.Mazes.ElementAt(currentExamStore.CurrentIndex);
             ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze);
 
-            GoToNextPage = new GoToNextPageCommand(currentExamStore, examTransitionNavigationService, examEndNavigationService);
+            GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService);
             ExamMazeCanvasViewModel.CompletedMaze += StartCountdown;
             _transitionTimer.Elapsed += new ElapsedEventHandler(ReduceCountdownValue);
         }
 
         private void StartCountdown()
         {
+            CanGoToNextPage = false;
             _transitionTimer.Start();
         }
 
@@ -55,6 +68,10 @@ namespace Theseus.WPF.Code.ViewModels
             if (CountdownValue == 0)
             {
                 _transitionTimer.Stop();
+
+                Application.Current.Dispatcher.Invoke(() => {
+                    CanGoToNextPage = true;
+                });
                 GoToNextPage.Execute(null);
             }
         }

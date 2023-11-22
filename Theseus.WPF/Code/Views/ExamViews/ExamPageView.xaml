@@ -19,7 +19,10 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Margin="0 0 0 40">
-            <Label DockPanel.Dock="Left" Content="Solve Maze" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontFamily="Microsoft YaHei Light"/>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <Label DockPanel.Dock="Left" Content="Solve Maze" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontFamily="Microsoft YaHei Light"/>
+                <Button Margin="40 0 0 0" Content="Skip" Command="{Binding GoToNextPage}" Style="{StaticResource Generic}"/>
+            </StackPanel>
 
             <StackPanel Visibility="{Binding ExamMazeCanvasViewModel.MazeExamFinished, Converter={StaticResource BoolToVisibility}}" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Label Content="Maze finished! Next screen in:" VerticalAlignment="Center" FontSize="22" FontFamily="Microsoft YaHei Light"/>
