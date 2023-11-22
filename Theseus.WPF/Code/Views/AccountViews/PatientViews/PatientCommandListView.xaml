@@ -13,75 +13,65 @@
     </UserControl.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="0 10 0 10">
-            <ListBox ItemsSource="{Binding ActionablePatients}" HorizontalContentAlignment="Stretch">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
-                                            BorderThickness="0"
-                                            Background="{TemplateBinding Background}">
-                                        <ContentPresenter />
-                                    </Border>
-
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-
-                <ListBox.ItemTemplate>
-                    <DataTemplate >
-                        <Grid>
-                            <Grid.Style>
-                                <Style TargetType="Grid">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Selected}" Value="true">
-                                            <Setter Property="Background" Value="Linen"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Selected}" Value="false">
-                                            <Setter Property="Background" Value="Transparent"></Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Grid.Style>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="70" />
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Row="0" Grid.Column="0" Content="{Binding Patient.Username}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="30 0 0 0"/>
-
-                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Patient.Age}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="30 0 0 0"/>
-
-                            <Label Grid.Row="0" Grid.Column="2" Content="{Binding Patient.Sex}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="30 0 0 0"/>
-
-                            <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" >
-                                <Button Style="{StaticResource Generic}" FontSize="17" Content="{Binding Command1Name}" Command="{Binding Command1}" Padding="7" HorizontalAlignment="Center" Width="80"/>
-
-                                <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="17" Visibility="{Binding ShowCommand2, Converter={StaticResource BooleanVisibility}}" Content="{Binding Command2Name}" Command="{Binding Command2}" Padding="7" HorizontalAlignment="Center" Width="80"/>
-                            </StackPanel>
-
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
 
 
-            </ListBox>
+            <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionablePatients}" FontSize="18">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Username">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.Username}"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Age">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.Age}"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Gender">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.Sex}"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Education">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Margin="10 0 10 0" Text="{Binding Patient.EducationLevel}"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Profession">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.ProfessionType}"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Actions">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10 0 10 0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                            <Button Style="{StaticResource Generic}" FontSize="17" Content="{Binding Command1Name}" Command="{Binding Command1}" Padding="7" HorizontalAlignment="Center" Width="80"/>
+
+                                            <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="17" Visibility="{Binding ShowCommand2, Converter={StaticResource BooleanVisibility}}" Content="{Binding Command2Name}" Command="{Binding Command2}" Padding="4" HorizontalAlignment="Center" Width="80"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+
         </ScrollViewer>
     </Grid>
 </UserControl>
