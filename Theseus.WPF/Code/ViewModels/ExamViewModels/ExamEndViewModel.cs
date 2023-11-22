@@ -4,5 +4,9 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class ExamEndViewModel : ViewModelBase
     {
+
+        public ExamEndViewModel()
+        {          
+        }
     }
 }

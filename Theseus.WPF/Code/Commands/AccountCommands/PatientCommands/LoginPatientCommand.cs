@@ -13,15 +13,15 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
     {
         private readonly PatientLoginViewModel _patientLoginViewModel;
         private readonly IPatientAuthenticator _authenticator;
-        private readonly NavigationService<LoggedInViewModel> _loggedInNavigationService;
+        private readonly NavigationService<BeginTestViewModel> _beginTestNavigationService;
 
         public LoginPatientCommand(PatientLoginViewModel patientLoginViewModel,
                                    IPatientAuthenticator authenticator,
-                                   NavigationService<LoggedInViewModel> loggedInNavigationService)
+                                   NavigationService<BeginTestViewModel> beginTestNavigationService)
         {
             _patientLoginViewModel = patientLoginViewModel;
             _authenticator = authenticator;
-            _loggedInNavigationService = loggedInNavigationService;
+            _beginTestNavigationService = beginTestNavigationService;
 
             _patientLoginViewModel.PropertyChanged += ViewModelPropertyChanged;
         }
@@ -32,7 +32,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
             {
                 await _authenticator.Login(_patientLoginViewModel.Username, _patientLoginViewModel.GroupName);
 
-                _loggedInNavigationService.Navigate();
+                _beginTestNavigationService.Navigate();
                 UpdateLastStoredPatientData();
             }
             catch (UserNotFoundException)

@@ -85,6 +85,9 @@
             <DataTemplate DataType="{x:Type vms:ExamPageViewModel}">
                 <views:ExamPageView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ExamTransitionViewModel}">
+                <views:ExamTransitionView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vms:ExamEndViewModel}">
                 <views:ExamEndView/>
             </DataTemplate>

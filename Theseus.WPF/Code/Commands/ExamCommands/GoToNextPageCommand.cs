@@ -9,15 +9,15 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
     public class GoToNextPageCommand : CommandBase
     {
         private readonly CurrentExamStore _currentExamStore;
-        private readonly NavigationService<ExamPageViewModel> _examPageNavigationService;
+        private readonly NavigationService<ExamTransitionViewModel> _examTransitionNavigationService;
         private readonly NavigationService<ExamEndViewModel> _examEndNavigationService;
 
         public GoToNextPageCommand(CurrentExamStore currentExamStore,
-                                   NavigationService<ExamPageViewModel> examPageNavigationService,
+                                   NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
                                    NavigationService<ExamEndViewModel> examEndNavigationService)
         {
             _currentExamStore = currentExamStore;
-            _examPageNavigationService = examPageNavigationService;
+            _examTransitionNavigationService = examTransitionNavigationService;
             _examEndNavigationService = examEndNavigationService;
         }
 
@@ -30,7 +30,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
             else
             {
                 _currentExamStore.CurrentIndex++;
-                _examPageNavigationService.Navigate();
+                _examTransitionNavigationService.Navigate();
             }
         }
 

@@ -112,13 +112,13 @@ namespace Theseus.WPF.Code.ViewModels
         public bool CanLogin => !HasErrors;
         public ICommand Login { get; }
 
-        public PatientLoginViewModel(IPatientAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInNavigationService)
+        public PatientLoginViewModel(IPatientAuthenticator authenticator, NavigationService<BeginTestViewModel> beginTestNavigationService)
         {
             ClearFields();
             LoadPastLogInInfo();
             HasPastLogins = !string.IsNullOrWhiteSpace(PastUsernameFirst);
 
-            Login = new LoginPatientCommand(this, authenticator, loggedInNavigationService);
+            Login = new LoginPatientCommand(this, authenticator, beginTestNavigationService);
         }
 
         private void ClearFields()

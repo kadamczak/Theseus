@@ -27,6 +27,6 @@
             </StackPanel>
         </DockPanel>
 
-        <canvases:ExamMazeCanvasView Grid.Row="1" x:Name="ExamMazeCanvasView" DataContext="{Binding ExamMazeCanvasViewModel}" Loaded="ExamMazeCanvasView_Loaded"/>
+        <canvases:ExamMazeCanvasView FocusVisualStyle="{x:Null}" Grid.Row="1" x:Name="ExamMazeCanvasView" DataContext="{Binding ExamMazeCanvasViewModel}" Loaded="ExamMazeCanvasView_Loaded"/>
     </Grid>
 </UserControl>

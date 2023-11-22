@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Timers;
 using System.Windows.Input;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
@@ -29,21 +30,15 @@ namespace Theseus.WPF.Code.ViewModels
         private Timer _transitionTimer = new Timer() { Interval = 1000 };
         public ICommand GoToNextPage;
 
-        //TheseusDbContextFactory factory, IMapper mapper
-        public ExamPageViewModel(CurrentExamStore currentExamStore,
-                                 NavigationService<ExamPageViewModel> examPageNavigationService,
-                                 NavigationService<ExamEndViewModel> examEndNavigationService)
-        {
-            //Guid guid = new Guid("b879799d-af75-4ce4-734d-08dbd14fb5c2");
-            //GetMazeById = new GetMazeWithSolutionByIdQuery(factory, mapper);
-            //MazeWithSolution? m = GetMazeById.GetMazeWithSolutionById(guid);
 
-            //if (m is null)
-            //    throw new Exception("Maze doesn't exist.");         
+        public ExamPageViewModel(CurrentExamStore currentExamStore,
+                                 NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
+                                 NavigationService<ExamEndViewModel> examEndNavigationService)
+        {      
             MazeWithSolution currentMaze = currentExamStore.Mazes.ElementAt(currentExamStore.CurrentIndex);
             ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze);
 
-            GoToNextPage = new GoToNextPageCommand(currentExamStore, examPageNavigationService, examEndNavigationService);
+            GoToNextPage = new GoToNextPageCommand(currentExamStore, examTransitionNavigationService, examEndNavigationService);
             ExamMazeCanvasViewModel.CompletedMaze += StartCountdown;
             _transitionTimer.Elapsed += new ElapsedEventHandler(ReduceCountdownValue);
         }

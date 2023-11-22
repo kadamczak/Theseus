@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True">
-    <Grid>
-        <local:MazeWithSolutionCanvasView x:Name="MazeWithSolutionCanvasView"  DataContext="{Binding MazeWithSolutionCanvasViewModel}"/>
-        <Canvas Name="ExamSolutionCanvas" />
+    <Grid FocusVisualStyle="{x:Null}">
+        <local:MazeWithSolutionCanvasView FocusVisualStyle="{x:Null}" x:Name="MazeWithSolutionCanvasView"  DataContext="{Binding MazeWithSolutionCanvasViewModel}"/>
+        <Canvas Name="ExamSolutionCanvas" FocusVisualStyle="{x:Null}" />
+
     </Grid>
 
     <UserControl.InputBindings>

@@ -24,3 +24,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         }
     }
 }
+//komentarz przynajmniej do klasy
+//zlozonosc z ksiazki
+
+//filmiki (najciekawsze fragmenty)
+//analiza
+//rozdzial - funkcje poznawcze, badania
+//opisac narzedzia robiace podobne rzeczy
