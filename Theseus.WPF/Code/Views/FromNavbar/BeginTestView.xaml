@@ -11,10 +11,21 @@
     <Grid Background="WhiteSmoke" Margin="40">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-       
+        <Label Content="Begin Test" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light" Margin="0 0 0 50"/>
+
+        <ListBox Grid.Row="1" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableExamSets}" SelectedItem="{Binding SelectedExamSet, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Width="250" HorizontalAlignment="Left">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Margin="0 50 0 0" Grid.Row="2" Content="Begin" Style="{StaticResource Generic}" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BeginExam}"/>
     </Grid>
 
 </UserControl>

@@ -82,7 +82,7 @@ namespace Theseus.WPF.Code.ViewModels
         private void CurrentUserStateChanged()
         {
             LoggedInAsStaff = _currentStaffMemberStore.IsStaffMemberLoggedIn;
-            LoggedIn = _currentStaffMemberStore.IsStaffMemberLoggedIn || _currentPatientStore.IsPatientLoggedIn; ;
+            LoggedIn = _currentStaffMemberStore.IsStaffMemberLoggedIn || _currentPatientStore.IsPatientLoggedIn;
         }
     }
 }

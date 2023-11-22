@@ -14,11 +14,11 @@ namespace Theseus.Infrastructure.Queries.GroupQueries
         {
         }
 
-        public async Task<Group?> GetGroup(Guid patientId)
+        public Group? GetGroup(Guid patientId)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                GroupDto? groupDto = await context.Groups.AsNoTracking().FirstOrDefaultAsync(g => g.PatientDtos.Where(p => p.Id == patientId).Any());
+                GroupDto? groupDto = context.Groups.AsNoTracking().FirstOrDefault(g => g.PatientDtos.Where(p => p.Id == patientId).Any());
                 return groupDto is null ? null : MapGroup(groupDto);
             }
         }

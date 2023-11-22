@@ -5,9 +5,9 @@ namespace Theseus.WPF.Code.Views
     /// <summary>
     /// Interaction logic for ExamPageEnd.xaml
     /// </summary>
-    public partial class ExamPageEnd : UserControl
+    public partial class ExamEndView : UserControl
     {
-        public ExamPageEnd()
+        public ExamEndView()
         {
             InitializeComponent();
         }

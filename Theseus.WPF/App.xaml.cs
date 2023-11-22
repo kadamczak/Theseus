@@ -31,6 +31,7 @@ namespace Theseus.WPF
                 .AddNavbarViewModels()
                 .AddMazeViewModels()
                 .AddExamSetViewModels()
+                .AddExamViewModels()
                 .AddAuthenticationViewModels()
                 .AddGroupViewModels()
                 .AddStores()
@@ -57,10 +58,11 @@ namespace Theseus.WPF
 
             LoadStringResources();
             MigrateDatabase();
-            await AttemptToLogInPatientAutomatically();
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
+
+            await AttemptToLogInPatientAutomatically();
 
             base.OnStartup(e);
         }

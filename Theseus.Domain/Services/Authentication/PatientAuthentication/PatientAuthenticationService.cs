@@ -30,7 +30,7 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
         {
             Patient? existingPatient = await _getPatientByUsernameQuery.GetPatient(username) ?? throw new UserNotFoundException(username);
 
-            Group? group = await _getGroupByPatientQuery.GetGroup(existingPatient.Id);
+            Group? group = _getGroupByPatientQuery.GetGroup(existingPatient.Id);
             if (group is null || group.Name != groupName)
             {
                 throw new WrongGroupNameForPatientException(groupName, existingPatient.Username);

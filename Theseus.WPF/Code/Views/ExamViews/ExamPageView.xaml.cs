@@ -20,6 +20,7 @@ namespace Theseus.WPF.Code.Views
         private void ExamMazeCanvasView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             _examMazeCanvasView.InitializeDataContexts();
+            _examMazeCanvasView.Focus();
             _mazeCanvasLoaded = true;
             RedrawMaze();
             UpdateLayout();

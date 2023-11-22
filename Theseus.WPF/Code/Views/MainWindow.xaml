@@ -81,6 +81,13 @@
             <DataTemplate DataType="{x:Type vms:GroupDetailsViewModel}">
                 <views:GroupDetailsView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:ExamPageViewModel}">
+                <views:ExamPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ExamEndViewModel}">
+                <views:ExamEndView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <views:NavigationBarView Grid.Column="0" DataContext="{Binding NavigationBarViewModel}" />
