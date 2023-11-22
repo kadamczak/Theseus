@@ -13,13 +13,10 @@
     </UserControl.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-
-
-            <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionablePatients}" FontSize="18">
-                <ListView.View>
-                    <GridView>
-                        <GridView.Columns>
+        <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionablePatients}" FontSize="18">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
                             <GridViewColumn Header="Username">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -67,11 +64,8 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView.Columns>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
-
-        </ScrollViewer>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>
