@@ -26,6 +26,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<StaffMemberGroupsViewModel>();
             services.AddTransient<ShowDetailsGroupCommandListViewModel>();
             services.AddTransient<GroupDetailsViewModel>();
+
+            services.AddTransient<AddPatientToGroupViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -33,6 +35,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<StaffMemberGroupsViewModel>>((s) => () => s.GetRequiredService<StaffMemberGroupsViewModel>());
             services.AddSingleton<Func<ShowDetailsGroupCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsGroupCommandListViewModel>());
             services.AddSingleton<Func<GroupDetailsViewModel>>((s) => () => s.GetRequiredService<GroupDetailsViewModel>());
+
+            services.AddSingleton<Func<AddPatientToGroupViewModel>>((s) => () => s.GetRequiredService<AddPatientToGroupViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -40,6 +44,8 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<StaffMemberGroupsViewModel>>();
             services.AddSingleton<NavigationService<ShowDetailsGroupCommandListViewModel>>();
             services.AddSingleton<NavigationService<GroupDetailsViewModel>>();
+
+            services.AddSingleton<NavigationService<AddPatientToGroupViewModel>>();
         }
     }
 }

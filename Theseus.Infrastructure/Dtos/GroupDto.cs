@@ -12,5 +12,15 @@ namespace Theseus.Infrastructure.Dtos
         public virtual ICollection<StaffMemberDto> StaffMemberDtos { get; set; } = default!;
         public virtual ICollection<PatientDto> PatientDtos { get; set; } = default!;
         public virtual ICollection<ExamSetDto> ExamSetDtos { get; set;} = default!;
+
+        public GroupDto()
+        {
+            
+        }
+
+        public GroupDto(Guid id)
+        {
+            Id = id;
+        }
     }
 }

@@ -6,38 +6,45 @@
              xmlns:views="clr-namespace:Theseus.WPF.Code.Views"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="800">
-    <Grid Margin="40">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="300"/>
-            <RowDefinition Height="300"/>
-        </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" FontSize="30" Content="{Binding CurrentGroup.Name}" FontWeight="Bold" Margin="0 0 0 30"/>
-
-        <Grid Grid.Row="1">
-            <Label Grid.Row="0" FontSize="25" Content="Staff Members" />
-        </Grid>
-
-        <Grid Grid.Row="2">
+    <ScrollViewer>
+        <Grid Margin="40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" FontSize="25" Content="Patients" />
-            <views:PatientCommandListView Grid.Row="1" DataContext="{Binding RemovePatientCommandListViewModel}" />
-        </Grid>
-
-        <Grid Grid.Row="3">
-            <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="300"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" FontSize="25" Content="Exam Sets" />
-            <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding ShowDetailsExamSetCommandListViewModel}" />
+            <Label Grid.Row="0" FontSize="30" Content="{Binding CurrentGroup.Name}" FontWeight="Bold" Margin="0 0 0 30"/>
+
+            <Grid Grid.Row="1">
+                <Label Grid.Row="0" FontSize="25" Content="Staff Members" />
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0 0 0 10">
+                    <Label Grid.Row="0" FontSize="25" Content="Patients" VerticalAlignment="Center" />
+                    <Button Content="Add" Style="{StaticResource Generic}" FontSize="19" Padding="10 3" Width="80" Height="40" Margin="60 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding AddPatient}"/>
+                </StackPanel>
+                <views:PatientCommandListView Grid.Row="1" DataContext="{Binding RemovePatientCommandListViewModel}" />
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" FontSize="25" Content="Exam Sets" Margin="0 0 0 10" />
+                <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding ShowDetailsExamSetCommandListViewModel}" />
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
+   
 </UserControl>

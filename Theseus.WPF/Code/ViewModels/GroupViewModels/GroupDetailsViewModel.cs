@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Windows.Input;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Commands.NavigationCommands;
+using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.ExamSets;
 using Theseus.WPF.Code.Stores.Groups;
 using Theseus.WPF.Code.Stores.Patients;
@@ -12,9 +15,10 @@ namespace Theseus.WPF.Code.ViewModels
     public class GroupDetailsViewModel : ViewModelBase
     {
         public Group CurrentGroup { get; }
-
         public RemovePatientCommandListViewModel RemovePatientCommandListViewModel { get; set; }
         public ShowDetailsExamSetCommandListViewModel ShowDetailsExamSetCommandListViewModel { get; set; }
+
+        public ICommand AddPatient { get; }
 
         public GroupDetailsViewModel(SelectedGroupDetailsStore selectedGroupDetailsStore,
                                      IGetPatientsOfGroupQuery getPatientsOfGroupQuery, 
@@ -22,12 +26,15 @@ namespace Theseus.WPF.Code.ViewModels
                                      RemovePatientCommandListViewModel removePatientCommandListViewModel,
                                      IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
                                      SelectedExamSetListStore selectedExamSetListStore,
-                                     ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel)
+                                     ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel,
+                                     NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService)
         {
             CurrentGroup = selectedGroupDetailsStore.SelectedGroup;
 
             CreatePatientCommandList(getPatientsOfGroupQuery, selectedPatientListStore, removePatientCommandListViewModel);
             CreateExamSetCommandList(getExamSetsOfGroupQuery, selectedExamSetListStore, showDetailsExamSetCommandListViewModel);
+
+            AddPatient = new NavigateCommand<AddPatientToGroupViewModel>(addPatientToGroupNavigationService);
         }
 
         private void CreatePatientCommandList(IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
