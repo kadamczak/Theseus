@@ -4,8 +4,8 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.WPF.Code.Commands.GroupCommands;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.Stores.Groups;
 using Theseus.WPF.Code.Stores.StaffMembers;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
@@ -15,7 +15,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         private readonly IRemoveStaffMemberFromGroupCommand _removeStaffMemberFromGroupCommand;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
-        private readonly SelectedGroupDetailsStore _selectedGroupDetailsStore;
+        private readonly SelectedModelDetailsStore<Group> _selectedGroupDetailsStore;
 
         private Guid _groupOwnerId;
         private readonly bool _currentStaffMemberCanRemoveMembers = false;
@@ -23,14 +23,14 @@ namespace Theseus.WPF.Code.ViewModels
         public RemoveStaffMemberCommandListViewModel(SelectedStaffMemberListStore selectedStaffMemberListStore,
                                                      IRemoveStaffMemberFromGroupCommand removeStaffMemberFromGroupCommand,
                                                      ICurrentStaffMemberStore currentStaffMemberStore,
-                                                     SelectedGroupDetailsStore selectedGroupDetailsStore,
+                                                     SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
                                                      IGetOwnerOfGroupQuery getOwnerOfGroupQuery) : base(selectedStaffMemberListStore)
         {
             _removeStaffMemberFromGroupCommand = removeStaffMemberFromGroupCommand;
             _currentStaffMemberStore = currentStaffMemberStore;
             _selectedGroupDetailsStore = selectedGroupDetailsStore;
 
-            Group currentGroup = selectedGroupDetailsStore.SelectedGroup;
+            Group currentGroup = selectedGroupDetailsStore.SelectedModel;
             _groupOwnerId = getOwnerOfGroupQuery.GetOwner(currentGroup.Id).Id;
             _currentStaffMemberCanRemoveMembers = IsOwner(currentStaffMemberStore.StaffMember.Id);
         }

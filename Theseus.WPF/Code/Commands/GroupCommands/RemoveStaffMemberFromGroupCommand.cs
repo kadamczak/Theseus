@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
+using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Stores.Groups;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
@@ -15,12 +16,12 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
         private readonly RemoveStaffMemberCommandListViewModel _removeStaffMemberCommandListViewModel;
         private readonly CommandViewModel<StaffMember> _staffMemberCommandViewModel;
         private readonly IRemoveStaffMemberFromGroupCommand _removeStaffMemberFromGroupCommand;
-        private readonly SelectedGroupDetailsStore _selectedGroupDetailsStore;
+        private readonly SelectedModelDetailsStore<Group> _selectedGroupDetailsStore;
 
         public RemoveStaffMemberFromGroupCommand(RemoveStaffMemberCommandListViewModel removeStaffMemberCommandListViewModel,
                                                  CommandViewModel<StaffMember> staffMemberCommandViewModel,
                                                  IRemoveStaffMemberFromGroupCommand removeStaffMemberFromGroupCommand,
-                                                 SelectedGroupDetailsStore selectedGroupDetailsStore)
+                                                 SelectedModelDetailsStore<Group> selectedGroupDetailsStore)
         {
             _removeStaffMemberCommandListViewModel = removeStaffMemberCommandListViewModel;
             _staffMemberCommandViewModel = staffMemberCommandViewModel;
@@ -38,7 +39,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
             if(result == MessageBoxResult.Yes)
             {
-                Guid groupId = _selectedGroupDetailsStore.SelectedGroup.Id;
+                Guid groupId = _selectedGroupDetailsStore.SelectedModel.Id;
                 await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_staffMemberCommandViewModel.Model, groupId);
                 _removeStaffMemberCommandListViewModel.ActionableStaffMembers.Remove(_staffMemberCommandViewModel);
             }

@@ -6,7 +6,6 @@ using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Exams;
 using Theseus.WPF.Code.Stores.ExamSets;
-using Theseus.WPF.Code.Stores.Groups;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.Stores.Patients;
 using Theseus.WPF.Code.Stores.StaffMembers;
@@ -28,17 +27,17 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<SelectedExamSetDetailsStore>();
                 services.AddSingleton<SelectedExamSetListStore>();
 
-                services.AddSingleton<SelectedGroupDetailsStore>();
+                //services.AddSingleton<SelectedGroupDetailsStore>();
 
                 services.AddSingleton<SelectedPatientDetailsStore>();
                 services.AddSingleton<SelectedPatientListStore>();
-
                 services.AddSingleton<SelectedStaffMemberDetailsStore>();
                 services.AddSingleton<SelectedStaffMemberListStore>();
-
                 services.AddSingleton<CurrentExamStore>();
 
                 services.AddSingleton<SelectedModelListStore<Group>>();
+
+                services.AddSingleton<SelectedModelDetailsStore<Group>>();
 
                 services.AddSingleton<ICurrentStaffMemberStore, CurrentStaffMemberStore>();
                 services.AddSingleton<ICurrentPatientStore, CurrentPatientStore>();

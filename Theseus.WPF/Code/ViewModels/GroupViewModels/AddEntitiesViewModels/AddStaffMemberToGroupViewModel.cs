@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
+using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
@@ -10,7 +11,7 @@ using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Groups;
+using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -68,7 +69,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand SearchForStaffMember { get; }
         public ICommand AddStaffMemberToGroup { get; }
 
-        public AddStaffMemberToGroupViewModel(SelectedGroupDetailsStore selectedGroupDetailsStore,
+        public AddStaffMemberToGroupViewModel(SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
                                               IGetStaffMemberByUsernameQuery getStaffMemberByUsernameQuery,
                                               IGetGroupsOfStaffMemberQuery getGroupsOfStaffMemberQuery,
                                               IAddStaffMemberToGroupCommand addStaffMemberToGroupCommand,
@@ -76,7 +77,7 @@ namespace Theseus.WPF.Code.ViewModels
         {
             PropertyChanged += OnPropertyChanged;
 
-            SelectedGroupId = selectedGroupDetailsStore.SelectedGroup.Id;
+            SelectedGroupId = selectedGroupDetailsStore.SelectedModel.Id;
             SearchForStaffMember = new SearchForStaffMemberCommand(this, getStaffMemberByUsernameQuery, getGroupsOfStaffMemberQuery);
             AddStaffMemberToGroup = new AddStaffMemberToGroupCommand(this, addStaffMemberToGroupCommand, groupDetailsNavigationService);
         }

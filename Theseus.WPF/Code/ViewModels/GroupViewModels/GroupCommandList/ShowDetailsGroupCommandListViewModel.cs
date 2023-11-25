@@ -2,18 +2,17 @@
 using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
-using Theseus.WPF.Code.Stores.Groups;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class ShowDetailsGroupCommandListViewModel : CommandListViewModel<Group>
     {
-        private readonly SelectedGroupDetailsStore _selectedGroupDetailsStore;
+        private readonly SelectedModelDetailsStore<Group> _selectedGroupDetailsStore;
         private readonly NavigationService<GroupDetailsViewModel> _navigationService;
 
         public ShowDetailsGroupCommandListViewModel(SelectedModelListStore<Group> selectedGroupListStore,
-                                                    SelectedGroupDetailsStore selectedGroupDetailsStore,
+                                                    SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
                                                     NavigationService<GroupDetailsViewModel> navigationService) : base(selectedGroupListStore)
         {
             _selectedGroupDetailsStore = selectedGroupDetailsStore;

@@ -7,9 +7,9 @@ using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.ExamSets;
-using Theseus.WPF.Code.Stores.Groups;
 using Theseus.WPF.Code.Stores.Patients;
 using Theseus.WPF.Code.Stores.StaffMembers;
 
@@ -29,7 +29,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand AddStaffMember { get; }
         public ICommand AddPatient { get; }
 
-        public GroupDetailsViewModel(SelectedGroupDetailsStore selectedGroupDetailsStore,
+        public GroupDetailsViewModel(SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
                                      ICurrentStaffMemberStore currentStaffMemberStore,        
                                      IGetOwnerOfGroupQuery getOwnerOfGroupQuery,
                                      IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
@@ -44,7 +44,7 @@ namespace Theseus.WPF.Code.ViewModels
                                      NavigationService<AddStaffMemberToGroupViewModel> addStaffMemberToGroupNavigationService,
                                      NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService)
         {
-            CurrentGroup = selectedGroupDetailsStore.SelectedGroup;
+            CurrentGroup = selectedGroupDetailsStore.SelectedModel;
             CurrentGroup.Owner = getOwnerOfGroupQuery.GetOwner(CurrentGroup.Id);
             AddStaffMemberAvailable = (currentStaffMemberStore.StaffMember.Id == CurrentGroup.Owner.Id);
             GroupOwnerName = CurrentGroup.Owner.Username;

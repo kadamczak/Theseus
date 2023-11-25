@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
@@ -11,7 +10,7 @@ using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
 using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Groups;
+using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -70,7 +69,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand SearchForPatient { get; }
         public ICommand AddPatientToGroup { get; }
 
-        public AddPatientToGroupViewModel(SelectedGroupDetailsStore selectedGroupDetailsStore,
+        public AddPatientToGroupViewModel(SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
                                           IGetPatientByUsernameQuery getPatientByUsernameQuery,
                                           IGetGroupByPatientQuery getGroupByPatientQuery,
                                           IAddPatientToGroupCommand addPatientToGroupCommand,
@@ -78,7 +77,7 @@ namespace Theseus.WPF.Code.ViewModels
         {
             PropertyChanged += OnPropertyChanged;
 
-            SelectedGroupId = selectedGroupDetailsStore.SelectedGroup.Id;
+            SelectedGroupId = selectedGroupDetailsStore.SelectedModel.Id;
             SearchForPatient = new SearchForPatientCommand(this, getPatientByUsernameQuery, getGroupByPatientQuery);
             AddPatientToGroup = new AddPatientToGroupCommand(this, addPatientToGroupCommand, groupDetailsNavigationService);
         }
