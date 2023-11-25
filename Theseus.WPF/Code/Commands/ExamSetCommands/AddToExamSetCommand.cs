@@ -7,10 +7,10 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
     class AddToExamSetCommand : CommandBase
     {
-        private readonly MazeWithSolutionCommandViewModel _mazeWithSolutionCommandViewModel;
+        private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeWithSolutionCommandViewModel;
         private AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
 
-        public AddToExamSetCommand(MazeWithSolutionCommandViewModel mazeWithSolutionCommandViewModel,
+        public AddToExamSetCommand(CommandViewModel<MazeWithSolutionCanvasViewModel> mazeWithSolutionCommandViewModel,
                                AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
         {
             _mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;
@@ -19,7 +19,7 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         public override void Execute(object? parameter)
         {
-            MazeWithSolution mazeWithSolution = _mazeWithSolutionCommandViewModel.MazeWithSolutionCanvasViewModel.MazeWithSolution;
+            MazeWithSolution mazeWithSolution = _mazeWithSolutionCommandViewModel.Model.MazeWithSolution;
 
             if (_mazeWithSolutionCommandViewModel.Selected)
             {
@@ -35,14 +35,14 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
         {
             _addToSetMazeCommandListViewModel.SelectedMazes.Remove(mazeWithSolution);
             _mazeWithSolutionCommandViewModel.Selected = false;
-            _mazeWithSolutionCommandViewModel.CommandName = "Add";
+            _mazeWithSolutionCommandViewModel.Command1Name = "Add";
         }
 
         private void SelectMaze(MazeWithSolution mazeWithSolution)
         {
             _addToSetMazeCommandListViewModel.SelectedMazes.Add(mazeWithSolution);
             _mazeWithSolutionCommandViewModel.Selected = true;
-            _mazeWithSolutionCommandViewModel.CommandName = "Remove";
+            _mazeWithSolutionCommandViewModel.Command1Name = "Remove";
         }
     }
 }

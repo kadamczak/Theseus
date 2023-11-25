@@ -9,12 +9,11 @@ namespace Theseus.WPF.Code.ViewModels
     public abstract class MazeCommandListViewModel : ViewModelBase
     {
         private SelectedMazeListStore _mazeListStore;
-        public ObservableCollection<MazeWithSolutionCommandViewModel> ActionableMazes { get; } = new ObservableCollection<MazeWithSolutionCommandViewModel>();
+        public ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>> ActionableMazes { get; } = new ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>>();
 
         public MazeCommandListViewModel(SelectedMazeListStore mazeListStore)
         {
             this._mazeListStore = mazeListStore;
-            //CreateMazeCommandViewModels();
         }
 
         public void CreateMazeCommandViewModels()

@@ -22,9 +22,11 @@ namespace Theseus.WPF.Code.ViewModels
 
         protected override void AddMazeWithCommandToActionableMazes(MazeWithSolution mazeWithSolution)
         {
-            MazeWithSolutionCommandViewModel actionableMaze = new MazeWithSolutionCommandViewModel(mazeWithSolution);
-            actionableMaze.Command = new ShowMazeDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
-            actionableMaze.CommandName = "Details";
+            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution));
+            actionableMaze.Command1 = new ShowMazeDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
+            actionableMaze.Command1Name = "Details";
+            actionableMaze.ShowCommand1 = true;
+
             this.ActionableMazes.Add(actionableMaze);
         }
     }

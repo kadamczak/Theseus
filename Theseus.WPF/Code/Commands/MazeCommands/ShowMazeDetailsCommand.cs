@@ -9,11 +9,11 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
 {
     public class ShowMazeDetailsCommand : CommandBase
     {
-        private readonly MazeWithSolutionCommandViewModel _mazeWithSolutionCommandViewModel;
+        private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeWithSolutionCommandViewModel;
         private readonly SelectedMazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
-        public ShowMazeDetailsCommand(MazeWithSolutionCommandViewModel mazeWithSolutionCommandViewModel,
+        public ShowMazeDetailsCommand(CommandViewModel<MazeWithSolutionCanvasViewModel> mazeWithSolutionCommandViewModel,
                                   SelectedMazeDetailsStore mazeDetailsStore,
                                   NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
@@ -24,7 +24,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
 
         public override void Execute(object? parameter)
         {
-            MazeWithSolution mazeWithSolution = _mazeWithSolutionCommandViewModel.MazeWithSolutionCanvasViewModel.MazeWithSolution;
+            MazeWithSolution mazeWithSolution = _mazeWithSolutionCommandViewModel.Model.MazeWithSolution;
             _mazeDetailsStore.UpdateMazeDetails(mazeWithSolution, unsavedChanges: false);
             _mazeDetailNavigationService.Navigate();
         }
