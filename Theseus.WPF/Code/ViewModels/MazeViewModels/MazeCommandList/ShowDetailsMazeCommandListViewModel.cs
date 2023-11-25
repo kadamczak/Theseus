@@ -9,25 +9,26 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class ShowDetailsMazeCommandListViewModel : MazeCommandListViewModel
     {
-        private SelectedMazeDetailsStore _mazeDetailsStore;
-        private NavigationService<MazeDetailsViewModel> _mazeDetailsNavigationService;
-
+        private readonly SelectedMazeDetailsStore _mazeDetailsStore;
+        private readonly NavigationService<MazeDetailsViewModel> _mazeDetailsNavigationService;
 
         public ShowDetailsMazeCommandListViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
                                                    SelectedMazeDetailsStore mazeDetailsStore,
                                                    NavigationService<MazeDetailsViewModel> mazeDetailsNavigationService) : base(mazeListStore)
         {
-            this._mazeDetailsStore = mazeDetailsStore;
-            this._mazeDetailsNavigationService = mazeDetailsNavigationService;
+            _mazeDetailsStore = mazeDetailsStore;
+            _mazeDetailsNavigationService = mazeDetailsNavigationService;
         }
 
         protected override void AddMazeWithCommandToActionableMazes(MazeWithSolution mazeWithSolution)
         {
-            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution));
-            actionableMaze.Command1 = new ShowMazeDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
-            actionableMaze.Command1Name = "Details";
-            actionableMaze.ShowCommand1 = true;
+            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution))
+            {
+                Command1Name = "Details",
+                ShowCommand1 = true,
+            };
 
+            actionableMaze.Command1 = new ShowMazeDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
             this.ActionableMazes.Add(actionableMaze);
         }
     }

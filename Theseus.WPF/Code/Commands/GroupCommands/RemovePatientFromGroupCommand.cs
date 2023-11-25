@@ -25,17 +25,27 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
+            MessageBoxResult result = ShowMessageBox();
+
+            if (result == MessageBoxResult.Yes)
+            {
+                await RemovePatientFromGroup();
+            }
+        }
+
+        private MessageBoxResult ShowMessageBox()
+        {
             string messageBoxText = "Do you want to remove patient from this group?";
             string caption = "Patient Removal";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);
+            return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);
+        }
 
-            if (result == MessageBoxResult.Yes)
-            {
-                await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Model);
-                _removePatientCommandListViewModel.ActionableModels.Remove(_patientCommandViewModel);
-            }
+        private async Task RemovePatientFromGroup()
+        {
+            await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Model);
+            _removePatientCommandListViewModel.ActionableModels.Remove(_patientCommandViewModel);
         }
     }
 }

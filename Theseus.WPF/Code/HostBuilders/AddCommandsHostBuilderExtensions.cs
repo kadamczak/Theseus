@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
+using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.ExamSetCommandInterfaces;
@@ -30,6 +31,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IRemoveStaffMemberFromGroupCommand, RemoveStaffMemberFromGroupCommand>();
                 services.AddSingleton<IAddPatientToGroupCommand, AddPatientToGroupCommand>();
                 services.AddSingleton<IAddStaffMemberToGroupCommand, AddStaffMemberToGroupCommand>();
+                services.AddSingleton<IRemoveMazeWithSolutionCommand, RemoveMazeWithSolutionCommand>();
             });
 
             return hostBuilder;

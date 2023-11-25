@@ -11,12 +11,12 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class BrowseMazesViewModel : ViewModelBase
     {
-        public ShowDetailsMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
+        public ShowDetailsDeleteMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
 
         public BrowseMazesViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
                                     IGetMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
                                     ICurrentStaffMemberStore currentStaffMemberStore,
-                                    ShowDetailsMazeCommandListViewModel showDetailsMazeCommandListViewModel)
+                                    ShowDetailsDeleteMazeCommandListViewModel showDetailsMazeCommandListViewModel)
         {
             if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
                 throw new StaffMemberNotLoggedInException();

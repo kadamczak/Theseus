@@ -6,7 +6,6 @@ using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
 {
