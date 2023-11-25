@@ -63,7 +63,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="{Binding ExamSet.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Margin="30 0 0 0"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="{Binding Model.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Margin="30 0 0 0"/>
 
                             <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" >
                                 <Button Style="{StaticResource Generic}" FontSize="17" Content="{Binding Command1Name}" Command="{Binding Command1}" Padding="7" HorizontalAlignment="Center" Width="80"/>

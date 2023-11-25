@@ -1,21 +1,21 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
+using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
+using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
     public class RemovePatientFromGroupCommand : AsyncCommandBase
     {
         private readonly RemovePatientCommandListViewModel _removePatientCommandListViewModel;
-        private readonly PatientCommandViewModel _patientCommandViewModel;
+        private readonly CommandViewModel<Patient> _patientCommandViewModel;
         private readonly IRemovePatientFromGroupCommand _removePatientFromGroupCommand;
 
         public RemovePatientFromGroupCommand(RemovePatientCommandListViewModel removePatientCommandListViewModel,
-                                             PatientCommandViewModel patientCommandViewModel,
+                                             CommandViewModel<Patient> patientCommandViewModel,
                                              IRemovePatientFromGroupCommand removePatientFromGroupCommand)
         {
             _removePatientCommandListViewModel = removePatientCommandListViewModel;
@@ -33,7 +33,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
             if (result == MessageBoxResult.Yes)
             {
-                await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Patient);
+                await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Model);
                 _removePatientCommandListViewModel.ActionablePatients.Remove(_patientCommandViewModel);
             }
         }

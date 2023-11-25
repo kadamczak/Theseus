@@ -2,22 +2,23 @@
 using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
+using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Groups;
 using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
+using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
     public class RemoveStaffMemberFromGroupCommand : AsyncCommandBase
     {
         private readonly RemoveStaffMemberCommandListViewModel _removeStaffMemberCommandListViewModel;
-        private readonly StaffMemberCommandViewModel _staffMemberCommandViewModel;
+        private readonly CommandViewModel<StaffMember> _staffMemberCommandViewModel;
         private readonly IRemoveStaffMemberFromGroupCommand _removeStaffMemberFromGroupCommand;
         private readonly SelectedGroupDetailsStore _selectedGroupDetailsStore;
 
         public RemoveStaffMemberFromGroupCommand(RemoveStaffMemberCommandListViewModel removeStaffMemberCommandListViewModel,
-                                                 StaffMemberCommandViewModel staffMemberCommandViewModel,
+                                                 CommandViewModel<StaffMember> staffMemberCommandViewModel,
                                                  IRemoveStaffMemberFromGroupCommand removeStaffMemberFromGroupCommand,
                                                  SelectedGroupDetailsStore selectedGroupDetailsStore)
         {
@@ -38,7 +39,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
             if(result == MessageBoxResult.Yes)
             {
                 Guid groupId = _selectedGroupDetailsStore.SelectedGroup.Id;
-                await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_staffMemberCommandViewModel.StaffMember, groupId);
+                await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_staffMemberCommandViewModel.Model, groupId);
                 _removeStaffMemberCommandListViewModel.ActionableStaffMembers.Remove(_staffMemberCommandViewModel);
             }
         }

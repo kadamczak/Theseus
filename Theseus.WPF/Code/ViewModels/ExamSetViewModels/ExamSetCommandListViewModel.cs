@@ -9,14 +9,13 @@ namespace Theseus.WPF.Code.ViewModels
     public abstract class ExamSetCommandListViewModel : ViewModelBase
     {
         public SelectedExamSetListStore SelectedExamSetListStore { get; }
-        public ObservableCollection<ExamSetCommandViewModel> ActionableExamSets { get; } = new ObservableCollection<ExamSetCommandViewModel>();
+        public ObservableCollection<CommandViewModel<ExamSet>> ActionableExamSets { get; } = new ObservableCollection<CommandViewModel<ExamSet>>();
 
         //public SelectedExamSetsStore SelectedExamSetsStore { get; }
 
         public ExamSetCommandListViewModel(SelectedExamSetListStore selectedExamSetDetailsStore)
         {
             SelectedExamSetListStore = selectedExamSetDetailsStore;
-            //CreateExamSetCommandViewModels();
         }
 
         public void CreateExamSetCommandViewModels()

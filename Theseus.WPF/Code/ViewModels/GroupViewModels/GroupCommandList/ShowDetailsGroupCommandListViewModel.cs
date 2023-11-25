@@ -2,7 +2,7 @@
 using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Groups;
-using Theseus.WPF.Code.ViewModels.Bindings.GroupBindings;
+using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -21,7 +21,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         protected override void AddGroupToActionableGroups(Group group)
         {
-            GroupCommandViewModel groupCommandViewModel = new GroupCommandViewModel(group)
+            CommandViewModel<Group> groupCommandViewModel = new CommandViewModel<Group>(group)
             {
                 Command1Name = "Details",
                 ShowCommand2 = false

@@ -2,14 +2,14 @@
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Patients;
-using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
+using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public abstract class PatientCommandListViewModel : ViewModelBase
     {
         public SelectedPatientListStore SelectedPatientListStore { get; }
-        public ObservableCollection<PatientCommandViewModel> ActionablePatients { get; } = new ObservableCollection<PatientCommandViewModel>();
+        public ObservableCollection<CommandViewModel<Patient>> ActionablePatients { get; } = new ObservableCollection<CommandViewModel<Patient>>();
 
         public PatientCommandListViewModel(SelectedPatientListStore selectedPatientListStore)
         {

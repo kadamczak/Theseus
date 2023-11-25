@@ -7,7 +7,7 @@ using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Groups;
 using Theseus.WPF.Code.Stores.StaffMembers;
-using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
+using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -37,7 +37,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         protected override void AddStaffMemberToActionableStaffMembers(StaffMember staffMember)
         {
-            StaffMemberCommandViewModel staffMemberCommandViewModel = new StaffMemberCommandViewModel(staffMember);
+            CommandViewModel<StaffMember> staffMemberCommandViewModel = new CommandViewModel<StaffMember>(staffMember);
 
             if(_currentStaffMemberCanRemoveMembers && !IsOwner(staffMember.Id))
             {

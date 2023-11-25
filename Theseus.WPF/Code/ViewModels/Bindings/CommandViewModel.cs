@@ -3,8 +3,10 @@ using Theseus.WPF.Code.Bases;
 
 namespace Theseus.WPF.Code.ViewModels.Bindings
 {
-    public class CommandViewModel : ViewModelBase
+    public class CommandViewModel<T> : ViewModelBase
     {
+        public T Model { get; set; }
+
         public bool ShowCommand1 { get; set; } = false;
         public bool ShowCommand2 { get; set; } = false;
 
@@ -42,6 +44,11 @@ namespace Theseus.WPF.Code.ViewModels.Bindings
                 _selected = value;
                 OnPropertyChanged(nameof(Selected));
             }
+        }
+
+        public CommandViewModel(T model)
+        {
+            Model = model;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Stores.Patients;
+using Theseus.WPF.Code.ViewModels.Bindings;
 using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -18,7 +19,7 @@ namespace Theseus.WPF.Code.ViewModels
         
         protected override void AddPatientToActionablePatients(Patient patient)
         {
-            PatientCommandViewModel patientCommandViewModel = new PatientCommandViewModel(patient)
+            CommandViewModel<Patient> patientCommandViewModel = new CommandViewModel<Patient>(patient)
             {
                 Command1Name = "Remove",
                 ShowCommand1 = true,

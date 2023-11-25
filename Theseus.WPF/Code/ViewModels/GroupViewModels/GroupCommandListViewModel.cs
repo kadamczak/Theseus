@@ -2,14 +2,14 @@
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Groups;
-using Theseus.WPF.Code.ViewModels.Bindings.GroupBindings;
+using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public abstract class GroupCommandListViewModel : ViewModelBase
     {
         public SelectedGroupListStore SelectedGroupListStore { get; }
-        public ObservableCollection<GroupCommandViewModel> ActionableGroups { get; } = new ObservableCollection<GroupCommandViewModel>();
+        public ObservableCollection<CommandViewModel<Group>> ActionableGroups { get; } = new ObservableCollection<CommandViewModel<Group>>();
 
         protected GroupCommandListViewModel(SelectedGroupListStore selectedGroupListStore)
         {

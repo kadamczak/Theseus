@@ -20,28 +20,28 @@
                         <GridViewColumn Header="Username">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Margin="10 0 10 0" Text="{Binding StaffMember.Username}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Username}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Name">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Margin="10 0 10 0" Text="{Binding StaffMember.Name}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Name}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Surname">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Margin="10 0 10 0" Text="{Binding StaffMember.Surname}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Surname}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Email">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock  Margin="10 0 10 0" Text="{Binding StaffMember.Email}"></TextBlock>
+                                    <TextBlock  Margin="10 0 10 0" Text="{Binding Model.Email}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

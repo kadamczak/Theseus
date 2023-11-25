@@ -20,35 +20,35 @@
                             <GridViewColumn Header="Username">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.Username}"></TextBlock>
+                                        <TextBlock Margin="10 0 10 0" Text="{Binding Model.Username}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Age">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.Age}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Age}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Gender">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.Sex}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Sex}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Education">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock  Margin="10 0 10 0" Text="{Binding Patient.EducationLevel}"></TextBlock>
+                                    <TextBlock  Margin="10 0 10 0" Text="{Binding Model.EducationLevel}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Profession">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Margin="10 0 10 0" Text="{Binding Patient.ProfessionType}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.ProfessionType}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

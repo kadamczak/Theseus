@@ -21,7 +21,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         protected override void AddExamSetToActionableExamSets(ExamSet examSet)
         {
-            ExamSetCommandViewModel examSetCommandViewModel = new ExamSetCommandViewModel(examSet)
+            CommandViewModel<ExamSet> examSetCommandViewModel = new CommandViewModel<ExamSet>(examSet)
             {
                 Command1Name = "Details",
                 ShowCommand1 = true,
