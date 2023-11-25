@@ -29,6 +29,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IRemovePatientFromGroupCommand, RemovePatientFromGroupCommand>();
                 services.AddSingleton<IRemoveStaffMemberFromGroupCommand, RemoveStaffMemberFromGroupCommand>();
                 services.AddSingleton<IAddPatientToGroupCommand, AddPatientToGroupCommand>();
+                services.AddSingleton<IAddStaffMemberToGroupCommand, AddStaffMemberToGroupCommand>();
             });
 
             return hostBuilder;

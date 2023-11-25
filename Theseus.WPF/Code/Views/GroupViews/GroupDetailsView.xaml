@@ -40,7 +40,7 @@
                 <views:StaffMemberCommandListView Grid.Row="1" DataContext="{Binding RemoveStaffMemberCommandListViewModel}"/>
             </Grid>
 
-            <Grid Grid.Row="2" Margin="0 20 0 0">
+            <Grid Grid.Row="2" Margin="0 30 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -53,7 +53,7 @@
                 <views:PatientCommandListView Grid.Row="1" DataContext="{Binding RemovePatientCommandListViewModel}" />
             </Grid>
 
-            <Grid Grid.Row="3" Margin="0 20 0 0">
+            <Grid Grid.Row="3" Margin="0 30 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>

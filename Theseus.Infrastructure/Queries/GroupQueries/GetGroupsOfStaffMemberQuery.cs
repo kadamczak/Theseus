@@ -17,7 +17,7 @@ namespace Theseus.Infrastructure.Queries.GroupQueries
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                IEnumerable<GroupDto> groupDtos = context.Groups.Where(m => m.Owner.Id == staffMemberId).AsNoTracking();
+                IEnumerable<GroupDto> groupDtos = context.Groups.Where(m => m.StaffMemberDtos.Where(s => s.Id == staffMemberId).Any()).AsNoTracking();
                 return MapGroups(groupDtos);    
             }
         }
