@@ -62,7 +62,8 @@ namespace Theseus.Infrastructure.DbContexts
 
             modelBuilder.Entity<StaffMemberDto>()
                         .HasMany(m => m.OwnedGroupDtos)
-                        .WithOne(e => e.Owner);
+                        .WithOne(e => e.Owner)
+                        .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

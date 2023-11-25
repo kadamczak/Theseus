@@ -5,7 +5,7 @@ namespace Theseus.WPF.Code.ViewModels.Bindings
 {
     public class CommandViewModel : ViewModelBase
     {
-        public bool ShowCommand1 { get; set; } = true;
+        public bool ShowCommand1 { get; set; } = false;
         public bool ShowCommand2 { get; set; } = false;
 
         public ICommand Command1 { get; set; }

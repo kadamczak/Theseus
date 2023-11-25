@@ -21,6 +21,7 @@ namespace Theseus.WPF.Code.ViewModels
             PatientCommandViewModel patientCommandViewModel = new PatientCommandViewModel(patient)
             {
                 Command1Name = "Remove",
+                ShowCommand1 = true,
                 ShowCommand2 = false
             };
 

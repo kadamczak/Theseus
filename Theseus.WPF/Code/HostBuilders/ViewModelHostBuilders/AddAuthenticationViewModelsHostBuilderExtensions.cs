@@ -39,6 +39,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<StaffMemberLoginRegisterViewModel>();
             services.AddTransient<StaffMemberLoginViewModel>();
             services.AddTransient<StaffMemberRegisterViewModel>();
+            services.AddTransient<RemoveStaffMemberCommandListViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -59,6 +60,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<StaffMemberLoginRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginRegisterViewModel>());
             services.AddSingleton<Func<StaffMemberLoginViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginViewModel>());
             services.AddSingleton<Func<StaffMemberRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberRegisterViewModel>());
+            services.AddSingleton<Func<RemoveStaffMemberCommandListViewModel>>((s) => () => s.GetRequiredService<RemoveStaffMemberCommandListViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -79,6 +81,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<StaffMemberLoginRegisterViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberLoginViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberRegisterViewModel>>();
+            services.AddSingleton<NavigationService<RemoveStaffMemberCommandListViewModel>>();
         }
     }
 }

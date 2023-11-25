@@ -24,6 +24,7 @@ namespace Theseus.WPF.Code.ViewModels
             ExamSetCommandViewModel examSetCommandViewModel = new ExamSetCommandViewModel(examSet)
             {
                 Command1Name = "Details",
+                ShowCommand1 = true,
                 ShowCommand2 = false
             };
             examSetCommandViewModel.Command1 = new ShowExamSetDetailsCommand(examSetCommandViewModel,
