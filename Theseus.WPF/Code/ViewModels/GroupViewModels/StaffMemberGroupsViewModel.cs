@@ -1,9 +1,10 @@
 ﻿using System;
+using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.Stores.Groups;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -11,7 +12,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ShowDetailsGroupCommandListViewModel ShowDetailsGroupCommandListViewModel { get; }
 
-        public StaffMemberGroupsViewModel(SelectedGroupListStore selectedGroupListStore,
+        public StaffMemberGroupsViewModel(SelectedModelListStore<Group> selectedGroupListStore,
                                           IGetGroupsOfStaffMemberQuery getGroupsOfStaffMemberQuery,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
                                           ShowDetailsGroupCommandListViewModel showDetailsGroupCommandListViewModel)
@@ -22,13 +23,13 @@ namespace Theseus.WPF.Code.ViewModels
             LoadGroupsOfStaffMember(getGroupsOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, selectedGroupListStore);
 
             ShowDetailsGroupCommandListViewModel = showDetailsGroupCommandListViewModel;
-            ShowDetailsGroupCommandListViewModel.CreateGroupCommandViewModels();
+            ShowDetailsGroupCommandListViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadGroupsOfStaffMember(IGetGroupsOfStaffMemberQuery query, Guid staffMemberId, SelectedGroupListStore selectedGroupListStore)
+        private void LoadGroupsOfStaffMember(IGetGroupsOfStaffMemberQuery query, Guid staffMemberId, SelectedModelListStore<Group> selectedGroupListStore)
         {
             var groupList = query.GetGroups(staffMemberId);
-            selectedGroupListStore.Groups = groupList;
+            selectedGroupListStore.ModelList = groupList;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Theseus.Domain.Models.GroupRelated;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -28,7 +29,6 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<SelectedExamSetListStore>();
 
                 services.AddSingleton<SelectedGroupDetailsStore>();
-                services.AddSingleton<SelectedGroupListStore>();
 
                 services.AddSingleton<SelectedPatientDetailsStore>();
                 services.AddSingleton<SelectedPatientListStore>();
@@ -37,6 +37,8 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<SelectedStaffMemberListStore>();
 
                 services.AddSingleton<CurrentExamStore>();
+
+                services.AddSingleton<SelectedModelListStore<Group>>();
 
                 services.AddSingleton<ICurrentStaffMemberStore, CurrentStaffMemberStore>();
                 services.AddSingleton<ICurrentPatientStore, CurrentPatientStore>();
