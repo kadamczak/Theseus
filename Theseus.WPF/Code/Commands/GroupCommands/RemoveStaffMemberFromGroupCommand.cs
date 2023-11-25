@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Groups;
@@ -28,9 +29,18 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            Guid groupId = _selectedGroupDetailsStore.SelectedGroup.Id;
-            await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_staffMemberCommandViewModel.StaffMember, groupId);
-            _removeStaffMemberCommandListViewModel.ActionableStaffMembers.Remove(_staffMemberCommandViewModel);
+            string messageBoxText = "Do you want to remove staff member from this group?";
+            string caption = "Staff Member Removal";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);
+
+            if(result == MessageBoxResult.Yes)
+            {
+                Guid groupId = _selectedGroupDetailsStore.SelectedGroup.Id;
+                await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_staffMemberCommandViewModel.StaffMember, groupId);
+                _removeStaffMemberCommandListViewModel.ActionableStaffMembers.Remove(_staffMemberCommandViewModel);
+            }
         }
     }
 }

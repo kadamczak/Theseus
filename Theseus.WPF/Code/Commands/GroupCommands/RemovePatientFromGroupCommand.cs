@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.ViewModels;
@@ -24,8 +25,17 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Patient);
-            _removePatientCommandListViewModel.ActionablePatients.Remove(_patientCommandViewModel);
+            string messageBoxText = "Do you want to remove patient from this group?";
+            string caption = "Patient Removal";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Patient);
+                _removePatientCommandListViewModel.ActionablePatients.Remove(_patientCommandViewModel);
+            }
         }
     }
 }
