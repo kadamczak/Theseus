@@ -6,12 +6,11 @@ using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.Stores.StaffMembers;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class RemoveStaffMemberCommandListViewModel : StaffMemberCommandListViewModel
+    public class RemoveStaffMemberCommandListViewModel : CommandListViewModel<StaffMember>
     {
         private readonly IRemoveStaffMemberFromGroupCommand _removeStaffMemberFromGroupCommand;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
@@ -20,7 +19,7 @@ namespace Theseus.WPF.Code.ViewModels
         private Guid _groupOwnerId;
         private readonly bool _currentStaffMemberCanRemoveMembers = false;
 
-        public RemoveStaffMemberCommandListViewModel(SelectedStaffMemberListStore selectedStaffMemberListStore,
+        public RemoveStaffMemberCommandListViewModel(SelectedModelListStore<StaffMember> selectedStaffMemberListStore,
                                                      IRemoveStaffMemberFromGroupCommand removeStaffMemberFromGroupCommand,
                                                      ICurrentStaffMemberStore currentStaffMemberStore,
                                                      SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
@@ -35,7 +34,7 @@ namespace Theseus.WPF.Code.ViewModels
             _currentStaffMemberCanRemoveMembers = IsOwner(currentStaffMemberStore.StaffMember.Id);
         }
 
-        protected override void AddStaffMemberToActionableStaffMembers(StaffMember staffMember)
+        protected override void AddModelToActionableModels(StaffMember staffMember)
         {
             CommandViewModel<StaffMember> staffMemberCommandViewModel = new CommandViewModel<StaffMember>(staffMember);
 
@@ -49,7 +48,7 @@ namespace Theseus.WPF.Code.ViewModels
                                                                                              _selectedGroupDetailsStore);
             }
 
-            ActionableStaffMembers.Add(staffMemberCommandViewModel);
+            ActionableModels.Add(staffMemberCommandViewModel);
         }
 
         private bool IsOwner(Guid guid) => guid == _groupOwnerId;

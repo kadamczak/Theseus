@@ -41,7 +41,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
             {
                 Guid groupId = _selectedGroupDetailsStore.SelectedModel.Id;
                 await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_staffMemberCommandViewModel.Model, groupId);
-                _removeStaffMemberCommandListViewModel.ActionableStaffMembers.Remove(_staffMemberCommandViewModel);
+                _removeStaffMemberCommandListViewModel.ActionableModels.Remove(_staffMemberCommandViewModel);
             }
         }
     }

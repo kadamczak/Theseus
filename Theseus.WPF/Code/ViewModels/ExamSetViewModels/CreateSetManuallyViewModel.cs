@@ -11,8 +11,8 @@ using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -36,7 +36,7 @@ namespace Theseus.WPF.Code.ViewModels
         public bool CanCreate => !string.IsNullOrEmpty(_examSetName) && AddToSetMazeCommandListViewModel.SelectedMazes.Any();
         public ICommand CreateSetManually { get; }
 
-        public CreateSetManuallyViewModel(SelectedMazeListStore mazeListStore,
+        public CreateSetManuallyViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
                                           IGetMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
                                           ICreateExamSetCommand createExamSetCommand,
                                           IGetGroupByNameQuery getGroupByNameQuery,
@@ -55,10 +55,10 @@ namespace Theseus.WPF.Code.ViewModels
             this.AddToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
         }
 
-        private void LoadFullMazeListToStore(IGetMazesWithSolutionOfStaffMemberQuery query, Guid staffMemberId, SelectedMazeListStore mazeListStore)
+        private void LoadFullMazeListToStore(IGetMazesWithSolutionOfStaffMemberQuery query, Guid staffMemberId, SelectedModelListStore<MazeWithSolution> mazeListStore)
         {
             var fullMazeList = query.GetMazesWithSolution(staffMemberId);
-            mazeListStore.Mazes = fullMazeList;
+            mazeListStore.ModelList = fullMazeList;
         }
 
         private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

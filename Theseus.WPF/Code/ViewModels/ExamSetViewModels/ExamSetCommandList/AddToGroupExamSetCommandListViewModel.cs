@@ -1,17 +1,15 @@
 ﻿using Theseus.Domain.Models.ExamSetRelated;
-using Theseus.WPF.Code.Commands.ExamSetCommands;
-using Theseus.WPF.Code.Stores.ExamSets;
-using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList
 {
-    public class AddToGroupExamSetCommandListViewModel : ExamSetCommandListViewModel
+    public class AddToGroupExamSetCommandListViewModel : CommandListViewModel<ExamSet>
     {
-        public AddToGroupExamSetCommandListViewModel(SelectedExamSetListStore selectedExamSetDetailsStore) : base(selectedExamSetDetailsStore)
+        public AddToGroupExamSetCommandListViewModel(SelectedModelListStore<ExamSet> selectedExamSetDetailsStore) : base(selectedExamSetDetailsStore)
         {
         }
 
-        protected override void AddExamSetToActionableExamSets(ExamSet examSet)
+        protected override void AddModelToActionableModels(ExamSet examSet)
         {
             //ExamSetCommandViewModel examSetCommandViewModel = new ExamSetCommandViewModel(examSet)
             //{

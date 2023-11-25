@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
+using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
@@ -9,9 +11,6 @@ using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.Stores.ExamSets;
-using Theseus.WPF.Code.Stores.Patients;
-using Theseus.WPF.Code.Stores.StaffMembers;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -33,13 +32,13 @@ namespace Theseus.WPF.Code.ViewModels
                                      ICurrentStaffMemberStore currentStaffMemberStore,        
                                      IGetOwnerOfGroupQuery getOwnerOfGroupQuery,
                                      IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
-                                     SelectedStaffMemberListStore selectedStaffMemberListStore,
+                                     SelectedModelListStore<StaffMember> selectedStaffMemberListStore,
                                      RemoveStaffMemberCommandListViewModel removeStaffMemberCommandListViewModel,
-                                     IGetPatientsOfGroupQuery getPatientsOfGroupQuery, 
-                                     SelectedPatientListStore selectedPatientListStore,
+                                     IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
+                                     SelectedModelListStore<Patient> selectedPatientListStore,
                                      RemovePatientCommandListViewModel removePatientCommandListViewModel,
                                      IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
-                                     SelectedExamSetListStore selectedExamSetListStore,
+                                     SelectedModelListStore<ExamSet> selectedExamSetListStore,
                                      ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel,
                                      NavigationService<AddStaffMemberToGroupViewModel> addStaffMemberToGroupNavigationService,
                                      NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService)
@@ -58,54 +57,54 @@ namespace Theseus.WPF.Code.ViewModels
         }
 
         private void CreateStaffMemberCommandList(IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
-                                                  SelectedStaffMemberListStore selectedStaffMemberListStore,
+                                                  SelectedModelListStore<StaffMember> selectedStaffMemberListStore,
                                                   RemoveStaffMemberCommandListViewModel removeStaffMemberCommandListViewModel)
         {
             LoadStaffMembersFromGroupToStore(getStaffMembersOfGroupQuery, CurrentGroup.Id, selectedStaffMemberListStore);
             RemoveStaffMemberCommandListViewModel = removeStaffMemberCommandListViewModel;
-            RemoveStaffMemberCommandListViewModel.CreateStaffMemberCommandViewModels();
+            RemoveStaffMemberCommandListViewModel.CreateModelCommandViewModels();
         }
 
         private void LoadStaffMembersFromGroupToStore(IGetStaffMembersOfGroupQuery query,
                                                       Guid groupId,
-                                                      SelectedStaffMemberListStore selectedStaffMemberListStore)
+                                                      SelectedModelListStore<StaffMember> selectedStaffMemberListStore)
         {
             var staffMembers = query.GetStaffMembers(groupId);
-            selectedStaffMemberListStore.StaffMembers = staffMembers;
+            selectedStaffMemberListStore.ModelList = staffMembers;
         }
 
         private void CreatePatientCommandList(IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
-                                              SelectedPatientListStore selectedPatientListStore,
+                                              SelectedModelListStore<Patient> selectedPatientListStore,
                                               RemovePatientCommandListViewModel removePatientCommandListViewModel)
         {
             LoadPatientsFromGroupToStore(getPatientsOfGroupQuery, CurrentGroup.Id, selectedPatientListStore);
             RemovePatientCommandListViewModel = removePatientCommandListViewModel;
-            RemovePatientCommandListViewModel.CreatePatientCommandViewModels();
+            RemovePatientCommandListViewModel.CreateModelCommandViewModels();
         }
 
         private void LoadPatientsFromGroupToStore(IGetPatientsOfGroupQuery query,
                                                  Guid groupId,
-                                                 SelectedPatientListStore selectedPatientListStore)
+                                                 SelectedModelListStore<Patient> selectedPatientListStore)
         {
             var patients = query.GetPatients(groupId);
-            selectedPatientListStore.Patients = patients;
+            selectedPatientListStore.ModelList = patients;
         }
 
         private void CreateExamSetCommandList(IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
-                                              SelectedExamSetListStore selectedExamSetListStore,
+                                              SelectedModelListStore<ExamSet> selectedExamSetListStore,
                                               ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel)
         {
             LoadExamSetsFromGroupToStore(getExamSetsOfGroupQuery, CurrentGroup.Id, selectedExamSetListStore);
             ShowDetailsExamSetCommandListViewModel = showDetailsExamSetCommandListViewModel;
-            ShowDetailsExamSetCommandListViewModel.CreateExamSetCommandViewModels();
+            ShowDetailsExamSetCommandListViewModel.CreateModelCommandViewModels();
         }
 
         private void LoadExamSetsFromGroupToStore(IGetExamSetsOfGroupQuery query,
                                                   Guid groupId,
-                                                  SelectedExamSetListStore selectedExamSetListStore)
+                                                  SelectedModelListStore<ExamSet> selectedExamSetListStore)
         {
             var examSets = query.GetExamSets(groupId);
-            selectedExamSetListStore.ExamSets = examSets;
+            selectedExamSetListStore.ModelList = examSets;
         }
     }
 }

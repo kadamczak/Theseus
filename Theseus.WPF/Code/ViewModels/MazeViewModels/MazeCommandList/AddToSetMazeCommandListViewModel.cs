@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
-using Theseus.WPF.Code.Stores.Mazes;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -10,7 +10,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ObservableCollection<MazeWithSolution> SelectedMazes = new ObservableCollection<MazeWithSolution>();
 
-        public AddToSetMazeCommandListViewModel(SelectedMazeListStore mazeListStore) : base(mazeListStore)
+        public AddToSetMazeCommandListViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore) : base(mazeListStore)
         {
         }
 

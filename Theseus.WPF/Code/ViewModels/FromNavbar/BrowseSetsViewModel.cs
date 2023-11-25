@@ -1,9 +1,10 @@
 ﻿using System;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.Stores.ExamSets;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -12,7 +13,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ShowDetailsExamSetCommandListViewModel ShowDetailsExamSetCommandListViewModel { get; }
 
         public BrowseSetsViewModel(ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel,
-                                   SelectedExamSetListStore selectedExamSetListStore,
+                                   SelectedModelListStore<ExamSet> selectedExamSetListStore,
                                    IGetAllExamSetsOfStaffMemberQuery getAllExamSetsOfStaffMemberQuery,
                                    ICurrentStaffMemberStore currentStaffMemberStore)
         {
@@ -22,13 +23,15 @@ namespace Theseus.WPF.Code.ViewModels
             LoadExamSetsOfStaffMember(getAllExamSetsOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, selectedExamSetListStore);
 
             ShowDetailsExamSetCommandListViewModel = showDetailsExamSetCommandListViewModel;
-            ShowDetailsExamSetCommandListViewModel.CreateExamSetCommandViewModels();
+            ShowDetailsExamSetCommandListViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadExamSetsOfStaffMember(IGetAllExamSetsOfStaffMemberQuery getAllExamSetsOfStaffMemberQuery, Guid staffMemberId, SelectedExamSetListStore selectedExamSetListStore)
+        private void LoadExamSetsOfStaffMember(IGetAllExamSetsOfStaffMemberQuery getAllExamSetsOfStaffMemberQuery,
+                                               Guid staffMemberId,
+                                               SelectedModelListStore<ExamSet> selectedExamSetListStore)
         {
             var examSetList = getAllExamSetsOfStaffMemberQuery.GetExamSets(staffMemberId);
-            selectedExamSetListStore.ExamSets = examSetList;
+            selectedExamSetListStore.ModelList = examSetList;
         }
     }
 }

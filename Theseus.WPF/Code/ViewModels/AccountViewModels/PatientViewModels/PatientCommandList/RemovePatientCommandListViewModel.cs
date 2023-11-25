@@ -1,23 +1,23 @@
 ﻿using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
-using Theseus.WPF.Code.Stores.Patients;
+using Theseus.WPF.Code.Commands.GroupCommands;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings;
-using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class RemovePatientCommandListViewModel : PatientCommandListViewModel
+    public class RemovePatientCommandListViewModel : CommandListViewModel<Patient>
     {
         private readonly IRemovePatientFromGroupCommand _removePatientFromGroupCommand;
 
-        public RemovePatientCommandListViewModel(SelectedPatientListStore selectedPatientListStore,
+        public RemovePatientCommandListViewModel(SelectedModelListStore<Patient> selectedPatientListStore,
                                                  IRemovePatientFromGroupCommand removePatientFromGroupCommand) : base(selectedPatientListStore)
         {
             _removePatientFromGroupCommand = removePatientFromGroupCommand;
         }
 
         
-        protected override void AddPatientToActionablePatients(Patient patient)
+        protected override void AddModelToActionableModels(Patient patient)
         {
             CommandViewModel<Patient> patientCommandViewModel = new CommandViewModel<Patient>(patient)
             {
@@ -26,8 +26,8 @@ namespace Theseus.WPF.Code.ViewModels
                 ShowCommand2 = false
             };
 
-            patientCommandViewModel.Command1 = new Commands.GroupCommands.RemovePatientFromGroupCommand(this, patientCommandViewModel, _removePatientFromGroupCommand);
-            this.ActionablePatients.Add(patientCommandViewModel);
+            patientCommandViewModel.Command1 = new RemovePatientFromGroupCommand(this, patientCommandViewModel, _removePatientFromGroupCommand);
+            this.ActionableModels.Add(patientCommandViewModel);
         }
     }
 }

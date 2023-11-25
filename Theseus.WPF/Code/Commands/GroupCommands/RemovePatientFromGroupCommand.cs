@@ -34,7 +34,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
             if (result == MessageBoxResult.Yes)
             {
                 await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Model);
-                _removePatientCommandListViewModel.ActionablePatients.Remove(_patientCommandViewModel);
+                _removePatientCommandListViewModel.ActionableModels.Remove(_patientCommandViewModel);
             }
         }
     }

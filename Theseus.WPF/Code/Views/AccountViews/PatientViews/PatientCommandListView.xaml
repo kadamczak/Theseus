@@ -13,7 +13,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionablePatients}" FontSize="18">
+        <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionableModels}" FontSize="18">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>

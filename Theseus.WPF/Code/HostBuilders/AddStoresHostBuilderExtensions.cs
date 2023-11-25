@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Exams;
-using Theseus.WPF.Code.Stores.ExamSets;
 using Theseus.WPF.Code.Stores.Mazes;
-using Theseus.WPF.Code.Stores.Patients;
-using Theseus.WPF.Code.Stores.StaffMembers;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
@@ -21,22 +21,19 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<NavigationStore>();
 
                 services.AddSingleton<LastMazeGeneratorInputStore>();
-                services.AddSingleton<SelectedMazeListStore>();
                 services.AddSingleton<SelectedMazeDetailsStore>();
 
-                services.AddSingleton<SelectedExamSetDetailsStore>();
-                services.AddSingleton<SelectedExamSetListStore>();
-
-                //services.AddSingleton<SelectedGroupDetailsStore>();
-
-                services.AddSingleton<SelectedPatientDetailsStore>();
-                services.AddSingleton<SelectedPatientListStore>();
-                services.AddSingleton<SelectedStaffMemberDetailsStore>();
-                services.AddSingleton<SelectedStaffMemberListStore>();
                 services.AddSingleton<CurrentExamStore>();
 
+                services.AddSingleton<SelectedModelListStore<MazeWithSolution>>();
+                services.AddSingleton<SelectedModelListStore<ExamSet>>();
+                services.AddSingleton<SelectedModelListStore<Patient>>();
+                services.AddSingleton<SelectedModelListStore<StaffMember>>();
                 services.AddSingleton<SelectedModelListStore<Group>>();
 
+                services.AddSingleton<SelectedModelDetailsStore<ExamSet>>();
+                services.AddSingleton<SelectedModelDetailsStore<Patient>>();
+                services.AddSingleton<SelectedModelDetailsStore<StaffMember>>();
                 services.AddSingleton<SelectedModelDetailsStore<Group>>();
 
                 services.AddSingleton<ICurrentStaffMemberStore, CurrentStaffMemberStore>();
