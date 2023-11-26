@@ -50,9 +50,9 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
                 StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException()
             };
 
-            string defaultGroupName = examSet.StaffMember.Username + "-gr";
-            Group defaultGroup = await _getGroupByNameQuery.GetGroup(defaultGroupName) ?? throw new GroupNotFoundException(defaultGroupName);
-            examSet.Groups.Add(defaultGroup);
+            //string defaultGroupName = examSet.StaffMember.Username + "-gr";
+            //Group defaultGroup = await _getGroupByNameQuery.GetGroup(defaultGroupName) ?? throw new GroupNotFoundException(defaultGroupName);
+            //examSet.Groups.Add(defaultGroup);
 
             await _createExamSetCommand.CreateExamSet(examSet);
             _createSetNavigationService.Navigate();

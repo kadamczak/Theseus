@@ -82,7 +82,6 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
                 await _createStaffMemberCommand.Create(newAccount);
 
                 Group defaultGroup = CreateDefaultGroupForStaffMember(newAccount);
-                defaultGroup.Default = true;
                 defaultGroup.Owner = newAccount;
                 defaultGroup.StaffMembers.Add(newAccount);
                 await _createGroupCommand.CreateGroup(defaultGroup);

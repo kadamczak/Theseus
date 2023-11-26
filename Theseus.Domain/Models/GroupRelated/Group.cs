@@ -7,7 +7,6 @@ namespace Theseus.Domain.Models.GroupRelated
     {
         public Guid Id { get; set; } = default!;
         public string Name { get; set; } = default!;
-        public bool Default { get; set; } = default!;
         public StaffMember Owner { get; set; } = default!;
         public List<StaffMember> StaffMembers { get; set; } = new List<StaffMember>();
         public List<Patient> Patients { get; set; } = new List<Patient>();

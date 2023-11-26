@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Theseus.Infrastructure.DbContexts;
 
@@ -11,9 +12,11 @@ using Theseus.Infrastructure.DbContexts;
 namespace Theseus.Infrastructure.Migrations
 {
     [DbContext(typeof(TheseusDbContext))]
-    partial class TheseusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231126111552_ExamSetMazeCascade")]
+    partial class ExamSetMazeCascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,6 +95,9 @@ namespace Theseus.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Default")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -232,7 +238,7 @@ namespace Theseus.Infrastructure.Migrations
                     b.HasOne("Theseus.Infrastructure.Dtos.MazeDto", null)
                         .WithMany()
                         .HasForeignKey("MazeDtosId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
