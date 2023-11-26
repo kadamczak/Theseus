@@ -9,7 +9,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList
         {
         }
 
-        protected override void AddModelToActionableModels(ExamSet examSet)
+        public override void AddModelToActionableModels(ExamSet examSet)
         {
             //ExamSetCommandViewModel examSetCommandViewModel = new ExamSetCommandViewModel(examSet)
             //{

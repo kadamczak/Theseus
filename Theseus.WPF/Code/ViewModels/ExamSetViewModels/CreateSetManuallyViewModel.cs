@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated.Exceptions;
-using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
@@ -39,7 +38,6 @@ namespace Theseus.WPF.Code.ViewModels
         public CreateSetManuallyViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
                                           IGetMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
                                           ICreateExamSetCommand createExamSetCommand,
-                                          IGetGroupByNameQuery getGroupByNameQuery,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
                                           NavigationService<CreateSetViewModel> createSetNavigationService,
                                           AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
@@ -48,7 +46,7 @@ namespace Theseus.WPF.Code.ViewModels
                 throw new StaffMemberNotLoggedInException();
 
             LoadFullMazeListToStore(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
-            this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, getGroupByNameQuery, currentStaffMemberStore, createSetNavigationService);
+            this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, currentStaffMemberStore, createSetNavigationService);
 
             this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
             this.AddToSetMazeCommandListViewModel.CreateMazeCommandViewModels();

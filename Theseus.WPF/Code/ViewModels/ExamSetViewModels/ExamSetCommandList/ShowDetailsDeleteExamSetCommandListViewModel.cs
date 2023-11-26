@@ -23,7 +23,7 @@ namespace Theseus.WPF.Code.ViewModels
             _removeExamSetCommand = removeExamSetCommand;
         }
 
-        protected override void AddModelToActionableModels(ExamSet model)
+        public override void AddModelToActionableModels(ExamSet model)
         {
             CommandViewModel<ExamSet> examSetCommandViewModel = new CommandViewModel<ExamSet>(model)
             {

@@ -3,10 +3,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
-using Theseus.Domain.Models.GroupRelated;
-using Theseus.Domain.Models.GroupRelated.Exceptions;
 using Theseus.Domain.Models.UserRelated.Exceptions;
-using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -18,19 +15,16 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
     {
         private readonly CreateSetManuallyViewModel _createSetManuallyViewModel;
         private readonly ICreateExamSetCommand _createExamSetCommand;
-        private readonly IGetGroupByNameQuery _getGroupByNameQuery;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
         private readonly NavigationService<CreateSetViewModel> _createSetNavigationService;
 
         public CreateExamSetManuallyCommand(CreateSetManuallyViewModel createSetManuallyViewModel,
                                             ICreateExamSetCommand createExamSetCommand,
-                                            IGetGroupByNameQuery getGroupByNameQuery,
                                             ICurrentStaffMemberStore currentStaffMemberStore,
                                             NavigationService<CreateSetViewModel> createSetNavigationService)
         {
             _createSetManuallyViewModel = createSetManuallyViewModel;
             _createExamSetCommand = createExamSetCommand;
-            _getGroupByNameQuery = getGroupByNameQuery;
             _currentStaffMemberStore = currentStaffMemberStore;
             _createSetNavigationService = createSetNavigationService;
             _createSetManuallyViewModel.PropertyChanged += OnPropertyChanged;
@@ -49,10 +43,6 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
                 Name = _createSetManuallyViewModel.ExamSetName,
                 StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException()
             };
-
-            //string defaultGroupName = examSet.StaffMember.Username + "-gr";
-            //Group defaultGroup = await _getGroupByNameQuery.GetGroup(defaultGroupName) ?? throw new GroupNotFoundException(defaultGroupName);
-            //examSet.Groups.Add(defaultGroup);
 
             await _createExamSetCommand.CreateExamSet(examSet);
             _createSetNavigationService.Navigate();

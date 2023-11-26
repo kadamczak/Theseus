@@ -25,6 +25,6 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
-        protected abstract void AddModelToActionableModels(TModel model);
+        public abstract void AddModelToActionableModels(TModel model);
     }
 }

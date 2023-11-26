@@ -16,8 +16,8 @@ namespace Theseus.WPF.Code.ViewModels
             _removePatientFromGroupCommand = removePatientFromGroupCommand;
         }
 
-        
-        protected override void AddModelToActionableModels(Patient patient)
+
+        public override void AddModelToActionableModels(Patient patient)
         {
             CommandViewModel<Patient> patientCommandViewModel = new CommandViewModel<Patient>(patient)
             {

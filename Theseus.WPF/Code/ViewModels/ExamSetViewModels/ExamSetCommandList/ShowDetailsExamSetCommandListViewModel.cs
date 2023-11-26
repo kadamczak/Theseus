@@ -19,7 +19,7 @@ namespace Theseus.WPF.Code.ViewModels
             _navigationService = navigationService;
         }
 
-        protected override void AddModelToActionableModels(ExamSet examSet)
+        public override void AddModelToActionableModels(ExamSet examSet)
         {
             CommandViewModel<ExamSet> examSetCommandViewModel = new CommandViewModel<ExamSet>(examSet)
             {

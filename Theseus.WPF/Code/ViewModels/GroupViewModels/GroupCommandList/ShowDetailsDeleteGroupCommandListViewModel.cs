@@ -38,7 +38,7 @@ namespace Theseus.WPF.Code.ViewModels
             _currentStaffMember = currentStaffMemberStore.StaffMember;
         }
 
-        protected override void AddModelToActionableModels(Group group)
+        public override void AddModelToActionableModels(Group group)
         {
             CommandViewModel<Group> groupCommandViewModel = new CommandViewModel<Group>(group)
             {

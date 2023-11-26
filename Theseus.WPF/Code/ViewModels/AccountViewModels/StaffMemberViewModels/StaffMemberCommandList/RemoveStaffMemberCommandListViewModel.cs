@@ -34,7 +34,7 @@ namespace Theseus.WPF.Code.ViewModels
             _currentStaffMemberCanRemoveMembers = IsOwner(currentStaffMemberStore.StaffMember.Id);
         }
 
-        protected override void AddModelToActionableModels(StaffMember staffMember)
+        public override void AddModelToActionableModels(StaffMember staffMember)
         {
             CommandViewModel<StaffMember> staffMemberCommandViewModel = new CommandViewModel<StaffMember>(staffMember);
 

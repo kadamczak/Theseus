@@ -39,7 +39,7 @@ namespace Theseus.WPF.Code.ViewModels
             _currentStaffMemberCanRemoveExamSets = currentStaffMemberStore.StaffMember.Id == _groupOwnerId;
         }
 
-        protected override void AddModelToActionableModels(ExamSet model)
+        public override void AddModelToActionableModels(ExamSet model)
         {
             CommandViewModel<ExamSet> examSetCommandViewModel = new CommandViewModel<ExamSet>(model)
             {
