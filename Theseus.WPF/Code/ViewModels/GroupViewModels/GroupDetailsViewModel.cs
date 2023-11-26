@@ -11,6 +11,7 @@ using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
+using Theseus.WPF.Code.Stores.ExamSets;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -41,12 +42,17 @@ namespace Theseus.WPF.Code.ViewModels
                                      SelectedModelListStore<ExamSet> selectedExamSetListStore,
                                      ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel,
                                      NavigationService<AddStaffMemberToGroupViewModel> addStaffMemberToGroupNavigationService,
-                                     NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService)
+                                     NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService,
+                                     ExamSetReturnServiceStore examSetReturnServiceStore,
+                                     NavigationStore navigationStore,
+                                     Func<GroupDetailsViewModel> viewModelGenerator)
         {
             CurrentGroup = selectedGroupDetailsStore.SelectedModel;
             CurrentGroup.Owner = getOwnerOfGroupQuery.GetOwner(CurrentGroup.Id);
             AddStaffMemberAvailable = (currentStaffMemberStore.StaffMember.Id == CurrentGroup.Owner.Id);
             GroupOwnerName = CurrentGroup.Owner.Username;
+
+            examSetReturnServiceStore.ExamSetNavigationService = new NavigationService<ViewModelBase>(navigationStore, viewModelGenerator);
 
             CreateStaffMemberCommandList(getStaffMembersOfGroupQuery, selectedStaffMemberListStore, removeStaffMemberCommandListViewModel);
             CreatePatientCommandList(getPatientsOfGroupQuery, selectedPatientListStore, removePatientCommandListViewModel);
