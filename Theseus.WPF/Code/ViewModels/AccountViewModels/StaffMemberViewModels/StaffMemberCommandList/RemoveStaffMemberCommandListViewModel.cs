@@ -38,19 +38,26 @@ namespace Theseus.WPF.Code.ViewModels
         {
             CommandViewModel<StaffMember> staffMemberCommandViewModel = new CommandViewModel<StaffMember>(staffMember);
 
-            if(_currentStaffMemberCanRemoveMembers && !IsOwner(staffMember.Id))
+            if (StaffMemberIsRemovable(staffMember.Id))
             {
-                staffMemberCommandViewModel.ShowCommand1 = true;
-                staffMemberCommandViewModel.Command1Name = "Remove";
-                staffMemberCommandViewModel.Command1 = new RemoveStaffMemberFromGroupCommand(this,
-                                                                                             staffMemberCommandViewModel,
-                                                                                             _removeStaffMemberFromGroupCommand,
-                                                                                             _selectedGroupDetailsStore);
+                GrantRemoveCommand(staffMemberCommandViewModel);
             }
 
             ActionableModels.Add(staffMemberCommandViewModel);
         }
 
+        private bool StaffMemberIsRemovable(Guid staffMemberId) => _currentStaffMemberCanRemoveMembers && !IsOwner(staffMemberId);
+
         private bool IsOwner(Guid guid) => guid == _groupOwnerId;
+
+        private void GrantRemoveCommand(CommandViewModel<StaffMember> staffMemberCommandViewModel)
+        {
+            staffMemberCommandViewModel.ShowCommand1 = true;
+            staffMemberCommandViewModel.Command1Name = "Remove";
+            staffMemberCommandViewModel.Command1 = new RemoveStaffMemberFromGroupCommand(this,
+                                                                                         staffMemberCommandViewModel,
+                                                                                         _removeStaffMemberFromGroupCommand,
+                                                                                         _selectedGroupDetailsStore);
+        }
     }
 }
