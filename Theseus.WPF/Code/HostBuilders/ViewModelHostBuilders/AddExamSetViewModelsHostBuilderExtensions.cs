@@ -30,6 +30,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<ExamSetDetailsViewModel>();
             services.AddTransient<ShowDetailsExamSetCommandListViewModel>();
             services.AddTransient<ShowDetailsDeleteExamSetCommandListViewModel>();
+            services.AddTransient<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -39,6 +40,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<ExamSetDetailsViewModel>>((s) => () => s.GetRequiredService<ExamSetDetailsViewModel>());
             services.AddSingleton<Func<ShowDetailsExamSetCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsExamSetCommandListViewModel>());
             services.AddSingleton<Func<ShowDetailsDeleteExamSetCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsDeleteExamSetCommandListViewModel>());
+            services.AddSingleton<Func<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -48,6 +50,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<ExamSetDetailsViewModel>>();
             services.AddSingleton<NavigationService<ShowDetailsExamSetCommandListViewModel>>();
             services.AddSingleton<NavigationService<ShowDetailsDeleteExamSetCommandListViewModel>>();
+            services.AddSingleton<NavigationService<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>>();
         }
     }
 }

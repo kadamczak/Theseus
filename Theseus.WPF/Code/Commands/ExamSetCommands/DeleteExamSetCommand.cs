@@ -13,11 +13,11 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
     {
         private readonly ShowDetailsDeleteExamSetCommandListViewModel _commandListViewModel;
         private readonly CommandViewModel<ExamSet> _examSetCommandViewModel;
-        private readonly IRemoveExamSetCommand _removeExamSetCommand;
+        private readonly IDeleteExamSetCommand _removeExamSetCommand;
 
         public DeleteExamSetCommand(ShowDetailsDeleteExamSetCommandListViewModel commandListViewModel,
                                     CommandViewModel<ExamSet> examSetCommandViewModel,
-                                    IRemoveExamSetCommand removeExamSetCommand)
+                                    IDeleteExamSetCommand removeExamSetCommand)
         {
             _commandListViewModel = commandListViewModel;
             _examSetCommandViewModel = examSetCommandViewModel;

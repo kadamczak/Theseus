@@ -11,12 +11,12 @@ namespace Theseus.WPF.Code.ViewModels
     {
         private readonly SelectedModelDetailsStore<ExamSet> _selectedExamSetDetailsStore;
         private readonly NavigationService<ExamSetDetailsViewModel> _navigationService;
-        private readonly IRemoveExamSetCommand _removeExamSetCommand;
+        private readonly IDeleteExamSetCommand _removeExamSetCommand;
 
         public ShowDetailsDeleteExamSetCommandListViewModel(SelectedModelListStore<ExamSet> selectedModelListStore,
                                                             SelectedModelDetailsStore<ExamSet> selectedExamSetDetailsStore,
                                                             NavigationService<ExamSetDetailsViewModel> navigationService,
-                                                            IRemoveExamSetCommand removeExamSetCommand) : base(selectedModelListStore)
+                                                            IDeleteExamSetCommand removeExamSetCommand) : base(selectedModelListStore)
         {
             _selectedExamSetDetailsStore = selectedExamSetDetailsStore;
             _navigationService = navigationService;

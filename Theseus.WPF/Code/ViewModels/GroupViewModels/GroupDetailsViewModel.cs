@@ -22,7 +22,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public RemoveStaffMemberCommandListViewModel RemoveStaffMemberCommandListViewModel { get; set; }
         public RemovePatientCommandListViewModel RemovePatientCommandListViewModel { get; set; }
-        public ShowDetailsExamSetCommandListViewModel ShowDetailsExamSetCommandListViewModel { get; set; }
+        public ShowDetailsRemoveFromGroupExamSetCommandListViewModel ExamSetCommandListViewModel { get; set; }
 
         public bool AddStaffMemberAvailable { get; } = false;
 
@@ -40,7 +40,7 @@ namespace Theseus.WPF.Code.ViewModels
                                      RemovePatientCommandListViewModel removePatientCommandListViewModel,
                                      IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
                                      SelectedModelListStore<ExamSet> selectedExamSetListStore,
-                                     ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel,
+                                     ShowDetailsRemoveFromGroupExamSetCommandListViewModel examSetCommandListViewModel,
                                      NavigationService<AddStaffMemberToGroupViewModel> addStaffMemberToGroupNavigationService,
                                      NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService,
                                      ExamSetReturnServiceStore examSetReturnServiceStore,
@@ -56,7 +56,7 @@ namespace Theseus.WPF.Code.ViewModels
 
             CreateStaffMemberCommandList(getStaffMembersOfGroupQuery, selectedStaffMemberListStore, removeStaffMemberCommandListViewModel);
             CreatePatientCommandList(getPatientsOfGroupQuery, selectedPatientListStore, removePatientCommandListViewModel);
-            CreateExamSetCommandList(getExamSetsOfGroupQuery, selectedExamSetListStore, showDetailsExamSetCommandListViewModel);
+            CreateExamSetCommandList(getExamSetsOfGroupQuery, selectedExamSetListStore, examSetCommandListViewModel);
 
             AddStaffMember = new NavigateCommand<AddStaffMemberToGroupViewModel>(addStaffMemberToGroupNavigationService);
             AddPatient = new NavigateCommand<AddPatientToGroupViewModel>(addPatientToGroupNavigationService);
@@ -98,11 +98,11 @@ namespace Theseus.WPF.Code.ViewModels
 
         private void CreateExamSetCommandList(IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
                                               SelectedModelListStore<ExamSet> selectedExamSetListStore,
-                                              ShowDetailsExamSetCommandListViewModel showDetailsExamSetCommandListViewModel)
+                                              ShowDetailsRemoveFromGroupExamSetCommandListViewModel examSetCommandListViewModel)
         {
             LoadExamSetsFromGroupToStore(getExamSetsOfGroupQuery, CurrentGroup.Id, selectedExamSetListStore);
-            ShowDetailsExamSetCommandListViewModel = showDetailsExamSetCommandListViewModel;
-            ShowDetailsExamSetCommandListViewModel.CreateModelCommandViewModels();
+            ExamSetCommandListViewModel = examSetCommandListViewModel;
+            ExamSetCommandListViewModel.CreateModelCommandViewModels();
         }
 
         private void LoadExamSetsFromGroupToStore(IGetExamSetsOfGroupQuery query,

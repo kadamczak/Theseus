@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.ExamSetCommands
 {
-    public class RemoveExamSetCommand : ExamSetCommand, IRemoveExamSetCommand
+    public class DeleteExamSetCommand : ExamSetCommand, IDeleteExamSetCommand
     {
-        public RemoveExamSetCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        public DeleteExamSetCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
         }
 

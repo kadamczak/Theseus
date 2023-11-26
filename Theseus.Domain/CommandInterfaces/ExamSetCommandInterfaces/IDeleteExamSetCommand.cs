@@ -1,6 +1,6 @@
 ﻿namespace Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces
 {
-    public interface IRemoveExamSetCommand
+    public interface IDeleteExamSetCommand
     {
         Task Remove(Guid examSetId);
     }

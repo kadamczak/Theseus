@@ -5,9 +5,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.MazeCommands
 {
-    public class RemoveMazeWithSolutionCommand : MazeCommand, IRemoveMazeWithSolutionCommand
+    public class DeleteMazeWithSolutionCommand : MazeCommand, IDeleteMazeWithSolutionCommand
     {
-        public RemoveMazeWithSolutionCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        public DeleteMazeWithSolutionCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
         }
 

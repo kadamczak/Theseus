@@ -14,12 +14,12 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
     {
         private readonly ShowDetailsDeleteMazeCommandListViewModel _mazeCommandListViewModel;
         private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeCanvasViewModel;
-        private readonly IRemoveMazeWithSolutionCommand _removeMazeCommand;
+        private readonly IDeleteMazeWithSolutionCommand _removeMazeCommand;
         private readonly IGetExamSetsWithMazeQuery _getExamSetsWithMazeQuery;
 
         public DeleteMazeCommand(ShowDetailsDeleteMazeCommandListViewModel mazeCommandListViewModel,
                                  CommandViewModel<MazeWithSolutionCanvasViewModel> mazeCanvasViewModel,
-                                 IRemoveMazeWithSolutionCommand removeMazeCommand,
+                                 IDeleteMazeWithSolutionCommand removeMazeCommand,
                                  IGetExamSetsWithMazeQuery getExamSetsWithMazeQuery)
         {
             _mazeCommandListViewModel = mazeCommandListViewModel;

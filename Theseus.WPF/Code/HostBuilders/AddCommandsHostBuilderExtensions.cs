@@ -28,10 +28,11 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<ICreateGroupCommand, CreateGroupCommand>();
                 services.AddSingleton<IRemovePatientFromGroupCommand, RemovePatientFromGroupCommand>();
                 services.AddSingleton<IRemoveStaffMemberFromGroupCommand, RemoveStaffMemberFromGroupCommand>();
+                services.AddSingleton<IRemoveExamSetFromGroupCommand, RemoveExamSetFromGroupCommand>();
                 services.AddSingleton<IAddPatientToGroupCommand, AddPatientToGroupCommand>();
                 services.AddSingleton<IAddStaffMemberToGroupCommand, AddStaffMemberToGroupCommand>();
-                services.AddSingleton<IRemoveMazeWithSolutionCommand, RemoveMazeWithSolutionCommand>();
-                services.AddSingleton<IRemoveExamSetCommand, RemoveExamSetCommand>();
+                services.AddSingleton<IDeleteMazeWithSolutionCommand, DeleteMazeWithSolutionCommand>();
+                services.AddSingleton<IDeleteExamSetCommand, DeleteExamSetCommand>();
             });
 
             return hostBuilder;

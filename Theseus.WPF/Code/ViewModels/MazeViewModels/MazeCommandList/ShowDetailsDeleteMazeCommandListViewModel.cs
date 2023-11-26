@@ -13,13 +13,13 @@ namespace Theseus.WPF.Code.ViewModels
     {
         private readonly SelectedMazeDetailsStore _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailsNavigationService;
-        private readonly IRemoveMazeWithSolutionCommand _removeMazeCommand;
+        private readonly IDeleteMazeWithSolutionCommand _removeMazeCommand;
         private readonly IGetExamSetsWithMazeQuery _getExamSetsWithMazeQuery;
 
         public ShowDetailsDeleteMazeCommandListViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
                                                          SelectedMazeDetailsStore mazeDetailsStore,
                                                          NavigationService<MazeDetailsViewModel> mazeDetailsNavigationService,
-                                                         IRemoveMazeWithSolutionCommand removeMazeCommand,
+                                                         IDeleteMazeWithSolutionCommand removeMazeCommand,
                                                          IGetExamSetsWithMazeQuery getExamSetsWithMazeQuery) : base(mazeListStore)
         {
             _mazeDetailsStore = mazeDetailsStore;

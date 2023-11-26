@@ -60,7 +60,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" FontSize="25" Content="Exam Sets" Margin="0 0 0 10" />
-                <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding ShowDetailsExamSetCommandListViewModel}" />
+                <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding ExamSetCommandListViewModel}" />
             </Grid>
         </Grid>
     </ScrollViewer>

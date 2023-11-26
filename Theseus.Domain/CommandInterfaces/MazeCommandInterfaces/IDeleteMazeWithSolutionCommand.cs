@@ -1,6 +1,6 @@
 ﻿namespace Theseus.Domain.CommandInterfaces.MazeCommandInterfaces
 {
-    public interface IRemoveMazeWithSolutionCommand
+    public interface IDeleteMazeWithSolutionCommand
     {
         Task Remove(Guid mazeId);
     }
