@@ -1,6 +1,6 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
-namespace Theseus.Domain.MazeCommandInterfaces
+namespace Theseus.Domain.CommandInterfaces.MazeCommandInterfaces
 {
     public interface ICreateOrUpdateMazeWithSolutionCommand
     {

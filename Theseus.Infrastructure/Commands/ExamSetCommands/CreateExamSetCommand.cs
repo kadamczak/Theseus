@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Theseus.Domain.ExamSetCommandInterfaces;
+using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;

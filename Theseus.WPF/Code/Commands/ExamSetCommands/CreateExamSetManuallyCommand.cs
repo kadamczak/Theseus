@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Theseus.Domain.ExamSetCommandInterfaces;
+using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.GroupRelated.Exceptions;

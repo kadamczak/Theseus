@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Theseus.Domain.MazeCommandInterfaces;
+using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;

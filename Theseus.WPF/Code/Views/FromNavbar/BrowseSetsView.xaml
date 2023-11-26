@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
     <Grid Background="WhiteSmoke" Margin="40">
-        <views:ExamSetCommandListView DataContext="{Binding ShowDetailsExamSetCommandListViewModel}" />
+        <views:ExamSetCommandListView DataContext="{Binding ShowDetailsDeleteExamSetCommandListViewModel}" />
     </Grid>
 </UserControl>

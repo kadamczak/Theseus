@@ -23,11 +23,11 @@ namespace Theseus.Infrastructure.DbContexts
                             j => j
                                 .HasOne<ExamSetDto>()
                                 .WithMany()
-                                .OnDelete(DeleteBehavior.NoAction),
+                                .OnDelete(DeleteBehavior.Cascade),
                             j => j
                                 .HasOne<MazeDto>()
                                 .WithMany()
-                                .OnDelete(DeleteBehavior.NoAction)
+                                .OnDelete(DeleteBehavior.Cascade)
                         );
 
             modelBuilder.Entity<StaffMemberDto>()

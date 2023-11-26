@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
-using Theseus.Domain.ExamSetCommandInterfaces;
+using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;

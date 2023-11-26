@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Theseus.Domain.MazeCommandInterfaces;
+using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
