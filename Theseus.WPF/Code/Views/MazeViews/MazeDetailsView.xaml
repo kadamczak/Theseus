@@ -18,6 +18,7 @@
 
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource Generic}" FontSize="22" Content="Save" Command="{Binding SaveMaze}" />
+                <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="22" Content="Go Back" Command="{Binding GoBack}" />
             </StackPanel>
         </DockPanel>
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -7,6 +8,7 @@ using Theseus.Domain.Models.MazeRelated.MazeCreators;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.MazeCommands;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels.Bindings;
@@ -103,12 +105,16 @@ namespace Theseus.WPF.Code.ViewModels
                                       SelectedMazeDetailsStore mazeDetailsStore,
                                       ICurrentStaffMemberStore currentStaffMemberStore,
                                       NavigationService<MazeDetailsViewModel> mazeDetailNavigationService,
-                                      LastMazeGeneratorInputStore lastMazeGeneratorSettingsStore)
+                                      LastMazeGeneratorInputStore lastMazeGeneratorSettingsStore,
+                                      MazeReturnServiceStore mazeReturnServiceStore,
+                                      NavigationStore navigationStore,
+                                      Func<MazeGeneratorViewModel> viewModelGenerator)
         {
             this.GenerateMaze = new GenerateMazeCommand(this, mazeCreator, mazeDetailsStore, currentStaffMemberStore, mazeDetailNavigationService);
             this._lastMazeGeneratorSettingsStore = lastMazeGeneratorSettingsStore;
-            PropertyChanged += HandlePropertyChange;
+            mazeReturnServiceStore.MazeReturnNavigationService = new NavigationService<ViewModelBase>(navigationStore, viewModelGenerator);
 
+            PropertyChanged += HandlePropertyChange;
             GetStartValuesFromStore();
         }
 
