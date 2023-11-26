@@ -12,7 +12,7 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
         {
         }
 
-        public async Task Remove(Guid examSetId)
+        public async Task Delete(Guid examSetId)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {

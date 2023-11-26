@@ -2,6 +2,6 @@
 {
     public interface IDeleteExamSetCommand
     {
-        Task Remove(Guid examSetId);
+        Task Delete(Guid examSetId);
     }
 }

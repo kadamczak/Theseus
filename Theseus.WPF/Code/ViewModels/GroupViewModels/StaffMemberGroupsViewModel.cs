@@ -10,12 +10,12 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class StaffMemberGroupsViewModel : ViewModelBase
     {
-        public ShowDetailsGroupCommandListViewModel ShowDetailsGroupCommandListViewModel { get; }
+        public ShowDetailsDeleteGroupCommandListViewModel ShowDetailsGroupCommandListViewModel { get; }
 
         public StaffMemberGroupsViewModel(SelectedModelListStore<Group> selectedGroupListStore,
                                           IGetGroupsOfStaffMemberQuery getGroupsOfStaffMemberQuery,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
-                                          ShowDetailsGroupCommandListViewModel showDetailsGroupCommandListViewModel)
+                                          ShowDetailsDeleteGroupCommandListViewModel showDetailsGroupCommandListViewModel)
         {
             if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
                 throw new StaffMemberNotLoggedInException();

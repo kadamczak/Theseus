@@ -46,7 +46,7 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         private async Task DeleteExamSet(Guid examSetId)
         {
-            await _removeExamSetCommand.Remove(examSetId);
+            await _removeExamSetCommand.Delete(examSetId);
             _commandListViewModel.ActionableModels.Remove(_examSetCommandViewModel);
         }
     }
