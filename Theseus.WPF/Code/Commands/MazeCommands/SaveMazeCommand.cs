@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
 using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels;
@@ -12,10 +10,10 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
     public class SaveMazeCommand : AsyncCommandBase
     {
         private readonly MazeDetailsViewModel _mazeDetailsViewModel;
-        private readonly SelectedModelDetailsStore<MazeWithSolution> _mazeDetailsStore;
+        private readonly SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> _mazeDetailsStore;
         private readonly ICreateOrUpdateMazeWithSolutionCommand _createOrUpdateMazeCommand;
 
-        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, SelectedModelDetailsStore<MazeWithSolution> mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createOrUpdateMazeCommand)
+        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createOrUpdateMazeCommand)
         {
             _mazeDetailsViewModel = mazeDetailViewModel;
             _mazeDetailsStore = mazeDetailsStore;
@@ -32,7 +30,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await _createOrUpdateMazeCommand.CreateOrUpdateMazeWithSolution(_mazeDetailsStore.SelectedModel);
+            await _createOrUpdateMazeCommand.CreateOrUpdateMazeWithSolution(_mazeDetailsStore.SelectedModel.MazeWithSolution);
             _mazeDetailsViewModel.CanSaveMaze = false;
         }
 

@@ -10,13 +10,13 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class ShowDetailsDeleteMazeCommandListViewModel : CommandListViewModel<MazeWithSolutionCanvasViewModel>
     {
-        private readonly SelectedModelDetailsStore<MazeWithSolution> _mazeDetailsStore;
+        private readonly SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailsNavigationService;
         private readonly IDeleteMazeWithSolutionCommand _removeMazeCommand;
         private readonly IGetExamSetsWithMazeQuery _getExamSetsWithMazeQuery;
 
         public ShowDetailsDeleteMazeCommandListViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
-                                                         SelectedModelDetailsStore<MazeWithSolution> mazeDetailsStore,
+                                                         SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> mazeDetailsStore,
                                                          NavigationService<MazeDetailsViewModel> mazeDetailsNavigationService,
                                                          IDeleteMazeWithSolutionCommand removeMazeCommand,
                                                          IGetExamSetsWithMazeQuery getExamSetsWithMazeQuery) : base(mazeListStore)
@@ -29,7 +29,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public override void AddModelToActionableModels(MazeWithSolutionCanvasViewModel mazeWithSolution)
         {
-            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution.MazeWithSolution))
+            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(mazeWithSolution)
             {
                 Command1Name = "Details",
                 ShowCommand1 = true,

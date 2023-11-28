@@ -16,7 +16,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public override void AddModelToActionableModels(MazeWithSolutionCanvasViewModel mazeWithSolution)
         {
-            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution.MazeWithSolution))
+            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(mazeWithSolution)
             {
                Command1Name = "Add",
                ShowCommand1 = true

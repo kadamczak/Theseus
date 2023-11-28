@@ -15,7 +15,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
     {
         private readonly MazeGeneratorViewModel _mazeGenViewModel;
         private readonly MazeCreator _mazeCreator;
-        private readonly SelectedModelDetailsStore<MazeWithSolution> _mazeDetailsStore;
+        private readonly SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> _mazeDetailsStore;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
@@ -24,7 +24,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
 
         public GenerateMazeCommand(MazeGeneratorViewModel mazeGenViewModel,
                                    MazeCreator mazeCreator,
-                                   SelectedModelDetailsStore<MazeWithSolution> mazeDetailsStore,
+                                   SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> mazeDetailsStore,
                                    ICurrentStaffMemberStore currentStaffMemberStore,
                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
@@ -59,7 +59,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
                                                                        shouldExcludeCellsCloseToRoot);
 
             mazeWithSolution.StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException();
-            _mazeDetailsStore.SelectedModel = mazeWithSolution;
+            _mazeDetailsStore.SelectedModel = new MazeWithSolutionCanvasViewModel(mazeWithSolution);
             _mazeDetailNavigationService.Navigate();
         }
 

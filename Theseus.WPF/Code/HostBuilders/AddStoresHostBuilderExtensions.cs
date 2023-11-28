@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
@@ -23,7 +22,6 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<NavigationStore>();
 
                 services.AddSingleton<LastMazeGeneratorInputStore>();
-                services.AddSingleton<SelectedModelDetailsStore<MazeWithSolution>>();
                 services.AddSingleton<MazeReturnServiceStore>();
 
                 services.AddSingleton<ExamSetReturnServiceStore>();
@@ -37,6 +35,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<SelectedModelListStore<StaffMember>>();
                 services.AddSingleton<SelectedModelListStore<Group>>();
 
+                services.AddSingleton<SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel>>();
                 services.AddSingleton<SelectedModelDetailsStore<ExamSet>>();
                 services.AddSingleton<SelectedModelDetailsStore<Patient>>();
                 services.AddSingleton<SelectedModelDetailsStore<StaffMember>>();
