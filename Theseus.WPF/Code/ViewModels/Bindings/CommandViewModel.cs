@@ -16,6 +16,8 @@ namespace Theseus.WPF.Code.ViewModels.Bindings
         private string _command1Name = string.Empty;
         private string _command2Name = string.Empty;
 
+        public string AdditionalText { get; set; } = string.Empty;
+
         public string Command1Name
         {
             get => _command1Name;

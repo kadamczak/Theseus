@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.MazeCommands;
 using Theseus.WPF.Code.Services;
@@ -102,7 +103,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand GenerateMaze { get; }
 
         public MazeGeneratorViewModel(MazeCreator mazeCreator,
-                                      SelectedMazeDetailsStore mazeDetailsStore,
+                                      SelectedModelDetailsStore<MazeWithSolution> mazeDetailsStore,
                                       ICurrentStaffMemberStore currentStaffMemberStore,
                                       NavigationService<MazeDetailsViewModel> mazeDetailNavigationService,
                                       LastMazeGeneratorInputStore lastMazeGeneratorSettingsStore,

@@ -71,6 +71,7 @@
                                 <Button Style="{StaticResource Generic}" Margin="0 10 0 0" FontSize="17" Visibility="{Binding ShowCommand2, Converter={StaticResource BooleanVisibility}}" Content="{Binding Command2Name}" Command="{Binding Command2}" Padding="12 3" HorizontalAlignment="Stretch" />
                             </StackPanel>
 
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="2" MaxWidth="260" Text="{Binding AdditionalText}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

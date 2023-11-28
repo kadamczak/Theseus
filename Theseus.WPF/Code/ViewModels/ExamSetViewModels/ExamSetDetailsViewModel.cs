@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
@@ -19,7 +20,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ShowDetailsMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
         public ICommand GoBack { get; }
 
-        public ExamSetDetailsViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
+        public ExamSetDetailsViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
                                        SelectedModelDetailsStore<ExamSet> examSetDetailsStore,
                                        IGetMazesWithSolutionOfExamSetQuery getAllMazesOfExamSetQuery,
                                        ICurrentStaffMemberStore currentStaffMemberStore,
@@ -37,15 +38,22 @@ namespace Theseus.WPF.Code.ViewModels
             GoBack = new NavigateCommand<ViewModelBase>(examSetReturnServiceStore.ExamSetNavigationService);
 
             this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel;
-            this.ShowDetailsMazeCommandViewModel.CreateMazeCommandViewModels();
+            this.ShowDetailsMazeCommandViewModel.CreateModelCommandViewModels();
         }
 
         private void LoadMazesFromSelectedExamSet(IGetMazesWithSolutionOfExamSetQuery getAllMazesOfExamSetQuery,
                                                   Guid examSetId,
-                                                  SelectedModelListStore<MazeWithSolution> mazeListStore)
+                                                  SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore)
         {
             var mazes = getAllMazesOfExamSetQuery.GetMazesWithSolution(examSetId);
-            mazeListStore.ModelList = mazes;
+
+            var mazeCanvases = new List<MazeWithSolutionCanvasViewModel>();
+            foreach (var maze in mazes)
+            {
+                mazeCanvases.Add(new MazeWithSolutionCanvasViewModel(maze));
+            }
+
+            mazeListStore.ModelList = mazeCanvases;
         }
     }
 }

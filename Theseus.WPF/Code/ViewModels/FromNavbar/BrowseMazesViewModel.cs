@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Windows.Documents;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
@@ -14,7 +17,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ShowDetailsDeleteMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
 
-        public BrowseMazesViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
+        public BrowseMazesViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
                                     IGetMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
                                     ICurrentStaffMemberStore currentStaffMemberStore,
                                     ShowDetailsDeleteMazeCommandListViewModel showDetailsMazeCommandListViewModel,
@@ -29,15 +32,22 @@ namespace Theseus.WPF.Code.ViewModels
             mazeReturnServiceStore.MazeReturnNavigationService = new NavigationService<ViewModelBase>(navigationStore, viewModelGenerator);
 
             this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel;
-            this.ShowDetailsMazeCommandViewModel.CreateMazeCommandViewModels();
+            this.ShowDetailsMazeCommandViewModel.CreateModelCommandViewModels();
         }
 
         private void LoadMazesOfStaffMember(IGetMazesWithSolutionOfStaffMemberQuery query,
                                             Guid staffMemberId,
-                                            SelectedModelListStore<MazeWithSolution> mazeListStore)
+                                            SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore)
         {
             var mazeList = query.GetMazesWithSolution(staffMemberId);
-            mazeListStore.ModelList = mazeList;
+
+            var mazeCanvases = new List<MazeWithSolutionCanvasViewModel>();
+            foreach(var maze in mazeList)
+            {
+                mazeCanvases.Add(new MazeWithSolutionCanvasViewModel(maze));
+            }
+
+            mazeListStore.ModelList = mazeCanvases;
         }
     }
 }

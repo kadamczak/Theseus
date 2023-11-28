@@ -2,34 +2,33 @@
 using Theseus.WPF.Code.Commands.MazeCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
-using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class ShowDetailsMazeCommandListViewModel : MazeCommandListViewModel
+    public class ShowDetailsMazeCommandListViewModel : CommandListViewModel<MazeWithSolutionCanvasViewModel>
     {
-        private readonly SelectedMazeDetailsStore _mazeDetailsStore;
+        private readonly SelectedModelDetailsStore<MazeWithSolution> _mazeDetailsStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailsNavigationService;
 
-        public ShowDetailsMazeCommandListViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
-                                                   SelectedMazeDetailsStore mazeDetailsStore,
+        public ShowDetailsMazeCommandListViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
+                                                   SelectedModelDetailsStore<MazeWithSolution> mazeDetailsStore,
                                                    NavigationService<MazeDetailsViewModel> mazeDetailsNavigationService) : base(mazeListStore)
         {
             _mazeDetailsStore = mazeDetailsStore;
             _mazeDetailsNavigationService = mazeDetailsNavigationService;
         }
 
-        protected override void AddMazeWithCommandToActionableMazes(MazeWithSolution mazeWithSolution)
+        public override void AddModelToActionableModels(MazeWithSolutionCanvasViewModel mazeWithSolution)
         {
-            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution))
+            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution.MazeWithSolution))
             {
                 Command1Name = "Details",
                 ShowCommand1 = true,
             };
 
             actionableMaze.Command1 = new ShowMazeDetailsCommand(actionableMaze, _mazeDetailsStore, _mazeDetailsNavigationService);
-            this.ActionableMazes.Add(actionableMaze);
+            this.ActionableModels.Add(actionableMaze);
         }
     }
 }

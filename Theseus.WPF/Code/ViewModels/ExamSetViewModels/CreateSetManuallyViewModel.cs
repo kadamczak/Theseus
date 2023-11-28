@@ -35,7 +35,7 @@ namespace Theseus.WPF.Code.ViewModels
         public bool CanCreate => !string.IsNullOrEmpty(_examSetName) && AddToSetMazeCommandListViewModel.SelectedMazes.Any();
         public ICommand CreateSetManually { get; }
 
-        public CreateSetManuallyViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore,
+        public CreateSetManuallyViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
                                           IGetMazesWithSolutionOfStaffMemberQuery getAllMazesWithSolutionOfStaffMemberQuery,
                                           ICreateExamSetCommand createExamSetCommand,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
@@ -49,14 +49,21 @@ namespace Theseus.WPF.Code.ViewModels
             this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, currentStaffMemberStore, createSetNavigationService);
 
             this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
-            this.AddToSetMazeCommandListViewModel.CreateMazeCommandViewModels();
+            this.AddToSetMazeCommandListViewModel.CreateModelCommandViewModels();
             this.AddToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
         }
 
-        private void LoadFullMazeListToStore(IGetMazesWithSolutionOfStaffMemberQuery query, Guid staffMemberId, SelectedModelListStore<MazeWithSolution> mazeListStore)
+        private void LoadFullMazeListToStore(IGetMazesWithSolutionOfStaffMemberQuery query, Guid staffMemberId, SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore)
         {
             var fullMazeList = query.GetMazesWithSolution(staffMemberId);
-            mazeListStore.ModelList = fullMazeList;
+
+            var mazeCanvases = new List<MazeWithSolutionCanvasViewModel>();
+            foreach (var maze in fullMazeList)
+            {
+                mazeCanvases.Add(new MazeWithSolutionCanvasViewModel(maze));
+            }
+
+            mazeListStore.ModelList = mazeCanvases;
         }
 
         private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

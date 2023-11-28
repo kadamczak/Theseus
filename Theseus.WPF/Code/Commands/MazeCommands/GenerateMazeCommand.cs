@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
@@ -13,7 +15,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
     {
         private readonly MazeGeneratorViewModel _mazeGenViewModel;
         private readonly MazeCreator _mazeCreator;
-        private readonly SelectedMazeDetailsStore _mazeDetailsStore;
+        private readonly SelectedModelDetailsStore<MazeWithSolution> _mazeDetailsStore;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
@@ -22,7 +24,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
 
         public GenerateMazeCommand(MazeGeneratorViewModel mazeGenViewModel,
                                    MazeCreator mazeCreator,
-                                   SelectedMazeDetailsStore mazeDetailsStore,
+                                   SelectedModelDetailsStore<MazeWithSolution> mazeDetailsStore,
                                    ICurrentStaffMemberStore currentStaffMemberStore,
                                    NavigationService<MazeDetailsViewModel> mazeDetailNavigationService)
         {
@@ -57,8 +59,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
                                                                        shouldExcludeCellsCloseToRoot);
 
             mazeWithSolution.StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException();
-
-            _mazeDetailsStore.UpdateMazeDetails(mazeWithSolution, unsavedChanges: true);
+            _mazeDetailsStore.SelectedModel = mazeWithSolution;
             _mazeDetailNavigationService.Navigate();
         }
 

@@ -10,6 +10,7 @@ using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Exams;
 using Theseus.WPF.Code.Stores.ExamSets;
 using Theseus.WPF.Code.Stores.Mazes;
+using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
@@ -22,7 +23,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<NavigationStore>();
 
                 services.AddSingleton<LastMazeGeneratorInputStore>();
-                services.AddSingleton<SelectedMazeDetailsStore>();
+                services.AddSingleton<SelectedModelDetailsStore<MazeWithSolution>>();
                 services.AddSingleton<MazeReturnServiceStore>();
 
                 services.AddSingleton<ExamSetReturnServiceStore>();
@@ -30,7 +31,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<CurrentExamStore>();
                 services.AddSingleton<ExamSetsInGroupStore>();
 
-                services.AddSingleton<SelectedModelListStore<MazeWithSolution>>();
+                services.AddSingleton<SelectedModelListStore<MazeWithSolutionCanvasViewModel>>();
                 services.AddSingleton<SelectedModelListStore<ExamSet>>();
                 services.AddSingleton<SelectedModelListStore<Patient>>();
                 services.AddSingleton<SelectedModelListStore<StaffMember>>();

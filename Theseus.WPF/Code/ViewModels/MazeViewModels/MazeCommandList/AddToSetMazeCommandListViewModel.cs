@@ -6,24 +6,24 @@ using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class AddToSetMazeCommandListViewModel : MazeCommandListViewModel
+    public class AddToSetMazeCommandListViewModel : CommandListViewModel<MazeWithSolutionCanvasViewModel>
     {
         public ObservableCollection<MazeWithSolution> SelectedMazes = new ObservableCollection<MazeWithSolution>();
 
-        public AddToSetMazeCommandListViewModel(SelectedModelListStore<MazeWithSolution> mazeListStore) : base(mazeListStore)
+        public AddToSetMazeCommandListViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore) : base(mazeListStore)
         {
         }
 
-        protected override void AddMazeWithCommandToActionableMazes(MazeWithSolution mazeWithSolution)
+        public override void AddModelToActionableModels(MazeWithSolutionCanvasViewModel mazeWithSolution)
         {
-            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution))
+            var actionableMaze = new CommandViewModel<MazeWithSolutionCanvasViewModel>(new MazeWithSolutionCanvasViewModel(mazeWithSolution.MazeWithSolution))
             {
                Command1Name = "Add",
                ShowCommand1 = true
             };
 
             actionableMaze.Command1 = new AddToExamSetCommand(actionableMaze, this);
-            this.ActionableMazes.Add(actionableMaze);
+            this.ActionableModels.Add(actionableMaze);
         }
     }
 }

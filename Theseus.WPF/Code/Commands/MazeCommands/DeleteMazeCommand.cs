@@ -67,7 +67,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
         private async Task DeleteMaze(Guid mazeId)
         {
             await _removeMazeCommand.Remove(mazeId);
-            _mazeCommandListViewModel.ActionableMazes.Remove(_mazeCanvasViewModel);
+            _mazeCommandListViewModel.ActionableModels.Remove(_mazeCanvasViewModel);
         }
     }
 }
