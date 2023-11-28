@@ -5,13 +5,13 @@ using Theseus.WPF.Code.ViewModels.Bindings;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
-    class AddToExamSetCommand : CommandBase
+    public class AddToExamSetCommand : CommandBase
     {
         private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeWithSolutionCommandViewModel;
         private AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
 
         public AddToExamSetCommand(CommandViewModel<MazeWithSolutionCanvasViewModel> mazeWithSolutionCommandViewModel,
-                               AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
+                                   AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
         {
             _mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;
             _addToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;

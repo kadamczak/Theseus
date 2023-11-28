@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
@@ -28,6 +29,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand AddStaffMember { get; }
         public ICommand AddPatient { get; }
+        public ICommand ChangeExamSets { get; }
 
         public GroupDetailsViewModel(SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
                                      ICurrentStaffMemberStore currentStaffMemberStore,        
@@ -45,7 +47,10 @@ namespace Theseus.WPF.Code.ViewModels
                                      NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService,
                                      ExamSetReturnServiceStore examSetReturnServiceStore,
                                      NavigationStore navigationStore,
-                                     Func<GroupDetailsViewModel> viewModelGenerator)
+                                     Func<GroupDetailsViewModel> viewModelGenerator,
+                                     ExamSetsInGroupStore examSetsInGroupStore,
+                                     IGetExamSetsOfStaffMemberInGroupQuery getExamSetsQuery,
+                                     NavigationService<SelectExamSetsInGroupViewModel> selectExamSetsNavigationService)
         {
             CurrentGroup = selectedGroupDetailsStore.SelectedModel;
             CurrentGroup.Owner = getOwnerOfGroupQuery.GetOwner(CurrentGroup.Id);
@@ -58,8 +63,17 @@ namespace Theseus.WPF.Code.ViewModels
             CreatePatientCommandList(getPatientsOfGroupQuery, selectedPatientListStore, removePatientCommandListViewModel);
             CreateExamSetCommandList(getExamSetsOfGroupQuery, selectedExamSetListStore, examSetCommandListViewModel);
 
+            SaveExamSetsBelongingToCurrentStaffMemberInStore(getExamSetsQuery, currentStaffMemberStore.StaffMember.Id, CurrentGroup.Id, examSetsInGroupStore);
+
             AddStaffMember = new NavigateCommand<AddStaffMemberToGroupViewModel>(addStaffMemberToGroupNavigationService);
             AddPatient = new NavigateCommand<AddPatientToGroupViewModel>(addPatientToGroupNavigationService);
+            ChangeExamSets = new NavigateCommand<SelectExamSetsInGroupViewModel>(selectExamSetsNavigationService);
+        }
+
+        private void SaveExamSetsBelongingToCurrentStaffMemberInStore(IGetExamSetsOfStaffMemberInGroupQuery query, Guid staffMemberId, Guid groupId, ExamSetsInGroupStore examSetsInGroup)
+        {
+            var examSets = query.GetExamSets(staffMemberId, groupId);
+            examSetsInGroup.SelectedExamSets = new ObservableCollection<ExamSet>(examSets);
         }
 
         private void CreateStaffMemberCommandList(IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,

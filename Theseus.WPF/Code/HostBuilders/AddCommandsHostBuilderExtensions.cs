@@ -33,6 +33,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IAddStaffMemberToGroupCommand, AddStaffMemberToGroupCommand>();
                 services.AddSingleton<IDeleteMazeWithSolutionCommand, DeleteMazeWithSolutionCommand>();
                 services.AddSingleton<IDeleteExamSetCommand, DeleteExamSetCommand>();
+                services.AddSingleton<IChangeExamSetsOfStaffMemberInGroupCommand, ChangeExamSetsOfStaffMemberInGroupCommand>();
                 services.AddSingleton<IDeleteGroupCommand, DeleteGroupCommand>();
             });
 

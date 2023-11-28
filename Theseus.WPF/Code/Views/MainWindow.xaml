@@ -87,6 +87,9 @@
             <DataTemplate DataType="{x:Type vms:AddStaffMemberToGroupViewModel}">
                 <views:AddStaffMemberToGroupView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:SelectExamSetsInGroupViewModel}">
+                <views:SelectExamSetsInGroupView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type vms:ExamPageViewModel}">
                 <views:ExamPageView/>

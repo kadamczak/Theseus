@@ -4,6 +4,7 @@ using System;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList;
 using Theseus.WPF.Code.ViewModels.SetViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
@@ -31,6 +32,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<ShowDetailsExamSetCommandListViewModel>();
             services.AddTransient<ShowDetailsDeleteExamSetCommandListViewModel>();
             services.AddTransient<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>();
+            services.AddTransient<AddToGroupExamSetCommandListViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -41,6 +43,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<ShowDetailsExamSetCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsExamSetCommandListViewModel>());
             services.AddSingleton<Func<ShowDetailsDeleteExamSetCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsDeleteExamSetCommandListViewModel>());
             services.AddSingleton<Func<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>>((s) => () => s.GetRequiredService<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>());
+            services.AddSingleton<Func<AddToGroupExamSetCommandListViewModel>>((s) => () => s.GetRequiredService<AddToGroupExamSetCommandListViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -51,6 +54,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<ShowDetailsExamSetCommandListViewModel>>();
             services.AddSingleton<NavigationService<ShowDetailsDeleteExamSetCommandListViewModel>>();
             services.AddSingleton<NavigationService<ShowDetailsRemoveFromGroupExamSetCommandListViewModel>>();
+            services.AddSingleton<NavigationService<AddToGroupExamSetCommandListViewModel>>();
         }
     }
 }
