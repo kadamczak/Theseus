@@ -1,25 +1,25 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
     public class DeleteGroupCommand : AsyncCommandBase
     {
-        private readonly ShowDetailsDeleteGroupCommandListViewModel _groupCommandListViewModel;
+        private readonly ObservableCollection<CommandViewModel<Group>> _groupCommandList;
         private readonly CommandViewModel<Group> _groupCommandViewModel;
         private readonly IDeleteGroupCommand _deleteGroupCommand;
 
-        public DeleteGroupCommand(ShowDetailsDeleteGroupCommandListViewModel groupCommandListViewModel,
+        public DeleteGroupCommand(ObservableCollection<CommandViewModel<Group>> groupCommandList,
                                   CommandViewModel<Group> groupCommandViewModel,
                                   IDeleteGroupCommand deleteGroupCommand)
         {
-            _groupCommandListViewModel = groupCommandListViewModel;
+            _groupCommandList = groupCommandList;
             _groupCommandViewModel = groupCommandViewModel;
             _deleteGroupCommand = deleteGroupCommand;
         }
@@ -47,7 +47,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
         private async Task DeleteGroup(Guid groupId)
         {
             await _deleteGroupCommand.Delete(groupId);
-            _groupCommandListViewModel.ActionableModels.Remove(_groupCommandViewModel);
+            _groupCommandList.Remove(_groupCommandViewModel);
         }
     }
 }

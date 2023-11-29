@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
 using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
@@ -12,12 +9,16 @@ using Theseus.WPF.Code.Commands.ExamSetCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
+using Theseus.WPF.Code.Stores.Mazes;
+using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList;
+using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class CreateSetManuallyViewModel : ViewModelBase
     {
-        public AddToSetMazeCommandListViewModel AddToSetMazeCommandListViewModel { get; }
+        public MazeCommandListViewModel AddToSetMazeCommandListViewModel { get; }
         
         private string _examSetName = string.Empty;
         public string ExamSetName
@@ -27,12 +28,12 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _examSetName = value;
                 OnPropertyChanged(nameof(ExamSetName));
-                OnPropertyChanged(nameof(CanCreate));
+                OnPropertyChanged(nameof(ExamSetNameEntered));
             }
         }
 
-        public List<MazeWithSolution> SelectedMazes => AddToSetMazeCommandListViewModel.SelectedMazes.ToList();
-        public bool CanCreate => !string.IsNullOrEmpty(_examSetName) && AddToSetMazeCommandListViewModel.SelectedMazes.Any();
+        //public List<MazeWithSolution> SelectedMazes => AddToSetMazeCommandListViewModel.ToList();
+        public bool ExamSetNameEntered => !string.IsNullOrWhiteSpace(_examSetName);
         public ICommand CreateSetManually { get; }
 
         public CreateSetManuallyViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
@@ -40,17 +41,17 @@ namespace Theseus.WPF.Code.ViewModels
                                           ICreateExamSetCommand createExamSetCommand,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
                                           NavigationService<CreateSetViewModel> createSetNavigationService,
-                                          AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
+                                          MazeCommandListViewModelFactory addToSetMazeCommandListViewModel,
+                                          MazesInExamSetStore mazesInExamSetStore)
         {
             if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
                 throw new StaffMemberNotLoggedInException();
 
             LoadFullMazeListToStore(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
-            this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, currentStaffMemberStore, createSetNavigationService);
+            this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, currentStaffMemberStore, mazesInExamSetStore, createSetNavigationService);
 
-            this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
+            this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel.Create(MazeButtonCommand.AddToExamSet, MazeButtonCommand.None, MazeInfo.None);
             this.AddToSetMazeCommandListViewModel.CreateModelCommandViewModels();
-            this.AddToSetMazeCommandListViewModel.SelectedMazes.CollectionChanged += OnCollectionChanged;
         }
 
         private void LoadFullMazeListToStore(IGetMazesWithSolutionOfStaffMemberQuery query, Guid staffMemberId, SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore)
@@ -66,9 +67,9 @@ namespace Theseus.WPF.Code.ViewModels
             mazeListStore.ModelList = mazeCanvases;
         }
 
-        private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(CanCreate));
-        }
+        //private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    OnPropertyChanged(nameof(CanCreate));
+        //}
     }
 }

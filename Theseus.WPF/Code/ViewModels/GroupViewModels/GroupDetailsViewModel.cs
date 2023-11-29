@@ -13,6 +13,15 @@ using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.ExamSets;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.Info;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList.Info;
+using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList;
+using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -21,9 +30,9 @@ namespace Theseus.WPF.Code.ViewModels
         public Group CurrentGroup { get; }
         public string GroupOwnerName { get; } = string.Empty;
 
-        public RemoveStaffMemberCommandListViewModel RemoveStaffMemberCommandListViewModel { get; set; }
-        public RemovePatientCommandListViewModel RemovePatientCommandListViewModel { get; set; }
-        public ShowDetailsRemoveFromGroupExamSetCommandListViewModel ExamSetCommandListViewModel { get; set; }
+        public StaffMemberCommandListViewModel RemoveStaffMemberCommandListViewModel { get; set; }
+        public PatientCommandListViewModel RemovePatientCommandListViewModel { get; set; }
+        public ExamSetCommandListViewModel ExamSetCommandListViewModel { get; set; }
 
         public bool AddStaffMemberAvailable { get; } = false;
 
@@ -36,13 +45,13 @@ namespace Theseus.WPF.Code.ViewModels
                                      IGetOwnerOfGroupQuery getOwnerOfGroupQuery,
                                      IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
                                      SelectedModelListStore<StaffMember> selectedStaffMemberListStore,
-                                     RemoveStaffMemberCommandListViewModel removeStaffMemberCommandListViewModel,
+                                     StaffMemberCommandListViewModelFactory removeStaffMemberCommandListViewModel,
                                      IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
                                      SelectedModelListStore<Patient> selectedPatientListStore,
-                                     RemovePatientCommandListViewModel removePatientCommandListViewModel,
+                                     PatientCommandListViewModelFactory removePatientCommandListViewModel,
                                      IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
                                      SelectedModelListStore<ExamSet> selectedExamSetListStore,
-                                     ShowDetailsRemoveFromGroupExamSetCommandListViewModel examSetCommandListViewModel,
+                                     ExamSetCommandListViewModelFactory examSetCommandListViewModel,
                                      NavigationService<AddStaffMemberToGroupViewModel> addStaffMemberToGroupNavigationService,
                                      NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService,
                                      ExamSetReturnServiceStore examSetReturnServiceStore,
@@ -78,10 +87,10 @@ namespace Theseus.WPF.Code.ViewModels
 
         private void CreateStaffMemberCommandList(IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
                                                   SelectedModelListStore<StaffMember> selectedStaffMemberListStore,
-                                                  RemoveStaffMemberCommandListViewModel removeStaffMemberCommandListViewModel)
+                                                  StaffMemberCommandListViewModelFactory removeStaffMemberCommandListViewModel)
         {
             LoadStaffMembersFromGroupToStore(getStaffMembersOfGroupQuery, CurrentGroup.Id, selectedStaffMemberListStore);
-            RemoveStaffMemberCommandListViewModel = removeStaffMemberCommandListViewModel;
+            RemoveStaffMemberCommandListViewModel = removeStaffMemberCommandListViewModel.Create(StaffMemberButtonCommand.Remove, StaffMemberButtonCommand.None, StaffMemberInfo.None);
             RemoveStaffMemberCommandListViewModel.CreateModelCommandViewModels();
         }
 
@@ -95,10 +104,10 @@ namespace Theseus.WPF.Code.ViewModels
 
         private void CreatePatientCommandList(IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
                                               SelectedModelListStore<Patient> selectedPatientListStore,
-                                              RemovePatientCommandListViewModel removePatientCommandListViewModel)
+                                              PatientCommandListViewModelFactory removePatientCommandListViewModel)
         {
             LoadPatientsFromGroupToStore(getPatientsOfGroupQuery, CurrentGroup.Id, selectedPatientListStore);
-            RemovePatientCommandListViewModel = removePatientCommandListViewModel;
+            RemovePatientCommandListViewModel = removePatientCommandListViewModel.Create(PatientButtonCommand.Remove, PatientButtonCommand.None, PatientInfo.None);
             RemovePatientCommandListViewModel.CreateModelCommandViewModels();
         }
 
@@ -112,10 +121,10 @@ namespace Theseus.WPF.Code.ViewModels
 
         private void CreateExamSetCommandList(IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
                                               SelectedModelListStore<ExamSet> selectedExamSetListStore,
-                                              ShowDetailsRemoveFromGroupExamSetCommandListViewModel examSetCommandListViewModel)
+                                              ExamSetCommandListViewModelFactory examSetCommandListViewModel)
         {
             LoadExamSetsFromGroupToStore(getExamSetsOfGroupQuery, CurrentGroup.Id, selectedExamSetListStore);
-            ExamSetCommandListViewModel = examSetCommandListViewModel;
+            ExamSetCommandListViewModel = examSetCommandListViewModel.Create(ExamSetButtonCommand.ShowDetails, ExamSetButtonCommand.RemoveFromGroup, ExamSetInfo.None);
             ExamSetCommandListViewModel.CreateModelCommandViewModels();
         }
 

@@ -8,12 +8,15 @@ using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
+using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList;
+using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class StaffMemberGroupsViewModel : ViewModelBase
     {
-        public ShowDetailsDeleteGroupCommandListViewModel ShowDetailsGroupCommandListViewModel { get; }
+        public GroupCommandListViewModel ShowDetailsGroupCommandListViewModel { get; }
 
         private string _groupName = string.Empty;
         public string GroupName
@@ -34,7 +37,7 @@ namespace Theseus.WPF.Code.ViewModels
                                           IGetGroupsOfStaffMemberQuery getGroupsOfStaffMemberQuery,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
                                           ICreateGroupCommand createGroupCommand,
-                                          ShowDetailsDeleteGroupCommandListViewModel showDetailsGroupCommandListViewModel)
+                                          GroupCommandListViewModelFactory showDetailsGroupCommandListViewModel)
         {
             if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
                 throw new StaffMemberNotLoggedInException();
@@ -42,7 +45,7 @@ namespace Theseus.WPF.Code.ViewModels
             CreateGroup = new CreateGroupCommand(this, currentStaffMemberStore, createGroupCommand);
             LoadGroupsOfStaffMember(getGroupsOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, selectedGroupListStore);
 
-            ShowDetailsGroupCommandListViewModel = showDetailsGroupCommandListViewModel;
+            ShowDetailsGroupCommandListViewModel = showDetailsGroupCommandListViewModel.Create(GroupButtonCommand.ShowDetails, GroupButtonCommand.DeleteOrLeave, GroupInfo.None);
             ShowDetailsGroupCommandListViewModel.CreateModelCommandViewModels();
         }
 

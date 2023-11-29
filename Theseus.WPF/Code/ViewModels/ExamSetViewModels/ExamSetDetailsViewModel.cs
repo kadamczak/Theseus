@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using Theseus.Domain.Models.ExamSetRelated;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
@@ -12,19 +11,22 @@ using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.ExamSets;
 using Theseus.WPF.Code.Stores.Mazes;
+using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList;
+using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class ExamSetDetailsViewModel : ViewModelBase
     {
-        public ShowDetailsMazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
+        public MazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
         public ICommand GoBack { get; }
 
         public ExamSetDetailsViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
                                        SelectedModelDetailsStore<ExamSet> examSetDetailsStore,
                                        IGetMazesWithSolutionOfExamSetQuery getAllMazesOfExamSetQuery,
                                        ICurrentStaffMemberStore currentStaffMemberStore,
-                                       ShowDetailsMazeCommandListViewModel showDetailsMazeCommandListViewModel,
+                                       MazeCommandListViewModelFactory showDetailsMazeCommandListViewModel,
                                        MazeReturnServiceStore mazeReturnServiceStore,
                                        NavigationStore navigationStore,
                                        Func<ExamSetDetailsViewModel> viewModelGenerator,
@@ -37,7 +39,7 @@ namespace Theseus.WPF.Code.ViewModels
             mazeReturnServiceStore.MazeReturnNavigationService = new NavigationService<ViewModelBase>(navigationStore, viewModelGenerator);
             GoBack = new NavigateCommand<ViewModelBase>(examSetReturnServiceStore.ExamSetNavigationService);
 
-            this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel;
+            this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel.Create(MazeButtonCommand.ShowDetails, MazeButtonCommand.None, MazeInfo.None);
             this.ShowDetailsMazeCommandViewModel.CreateModelCommandViewModels();
         }
 

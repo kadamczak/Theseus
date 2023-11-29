@@ -8,21 +8,15 @@ namespace Theseus.Domain.Models.MazeRelated.MazeGenerators
     {
         public MazeStructureGeneratorBase Create(MazeStructureGenAlgorithm algorithm)
         {
-            switch (algorithm)
+            return algorithm switch
             {
-                case MazeStructureGenAlgorithm.Binary:
-                    return new BinaryTreeMazeStructureGenerator();
-                case MazeStructureGenAlgorithm.Sidewinder:
-                    return new SidewinderMazeStructureGenerator();
-                case MazeStructureGenAlgorithm.AldousBroder:
-                    return new AldousBroderMazeStructureGenerator();
-                case MazeStructureGenAlgorithm.HuntAndKill:
-                    return new HuntAndKillMazeStructureGenerator();
-                case MazeStructureGenAlgorithm.Kruskal:
-                    return new KruskalMazeStructureGenerator();
-                default:
-                    throw new NotImplementedException("Asked to generate a maze with algorithm that has not been implemented yet.");
-            }
+                MazeStructureGenAlgorithm.Binary => new BinaryTreeMazeStructureGenerator(),
+                MazeStructureGenAlgorithm.Sidewinder => new SidewinderMazeStructureGenerator(),
+                MazeStructureGenAlgorithm.AldousBroder => new AldousBroderMazeStructureGenerator(),
+                MazeStructureGenAlgorithm.HuntAndKill => new HuntAndKillMazeStructureGenerator(),
+                MazeStructureGenAlgorithm.Kruskal => new KruskalMazeStructureGenerator(),
+                _ => throw new NotImplementedException("Asked to generate a maze with algorithm that has not been implemented yet."),
+            };
         }
     }
 }

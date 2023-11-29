@@ -7,14 +7,17 @@ using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.ExamSets;
+using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList;
+using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
     public class BrowseSetsViewModel : ViewModelBase
     {
-        public ShowDetailsDeleteExamSetCommandListViewModel ShowDetailsDeleteExamSetCommandListViewModel { get; }
+        public ExamSetCommandListViewModel ShowDetailsDeleteExamSetCommandListViewModel { get; }
 
-        public BrowseSetsViewModel(ShowDetailsDeleteExamSetCommandListViewModel showDetailsDeleteExamSetCommandListViewModel,
+        public BrowseSetsViewModel(ExamSetCommandListViewModelFactory showDetailsDeleteExamSetCommandListViewModel,
                                    SelectedModelListStore<ExamSet> selectedExamSetListStore,
                                    IGetAllExamSetsOfStaffMemberQuery getAllExamSetsOfStaffMemberQuery,
                                    ICurrentStaffMemberStore currentStaffMemberStore,
@@ -28,7 +31,7 @@ namespace Theseus.WPF.Code.ViewModels
             LoadExamSetsOfStaffMember(getAllExamSetsOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, selectedExamSetListStore);
             examSetReturnServiceStore.ExamSetNavigationService = new NavigationService<ViewModelBase>(navigationStore, viewModelGenerator);
 
-            ShowDetailsDeleteExamSetCommandListViewModel = showDetailsDeleteExamSetCommandListViewModel;
+            ShowDetailsDeleteExamSetCommandListViewModel = showDetailsDeleteExamSetCommandListViewModel.Create(ExamSetButtonCommand.ShowDetails, ExamSetButtonCommand.Delete, ExamSetInfo.None);
             ShowDetailsDeleteExamSetCommandListViewModel.CreateModelCommandViewModels();
         }
 

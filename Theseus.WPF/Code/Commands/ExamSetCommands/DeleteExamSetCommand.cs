@@ -1,25 +1,25 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
     public class DeleteExamSetCommand : AsyncCommandBase
     {
-        private readonly ShowDetailsDeleteExamSetCommandListViewModel _commandListViewModel;
+        private readonly ObservableCollection<CommandViewModel<ExamSet>> _commandList;
         private readonly CommandViewModel<ExamSet> _examSetCommandViewModel;
         private readonly IDeleteExamSetCommand _removeExamSetCommand;
 
-        public DeleteExamSetCommand(ShowDetailsDeleteExamSetCommandListViewModel commandListViewModel,
+        public DeleteExamSetCommand(ObservableCollection<CommandViewModel<ExamSet>> commandList,
                                     CommandViewModel<ExamSet> examSetCommandViewModel,
                                     IDeleteExamSetCommand removeExamSetCommand)
         {
-            _commandListViewModel = commandListViewModel;
+            _commandList = commandList;
             _examSetCommandViewModel = examSetCommandViewModel;
             _removeExamSetCommand = removeExamSetCommand;
         }
@@ -47,7 +47,7 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
         private async Task DeleteExamSet(Guid examSetId)
         {
             await _removeExamSetCommand.Delete(examSetId);
-            _commandListViewModel.ActionableModels.Remove(_examSetCommandViewModel);
+            _commandList.Remove(_examSetCommandViewModel);
         }
     }
 }

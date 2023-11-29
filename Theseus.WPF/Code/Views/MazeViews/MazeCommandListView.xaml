@@ -68,9 +68,9 @@
                             <canvases:MazeWithSolutionCanvasView Grid.Row="0" Grid.Column="0" Width="400" Height="150"  Margin="0 10 0 10" x:Name="MazeCanvas" DataContext="{Binding Model}" Tag="{Binding MazeWithSolution.Id}" Loaded="MazesWithSolutionCanvasView_Loaded"/>
 
                             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" >
-                                <Button Style="{StaticResource Generic}" FontSize="15" Content="{Binding Command1Name}" Command="{Binding Command1}" HorizontalAlignment="Stretch" Height="40" />
+                                <Button Style="{StaticResource Generic}" FontSize="15" Content="{Binding Button1.CommandName}" Command="{Binding Button1.Command}" Visibility="{Binding Button1.Show, Converter={StaticResource BooleanVisibility}}" HorizontalAlignment="Stretch" Height="40" />
 
-                                <Button Style="{StaticResource Generic}" Margin="0 10 0 0" FontSize="15" Visibility="{Binding ShowCommand2, Converter={StaticResource BooleanVisibility}}" Content="{Binding Command2Name}" Command="{Binding Command2}"  HorizontalAlignment="Stretch" Padding="7 0" Height="40" />
+                                <Button Style="{StaticResource Generic}" Margin="0 10 0 0" FontSize="15" Visibility="{Binding Button2.Show, Converter={StaticResource BooleanVisibility}}" Content="{Binding Button2.CommandName}" Command="{Binding Button2.Command}"  HorizontalAlignment="Stretch" Padding="7 0" Height="40" />
                             </StackPanel>
 
                             <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="2" MaxWidth="260" Text="MAZE STATISTICS Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis."/>

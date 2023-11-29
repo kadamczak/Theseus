@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
@@ -6,24 +7,23 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores;
-using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
     public class RemoveStaffMemberFromGroupCommand : AsyncCommandBase
     {
-        private readonly RemoveStaffMemberCommandListViewModel _removeStaffMemberCommandListViewModel;
+        private readonly ObservableCollection<CommandViewModel<StaffMember>> _staffMemberCommandListl;
         private readonly CommandViewModel<StaffMember> _staffMemberCommandViewModel;
         private readonly IRemoveStaffMemberFromGroupCommand _removeStaffMemberFromGroupCommand;
         private readonly SelectedModelDetailsStore<Group> _selectedGroupDetailsStore;
 
-        public RemoveStaffMemberFromGroupCommand(RemoveStaffMemberCommandListViewModel removeStaffMemberCommandListViewModel,
+        public RemoveStaffMemberFromGroupCommand(ObservableCollection<CommandViewModel<StaffMember>> staffMemberCommandList,
                                                  CommandViewModel<StaffMember> staffMemberCommandViewModel,
                                                  IRemoveStaffMemberFromGroupCommand removeStaffMemberFromGroupCommand,
                                                  SelectedModelDetailsStore<Group> selectedGroupDetailsStore)
         {
-            _removeStaffMemberCommandListViewModel = removeStaffMemberCommandListViewModel;
+            _staffMemberCommandListl = staffMemberCommandList;
             _staffMemberCommandViewModel = staffMemberCommandViewModel;
             _removeStaffMemberFromGroupCommand = removeStaffMemberFromGroupCommand;
             _selectedGroupDetailsStore = selectedGroupDetailsStore;
@@ -41,7 +41,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
             {
                 Guid groupId = _selectedGroupDetailsStore.SelectedModel.Id;
                 await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_staffMemberCommandViewModel.Model, groupId);
-                _removeStaffMemberCommandListViewModel.ActionableModels.Remove(_staffMemberCommandViewModel);
+                _staffMemberCommandListl.Remove(_staffMemberCommandViewModel);
             }
         }
     }

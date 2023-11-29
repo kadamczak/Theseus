@@ -1,20 +1,21 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
     public class AddToExamSetCommand : CommandBase
     {
         private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeWithSolutionCommandViewModel;
-        private AddToSetMazeCommandListViewModel _addToSetMazeCommandListViewModel;
+        private MazesInExamSetStore _mazesInExamSetStore;
 
         public AddToExamSetCommand(CommandViewModel<MazeWithSolutionCanvasViewModel> mazeWithSolutionCommandViewModel,
-                                   AddToSetMazeCommandListViewModel addToSetMazeCommandListViewModel)
+                                   MazesInExamSetStore mazesInExamSetStore)
         {
             _mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;
-            _addToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel;
+            _mazesInExamSetStore = mazesInExamSetStore;
         }
 
         public override void Execute(object? parameter)
@@ -33,16 +34,16 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         private void DeselectMaze(MazeWithSolution mazeWithSolution)
         {
-            _addToSetMazeCommandListViewModel.SelectedMazes.Remove(mazeWithSolution);
+            _mazesInExamSetStore.SelectedMazes.Remove(mazeWithSolution);
             _mazeWithSolutionCommandViewModel.Selected = false;
-            _mazeWithSolutionCommandViewModel.Command1Name = "Add";
+            //_mazeWithSolutionCommandViewModel.Command1Name = "Add";
         }
 
         private void SelectMaze(MazeWithSolution mazeWithSolution)
         {
-            _addToSetMazeCommandListViewModel.SelectedMazes.Add(mazeWithSolution);
+            _mazesInExamSetStore.SelectedMazes.Add(mazeWithSolution);
             _mazeWithSolutionCommandViewModel.Selected = true;
-            _mazeWithSolutionCommandViewModel.Command1Name = "Remove";
+            //_mazeWithSolutionCommandViewModel.Command1Name = "Remove";
         }
     }
 }

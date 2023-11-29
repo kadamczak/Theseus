@@ -32,14 +32,12 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<PatientLoginViewModel>();
             services.AddTransient<PatientRegisterViewModel>();
             services.AddTransient<PatientDetailsViewModel>();
-            services.AddTransient<RemovePatientCommandListViewModel>();
 
             services.AddTransient<StaffMemberDetailsLoggedInViewModel>();
             services.AddTransient<StaffMemberDetailsNotLoggedInViewModel>();
             services.AddTransient<StaffMemberLoginRegisterViewModel>();
             services.AddTransient<StaffMemberLoginViewModel>();
             services.AddTransient<StaffMemberRegisterViewModel>();
-            services.AddTransient<RemoveStaffMemberCommandListViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -53,14 +51,12 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<PatientLoginViewModel>>((s) => () => s.GetRequiredService<PatientLoginViewModel>());
             services.AddSingleton<Func<PatientRegisterViewModel>>((s) => () => s.GetRequiredService<PatientRegisterViewModel>());
             services.AddSingleton<Func<PatientDetailsViewModel>>((s) => () => s.GetRequiredService<PatientDetailsViewModel>());
-            services.AddSingleton<Func<RemovePatientCommandListViewModel>>((s) => () => s.GetRequiredService<RemovePatientCommandListViewModel>());
 
             services.AddSingleton<Func<StaffMemberDetailsLoggedInViewModel>>((s) => () => s.GetRequiredService<StaffMemberDetailsLoggedInViewModel>());
             services.AddSingleton<Func<StaffMemberDetailsNotLoggedInViewModel>>((s) => () => s.GetRequiredService<StaffMemberDetailsNotLoggedInViewModel>());
             services.AddSingleton<Func<StaffMemberLoginRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginRegisterViewModel>());
             services.AddSingleton<Func<StaffMemberLoginViewModel>>((s) => () => s.GetRequiredService<StaffMemberLoginViewModel>());
             services.AddSingleton<Func<StaffMemberRegisterViewModel>>((s) => () => s.GetRequiredService<StaffMemberRegisterViewModel>());
-            services.AddSingleton<Func<RemoveStaffMemberCommandListViewModel>>((s) => () => s.GetRequiredService<RemoveStaffMemberCommandListViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -74,14 +70,12 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<PatientLoginViewModel>>();
             services.AddSingleton<NavigationService<PatientRegisterViewModel>>();
             services.AddSingleton<NavigationService<PatientDetailsViewModel>>();
-            services.AddSingleton<NavigationService<RemovePatientCommandListViewModel>>();
 
             services.AddSingleton<NavigationService<StaffMemberDetailsLoggedInViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberDetailsNotLoggedInViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberLoginRegisterViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberLoginViewModel>>();
             services.AddSingleton<NavigationService<StaffMemberRegisterViewModel>>();
-            services.AddSingleton<NavigationService<RemoveStaffMemberCommandListViewModel>>();
         }
     }
 }

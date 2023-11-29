@@ -23,11 +23,12 @@ namespace Theseus.WPF.Code.HostBuilders
 
                 services.AddSingleton<LastMazeGeneratorInputStore>();
                 services.AddSingleton<MazeReturnServiceStore>();
+                services.AddSingleton<MazesInExamSetStore>();
 
                 services.AddSingleton<ExamSetReturnServiceStore>();
+                services.AddSingleton<ExamSetsInGroupStore>();
 
                 services.AddSingleton<CurrentExamStore>();
-                services.AddSingleton<ExamSetsInGroupStore>();
 
                 services.AddSingleton<SelectedModelListStore<MazeWithSolutionCanvasViewModel>>();
                 services.AddSingleton<SelectedModelListStore<ExamSet>>();

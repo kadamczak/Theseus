@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -6,23 +7,23 @@ using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.MazeCommands
 {
     public class DeleteMazeCommand : AsyncCommandBase
     {
-        private readonly ShowDetailsDeleteMazeCommandListViewModel _mazeCommandListViewModel;
+        private readonly ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>> _collection;
         private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeCanvasViewModel;
         private readonly IDeleteMazeWithSolutionCommand _removeMazeCommand;
         private readonly IGetExamSetsWithMazeQuery _getExamSetsWithMazeQuery;
 
-        public DeleteMazeCommand(ShowDetailsDeleteMazeCommandListViewModel mazeCommandListViewModel,
+        public DeleteMazeCommand(ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>> collection,
                                  CommandViewModel<MazeWithSolutionCanvasViewModel> mazeCanvasViewModel,
                                  IDeleteMazeWithSolutionCommand removeMazeCommand,
                                  IGetExamSetsWithMazeQuery getExamSetsWithMazeQuery)
         {
-            _mazeCommandListViewModel = mazeCommandListViewModel;
+            _collection = collection;
             _mazeCanvasViewModel = mazeCanvasViewModel;
             _removeMazeCommand = removeMazeCommand;
             _getExamSetsWithMazeQuery = getExamSetsWithMazeQuery;
@@ -67,7 +68,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
         private async Task DeleteMaze(Guid mazeId)
         {
             await _removeMazeCommand.Remove(mazeId);
-            _mazeCommandListViewModel.ActionableModels.Remove(_mazeCanvasViewModel);
+            _collection.Remove(_mazeCanvasViewModel);
         }
     }
 }

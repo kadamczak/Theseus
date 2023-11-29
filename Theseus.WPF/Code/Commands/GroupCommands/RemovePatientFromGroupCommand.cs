@@ -1,24 +1,24 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.Bindings;
+using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
     public class RemovePatientFromGroupCommand : AsyncCommandBase
     {
-        private readonly RemovePatientCommandListViewModel _removePatientCommandListViewModel;
+        private readonly ObservableCollection<CommandViewModel<Patient>> _patientCommandList;
         private readonly CommandViewModel<Patient> _patientCommandViewModel;
         private readonly IRemovePatientFromGroupCommand _removePatientFromGroupCommand;
 
-        public RemovePatientFromGroupCommand(RemovePatientCommandListViewModel removePatientCommandListViewModel,
+        public RemovePatientFromGroupCommand(ObservableCollection<CommandViewModel<Patient>> patientCommandList,
                                              CommandViewModel<Patient> patientCommandViewModel,
                                              IRemovePatientFromGroupCommand removePatientFromGroupCommand)
         {
-            _removePatientCommandListViewModel = removePatientCommandListViewModel;
+            _patientCommandList = patientCommandList;
             _patientCommandViewModel = patientCommandViewModel;
             _removePatientFromGroupCommand = removePatientFromGroupCommand;
         }
@@ -45,7 +45,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
         private async Task RemovePatientFromGroup()
         {
             await _removePatientFromGroupCommand.RemoveFromGroup(_patientCommandViewModel.Model);
-            _removePatientCommandListViewModel.ActionableModels.Remove(_patientCommandViewModel);
+            _patientCommandList.Remove(_patientCommandViewModel);
         }
     }
 }
