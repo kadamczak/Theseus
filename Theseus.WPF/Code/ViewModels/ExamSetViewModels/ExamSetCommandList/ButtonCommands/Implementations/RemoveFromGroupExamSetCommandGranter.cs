@@ -4,6 +4,7 @@ using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
+using Theseus.Infrastructure.Queries.StaffMemberQueries;
 using Theseus.WPF.Code.Commands.GroupCommands;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -15,31 +16,33 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Butto
     {
         private readonly IRemoveExamSetFromGroupCommand _removeExamSetFromGroupCommand;
         private readonly SelectedModelDetailsStore<Group> _selectedGroupDetailsStore;
-
-        private readonly bool _currentStaffMemberCanRemoveExamSets = false;
+        private readonly IGetOwnerOfGroupQuery _getOwnerOfGroupQuery;
+        private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
 
         public RemoveFromGroupExamSetCommandGranter(IRemoveExamSetFromGroupCommand removeExamSetFromGroupCommand,
                                                     SelectedModelDetailsStore<Group> selectedGroupDetailsStore,
                                                     IGetOwnerOfGroupQuery getOwnerOfGroupQuery,
-                                                     ICurrentStaffMemberStore currentStaffMemberStore)
+                                                    ICurrentStaffMemberStore currentStaffMemberStore)
         {
-            if (selectedGroupDetailsStore.SelectedModel is null)
-                return;
-
             _removeExamSetFromGroupCommand = removeExamSetFromGroupCommand;
             _selectedGroupDetailsStore = selectedGroupDetailsStore;
-
-            Group currentGroup = selectedGroupDetailsStore.SelectedModel;
-            Guid _groupOwnerId = getOwnerOfGroupQuery.GetOwner(currentGroup.Id).Id;
-            _currentStaffMemberCanRemoveExamSets = currentStaffMemberStore.StaffMember.Id == _groupOwnerId;
+            _getOwnerOfGroupQuery = getOwnerOfGroupQuery;
+            _currentStaffMemberStore = currentStaffMemberStore;
         }
 
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<ExamSet>> collection,
                                                      CommandViewModel<ExamSet> commandViewModel)
         {
-            return _currentStaffMemberCanRemoveExamSets ?
+            return CurrentStaffMemberCanRemoveExamSets() ?
                 new ButtonViewModel(show: true, "Remove", new RemoveExamSetFromGroupCommand(collection, commandViewModel, _removeExamSetFromGroupCommand, _selectedGroupDetailsStore)) :
                 new ButtonViewModel(show: false);
+        }
+
+        private bool CurrentStaffMemberCanRemoveExamSets()
+        {
+            Group currentGroup = _selectedGroupDetailsStore.SelectedModel;
+            Guid _groupOwnerId = _getOwnerOfGroupQuery.GetOwner(currentGroup.Id).Id;
+            return _currentStaffMemberStore.StaffMember.Id == _groupOwnerId;
         }
     }
 }

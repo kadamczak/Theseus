@@ -65,13 +65,13 @@
 
                             <Label Grid.Row="0" Grid.Column="0" Content="{Binding Model.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Margin="30 0 0 0"/>
 
-                            <StackPanel Orientation="Vertical"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" >
+                            <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" >
                                 <Button Style="{StaticResource Generic}" FontSize="17" Visibility="{Binding Button1.Show, Converter={StaticResource BooleanVisibility}}" Content="{Binding Button1.CommandName}" Command="{Binding Button1.Command}" Padding="12 3" HorizontalAlignment="Stretch"/>
 
-                                <Button Style="{StaticResource Generic}" Margin="0 10 0 0" FontSize="17" Visibility="{Binding Button2.Show, Converter={StaticResource BooleanVisibility}}" Content="{Binding Button2.CommandName}" Command="{Binding Button2.Command}" Padding="12 3" HorizontalAlignment="Stretch" />
+                                <Button Style="{StaticResource Generic}" Margin="25 0 0 0" FontSize="17" Visibility="{Binding Button2.Show, Converter={StaticResource BooleanVisibility}}" Content="{Binding Button2.CommandName}" Command="{Binding Button2.Command}" Padding="12 3" HorizontalAlignment="Stretch" />
                             </StackPanel>
 
-                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="2" MaxWidth="260" Text="{Binding Info}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Left" Margin="40 0 0 0" TextWrapping="WrapWithOverflow" Grid.Row="0" FontSize="18" Grid.Column="2" MaxWidth="260" Text="{Binding Info}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

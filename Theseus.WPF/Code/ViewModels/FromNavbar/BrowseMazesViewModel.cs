@@ -31,7 +31,7 @@ namespace Theseus.WPF.Code.ViewModels
             LoadMazesOfStaffMember(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
             mazeReturnServiceStore.MazeReturnNavigationService = new NavigationService<ViewModelBase>(navigationStore, viewModelGenerator);
 
-            this.ShowDetailsMazeCommandViewModel = mazeCommandListViewModelFactory.Create(MazeButtonCommand.ShowDetails, MazeButtonCommand.Delete, MazeInfo.None);
+            this.ShowDetailsMazeCommandViewModel = mazeCommandListViewModelFactory.Create(MazeButtonCommand.ShowDetails, MazeButtonCommand.Delete, MazeInfo.GeneralInfo);
             this.ShowDetailsMazeCommandViewModel.CreateModelCommandViewModels();
         }
 

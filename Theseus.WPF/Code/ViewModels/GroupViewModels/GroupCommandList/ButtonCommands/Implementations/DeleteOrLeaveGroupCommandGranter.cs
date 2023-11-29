@@ -14,7 +14,6 @@ namespace Theseus.WPF.Code.ViewModels
     {
         private readonly IGetOwnerOfGroupQuery _getOwnerOfGroupQuery;
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;
-
         private readonly IRemoveStaffMemberFromGroupCommand _removeStaffMemberFromGroupCommand;
         private readonly IDeleteGroupCommand _deleteGroupCommand;
 

@@ -3,6 +3,7 @@
     public enum ExamSetInfo
     {
         None,
-        GeneralInfo
+        GeneralInfo,
+        OwnerInfo
     }
 }

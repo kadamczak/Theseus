@@ -45,7 +45,7 @@ namespace Theseus.WPF.Code.ViewModels
             CreateGroup = new CreateGroupCommand(this, currentStaffMemberStore, createGroupCommand);
             LoadGroupsOfStaffMember(getGroupsOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, selectedGroupListStore);
 
-            ShowDetailsGroupCommandListViewModel = showDetailsGroupCommandListViewModel.Create(GroupButtonCommand.ShowDetails, GroupButtonCommand.DeleteOrLeave, GroupInfo.None);
+            ShowDetailsGroupCommandListViewModel = showDetailsGroupCommandListViewModel.Create(GroupButtonCommand.ShowDetails, GroupButtonCommand.DeleteOrLeave, GroupInfo.GeneralInfo);
             ShowDetailsGroupCommandListViewModel.CreateModelCommandViewModels();
         }
 

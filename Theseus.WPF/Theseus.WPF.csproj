@@ -84,9 +84,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Code\ViewModels\GroupViewModels\GroupCommandList\Info\Implementations\" />
-    <Folder Include="Code\ViewModels\MazeViewModels\MazeCommandList\Info\Implementations\" />
-  </ItemGroup>
-
 </Project>

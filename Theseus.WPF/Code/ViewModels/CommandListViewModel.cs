@@ -52,7 +52,7 @@ namespace Theseus.WPF.Code.ViewModels
 
             actionableModel.Button1 = GrantCommand(actionableModel, _command1Type);
             actionableModel.Button2 = GrantCommand(actionableModel, _command2Type);
-            //actionableModel.Info = GrantInfo(actionableModel, _infoType);
+            actionableModel.Info = GrantInfo(actionableModel, _infoType);
 
             ActionableModels.Add(actionableModel);
         }

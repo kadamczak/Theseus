@@ -2,17 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
 using Theseus.WPF.Code.Commands.SettingsCommands;
 using Theseus.WPF.Code.HostBuilders;
+using Theseus.WPF.Code.HostBuilders.CommandListHostBuilders;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.Views.HelperClasses;
 
 namespace Theseus.WPF
 {
@@ -40,6 +39,10 @@ namespace Theseus.WPF
                 .AddFactories()
                 .AddConverters()
                 .AddServices()
+                .AddCommandListFactories()
+                .AddGranterFactories()
+                .AddCommandGranters()
+                .AddInfoGranters()
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<IPasswordHasher, PasswordHasher>();
