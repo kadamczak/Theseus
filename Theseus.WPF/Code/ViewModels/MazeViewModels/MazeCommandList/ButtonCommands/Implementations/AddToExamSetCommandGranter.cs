@@ -18,7 +18,7 @@ namespace Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.ButtonComma
                                                      CommandViewModel<MazeWithSolutionCanvasViewModel> commandViewModel)
         {
             return new ButtonViewModel(true,
-                                       "Add",
+                                       "Toggle",
                                        new AddToExamSetCommand(commandViewModel, _mazeInExamSetStore));
         }
     }

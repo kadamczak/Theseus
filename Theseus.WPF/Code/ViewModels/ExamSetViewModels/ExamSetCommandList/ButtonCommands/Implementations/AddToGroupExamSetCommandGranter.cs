@@ -18,20 +18,8 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Butto
 
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<ExamSet>> collection, CommandViewModel<ExamSet> commandViewModel)
         {
-            string buttonText = string.Empty;
-
-            if(IsSelected(commandViewModel.Model))
-            {
-                commandViewModel.Selected = true;
-                buttonText = "Deselect";
-            }
-            else
-            {
-                commandViewModel.Selected = false;
-                buttonText = "Select";
-            }
-
-            return new ButtonViewModel(true, buttonText, new AddExamSetToGroupCommand(commandViewModel, _examSetsInGroupStore));
+            commandViewModel.Selected = IsSelected(commandViewModel.Model);
+            return new ButtonViewModel(true, "Toggle", new AddExamSetToGroupCommand(commandViewModel, _examSetsInGroupStore));
         }
 
         private bool IsSelected(ExamSet examSet) => _examSetsInGroupStore.SelectedExamSets.Where(e => e.Id == examSet.Id).Any();
