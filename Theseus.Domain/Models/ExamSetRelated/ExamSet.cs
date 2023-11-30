@@ -10,10 +10,10 @@ namespace Theseus.Domain.Models.ExamSetRelated
         public string Name { get; set; } = default!;
 
         public List<ExamSetMazeIndex> ExamSetMazeIndexes { get; set; } = new List<ExamSetMazeIndex>();
-        public List<MazeWithSolution> MazesWithSolution
-        {
-            get { return ExamSetMazeIndexes.Select(t => t.MazeWithSolution).ToList(); }
-        }
+        //public List<MazeWithSolution> MazesWithSolution
+        //{
+        //    get { return ExamSetMazeIndexes.Select(t => t.MazeWithSolution).ToList(); }
+        //}
 
         public StaffMember StaffMember { get; set; } = default!;
         public List<Group> Groups { get; set; } = new List<Group>();

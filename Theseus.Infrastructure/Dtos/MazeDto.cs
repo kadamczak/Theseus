@@ -22,10 +22,10 @@ namespace Theseus.Infrastructure.Dtos
 
 
         public virtual ICollection<ExamSetDto_MazeDto> ExamSetDto_MazeDto { get; set; } = default!;
-        public virtual IEnumerable<ExamSetDto> ExamSetDtos
-        {
-            get { return ExamSetDto_MazeDto.Select(t => t.ExamSetDto); }
-        }
+        //public virtual IEnumerable<ExamSetDto> ExamSetDtos
+        //{
+        //    get { return ExamSetDto_MazeDto.Select(t => t.ExamSetDto); }
+        //}
 
 
         public MazeDto(Guid? id)

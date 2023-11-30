@@ -12,6 +12,7 @@ namespace Theseus.Infrastructure.DbContexts
         public DbSet<StaffMemberDto> StaffMembers { get; set; }
         public DbSet<PatientDto> Patients { get; set; }
         public DbSet<GroupDto> Groups { get; set; }
+        public DbSet<ExamSetDto_MazeDto> ExamSetDtos_MazeDtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,6 +70,7 @@ namespace Theseus.Infrastructure.DbContexts
             .HasMany(m => m.ExamSetDto_MazeDto)
             .WithOne(e => e.ExamSetDto)
             .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<MazeDto>()
                         .HasMany(m => m.ExamSetDto_MazeDto)
                         .WithOne(e => e.MazeDto)

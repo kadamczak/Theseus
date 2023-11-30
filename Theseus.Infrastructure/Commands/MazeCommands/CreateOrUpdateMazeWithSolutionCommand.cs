@@ -18,6 +18,7 @@ namespace Theseus.Infrastructure.Commands.MazeCommands
             {
                 MazeDto mazeDto = Mapper.Map<MazeDto>(maze);
                 mazeDto.Owner = Mapper.Map<StaffMemberDto>(maze.StaffMember);
+                mazeDto.ExamSetDto_MazeDto = new List<ExamSetDto_MazeDto>();
 
                 AttachRelatedEntities(mazeDto, context);
                 context.Mazes.Update(mazeDto);

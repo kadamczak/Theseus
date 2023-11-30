@@ -62,10 +62,10 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
         private List<ExamSetMazeIndex> CreateMazeIndexesList(ExamSet examSet)
         {
             List<ExamSetMazeIndex> mazeIndexes = new List<ExamSetMazeIndex>();
-            var mazes = _createSetManuallyViewModel.AddToSetMazeCommandListViewModel.SelectedModelListStore.ModelList.ToList();
+            var mazes = _mazesInExamSetStore.SelectedMazes;
             for (int i = 0; i < mazes.Count(); i++)
             {
-                mazeIndexes.Add(new ExamSetMazeIndex(Guid.NewGuid(), examSet, mazes[i].MazeWithSolution, i));
+                mazeIndexes.Add(new ExamSetMazeIndex(Guid.NewGuid(), examSet, mazes[i], i));
             }
             return mazeIndexes;
         }

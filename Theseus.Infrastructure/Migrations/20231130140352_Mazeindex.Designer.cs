@@ -12,8 +12,8 @@ using Theseus.Infrastructure.DbContexts;
 namespace Theseus.Infrastructure.Migrations
 {
     [DbContext(typeof(TheseusDbContext))]
-    [Migration("20231118145623_Groups")]
-    partial class Groups
+    [Migration("20231130140352_Mazeindex")]
+    partial class Mazeindex
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Theseus.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ExamSetDto_MazeDto", b =>
+            modelBuilder.Entity("ExamSetDtoMazeDto", b =>
                 {
                     b.Property<Guid>("ExamSetDtosId")
                         .HasColumnType("uniqueidentifier");
@@ -37,7 +37,7 @@ namespace Theseus.Infrastructure.Migrations
 
                     b.HasIndex("MazeDtosId");
 
-                    b.ToTable("ExamSetDto_MazeDto");
+                    b.ToTable("ExamSetDtoMazeDto");
                 });
 
             modelBuilder.Entity("ExamSet_Group", b =>
@@ -76,6 +76,10 @@ namespace Theseus.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -84,6 +88,30 @@ namespace Theseus.Infrastructure.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("ExamSets");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto_MazeDto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamSetDtoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("MazeDtoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamSetDtoId");
+
+                    b.HasIndex("MazeDtoId");
+
+                    b.ToTable("ExamSetDtos_MazeDtos");
                 });
 
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.GroupDto", b =>
@@ -96,7 +124,12 @@ namespace Theseus.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Groups");
                 });
@@ -159,7 +192,7 @@ namespace Theseus.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("GroupDtoId")
+                    b.Property<Guid?>("GroupDtoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProfessionType")
@@ -215,18 +248,18 @@ namespace Theseus.Infrastructure.Migrations
                     b.ToTable("StaffMembers");
                 });
 
-            modelBuilder.Entity("ExamSetDto_MazeDto", b =>
+            modelBuilder.Entity("ExamSetDtoMazeDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.ExamSetDto", null)
                         .WithMany()
                         .HasForeignKey("ExamSetDtosId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Theseus.Infrastructure.Dtos.MazeDto", null)
                         .WithMany()
                         .HasForeignKey("MazeDtosId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -271,6 +304,35 @@ namespace Theseus.Infrastructure.Migrations
                     b.Navigation("Owner");
                 });
 
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto_MazeDto", b =>
+                {
+                    b.HasOne("Theseus.Infrastructure.Dtos.ExamSetDto", "ExamSetDto")
+                        .WithMany("ExamSetDto_MazeDto")
+                        .HasForeignKey("ExamSetDtoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Theseus.Infrastructure.Dtos.MazeDto", "MazeDto")
+                        .WithMany("ExamSetDto_MazeDto")
+                        .HasForeignKey("MazeDtoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ExamSetDto");
+
+                    b.Navigation("MazeDto");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.GroupDto", b =>
+                {
+                    b.HasOne("Theseus.Infrastructure.Dtos.StaffMemberDto", "Owner")
+                        .WithMany("OwnedGroupDtos")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.MazeDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.StaffMemberDto", "Owner")
@@ -286,11 +348,14 @@ namespace Theseus.Infrastructure.Migrations
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.GroupDto", "GroupDto")
                         .WithMany("PatientDtos")
-                        .HasForeignKey("GroupDtoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GroupDtoId");
 
                     b.Navigation("GroupDto");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto", b =>
+                {
+                    b.Navigation("ExamSetDto_MazeDto");
                 });
 
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.GroupDto", b =>
@@ -298,11 +363,18 @@ namespace Theseus.Infrastructure.Migrations
                     b.Navigation("PatientDtos");
                 });
 
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.MazeDto", b =>
+                {
+                    b.Navigation("ExamSetDto_MazeDto");
+                });
+
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.StaffMemberDto", b =>
                 {
                     b.Navigation("ExamSetDtos");
 
                     b.Navigation("MazeDtos");
+
+                    b.Navigation("OwnedGroupDtos");
                 });
 #pragma warning restore 612, 618
         }

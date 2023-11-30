@@ -18,7 +18,7 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                IEnumerable<MazeDto> mazeDtos = context.Mazes.AsNoTracking().Where(m => m.ExamSetDtos.Where(e => e.Id == examSetId).Any());
+                IEnumerable<MazeDto> mazeDtos = context.Mazes.AsNoTracking().Where(m => m.ExamSetDto_MazeDto.Where(e => e.Id == examSetId).Any());
                 return MapMazesWithSolution(mazeDtos);
             }
         }

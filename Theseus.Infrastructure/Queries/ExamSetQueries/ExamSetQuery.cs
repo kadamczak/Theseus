@@ -14,6 +14,10 @@ namespace Theseus.Infrastructure.Queries.ExamSetQueries
         protected List<ExamSet> MapExamSets(IEnumerable<ExamSetDto> examSetDtos)
         {
             List<ExamSet> examSets = new List<ExamSet>();
+
+            if (examSetDtos is null)
+                return examSets;
+
             foreach (var examSet in examSetDtos)
             {
                 examSets.Add(MapExamSet(examSet));

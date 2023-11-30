@@ -19,6 +19,8 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
                 ExamSetDto examSetDto = new ExamSetDto();
                 Mapper.Map(examSet, examSetDto);
                 AttachRelatedEntities(examSetDto, context);
+
+                context.ExamSetDtos_MazeDtos.AddRange(examSetDto.ExamSetDto_MazeDto);
                 context.ExamSets.Add(examSetDto);
                 await context.SaveChangesAsync();
             }
