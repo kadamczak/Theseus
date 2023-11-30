@@ -7,7 +7,13 @@ namespace Theseus.Infrastructure.Dtos
         [Key]
         public Guid Id { get; set; } = default;
         public string Name { get; set; } = default!;
-        public virtual ICollection<MazeDto> MazeDtos { get; set; } = default!;
+
+        public virtual ICollection<ExamSetDto_MazeDto> ExamSetDto_MazeDto { get; set; } = default!;
+        public virtual IEnumerable<MazeDto> MazeDtos
+        {
+            get { return ExamSetDto_MazeDto.Select(t => t.MazeDto); }
+        }
+
         public virtual StaffMemberDto Owner { get; set; } = default!;
         public virtual ICollection<GroupDto> GroupDtos { get; set; } = default!;
 
@@ -16,12 +22,6 @@ namespace Theseus.Infrastructure.Dtos
         public ExamSetDto(Guid id)
         {
             Id = id;
-        }
-
-        public ExamSetDto(Guid id, ICollection<MazeDto> mazeDtos)
-        {
-            Id = id;
-            MazeDtos = mazeDtos;
         }
     }
 }

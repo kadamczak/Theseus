@@ -15,20 +15,20 @@ namespace Theseus.Infrastructure.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MazeDto>()
-                        .HasMany(m => m.ExamSetDtos)
-                        .WithMany(e => e.MazeDtos)
-                        .UsingEntity<Dictionary<string, object>>(
-                            "ExamSetDto_MazeDto",
-                            j => j
-                                .HasOne<ExamSetDto>()
-                                .WithMany()
-                                .OnDelete(DeleteBehavior.NoAction),
-                            j => j
-                                .HasOne<MazeDto>()
-                                .WithMany()
-                                .OnDelete(DeleteBehavior.NoAction)
-                        );
+            //modelBuilder.Entity<MazeDto>()
+            //            .HasMany(m => m.ExamSetDtos)
+            //            .WithMany(e => e.MazeDtos)
+            //            .UsingEntity<Dictionary<string, object>>(
+            //                "ExamSetDto_MazeDto",
+            //                j => j
+            //                    .HasOne<ExamSetDto>()
+            //                    .WithMany()
+            //                    .OnDelete(DeleteBehavior.NoAction),
+            //                j => j
+            //                    .HasOne<MazeDto>()
+            //                    .WithMany()
+            //                    .OnDelete(DeleteBehavior.NoAction)
+            //          );
 
             modelBuilder.Entity<StaffMemberDto>()
                         .HasMany(m => m.GroupDtos)
@@ -64,6 +64,15 @@ namespace Theseus.Infrastructure.DbContexts
                         .HasMany(m => m.OwnedGroupDtos)
                         .WithOne(e => e.Owner)
                         .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ExamSetDto>()
+            .HasMany(m => m.ExamSetDto_MazeDto)
+            .WithOne(e => e.ExamSetDto)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<MazeDto>()
+                        .HasMany(m => m.ExamSetDto_MazeDto)
+                        .WithOne(e => e.MazeDto)
+                        .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(modelBuilder);
         }

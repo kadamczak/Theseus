@@ -19,9 +19,15 @@ namespace Theseus.Infrastructure.Dtos
         public byte EndDirection { get; set; } = default!;
 
         public virtual StaffMemberDto Owner { get; set; } = default!;
-        public virtual ICollection<ExamSetDto> ExamSetDtos { get; set; } = default!;
 
-        
+
+        public virtual ICollection<ExamSetDto_MazeDto> ExamSetDto_MazeDto { get; set; } = default!;
+        public virtual IEnumerable<ExamSetDto> ExamSetDtos
+        {
+            get { return ExamSetDto_MazeDto.Select(t => t.ExamSetDto); }
+        }
+
+
         public MazeDto(Guid? id)
         {
             Id = id;

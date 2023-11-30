@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -46,14 +47,27 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            ExamSet examSet = new ExamSet(Guid.NewGuid(), _mazesInExamSetStore.SelectedMazes.ToList())
+            ExamSet examSet = new ExamSet(Guid.NewGuid())
             {
                 Name = _createSetManuallyViewModel.ExamSetName,
                 StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException()
             };
 
+            examSet.ExamSetMazeIndexes = CreateMazeIndexesList(examSet);
+
             await _createExamSetCommand.CreateExamSet(examSet);
             _createSetNavigationService.Navigate();
+        }
+
+        private List<ExamSetMazeIndex> CreateMazeIndexesList(ExamSet examSet)
+        {
+            List<ExamSetMazeIndex> mazeIndexes = new List<ExamSetMazeIndex>();
+            var mazes = _createSetManuallyViewModel.AddToSetMazeCommandListViewModel.SelectedModelListStore.ModelList.ToList();
+            for (int i = 0; i < mazes.Count(); i++)
+            {
+                mazeIndexes.Add(new ExamSetMazeIndex(Guid.NewGuid(), examSet, mazes[i].MazeWithSolution, i));
+            }
+            return mazeIndexes;
         }
 
         private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
