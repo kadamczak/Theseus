@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Theseus.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Mazeindex : Migration
+    public partial class ExamSetDtoMazeDtoCascade : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -175,12 +175,14 @@ namespace Theseus.Infrastructure.Migrations
                         name: "FK_ExamSetDtos_MazeDtos_ExamSets_ExamSetDtoId",
                         column: x => x.ExamSetDtoId,
                         principalTable: "ExamSets",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ExamSetDtos_MazeDtos_Mazes_MazeDtoId",
                         column: x => x.MazeDtoId,
                         principalTable: "Mazes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

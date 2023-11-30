@@ -12,8 +12,8 @@ using Theseus.Infrastructure.DbContexts;
 namespace Theseus.Infrastructure.Migrations
 {
     [DbContext(typeof(TheseusDbContext))]
-    [Migration("20231130140352_Mazeindex")]
-    partial class Mazeindex
+    [Migration("20231130152114_ExamSetDtoMazeDtoCascade")]
+    partial class ExamSetDtoMazeDtoCascade
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace Theseus.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ExamSetDtoMazeDto", b =>
-                {
-                    b.Property<Guid>("ExamSetDtosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MazeDtosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ExamSetDtosId", "MazeDtosId");
-
-                    b.HasIndex("MazeDtosId");
-
-                    b.ToTable("ExamSetDtoMazeDto");
-                });
 
             modelBuilder.Entity("ExamSet_Group", b =>
                 {
@@ -248,21 +233,6 @@ namespace Theseus.Infrastructure.Migrations
                     b.ToTable("StaffMembers");
                 });
 
-            modelBuilder.Entity("ExamSetDtoMazeDto", b =>
-                {
-                    b.HasOne("Theseus.Infrastructure.Dtos.ExamSetDto", null)
-                        .WithMany()
-                        .HasForeignKey("ExamSetDtosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Theseus.Infrastructure.Dtos.MazeDto", null)
-                        .WithMany()
-                        .HasForeignKey("MazeDtosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ExamSet_Group", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.ExamSetDto", null)
@@ -309,13 +279,13 @@ namespace Theseus.Infrastructure.Migrations
                     b.HasOne("Theseus.Infrastructure.Dtos.ExamSetDto", "ExamSetDto")
                         .WithMany("ExamSetDto_MazeDto")
                         .HasForeignKey("ExamSetDtoId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Theseus.Infrastructure.Dtos.MazeDto", "MazeDto")
                         .WithMany("ExamSetDto_MazeDto")
                         .HasForeignKey("MazeDtoId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ExamSetDto");

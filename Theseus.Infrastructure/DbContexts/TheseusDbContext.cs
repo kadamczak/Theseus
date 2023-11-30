@@ -69,12 +69,12 @@ namespace Theseus.Infrastructure.DbContexts
             modelBuilder.Entity<ExamSetDto>()
             .HasMany(m => m.ExamSetDto_MazeDto)
             .WithOne(e => e.ExamSetDto)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<MazeDto>()
                         .HasMany(m => m.ExamSetDto_MazeDto)
                         .WithOne(e => e.MazeDto)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
