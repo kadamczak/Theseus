@@ -2,7 +2,7 @@
 
 namespace Theseus.Domain.QueryInterfaces.MazeQueryInterfaces
 {
-    public interface IGetMazesWithSolutionOfExamSetQuery
+    public interface IGetOrderedMazesWithSolutionOfExamSetQuery
     {
         IEnumerable<MazeWithSolution> GetMazesWithSolution(Guid examSetId);
     }

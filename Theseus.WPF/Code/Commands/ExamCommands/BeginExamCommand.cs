@@ -11,12 +11,12 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
     {
         private readonly BeginTestViewModel _beginTestViewModel;
         private readonly CurrentExamStore _currentExamStore;
-        private readonly IGetMazesWithSolutionOfExamSetQuery _getMazesOfExamSetQuery;
+        private readonly IGetOrderedMazesWithSolutionOfExamSetQuery _getMazesOfExamSetQuery;
         private readonly NavigationService<ExamPageViewModel> _examPageNavigationService;
 
         public BeginExamCommand(BeginTestViewModel beginTestViewModel,
                                 CurrentExamStore currentExamStore,
-                                IGetMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
+                                IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
                                 NavigationService<ExamPageViewModel> examPageNavigationService)
         {
             _beginTestViewModel = beginTestViewModel;

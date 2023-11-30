@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.MazeQueries
 {
-    public class GetMazesWithSolutionOfExamSetQuery : MazeQuery, IGetMazesWithSolutionOfExamSetQuery
+    public class GetOrderedMazesWithSolutionOfExamSetQuery : MazeQuery, IGetOrderedMazesWithSolutionOfExamSetQuery
     {
-        public GetMazesWithSolutionOfExamSetQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        public GetOrderedMazesWithSolutionOfExamSetQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
         }
 
@@ -18,7 +16,7 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                IEnumerable<MazeDto> mazeDtos = context.Mazes.AsNoTracking().Where(m => m.ExamSetDto_MazeDto.Where(e => e.Id == examSetId).Any());
+                IEnumerable<MazeDto> mazeDtos = context.ExamSetDtos_MazeDtos.Where(j => j.ExamSetDto.Id == examSetId).OrderBy(j => j.Index).Select(j => j.MazeDto);
                 return MapMazesWithSolution(mazeDtos);
             }
         }

@@ -24,7 +24,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ExamSetDetailsViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
                                        SelectedModelDetailsStore<ExamSet> examSetDetailsStore,
-                                       IGetMazesWithSolutionOfExamSetQuery getAllMazesOfExamSetQuery,
+                                       IGetOrderedMazesWithSolutionOfExamSetQuery getAllMazesOfExamSetQuery,
                                        ICurrentStaffMemberStore currentStaffMemberStore,
                                        MazeCommandListViewModelFactory showDetailsMazeCommandListViewModel,
                                        MazeReturnServiceStore mazeReturnServiceStore,
@@ -43,7 +43,7 @@ namespace Theseus.WPF.Code.ViewModels
             this.ShowDetailsMazeCommandViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadMazesFromSelectedExamSet(IGetMazesWithSolutionOfExamSetQuery getAllMazesOfExamSetQuery,
+        private void LoadMazesFromSelectedExamSet(IGetOrderedMazesWithSolutionOfExamSetQuery getAllMazesOfExamSetQuery,
                                                   Guid examSetId,
                                                   SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore)
         {

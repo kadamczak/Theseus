@@ -39,7 +39,7 @@ namespace Theseus.WPF.Code.ViewModels
                                   ICurrentPatientStore currentPatientStore,
                                   IGetGroupByPatientQuery getGroupQuery,
                                   IGetExamSetsOfGroupQuery getExamSetsQuery,
-                                  IGetMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
+                                  IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
                                   NavigationService<ExamPageViewModel> examPageNavigationService)
         {
             if (!currentPatientStore.IsPatientLoggedIn)

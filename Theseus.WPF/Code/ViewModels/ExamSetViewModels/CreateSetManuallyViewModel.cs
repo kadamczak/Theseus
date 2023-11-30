@@ -50,7 +50,7 @@ namespace Theseus.WPF.Code.ViewModels
             LoadFullMazeListToStore(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
             this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, currentStaffMemberStore, mazesInExamSetStore, createSetNavigationService);
 
-            this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel.Create(MazeButtonCommand.AddToExamSet, MazeButtonCommand.None, MazeInfo.GeneralInfo);
+            this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel.Create(MazeButtonCommand.AddToExamSet, MazeButtonCommand.None, MazeInfo.None);
             this.AddToSetMazeCommandListViewModel.CreateModelCommandViewModels();
         }
 

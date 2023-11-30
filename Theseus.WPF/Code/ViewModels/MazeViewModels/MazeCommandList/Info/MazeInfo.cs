@@ -3,7 +3,6 @@
     public enum MazeInfo
     {
         None,
-        GeneralInfo,
-        IndexInExamSet
+        GeneralInfo
     }
 }

@@ -1,4 +1,6 @@
-﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
@@ -8,12 +10,15 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
     public class AddToExamSetCommand : CommandBase
     {
+        private readonly ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>> _mazeCommandList;
         private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeWithSolutionCommandViewModel;
         private MazesInExamSetStore _mazesInExamSetStore;
 
-        public AddToExamSetCommand(CommandViewModel<MazeWithSolutionCanvasViewModel> mazeWithSolutionCommandViewModel,
+        public AddToExamSetCommand(ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>> mazeCommandList,
+                                   CommandViewModel<MazeWithSolutionCanvasViewModel> mazeWithSolutionCommandViewModel,
                                    MazesInExamSetStore mazesInExamSetStore)
         {
+            _mazeCommandList = mazeCommandList;
             _mazeWithSolutionCommandViewModel = mazeWithSolutionCommandViewModel;
             _mazesInExamSetStore = mazesInExamSetStore;
         }
@@ -36,14 +41,25 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
         {
             _mazesInExamSetStore.SelectedMazes.Remove(mazeWithSolution);
             _mazeWithSolutionCommandViewModel.Selected = false;
-            //_mazeWithSolutionCommandViewModel.Command1Name = "Add";
+            _mazeWithSolutionCommandViewModel.Info = string.Empty;
+            UpdateDisplayedIndexes();
         }
 
         private void SelectMaze(MazeWithSolution mazeWithSolution)
         {
             _mazesInExamSetStore.SelectedMazes.Add(mazeWithSolution);
             _mazeWithSolutionCommandViewModel.Selected = true;
-            //_mazeWithSolutionCommandViewModel.Command1Name = "Remove";
+            UpdateDisplayedIndexes();
+        }
+
+        private void UpdateDisplayedIndexes()
+        {
+            for(int i = 0; i < _mazesInExamSetStore.SelectedMazes.Count; i++)
+            {
+                var selectedMaze = _mazesInExamSetStore.SelectedMazes[i];
+                var commandViewModel = _mazeCommandList.Where(m => m.Model.MazeWithSolution.Id == selectedMaze.Id).First();
+                commandViewModel.Info = "Place in exam: " + (i + 1);
+            }
         }
     }
 }

@@ -9,7 +9,16 @@ namespace Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel
         public ButtonViewModel Button1 { get; set; }
         public ButtonViewModel Button2 { get; set; }
 
-        public string Info { get; set; } = string.Empty;
+        private string _info = string.Empty;
+        public string Info
+        {
+            get => _info;
+            set
+            {
+                _info = value;
+                OnPropertyChanged(nameof(Info));
+            }
+        }
 
         private bool _selected = false;
         public bool Selected

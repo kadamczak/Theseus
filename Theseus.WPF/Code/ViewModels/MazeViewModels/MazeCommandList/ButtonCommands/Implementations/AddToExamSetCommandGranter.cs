@@ -19,7 +19,7 @@ namespace Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.ButtonComma
         {
             return new ButtonViewModel(true,
                                        "Toggle",
-                                       new AddToExamSetCommand(commandViewModel, _mazeInExamSetStore));
+                                       new AddToExamSetCommand(collection, commandViewModel, _mazeInExamSetStore));
         }
     }
 }

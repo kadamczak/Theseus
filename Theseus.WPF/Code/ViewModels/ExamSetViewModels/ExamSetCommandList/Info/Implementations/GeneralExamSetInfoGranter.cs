@@ -7,9 +7,9 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.
 {
     public class GeneralExamSetInfoGranter : InfoGranter<ExamSet>
     {
-        private readonly IGetMazesWithSolutionOfExamSetQuery _getMazes;
+        private readonly IGetOrderedMazesWithSolutionOfExamSetQuery _getMazes;
 
-        public GeneralExamSetInfoGranter(IGetMazesWithSolutionOfExamSetQuery getMazes)
+        public GeneralExamSetInfoGranter(IGetOrderedMazesWithSolutionOfExamSetQuery getMazes)
         {
             _getMazes = getMazes;
         }
