@@ -39,7 +39,7 @@ namespace Theseus.WPF.Code.ViewModels
             mazeReturnServiceStore.MazeReturnNavigationService = new NavigationService<ViewModelBase>(navigationStore, viewModelGenerator);
             GoBack = new NavigateCommand<ViewModelBase>(examSetReturnServiceStore.ExamSetNavigationService);
 
-            this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel.Create(MazeButtonCommand.ShowDetails, MazeButtonCommand.None, MazeInfo.None);
+            this.ShowDetailsMazeCommandViewModel = showDetailsMazeCommandListViewModel.Create(MazeButtonCommand.ShowDetails, MazeButtonCommand.None, MazeInfo.GeneralInfo);
             this.ShowDetailsMazeCommandViewModel.CreateModelCommandViewModels();
         }
 

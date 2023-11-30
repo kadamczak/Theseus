@@ -42,7 +42,7 @@ namespace Theseus.WPF.Code.ViewModels
             SaveExamSetsInGroup = new SaveExamSetsInGroupCommand(changeExamSetsOfUserInGroupCommand, currentStaffMemberStore, selectedGroupStore, examSetsInGroupStore, groupDetailsNavigationService);
             GoBack = new NavigateCommand<GroupDetailsViewModel>(groupDetailsNavigationService);
 
-            AddToGroupExamSetCommandListViewModel = addToGroupExamSetCommandListViewModel.Create(ExamSetButtonCommand.ShowDetails, ExamSetButtonCommand.AddToGroup, ExamSetInfo.None);
+            AddToGroupExamSetCommandListViewModel = addToGroupExamSetCommandListViewModel.Create(ExamSetButtonCommand.ShowDetails, ExamSetButtonCommand.AddToGroup, ExamSetInfo.GeneralInfo);
             AddToGroupExamSetCommandListViewModel.CreateModelCommandViewModels();
         }
 

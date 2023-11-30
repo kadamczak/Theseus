@@ -10,14 +10,17 @@ namespace Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info.Impl
 {
     public class GeneralGroupInfoGranter : InfoGranter<Group>
     {
+        private readonly IGetOwnerOfGroupQuery _getOwnerOfGroupQuery;
         private readonly IGetStaffMembersOfGroupQuery _getStaffMembersOfGroupQuery;
         private readonly IGetPatientsOfGroupQuery _getPatientsOfGroupQuery;
         private readonly IGetExamSetsOfGroupQuery _getExamSetsOfGroupQuery;
 
-        public GeneralGroupInfoGranter(IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
+        public GeneralGroupInfoGranter(IGetOwnerOfGroupQuery getOwnerOfGroupQuery,
+                                       IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
                                        IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
                                        IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery)
         {
+            _getOwnerOfGroupQuery = getOwnerOfGroupQuery;
             _getStaffMembersOfGroupQuery = getStaffMembersOfGroupQuery;
             _getPatientsOfGroupQuery = getPatientsOfGroupQuery;
             _getExamSetsOfGroupQuery = getExamSetsOfGroupQuery;
@@ -27,14 +30,16 @@ namespace Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info.Impl
         {
             Guid groupId = commandViewModel.Model.Id;
 
+            string ownerName = _getOwnerOfGroupQuery.GetOwner(groupId).Username;
             int numberOfStaffMembers = _getStaffMembersOfGroupQuery.GetStaffMembers(groupId).Count();
             int numberOfPatients = _getPatientsOfGroupQuery.GetPatients(groupId).Count();
             int numberOfExamSets = _getExamSetsOfGroupQuery.GetExamSets(groupId).Count();
 
-            string[] infoParts = new string[3];
-            infoParts[0] = $"Amount of staff members: {numberOfStaffMembers}";
-            infoParts[1] = $"Amount of patients: {numberOfPatients}";
-            infoParts[2] = $"Amount of exam sets: {numberOfExamSets}";
+            string[] infoParts = new string[4];
+            infoParts[0] = $"Owner: {ownerName}";
+            infoParts[1] = $"Amount of staff members: {numberOfStaffMembers}";
+            infoParts[2] = $"Amount of patients: {numberOfPatients}";
+            infoParts[3] = $"Amount of exam sets: {numberOfExamSets}";
 
             return String.Join("\n", infoParts);
         }

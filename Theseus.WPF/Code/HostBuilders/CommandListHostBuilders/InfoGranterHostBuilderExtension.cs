@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.Info.Implementations;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList.Info.Implementations;
 using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.Implementations;
 using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info.Implementations;
 using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info.Implementations;
@@ -21,6 +23,10 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
 
                 services.AddTransient<EmptyGroupInfoGranter>();
                 services.AddTransient<GeneralGroupInfoGranter>();
+
+                services.AddTransient<EmptyStaffMemberInfoGranter>();
+
+                services.AddTransient<EmptyPatientInfoGranter>();
             });
 
             return hostBuilder;

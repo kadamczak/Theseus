@@ -1,15 +1,23 @@
-﻿using Theseus.Domain.Models.ExamSetRelated;
+﻿using System;
+using Theseus.Domain.Models.ExamSetRelated;
+using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.Implementations
 {
     public class OwnerExamSetInfoGranter : InfoGranter<ExamSet>
     {
-        //private readonly IGET
+        private readonly IGetOwnerOfExamSetQuery _getOwnerQuery;
+
+        public OwnerExamSetInfoGranter(IGetOwnerOfExamSetQuery getOwnerQuery)
+        {
+            _getOwnerQuery = getOwnerQuery;
+        }
 
         public override string GrantInfo(CommandViewModel<ExamSet> commandViewModel)
         {
-            return string.Empty;
+            Guid examSetId = commandViewModel.Model.Id;
+            return "Owner: " + _getOwnerQuery.GetOwner(examSetId).Username;
         }
     }
 }
