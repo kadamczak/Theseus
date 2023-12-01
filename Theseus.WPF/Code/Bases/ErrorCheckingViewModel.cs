@@ -34,5 +34,11 @@ namespace Theseus.WPF.Code.Bases
             _propertyNameToErrorsDictionary.Remove(propertyName);
             OnErrorsChanged(propertyName);
         }
+
+        protected void ClearError(string propertyName, string errorMessage)
+        {
+            _propertyNameToErrorsDictionary.GetValueOrDefault(propertyName)?.Remove(errorMessage);
+            OnErrorsChanged(propertyName);
+        }
     }
 }
