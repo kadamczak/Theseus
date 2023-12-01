@@ -24,21 +24,21 @@ namespace Theseus.WPF.Code.HostBuilders
 
         private static void AddViewModels(IServiceCollection services)
         {
-            services.AddTransient<SetGeneratorViewModel>();
+            services.AddTransient<ExamSetGeneratorViewModel>();
             services.AddTransient<CreateSetManuallyViewModel>();
             services.AddTransient<ExamSetDetailsViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
         {
-            services.AddSingleton<Func<SetGeneratorViewModel>>((s) => () => s.GetRequiredService<SetGeneratorViewModel>());
+            services.AddSingleton<Func<ExamSetGeneratorViewModel>>((s) => () => s.GetRequiredService<ExamSetGeneratorViewModel>());
             services.AddSingleton<Func<CreateSetManuallyViewModel>>((s) => () => s.GetRequiredService<CreateSetManuallyViewModel>());
             services.AddSingleton<Func<ExamSetDetailsViewModel>>((s) => () => s.GetRequiredService<ExamSetDetailsViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
         {
-            services.AddSingleton<NavigationService<SetGeneratorViewModel>>();
+            services.AddSingleton<NavigationService<ExamSetGeneratorViewModel>>();
             services.AddSingleton<NavigationService<CreateSetManuallyViewModel>>();
             services.AddSingleton<NavigationService<ExamSetDetailsViewModel>>();
         }

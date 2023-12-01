@@ -2,14 +2,14 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.ExamSetRelated.Enums;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Commands.ExamSetCommands;
 using Theseus.WPF.Code.ViewModels.Bindings.ExamSetBindings;
 
 namespace Theseus.WPF.Code.ViewModels.SetViewModels
 {
-    public class SetGeneratorViewModel : ErrorCheckingViewModel
+    public class ExamSetGeneratorViewModel : ErrorCheckingViewModel
     {
         public ObservableCollection<ExamSetDifficultyViewModel> ExamSetDifficulties { get; } = new ObservableCollection<ExamSetDifficultyViewModel>(){
             new ExamSetDifficultyViewModel("Easier", ExamSetDifficulty.Easy),
@@ -115,7 +115,7 @@ namespace Theseus.WPF.Code.ViewModels.SetViewModels
             }
         }
 
-        private readonly int MinMazeAmount = 1;
+        private readonly int MinMazeAmount = 3;
         private readonly int MaxMazeAmount = 30;
 
         private readonly int MinMazeDimension = 2;
@@ -143,9 +143,10 @@ namespace Theseus.WPF.Code.ViewModels.SetViewModels
 
         public ICommand Generate { get; }
 
-        public SetGeneratorViewModel()
+        public ExamSetGeneratorViewModel()
         {
             SetStartSelection();
+            Generate = new GenerateExamSetCommand(this);
 
             PropertyChanged += HandlePropertyChange;
         }

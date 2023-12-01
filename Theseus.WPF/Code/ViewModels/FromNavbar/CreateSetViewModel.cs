@@ -9,10 +9,10 @@ namespace Theseus.WPF.Code.ViewModels
 {
     public class CreateSetViewModel : ViewModelBase
     {
-        public SetGeneratorViewModel SetGeneratorViewModel { get; }
+        public ExamSetGeneratorViewModel SetGeneratorViewModel { get; }
         public ICommand NavigateToCreateSetManually { get; }
 
-        public CreateSetViewModel(SetGeneratorViewModel setGeneratorViewModel,
+        public CreateSetViewModel(ExamSetGeneratorViewModel setGeneratorViewModel,
                                   MazesInExamSetStore mazesInExamSetStore,
                                   NavigationService<CreateSetManuallyViewModel> createSetManuallyNavigationService)
         {
