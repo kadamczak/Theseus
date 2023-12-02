@@ -2,7 +2,7 @@
 {
     public enum MazeSolutionGenAlgorithm
     {
-        Dijkstra,
-        RandomBorderCells
+        Dijkstra = 0,
+        RandomBorderCells = 1
     }
 }

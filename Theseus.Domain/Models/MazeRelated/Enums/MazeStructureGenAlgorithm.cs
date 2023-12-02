@@ -2,10 +2,10 @@
 {
     public enum MazeStructureGenAlgorithm
     {
-        Binary,
-        Sidewinder,
-        AldousBroder,
-        HuntAndKill,
-        Kruskal
+        AldousBroder = 0,
+        HuntAndKill = 1,
+        Kruskal = 2,
+        Binary = 4,
+        Sidewinder = 3,
     }
 }

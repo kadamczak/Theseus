@@ -17,6 +17,11 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 
         public MazeWithSolution() { }
 
+        public MazeWithSolution(Guid id)
+        {
+            Id = id;
+        }
+
         public MazeWithSolution(Maze grid, Guid? id = null)
         {
             Id = id;

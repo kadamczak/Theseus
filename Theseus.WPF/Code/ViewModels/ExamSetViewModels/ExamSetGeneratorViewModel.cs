@@ -2,9 +2,13 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.ExamSetRelated.Enums;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
+using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels.Bindings.ExamSetBindings;
 
 namespace Theseus.WPF.Code.ViewModels.SetViewModels
@@ -121,7 +125,7 @@ namespace Theseus.WPF.Code.ViewModels.SetViewModels
         private readonly int MinMazeDimension = 2;
         private readonly int MaxMazeDimension = 50;
 
-        private readonly string EndingValueTooSmallMessage = "Ending value cannot be smaller than ending value.";
+        private readonly string EndingValueTooSmallMessage = "Ending value cannot be smaller than beginning value.";
 
         private bool HasValueInRange(int value, int min, int max) => value >= min && value <= max;
 
@@ -143,10 +147,13 @@ namespace Theseus.WPF.Code.ViewModels.SetViewModels
 
         public ICommand Generate { get; }
 
-        public ExamSetGeneratorViewModel()
+        public ExamSetGeneratorViewModel(ExamSetCreator examSetCreator,
+                                         ICurrentStaffMemberStore currentStaffMemberStore,
+                                         SelectedModelDetailsStore<ExamSet> examSetDetailsStore,
+                                         NavigationService<ExamSetDetailsViewModel> examSetDetailNavigationService)
         {
             SetStartSelection();
-            Generate = new GenerateExamSetCommand(this);
+            Generate = new GenerateExamSetCommand(this, examSetCreator, currentStaffMemberStore, examSetDetailsStore, examSetDetailNavigationService);
 
             PropertyChanged += HandlePropertyChange;
         }
