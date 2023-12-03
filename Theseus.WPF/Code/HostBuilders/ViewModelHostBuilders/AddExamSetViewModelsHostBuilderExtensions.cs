@@ -3,7 +3,6 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
-using Theseus.WPF.Code.ViewModels.SetViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
@@ -27,6 +26,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddTransient<ExamSetGeneratorViewModel>();
             services.AddTransient<CreateSetManuallyViewModel>();
             services.AddTransient<ExamSetDetailsViewModel>();
+            services.AddTransient<ExamSetGeneratorResultViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -34,6 +34,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<Func<ExamSetGeneratorViewModel>>((s) => () => s.GetRequiredService<ExamSetGeneratorViewModel>());
             services.AddSingleton<Func<CreateSetManuallyViewModel>>((s) => () => s.GetRequiredService<CreateSetManuallyViewModel>());
             services.AddSingleton<Func<ExamSetDetailsViewModel>>((s) => () => s.GetRequiredService<ExamSetDetailsViewModel>());
+            services.AddSingleton<Func<ExamSetGeneratorResultViewModel>>((s) => () => s.GetRequiredService<ExamSetGeneratorResultViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -41,6 +42,7 @@ namespace Theseus.WPF.Code.HostBuilders
             services.AddSingleton<NavigationService<ExamSetGeneratorViewModel>>();
             services.AddSingleton<NavigationService<CreateSetManuallyViewModel>>();
             services.AddSingleton<NavigationService<ExamSetDetailsViewModel>>();
+            services.AddSingleton<NavigationService<ExamSetGeneratorResultViewModel>>();
         }
     }
 }

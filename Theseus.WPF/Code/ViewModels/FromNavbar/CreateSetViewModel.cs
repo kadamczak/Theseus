@@ -3,7 +3,6 @@ using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Mazes;
-using Theseus.WPF.Code.ViewModels.SetViewModels;
 
 namespace Theseus.WPF.Code.ViewModels
 {

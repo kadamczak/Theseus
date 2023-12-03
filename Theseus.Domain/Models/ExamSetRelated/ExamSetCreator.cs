@@ -32,16 +32,16 @@ namespace Theseus.Domain.Models.ExamSetRelated
 
         private readonly Dictionary<int, int[]> _structureAlgorithmClassProportions = new Dictionary<int, int[]>()
         {
-            [0] = new int[3] { 1, 1, 1 },
+            [0] = new int[3] { 1, 0, 1 },
             [1] = new int[3] { 1, 1, 1 },
-            [2] = new int[3] { 1, 1, 1 },
+            [2] = new int[3] { 1, 2, 1 },
         };
 
         private readonly Dictionary<int, int[]> _solutionAlgorithmClassProportions = new Dictionary<int, int[]>()
         {
-            [0] = new int[2] { 1, 2 },
-            [1] = new int[2] { 1, 1 },
-            [2] = new int[2] { 2, 1 },
+            [0] = new int[1] { 1 },
+            [1] = new int[1] { 1 },
+            [2] = new int[1] { 1 },
         };
 
         private record MazeParameter
@@ -88,9 +88,11 @@ namespace Theseus.Domain.Models.ExamSetRelated
         private List<MazeParameter> GenerateMazeParameters(int[] segmentLengths, int beginningMaxDimension, int endingMaxDimension, Random rnd)
         {
             var mazeShapes = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _mazeShapeClassProportions).Cast<MazeShape>();
-            var structureAlgorithms = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _structureAlgorithmClassProportions).Cast<MazeStructureGenAlgorithm>();
-            var solutionAlgorithms = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _solutionAlgorithmClassProportions).Cast<MazeSolutionGenAlgorithm>(); ;
+            var structureAlgorithms = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _structureAlgorithmClassProportions).Cast<MazeStructureGenAlgorithm>().ToList();
+            var solutionAlgorithms = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _solutionAlgorithmClassProportions).Cast<MazeSolutionGenAlgorithm>();
             var mazeDimensions = CreateMazeDimensionList(mazeShapes, beginningMaxDimension, endingMaxDimension, rnd);
+
+            structureAlgorithms[structureAlgorithms.Count() - 1] = MazeStructureGenAlgorithm.HuntAndKill;
 
             List<MazeParameter> mazeParameters = new List<MazeParameter>();
             for (int i = 0; i < mazeDimensions.Count; i++)

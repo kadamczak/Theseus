@@ -32,30 +32,33 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private MazeWithSolutionCanvasViewModel GetDataContext() => (MazeWithSolutionCanvasViewModel)this.DataContext;
 
-        public void DrawScaledMazeWithVisibleSolutionPath(float minCellSize, bool centerMaze = true)
+        public void DrawScaledMazeWithVisibleSolutionPath(float minCellSize, bool centerMaze = true, bool drawArrows = true)
         {
             float cellSize = CalculateCellSize(minCellSize);
-            DrawMazeWithVisibleSolutionPath(cellSize, centerMaze);
+            DrawMazeWithVisibleSolutionPath(cellSize, centerMaze, drawArrows);
         }
 
-        public void DrawScaledMaze(float minCellSize, bool centerMaze = true)
+        public void DrawScaledMaze(float minCellSize, bool centerMaze = true, bool drawArrows = true)
         {
             float cellSize = CalculateCellSize(minCellSize);
-            DrawMaze(cellSize, centerMaze);
+            DrawMaze(cellSize, centerMaze, drawArrows);
         }
 
-        public void DrawMazeWithVisibleSolutionPath(float cellSize, bool centerMaze = true)
+        public void DrawMazeWithVisibleSolutionPath(float cellSize, bool centerMaze = true, bool drawArrows = true)
         {
-            DrawMaze(cellSize, centerMaze);
+            DrawMaze(cellSize, centerMaze, drawArrows);
             _solutionCanvasView.DrawSolutionPath(cellSize);
         }
 
-        public void DrawMaze(float cellSize, bool centerMaze = true)
+        public void DrawMaze(float cellSize, bool centerMaze = true, bool drawArrows = true)
         {
             _mazeCanvasView.DrawMaze(cellSize);
             RemoveMazeEntryWalls();
             _solutionCanvasView.Clear();
+
+            if(drawArrows)
             _solutionCanvasView.DrawEntryArrows(cellSize);
+
             this.Margin = (centerMaze) ? CalculateCenterMargin(cellSize) : new Thickness(0);
         }
 

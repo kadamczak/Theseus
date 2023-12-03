@@ -11,7 +11,7 @@ using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels.Bindings.ExamSetBindings;
 
-namespace Theseus.WPF.Code.ViewModels.SetViewModels
+namespace Theseus.WPF.Code.ViewModels
 {
     public class ExamSetGeneratorViewModel : ErrorCheckingViewModel
     {
@@ -57,7 +57,7 @@ namespace Theseus.WPF.Code.ViewModels.SetViewModels
             }
         }
 
-        private string _beginningMaxMazeDimension = "5";
+        private string _beginningMaxMazeDimension = "8";
         public string BeginningMaxMazeDimension
         {
             get => _beginningMaxMazeDimension;
@@ -129,8 +129,8 @@ namespace Theseus.WPF.Code.ViewModels.SetViewModels
 
         private bool HasValueInRange(int value, int min, int max) => value >= min && value <= max;
 
-        private readonly int[] _beginningMaxMazeDimensions = new int[3] { 3, 5, 10 };
-        private readonly int[] _endingMaxMazeDimensions = new int[3] { 15, 25, 35 };
+        private readonly int[] _beginningMaxMazeDimensions = new int[3] { 8, 8, 12 };
+        private readonly int[] _endingMaxMazeDimensions = new int[3] { 20, 25, 35 };
 
         private bool _customDimensionsEnabled = false;
         public bool CustomDimensionsEnabled
@@ -150,10 +150,10 @@ namespace Theseus.WPF.Code.ViewModels.SetViewModels
         public ExamSetGeneratorViewModel(ExamSetCreator examSetCreator,
                                          ICurrentStaffMemberStore currentStaffMemberStore,
                                          SelectedModelDetailsStore<ExamSet> examSetDetailsStore,
-                                         NavigationService<ExamSetDetailsViewModel> examSetDetailNavigationService)
+                                         NavigationService<ExamSetGeneratorResultViewModel> examSetResultNavigationService)
         {
             SetStartSelection();
-            Generate = new GenerateExamSetCommand(this, examSetCreator, currentStaffMemberStore, examSetDetailsStore, examSetDetailNavigationService);
+            Generate = new GenerateExamSetCommand(this, examSetCreator, currentStaffMemberStore, examSetDetailsStore, examSetResultNavigationService);
 
             PropertyChanged += HandlePropertyChange;
         }
