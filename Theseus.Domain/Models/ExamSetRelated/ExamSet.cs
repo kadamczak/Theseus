@@ -1,5 +1,5 @@
-﻿using Theseus.Domain.Models.GroupRelated;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+﻿using Theseus.Domain.Models.ExamRelated;
+using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Domain.Models.ExamSetRelated
@@ -10,13 +10,10 @@ namespace Theseus.Domain.Models.ExamSetRelated
         public string Name { get; set; } = default!;
 
         public List<ExamSetMazeIndex> ExamSetMazeIndexes { get; set; } = new List<ExamSetMazeIndex>();
-        //public List<MazeWithSolution> MazesWithSolution
-        //{
-        //    get { return ExamSetMazeIndexes.Select(t => t.MazeWithSolution).ToList(); }
-        //}
 
         public StaffMember StaffMember { get; set; } = default!;
         public List<Group> Groups { get; set; } = new List<Group>();
+        public List<Exam> Exams { get; set; } = new List<Exam>();
 
         public ExamSet() { }
 
