@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Theseus.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ExamSetDtoMazeDtoCascade : Migration
+    public partial class Exams : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -185,6 +185,83 @@ namespace Theseus.Infrastructure.Migrations
                         onDelete: ReferentialAction.NoAction);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Exams",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExamSetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Exams_ExamSets_ExamSetId",
+                        column: x => x.ExamSetId,
+                        principalTable: "ExamSets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Exams_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExamStages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
+                    Completed = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExamStages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExamStages_Exams_ExamId",
+                        column: x => x.ExamId,
+                        principalTable: "Exams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExamSteps",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
+                    StepTaken = table.Column<int>(type: "int", nullable: false),
+                    TimeBeforeStep = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExamSteps", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExamSteps_ExamStages_StageId",
+                        column: x => x.StageId,
+                        principalTable: "ExamStages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Exams_ExamSetId",
+                table: "Exams",
+                column: "ExamSetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Exams_PatientId",
+                table: "Exams",
+                column: "PatientId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_ExamSet_Group_GroupDtosId",
                 table: "ExamSet_Group",
@@ -204,6 +281,16 @@ namespace Theseus.Infrastructure.Migrations
                 name: "IX_ExamSets_OwnerId",
                 table: "ExamSets",
                 column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExamStages_ExamId",
+                table: "ExamStages",
+                column: "ExamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExamSteps_StageId",
+                table: "ExamSteps",
+                column: "StageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_OwnerId",
@@ -236,16 +323,25 @@ namespace Theseus.Infrastructure.Migrations
                 name: "ExamSetDtos_MazeDtos");
 
             migrationBuilder.DropTable(
-                name: "Patients");
+                name: "ExamSteps");
 
             migrationBuilder.DropTable(
                 name: "StaffMember_Group");
 
             migrationBuilder.DropTable(
+                name: "Mazes");
+
+            migrationBuilder.DropTable(
+                name: "ExamStages");
+
+            migrationBuilder.DropTable(
+                name: "Exams");
+
+            migrationBuilder.DropTable(
                 name: "ExamSets");
 
             migrationBuilder.DropTable(
-                name: "Mazes");
+                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "Groups");

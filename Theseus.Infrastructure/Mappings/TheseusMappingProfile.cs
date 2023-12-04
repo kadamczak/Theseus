@@ -5,6 +5,7 @@ using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.Dtos;
 using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 using Theseus.Domain.Models.GroupRelated;
+using Theseus.Domain.Models.ExamRelated;
 
 namespace Theseus.Infrastructure.Mappings
 {
@@ -26,8 +27,6 @@ namespace Theseus.Infrastructure.Mappings
                 .ForMember(p => p.ExamSetDto, c => c.MapFrom(p => p.ExamSet))
                 .ForMember(p => p.MazeDto, c => c.MapFrom(p => p.MazeWithSolution));
 
-
-
             CreateMap<GroupDto, Group>()
                 .ForMember(p => p.Owner, c => c.MapFrom(p => p.Owner))
                 .ForMember(p => p.StaffMembers, c => c.MapFrom(p => p.StaffMemberDtos))
@@ -41,15 +40,15 @@ namespace Theseus.Infrastructure.Mappings
                 .ForMember(p => p.ExamSetDtos, c => c.MapFrom(p => p.ExamSets));
 
             CreateMap<ExamSetDto, ExamSet>()
-               //.ForMember(p => p.MazesWithSolution, c => c.MapFrom(p => p.MazeDtos))
                .ForMember(p => p.ExamSetMazeIndexes, c => c.MapFrom(p => p.ExamSetDto_MazeDto))
                .ForMember(p => p.StaffMember, c => c.MapFrom(p => p.Owner))
+               .ForMember(p => p.Exams, c => c.MapFrom(c => c.ExamDtos))
                .ForMember(p => p.Groups, c => c.MapFrom(p => p.GroupDtos));
 
             CreateMap<ExamSet, ExamSetDto>()
-                //.ForMember(p => p.MazeDtos, c => c.MapFrom(p => p.MazesWithSolution))
                 .ForMember(p => p.ExamSetDto_MazeDto, c => c.MapFrom(p => p.ExamSetMazeIndexes))
                 .ForMember(p => p.Owner, c => c.MapFrom(p => p.StaffMember))
+                .ForMember(p => p.ExamDtos, c => c.MapFrom(p => p.Exams))
                 .ForMember(p => p.GroupDtos, c => c.MapFrom(p => p.Groups));
 
             CreateMap<StaffMemberDto, StaffMember>()
@@ -69,7 +68,30 @@ namespace Theseus.Infrastructure.Mappings
 
             CreateMap<Patient, PatientDto>()
                 .ForMember(p => p.GroupDto, c => c.MapFrom(p => p.Group));
-            
+
+            CreateMap<Exam, ExamDto>()
+                .ForMember(p => p.ExamSet, c => c.MapFrom(p => p.ExamSet))
+                .ForMember(p => p.Patient, c => c.MapFrom(p => p.Patient))
+                .ForMember(p => p.Stages, c => c.MapFrom(p => p.Stages));
+
+            CreateMap<ExamDto, Exam>()
+                .ForMember(p => p.ExamSet, c => c.MapFrom(p => p.ExamSet))
+                .ForMember(p => p.Patient, c => c.MapFrom(p => p.Patient))
+                .ForMember(p => p.Stages, c => c.MapFrom(p => p.Stages));
+
+            CreateMap<ExamStage, ExamStageDto>()
+                .ForMember(p => p.Exam, c => c.MapFrom(p => p.Exam))
+                .ForMember(p => p.Steps, c => c.MapFrom(p => p.Steps));
+
+            CreateMap<ExamStageDto, ExamStage>()
+                .ForMember(p => p.Exam, c => c.MapFrom(p => p.Exam))
+                .ForMember(p => p.Steps, c => c.MapFrom(p => p.Steps));
+
+            CreateMap<ExamStep, ExamStepDto>()
+                .ForMember(p => p.Stage, c => c.MapFrom(p => p.Stage));
+
+            CreateMap<ExamStepDto, ExamStep>()
+                .ForMember(p => p.Stage, c => c.MapFrom(p => p.Stage));
         }
     }
 }

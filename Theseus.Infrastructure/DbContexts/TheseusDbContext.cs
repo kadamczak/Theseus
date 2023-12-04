@@ -14,23 +14,12 @@ namespace Theseus.Infrastructure.DbContexts
         public DbSet<GroupDto> Groups { get; set; }
         public DbSet<ExamSetDto_MazeDto> ExamSetDtos_MazeDtos { get; set; }
 
+        public DbSet<ExamDto> Exams { get; set; }
+        public DbSet<ExamStageDto> ExamStages { get; set; }
+        public DbSet<ExamStepDto> ExamSteps { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<MazeDto>()
-            //            .HasMany(m => m.ExamSetDtos)
-            //            .WithMany(e => e.MazeDtos)
-            //            .UsingEntity<Dictionary<string, object>>(
-            //                "ExamSetDto_MazeDto",
-            //                j => j
-            //                    .HasOne<ExamSetDto>()
-            //                    .WithMany()
-            //                    .OnDelete(DeleteBehavior.NoAction),
-            //                j => j
-            //                    .HasOne<MazeDto>()
-            //                    .WithMany()
-            //                    .OnDelete(DeleteBehavior.NoAction)
-            //          );
-
             modelBuilder.Entity<StaffMemberDto>()
                         .HasMany(m => m.GroupDtos)
                         .WithMany(e => e.StaffMemberDtos)
@@ -74,6 +63,21 @@ namespace Theseus.Infrastructure.DbContexts
             modelBuilder.Entity<MazeDto>()
                         .HasMany(m => m.ExamSetDto_MazeDto)
                         .WithOne(e => e.MazeDto)
+                        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ExamSetDto>()
+                        .HasMany(m => m.ExamDtos)
+                        .WithOne(e => e.ExamSet)
+                        .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ExamDto>()
+                        .HasMany(m => m.Stages)
+                        .WithOne(e => e.Exam)
+                        .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ExamStageDto>()
+                        .HasMany(m => m.Steps)
+                        .WithOne(e => e.Stage)
                         .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);

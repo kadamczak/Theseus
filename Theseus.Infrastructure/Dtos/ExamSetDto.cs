@@ -9,13 +9,10 @@ namespace Theseus.Infrastructure.Dtos
         public string Name { get; set; } = default!;
 
         public virtual ICollection<ExamSetDto_MazeDto> ExamSetDto_MazeDto { get; set; } = new List<ExamSetDto_MazeDto>();
-        //public virtual IEnumerable<MazeDto> MazeDtos
-        //{
-        //    get { return ExamSetDto_MazeDto.Select(t => t.MazeDto); }
-        //}
 
         public virtual StaffMemberDto Owner { get; set; } = default!;
         public virtual ICollection<GroupDto> GroupDtos { get; set; } = default!;
+        public virtual ICollection<ExamDto> ExamDtos { get; set; } = default!;
 
         public ExamSetDto() { }
 

@@ -6,7 +6,7 @@
         public PatientDto Patient { get; set; } = default!;
         public ExamSetDto ExamSet { get; set; } = default!;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public virtual ICollection<ExamStageDto> ExamStages { get; set; } = default!;
+        public virtual ICollection<ExamStageDto> Stages { get; set; } = default!;
 
         public ExamDto() { }
 

@@ -12,8 +12,8 @@ using Theseus.Infrastructure.DbContexts;
 namespace Theseus.Infrastructure.Migrations
 {
     [DbContext(typeof(TheseusDbContext))]
-    [Migration("20231130152114_ExamSetDtoMazeDtoCascade")]
-    partial class ExamSetDtoMazeDtoCascade
+    [Migration("20231204185845_Exams")]
+    partial class Exams
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,30 @@ namespace Theseus.Infrastructure.Migrations
                     b.HasIndex("StaffMemberDtosId");
 
                     b.ToTable("StaffMember_Group");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamDto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ExamSetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamSetId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto", b =>
@@ -97,6 +121,53 @@ namespace Theseus.Infrastructure.Migrations
                     b.HasIndex("MazeDtoId");
 
                     b.ToTable("ExamSetDtos_MazeDtos");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamStageDto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("ExamStages");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamStepDto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("StepTaken")
+                        .HasColumnType("int");
+
+                    b.Property<float>("TimeBeforeStep")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StageId");
+
+                    b.ToTable("ExamSteps");
                 });
 
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.GroupDto", b =>
@@ -263,6 +334,25 @@ namespace Theseus.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamDto", b =>
+                {
+                    b.HasOne("Theseus.Infrastructure.Dtos.ExamSetDto", "ExamSet")
+                        .WithMany("ExamDtos")
+                        .HasForeignKey("ExamSetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Theseus.Infrastructure.Dtos.PatientDto", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExamSet");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto", b =>
                 {
                     b.HasOne("Theseus.Infrastructure.Dtos.StaffMemberDto", "Owner")
@@ -291,6 +381,28 @@ namespace Theseus.Infrastructure.Migrations
                     b.Navigation("ExamSetDto");
 
                     b.Navigation("MazeDto");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamStageDto", b =>
+                {
+                    b.HasOne("Theseus.Infrastructure.Dtos.ExamDto", "Exam")
+                        .WithMany("Stages")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamStepDto", b =>
+                {
+                    b.HasOne("Theseus.Infrastructure.Dtos.ExamStageDto", "Stage")
+                        .WithMany("Steps")
+                        .HasForeignKey("StageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stage");
                 });
 
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.GroupDto", b =>
@@ -323,9 +435,21 @@ namespace Theseus.Infrastructure.Migrations
                     b.Navigation("GroupDto");
                 });
 
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamDto", b =>
+                {
+                    b.Navigation("Stages");
+                });
+
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamSetDto", b =>
                 {
+                    b.Navigation("ExamDtos");
+
                     b.Navigation("ExamSetDto_MazeDto");
+                });
+
+            modelBuilder.Entity("Theseus.Infrastructure.Dtos.ExamStageDto", b =>
+                {
+                    b.Navigation("Steps");
                 });
 
             modelBuilder.Entity("Theseus.Infrastructure.Dtos.GroupDto", b =>
