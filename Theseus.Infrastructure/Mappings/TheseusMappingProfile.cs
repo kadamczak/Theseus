@@ -70,14 +70,14 @@ namespace Theseus.Infrastructure.Mappings
                 .ForMember(p => p.GroupDto, c => c.MapFrom(p => p.Group));
 
             CreateMap<Exam, ExamDto>()
-                .ForMember(p => p.ExamSet, c => c.MapFrom(p => p.ExamSet))
+                .ForMember(p => p.ExamSetDto, c => c.MapFrom(p => p.ExamSet))
                 .ForMember(p => p.Patient, c => c.MapFrom(p => p.Patient))
-                .ForMember(p => p.Stages, c => c.MapFrom(p => p.Stages));
+                .ForMember(p => p.StageDtos, c => c.MapFrom(p => p.Stages));
 
             CreateMap<ExamDto, Exam>()
-                .ForMember(p => p.ExamSet, c => c.MapFrom(p => p.ExamSet))
+                .ForMember(p => p.ExamSet, c => c.MapFrom(p => p.ExamSetDto))
                 .ForMember(p => p.Patient, c => c.MapFrom(p => p.Patient))
-                .ForMember(p => p.Stages, c => c.MapFrom(p => p.Stages));
+                .ForMember(p => p.Stages, c => c.MapFrom(p => p.StageDtos));
 
             CreateMap<ExamStage, ExamStageDto>()
                 .ForMember(p => p.Exam, c => c.MapFrom(p => p.Exam))
@@ -88,10 +88,10 @@ namespace Theseus.Infrastructure.Mappings
                 .ForMember(p => p.Steps, c => c.MapFrom(p => p.Steps));
 
             CreateMap<ExamStep, ExamStepDto>()
-                .ForMember(p => p.Stage, c => c.MapFrom(p => p.Stage));
+                .ForMember(p => p.StageDtos, c => c.MapFrom(p => p.Stage));
 
             CreateMap<ExamStepDto, ExamStep>()
-                .ForMember(p => p.Stage, c => c.MapFrom(p => p.Stage));
+                .ForMember(p => p.Stage, c => c.MapFrom(p => p.StageDtos));
         }
     }
 }

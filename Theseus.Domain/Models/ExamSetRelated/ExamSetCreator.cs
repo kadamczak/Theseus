@@ -89,9 +89,10 @@ namespace Theseus.Domain.Models.ExamSetRelated
         {
             var mazeShapes = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _mazeShapeClassProportions).Cast<MazeShape>();
             var structureAlgorithms = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _structureAlgorithmClassProportions).Cast<MazeStructureGenAlgorithm>().ToList();
-            var solutionAlgorithms = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _solutionAlgorithmClassProportions).Cast<MazeSolutionGenAlgorithm>();
+            var solutionAlgorithms = CreateShuffledClassListForAllSegments(segmentLengths, rnd, _solutionAlgorithmClassProportions).Cast<MazeSolutionGenAlgorithm>().ToList();
             var mazeDimensions = CreateMazeDimensionList(mazeShapes, beginningMaxDimension, endingMaxDimension, rnd);
 
+            solutionAlgorithms[0] = MazeSolutionGenAlgorithm.RandomBorderCells;
             structureAlgorithms[structureAlgorithms.Count() - 1] = MazeStructureGenAlgorithm.HuntAndKill;
 
             List<MazeParameter> mazeParameters = new List<MazeParameter>();
@@ -238,14 +239,14 @@ namespace Theseus.Domain.Models.ExamSetRelated
             {
                 int width = referenceValue;
                 int height = (int)(width * multiplierValue);
-                if (height < 2) height = 2;
+                if (height < 4) height = 4;
                 return (height, width);
             }
             else
             {
                 int height = referenceValue;
                 int width = (int)(height / multiplierValue);
-                if (width < 2) width = 2;
+                if (width < 4) width = 4;
                 return (height, width);
             }
         }

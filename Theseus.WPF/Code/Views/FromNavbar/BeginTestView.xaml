@@ -5,11 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
              xmlns:canvases="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
+             xmlns:converters="clr-namespace:Theseus.WPF.Code.CustomUI.CustomConverters"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
 
+    <UserControl.Resources>
+        <converters:BooleanVisibilityConverter x:Key="ReverseBooleanVisibility" True="Collapsed" False="Visible"/>
+    </UserControl.Resources>
+
     <Grid Background="WhiteSmoke" Margin="40">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -17,7 +23,7 @@
 
         <Label Content="Begin Test" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light" Margin="0 0 0 50"/>
 
-        <ListBox Grid.Row="1" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableExamSets}" SelectedItem="{Binding SelectedExamSet, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Width="250" HorizontalAlignment="Left">
+        <ListBox Grid.Row="1" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableExamSets}" SelectedItem="{Binding SelectedExamSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="250" HorizontalAlignment="Left">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
@@ -26,6 +32,8 @@
         </ListBox>
 
         <Button Margin="0 50 0 0" Grid.Row="2" Content="Begin" Style="{StaticResource Generic}" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BeginExam}"/>
+
+        <TextBlock Grid.Row="3" Text="Can't begin test because patient is not logged in." FontSize="15" Margin="0 25 0 0" Visibility="{Binding IsPatientLoggedIn, Converter={StaticResource ReverseBooleanVisibility}}" />
     </Grid>
 
 </UserControl>

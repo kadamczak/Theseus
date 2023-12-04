@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
@@ -33,6 +30,17 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+        private bool _isPatientLoggedIn = false;
+        public bool IsPatientLoggedIn
+        {
+            get => _isPatientLoggedIn;
+            set
+            {
+                _isPatientLoggedIn = value;
+                OnPropertyChanged(nameof(IsPatientLoggedIn));
+            }
+        }
+
         public ICommand BeginExam { get; }
 
         public BeginTestViewModel(CurrentExamStore currentExamStore,
@@ -42,14 +50,15 @@ namespace Theseus.WPF.Code.ViewModels
                                   IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
                                   NavigationService<ExamPageViewModel> examPageNavigationService)
         {
+            IsPatientLoggedIn = currentPatientStore.IsPatientLoggedIn;
+            BeginExam = new BeginExamCommand(this, currentExamStore, currentPatientStore, getMazesOfExamSetQuery, examPageNavigationService);
+
             if (!currentPatientStore.IsPatientLoggedIn)
                 return;
 
             var examSets = GetAvailableExamSets(currentPatientStore, getGroupQuery, getExamSetsQuery);
             AvailableExamSets = new ObservableCollection<ExamSet>(examSets);
             SelectedExamSet = AvailableExamSets.FirstOrDefault();
-
-            BeginExam = new BeginExamCommand(this, currentExamStore, getMazesOfExamSetQuery, examPageNavigationService);
         }
 
         private IEnumerable<ExamSet> GetAvailableExamSets(ICurrentPatientStore currentPatientStore,

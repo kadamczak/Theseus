@@ -3,7 +3,7 @@
     public class ExamStepDto
     {
         public Guid Id { get; set; } = default!;
-        public ExamStageDto Stage { get; set; } = default!;
+        public ExamStageDto StageDtos { get; set; } = default!;
         public int Index { get; set; } = default!;
         public int StepTaken { get; set; } = default!;
         public float TimeBeforeStep { get; set; } = default!;

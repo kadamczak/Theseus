@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
-using Theseus.Domain.Models.GroupRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 

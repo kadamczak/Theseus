@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
+using Theseus.Infrastructure.Commands.ExamCommands;
 using Theseus.Infrastructure.Commands.ExamSetCommands;
 using Theseus.Infrastructure.Commands.GroupCommands;
 using Theseus.Infrastructure.Commands.MazeCommands;
@@ -36,6 +38,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IDeleteExamSetCommand, DeleteExamSetCommand>();
                 services.AddSingleton<IChangeExamSetsOfStaffMemberInGroupCommand, ChangeExamSetsOfStaffMemberInGroupCommand>();
                 services.AddSingleton<IDeleteGroupCommand, DeleteGroupCommand>();
+                services.AddSingleton<ICreateExamCommand, CreateExamCommand>();
             });
 
             return hostBuilder;

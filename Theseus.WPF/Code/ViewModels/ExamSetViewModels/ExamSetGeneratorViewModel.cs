@@ -122,7 +122,7 @@ namespace Theseus.WPF.Code.ViewModels
         private readonly int MinMazeAmount = 3;
         private readonly int MaxMazeAmount = 30;
 
-        private readonly int MinMazeDimension = 2;
+        private readonly int MinMazeDimension = 5;
         private readonly int MaxMazeDimension = 50;
 
         private readonly string EndingValueTooSmallMessage = "Ending value cannot be smaller than beginning value.";

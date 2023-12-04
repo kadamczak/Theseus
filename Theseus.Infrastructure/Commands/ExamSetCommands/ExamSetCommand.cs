@@ -30,6 +30,14 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
                     context.Attach(group);
                 }
             }
+
+            if (examSetDto.ExamDtos is not null)
+            {
+                foreach (var exam in examSetDto.ExamDtos)
+                {
+                    context.Attach(exam);
+                }
+            }
         }
     }
 }
