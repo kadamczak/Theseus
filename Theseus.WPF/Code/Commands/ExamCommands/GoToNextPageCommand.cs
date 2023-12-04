@@ -1,5 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Metadata;
+using Theseus.Domain.Models.ExamRelated;
+using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Exams;
@@ -31,15 +35,38 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
 
         public override void Execute(object? parameter)
         {
-            if(LastMazeFinished())
+            SaveStageCompletionStatus(parameter);
+
+            if (LastMazeFinished())
             {
                 _examEndNavigationService.Navigate();
             }
             else
             {
                 _currentExamStore.CurrentIndex++;
+                CreateNextExamStage();
                 _examTransitionNavigationService.Navigate();
             }
+        }
+
+        private void SaveStageCompletionStatus(object? parameter)
+        {
+            string parameterText = (string)parameter!;
+            bool mazeCompleted = bool.Parse(parameterText);
+
+            ExamStage currentExamStage = _currentExamStore.CurrentExam.Stages.Last();
+            currentExamStage.Completed = mazeCompleted;
+        }
+
+        private void CreateNextExamStage()
+        {
+            ExamStage stage = new ExamStage(Guid.NewGuid())
+            {
+                Exam = _currentExamStore.CurrentExam,
+                Index = _currentExamStore.CurrentIndex
+            };
+
+            _currentExamStore.CurrentExam.Stages.Add(stage);
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

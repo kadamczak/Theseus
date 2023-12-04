@@ -52,6 +52,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
             ExamStage firstStage = new ExamStage(Guid.NewGuid())
             {
                 Exam = _currentExamStore.CurrentExam,
+                Index = 0
             };
 
             _currentExamStore.CurrentExam.Stages.Add(firstStage);
@@ -62,7 +63,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
             if (e.PropertyName == nameof(_beginTestViewModel.SelectedExamSet))
                 OnCanExecuteChanged();
 
-            if (e.PropertyName == nameof(_beginTestViewModel.IsPatientLoggedIn))
+            else if (e.PropertyName == nameof(_beginTestViewModel.IsPatientLoggedIn))
                 OnCanExecuteChanged();
         }
 

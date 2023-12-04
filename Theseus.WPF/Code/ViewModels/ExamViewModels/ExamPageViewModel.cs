@@ -48,11 +48,13 @@ namespace Theseus.WPF.Code.ViewModels
                                  NavigationService<ExamEndViewModel> examEndNavigationService)
         {      
             MazeWithSolution currentMaze = currentExamStore.Mazes.ElementAt(currentExamStore.CurrentIndex);
-            ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze);
+            ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze, currentExamStore);
 
             GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService);
             ExamMazeCanvasViewModel.CompletedMaze += StartCountdown;
             _transitionTimer.Elapsed += new ElapsedEventHandler(ReduceCountdownValue);
+
+            currentExamStore.TimeSinceLastStep.Restart();
         }
 
         private void StartCountdown()
@@ -72,7 +74,7 @@ namespace Theseus.WPF.Code.ViewModels
                 Application.Current.Dispatcher.Invoke(() => {
                     CanGoToNextPage = true;
                 });
-                GoToNextPage.Execute(null);
+                GoToNextPage.Execute("True");
             }
         }
     }

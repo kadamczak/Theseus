@@ -6,6 +6,7 @@ using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamCommands;
+using Theseus.WPF.Code.Stores.Exams;
 
 namespace Theseus.WPF.Code.ViewModels.Components
 {
@@ -34,7 +35,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
             }
         }
 
-        public ExamMazeCanvasViewModel(MazeWithSolution mazeWithSolution)
+        public ExamMazeCanvasViewModel(MazeWithSolution mazeWithSolution, CurrentExamStore currentExamStore)
         {
             this.MazeWithSolutionCanvasViewModel = new MazeWithSolutionCanvasViewModel(mazeWithSolution);
             this.CurrentCell = GetMazeWithSolution().SolutionPath.First();
@@ -43,7 +44,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
             this.EndDirection = GetMazeWithSolution().EndDirection;
             this.UserSolution = new List<Cell>() { CurrentCell };
 
-            this.PerformMove = new PerformMoveCommand(this);
+            this.PerformMove = new PerformMoveCommand(this, currentExamStore);
         }
 
         public void MoveFurther(Cell nextCell)
