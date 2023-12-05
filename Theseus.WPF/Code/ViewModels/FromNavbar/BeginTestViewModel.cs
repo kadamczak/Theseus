@@ -41,6 +41,17 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+        private string _examSetsOmittedDueToScreenSizeText = string.Empty;
+        public string ExamSetsOmittedDueToScreenSizeText
+        {
+            get => _examSetsOmittedDueToScreenSizeText;
+            set
+            {
+                _examSetsOmittedDueToScreenSizeText = value;
+                OnPropertyChanged(nameof(ExamSetsOmittedDueToScreenSizeText));
+            }
+        }
+
         public ICommand BeginExam { get; }
 
         public BeginTestViewModel(CurrentExamStore currentExamStore,
@@ -56,17 +67,48 @@ namespace Theseus.WPF.Code.ViewModels
             if (!currentPatientStore.IsPatientLoggedIn)
                 return;
 
-            var examSets = GetAvailableExamSets(currentPatientStore, getGroupQuery, getExamSetsQuery);
+            var examSets = GetAvailableFittedExamSets(currentPatientStore, getGroupQuery, getExamSetsQuery, getMazesOfExamSetQuery);
             AvailableExamSets = new ObservableCollection<ExamSet>(examSets);
             SelectedExamSet = AvailableExamSets.FirstOrDefault();
         }
 
-        private IEnumerable<ExamSet> GetAvailableExamSets(ICurrentPatientStore currentPatientStore,
-                                                          IGetGroupByPatientQuery getGroupQuery,
-                                                          IGetExamSetsOfGroupQuery getExamSetsQuery)
+        private List<ExamSet> GetAvailableFittedExamSets(ICurrentPatientStore currentPatientStore,
+                                                         IGetGroupByPatientQuery getGroupQuery,
+                                                         IGetExamSetsOfGroupQuery getExamSetsQuery,
+                                                         IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery)
         {
             Group group = getGroupQuery.GetGroup(currentPatientStore.Patient.Id);
-            return getExamSetsQuery.GetExamSets(group!.Id);
+            var allAvailableExamSets = getExamSetsQuery.GetExamSets(group!.Id);
+            var displayableExamSets = GetExamSetsCompatibleWithScreenSize(allAvailableExamSets, getMazesOfExamSetQuery);
+
+            int amountOfOmittedExamSets = allAvailableExamSets.Count() - displayableExamSets.Count();
+            ExamSetsOmittedDueToScreenSizeText = $"Amount of sets omitted because of too small screen size: {amountOfOmittedExamSets}.\nYou can change the minimal cell size by clicking the gear button in the navigation bar.";
+
+            return displayableExamSets;
+        }
+
+        private List<ExamSet> GetExamSetsCompatibleWithScreenSize(IEnumerable<ExamSet> examSets, IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery)
+        {
+            List<ExamSet> displayableExamSets = new List<ExamSet>();
+            float minCellSize = Properties.Settings.Default.MinimalCellSize;
+
+            int maxAllowedColumnAmount = (int)((System.Windows.SystemParameters.PrimaryScreenWidth - 340) / (minCellSize + 2));
+            int maxAllowedRowAmount = (int)(System.Windows.SystemParameters.PrimaryScreenHeight / (minCellSize + 2));
+
+            foreach (var examSet in examSets)
+            {
+                var mazes = getMazesOfExamSetQuery.GetMazesWithSolution(examSet.Id);
+
+                int highestColumnAmount = mazes.OrderByDescending(m => m.Grid.ColumnAmount).FirstOrDefault().Grid.ColumnAmount;
+                int highestRowAmount = mazes.OrderByDescending(m => m.Grid.RowAmount).FirstOrDefault().Grid.RowAmount;
+
+                if (highestColumnAmount <= maxAllowedColumnAmount && highestRowAmount <= maxAllowedRowAmount)
+                {
+                    displayableExamSets.Add(examSet);
+                }
+            }
+
+            return displayableExamSets;
         }
     }
 }

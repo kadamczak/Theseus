@@ -8,7 +8,7 @@
         xmlns:vms="clr-namespace:Theseus.WPF.Code.ViewModels"
         mc:Ignorable="d"
         Icon="/Resources/Icons/maze.png"
-        Title="Theseus" Height="800" Width="1300">
+        Title="Theseus" MinWidth="1105" WindowState="Maximized">
 
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
