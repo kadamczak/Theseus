@@ -70,6 +70,6 @@
             </ComboBox>
         </StackPanel>
 
-        <Button Grid.Row="6" Margin="0 40 0 0" Style="{StaticResource Generic}" Content="Logout" HorizontalAlignment="Center" Command="{Binding Logout}"/>
+        <Button Grid.Row="6" Margin="0 20 0 0" Style="{StaticResource Generic}" Content="Logout" HorizontalAlignment="Center" Command="{Binding Logout}"/>
     </Grid>
 </UserControl>
