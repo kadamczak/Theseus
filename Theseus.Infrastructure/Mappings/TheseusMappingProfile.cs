@@ -88,10 +88,10 @@ namespace Theseus.Infrastructure.Mappings
                 .ForMember(p => p.Steps, c => c.MapFrom(p => p.StepDtos));
 
             CreateMap<ExamStep, ExamStepDto>()
-                .ForMember(p => p.StageDtos, c => c.MapFrom(p => p.Stage));
+                .ForMember(p => p.StageDto, c => c.MapFrom(p => p.Stage));
 
             CreateMap<ExamStepDto, ExamStep>()
-                .ForMember(p => p.Stage, c => c.MapFrom(p => p.StageDtos));
+                .ForMember(p => p.Stage, c => c.MapFrom(p => p.StageDto));
         }
     }
 }

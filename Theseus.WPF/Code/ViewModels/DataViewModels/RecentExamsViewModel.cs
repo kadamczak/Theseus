@@ -1,7 +1,12 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using Theseus.Domain.Models.ExamRelated;
+using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
+using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.ButtonCommands;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info;
@@ -15,9 +20,12 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand GoBack { get; }
 
         public RecentExamsViewModel(ExamCommandListViewModelFactory examCommandListViewModelFactory,
+                                    ICurrentStaffMemberStore currentStaffMemberStore,
+                                    IGetExamsOfStaffMemberQuery getExamsQuery,
+                                    SelectedModelListStore<Exam> selectedExamListStore,
                                     NavigationService<ViewDataViewModel> viewDataNavigationService)
         {
-            LoadExamsOfCurrentStaffMember();
+            LoadExamsOfCurrentStaffMember(getExamsQuery, currentStaffMemberStore, selectedExamListStore);
 
             GoBack = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
 
@@ -25,9 +33,12 @@ namespace Theseus.WPF.Code.ViewModels
             ExamCommandListViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadExamsOfCurrentStaffMember()
+        private void LoadExamsOfCurrentStaffMember(IGetExamsOfStaffMemberQuery getExamsQuery,
+                                                   ICurrentStaffMemberStore currentStaffMemberStore,
+                                                   SelectedModelListStore<Exam> selectedExamListStore)
         {
-            
+            var exams = getExamsQuery.GetExams(currentStaffMemberStore.StaffMember.Id);
+            selectedExamListStore.ModelList = exams;
         }
     }
 }
