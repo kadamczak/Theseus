@@ -44,8 +44,8 @@ namespace Theseus.WPF.Code.ViewModels
         }
 
         private void CreateExamSetCommandList(IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery,
-                                      SelectedModelListStore<ExamSet> selectedExamSetListStore,
-                                      ExamSetCommandListViewModelFactory examSetCommandListViewModel)
+                                              SelectedModelListStore<ExamSet> selectedExamSetListStore,
+                                              ExamSetCommandListViewModelFactory examSetCommandListViewModel)
         {
             LoadExamSetsFromGroupToStore(getExamSetsOfGroupQuery, CurrentGroup.Id, selectedExamSetListStore);
             ExamSetCommandListViewModel = examSetCommandListViewModel.Create(ExamSetButtonCommand.ShowDetails, ExamSetButtonCommand.RemoveFromGroup, ExamSetInfo.OwnerInfo);

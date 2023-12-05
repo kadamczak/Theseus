@@ -4,6 +4,8 @@ using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCom
 using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.Info;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList.ButtonCommands;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList.Info;
+using Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.ButtonCommands;
+using Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info;
 using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.ButtonCommands;
 using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info;
 using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.ButtonCommands;
@@ -24,12 +26,14 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
                 services.AddTransient<GroupCommandGranterFactory>();
                 services.AddTransient<StaffMemberCommandGranterFactory>();
                 services.AddTransient<PatientCommandGranterFactory>();
+                services.AddTransient<ExamCommandGranterFactory>();
 
                 services.AddTransient<MazeInfoGranterFactory>();
                 services.AddTransient<ExamSetInfoGranterFactory>();
                 services.AddTransient<GroupInfoGranterFactory>();
                 services.AddTransient<StaffMemberInfoGranterFactory>();
                 services.AddTransient<PatientInfoGranterFactory>();
+                services.AddTransient<ExamInfoGranterFactory>();
             });
 
             return hostBuilder;

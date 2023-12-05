@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
@@ -35,12 +36,14 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<SelectedModelListStore<Patient>>();
                 services.AddSingleton<SelectedModelListStore<StaffMember>>();
                 services.AddSingleton<SelectedModelListStore<Group>>();
+                services.AddSingleton<SelectedModelListStore<Exam>>();
 
                 services.AddSingleton<SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel>>();
                 services.AddSingleton<SelectedModelDetailsStore<ExamSet>>();
                 services.AddSingleton<SelectedModelDetailsStore<Patient>>();
                 services.AddSingleton<SelectedModelDetailsStore<StaffMember>>();
                 services.AddSingleton<SelectedModelDetailsStore<Group>>();
+                services.AddSingleton<SelectedModelDetailsStore<Exam>>();
 
                 services.AddSingleton<ICurrentStaffMemberStore, CurrentStaffMemberStore>();
                 services.AddSingleton<ICurrentPatientStore, CurrentPatientStore>();

@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.ExamSetRelated;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Domain.Models.ExamRelated

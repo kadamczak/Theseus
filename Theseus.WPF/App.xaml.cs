@@ -9,6 +9,7 @@ using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
 using Theseus.WPF.Code.Commands.SettingsCommands;
 using Theseus.WPF.Code.HostBuilders;
 using Theseus.WPF.Code.HostBuilders.CommandListHostBuilders;
+using Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.ViewModels;
@@ -29,6 +30,7 @@ namespace Theseus.WPF
                 .AddSingletonViewModels()
                 .AddNavbarViewModels()
                 .AddMazeViewModels()
+                .AddDataViewModels()
                 .AddExamSetViewModels()
                 .AddExamViewModels()
                 .AddAuthenticationViewModels()

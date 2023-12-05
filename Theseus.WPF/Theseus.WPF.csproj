@@ -84,9 +84,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Code\ViewModels\DataViewModels\" />
-    <Folder Include="Code\Views\DataViews\" />
-  </ItemGroup>
-
 </Project>
