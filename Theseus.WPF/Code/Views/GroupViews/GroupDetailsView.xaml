@@ -17,8 +17,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="300"/>
-                <RowDefinition Height="300"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="500"/>
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0 0 0 30">
@@ -27,44 +27,10 @@
                 <Label FontSize="30" Content="{Binding GroupOwnerName}" Margin="10 0 0 0"/>
             </StackPanel>
 
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <DockPanel Grid.Row="0" Margin="0 0 0 10">
-                    <Label DockPanel.Dock="Left" Grid.Row="0" FontSize="25" Content="Staff Members" VerticalAlignment="Center" />
-                    <Button DockPanel.Dock="Right" Content="Add" Style="{StaticResource Generic}" FontSize="19" Padding="20 3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding AddStaffMember}" Visibility="{Binding AddStaffMemberAvailable, Converter={StaticResource BooleanVisibility}}"/>
-                </DockPanel>
-                <views:StaffMemberCommandListView Grid.Row="1" DataContext="{Binding RemoveStaffMemberCommandListViewModel}"/>
-            </Grid>
-
-            <Grid Grid.Row="2" Margin="0 30 0 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <DockPanel Grid.Row="0" Margin="0 0 0 10">
-                    <Label DockPanel.Dock="Left" Grid.Row="0" FontSize="25" Content="Patients" VerticalAlignment="Center" />
-                    <Button DockPanel.Dock="Right" Content="Add" Style="{StaticResource Generic}" FontSize="19" Padding="20 3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding AddPatient}"/>
-                </DockPanel>
-                <views:PatientCommandListView Grid.Row="1" DataContext="{Binding RemovePatientCommandListViewModel}" />
-            </Grid>
-
-            <Grid Grid.Row="3" Margin="0 30 0 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <DockPanel Grid.Row="0" Margin="0 0 0 10">
-                    <Label DockPanel.Dock="Left" Grid.Row="0" FontSize="25" Content="Exam Sets" VerticalAlignment="Center" />
-                    <Button DockPanel.Dock="Right" Content="Add" Style="{StaticResource Generic}" FontSize="19" Padding="20 3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding ChangeExamSets}"/>
-                </DockPanel>
-                <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding ExamSetCommandListViewModel}" />
-            </Grid>
+            <views:StaffMemberGroupDashboardView Grid.Row="1" DataContext="{Binding StaffMemberGroupDashboardViewModel}"/>
+            <views:PatientGroupDashboardView Grid.Row="2" Margin="0 30 0 0" DataContext="{Binding PatientGroupDashboardViewModel}" />
+            <views:ExamSetGroupDashboardView Grid.Row="3" Margin="0 30 0 30" DataContext="{Binding ExamSetGroupDashboardViewModel}" />
+            
         </Grid>
     </ScrollViewer>
    
