@@ -3,7 +3,7 @@
     public class ExamDto
     {
         public Guid Id { get; set; } = default!;
-        public PatientDto Patient { get; set; } = default!;
+        public PatientDto PatientDto { get; set; } = default!;
         public ExamSetDto ExamSetDto { get; set; } = default!;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public virtual ICollection<ExamStageDto> StageDtos { get; set; } = default!;

@@ -72,11 +72,11 @@ namespace Theseus.Infrastructure.DbContexts
 
             modelBuilder.Entity<ExamDto>()
                         .HasMany(m => m.StageDtos)
-                        .WithOne(e => e.Exam)
+                        .WithOne(e => e.ExamDto)
                         .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ExamStageDto>()
-                        .HasMany(m => m.Steps)
+                        .HasMany(m => m.StepDtos)
                         .WithOne(e => e.StageDtos)
                         .OnDelete(DeleteBehavior.Cascade);
 

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection.Metadata;
+using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
 using Theseus.Domain.Models.ExamRelated;
-using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Exams;
@@ -15,6 +14,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
     {
         private readonly ExamPageViewModel _viewModel;
         private readonly CurrentExamStore _currentExamStore;
+        private readonly ICreateExamCommand _createExamCommand;
         private readonly NavigationService<ExamTransitionViewModel> _examTransitionNavigationService;
         private readonly NavigationService<ExamEndViewModel> _examEndNavigationService;
 
@@ -23,10 +23,12 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
         public GoToNextPageCommand(ExamPageViewModel viewModel,
                                    CurrentExamStore currentExamStore,
                                    NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
-                                   NavigationService<ExamEndViewModel> examEndNavigationService)
+                                   NavigationService<ExamEndViewModel> examEndNavigationService,
+                                   ICreateExamCommand createExamCommand)
         {
             _viewModel = viewModel;
             _currentExamStore = currentExamStore;
+            _createExamCommand = createExamCommand;
             _examTransitionNavigationService = examTransitionNavigationService;
             _examEndNavigationService = examEndNavigationService;
 
@@ -39,6 +41,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
 
             if (LastMazeFinished())
             {
+                _createExamCommand.Create(_currentExamStore.CurrentExam);
                 _examEndNavigationService.Navigate();
             }
             else

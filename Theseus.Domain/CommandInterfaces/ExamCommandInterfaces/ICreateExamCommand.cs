@@ -4,6 +4,6 @@ namespace Theseus.Domain.CommandInterfaces.ExamCommandInterfaces
 {
     public interface ICreateExamCommand
     {
-        Task Create(Exam exam);
+        void Create(Exam exam);
     }
 }

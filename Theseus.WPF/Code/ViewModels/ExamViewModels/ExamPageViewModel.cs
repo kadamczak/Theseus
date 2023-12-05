@@ -3,6 +3,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
@@ -44,13 +45,14 @@ namespace Theseus.WPF.Code.ViewModels
         private Timer _transitionTimer = new Timer() { Interval = 1000 };
 
         public ExamPageViewModel(CurrentExamStore currentExamStore,
+                                 ICreateExamCommand createExamCommand,
                                  NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
                                  NavigationService<ExamEndViewModel> examEndNavigationService)
         {      
             MazeWithSolution currentMaze = currentExamStore.Mazes.ElementAt(currentExamStore.CurrentIndex);
             ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze, currentExamStore);
 
-            GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService);
+            GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService, createExamCommand);
             ExamMazeCanvasViewModel.CompletedMaze += StartCountdown;
             _transitionTimer.Elapsed += new ElapsedEventHandler(ReduceCountdownValue);
 

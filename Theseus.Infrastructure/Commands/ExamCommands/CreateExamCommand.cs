@@ -12,18 +12,18 @@ namespace Theseus.Infrastructure.Commands.ExamCommands
         {
         }
 
-        public async Task Create(Exam exam)
+        public void Create(Exam exam)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 ExamDto examDto = new ExamDto();
                 Mapper.Map(exam, examDto);
 
-                context.Attach(examDto.Patient);
+                context.Attach(examDto.PatientDto);
                 context.Attach(examDto.ExamSetDto);
 
                 context.Exams.Add(examDto);
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
     }
