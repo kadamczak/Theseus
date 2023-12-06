@@ -29,7 +29,7 @@ namespace Theseus.WPF.Code.ViewModels
 
             GoBack = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
 
-            ExamCommandListViewModel = examCommandListViewModelFactory.Create(ExamButtonCommand.None, ExamButtonCommand.None, ExamInfo.None);
+            ExamCommandListViewModel = examCommandListViewModelFactory.Create(ExamButtonCommand.None, ExamButtonCommand.None, ExamInfo.GeneralInfo);
             ExamCommandListViewModel.CreateModelCommandViewModels();
         }
 

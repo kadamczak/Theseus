@@ -30,6 +30,7 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
                 services.AddTransient<EmptyPatientInfoGranter>();
 
                 services.AddTransient<EmptyExamInfoGranter>();
+                services.AddTransient<GeneralExamInfoGranter>();
             });
 
             return hostBuilder;

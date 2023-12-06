@@ -7,18 +7,18 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.ExamQueries
 {
-    public class GetStepsOfExamQuery : ExamStepQuery, IGetStepsOfExamQuery
+    public class GetStagesOfExamQuery : ExamStageQuery, IGetStagesOfExamQuery
     {
-        public GetStepsOfExamQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        public GetStagesOfExamQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
         }
 
-        public IEnumerable<ExamStep> GetSteps(Guid examId)
+        public IEnumerable<ExamStage> GetStages(Guid examId)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                IEnumerable<ExamStepDto> examStepDtos = context.ExamSteps.Where(s => s.StageDto.ExamDto.Id == examId).AsNoTracking();
-                return MapExamSteps(examStepDtos);
+                IEnumerable<ExamStageDto> examStageDtos = context.ExamStages.Where(s => s.ExamDto.Id == examId).AsNoTracking();
+                return MapExamStages(examStageDtos);
             }
         }
     }

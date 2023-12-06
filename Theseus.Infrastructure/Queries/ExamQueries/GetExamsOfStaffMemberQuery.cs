@@ -20,7 +20,9 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
                 IEnumerable<ExamDto> examDtos = context.Exams
                                                        .Include(e => e.ExamSetDto)
                                                        .Include(e => e.PatientDto)
-                                                       .Where(e => e.ExamSetDto.GroupDtos.Where(g => g.StaffMemberDtos.Where(s => s.Id == staffMemberId).Any()).Any()).AsNoTracking();
+                                                       .Where(e => e.ExamSetDto.GroupDtos.Where(g => g.StaffMemberDtos.Where(s => s.Id == staffMemberId).Any()).Any())
+                                                       .OrderByDescending(e => e.CreatedAt)
+                                                       .AsNoTracking();
                 return MapExams(examDtos);
             }
         }

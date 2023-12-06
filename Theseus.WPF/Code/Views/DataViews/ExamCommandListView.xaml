@@ -13,7 +13,14 @@
     </UserControl.Resources>
 
     <Grid>
-        <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionableModels}" FontSize="18">
+        <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionableModels}" FontSize="18" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Margin" Value="0 10 0 10"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
