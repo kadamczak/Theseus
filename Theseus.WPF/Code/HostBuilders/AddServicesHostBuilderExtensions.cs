@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Theseus.Domain.Services.Authentication.PatientAuthentication;
 using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
-using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 using Theseus.Infrastructure.Mappings;
 using Theseus.WPF.Code.Services;
 
@@ -18,6 +17,7 @@ namespace Theseus.WPF.Code.HostBuilders
             {
                 services.AddSingleton<IPasswordHasher, PasswordHasher>();
                 services.AddSingleton<IEmailValidator, EmailValidator>();
+                services.AddSingleton<ExamSetStatCalculator>();
                 services.AddSingleton<IStaffMemberAuthenticationService, StaffMemberAuthenticationService>();
                 services.AddSingleton<IPatientAuthenticationService, PatientAuthenticationService>();
 

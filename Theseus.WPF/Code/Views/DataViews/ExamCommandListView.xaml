@@ -16,7 +16,7 @@
         <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionableModels}" FontSize="18" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Margin" Value="0 10 0 10"/>
+                    <Setter Property="Margin" Value="0 20 0 20"/>
                 </Style>
             </ListView.ItemContainerStyle>
 
@@ -28,6 +28,13 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Margin="10 0 10 0" Text="{Binding Model.Patient.Username}"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Group">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Patient.Group.Name}"></TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

@@ -30,6 +30,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<ExamSetsInGroupStore>();
 
                 services.AddSingleton<CurrentExamStore>();
+                services.AddSingleton<ExamSetStatsStore>();
 
                 services.AddSingleton<SelectedModelListStore<MazeWithSolutionCanvasViewModel>>();
                 services.AddSingleton<SelectedModelListStore<ExamSet>>();
