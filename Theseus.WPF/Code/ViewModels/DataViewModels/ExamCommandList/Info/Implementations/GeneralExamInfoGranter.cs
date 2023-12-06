@@ -93,9 +93,9 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 float? averageTotalInputs = anyCompletedExamsByOtherPatient ?
                                           (float)examsByOtherPatientsWithNoSkips.Average(e => e.Stages.Sum(s => s.Steps.Count)) : null;
 
-                comparisonInfo.Add("Completed mazes: " + CreateValueComparison(currentExamStats.CompletedMazeAmount, averageCompletedMazes));
-                comparisonInfo.Add("Total time: " + CreateValueComparison(currentExamStats.TotalExamTime, averageTotalTime));
-                comparisonInfo.Add("Inputs made: " + CreateValueComparison(currentExamStats.TotalSteps, averageTotalInputs));
+                comparisonInfo.Add("\tCompleted mazes: " + CreateValueComparison(currentExamStats.CompletedMazeAmount, averageCompletedMazes, true));
+                comparisonInfo.Add("\tTotal time: " + CreateValueComparison(currentExamStats.TotalExamTime, averageTotalTime, false));
+                comparisonInfo.Add("\tInputs made: " + CreateValueComparison(currentExamStats.TotalSteps, averageTotalInputs, false));
 
                 return comparisonInfo;
             }
@@ -114,7 +114,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                                                      .FirstOrDefault();
             if (previousAttempt is null)
             {
-                return new List<string>() { "", "No previous attempts by this patient." };
+                return new List<string>() {"", "No previous attempts by this patient." };
             }
             else
             {
@@ -127,14 +127,14 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 return new List<string>() {
                     "",
                     $"Comparison to previous attempt on {previousAttempt.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:",
-                    "Completed mazes: " + CreateValueComparison(currentExamStats.CompletedMazeAmount, previousCompletedMazes),
-                    "Total time: " + CreateValueComparison(currentExamStats.TotalExamTime, previousTotalTime),
-                    "Total time: " + CreateValueComparison(currentExamStats.TotalExamTime, previousTotalInputs)
+                    "\tCompleted mazes: " + CreateValueComparison(currentExamStats.CompletedMazeAmount, previousCompletedMazes, true),
+                    "\tTotal time: " + CreateValueComparison(currentExamStats.TotalExamTime, previousTotalTime, false),
+                    "\tInputs made: " + CreateValueComparison(currentExamStats.TotalSteps, previousTotalInputs, false)
                 };
             }
         }
 
-        private string CreateValueComparison(float examValue, float? possibleValue)
+        private string CreateValueComparison(float examValue, float? possibleValue, bool higherIsBetter)
         {
             if (possibleValue is null)
                 return "No other values to compare.";
@@ -143,17 +143,19 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
 
             if (examValue == value)
             {
-                return "Same as.";
+                return "No difference.";
             }
             else if (examValue > value)
             {
                 float percentageHigher = (examValue - value) / value * 100f;
-                return $"Higher by {Math.Round(percentageHigher, 1)}%.";
+                double roundedValue = Math.Round(percentageHigher, 1);
+                return (higherIsBetter) ? $"Better by {roundedValue}%." : $"Worse by {roundedValue}%.";
             }
             else
             {
                 float percentageLower = (value - examValue) / examValue * 100f;
-                return $"Lower by {Math.Round(percentageLower, 1)}%.";
+                double roundedValue = Math.Round(percentageLower, 1);
+                return (higherIsBetter) ? $"Worse by {roundedValue}%." : $"Better by {roundedValue}%.";
             }
         }
     }
