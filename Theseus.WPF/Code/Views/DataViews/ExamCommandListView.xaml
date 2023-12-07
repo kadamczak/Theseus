@@ -106,7 +106,7 @@
                                     <StackPanel Margin="10 0 10 0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
                                         <Button Style="{StaticResource Generic}" FontSize="17" Content="{Binding Button1.CommandName}" Command="{Binding Button1.Command}" Padding="7" HorizontalAlignment="Center" Visibility="{Binding Button1.Show, Converter={StaticResource BooleanVisibility}}" Width="80" Height="40"/>
 
-                                        <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="17" Visibility="{Binding Button2.Show, Converter={StaticResource BooleanVisibility}}" Content="{Binding Button2.CommandName}" Command="{Binding Button2.Command}" Padding="4" HorizontalAlignment="Center" Width="80"/>
+                                        <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="17" Visibility="{Binding Button2.Show, Converter={StaticResource BooleanVisibility}}" Content="{Binding Button2.CommandName}" Command="{Binding Button2.Command}" Padding="4" HorizontalAlignment="Center" Width="80" Height="40"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Theseus.WPF.Code.Views.Components.MazeCanvases;
 
 namespace Theseus.WPF.Code.Views
 {
@@ -10,6 +12,13 @@ namespace Theseus.WPF.Code.Views
         public ExamStageCommandListView()
         {
             InitializeComponent();
+        }
+
+        private void MazesWithSolutionCanvasView_Loaded(object sender, RoutedEventArgs e)
+        {
+            MazeWithSolutionCanvasView mazeCanvas = sender as MazeWithSolutionCanvasView;
+            mazeCanvas.InitializeDataContexts();
+            mazeCanvas.DrawScaledMazeWithVisibleSolutionPath(2, centerMaze: true, drawArrows: false);
         }
     }
 }

@@ -11,6 +11,7 @@ using Theseus.WPF.Code.Stores.Exams;
 using Theseus.WPF.Code.Stores.ExamSets;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
+using Theseus.WPF.Code.ViewModels.Bindings.ExamBindings;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
@@ -38,6 +39,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<SelectedModelListStore<StaffMember>>();
                 services.AddSingleton<SelectedModelListStore<Group>>();
                 services.AddSingleton<SelectedModelListStore<Exam>>();
+                services.AddSingleton<SelectedModelListStore<ExamStageWithMazeViewModel>>();
 
                 services.AddSingleton<SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel>>();
                 services.AddSingleton<SelectedModelDetailsStore<ExamSet>>();

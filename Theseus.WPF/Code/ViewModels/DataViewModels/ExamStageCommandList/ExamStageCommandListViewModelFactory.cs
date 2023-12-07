@@ -1,5 +1,5 @@
-﻿using Theseus.Domain.Models.ExamRelated;
-using Theseus.WPF.Code.Stores;
+﻿using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.ViewModels.Bindings.ExamBindings;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.ButtonCommands;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info;
 
@@ -7,11 +7,11 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList
 {
     public class ExamStageCommandListViewModelFactory
     {
-        private readonly SelectedModelListStore<ExamStage> _selectedListStore;
+        private readonly SelectedModelListStore<ExamStageWithMazeViewModel> _selectedListStore;
         private readonly ExamStageCommandGranterFactory _commandGranterFactory;
         private readonly ExamStageInfoGranterFactory _infoGranterFactory;
 
-        public ExamStageCommandListViewModelFactory(SelectedModelListStore<ExamStage> selectedListStore,
+        public ExamStageCommandListViewModelFactory(SelectedModelListStore<ExamStageWithMazeViewModel> selectedListStore,
                                                     ExamStageCommandGranterFactory commandGranterFactory,
                                                     ExamStageInfoGranterFactory infoGranterFactory)
         {

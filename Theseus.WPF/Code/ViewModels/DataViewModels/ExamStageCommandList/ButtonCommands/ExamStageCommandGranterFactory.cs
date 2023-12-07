@@ -1,11 +1,11 @@
 ﻿using System;
-using Theseus.Domain.Models.ExamRelated;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
+using Theseus.WPF.Code.ViewModels.Bindings.ExamBindings;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.ButtonCommands.Implementations;
 
 namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.ButtonCommands
 {
-    public class ExamStageCommandGranterFactory : CommandGranterFactory<ExamStage, ExamStageButtonCommand>
+    public class ExamStageCommandGranterFactory : CommandGranterFactory<ExamStageWithMazeViewModel, ExamStageButtonCommand>
     {
         private readonly EmptyExamStageCommandGranter _emptyCommandGranter;
 
@@ -14,7 +14,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Button
             _emptyCommandGranter = emptyCommandGranter;
         }
 
-        public override CommandGranter<ExamStage> Get(ExamStageButtonCommand chosenCommandType)
+        public override CommandGranter<ExamStageWithMazeViewModel> Get(ExamStageButtonCommand chosenCommandType)
         {
             return chosenCommandType switch
             {
