@@ -37,6 +37,7 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
                 services.AddTransient<DeleteMazeCommandGranter>();
 
                 services.AddTransient<EmptyExamCommandGranter>();
+                services.AddTransient<DeleteExamCommandGranter>();
             });
 
             return hostBuilder;

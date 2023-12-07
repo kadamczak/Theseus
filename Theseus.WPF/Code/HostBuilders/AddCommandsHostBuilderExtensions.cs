@@ -39,6 +39,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IChangeExamSetsOfStaffMemberInGroupCommand, ChangeExamSetsOfStaffMemberInGroupCommand>();
                 services.AddSingleton<IDeleteGroupCommand, DeleteGroupCommand>();
                 services.AddSingleton<ICreateExamCommand, CreateExamCommand>();
+                services.AddSingleton<IDeleteExamCommand, DeleteExamCommand>();
             });
 
             return hostBuilder;

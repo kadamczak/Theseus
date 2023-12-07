@@ -3,6 +3,7 @@
     public enum ExamButtonCommand
     {
         None,
+        Delete,
         ViewStages
     }
 }

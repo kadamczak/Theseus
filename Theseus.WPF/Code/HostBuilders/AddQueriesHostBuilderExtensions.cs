@@ -43,6 +43,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IGetStepsOfExamQuery, GetStepsOfExamQuery>();
                 services.AddSingleton<IGetStagesOfExamQuery, GetStagesOfExamQuery>();
                 services.AddSingleton<IGetExamsOfGroupOfExamSetQuery, GetExamsOfGroupOfExamSetQuery>();
+                services.AddSingleton<IGetExamsOfExamSetQuery, GetExamsOfExamSetQuery>();
             });
 
             return hostBuilder;
