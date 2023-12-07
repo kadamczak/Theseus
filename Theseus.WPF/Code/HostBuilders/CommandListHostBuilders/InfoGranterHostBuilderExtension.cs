@@ -28,6 +28,7 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
                 services.AddTransient<EmptyStaffMemberInfoGranter>();
 
                 services.AddTransient<EmptyPatientInfoGranter>();
+                services.AddTransient<ExamPatientInfoGranter>();
 
                 services.AddTransient<EmptyExamInfoGranter>();
                 services.AddTransient<GeneralExamInfoGranter>();

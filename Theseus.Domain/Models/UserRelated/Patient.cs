@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.GroupRelated;
+﻿using Theseus.Domain.Models.ExamRelated;
+using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated.Enums;
 
 namespace Theseus.Domain.Models.UserRelated
@@ -14,5 +15,6 @@ namespace Theseus.Domain.Models.UserRelated
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public Group? Group { get; set; } = default!;
+        public List<Exam> Exams { get; set; } = new List<Exam>();
     }
 }

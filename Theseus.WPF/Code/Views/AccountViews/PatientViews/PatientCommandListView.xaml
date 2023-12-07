@@ -14,6 +14,13 @@
 
     <Grid>
         <ListView HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding ActionableModels}" FontSize="18">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Margin" Value="0 5 0 5"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
@@ -27,7 +34,7 @@
                             <GridViewColumn Header="Age">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Age}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Age, TargetNullValue=Undisclosed}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -49,6 +56,13 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                     <TextBlock Margin="10 0 10 0" Text="{Binding Model.ProfessionType}"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Additional Info">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="10 0 10 0" Text="{Binding Info}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

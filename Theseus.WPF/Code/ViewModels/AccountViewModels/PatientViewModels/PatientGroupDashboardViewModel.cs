@@ -11,7 +11,7 @@ using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCom
 using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.ButtonCommands;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.Info;
 
-namespace Theseus.WPF.Code.ViewModels
+namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels
 {
     public class PatientGroupDashboardViewModel : ViewModelBase
     {

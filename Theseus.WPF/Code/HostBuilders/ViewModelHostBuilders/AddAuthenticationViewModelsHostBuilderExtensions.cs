@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {

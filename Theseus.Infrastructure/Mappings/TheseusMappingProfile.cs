@@ -64,10 +64,12 @@ namespace Theseus.Infrastructure.Mappings
                 .ForMember(p => p.ExamSetDtos, c => c.MapFrom(p => p.ExamSets));
 
             CreateMap<PatientDto, Patient>()
-                .ForMember(p => p.Group, c => c.MapFrom(p => p.GroupDto));
+                .ForMember(p => p.Group, c => c.MapFrom(p => p.GroupDto))
+                .ForMember(p => p.Exams, c => c.MapFrom(p => p.ExamDtos));
 
             CreateMap<Patient, PatientDto>()
-                .ForMember(p => p.GroupDto, c => c.MapFrom(p => p.Group));
+                .ForMember(p => p.GroupDto, c => c.MapFrom(p => p.Group))
+                .ForMember(p => p.ExamDtos, c => c.MapFrom(p => p.Exams));
 
             CreateMap<Exam, ExamDto>()
                 .ForMember(p => p.ExamSetDto, c => c.MapFrom(p => p.ExamSet))

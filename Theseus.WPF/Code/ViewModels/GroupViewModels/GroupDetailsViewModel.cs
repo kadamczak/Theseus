@@ -2,6 +2,7 @@
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Stores;
+using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels;
 
 namespace Theseus.WPF.Code.ViewModels
 {

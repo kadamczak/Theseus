@@ -2,6 +2,7 @@
 {
     public enum PatientInfo
     {
-        None
+        None,
+        ExamInfo
     }
 }

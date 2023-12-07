@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Theseus.WPF.Code.Views"
+             xmlns:views="clr-namespace:Theseus.WPF.Code.Views"
              mc:Ignorable="d" 
              d:DesignHeight="784.04" d:DesignWidth="1040">
 
@@ -11,6 +11,7 @@
         <Grid Background="WhiteSmoke" Margin="40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="300"/>
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
@@ -20,8 +21,9 @@
                     <Button Style="{StaticResource Generic}" FontSize="22" Content="View recent exams" Command="{Binding GoToRecentExams}" />
                 </StackPanel>
             </DockPanel>
-            
-            
+
+            <views:PatientsExamsSummaryView Grid.Row="1" DataContext="{Binding PatientsExamsSummaryViewModel}"/>
+
         </Grid>
     </ScrollViewer>
 </UserControl>

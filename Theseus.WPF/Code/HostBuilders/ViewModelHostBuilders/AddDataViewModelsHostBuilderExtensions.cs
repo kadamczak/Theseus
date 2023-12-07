@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
+using Theseus.WPF.Code.ViewModels.DataViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders
 {
@@ -24,16 +25,19 @@ namespace Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders
         private static void AddViewModels(IServiceCollection services)
         {
             services.AddTransient<RecentExamsViewModel>();
+            services.AddTransient<PatientsExamsSummaryViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
         {
             services.AddSingleton<Func<RecentExamsViewModel>>((s) => () => s.GetRequiredService<RecentExamsViewModel>());
+            services.AddSingleton<Func<PatientsExamsSummaryViewModel>>((s) => () => s.GetRequiredService<PatientsExamsSummaryViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
         {
             services.AddSingleton<NavigationService<RecentExamsViewModel>>();
+            services.AddSingleton<NavigationService<PatientsExamsSummaryViewModel>>();
         }
     }
 }

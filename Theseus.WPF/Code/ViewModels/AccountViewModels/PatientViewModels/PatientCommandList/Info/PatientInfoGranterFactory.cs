@@ -8,10 +8,12 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.Patien
     public class PatientInfoGranterFactory : InfoGranterFactory<Patient, PatientInfo>
     {
         private readonly EmptyPatientInfoGranter _emptyInfoGranter;
+        private readonly ExamPatientInfoGranter _examInfoGranter;
 
-        public PatientInfoGranterFactory(EmptyPatientInfoGranter emptyInfoGranter)
+        public PatientInfoGranterFactory(EmptyPatientInfoGranter emptyInfoGranter, ExamPatientInfoGranter examInfoGranter)
         {
             _emptyInfoGranter = emptyInfoGranter;
+            _examInfoGranter = examInfoGranter;
         }
 
         public override InfoGranter<Patient> Create(PatientInfo chosenInfoType)
@@ -19,6 +21,7 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.Patien
             return chosenInfoType switch
             {
                 PatientInfo.None => _emptyInfoGranter,
+                PatientInfo.ExamInfo => _examInfoGranter,
                 _ => throw new ArgumentException("Invalid patient info type.")
             };
         }
