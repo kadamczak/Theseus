@@ -4,6 +4,7 @@ using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.ButtonCommands.Implementations;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList.ButtonCommands.Implementations;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.ButtonCommands.Implementations;
+using Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.ButtonCommands.Implementations;
 using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.ButtonCommands.Implementations;
 using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.ButtonCommands.Implementations;
 
@@ -39,6 +40,8 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
 
                 services.AddTransient<EmptyExamCommandGranter>();
                 services.AddTransient<DeleteExamCommandGranter>();
+
+                services.AddTransient<EmptyExamStageCommandGranter>();
             });
 
             return hostBuilder;

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList;
 using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffMemberCommandList;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList;
+using Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList;
 using Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList;
 using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList;
 using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList;
@@ -21,6 +22,7 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
                 services.AddTransient<StaffMemberCommandListViewModelFactory>();
                 services.AddTransient<PatientCommandListViewModelFactory>();
                 services.AddTransient<ExamCommandListViewModelFactory>();
+                services.AddTransient<ExamStageCommandListViewModelFactory>();
             });
 
             return hostBuilder;
