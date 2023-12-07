@@ -107,6 +107,9 @@
             <DataTemplate DataType="{x:Type vms:RecentExamsViewModel}">
                 <views:RecentExamsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:PatientExamsViewModel}">
+                <views:PatientExamsView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <views:NavigationBarView Grid.Column="0" DataContext="{Binding NavigationBarViewModel}" />

@@ -20,7 +20,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels
                                              PatientCommandListViewModelFactory patientCommandListFactory)
         {
             LoadPatientsOfStaffMemberToStore(getPatientsQuery, currentStaffMemberStore.StaffMember.Id, patientListStore);
-            PatientCommandListViewModel = patientCommandListFactory.Create(PatientButtonCommand.None, PatientButtonCommand.None, PatientInfo.ExamInfo);
+            PatientCommandListViewModel = patientCommandListFactory.Create(PatientButtonCommand.ShowExams, PatientButtonCommand.None, PatientInfo.ExamInfo);
             PatientCommandListViewModel.CreateModelCommandViewModels();
         }
 

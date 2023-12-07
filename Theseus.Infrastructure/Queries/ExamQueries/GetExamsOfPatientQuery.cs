@@ -18,6 +18,9 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 IEnumerable<ExamDto> examDtos = context.Exams
+                                                       .Include(e => e.ExamSetDto)
+                                                       .Include(e => e.PatientDto)
+                                                       .ThenInclude(p => p.GroupDto)
                                                        .Where(e => e.PatientDto.Id == patientId)
                                                        .OrderByDescending(e => e.CreatedAt)
                                                        .AsNoTracking();

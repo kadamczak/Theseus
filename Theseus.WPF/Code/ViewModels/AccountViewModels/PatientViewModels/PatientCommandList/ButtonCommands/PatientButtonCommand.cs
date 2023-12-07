@@ -3,6 +3,7 @@
     public enum PatientButtonCommand
     {
         None,
-        Remove
+        Remove,
+        ShowExams
     }
 }

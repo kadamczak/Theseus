@@ -26,18 +26,21 @@ namespace Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders
         {
             services.AddTransient<RecentExamsViewModel>();
             services.AddTransient<PatientsExamsSummaryViewModel>();
+            services.AddTransient<PatientExamsViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
         {
             services.AddSingleton<Func<RecentExamsViewModel>>((s) => () => s.GetRequiredService<RecentExamsViewModel>());
             services.AddSingleton<Func<PatientsExamsSummaryViewModel>>((s) => () => s.GetRequiredService<PatientsExamsSummaryViewModel>());
+            services.AddSingleton<Func<PatientExamsViewModel>>((s) => () => s.GetRequiredService<PatientExamsViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
         {
             services.AddSingleton<NavigationService<RecentExamsViewModel>>();
             services.AddSingleton<NavigationService<PatientsExamsSummaryViewModel>>();
+            services.AddSingleton<NavigationService<PatientExamsViewModel>>();
         }
     }
 }

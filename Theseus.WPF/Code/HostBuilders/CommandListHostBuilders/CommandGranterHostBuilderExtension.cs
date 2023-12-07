@@ -17,6 +17,7 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
             {
                 services.AddTransient<RemovePatientCommandGranter>();
                 services.AddTransient<EmptyPatientCommandGranter>();
+                services.AddTransient<ShowExamsPatientCommandGranter>();
 
                 services.AddTransient<RemoveStaffMemberCommandGranter>();
                 services.AddTransient<EmptyStaffMemberCommandGranter>();
