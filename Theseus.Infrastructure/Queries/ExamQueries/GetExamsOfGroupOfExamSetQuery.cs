@@ -19,6 +19,7 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
             {
                 IEnumerable<ExamDto> examDtos = context.Exams
                                                        .Include(e => e.PatientDto)
+                                                       .Include(e => e.ExamSetDto)
                                                        .Include(e => e.StageDtos)
                                                        .ThenInclude(s => s.StepDtos)
                                                        .Where(e => e.ExamSetDto.Id == examSetId && e.PatientDto.GroupDto.Id == groupId)

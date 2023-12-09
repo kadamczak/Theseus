@@ -24,7 +24,7 @@ namespace Theseus.WPF.Code.Services
             }
             else
             {
-                percentage = (value - examValue) / examValue * 100f;
+                percentage = (value - examValue) / value * 100f;
                 double roundedValue = Math.Round(percentage, 1);
                 return $"{adjectiveWhenLower} by {roundedValue}%.";
             }

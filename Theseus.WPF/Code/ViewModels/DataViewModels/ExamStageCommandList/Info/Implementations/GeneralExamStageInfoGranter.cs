@@ -118,13 +118,13 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
         private void AddComparisonToAverage(float averageInputs, float averageTime, float averageTimeBeforeFirstInput, float averageLongestInactivityTime)
         {
-            return new List<string> {
-                "Comparison to average completed attempts by other patients:",
-                $"\tTotal time: {_valueComparer.Compare(stats.TotalTime!.Value, averageTime, higherIsBetter: false)} (Avg: {averageTime})",
-                "\tInputs made: " + _valueComparer.Compare(stats.TotalInputs, averageInputs, higherIsBetter: false),
-            comparisonInfo.Add("\tTime before first input: " + _valueComparer.Compare(stats.TimeBeforeFirstInput!.Value, averageTimeBeforeFirstInput, "Higher", "Lower"));
-            comparisonInfo.Add("\tLongest inactivity time: " + _valueComparer.Compare(stats.LongestInactivityTime!.Value, averageLongestInactivityTime, "Higher", "Lower"));
-            };
+            //return new List<string> {
+            //    "Comparison to average completed attempts by other patients:",
+            //    $"\tTotal time: {_valueComparer.Compare(stats.TotalTime!.Value, averageTime, higherIsBetter: false)} (Avg: {averageTime})",
+            //    "\tInputs made: " + _valueComparer.Compare(stats.TotalInputs, averageInputs, higherIsBetter: false),
+            //comparisonInfo.Add("\tTime before first input: " + _valueComparer.Compare(stats.TimeBeforeFirstInput!.Value, averageTimeBeforeFirstInput, "Higher", "Lower"));
+            //comparisonInfo.Add("\tLongest inactivity time: " + _valueComparer.Compare(stats.LongestInactivityTime!.Value, averageLongestInactivityTime, "Higher", "Lower"));
+            //};
         }
     }
 }

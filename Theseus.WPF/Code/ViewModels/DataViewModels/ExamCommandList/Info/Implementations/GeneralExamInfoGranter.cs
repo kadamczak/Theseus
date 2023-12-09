@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Theseus.Domain.Models.ExamRelated;
+using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Exams;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -11,11 +12,15 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
     public class GeneralExamInfoGranter : InfoGranter<Exam>
     {
         private readonly ExamSetStatsStore _examSetStatsStore;
+        private readonly IGetExamsOfPatientQuery _getExamsOfPatientQuery;
         private readonly DescriptiveValueComparer _valueComparer;
 
-        public GeneralExamInfoGranter(DescriptiveValueComparer valueComparer, ExamSetStatsStore examSetStatsStore)
+        public GeneralExamInfoGranter(DescriptiveValueComparer valueComparer,
+                                      IGetExamsOfPatientQuery getExamsOfPatientQuery,
+                                      ExamSetStatsStore examSetStatsStore)
         {
             _valueComparer = valueComparer;
+            _getExamsOfPatientQuery = getExamsOfPatientQuery;
             _examSetStatsStore = examSetStatsStore;
         }
 
@@ -23,106 +28,157 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
         {
             public Guid PatientId { get; set; }
             public DateTime CreatedAt { get; set; }
+            public int AttemptNumber { get; set; }
+            public bool NoSkips { get; set; }
             public float TotalExamTime { get; set; }
             public int CompletedMazeAmount { get; set; }
-            public int TotalSteps { get; set; }
+            public int TotalInputs { get; set; }
         }
 
         public override string GrantInfo(CommandViewModel<Exam> commandViewModel)
         {
-            Guid examId = commandViewModel.Model.Id;
             Guid examSetId = commandViewModel.Model.ExamSet.Id;
             Guid groupId = commandViewModel.Model.Patient.Group.Id;
 
-            var examStages = commandViewModel.Model.Stages;
-            var examSteps = commandViewModel.Model.Stages.SelectMany(s => s.Steps);
-
             ExamSetStatSummary examSetStatSummary = _examSetStatsStore.ExamSetStatList.Where(e => e.GroupId == groupId && e.ExamSetId == examSetId).First();
+            ExamStats currentExamStats = CalculateExamStats(commandViewModel.Model);
 
-            ExamStats currentExamStats = new ExamStats()
-            {
-                PatientId = commandViewModel.Model.Patient.Id,
-                CreatedAt = commandViewModel.Model.CreatedAt,
-                TotalExamTime = examSteps.Sum(e => e.TimeBeforeStep),
-                CompletedMazeAmount = examStages.Where(s => s.Completed).Count(),
-                TotalSteps = examSteps.Count()
-            };
-
-            List<string> displayedInfoText = CreateBasicSummary(currentExamStats, examSetStatSummary);
-            displayedInfoText.AddRange(CreateComparisonTextWithOverallSummary(currentExamStats, examSetStatSummary));
-            displayedInfoText.AddRange(CreateComparisonWithPreviousAttempt(currentExamStats, examSetStatSummary));
+            List<string> displayedInfoText = CreateBasicTextSummary(currentExamStats, examSetStatSummary);
+            displayedInfoText.AddRange(CreateComparisonTextToOtherPatients(currentExamStats, examSetStatSummary));
+            displayedInfoText.AddRange(CreateComparisonTextToPreviousAttempt(currentExamStats, examSetStatSummary));
 
             return string.Join("\n", displayedInfoText.ToArray());
         }
 
-        private List<string> CreateBasicSummary(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
+        private ExamStats CalculateExamStats(Exam exam)
         {
-            return new List<string>
+            var examStages = exam.Stages;
+            var examSteps = exam.Stages.SelectMany(s => s.Steps);
+
+            return new ExamStats()
             {
-                $"Completed mazes: {currentExamStats.CompletedMazeAmount}/{examSetStatSummary.MazeAmount}",
-                $"Total time: {Math.Round(currentExamStats.TotalExamTime, 2)} s",
-                $"Inputs made: {currentExamStats.TotalSteps}/{examSetStatSummary.IdealStepAmount}"
+                PatientId = exam.Patient.Id,
+                CreatedAt = exam.CreatedAt,
+                AttemptNumber = CalculateAttemptNumber(exam),
+                NoSkips = examStages.All(e => e.Completed),
+                TotalExamTime = examSteps.Sum(e => e.TimeBeforeStep),
+                CompletedMazeAmount = examStages.Where(s => s.Completed).Count(),
+                TotalInputs = examSteps.Count()
             };
         }
 
-        private List<string> CreateComparisonTextWithOverallSummary(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
+        private int CalculateAttemptNumber(Exam exam) => _getExamsOfPatientQuery.GetExams(exam.Patient.Id)
+                                                                                .Where(e => e.ExamSet.Id == exam.ExamSet.Id)
+                                                                                .Where(e => e.CreatedAt < exam.CreatedAt)
+                                                                                .Count() + 1;
+
+        private List<string> CreateBasicTextSummary(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
+        {
+            return new List<string>
+            {
+                $"Attempt #{currentExamStats.AttemptNumber}",
+                $"Completed mazes: {currentExamStats.CompletedMazeAmount}/{examSetStatSummary.MazeAmount}",
+                $"Total time: {Round(currentExamStats.TotalExamTime)} s",
+                $"Inputs made: {currentExamStats.TotalInputs}/{examSetStatSummary.IdealStepAmount}"
+            };
+        }
+
+        private List<string> CreateComparisonTextToOtherPatients(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
         {
             var examsByOtherPatients = examSetStatSummary.Exams.Where(e => e.Patient.Id != currentExamStats.PatientId);
 
-            if(examsByOtherPatients.Any())
-            {
-                var examsByOtherPatientsWithNoSkips = examsByOtherPatients.Where(e => !e.Stages.Where(s => !s.Completed).Any());
-
-                List<string> comparisonInfo = new List<string>() {
-                    $"Amount of attempts by other patients: {examsByOtherPatients.Count()}",
-                    $"Amount of attempts with no skips by other patients: {examsByOtherPatientsWithNoSkips.Count()}",
-                    "", "Comparison to average:"
-                };
-
-                float averageCompletedMazes = (float) examsByOtherPatients.Average(e => e.Stages.Count(s => s.Completed));
-                bool anyCompletedExamsByOtherPatient = examsByOtherPatientsWithNoSkips.Any();
-
-                float? averageTotalTime = anyCompletedExamsByOtherPatient ? (float)examsByOtherPatientsWithNoSkips.Average(e => e.Stages.Sum(s => s.Steps.Sum(s => s.TimeBeforeStep))) : null;
-                float? averageTotalInputs = anyCompletedExamsByOtherPatient ? (float)examsByOtherPatientsWithNoSkips.Average(e => e.Stages.Sum(s => s.Steps.Count)) : null;
-
-                comparisonInfo.Add("\tCompleted mazes: " + _valueComparer.Compare(currentExamStats.CompletedMazeAmount, averageCompletedMazes, higherIsBetter: true));
-                comparisonInfo.Add("\tTotal time: " + _valueComparer.Compare(currentExamStats.TotalExamTime, averageTotalTime, higherIsBetter: false));
-                comparisonInfo.Add("\tInputs made: " + _valueComparer.Compare(currentExamStats.TotalSteps, averageTotalInputs, higherIsBetter: false));
-
-                return comparisonInfo;
-            }
-            else
-            {
-                return new List<string>() { "Other patients in group didn't complete this exam set."};
-            }
+            return examsByOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStats, CalculateAverageStats(examsByOtherPatients)) :
+                                                new List<string>() { "Other patients in group didn't complete this exam set." };
         }
 
-        private IEnumerable<string> CreateComparisonWithPreviousAttempt(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
+        public class AverageStats
+        {
+            public int TotalExamAmount { get; set; }
+            public int ExamsWithNoSkipsAmount { get; set; }
+            public float AverageCompletedMazes { get; set; }
+            public float? AverageTotalTime { get; set; }
+            public float? AverageTotalInputs { get; set; }
+        }
+
+        private AverageStats CalculateAverageStats(IEnumerable<Exam> exams)
+        {
+            var examsByOtherPatientsWithNoSkips = exams.Where(e => !e.Stages.Where(s => !s.Completed).Any());
+            bool anyCompletedExamsByOtherPatient = examsByOtherPatientsWithNoSkips.Any();
+
+            return new AverageStats()
+            {
+                TotalExamAmount = exams.Count(),
+                ExamsWithNoSkipsAmount = examsByOtherPatientsWithNoSkips.Count(),
+                AverageCompletedMazes = CalculateAverageCompletedMazes(exams),
+                AverageTotalTime = anyCompletedExamsByOtherPatient ? CalculateAverageTotalTime(examsByOtherPatientsWithNoSkips) : null,
+                AverageTotalInputs = anyCompletedExamsByOtherPatient ? CalculateAverageTotalInputs(examsByOtherPatientsWithNoSkips) : null
+            };
+        }
+
+        private float CalculateAverageCompletedMazes(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Count(s => s.Completed));
+        private float CalculateAverageTotalTime(IEnumerable<Exam> exams) => exams.Average(e => e.Stages.Sum(s => s.Steps.Sum(s => s.TimeBeforeStep)));
+        private float CalculateAverageTotalInputs(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Sum(s => s.Steps.Count));
+
+        private List<string> CreateFullComparisonTextToOtherPatients(ExamStats currentExamStats, AverageStats otherPatientsStats)
+        {
+            string completedMazesComparison = _valueComparer.Compare(currentExamStats.CompletedMazeAmount, otherPatientsStats.AverageCompletedMazes, higherIsBetter: true);
+            string averageCompletedMazesFormatted = Round(otherPatientsStats.AverageCompletedMazes);
+
+            List<string> comparisonText =  new List<string>() {
+                    $"Amount of attempts by other patients: {otherPatientsStats.TotalExamAmount}",
+                    $"Amount of attempts with no skips by other patients: {otherPatientsStats.ExamsWithNoSkipsAmount}",
+                    "", "Comparison to average:",
+                    $"\tCompleted mazes: {completedMazesComparison} (Avg: {averageCompletedMazesFormatted})"
+            };
+
+            if (currentExamStats.NoSkips && otherPatientsStats.ExamsWithNoSkipsAmount > 0)
+                comparisonText.AddRange(CreateComparisonTextForTimeAndInputs(currentExamStats, otherPatientsStats.AverageTotalTime.Value, otherPatientsStats.AverageTotalInputs.Value, "Avg"));
+
+            return comparisonText;
+        }
+
+        private string Round(float value, string suffix = "") => Math.Round(value, 1).ToString() + suffix;
+
+        private IEnumerable<string> CreateComparisonTextToPreviousAttempt(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
         {
             var previousAttempt = examSetStatSummary.Exams
                                                      .Where(e => e.Patient.Id == currentExamStats.PatientId)
                                                      .Where(e => e.CreatedAt < currentExamStats.CreatedAt)
                                                      .OrderByDescending(e => e.CreatedAt)
                                                      .FirstOrDefault();
-            if (previousAttempt is null)
-            {
-                return new List<string>() {"", "No previous attempts by this patient." };
-            }
-            else
-            {
-                int previousCompletedMazes = previousAttempt.Stages.Count(s => s.Completed);
-                bool allMazesCompleted = previousAttempt.Stages.All(s => s.Completed);
 
-                float? previousTotalTime = (allMazesCompleted) ? previousAttempt.Stages.Sum(s => s.Steps.Sum(s => s.TimeBeforeStep)) : null;
-                float? previousTotalInputs = (allMazesCompleted) ? previousAttempt.Stages.Sum(s => s.Steps.Count) : null;
+            return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStats, CalculateExamStats(previousAttempt)) :
+                                                   new List<string>() { "", "No previous attempts by this patient." };
+        }
 
-                return new List<string>() {
-                    "", $"Comparison to previous attempt on {previousAttempt.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:",
-                    "\tCompleted mazes: " + _valueComparer.Compare(currentExamStats.CompletedMazeAmount, previousCompletedMazes, higherIsBetter: true),
-                    "\tTotal time: " + _valueComparer.Compare(currentExamStats.TotalExamTime, previousTotalTime, higherIsBetter: false),
-                    "\tInputs made: " + _valueComparer.Compare(currentExamStats.TotalSteps, previousTotalInputs, higherIsBetter: false)
-                };
-            }
+        private List<string> CreateFullComparisonTextToPreviousAttempt(ExamStats currentExamStats, ExamStats previousExamStats)
+        {
+            string completedMazesComparison = _valueComparer.Compare(currentExamStats.CompletedMazeAmount, previousExamStats.CompletedMazeAmount, higherIsBetter: true);
+            var comparisonText = new List<string>
+            {
+                "", $"Comparison to previous attempt on {previousExamStats.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:",
+                    $"\tCompleted mazes: {completedMazesComparison} (Prev: {previousExamStats.CompletedMazeAmount})",
+            };
+
+            if (currentExamStats.NoSkips && previousExamStats.NoSkips)
+                comparisonText.AddRange(CreateComparisonTextForTimeAndInputs(currentExamStats, previousExamStats.TotalExamTime, previousExamStats.TotalInputs, "Prev"));
+
+            return comparisonText;
+               
+        }
+
+        private List<string> CreateComparisonTextForTimeAndInputs(ExamStats currentExamStats, float time, float inputs, string valueType)
+        {
+            string timeComparison = _valueComparer.Compare(currentExamStats.TotalExamTime, time, higherIsBetter: false);
+            string inputComparison = _valueComparer.Compare(currentExamStats.TotalInputs, inputs, higherIsBetter: false);
+            string timeFormatted = Round(time, " s");
+            string inputsFormatted = Round(inputs);
+
+            return new List<string>
+            {
+                $"\tTotal time: {timeComparison} ({valueType}: {timeFormatted})",
+                $"\tInputs made: {inputComparison} ({valueType}: {inputsFormatted})"
+            };
         }
     }
 }
