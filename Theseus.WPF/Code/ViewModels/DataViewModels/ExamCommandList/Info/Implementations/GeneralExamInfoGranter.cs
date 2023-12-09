@@ -91,7 +91,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                                                 new List<string>() { "Other patients in group didn't complete this exam set." };
         }
 
-        public class AverageStats
+        public class AverageExamStats
         {
             public int TotalExamAmount { get; set; }
             public int ExamsWithNoSkipsAmount { get; set; }
@@ -100,12 +100,12 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             public float? AverageTotalInputs { get; set; }
         }
 
-        private AverageStats CalculateAverageStats(IEnumerable<Exam> exams)
+        private AverageExamStats CalculateAverageStats(IEnumerable<Exam> exams)
         {
             var examsByOtherPatientsWithNoSkips = exams.Where(e => !e.Stages.Where(s => !s.Completed).Any());
             bool anyCompletedExamsByOtherPatient = examsByOtherPatientsWithNoSkips.Any();
 
-            return new AverageStats()
+            return new AverageExamStats()
             {
                 TotalExamAmount = exams.Count(),
                 ExamsWithNoSkipsAmount = examsByOtherPatientsWithNoSkips.Count(),
@@ -119,25 +119,26 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
         private float CalculateAverageTotalTime(IEnumerable<Exam> exams) => exams.Average(e => e.Stages.Sum(s => s.Steps.Sum(s => s.TimeBeforeStep)));
         private float CalculateAverageTotalInputs(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Sum(s => s.Steps.Count));
 
-        private List<string> CreateFullComparisonTextToOtherPatients(ExamStats currentExamStats, AverageStats otherPatientsStats)
+        private List<string> CreateFullComparisonTextToOtherPatients(ExamStats currentExamStats, AverageExamStats otherPatientsStats)
         {
             string completedMazesComparison = _valueComparer.Compare(currentExamStats.CompletedMazeAmount, otherPatientsStats.AverageCompletedMazes, higherIsBetter: true);
             string averageCompletedMazesFormatted = Round(otherPatientsStats.AverageCompletedMazes);
+            string formattedPercentNoSkips = Round((float) otherPatientsStats.ExamsWithNoSkipsAmount / otherPatientsStats.TotalExamAmount * 100f);
 
             List<string> comparisonText =  new List<string>() {
                     $"Amount of attempts by other patients: {otherPatientsStats.TotalExamAmount}",
-                    $"Amount of attempts with no skips by other patients: {otherPatientsStats.ExamsWithNoSkipsAmount}",
+                    $"Amount of attempts with no skips by other patients: {otherPatientsStats.ExamsWithNoSkipsAmount} ({formattedPercentNoSkips}%)",
                     "", "Comparison to average:",
                     $"\tCompleted mazes: {completedMazesComparison} (Avg: {averageCompletedMazesFormatted})"
             };
 
             if (currentExamStats.NoSkips && otherPatientsStats.ExamsWithNoSkipsAmount > 0)
-                comparisonText.AddRange(CreateComparisonTextForTimeAndInputs(currentExamStats, otherPatientsStats.AverageTotalTime.Value, otherPatientsStats.AverageTotalInputs.Value, "Avg"));
+                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, otherPatientsStats.AverageTotalTime.Value, otherPatientsStats.AverageTotalInputs.Value, "Avg"));
 
             return comparisonText;
         }
 
-        private string Round(float value, string suffix = "") => Math.Round(value, 1).ToString() + suffix;
+        private string Round(float value) => Math.Round(value, 1).ToString();
 
         private IEnumerable<string> CreateComparisonTextToPreviousAttempt(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
         {
@@ -161,22 +162,22 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             };
 
             if (currentExamStats.NoSkips && previousExamStats.NoSkips)
-                comparisonText.AddRange(CreateComparisonTextForTimeAndInputs(currentExamStats, previousExamStats.TotalExamTime, previousExamStats.TotalInputs, "Prev"));
+                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, previousExamStats.TotalExamTime, previousExamStats.TotalInputs, "Prev"));
 
             return comparisonText;
                
         }
 
-        private List<string> CreateComparisonTextForTimeAndInputs(ExamStats currentExamStats, float time, float inputs, string valueType)
+        private List<string> CreateComparisonTextForNoSkipExams(ExamStats currentExamStats, float time, float inputs, string valueType)
         {
             string timeComparison = _valueComparer.Compare(currentExamStats.TotalExamTime, time, higherIsBetter: false);
             string inputComparison = _valueComparer.Compare(currentExamStats.TotalInputs, inputs, higherIsBetter: false);
-            string timeFormatted = Round(time, " s");
+            string timeFormatted = Round(time);
             string inputsFormatted = Round(inputs);
 
             return new List<string>
             {
-                $"\tTotal time: {timeComparison} ({valueType}: {timeFormatted})",
+                $"\tTotal time: {timeComparison} ({valueType}: {timeFormatted} s)",
                 $"\tInputs made: {inputComparison} ({valueType}: {inputsFormatted})"
             };
         }

@@ -11,7 +11,7 @@
         <Grid Background="WhiteSmoke" Margin="40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="300"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
@@ -22,7 +22,7 @@
                 </StackPanel>
             </DockPanel>
 
-            <views:PatientsExamsSummaryView Grid.Row="1" DataContext="{Binding PatientsExamsSummaryViewModel}"/>
+            <views:PatientsExamsSummaryView Grid.Row="1" DataContext="{Binding PatientsExamsSummaryViewModel}" Margin=" 0 0 0 30"/>
 
         </Grid>
     </ScrollViewer>

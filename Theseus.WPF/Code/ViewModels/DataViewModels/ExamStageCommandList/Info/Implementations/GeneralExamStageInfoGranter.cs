@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Theseus.Domain.Models.ExamRelated;
@@ -9,6 +7,7 @@ using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 using Theseus.WPF.Code.ViewModels.Bindings.ExamBindings;
+using static Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.Implementations.GeneralExamStageInfoGranter;
 
 namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.Implementations
 {
@@ -34,9 +33,13 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             public Guid ExamSetId { get; set; }
             public int Index { get; set; }
             public DateTime CreatedAt { get; set; }
-
             public bool Completed { get; set; }
-            public int TotalInputs { get; set; }
+            public ExamStageData Data { get; set; }
+        }
+
+        public class ExamStageData
+        {
+            public float TotalInputs { get; set; }
             public float? TotalTime { get; set; }
             public float? TimeBeforeFirstInput { get; set; }
             public float? LongestInactivityTime { get; set; }
@@ -44,10 +47,20 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
         public override string GrantInfo(CommandViewModel<ExamStageWithMazeViewModel> commandViewModel)
         {
-            ExamStage examStage = commandViewModel.Model.ExamStage;
+            ExamStageStats currentExamStageStats = CalculateExamStageStats(commandViewModel.Model.ExamStage);
+
+            List<string> displayedInfoText = CreateBasicSummary(currentExamStageStats);
+            displayedInfoText.AddRange(CreateComparisonTextToOtherPatients(currentExamStageStats));
+            displayedInfoText.AddRange(CreateComparisonTextToPreviousAttempt(currentExamStageStats));
+
+            return string.Join("\n", displayedInfoText.ToArray());
+        }
+
+        private ExamStageStats CalculateExamStageStats(ExamStage examStage)
+        {
             Exam exam = examStage.Exam;
 
-            ExamStageStats currentExamStageStats = new ExamStageStats()
+            return new ExamStageStats()
             {
                 PatientId = exam.Patient.Id,
                 ExamStageId = examStage.Id,
@@ -55,76 +68,162 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                 Index = examStage.Index,
                 CreatedAt = exam.CreatedAt,
                 Completed = examStage.Completed,
-                TotalInputs = examStage.Steps.Count,
-                TotalTime = examStage.Steps.Any() ? examStage.Steps.Sum(s => s.TimeBeforeStep) : null,
-                TimeBeforeFirstInput = examStage.Steps.Any() ? examStage.Steps.First().TimeBeforeStep : null,
-                LongestInactivityTime = examStage.Steps.Any() ? examStage.Steps.Max(s => s.TimeBeforeStep) : null
+
+                Data = new ExamStageData()
+                {
+                    TotalInputs = examStage.Steps.Count,
+                    TotalTime = examStage.Steps.Any() ? examStage.Steps.Sum(s => s.TimeBeforeStep) : null,
+                    TimeBeforeFirstInput = examStage.Steps.Any() ? examStage.Steps.First().TimeBeforeStep : null,
+                    LongestInactivityTime = examStage.Steps.Any() ? examStage.Steps.Max(s => s.TimeBeforeStep) : null
+                }
             };
-
-            List<string> displayedInfoText = CreateBasicSummary(currentExamStageStats);
-            displayedInfoText.AddRange(CreateComparisonTextWithOverallSummary(currentExamStageStats));
-            //displayedInfoText.AddRange(CreateComparisonWithPreviousAttempt(currentExamStats, examSetStatSummary));
-
-            return string.Join("\n", displayedInfoText.ToArray());
         }
 
         private List<string> CreateBasicSummary(ExamStageStats stats)
         {
-            string timeInfo = stats.TotalTime is null ? "Not recorded (inputs were not made)." : Math.Round(stats.TotalTime.Value, 2).ToString();
             var maze = _getMazeOfExamStageQuery.GetMaze(stats.ExamStageId);
             int idealInputAmount = maze.SolutionPath.Count;
 
-            return new List<string>
+            List<string> textSummary = new List<string>
             {
                 "Completed: " + (stats.Completed ? "Yes" : "No"),
-                $"Total time: {timeInfo} s",
-                $"Inputs made: {stats.TotalInputs}/{idealInputAmount}"
+                $"Inputs made: {Round(stats.Data.TotalInputs)}/{idealInputAmount}",
+            };
+
+            if (stats.Data.TotalInputs > 0)
+            {
+                textSummary.AddRange(new List<string>
+                {
+                    $"Total time: {Round(stats.Data.TotalTime!.Value)} s",
+                    $"Time before first input: {Round(stats.Data.TimeBeforeFirstInput!.Value)} s",
+                    $"Longest inactivity time: {Round(stats.Data.LongestInactivityTime!.Value)} s",
+                });
+            }
+            else
+            {
+                textSummary.Add("Times not recorded (inputs were not made).");
+            }
+            return textSummary;
+        }
+
+        private IEnumerable<string> CreateComparisonTextToOtherPatients(ExamStageStats currentExamStageStats)
+        {
+            var examStagesOfOtherPatients = _getExamStagesQuery.GetExamStages(currentExamStageStats.ExamSetId, currentExamStageStats.Index)
+                                                               .Where(e => e.Exam.Patient.Id != currentExamStageStats.PatientId);
+
+            return examStagesOfOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStageStats, CalculateAverageStats(examStagesOfOtherPatients)) :
+                                                     new List<string>() { "Other patients in group didn't complete this maze." };
+        }
+
+        public class AverageExamStageStats
+        {
+            public int TotalAttemptAmount { get; set; }
+            public int CompletedAttemptAmount { get; set; }
+            public ExamStageData Data { get; set; }
+        }
+
+        private AverageExamStageStats CalculateAverageStats(IEnumerable<ExamStage> examStages)
+        {
+            var completedExamStages = examStages.Where(e => e.Completed);
+
+            return new AverageExamStageStats()
+            {
+                TotalAttemptAmount = examStages.Count(),
+                CompletedAttemptAmount = completedExamStages.Count(),
+                Data = new ExamStageData()
+                {
+                    TotalTime = completedExamStages.Any() ? CalculateAverageTotalTime(completedExamStages) : null,
+                    TotalInputs = completedExamStages.Any() ? CalculateAverageTotalInputs(completedExamStages) : 0,
+                    TimeBeforeFirstInput = completedExamStages.Any() ? CalculateAverageTimeBeforeFirstInput(completedExamStages) : null,
+                    LongestInactivityTime = completedExamStages.Any() ? CalculateAverageLongestInactivityTime(completedExamStages) : null
+                }
             };
         }
 
-        private IEnumerable<string> CreateComparisonTextWithOverallSummary(ExamStageStats stats)
+        private float CalculateAverageTotalTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Sum(e => e.TimeBeforeStep));
+        private float CalculateAverageTotalInputs(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Count);
+        private float CalculateAverageTimeBeforeFirstInput(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.First().TimeBeforeStep);
+        private float CalculateAverageLongestInactivityTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Max(e => e.TimeBeforeStep));
+
+        private List<string> CreateFullComparisonTextToOtherPatients(ExamStageStats examStageStats, AverageExamStageStats averageExamStageStats)
         {
-            var examStagesOfOtherPatients = _getExamStagesQuery.GetExamStages(stats.ExamSetId, stats.Index)
-                                                               .Where(e => e.Exam.Patient.Id != stats.PatientId);
-            var otherCompleted = examStagesOfOtherPatients.Where(e => e.Completed);
-            int totalAmountOfAttempts = examStagesOfOtherPatients.Count();
-            int completedAmountOfAttempts = otherCompleted.Count();
+            string formattedPercentCompleted = Round((float) averageExamStageStats.CompletedAttemptAmount / averageExamStageStats.TotalAttemptAmount * 100f);
 
-            float averageCompleted = otherCompleted.Count() / examStagesOfOtherPatients.Count() * 100f;
-
-            List<string> comparisonInfo = new List<string>
-            {
-                $"Amount of attempts by other patients: {totalAmountOfAttempts}",
-                $"{averageCompleted}% of these attempts were completed ({completedAmountOfAttempts}/{totalAmountOfAttempts})",
-                "",
+            List<string> comparisonText = new List<string>() {
+                    "",
+                    $"Amount of attempts by other patients: {averageExamStageStats.TotalAttemptAmount}",
+                    $"Amount of completed attempts by other patients: {averageExamStageStats.CompletedAttemptAmount} ({formattedPercentCompleted}%)"
             };
 
-            if (stats.TotalInputs > 0 && otherCompleted.Any())
+            if (examStageStats.Completed && averageExamStageStats.CompletedAttemptAmount > 0)
             {
-                float averageInputs = (float)otherCompleted.Average(e => e.Steps.Count);
-                float averageTime = (float) otherCompleted.Average(e => e.Steps.Sum(e => e.TimeBeforeStep));
-                float averageTimeBeforeFirstInput = (float)otherCompleted.Average(e => e.Steps.First().TimeBeforeStep);
-                float averageLongestInactivityTime = (float)otherCompleted.Average(e => e.Steps.Max(e => e.TimeBeforeStep));
-
-                AddComparisonToAverage(averageInputs, averageTime, averageTimeBeforeFirstInput, averageLongestInactivityTime);
-            }
-            else if (stats.TotalInputs == 0)
-            {
-                comparisonInfo.Add("Patient's attempt can not be compared time-wise because it was not completed.");
+                comparisonText.AddRange(new List<string>() { "Comparison to average:" });
+                comparisonText.AddRange(CreateComparisonOfCompletedStages(examStageStats, averageExamStageStats.Data, "Avg"));
             }
 
-            return comparisonInfo;
+            return comparisonText;
         }
 
-        private void AddComparisonToAverage(float averageInputs, float averageTime, float averageTimeBeforeFirstInput, float averageLongestInactivityTime)
+        private IEnumerable<string> CreateComparisonOfCompletedStages(ExamStageStats examStageStats, ExamStageData otherExamStageData, string valueType)
         {
-            //return new List<string> {
-            //    "Comparison to average completed attempts by other patients:",
-            //    $"\tTotal time: {_valueComparer.Compare(stats.TotalTime!.Value, averageTime, higherIsBetter: false)} (Avg: {averageTime})",
-            //    "\tInputs made: " + _valueComparer.Compare(stats.TotalInputs, averageInputs, higherIsBetter: false),
-            //comparisonInfo.Add("\tTime before first input: " + _valueComparer.Compare(stats.TimeBeforeFirstInput!.Value, averageTimeBeforeFirstInput, "Higher", "Lower"));
-            //comparisonInfo.Add("\tLongest inactivity time: " + _valueComparer.Compare(stats.LongestInactivityTime!.Value, averageLongestInactivityTime, "Higher", "Lower"));
-            //};
+            string timeComparison = _valueComparer.Compare(examStageStats.Data.TotalTime!.Value, otherExamStageData.TotalTime, higherIsBetter: false);
+            string inputComparison = _valueComparer.Compare(examStageStats.Data.TotalInputs, otherExamStageData.TotalInputs, higherIsBetter: false);
+            string firstInputTimeComparison = _valueComparer.Compare(examStageStats.Data.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput!.Value, "Higher", "Lower");
+            string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.Data.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime!.Value, "Higher", "Lower");
+
+            string timeFormatted = Round(otherExamStageData.TotalTime!.Value);
+            string inputsFormatted = Round(otherExamStageData.TotalInputs);
+            string firstInputTimeFormatted = Round(otherExamStageData.TimeBeforeFirstInput!.Value);
+            string longestInactivityTimeFormatted = Round(otherExamStageData.LongestInactivityTime!.Value);
+
+            return new List<string>
+            {
+                $"\tInputs made: {inputComparison} ({valueType}: {inputsFormatted})",
+                $"\tTotal time: {timeComparison} ({valueType}: {timeFormatted} s)",
+                $"\tTime before first input: {firstInputTimeComparison} ({valueType}: {firstInputTimeFormatted} s)",
+                $"\tLongest inactivity time: {longestInactivityTimeComparison} ({valueType}: {longestInactivityTimeFormatted} s)"
+            };
         }
+
+        private IEnumerable<string> CreateComparisonTextToPreviousAttempt(ExamStageStats currentExamStageStats)
+        {
+            var previousAttempt = _getExamStagesQuery.GetExamStages(currentExamStageStats.ExamSetId, currentExamStageStats.Index)
+                                                     .Where(e => e.Exam.Patient.Id == currentExamStageStats.PatientId)
+                                                     .Where(e => e.Exam.CreatedAt < currentExamStageStats.CreatedAt)
+                                                     .OrderByDescending(e => e.Exam.CreatedAt)
+                                                     .FirstOrDefault();
+
+            return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStageStats, CalculateExamStageStats(previousAttempt)) :
+                                                   new List<string>() { "", "No previous attempts by this patient." };
+        }
+
+        private List<string> CreateFullComparisonTextToPreviousAttempt(ExamStageStats currentExamStageStats, ExamStageStats previousExamStageStats)
+        {
+            var comparisonText = new List<string>
+            {
+                "", $"Comparison to previous attempt on {previousExamStageStats.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:"
+            };
+
+            if (currentExamStageStats.Completed && previousExamStageStats.Completed)
+            {
+                comparisonText.AddRange(CreateComparisonOfCompletedStages(currentExamStageStats, previousExamStageStats.Data, "Prev"));
+            }
+            else if (currentExamStageStats.Completed)
+            {
+                comparisonText.Add("Previous attempt was not completed, but this one was.");
+            }
+            else if (previousExamStageStats.Completed)
+            {
+                comparisonText.Add("Previous attempt was completed, but this one was not.");
+            }
+            else
+            {
+                comparisonText.Add("Both attempts were not completed.");
+            }
+
+            return comparisonText;
+        }
+
+        private string Round(float value) => Math.Round(value, 1).ToString();
     }
 }
