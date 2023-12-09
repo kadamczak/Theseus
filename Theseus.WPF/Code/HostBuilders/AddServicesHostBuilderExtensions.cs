@@ -18,6 +18,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IPasswordHasher, PasswordHasher>();
                 services.AddSingleton<IEmailValidator, EmailValidator>();
                 services.AddSingleton<ExamSetStatCalculator>();
+                services.AddSingleton<DescriptiveValueComparer>();
                 services.AddSingleton<IStaffMemberAuthenticationService, StaffMemberAuthenticationService>();
                 services.AddSingleton<IPatientAuthenticationService, PatientAuthenticationService>();
 

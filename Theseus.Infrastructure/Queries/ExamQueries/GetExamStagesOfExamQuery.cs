@@ -18,8 +18,12 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 IEnumerable<ExamStageDto> examStageDtos = context.ExamStages
-                                                                 .Where(e => e.ExamDto.Id == examId)
                                                                  .Include(e => e.StepDtos)
+                                                                 .Include(e => e.ExamDto)
+                                                                 .ThenInclude(e => e.ExamSetDto)
+                                                                 .Include(e => e.ExamDto)
+                                                                 .ThenInclude(e => e.PatientDto)
+                                                                 .Where(e => e.ExamDto.Id == examId)
                                                                  .OrderBy(e => e.Index)
                                                                  .AsNoTracking();
 

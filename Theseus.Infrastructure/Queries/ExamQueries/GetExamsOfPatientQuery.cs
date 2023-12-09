@@ -21,6 +21,8 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
                                                        .Include(e => e.ExamSetDto)
                                                        .Include(e => e.PatientDto)
                                                        .ThenInclude(p => p.GroupDto)
+                                                       .Include(e => e.StageDtos)
+                                                       .ThenInclude(e => e.StepDtos)
                                                        .Where(e => e.PatientDto.Id == patientId)
                                                        .OrderByDescending(e => e.CreatedAt)
                                                        .AsNoTracking();

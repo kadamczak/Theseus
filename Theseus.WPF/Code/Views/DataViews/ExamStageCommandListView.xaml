@@ -56,7 +56,7 @@
 
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="260" />
+                                <RowDefinition Height="500" />
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -73,7 +73,7 @@
                                 <Button Style="{StaticResource Generic}" Margin="0 10 0 0" FontSize="15" Visibility="{Binding Button2.Show, Converter={StaticResource BooleanVisibility}}" Content="{Binding Button2.CommandName}" Command="{Binding Button2.Command}"  HorizontalAlignment="Stretch" Padding="7 0" Height="40" />
                             </StackPanel>
 
-                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="2" FontSize="18" MaxWidth="260" Text="{Binding Info, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" Margin="30 0 0 0" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="2" FontSize="18"  Text="{Binding Info, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

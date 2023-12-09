@@ -25,7 +25,7 @@ namespace Theseus.WPF.Code.ViewModels
         {
             LoadExamStagesOfExam(getExamStagesQuery, getMazeQuery, examDetailsStore.SelectedModel.Id, examStageListStore);
 
-            ExamStageCommandListViewModel = examStageCommandListViewModelFactory.Create(ExamStageButtonCommand.None, ExamStageButtonCommand.None, ExamStageInfo.None);
+            ExamStageCommandListViewModel = examStageCommandListViewModelFactory.Create(ExamStageButtonCommand.None, ExamStageButtonCommand.None, ExamStageInfo.GeneralInfo);
             ExamStageCommandListViewModel.CreateModelCommandViewModels();
         }
 
