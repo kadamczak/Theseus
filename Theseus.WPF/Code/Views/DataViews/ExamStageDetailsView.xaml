@@ -25,6 +25,7 @@
 
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Label Content="End" FontSize="30" Margin="0 0 30 0" Visibility="{Binding ReplayDone, Converter={StaticResource BooleanVisibility}}"/>
+                <Button Style="{StaticResource Generic}" Content="Go Back" IsEnabled="{Binding NavigationEnabled}" Command="{Binding GoBack}" Margin="0 0 30 0"/>
                 <Button Style="{StaticResource Generic}" Content="Stop" Command="{Binding StopReplay}"/>
             </StackPanel>
         </DockPanel>

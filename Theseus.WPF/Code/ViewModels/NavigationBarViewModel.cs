@@ -1,9 +1,11 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
+using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -45,6 +47,20 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
+        private readonly NavigationEnabledStore _navigationEnabledStore;
+
+        private bool _navigationEnabled = true;
+        public bool NavigationEnabled
+        {
+            get => _navigationEnabled;
+            set
+            {
+                _navigationEnabled = value;
+                OnPropertyChanged(nameof(NavigationEnabled));
+            }
+        }
+
+
         public NavigationBarViewModel(NavigationService<BeginTestViewModel> beginTestNavigationService,
                                       NavigationService<ViewDataViewModel> viewDataNavigationService,
                                       NavigationService<CreateMazeViewModel> createMazeNavigationService,
@@ -55,9 +71,13 @@ namespace Theseus.WPF.Code.ViewModels
                                       NavigationService<HomeViewModel> homeNavigationService,
                                       NavigationService<LoggedInViewModel> loggedInNavigationService,
                                       NavigationService<NotLoggedInViewModel> notLoggedInNavigationService,
+                                      NavigationEnabledStore navigationEnabledStore,
                                       ICurrentStaffMemberStore currentStaffMemberStore,
                                       ICurrentPatientStore currentPatientStore)
         {
+            _navigationEnabledStore = navigationEnabledStore;
+            _navigationEnabledStore.NavigationEnabledChanged += OnNavigationEnabledChanged;
+
             NavigateToBeginTest = new NavigateCommand<BeginTestViewModel>(beginTestNavigationService);
             NavigateToViewData = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
             NavigateToCreateMaze = new NavigateCommand<CreateMazeViewModel>(createMazeNavigationService);
@@ -77,6 +97,11 @@ namespace Theseus.WPF.Code.ViewModels
             this._currentPatientStore = currentPatientStore;
             this._currentStaffMemberStore.StaffMemberStateChanged += CurrentUserStateChanged;
             this._currentPatientStore.PatientStateChanged += CurrentUserStateChanged;
+        }
+
+        private void OnNavigationEnabledChanged()
+        {
+            NavigationEnabled = _navigationEnabledStore.NavigationEnabled;
         }
 
         private void CurrentUserStateChanged()

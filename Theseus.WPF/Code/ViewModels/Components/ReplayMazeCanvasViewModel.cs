@@ -29,6 +29,12 @@ namespace Theseus.WPF.Code.ViewModels.Components
 
         public Timer InputTimer { get; set; }
 
+        public void StopTimer()
+        {
+            InputTimer?.Stop();
+            InputTimer?.Dispose();
+        }
+
         public ReplayMazeCanvasViewModel(MazeWithSolution mazeWithSolution, List<TimedCell> userSolutionWithTimes, bool examStageCompleted)
         {
             _userSolutionWithTimes = userSolutionWithTimes;
@@ -46,7 +52,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
 
         private void DrawNextStep(object? sender, ElapsedEventArgs e)
         {
-            InputTimer.Stop();
+            StopTimer();
 
             Cell nextCell = _userSolutionWithTimes[_nextCellIndex].Cell;
             UserSolution.Add(nextCell);
