@@ -47,18 +47,23 @@ namespace Theseus.WPF.Code.ViewModels.Components
             this.PerformMove = new PerformMoveCommand(this, currentExamStore);
         }
 
+        public void OnSuccesfullyMoved()
+        {
+            this.SuccesfullyMoved?.Invoke();
+        }
+
         public void MoveFurther(Cell nextCell)
         {
             this.UserSolution.Add(nextCell);
             this.CurrentCell = nextCell;
-            this.SuccesfullyMoved?.Invoke();
+            OnSuccesfullyMoved();
         }
 
         public void MoveBack()
         {
             this.UserSolution.Remove(this.UserSolution.Last());
             this.CurrentCell = UserSolution.Last();
-            this.SuccesfullyMoved?.Invoke();
+            OnSuccesfullyMoved();
         }
 
         public void OnCompletedMaze()

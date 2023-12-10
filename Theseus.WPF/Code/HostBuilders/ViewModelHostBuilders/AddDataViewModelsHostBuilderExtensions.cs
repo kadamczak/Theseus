@@ -28,6 +28,7 @@ namespace Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders
             services.AddTransient<PatientsExamsSummaryViewModel>();
             services.AddTransient<PatientExamsViewModel>();
             services.AddTransient<ExamDetailsViewModel>();
+            services.AddTransient<ExamStageDetailsViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -36,6 +37,7 @@ namespace Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders
             services.AddSingleton<Func<PatientsExamsSummaryViewModel>>((s) => () => s.GetRequiredService<PatientsExamsSummaryViewModel>());
             services.AddSingleton<Func<PatientExamsViewModel>>((s) => () => s.GetRequiredService<PatientExamsViewModel>());
             services.AddSingleton<Func<ExamDetailsViewModel>>((s) => () => s.GetRequiredService<ExamDetailsViewModel>());
+            services.AddSingleton<Func<ExamStageDetailsViewModel>>((s) => () => s.GetRequiredService<ExamStageDetailsViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -44,6 +46,7 @@ namespace Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders
             services.AddSingleton<NavigationService<PatientsExamsSummaryViewModel>>();
             services.AddSingleton<NavigationService<PatientExamsViewModel>>();
             services.AddSingleton<NavigationService<ExamDetailsViewModel>>();
+            services.AddSingleton<NavigationService<ExamStageDetailsViewModel>>();
         }
     }
 }

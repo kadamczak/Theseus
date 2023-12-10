@@ -43,6 +43,7 @@ namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
                 services.AddTransient<ShowDetailsExamCommandGranter>();
 
                 services.AddTransient<EmptyExamStageCommandGranter>();
+                services.AddTransient<ShowDetailsExamStageCommandGranter>();
             });
 
             return hostBuilder;

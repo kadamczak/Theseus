@@ -56,8 +56,8 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             RemoveMazeEntryWalls();
             _solutionCanvasView.Clear();
 
-            if(drawArrows)
-            _solutionCanvasView.DrawEntryArrows(cellSize);
+            if (drawArrows)
+                _solutionCanvasView.DrawEntryArrows(cellSize);
 
             this.Margin = (centerMaze) ? CalculateCenterMargin(cellSize) : new Thickness(0);
         }

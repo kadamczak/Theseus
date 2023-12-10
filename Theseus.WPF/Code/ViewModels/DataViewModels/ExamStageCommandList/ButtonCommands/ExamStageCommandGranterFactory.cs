@@ -8,10 +8,12 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Button
     public class ExamStageCommandGranterFactory : CommandGranterFactory<ExamStageWithMazeViewModel, ExamStageButtonCommand>
     {
         private readonly EmptyExamStageCommandGranter _emptyCommandGranter;
+        private readonly ShowDetailsExamStageCommandGranter _showDetailsCommandGranter;
 
-        public ExamStageCommandGranterFactory(EmptyExamStageCommandGranter emptyCommandGranter)
+        public ExamStageCommandGranterFactory(EmptyExamStageCommandGranter emptyCommandGranter, ShowDetailsExamStageCommandGranter showDetailsCommandGranter)
         {
             _emptyCommandGranter = emptyCommandGranter;
+            _showDetailsCommandGranter = showDetailsCommandGranter;
         }
 
         public override CommandGranter<ExamStageWithMazeViewModel> Get(ExamStageButtonCommand chosenCommandType)
@@ -19,6 +21,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Button
             return chosenCommandType switch
             {
                 ExamStageButtonCommand.None => _emptyCommandGranter,
+                ExamStageButtonCommand.ShowDetails => _showDetailsCommandGranter,
                 _ => throw new ArgumentException("Invalid exam stage command type.")
             }; ;
         }

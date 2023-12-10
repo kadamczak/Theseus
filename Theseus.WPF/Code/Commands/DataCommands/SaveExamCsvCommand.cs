@@ -6,6 +6,7 @@ using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.Commands.DataCommands
@@ -14,11 +15,15 @@ namespace Theseus.WPF.Code.Commands.DataCommands
     {
         private readonly SelectedModelDetailsStore<Exam> _selectedExamStore;
         private readonly IGetMazeOfExamStageQuery _getMazeQuery;
+        private readonly InputListToTimedCellPathConverter _inputConverter;
 
-        public SaveExamCsvCommand(SelectedModelDetailsStore<Exam> selectedExamStore, IGetMazeOfExamStageQuery getMazeQuery)
+        public SaveExamCsvCommand(SelectedModelDetailsStore<Exam> selectedExamStore,
+                                  IGetMazeOfExamStageQuery getMazeQuery,
+                                  InputListToTimedCellPathConverter inputConverter)
         {
             _selectedExamStore = selectedExamStore;
             _getMazeQuery = getMazeQuery;
+            _inputConverter = inputConverter;
         }
 
         public override async Task ExecuteAsync(object parameter)
@@ -68,28 +73,10 @@ namespace Theseus.WPF.Code.Commands.DataCommands
             return csvContent;
         }
 
-        public List<Cell> ConvertInputListToCellList(IEnumerable<ExamStep> inputs, MazeWithSolution maze)
-        {
-            Cell currentCell = maze.SolutionPath.First();
-            List<Cell> patientInputPath = new List<Cell>() { currentCell };
-
-            foreach (var input in inputs)
-            {
-                if (currentCell.IsLinkedToNeighbour(input.StepTaken))
-                {
-                    Cell nextCell = currentCell.AdjecentCellSpaces[input.StepTaken]!;
-                    patientInputPath.Add(nextCell);
-                    currentCell = nextCell;
-                }
-            }
-
-            return patientInputPath;
-        }
-
         public List<bool> CreateInputCorrectnessList(ExamStage examStage, IEnumerable<ExamStep> steps)
         {
             MazeWithSolution maze = _getMazeQuery.GetMaze(examStage.Id);
-            var patientCellPath = ConvertInputListToCellList(steps, maze);
+            var patientCellPath = _inputConverter.ConvertInputListToTimedCellList(steps, maze).Select(e => e.Cell).ToList();
 
             int currentPatientCellPathIndex = 0;
             Cell currentPatientCell = patientCellPath.First();

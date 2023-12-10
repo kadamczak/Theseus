@@ -113,6 +113,9 @@
             <DataTemplate DataType="{x:Type vms:ExamDetailsViewModel}">
                 <views:ExamDetailsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ExamStageDetailsViewModel}">
+                <views:ExamStageDetailsView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <views:NavigationBarView Grid.Column="0" DataContext="{Binding NavigationBarViewModel}" />

@@ -2,6 +2,7 @@
 {
     public enum ExamStageButtonCommand
     {
-        None
+        None,
+        ShowDetails
     }
 }

@@ -47,6 +47,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<SelectedModelDetailsStore<StaffMember>>();
                 services.AddSingleton<SelectedModelDetailsStore<Group>>();
                 services.AddSingleton<SelectedModelDetailsStore<Exam>>();
+                services.AddSingleton<SelectedModelDetailsStore<ExamStageWithMazeViewModel>>();
 
                 services.AddSingleton<ICurrentStaffMemberStore, CurrentStaffMemberStore>();
                 services.AddSingleton<ICurrentPatientStore, CurrentPatientStore>();

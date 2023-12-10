@@ -19,6 +19,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IEmailValidator, EmailValidator>();
                 services.AddSingleton<ExamSetStatCalculator>();
                 services.AddSingleton<DescriptiveValueComparer>();
+                services.AddSingleton<InputListToTimedCellPathConverter>();
                 services.AddSingleton<IStaffMemberAuthenticationService, StaffMemberAuthenticationService>();
                 services.AddSingleton<IPatientAuthenticationService, PatientAuthenticationService>();
 

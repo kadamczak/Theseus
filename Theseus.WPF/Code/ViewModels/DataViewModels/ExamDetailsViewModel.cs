@@ -7,6 +7,7 @@ using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.DataCommands;
+using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings.ExamBindings;
 using Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList;
@@ -24,15 +25,16 @@ namespace Theseus.WPF.Code.ViewModels
         public ExamDetailsViewModel(IGetExamStagesOfExamQuery getExamStagesQuery,
                                     IGetMazeOfExamStageQuery getMazeQuery,
                                     SelectedModelDetailsStore<Exam> examDetailsStore,
+                                    InputListToTimedCellPathConverter inputConverter,
                                     SelectedModelListStore<ExamStageWithMazeViewModel> examStageListStore,
                                     ExamStageCommandListViewModelFactory examStageCommandListViewModelFactory)
         {
             LoadExamStagesOfExam(getExamStagesQuery, getMazeQuery, examDetailsStore.SelectedModel.Id, examStageListStore);
 
-            ExamStageCommandListViewModel = examStageCommandListViewModelFactory.Create(ExamStageButtonCommand.None, ExamStageButtonCommand.None, ExamStageInfo.GeneralInfo);
+            ExamStageCommandListViewModel = examStageCommandListViewModelFactory.Create(ExamStageButtonCommand.ShowDetails, ExamStageButtonCommand.None, ExamStageInfo.GeneralInfo);
             ExamStageCommandListViewModel.CreateModelCommandViewModels();
 
-            SaveCsv = new SaveExamCsvCommand(examDetailsStore, getMazeQuery);
+            SaveCsv = new SaveExamCsvCommand(examDetailsStore, getMazeQuery, inputConverter);
         }
 
         private void LoadExamStagesOfExam(IGetExamStagesOfExamQuery query,
