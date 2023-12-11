@@ -9,6 +9,7 @@ using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Exams;
@@ -82,7 +83,7 @@ namespace Theseus.WPF.Code.ViewModels
             var displayableExamSets = GetExamSetsCompatibleWithScreenSize(allAvailableExamSets, getMazesOfExamSetQuery);
 
             int amountOfOmittedExamSets = allAvailableExamSets.Count() - displayableExamSets.Count();
-            ExamSetsOmittedDueToScreenSizeText = $"Amount of sets omitted because of too small screen size: {amountOfOmittedExamSets}.\nYou can change the minimal cell size by clicking the gear button in the navigation bar.";
+            ExamSetsOmittedDueToScreenSizeText = $"{"AmountOfSetsOmitted".Resource()}{amountOfOmittedExamSets}.\n{"YouCanChangeTheMinimalCellSize".Resource()}";
 
             return displayableExamSets;
         }

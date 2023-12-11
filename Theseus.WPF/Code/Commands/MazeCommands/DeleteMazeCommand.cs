@@ -6,6 +6,7 @@ using System.Windows;
 using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
@@ -49,8 +50,8 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
 
         private MessageBoxResult ShowErrorMessageBox()
         {
-            string messageBoxText = "This maze can't be deleted because it is present in Exam Sets.";
-            string caption = "Maze Deletion";
+            string messageBoxText = "MazeCantBeDeleted".Resource();
+            string caption = "MazeDeletion".Resource();
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Exclamation;
             return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
@@ -58,8 +59,8 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
 
         private MessageBoxResult ShowConfirmationMessageBox()
         {
-            string messageBoxText = "Do you want to delete this maze?";
-            string caption = "Maze Deletion";
+            string messageBoxText = "DoYouWantToDeleteMaze".Resource();
+            string caption = "MazeDeletion".Resource();
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);

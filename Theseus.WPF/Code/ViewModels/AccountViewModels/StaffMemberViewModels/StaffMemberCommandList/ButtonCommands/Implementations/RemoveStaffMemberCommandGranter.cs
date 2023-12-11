@@ -5,6 +5,7 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.WPF.Code.Commands.GroupCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -36,7 +37,7 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.St
             Guid currentStaffMemberId = _currentStaffMemberStore.StaffMember.Id;
 
             return StaffMemberIsRemovable(commandStaffMemberId, currentStaffMemberId) ?
-                new ButtonViewModel(show: true, "Remove", new RemoveStaffMemberFromGroupCommand(collection, commandViewModel, _removeStaffMemberFromGroupCommand, _selectedGroupDetailsStore)) :
+                new ButtonViewModel(show: true, "Remove".Resource(), new RemoveStaffMemberFromGroupCommand(collection, commandViewModel, _removeStaffMemberFromGroupCommand, _selectedGroupDetailsStore)) :
                 new ButtonViewModel(show: false);
         }
 

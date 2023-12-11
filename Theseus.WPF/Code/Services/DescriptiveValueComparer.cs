@@ -1,38 +1,40 @@
 ﻿using System;
+using Theseus.WPF.Code.Extensions;
 
 namespace Theseus.WPF.Code.Services
 {
     public class DescriptiveValueComparer
     {
-        public string Compare(float examValue, float? possibleValue, string adjectiveWhenHigher = "Better", string adjectiveWhenLower = "Worse")
+        public string Compare(float examValue, float? possibleValue, string adjectiveWhenHigher, string adjectiveWhenLower)
         {
             if (possibleValue is null)
-                return "No other values to compare.";
+                return "NoOtherValuesToCompare".Resource();
 
             float value = possibleValue.Value;
             float percentage;
 
             if (examValue == value)
             {
-                return "No difference.";
+                return "NoDifference".Resource();
             }
             else if (examValue > value)
             {
                 percentage = (examValue - value) / value * 100f;
                 double roundedValue = Math.Round(percentage, 1);
-                return $"{adjectiveWhenHigher} by {roundedValue}%.";
+                return $"{adjectiveWhenHigher} {"by".Resource()} {roundedValue}%.";
             }
             else
             {
                 percentage = (value - examValue) / value * 100f;
                 double roundedValue = Math.Round(percentage, 1);
-                return $"{adjectiveWhenLower} by {roundedValue}%.";
+                return $"{adjectiveWhenLower} {"by".Resource()} {roundedValue}%.";
             }
         }
 
         public string Compare(float examValue, float? possibleValue, bool higherIsBetter)
         {
-            return (higherIsBetter) ? Compare(examValue, possibleValue) : Compare(examValue, possibleValue, "Worse", "Better");
+            return (higherIsBetter) ? Compare(examValue, possibleValue, "Better".Resource(), "Worse".Resource()) :
+                                      Compare(examValue, possibleValue, "Worse".Resource(), "Better".Resource());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info.Implementations
@@ -17,10 +18,7 @@ namespace Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info.Implem
         public override string GrantInfo(CommandViewModel<MazeWithSolutionCanvasViewModel> commandViewModel)
         {
             Guid mazeId = commandViewModel.Model.MazeWithSolution.Id.Value;
-            string examSetInfo = $"Present in {_getExamSetsWithMazeQuery.GetExamSets(mazeId).Count()} exam sets.";
-            //string groupInfo = "\n lala";
-
-            return examSetInfo;
+            return $"{"PresentInExamSets:".Resource()}{_getExamSetsWithMazeQuery.GetExamSets(mazeId).Count()}";
         }
     }
 }

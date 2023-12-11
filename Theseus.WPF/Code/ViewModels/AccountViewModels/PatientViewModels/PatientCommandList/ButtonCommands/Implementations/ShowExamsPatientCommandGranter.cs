@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Commands.DataCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -21,7 +22,7 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.Patien
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<Patient>> collection, CommandViewModel<Patient> commandViewModel)
         {
             return new ButtonViewModel(show: true,
-                                      "Exams",
+                                      "Exams".Resource(),
                                       new ShowPatientExamsCommand(commandViewModel, _patientDetailsStore, _patientExamsNavigationService));
         }
     }

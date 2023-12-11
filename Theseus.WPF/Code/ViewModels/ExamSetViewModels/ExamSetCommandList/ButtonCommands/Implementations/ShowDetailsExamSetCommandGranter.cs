@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -22,7 +23,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Butto
                                                      CommandViewModel<ExamSet> commandViewModel)
         {
             return new ButtonViewModel(true,
-                                       "Details",
+                                       "Details".Resource(),
                                        new ShowExamSetDetailsCommand(commandViewModel, _selectedExamSetDetailsStore, _navigationService));
         }
     }

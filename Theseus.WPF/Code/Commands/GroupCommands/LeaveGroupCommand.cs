@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
-using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
-using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
@@ -32,8 +31,8 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            string messageBoxText = "Do you want to leave this group?";
-            string caption = "Leaving Group";
+            string messageBoxText = "DoYouWantToLeaveThisGroup".Resource();
+            string caption = "LeavingGroup".Resource();
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);

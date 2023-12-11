@@ -4,10 +4,10 @@ using System.Linq;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 using Theseus.WPF.Code.ViewModels.Bindings.ExamBindings;
-using static Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.Implementations.GeneralExamStageInfoGranter;
 
 namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.Implementations
 {
@@ -86,22 +86,22 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
             List<string> textSummary = new List<string>
             {
-                "Completed: " + (stats.Completed ? "Yes" : "No"),
-                $"Inputs made: {Round(stats.Data.TotalInputs)}/{idealInputAmount}",
+                "Completed:".Resource() + (stats.Completed ? "Yes".Resource() : "No".Resource()),
+                $"{"InputsMade:".Resource()}{Round(stats.Data.TotalInputs)}/{idealInputAmount}",
             };
 
             if (stats.Data.TotalInputs > 0)
             {
                 textSummary.AddRange(new List<string>
                 {
-                    $"Total time: {Round(stats.Data.TotalTime!.Value)} s",
-                    $"Time before first input: {Round(stats.Data.TimeBeforeFirstInput!.Value)} s",
-                    $"Longest inactivity time: {Round(stats.Data.LongestInactivityTime!.Value)} s",
+                    $"{"TotalTime:".Resource()}{Round(stats.Data.TotalTime!.Value)} s",
+                    $"{"TimeBeforeFirstInput:".Resource()}{Round(stats.Data.TimeBeforeFirstInput!.Value)} s",
+                    $"{"LongestInactivityTime:".Resource()}{Round(stats.Data.LongestInactivityTime!.Value)} s",
                 });
             }
             else
             {
-                textSummary.Add("Times not recorded (inputs were not made).");
+                textSummary.Add("TimesNotRecorded".Resource());
             }
             return textSummary;
         }
@@ -112,7 +112,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                                                                .Where(e => e.Exam.Patient.Id != currentExamStageStats.PatientId);
 
             return examStagesOfOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStageStats, CalculateAverageStats(examStagesOfOtherPatients)) :
-                                                     new List<string>() { "Other patients in group didn't complete this maze." };
+                                                     new List<string>() { "OtherPatientsInGroupDidNotCompleteThisMaze".Resource() };
         }
 
         public class AverageExamStageStats
@@ -151,14 +151,14 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
             List<string> comparisonText = new List<string>() {
                     "",
-                    $"Amount of attempts by other patients: {averageExamStageStats.TotalAttemptAmount}",
-                    $"Amount of completed attempts by other patients: {averageExamStageStats.CompletedAttemptAmount} ({formattedPercentCompleted}%)"
+                    $"{"AmountOfAttemptsByOtherPatients:".Resource()}{averageExamStageStats.TotalAttemptAmount}",
+                    $"{"AmountOfCompletedAttemptsByOtherPatients:".Resource()}{averageExamStageStats.CompletedAttemptAmount} ({formattedPercentCompleted}%)"
             };
 
             if (examStageStats.Completed && averageExamStageStats.CompletedAttemptAmount > 0)
             {
-                comparisonText.AddRange(new List<string>() { "Comparison to average:" });
-                comparisonText.AddRange(CreateComparisonOfCompletedStages(examStageStats, averageExamStageStats.Data, "Avg"));
+                comparisonText.AddRange(new List<string>() { "ComparisonToAverage:".Resource() });
+                comparisonText.AddRange(CreateComparisonOfCompletedStages(examStageStats, averageExamStageStats.Data, "Avg".Resource()));
             }
 
             return comparisonText;
@@ -168,8 +168,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
         {
             string timeComparison = _valueComparer.Compare(examStageStats.Data.TotalTime!.Value, otherExamStageData.TotalTime, higherIsBetter: false);
             string inputComparison = _valueComparer.Compare(examStageStats.Data.TotalInputs, otherExamStageData.TotalInputs, higherIsBetter: false);
-            string firstInputTimeComparison = _valueComparer.Compare(examStageStats.Data.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput!.Value, "Higher", "Lower");
-            string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.Data.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime!.Value, "Higher", "Lower");
+            string firstInputTimeComparison = _valueComparer.Compare(examStageStats.Data.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput!.Value, "Higher".Resource(), "Lower".Resource());
+            string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.Data.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime!.Value, "Higher".Resource(), "Lower".Resource());
 
             string timeFormatted = Round(otherExamStageData.TotalTime!.Value);
             string inputsFormatted = Round(otherExamStageData.TotalInputs);
@@ -178,10 +178,10 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
             return new List<string>
             {
-                $"\tInputs made: {inputComparison} ({valueType}: {inputsFormatted})",
-                $"\tTotal time: {timeComparison} ({valueType}: {timeFormatted} s)",
-                $"\tTime before first input: {firstInputTimeComparison} ({valueType}: {firstInputTimeFormatted} s)",
-                $"\tLongest inactivity time: {longestInactivityTimeComparison} ({valueType}: {longestInactivityTimeFormatted} s)"
+                $"\t{"InputsMade:".Resource()}{inputComparison} ({valueType}: {inputsFormatted})",
+                $"\t{"TotalTime:".Resource()}{timeComparison} ({valueType}: {timeFormatted} s)",
+                $"\t{"TimeBeforeFirstInput:".Resource()}{firstInputTimeComparison} ({valueType}: {firstInputTimeFormatted} s)",
+                $"\t{"LongestInactivityTime:".Resource()}{longestInactivityTimeComparison} ({valueType}: {longestInactivityTimeFormatted} s)"
             };
         }
 
@@ -194,31 +194,31 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                                                      .FirstOrDefault();
 
             return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStageStats, CalculateExamStageStats(previousAttempt)) :
-                                                   new List<string>() { "", "No previous attempts by this patient." };
+                                                   new List<string>() { "", "NoPreviousAttemptsByThisPatient".Resource() };
         }
 
         private List<string> CreateFullComparisonTextToPreviousAttempt(ExamStageStats currentExamStageStats, ExamStageStats previousExamStageStats)
         {
             var comparisonText = new List<string>
             {
-                "", $"Comparison to previous attempt on {previousExamStageStats.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:"
+                "", $"{"ComparisonToPreviousAttemptOn:".Resource()}{previousExamStageStats.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:"
             };
 
             if (currentExamStageStats.Completed && previousExamStageStats.Completed)
             {
-                comparisonText.AddRange(CreateComparisonOfCompletedStages(currentExamStageStats, previousExamStageStats.Data, "Prev"));
+                comparisonText.AddRange(CreateComparisonOfCompletedStages(currentExamStageStats, previousExamStageStats.Data, "Prev".Resource()));
             }
             else if (currentExamStageStats.Completed)
             {
-                comparisonText.Add("Previous attempt was not completed, but this one was.");
+                comparisonText.Add("PreviousAttemptWasNotCompletedButThisOneWas".Resource());
             }
             else if (previousExamStageStats.Completed)
             {
-                comparisonText.Add("Previous attempt was completed, but this one was not.");
+                comparisonText.Add("PreviousAttemptWasCompletedButThisOneWasNot".Resource());
             }
             else
             {
-                comparisonText.Add("Both attempts were not completed.");
+                comparisonText.Add("BothAttemptsWereNotCompleted".Resource());
             }
 
             return comparisonText;

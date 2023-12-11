@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Exams;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -76,10 +77,10 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
         {
             return new List<string>
             {
-                $"Attempt #{currentExamStats.AttemptNumber}",
-                $"Completed mazes: {currentExamStats.CompletedMazeAmount}/{examSetStatSummary.MazeAmount}",
-                $"Total time: {Round(currentExamStats.TotalExamTime)} s",
-                $"Inputs made: {currentExamStats.TotalInputs}/{examSetStatSummary.IdealStepAmount}"
+               "Attempt#".Resource() + currentExamStats.AttemptNumber,
+               "CompletedMazes:".Resource() + $"{currentExamStats.CompletedMazeAmount}/{examSetStatSummary.MazeAmount}",
+               "TotalTime:".Resource() + $"{Round(currentExamStats.TotalExamTime)} s",
+               "InputsMade:".Resource() + $"{currentExamStats.TotalInputs}/{examSetStatSummary.IdealStepAmount}"
             };
         }
 
@@ -88,7 +89,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             var examsByOtherPatients = examSetStatSummary.Exams.Where(e => e.Patient.Id != currentExamStats.PatientId);
 
             return examsByOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStats, CalculateAverageStats(examsByOtherPatients)) :
-                                                new List<string>() { "Other patients in group didn't complete this exam set." };
+                                                new List<string>() { "OtherPatientsInGroupDidNotCompleteThisExamSet".Resource() };
         }
 
         public class AverageExamStats
@@ -126,14 +127,14 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             string formattedPercentNoSkips = Round((float) otherPatientsStats.ExamsWithNoSkipsAmount / otherPatientsStats.TotalExamAmount * 100f);
 
             List<string> comparisonText =  new List<string>() {
-                    $"Amount of attempts by other patients: {otherPatientsStats.TotalExamAmount}",
-                    $"Amount of attempts with no skips by other patients: {otherPatientsStats.ExamsWithNoSkipsAmount} ({formattedPercentNoSkips}%)",
-                    "", "Comparison to average:",
-                    $"\tCompleted mazes: {completedMazesComparison} (Avg: {averageCompletedMazesFormatted})"
+                    $"{"AmountOfAttemptsByOtherPatients:".Resource()}{otherPatientsStats.TotalExamAmount}",
+                    $"{"AmountOfAttemptsWithNoSkipsByOtherPatients:".Resource()}{otherPatientsStats.ExamsWithNoSkipsAmount} ({formattedPercentNoSkips}%)",
+                    "", "ComparisonToAverage:".Resource(),
+                    $"\t{"CompletedMazes:".Resource()}{completedMazesComparison} ({"Avg".Resource()}: {averageCompletedMazesFormatted})"
             };
 
             if (currentExamStats.NoSkips && otherPatientsStats.ExamsWithNoSkipsAmount > 0)
-                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, otherPatientsStats.AverageTotalTime.Value, otherPatientsStats.AverageTotalInputs.Value, "Avg"));
+                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, otherPatientsStats.AverageTotalTime.Value, otherPatientsStats.AverageTotalInputs.Value, "Avg".Resource()));
 
             return comparisonText;
         }
@@ -149,7 +150,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                                                      .FirstOrDefault();
 
             return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStats, CalculateExamStats(previousAttempt)) :
-                                                   new List<string>() { "", "No previous attempts by this patient." };
+                                                   new List<string>() { "", "NoPreviousAttemptsByThisPatient".Resource() };
         }
 
         private List<string> CreateFullComparisonTextToPreviousAttempt(ExamStats currentExamStats, ExamStats previousExamStats)
@@ -157,12 +158,12 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             string completedMazesComparison = _valueComparer.Compare(currentExamStats.CompletedMazeAmount, previousExamStats.CompletedMazeAmount, higherIsBetter: true);
             var comparisonText = new List<string>
             {
-                "", $"Comparison to previous attempt on {previousExamStats.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:",
-                    $"\tCompleted mazes: {completedMazesComparison} (Prev: {previousExamStats.CompletedMazeAmount})",
+                "", $"{"ComparisonToPreviousAttemptOn:".Resource()}{previousExamStats.CreatedAt.ToString("dd/MM/yyyy HH:mm")}:",
+                    $"\t{"CompletedMazes:".Resource()}{completedMazesComparison} ({"Prev".Resource()}: {previousExamStats.CompletedMazeAmount})",
             };
 
             if (currentExamStats.NoSkips && previousExamStats.NoSkips)
-                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, previousExamStats.TotalExamTime, previousExamStats.TotalInputs, "Prev"));
+                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, previousExamStats.TotalExamTime, previousExamStats.TotalInputs, "Prev".Resource()));
 
             return comparisonText;
                
@@ -177,8 +178,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
 
             return new List<string>
             {
-                $"\tTotal time: {timeComparison} ({valueType}: {timeFormatted} s)",
-                $"\tInputs made: {inputComparison} ({valueType}: {inputsFormatted})"
+                $"\t{"TotalTime:".Resource()}{timeComparison} ({valueType}: {timeFormatted} s)",
+                $"\t{"InputsMade:".Resource()}{inputComparison} ({valueType}: {inputsFormatted})"
             };
         }
     }

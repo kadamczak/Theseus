@@ -37,14 +37,12 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
             ExamSet deselectedExamSet = _examSetsInGroupStore.SelectedExamSets.First(e => e.Id == examSet.Id);
             _examSetsInGroupStore.SelectedExamSets.Remove(deselectedExamSet);
             _examSetCommandViewModel.Selected = false;
-            //_examSetCommandViewModel.Command2Name = "Add";
         }
 
         private void SelectExamSet(ExamSet examSet)
         {
             _examSetsInGroupStore.SelectedExamSets.Add(examSet);
             _examSetCommandViewModel.Selected = true;
-            //_examSetCommandViewModel.Command2Name = "Remove";
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.WPF.Code.Commands.MazeCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -22,7 +23,7 @@ namespace Theseus.WPF.Code.ViewModels
                                                      CommandViewModel<MazeWithSolutionCanvasViewModel> commandViewModel)
         {
             return new ButtonViewModel(true,
-                                       "Details",
+                                       "Details".Resource(),
                                        new ShowMazeDetailsCommand(commandViewModel, _mazeDetailsStore, _mazeDetailsNavigationService));
         }
     }

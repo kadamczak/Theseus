@@ -7,6 +7,7 @@ using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Enums;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.ViewModels.Bindings;
@@ -29,25 +30,25 @@ namespace Theseus.WPF.Code.ViewModels
         }
 
         public ObservableCollection<SexViewModel> Sexes { get; } = new ObservableCollection<SexViewModel> {
-                                new SexViewModel("Do Not Disclose", Sex.Undisclosed),
-                                new SexViewModel("Male", Sex.Male),
-                                new SexViewModel("Female", Sex.Female),
+                                new SexViewModel("DoNotDisclose".Resource(), Sex.Undisclosed),
+                                new SexViewModel("Male".Resource(), Sex.Male),
+                                new SexViewModel("Female".Resource(), Sex.Female),
                                 };
 
         public ObservableCollection<ProfessionTypeViewModel> ProfessionTypes { get; } = new ObservableCollection<ProfessionTypeViewModel> {
-                                new ProfessionTypeViewModel("Do Not Disclose", ProfessionType.Undisclosed),
-                                new ProfessionTypeViewModel("None", ProfessionType.None),
-                                new ProfessionTypeViewModel("Physical", ProfessionType.Physical),
-                                new ProfessionTypeViewModel("Mental", ProfessionType.Mental)
+                                new ProfessionTypeViewModel("DoNotDisclose".Resource(), ProfessionType.Undisclosed),
+                                new ProfessionTypeViewModel("None".Resource(), ProfessionType.None),
+                                new ProfessionTypeViewModel("Physical".Resource(), ProfessionType.Physical),
+                                new ProfessionTypeViewModel("Mental".Resource(), ProfessionType.Mental)
                                 };
 
         public ObservableCollection<EducationLevelViewModel> EducationLevels { get; } = new ObservableCollection<EducationLevelViewModel> {
-                                new EducationLevelViewModel("Do Not Disclose", EducationLevel.Undisclosed),
-                                new EducationLevelViewModel("Primary", EducationLevel.Primary),
-                                new EducationLevelViewModel("Lower Secondary", EducationLevel.LowerSecondary),
-                                new EducationLevelViewModel("Secondary", EducationLevel.Secondary),
-                                new EducationLevelViewModel("Vocational", EducationLevel.Vocational),
-                                new EducationLevelViewModel("Higher", EducationLevel.Higher)
+                                new EducationLevelViewModel("DoNotDisclose".Resource(), EducationLevel.Undisclosed),
+                                new EducationLevelViewModel("Primary".Resource(), EducationLevel.Primary),
+                                new EducationLevelViewModel("Lower Secondary".Resource(), EducationLevel.LowerSecondary),
+                                new EducationLevelViewModel("Secondary".Resource(), EducationLevel.Secondary),
+                                new EducationLevelViewModel("Vocational".Resource(), EducationLevel.Vocational),
+                                new EducationLevelViewModel("Higher".Resource(), EducationLevel.Higher)
                                 };
 
         private string _age = string.Empty;
@@ -68,12 +69,12 @@ namespace Theseus.WPF.Code.ViewModels
                 if (int.TryParse(Age, out int ageValue))
                 {
                     if (!AgeHasValidValue(ageValue))
-                        AddError(nameof(Age), "Age outside of range.");
+                        AddError(nameof(Age), "AgeOutsideOfRange".Resource());
                 }
                 else
                 {
                     if (!string.IsNullOrWhiteSpace(Age))
-                        AddError(nameof(Age), "Age contains invalid characters.");
+                        AddError(nameof(Age), "AgeContainsInvalidCharacters".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanUpdatePatient));

@@ -5,6 +5,7 @@ using System.Windows;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
@@ -37,8 +38,8 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         private MessageBoxResult ShowConfirmationMessageBox()
         {
-            string messageBoxText = "Do you want to delete this group? Included exam sets will remain.";
-            string caption = "Group Deletion";
+            string messageBoxText = "DoYouWantToDeleteThisGroup".Resource();
+            string caption = "GroupDeletion".Resource();
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);

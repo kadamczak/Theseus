@@ -3,6 +3,7 @@ using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.ButtonCommands.Implementations
@@ -20,7 +21,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Butto
 
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<ExamSet>> collection, CommandViewModel<ExamSet> commandViewModel)
         {
-            return new ButtonViewModel(true, "Delete", new DeleteExamSetCommand(collection, commandViewModel, _removeExamSetCommand, _getExamsQuery));
+            return new ButtonViewModel(true, "Delete".Resource(), new DeleteExamSetCommand(collection, commandViewModel, _removeExamSetCommand, _getExamsQuery));
         }
     }
 }

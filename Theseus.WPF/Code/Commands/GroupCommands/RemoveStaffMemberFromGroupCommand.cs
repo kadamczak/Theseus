@@ -6,6 +6,7 @@ using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
@@ -31,8 +32,8 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            string messageBoxText = "Do you want to remove staff member from this group?";
-            string caption = "Staff Member Removal";
+            string messageBoxText = "DoYouWantToRemoveStaffMember".Resource();
+            string caption = "StaffMemberRemoval".Resource();
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);

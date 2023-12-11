@@ -7,6 +7,7 @@ using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
@@ -50,8 +51,8 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         private MessageBoxResult ShowErrorMessageBox()
         {
-            string messageBoxText = "This exam set can't be deleted because it has recorded exam attempts.";
-            string caption = "Exam Set Deletion";
+            string messageBoxText = "ThisExamSetCantBeDeleted".Resource();
+            string caption = "ExamSetDeletion".Resource();
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Exclamation;
             return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
@@ -59,8 +60,8 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         private MessageBoxResult ShowConfirmationMessageBox()
         {
-            string messageBoxText = "Do you want to delete this exam set? Included mazes will still exist.";
-            string caption = "Exam Set Deletion";
+            string messageBoxText = "DoYouWantToDeleteThisExamSet".Resource();
+            string caption = "ExamSetDeletion".Resource();
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);

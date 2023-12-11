@@ -5,9 +5,9 @@ using System.Linq;
 using System.Windows.Input;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.MazeCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -36,8 +36,8 @@ namespace Theseus.WPF.Code.ViewModels
                                 };
 
         public ObservableCollection<SolutionAlgorithmViewModel> AvailableSolutionAlgorithms { get; } = new ObservableCollection<SolutionAlgorithmViewModel> {
-                                new SolutionAlgorithmViewModel("Random border cells", MazeSolutionGenAlgorithm.RandomBorderCells),
-                                new SolutionAlgorithmViewModel("Dijkstra (longest path)", MazeSolutionGenAlgorithm.Dijkstra),
+                                new SolutionAlgorithmViewModel("RandomBorderCells".Resource(), MazeSolutionGenAlgorithm.RandomBorderCells),
+                                new SolutionAlgorithmViewModel("Dijkstra".Resource(), MazeSolutionGenAlgorithm.Dijkstra),
                                 };
 
         public string MazeHeight

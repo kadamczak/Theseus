@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Theseus.Domain.Models.GroupRelated.Exceptions;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.ViewModels;
@@ -37,15 +38,15 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
             }
             catch (UserNotFoundException)
             {
-                _patientLoginViewModel.LoginResponse = "Username does not exist.";
+                _patientLoginViewModel.LoginResponse = "UsernameDoesNotExist".Resource();
             }
             catch (WrongGroupNameForPatientException)
             {
-                _patientLoginViewModel.LoginResponse = "Incorrect group name.";
+                _patientLoginViewModel.LoginResponse = "IncorrectGroupName".Resource();
             }
             catch (Exception)
             {
-                _patientLoginViewModel.LoginResponse = "Login failed.";
+                _patientLoginViewModel.LoginResponse = "LoginFailed".Resource();
             }
         }
 

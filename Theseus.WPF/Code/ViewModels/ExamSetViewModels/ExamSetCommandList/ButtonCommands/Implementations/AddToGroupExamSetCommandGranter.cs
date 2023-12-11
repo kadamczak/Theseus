@@ -2,6 +2,7 @@
 using System.Linq;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.WPF.Code.Commands.GroupCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.ExamSets;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
@@ -19,7 +20,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Butto
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<ExamSet>> collection, CommandViewModel<ExamSet> commandViewModel)
         {
             commandViewModel.Selected = IsSelected(commandViewModel.Model);
-            return new ButtonViewModel(true, "Toggle", new AddExamSetToGroupCommand(commandViewModel, _examSetsInGroupStore));
+            return new ButtonViewModel(true, "Toggle".Resource(), new AddExamSetToGroupCommand(commandViewModel, _examSetsInGroupStore));
         }
 
         private bool IsSelected(ExamSet examSet) => _examSetsInGroupStore.SelectedExamSets.Where(e => e.Id == examSet.Id).Any();

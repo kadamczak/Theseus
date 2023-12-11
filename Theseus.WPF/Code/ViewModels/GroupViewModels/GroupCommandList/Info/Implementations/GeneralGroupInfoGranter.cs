@@ -4,6 +4,7 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.QueryInterfaces.ExamSetQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info.Implementations
@@ -36,10 +37,10 @@ namespace Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info.Impl
             int numberOfExamSets = _getExamSetsOfGroupQuery.GetExamSets(groupId).Count();
 
             string[] infoParts = new string[4];
-            infoParts[0] = $"Owner: {ownerName}";
-            infoParts[1] = $"Amount of staff members: {numberOfStaffMembers}";
-            infoParts[2] = $"Amount of patients: {numberOfPatients}";
-            infoParts[3] = $"Amount of exam sets: {numberOfExamSets}";
+            infoParts[0] = $"{"Owner:".Resource()}{ownerName}";
+            infoParts[1] = $"{"AmountOfStaffMembers:".Resource()}{numberOfStaffMembers}";
+            infoParts[2] = $"{"AmountOfPatients:".Resource()}{numberOfPatients}";
+            infoParts[3] = $"{"AmountOfExamSets:".Resource()}{numberOfExamSets}";
 
             return String.Join("\n", infoParts);
         }

@@ -6,6 +6,7 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.Infrastructure.Queries.StaffMemberQueries;
 using Theseus.WPF.Code.Commands.GroupCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -34,7 +35,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Butto
                                                      CommandViewModel<ExamSet> commandViewModel)
         {
             return CurrentStaffMemberCanRemoveExamSets() ?
-                new ButtonViewModel(show: true, "Remove", new RemoveExamSetFromGroupCommand(collection, commandViewModel, _removeExamSetFromGroupCommand, _selectedGroupDetailsStore)) :
+                new ButtonViewModel(show: true, "Remove".Resource(), new RemoveExamSetFromGroupCommand(collection, commandViewModel, _removeExamSetFromGroupCommand, _selectedGroupDetailsStore)) :
                 new ButtonViewModel(show: false);
         }
 

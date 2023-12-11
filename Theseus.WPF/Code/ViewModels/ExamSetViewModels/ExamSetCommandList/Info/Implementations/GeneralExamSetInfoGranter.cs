@@ -3,6 +3,7 @@ using System.Linq;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.Implementations
@@ -25,7 +26,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.
 
             int numberOfMazes = _getMazes.GetMazesWithSolution(examSetId).Count();
             int numberOfExams = _getExams.GetExams(examSetId).Count();
-            return $"Amount of mazes: {numberOfMazes}\nAmount of exam attempts: {numberOfExams}";
+            return $"{"AmountOfMazes:".Resource()}{numberOfMazes}\n{"AmountOfExamSets:".Resource()}{numberOfExams}";
         }
     }
 }

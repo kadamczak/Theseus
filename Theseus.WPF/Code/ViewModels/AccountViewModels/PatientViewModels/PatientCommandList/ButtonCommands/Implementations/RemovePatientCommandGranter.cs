@@ -2,6 +2,7 @@
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Commands.GroupCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCommandList.ButtonCommands.Implementations
@@ -17,7 +18,9 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.Patien
 
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<Patient>> collection, CommandViewModel<Patient> commandViewModel)
         {
-            return new ButtonViewModel(true, "Remove", new RemovePatientFromGroupCommand(collection, commandViewModel, _removePatientFromGroupCommand));
+            return new ButtonViewModel(true,
+                                       "Remove".Resource(),
+                                       new RemovePatientFromGroupCommand(collection, commandViewModel, _removePatientFromGroupCommand));
         }
     }
 }

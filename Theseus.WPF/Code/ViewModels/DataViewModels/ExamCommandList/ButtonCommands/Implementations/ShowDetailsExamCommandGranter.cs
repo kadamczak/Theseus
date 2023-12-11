@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.WPF.Code.Commands.DataCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -21,7 +22,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.ButtonComma
 
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<Exam>> collection, CommandViewModel<Exam> commandViewModel)
         {
-            return new ButtonViewModel(show: true, "Details", new ShowExamDetailsCommand(commandViewModel, _selectedExamDetailsStore, _examDetailsNavigationService));
+            return new ButtonViewModel(show: true, "Details".Resource(), new ShowExamDetailsCommand(commandViewModel, _selectedExamDetailsStore, _examDetailsNavigationService));
         }
     }
 }

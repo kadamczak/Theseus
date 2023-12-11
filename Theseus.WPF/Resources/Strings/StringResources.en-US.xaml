@@ -28,6 +28,9 @@
     <system:String x:Key="Stop">Stop</system:String>
     <system:String x:Key="Generate">Generate</system:String>
 
+    <system:String x:Key="Yes">Yes</system:String>
+    <system:String x:Key="No">No</system:String>
+
     <system:String x:Key="LoginNoun">Login</system:String>
     <system:String x:Key="RegisterNoun">Register</system:String>
 
@@ -112,6 +115,19 @@
     <system:String x:Key="GroupDeletion">Group Deletion</system:String>
     <system:String x:Key="DoYouWantToDeleteThisGroup">Do you want to delete this group? Included exam sets will remain.</system:String>
 
+    <system:String x:Key="ExamSetRemoval">Exam Set Removal</system:String>
+    <system:String x:Key="DoYouWantToRemoveExamSet">Do you want to remove exam set from this group?</system:String>
+
+    <system:String x:Key="PatientRemoval">Patient Removal</system:String>
+    <system:String x:Key="DoYouWantToRemovePatient">Do you want to remove patient from this group?</system:String>
+
+    <system:String x:Key="StaffMemberRemoval">Staff Member Removal</system:String>
+    <system:String x:Key="DoYouWantToRemoveStaffMember">Do you want to remove staff member from this group?</system:String>
+
+    <system:String x:Key="MazeDeletion">Maze Deletion</system:String>
+    <system:String x:Key="DoYouWantToDeleteMaze">Do you want to delete this maze?</system:String>
+    <system:String x:Key="MazeCantBeDeleted">This maze can't be deleted because it is present in Exam Sets.</system:String>
+
     <system:String x:Key="StaffMembers">Staff Members</system:String>
     <system:String x:Key="Patients">Patients</system:String>
     <system:String x:Key="ExamSets">Exam Sets</system:String>
@@ -173,18 +189,20 @@
     <system:String x:Key="by">by</system:String>
     <system:String x:Key="Better">Better</system:String>
     <system:String x:Key="Worse">Worse</system:String>
+    <system:String x:Key="NoOtherValuesToCompare">No other values to compare.</system:String>
     <system:String x:Key="Lower">Lower</system:String>
     <system:String x:Key="Prev">Prev</system:String>
     <system:String x:Key="Avg">Avg</system:String>
     <system:String x:Key="NoDifference">No difference.</system:String>
     <system:String x:Key="NoPreviousAttemptsByThisPatient">No previous attempts by this patient.</system:String>
     <system:String x:Key="OtherPatientsInGroupDidNotCompleteThisExamSet">Other patients in group did not complete this exam set.</system:String>
+    <system:String x:Key="OtherPatientsInGroupDidNotCompleteThisMaze">Other patients in group did not complete this maze.</system:String>
 
     <system:String x:Key="Completed:"  xml:space="preserve">Completed: </system:String>
     <system:String x:Key="TimeBeforeFirstInput:"  xml:space="preserve">Time before first input: </system:String>
     <system:String x:Key="LongestInactivityTime:"  xml:space="preserve">Longest inactivity time: </system:String>
 
-    <system:String x:Key="AmountOfCompletedAttemptsByOtherPatients:">Amount of completed attempts by other patients: </system:String>
+    <system:String x:Key="AmountOfCompletedAttemptsByOtherPatients:" xml:space="preserve">Amount of completed attempts by other patients: </system:String>
     <system:String x:Key="TimesNotRecorded">Times not recorded (inputs were not made).</system:String>
     <system:String x:Key="PreviousAttemptWasCompletedButThisOneWasNot">Previous attempt was completed but this one was not.</system:String>
     <system:String x:Key="PreviousAttemptWasNotCompletedButThisOneWas">Previous attempt was not completed but this one was.</system:String>
@@ -201,6 +219,26 @@
     <system:String x:Key="MazeFinished"  xml:space="preserve">Maze finished! Next puzzle in: </system:String>
     <system:String x:Key="End">End</system:String>
     <system:String x:Key="ExamFinished">Exam finished. Results were saved automatically.</system:String>
+
+    <system:String x:Key="AgeOutsideOfRange">Age is outside of range.</system:String>
+    <system:String x:Key="AgeContainsInvalidCharacters">Age contains invalid characters.</system:String>
+
+    <system:String x:Key="UsernameDoesNotExist">Username does not exist.</system:String>
+    <system:String x:Key="IncorrectGroupName">Incorrect group name.</system:String>
+    <system:String x:Key="LoginFailed">Login failed.</system:String>
+    <system:String x:Key="IncorrectPassword">Incorrect password.</system:String>
+
+    <system:String x:Key="SuccesfullyRegistered">Succesfully registered.</system:String>
+    <system:String x:Key="PatientUsernameAlreadyExists">Patient username already exists.</system:String>
+    <system:String x:Key="GroupDoesNotExist">Group does not exist.</system:String>
+
+    <system:String x:Key="UsernameAlreadyExists">Username already exists.</system:String>
+    <system:String x:Key="EmailAlreadyExists">Email already used.</system:String>
+    <system:String x:Key="PasswordsDoNotMatch">Passwords do not match.</system:String>
+    <system:String x:Key="UsernameCantEndWithGr">Username can not end with the suffix -gr.</system:String>
+
+    <system:String x:Key="ThisExamSetCantBeDeleted">This exam set can't be deleted because it has recorded exam attempts.</system:String>
+    <system:String x:Key="DoYouWantToDeleteThisExamSet">Do you want to delete this exam set? Included mazes will still exist.</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
 

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Services.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
@@ -40,9 +41,9 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
         {
             return registrationResult switch
             {
-                PatientRegistrationResult.Success => "Succesfully registered.",
-                PatientRegistrationResult.UsernameAlreadyExists => "Patient username already exists.",
-                PatientRegistrationResult.GroupDoesNotExist => "Group does not exist.",
+                PatientRegistrationResult.Success => "SuccesfullyRegistered".Resource(),
+                PatientRegistrationResult.UsernameAlreadyExists => "PatientUsernameAlreadyExists".Resource(),
+                PatientRegistrationResult.GroupDoesNotExist => "GroupDoesNotExist".Resource(),
                 _ => throw new ArgumentException("Invalid parameter.")
             };
         }

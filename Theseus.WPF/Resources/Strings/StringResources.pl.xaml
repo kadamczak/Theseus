@@ -16,17 +16,20 @@
     <system:String x:Key="Add">Dodaj</system:String>
     <system:String x:Key="Begin">Zacznij</system:String>
     <system:String x:Key="Cancel">Anuluj</system:String>
-    <system:String x:Key="Details">Szczegóły</system:String>
+    <system:String x:Key="Details">Podgląd</system:String>
     <system:String x:Key="AdditionalInfo">Dod. Informacje</system:String>
     <system:String x:Key="Delete">Usuń</system:String>
     <system:String x:Key="Search">Szukaj</system:String>
     <system:String x:Key="Actions">Akcje</system:String>
     <system:String x:Key="Toggle">Zmień</system:String>
-    <system:String x:Key="Remove">Wyjmij</system:String>
+    <system:String x:Key="Remove">Usuń</system:String>
     <system:String x:Key="Leave">Opuść</system:String>
     <system:String x:Key="Skip">Pomiń</system:String>
     <system:String x:Key="Stop">Stop</system:String>
     <system:String x:Key="Generate">Generuj</system:String>
+
+    <system:String x:Key="Yes">Tak</system:String>
+    <system:String x:Key="No">Nie</system:String>
 
     <system:String x:Key="LoginNoun">Logowanie</system:String>
     <system:String x:Key="RegisterNoun">Rejestracja</system:String>
@@ -112,6 +115,19 @@
     <system:String x:Key="GroupDeletion">Usuwanie Grupy</system:String>
     <system:String x:Key="DoYouWantToDeleteThisGroup">Czy na pewno chcesz usunąć tą grupę? Zestawy wchodzące w jej skład pozostaną dostępne.</system:String>
 
+    <system:String x:Key="ExamSetRemoval">Usuwanie Zestawu</system:String>
+    <system:String x:Key="DoYouWantToRemoveExamSet">Czy na pewno chcesz wyrzucić zestaw z tej grupy?</system:String>
+
+    <system:String x:Key="PatientRemoval">Usuwanie Pacjenta</system:String>
+    <system:String x:Key="DoYouWantToRemovePatient">Czy na pewno chcesz wyrzucić pacjenta z tej grupy?</system:String>
+
+    <system:String x:Key="StaffMemberRemoval">Usuwanie Pracownika</system:String>
+    <system:String x:Key="DoYouWantToRemoveStaffMember">Czy na pewno chcesz wyrzucić pracownika z tej grupy?</system:String>
+
+    <system:String x:Key="MazeDeletion">Usuwanie Labiryntu</system:String>
+    <system:String x:Key="DoYouWantToDeleteMaze">Czy na pewno chcesz usunąć ten labirynt?</system:String>
+    <system:String x:Key="MazeCantBeDeleted">Labirynt nie może zostać usunięty bo jest wykorzystany w zestawach.</system:String>
+
     <system:String x:Key="StaffMembers">Pracownicy</system:String>
     <system:String x:Key="Patients">Pacjenci</system:String>
     <system:String x:Key="ExamSets">Zestawy</system:String>
@@ -145,7 +161,7 @@
     <system:String x:Key="Width">Szerokość</system:String>
     <system:String x:Key="PreventTooCloseExits">Nie dopuść by początek i koniec labiryntu były zbyt blisko siebie</system:String>
     <system:String x:Key="RandomBorderCells">Losowe kratki brzegowe</system:String>
-    <system:String x:Key="Dijkstra">Dijkstra (najdluższa droga)</system:String>
+    <system:String x:Key="Dijkstra">Dijkstra (najdłuższa droga)</system:String>
 
     <system:String x:Key="ExamData">Podgląd Testów</system:String>
     <system:String x:Key="ViewRecentExams">Zobacz ostatnie testy</system:String>
@@ -153,7 +169,7 @@
 
     <system:String x:Key="AmountOfExamAttempts:"  xml:space="preserve">Ilość testów: </system:String>
     <system:String x:Key="LatestExam:"  xml:space="preserve">Ostatni test: </system:String>
-    <system:String x:Key="SetName">Nazwa Zestawu</system:String>
+    <system:String x:Key="SetName">Zestaw</system:String>
     <system:String x:Key="FinishedAt">Ukończono</system:String>
 
     <system:String x:Key="ChronologicalExams">Lista Testów (chronologiczna)</system:String>
@@ -175,16 +191,17 @@
     <system:String x:Key="Worse">Gorzej</system:String>
     <system:String x:Key="Lower">Niżej</system:String>
     <system:String x:Key="Prev">Wcześniej</system:String>
-    <system:String x:Key="Avg">Średnia</system:String>
+    <system:String x:Key="Avg">Śr</system:String>
     <system:String x:Key="NoDifference">Brak różnicy.</system:String>
     <system:String x:Key="NoPreviousAttemptsByThisPatient">Brak wcześniejszych podejść przez tego pacjenta.</system:String>
     <system:String x:Key="OtherPatientsInGroupDidNotCompleteThisExamSet">Inni pacjenci w grupie nie korzystali z tego zestawu.</system:String>
+    <system:String x:Key="OtherPatientsInGroupDidNotCompleteThisMaze">Inni pacjenci w grupie nie przechodzili tego labiryntu.</system:String>
 
     <system:String x:Key="Completed:"  xml:space="preserve">Ukończono: </system:String>
     <system:String x:Key="TimeBeforeFirstInput:"  xml:space="preserve">Czas przed pierwszym ruchem: </system:String>
     <system:String x:Key="LongestInactivityTime:"  xml:space="preserve">Najdłuższy czas bez aktywności: </system:String>
 
-    <system:String x:Key="AmountOfCompletedAttemptsByOtherPatients:">Ilość ukończonych podejść przez innych pacjentów: </system:String>
+    <system:String x:Key="AmountOfCompletedAttemptsByOtherPatients:" xml:space="preserve">Ilość ukończonych podejść przez innych pacjentów: </system:String>
     <system:String x:Key="TimesNotRecorded">Czasy nie zostały zapisane (pacjent nie wykonał żadnego ruchu).</system:String>
     <system:String x:Key="PreviousAttemptWasCompletedButThisOneWasNot">Poprzednie podejście zostało ukończone, ale te nie.</system:String>
     <system:String x:Key="PreviousAttemptWasNotCompletedButThisOneWas">Poprzednie podejście nie zostało ukończone, ale te tak.</system:String>
@@ -201,6 +218,26 @@
     <system:String x:Key="MazeFinished"  xml:space="preserve">Labirynt ukończony! Następne zadanie za: </system:String>
     <system:String x:Key="End">Koniec</system:String>
     <system:String x:Key="ExamFinished">Test ukończony. Wyniki zostały zapisane automatycznie.</system:String>
+
+    <system:String x:Key="AgeOutsideOfRange">Wiek poza poprawnym zakresem.</system:String>
+    <system:String x:Key="AgeContainsInvalidCharacters">Nieprawidłowe znaki.</system:String>
+
+    <system:String x:Key="UsernameDoesNotExist">Nazwa użytkownika nie istnieje.</system:String>
+    <system:String x:Key="IncorrectGroupName">Nieprawidłowa nazwa grupy.</system:String>
+    <system:String x:Key="LoginFailed">Logowanie nie powiodło się.</system:String>
+    <system:String x:Key="IncorrectPassword">Niewłaściwe hasło.</system:String>
+
+    <system:String x:Key="SuccesfullyRegistered">Rejestracja powiodła się.</system:String>
+    <system:String x:Key="PatientUsernameAlreadyExists">Nazwa pacjenta już istnieje.</system:String>
+    <system:String x:Key="GroupDoesNotExist">Grupa nie istnieje.</system:String>
+
+    <system:String x:Key="UsernameAlreadyExists">Nazwa już istnieje.</system:String>
+    <system:String x:Key="EmailAlreadyExists">Email był już użyty.</system:String>
+    <system:String x:Key="PasswordsDoNotMatch">Hasła nie zgadzają się.</system:String>
+    <system:String x:Key="UsernameCantEndWithGr">Nazwa nie może kończyć się sufiksem -gr.</system:String>
+
+    <system:String x:Key="ThisExamSetCantBeDeleted">Ten zestaw nie może być usunięty, ponieważ wykonano na nim testy.</system:String>
+    <system:String x:Key="DoYouWantToDeleteThisExamSet">Czy na pewno chcesz usunąć zestaw? Labirynty wchodzące w jego skład nie zostaną usunięte.</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Algorytm Binary Tree produkuje labirynty mocno faworyzujące przebieg kratek po przekątnej. Z tego powodu nie jest on używany w generatorze zestawów, ale może być przydatny w wyjątkowych przypadkach.
 

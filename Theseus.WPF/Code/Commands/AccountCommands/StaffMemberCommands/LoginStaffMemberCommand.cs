@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
@@ -37,15 +38,15 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
             }
             catch (UserNotFoundException)
             {
-                _staffMemberLoginViewModel.LoginResponse = "Username does not exist.";
+                _staffMemberLoginViewModel.LoginResponse = "UsernameDoesNotExist".Resource();
             }
             catch (InvalidPasswordException)
             {
-                _staffMemberLoginViewModel.LoginResponse = "Incorrect password.";
+                _staffMemberLoginViewModel.LoginResponse = "IncorrectPassword".Resource();
             }
             catch (Exception)
             {
-                _staffMemberLoginViewModel.LoginResponse = "Login failed.";
+                _staffMemberLoginViewModel.LoginResponse = "LoginFailed".Resource();
             }
         }
 

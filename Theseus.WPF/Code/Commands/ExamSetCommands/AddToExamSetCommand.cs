@@ -2,6 +2,7 @@
 using System.Linq;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -58,7 +59,7 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
             {
                 var selectedMaze = _mazesInExamSetStore.SelectedMazes[i];
                 var commandViewModel = _mazeCommandList.Where(m => m.Model.MazeWithSolution.Id == selectedMaze.Id).First();
-                commandViewModel.Info = "Place in exam: " + (i + 1);
+                commandViewModel.Info = "PlaceInExam:".Resource() + (i + 1);
             }
         }
     }

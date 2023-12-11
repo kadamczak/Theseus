@@ -1,6 +1,7 @@
 ﻿using System;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.Implementations
@@ -17,7 +18,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.
         public override string GrantInfo(CommandViewModel<ExamSet> commandViewModel)
         {
             Guid examSetId = commandViewModel.Model.Id;
-            return "Owner: " + _getOwnerQuery.GetOwner(examSetId).Username;
+            return "Owner:".Resource() + _getOwnerQuery.GetOwner(examSetId).Username;
         }
     }
 }

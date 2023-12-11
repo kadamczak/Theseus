@@ -5,6 +5,7 @@ using System.Windows;
 using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamCommands
@@ -37,8 +38,8 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
 
         private MessageBoxResult ShowConfirmationMessageBox()
         {
-            string messageBoxText = "Do you want to delete this exam?";
-            string caption = "Exam Deletion";
+            string messageBoxText = "DoYouWantToDeleteThisExam".Resource();
+            string caption = "ExamDeletion".Resource();
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);

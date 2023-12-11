@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.WPF.Code.Commands.DataCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -22,7 +23,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Button
         public override ButtonViewModel GrantCommand(ObservableCollection<CommandViewModel<ExamStageWithMazeViewModel>> collection,
                                                      CommandViewModel<ExamStageWithMazeViewModel> commandViewModel)
         {
-            return new ButtonViewModel(show: true, "Replay", new ShowExamStageDetailsCommand(commandViewModel, _selectedExamStageDetailsStore, _examStageNavigationService));
+            return new ButtonViewModel(show: true, "Replay".Resource(), new ShowExamStageDetailsCommand(commandViewModel, _selectedExamStageDetailsStore, _examStageNavigationService));
         }
     }
 }

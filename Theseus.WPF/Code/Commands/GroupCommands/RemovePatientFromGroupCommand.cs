@@ -4,6 +4,7 @@ using System.Windows;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
@@ -35,8 +36,8 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         private MessageBoxResult ShowMessageBox()
         {
-            string messageBoxText = "Do you want to remove patient from this group?";
-            string caption = "Patient Removal";
+            string messageBoxText = "DoYouWantToRemovePatient".Resource();
+            string caption = "PatientRemoval".Resource();
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             return MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);

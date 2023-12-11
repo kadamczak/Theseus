@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
@@ -18,7 +19,7 @@ namespace Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.ButtonComma
                                                      CommandViewModel<MazeWithSolutionCanvasViewModel> commandViewModel)
         {
             return new ButtonViewModel(true,
-                                       "Toggle",
+                                       "Toggle".Resource(),
                                        new AddToExamSetCommand(collection, commandViewModel, _mazeInExamSetStore));
         }
     }

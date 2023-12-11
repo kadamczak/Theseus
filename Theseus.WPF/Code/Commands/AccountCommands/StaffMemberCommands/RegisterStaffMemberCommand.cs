@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
@@ -42,11 +43,11 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
         private string GetRegistrationResponse(StaffMemberRegistrationResult registrationResult)
         {
             return registrationResult switch {
-                StaffMemberRegistrationResult.Success => "Succesfully registered.",
-                StaffMemberRegistrationResult.UsernameAlreadyExists => "Username already exists.",
-                StaffMemberRegistrationResult.EmailAlreadyExists => "Email already exists.",
-                StaffMemberRegistrationResult.PasswordsDoNotMatch => "Passwords do not match.",
-                StaffMemberRegistrationResult.UsernameNotAllowed => "Username can't end with \"-gr\".",
+                StaffMemberRegistrationResult.Success => "SuccesfullyRegistered".Resource(),
+                StaffMemberRegistrationResult.UsernameAlreadyExists => "UsernameAlreadyExists".Resource(),
+                StaffMemberRegistrationResult.EmailAlreadyExists => "EmailAlreadyExists".Resource(),
+                StaffMemberRegistrationResult.PasswordsDoNotMatch => "PasswordsDoNotMatch".Resource(),
+                StaffMemberRegistrationResult.UsernameNotAllowed => "UsernameCantEndWithGr".Resource(),
                 _ => throw new ArgumentException("Invalid parameter.")
             };
         }
