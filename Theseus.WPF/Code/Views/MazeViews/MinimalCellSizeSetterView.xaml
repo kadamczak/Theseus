@@ -15,9 +15,9 @@
 
         <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 100">
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="Cell size: " VerticalAlignment="Center" FontSize="25" />
+                <Label Content="{DynamicResource CellSize}" VerticalAlignment="Center" FontSize="25" />
                 <TextBox Text="{Binding MinimalCellSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40" Width="60" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MaxLength="4" />
-                <Button Style="{StaticResource Generic}" FontSize="22" Content="Set as Minimal" Margin="40 0 0 0" Command="{Binding ChangeMinimalCellSize}"/>
+                <Button Style="{StaticResource Generic}" FontSize="22" Content="{DynamicResource SetAsMinimal}" Margin="40 0 0 0" Command="{Binding ChangeMinimalCellSize}"/>
             </StackPanel>
         </DockPanel>
 

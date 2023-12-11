@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
-            <Label DockPanel.Dock="Left" Content="Exams of Patient" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
+            <Label DockPanel.Dock="Left" Content="{DynamicResource ExamsOfPatient}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
 
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="22" Content="Go Back" Command="{Binding GoBack}" />
+                <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="22" Content="{DynamicResource GoBack}" Command="{Binding GoBack}" />
             </StackPanel>
         </DockPanel>
 

@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Margin="0 0 0 10">
-            <Label DockPanel.Dock="Left" Grid.Row="0" FontSize="25" Content="Staff Members" VerticalAlignment="Center" />
-            <Button DockPanel.Dock="Right" Content="Add" Style="{StaticResource Generic}" FontSize="19" Padding="20 3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding AddStaffMember}" Visibility="{Binding AddStaffMemberAvailable, Converter={StaticResource BooleanVisibility}}"/>
+            <Label DockPanel.Dock="Left" Grid.Row="0" FontSize="25" Content="{DynamicResource StaffMembers}" VerticalAlignment="Center" />
+            <Button DockPanel.Dock="Right" Content="{DynamicResource Add}" Style="{StaticResource Generic}" FontSize="19" Padding="20 3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding AddStaffMember}" Visibility="{Binding AddStaffMemberAvailable, Converter={StaticResource BooleanVisibility}}"/>
         </DockPanel>
         <views:StaffMemberCommandListView Grid.Row="1" DataContext="{Binding RemoveStaffMemberCommandListViewModel}"/>
     </Grid>

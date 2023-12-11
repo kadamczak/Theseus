@@ -24,49 +24,49 @@
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                            <GridViewColumn Header="Username">
+                            <GridViewColumn Header="{DynamicResource Username}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Margin="10 0 10 0" Text="{Binding Model.Username}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Age">
+                            <GridViewColumn Header="{DynamicResource Age}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                     <TextBlock Margin="10 0 10 0" Text="{Binding Model.Age, TargetNullValue=Undisclosed}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Gender">
+                            <GridViewColumn Header="{DynamicResource Gender}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                     <TextBlock Margin="10 0 10 0" Text="{Binding Model.Sex}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Education">
+                            <GridViewColumn Header="{DynamicResource Education}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                     <TextBlock  Margin="10 0 10 0" Text="{Binding Model.EducationLevel}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Profession">
+                            <GridViewColumn Header="{DynamicResource Profession}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                     <TextBlock Margin="10 0 10 0" Text="{Binding Model.ProfessionType}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Additional Info">
+                            <GridViewColumn Header="{DynamicResource AdditionalInfo}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Margin="10 0 10 0" Text="{Binding Info}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Actions">
+                            <GridViewColumn Header="{DynamicResource Actions}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10 0 10 0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >

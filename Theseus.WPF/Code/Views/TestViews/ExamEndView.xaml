@@ -13,10 +13,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="End" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontFamily="Microsoft YaHei Light"/>
+        <Label Grid.Row="0" Content="{DynamicResource End}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontFamily="Microsoft YaHei Light"/>
 
-        <Label Margin="0 30 0 0" Grid.Row="1" Content="Exam finished. Results were saved automatically." FontSize="20"/>
+        <Label Margin="0 30 0 0" Grid.Row="1" Content="{DynamicResource ExamFinished}" FontSize="20"/>
 
-        <Button Style="{StaticResource Generic}" Content="Go Back" Grid.Row="2" HorizontalAlignment="Left" FontSize="20" Margin="0 20 0 0" Command="{Binding GoBack}"/>
+        <Button Style="{StaticResource Generic}" Content="{DynamicResource GoBack}" Grid.Row="2" HorizontalAlignment="Left" FontSize="20" Margin="0 20 0 0" Command="{Binding GoBack}"/>
     </Grid>
 </UserControl>

@@ -24,10 +24,10 @@
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
 
-            <Label Grid.Column="0" Content="Generate a maze" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
+            <Label Grid.Column="0" Content="{DynamicResource GenerateMaze}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 40" FontFamily="Microsoft YaHei Light"/>
 
             <StackPanel Grid.Column="1" Margin="70 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Label Content="Height" FontSize="16" FontWeight="Bold" />
+                <Label Content="{DynamicResource Height}" FontSize="16" FontWeight="Bold" />
                 <TextBox Height="40" Width="40" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MaxLength="2"  Text="{Binding MazeHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
@@ -35,7 +35,7 @@
 
 
             <StackPanel Grid.Column="1" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Label Content="Width" FontSize="16" FontWeight="Bold" />
+                <Label Content="{DynamicResource Width}" FontSize="16" FontWeight="Bold" />
                 <TextBox Height="40" Width="40" FontWeight="Bold" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" MaxLength="2" Text="{Binding MazeWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
@@ -61,10 +61,10 @@
 
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="50 30 0 0" Orientation="Vertical">
             <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding ShouldExcludeCellsCloseToRoot, Mode=TwoWay}">
-                <TextBlock Margin="10 0 0 0" Text="Prevent maze entry and exit from being too close to each other" FontSize="16" TextWrapping="Wrap" />
+                <TextBlock Margin="10 0 0 0" Text="{DynamicResource PreventTooCloseExits}" FontSize="16" TextWrapping="Wrap" />
             </CheckBox>
         </StackPanel>
 
-        <Button Style="{StaticResource Generic}" Grid.Row="3" Grid.ColumnSpan="2" Content="Generate" Margin="0 50 0 0" HorizontalAlignment="Center" Command="{Binding GenerateMaze}" />
+        <Button Style="{StaticResource Generic}" Grid.Row="3" Grid.ColumnSpan="2" Content="{DynamicResource Generate}" Margin="0 50 0 0" HorizontalAlignment="Center" Command="{Binding GenerateMaze}" />
     </Grid>
 </UserControl>

@@ -12,10 +12,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Staff Info" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 25" FontFamily="Microsoft YaHei Light"/>
+        <Label Grid.Row="0" Content="{DynamicResource StaffInfo}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 25" FontFamily="Microsoft YaHei Light"/>
 
-        <TextBlock Grid.Row="1" Text="Staff Member not logged in." HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0 0 0 25" />
+        <TextBlock Grid.Row="1" Text="{DynamicResource StaffMemberNotLoggedIn}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0 0 0 25" />
 
-        <Button Grid.Row="2" Style="{StaticResource Generic}" HorizontalAlignment="Center" Content="Login as staff member" FontSize="20" Command="{Binding NavigateToStaffMemberLoginRegister}"/>
+        <Button Grid.Row="2" Style="{StaticResource Generic}" HorizontalAlignment="Center" Content="{DynamicResource LoginAsStaffMember}" FontSize="20" Command="{Binding NavigateToStaffMemberLoginRegister}"/>
     </Grid>
 </UserControl>

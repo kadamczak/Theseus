@@ -12,10 +12,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Patient Info" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 25" FontFamily="Microsoft YaHei Light"/>
+        <Label Grid.Row="0" Content="{DynamicResource PatientInfo}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Margin="0 0 0 25" FontFamily="Microsoft YaHei Light"/>
 
-        <TextBlock Grid.Row="1" Text="Patient is not logged in." HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0 0 0 25" />
+        <TextBlock Grid.Row="1" Text="{DynamicResource PatientNotLoggedIn}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0 0 0 25" />
 
-        <Button Grid.Row="2" Style="{StaticResource Generic}" HorizontalAlignment="Center" Content="Login as patient" FontSize="20" Command="{Binding NavigateToPatientLoginRegister}"/>
+        <Button Grid.Row="2" Style="{StaticResource Generic}" HorizontalAlignment="Center" Content="{DynamicResource LoginAsPatient}" FontSize="20" Command="{Binding NavigateToPatientLoginRegister}"/>
     </Grid>
 </UserControl>

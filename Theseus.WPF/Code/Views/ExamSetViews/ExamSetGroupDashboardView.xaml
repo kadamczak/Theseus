@@ -13,8 +13,8 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Margin="0 0 0 10">
-            <Label DockPanel.Dock="Left" Grid.Row="0" FontSize="25" Content="Exam Sets" VerticalAlignment="Center" />
-            <Button DockPanel.Dock="Right" Content="Add" Style="{StaticResource Generic}" FontSize="19" Padding="20 3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding ChangeExamSets}"/>
+            <Label DockPanel.Dock="Left" Grid.Row="0" FontSize="25" Content="{DynamicResource ExamSets}" VerticalAlignment="Center" />
+            <Button DockPanel.Dock="Right" Content="{DynamicResource Add}" Style="{StaticResource Generic}" FontSize="19" Padding="20 3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding ChangeExamSets}"/>
         </DockPanel>
         <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding ExamSetCommandListViewModel}" />
     </Grid>

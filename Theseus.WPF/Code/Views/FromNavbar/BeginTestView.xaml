@@ -21,7 +21,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Content="Begin Test" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light" Margin="0 0 0 50"/>
+        <Label Content="{DynamicResource BeginTest}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light" Margin="0 0 0 50"/>
 
         <ListBox Grid.Row="1" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableExamSets}" SelectedItem="{Binding SelectedExamSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="250" HorizontalAlignment="Left">
             <ListBox.ItemTemplate>
@@ -31,9 +31,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Margin="0 50 0 0" Grid.Row="2" Content="Begin" Style="{StaticResource Generic}" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BeginExam}"/>
+        <Button Margin="0 50 0 0" Grid.Row="2" Content="{DynamicResource Begin}" Style="{StaticResource Generic}" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BeginExam}"/>
 
-        <TextBlock Grid.Row="3" Text="Can't begin test because patient is not logged in." FontSize="17" Margin="0 35 0 0" Visibility="{Binding IsPatientLoggedIn, Converter={StaticResource ReverseBooleanVisibility}}" />
+        <TextBlock Grid.Row="3" Text="{DynamicResource CantBeginTest}" FontSize="17" Margin="0 35 0 0" Visibility="{Binding IsPatientLoggedIn, Converter={StaticResource ReverseBooleanVisibility}}" />
 
         <TextBlock Grid.Row="3" Text="{Binding ExamSetsOmittedDueToScreenSizeText}" FontSize="17" Margin="0 35 0 0" />
     </Grid>

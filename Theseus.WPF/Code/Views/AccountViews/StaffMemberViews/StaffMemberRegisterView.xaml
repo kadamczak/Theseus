@@ -17,10 +17,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="0" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="47" FontFamily="Microsoft YaHei Light" />
+        <Label Grid.Row="0" Content="{DynamicResource Register}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="47" FontFamily="Microsoft YaHei Light" />
 
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Username" FontSize="20" Margin="0 0 0 10"/>
+            <TextBlock Text="{DynamicResource Username}" FontSize="20" Margin="0 0 0 10"/>
             <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" Width="250" Style="{StaticResource GenericTextBox}"/>
         </StackPanel>
 
@@ -31,33 +31,33 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0 8 15 0" >
-                <TextBlock Text="First Name" FontSize="20" Margin="0 0 0 10"/>
+                <TextBlock Text="{DynamicResource FirstName}" FontSize="20" Margin="0 0 0 10"/>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" Style="{StaticResource GenericTextBox}" HorizontalAlignment="Stretch"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0 8 0 0">
-                <TextBlock Text="Surname" FontSize="20" Margin="0 0 0 10"/>
+                <TextBlock Text="{DynamicResource Surname}" FontSize="20" Margin="0 0 0 10"/>
                 <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" Style="{StaticResource GenericTextBox}" HorizontalAlignment="Stretch"/>
             </StackPanel>
         </Grid>
 
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Email" FontSize="20" Margin="0 0 0 10"/>
+            <TextBlock Text="{DynamicResource Email}" FontSize="20" Margin="0 0 0 10"/>
             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" Width="250" Style="{StaticResource GenericTextBox}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Password" FontSize="20" Margin="0 0 0 10"/>
+            <TextBlock Text="{DynamicResource Password}" FontSize="20" Margin="0 0 0 10"/>
             <PasswordBox Style="{StaticResource GenericPasswordBox}" FontSize="22" PasswordChar="*" Width="250" PasswordChanged="PasswordBox_PasswordChanged" />
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Confirm Password" FontSize="20" Margin="0 0 0 10"/>
+            <TextBlock Text="{DynamicResource ConfirmPassword}" FontSize="20" Margin="0 0 0 10"/>
             <PasswordBox Style="{StaticResource GenericPasswordBox}" FontSize="22" PasswordChar="*" Width="250" PasswordChanged="ConfirmPasswordBox_PasswordChanged"  />
         </StackPanel>
 
         <TextBlock Margin="0 5 0 0" Grid.Row="6" HorizontalAlignment="Center" Text="{Binding RegistrationResponse, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Foreground="Black" TextWrapping="Wrap"/>
 
-        <Button Grid.Row="7" Style="{StaticResource Generic}" Margin="0 3 0 0" Content="Register" HorizontalAlignment="Center" Command="{Binding Register}"/>
+        <Button Grid.Row="7" Style="{StaticResource Generic}" Margin="0 3 0 0" Content="{DynamicResource Register}" HorizontalAlignment="Center" Command="{Binding Register}"/>
     </Grid>
 </UserControl>

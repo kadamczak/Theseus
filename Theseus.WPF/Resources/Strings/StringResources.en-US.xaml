@@ -14,6 +14,7 @@
     <system:String x:Key="GoBack">Go Back</system:String>
     <system:String x:Key="Enter">Enter</system:String>
     <system:String x:Key="Add">Add</system:String>
+    <system:String x:Key="Begin">Begin</system:String>
     <system:String x:Key="Cancel">Cancel</system:String>
     <system:String x:Key="Details">Details</system:String>
     <system:String x:Key="AdditionalInfo">Additional Info</system:String>
@@ -35,24 +36,33 @@
     <system:String x:Key="Settings">Settings</system:String>
     <system:String x:Key="MinimalAllowedCellSize">Allowed minimal cell size: </system:String>
     <system:String x:Key="ApplicationLanguage">Application language:</system:String>
-    <system:String x:Key="SetAsMinimal">"Set as Minimal</system:String>
-    <system:String x:Key="CellSize">"Cell size</system:String>
+    <system:String x:Key="SetAsMinimal">Set as Minimal</system:String>
+    <system:String x:Key="CellSize">Cell size</system:String>
 
     <system:String x:Key="TheseusHomeDescription">Application for conducting the digital version of the Porteus Test.</system:String>
 
     <system:String x:Key="PatientInfo">Patient Info</system:String>
     <system:String x:Key="StaffInfo">Staff Info</system:String>
 
-    <system:String x:Key="YourUsername">Your Username:</system:String>
-    <system:String x:Key="GroupName:">Group Name:</system:String>
+    <system:String x:Key="YourUsername:"  xml:space="preserve">Your Username: </system:String>
+    <system:String x:Key="GroupName:"  xml:space="preserve">Group Name: </system:String>
     <system:String x:Key="Username">Username</system:String>
+    <system:String x:Key="Username:" xml:space="preserve">Username: </system:String>
     <system:String x:Key="Group">Group</system:String>
+    
     <system:String x:Key="Age">Age</system:String>
+    <system:String x:Key="Age:"  xml:space="preserve">Age: </system:String>
+    
     <system:String x:Key="Gender">Gender</system:String>
+    <system:String x:Key="Gender:"  xml:space="preserve">Gender: </system:String>
+    
     <system:String x:Key="Education">Education</system:String>
     <system:String x:Key="EducationLevel">Education Level</system:String>
+    <system:String x:Key="EducationLevel:"  xml:space="preserve">Education level: </system:String>
+    
     <system:String x:Key="Profession">Profession</system:String>
     <system:String x:Key="ProfessionType">Profession Type</system:String>
+    <system:String x:Key="ProfessionType:"  xml:space="preserve">Profession type: </system:String>
 
     <system:String x:Key="DoNotDisclose">Do Not Disclose</system:String>
     <system:String x:Key="Undisclosed">Undisclosed</system:String>
@@ -78,17 +88,19 @@
     <system:String x:Key="ConfirmPassword">Confirm Password</system:String>
 
     <system:String x:Key="StaffMemberNotLoggedIn">Staff Member not logged in.</system:String>
+    <system:String x:Key="PatientNotLoggedIn">Patient not logged in.</system:String>
+    <system:String x:Key="LoginAsPatient">Login as patient</system:String>
     <system:String x:Key="PleaseLoginToAccessTheProgram">Please log-in to access the program.</system:String>
     <system:String x:Key="LastPatientLogins">Last patient log-ins:</system:String>
 
     <system:String x:Key="ViewGroups">View Groups</system:String>
     <system:String x:Key="CreateGroup">Create Group</system:String>
 
-    <system:String x:Key="Owner:">Owner: </system:String>
-    <system:String x:Key="AmountOfStaffMembers:">Amount of staff members: </system:String>
-    <system:String x:Key="AmountOfPatients:">Amount of patients: </system:String>
-    <system:String x:Key="AmountOfExamSets:">Amount of exam sets: </system:String>
-    <system:String x:Key="AmountOfMazes:">Amount of mazes: </system:String>
+    <system:String x:Key="Owner:"  xml:space="preserve">Owner: </system:String>
+    <system:String x:Key="AmountOfStaffMembers:"  xml:space="preserve">Amount of staff members: </system:String>
+    <system:String x:Key="AmountOfPatients:"  xml:space="preserve">Amount of patients: </system:String>
+    <system:String x:Key="AmountOfExamSets:"  xml:space="preserve">Amount of exam sets: </system:String>
+    <system:String x:Key="AmountOfMazes:"  xml:space="preserve">Amount of mazes: </system:String>
 
     <system:String x:Key="LeavingGroup">Leaving Group</system:String>
     <system:String x:Key="DoYouWantToLeaveThisGroup">Do you want to leave this group?</system:String>
@@ -116,7 +128,7 @@
     
     <system:String x:Key="CreateUsingMazeDatabase">Create using maze database</system:String>
     <system:String x:Key="SetName:">Set name: </system:String>
-    <system:String x:Key="PlaceInExam:">Place in exam: </system:String>
+    <system:String x:Key="PlaceInExam:"  xml:space="preserve">Place in exam: </system:String>
 
     <system:String x:Key="Easier">Easier</system:String>
     <system:String x:Key="Standard">Standard</system:String>
@@ -134,8 +146,8 @@
     <system:String x:Key="ViewRecentExams">View recent exams</system:String>
     <system:String x:Key="Exams">Exams</system:String>
 
-    <system:String x:Key="AmountOfExamAttempts:">Amount of exam attempts: </system:String>
-    <system:String x:Key="LatestExam:">Latest exam: </system:String>
+    <system:String x:Key="AmountOfExamAttempts:"  xml:space="preserve">Amount of exam attempts: </system:String>
+    <system:String x:Key="LatestExam:"  xml:space="preserve">Latest exam: </system:String>
     <system:String x:Key="SetName">Set Name</system:String>
     <system:String x:Key="FinishedAt">Finished At</system:String>
 
@@ -146,13 +158,13 @@
     <system:String x:Key="DoYouWantToDeleteThisExam">Do you want to delete this exam?</system:String>
 
     <system:String x:Key="Attempt#">Attempt #</system:String>
-    <system:String x:Key="CompletedMazes:">Completed mazes: </system:String>
-    <system:String x:Key="TotalTime:">Total time: </system:String>
-    <system:String x:Key="InputsMade:">Inputs made: </system:String>
-    <system:String x:Key="AmountOfAttemptsByOtherPatients:">Amount of attempts by other patients: </system:String>
-    <system:String x:Key="AmountOfAttemptsWithNoSkipsByOtherPatients:">Amount of attempts with no skips by other patients: </system:String>
-    <system:String x:Key="ComparisonToAverage:">Comparison to average: </system:String>
-    <system:String x:Key="ComparisonToPreviousAttemptOn:">Comparison to previous attempt on: </system:String>
+    <system:String x:Key="CompletedMazes:"  xml:space="preserve">Completed mazes: </system:String>
+    <system:String x:Key="TotalTime:"  xml:space="preserve">Total time: </system:String>
+    <system:String x:Key="InputsMade:"  xml:space="preserve">Inputs made: </system:String>
+    <system:String x:Key="AmountOfAttemptsByOtherPatients:"  xml:space="preserve">Amount of attempts by other patients: </system:String>
+    <system:String x:Key="AmountOfAttemptsWithNoSkipsByOtherPatients:"  xml:space="preserve">Amount of attempts with no skips by other patients: </system:String>
+    <system:String x:Key="ComparisonToAverage:"  xml:space="preserve">Comparison to average: </system:String>
+    <system:String x:Key="ComparisonToPreviousAttemptOn:"  xml:space="preserve">Comparison to previous attempt on: </system:String>
     <system:String x:Key="by">by</system:String>
     <system:String x:Key="Better">Better</system:String>
     <system:String x:Key="Worse">Worse</system:String>
@@ -163,9 +175,9 @@
     <system:String x:Key="NoPreviousAttemptsByThisPatient">No previous attempts by this patient.</system:String>
     <system:String x:Key="OtherPatientsInGroupDidNotCompleteThisExamSet">Other patients in group did not complete this exam set.</system:String>
 
-    <system:String x:Key="Completed:">Completed: </system:String>
-    <system:String x:Key="TimeBeforeFirstInput:">Time before first input: </system:String>
-    <system:String x:Key="LongestInactivityTime:">Longest inactivity time: </system:String>
+    <system:String x:Key="Completed:"  xml:space="preserve">Completed: </system:String>
+    <system:String x:Key="TimeBeforeFirstInput:"  xml:space="preserve">Time before first input: </system:String>
+    <system:String x:Key="LongestInactivityTime:"  xml:space="preserve">Longest inactivity time: </system:String>
 
     <system:String x:Key="AmountOfCompletedAttemptsByOtherPatients:">Amount of completed attempts by other patients: </system:String>
     <system:String x:Key="TimesNotRecorded">Times not recorded (inputs were not made).</system:String>
@@ -177,9 +189,11 @@
     <system:String x:Key="CreateCsv">Create CSV</system:String>
 
     <system:String x:Key="AmountOfSetsOmitted">Amount of sets omitted because of too small screen size: </system:String>
+    <system:String x:Key="CantBeginTest">Can't begin test because patient is not logged in.</system:String>
     <system:String x:Key="YouCanChangeTheMinimalCellSize">You can change the minimal cell size by clicking the gear button in the navigation bar.</system:String>
 
     <system:String x:Key="SolveMaze">Solve Maze</system:String>
+    <system:String x:Key="MazeFinished"  xml:space="preserve">Maze finished! Next puzzle in: </system:String>
     <system:String x:Key="End">End</system:String>
     <system:String x:Key="ExamFinished">Exam finished. Results were saved automatically.</system:String>
 

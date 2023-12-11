@@ -14,14 +14,14 @@
 
         <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Label Content="Set Name:" FontSize="17" FontWeight="Bold" />
+                <Label Content="{DynamicResource SetName:}" FontSize="17" FontWeight="Bold" />
                 <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding ExamSetName, UpdateSourceTrigger=PropertyChanged}"  FontSize="17"/>
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource Generic}" Margin="0 0 0 0" FontSize="22" Content="Save" Command="{Binding SaveExamSet}" />
+                <Button Style="{StaticResource Generic}" Margin="0 0 0 0" FontSize="22" Content="{DynamicResource Save}" Command="{Binding SaveExamSet}" />
 
-                <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="22" Content="Go Back" Command="{Binding GoBack}" />
+                <Button Style="{StaticResource Generic}" Margin="40 0 0 0" FontSize="22" Content="{DynamicResource GoBack}" Command="{Binding GoBack}" />
             </StackPanel>
         </DockPanel>
 

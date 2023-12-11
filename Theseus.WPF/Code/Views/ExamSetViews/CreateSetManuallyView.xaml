@@ -14,11 +14,11 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Label Content="Set Name:" FontSize="17" FontWeight="Bold" />
+                <Label Content="{DynamicResource SetName:}" FontSize="17" FontWeight="Bold" />
                 <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding ExamSetName, UpdateSourceTrigger=PropertyChanged}"  FontSize="17"/>
             </StackPanel>
             
-            <Button Grid.Row="0" FontSize="17" Margin="0 0 0 10" Style="{StaticResource Generic}" Content="Create Set" HorizontalAlignment="Right" Command="{Binding CreateSetManually}"/>
+            <Button Grid.Row="0" FontSize="17" Margin="0 0 0 10" Style="{StaticResource Generic}" Content="{DynamicResource CreateSet}" HorizontalAlignment="Right" Command="{Binding CreateSetManually}"/>
             <views:MazeCommandListView Grid.Row="1" x:Name="AddToSetMazeCommandListView" DataContext="{Binding AddToSetMazeCommandListViewModel}" />
         </Grid>
     </Grid>

@@ -11,6 +11,21 @@
 
     <system:String x:Key="Save">Zapisz</system:String>
     <system:String x:Key="Change">Zmień</system:String>
+    <system:String x:Key="GoBack">Powrót</system:String>
+    <system:String x:Key="Enter">Wprowadź</system:String>
+    <system:String x:Key="Add">Dodaj</system:String>
+    <system:String x:Key="Cancel">Anuluj</system:String>
+    <system:String x:Key="Details">Szczegóły</system:String>
+    <system:String x:Key="AdditionalInfo">Dod. Informacje</system:String>
+    <system:String x:Key="Delete">Usuń</system:String>
+    <system:String x:Key="Search">Szukaj</system:String>
+    <system:String x:Key="Actions">Akcje</system:String>
+    <system:String x:Key="Toggle">Zmień</system:String>
+    <system:String x:Key="Remove">Wyjmij</system:String>
+    <system:String x:Key="Leave">Opuść</system:String>
+    <system:String x:Key="Skip">Pomiń</system:String>
+    <system:String x:Key="Stop">Stop</system:String>
+    <system:String x:Key="Generate">Generuj</system:String>
 
     <system:String x:Key="Settings">Ustawienia</system:String>
 

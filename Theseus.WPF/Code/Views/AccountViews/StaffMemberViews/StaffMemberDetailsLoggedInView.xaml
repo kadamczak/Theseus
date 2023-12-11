@@ -18,12 +18,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 15">
-            <Label Grid.Row="0" Content="Staff Info" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
-            <Button Content="Save" Style="{StaticResource Generic}" Command="{Binding Save}" VerticalAlignment="Center" Margin=" 20 0 0 0"/>
+            <Label Grid.Row="0" Content="{DynamicResource StaffInfo}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
+            <Button Content="{DynamicResource Save}" Style="{StaticResource Generic}" Command="{Binding Save}" VerticalAlignment="Center" Margin=" 20 0 0 0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 8 0 0">
-            <TextBlock Text="Username" FontSize="22" Margin="0 0 0 10"/>
+            <TextBlock Text="{DynamicResource Username}" FontSize="22" Margin="0 0 0 10"/>
             <TextBox Text="{Binding Username}" Width="250" Style="{StaticResource GenericTextBox}" IsReadOnly="True"/>
         </StackPanel>
 
@@ -34,24 +34,24 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0 0 15 0" >
-                <TextBlock Text="First Name" FontSize="22" Margin="0 0 0 10"/>
+                <TextBlock Text="{DynamicResource FirstName}" FontSize="22" Margin="0 0 0 10"/>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource GenericTextBox}" HorizontalAlignment="Stretch"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1">
-                <TextBlock Text="Surname" FontSize="22" Margin="0 0 0 10"/>
+                <TextBlock Text="{DynamicResource Surname}" FontSize="22" Margin="0 0 0 10"/>
                 <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource GenericTextBox}" HorizontalAlignment="Stretch"/>
             </StackPanel>
         </Grid>
 
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0 22 0 0">
-            <TextBlock Text="Email" FontSize="22" Margin="0 0 0 10"/>
+            <TextBlock Text="{DynamicResource Email}" FontSize="22" Margin="0 0 0 10"/>
             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="250" Style="{StaticResource GenericTextBox}"/>
         </StackPanel>
 
-        <Button Grid.Row="4" Margin="0 25 0 0" Style="{StaticResource Generic}" Width="190" Content="View Groups" HorizontalAlignment="Center" Command="{Binding ShowGroups}"/>
+        <Button Grid.Row="4" Margin="0 25 0 0" Style="{StaticResource Generic}" Width="190" Content="{DynamicResource ViewGroups}" HorizontalAlignment="Center" Command="{Binding ShowGroups}"/>
 
-        <Button Grid.Row="5" Margin="0 40 0 0" Style="{StaticResource Generic}" Width="190" Content="Logout" HorizontalAlignment="Center" Command="{Binding Logout}"/>
+        <Button Grid.Row="5" Margin="0 40 0 0" Style="{StaticResource Generic}" Width="190" Content="{DynamicResource Logout}" HorizontalAlignment="Center" Command="{Binding Logout}"/>
 
     </Grid>
 </UserControl>

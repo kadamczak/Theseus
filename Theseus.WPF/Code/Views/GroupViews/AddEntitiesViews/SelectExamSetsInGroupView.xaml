@@ -13,9 +13,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button Grid.Row="0" FontSize="17" Margin="0 0 0 0" Style="{StaticResource Generic}" Content="Save" Width="90" HorizontalAlignment="Right" Command="{Binding SaveExamSetsInGroup}"/>
+            <Button Grid.Row="0" FontSize="17" Margin="0 0 0 0" Style="{StaticResource Generic}" Content="{DynamicResource Save}" Width="90" HorizontalAlignment="Right" Command="{Binding SaveExamSetsInGroup}"/>
 
-            <Button Grid.Row="0" FontSize="17" Margin="30 0 0 0" Style="{StaticResource Generic}" Content="Cancel" Width="90"  HorizontalAlignment="Right" Command="{Binding GoBack}"/>
+            <Button Grid.Row="0" FontSize="17" Margin="30 0 0 0" Style="{StaticResource Generic}" Content="{DynamicResource Cancel}" Width="90"  HorizontalAlignment="Right" Command="{Binding GoBack}"/>
         </StackPanel>
 
         <views:ExamSetCommandListView Grid.Row="1" DataContext="{Binding AddToGroupExamSetCommandListViewModel}" />

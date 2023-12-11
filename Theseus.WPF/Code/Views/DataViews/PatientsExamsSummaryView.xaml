@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" FontSize="25" Content="Patients" VerticalAlignment="Center" Margin="0 0 0 10"/>
+        <Label Grid.Row="0" FontSize="25" Content="{DynamicResource Patients}" VerticalAlignment="Center" Margin="0 0 0 10"/>
         <views:PatientCommandListView Grid.Row="1" DataContext="{Binding PatientCommandListViewModel}" />
     </Grid>
 </UserControl>

@@ -15,10 +15,10 @@
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
-                <Label DockPanel.Dock="Left" Content="Exam Data" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
+                <Label DockPanel.Dock="Left" Content="{DynamicResource ExamData}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light"/>
 
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{StaticResource Generic}" FontSize="22" Content="View recent exams" Command="{Binding GoToRecentExams}" />
+                    <Button Style="{StaticResource Generic}" FontSize="22" Content="{DynamicResource ViewRecentExams}" Command="{Binding GoToRecentExams}" />
                 </StackPanel>
             </DockPanel>
 

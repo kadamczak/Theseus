@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
-            <Label Grid.Row="0" Content="Exam Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="40" FontFamily="Microsoft YaHei Light"/>
+            <Label Grid.Row="0" Content="{DynamicResource ExamDetails}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="40" FontFamily="Microsoft YaHei Light"/>
 
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource Generic}" FontSize="22" Content="Create CSV" Command="{Binding SaveCsv}" />
+                <Button Style="{StaticResource Generic}" FontSize="22" Content="{DynamicResource CreateCsv}" Command="{Binding SaveCsv}" />
             </StackPanel>
         </DockPanel>
 

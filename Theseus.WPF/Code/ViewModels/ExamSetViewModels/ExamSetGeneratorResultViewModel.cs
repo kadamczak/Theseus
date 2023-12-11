@@ -41,7 +41,7 @@ namespace Theseus.WPF.Code.ViewModels
                                                SelectedModelDetailsStore<ExamSet> examSetDetailsStore,
                                                MazeCommandListViewModelFactory showDetailsMazeCommandListViewModel,
                                                NavigationStore navigationStore,
-                                               Func<ExamSetGeneratorViewModel> viewModelGenerator,
+                                               Func<CreateSetViewModel> viewModelGenerator,
                                                ExamSetReturnServiceStore examSetReturnServiceStore,
                                                ICreateMazeWithSolutionCommand createMazeCommand,
                                                ICreateExamSetCommand createExamSetCommand,
