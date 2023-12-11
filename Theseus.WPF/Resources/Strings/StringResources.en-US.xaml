@@ -11,23 +11,200 @@
 
     <system:String x:Key="Save">Save</system:String>
     <system:String x:Key="Change">Change</system:String>
+    <system:String x:Key="GoBack">Go Back</system:String>
+    <system:String x:Key="Enter">Enter</system:String>
+    <system:String x:Key="Add">Add</system:String>
+    <system:String x:Key="Cancel">Cancel</system:String>
+    <system:String x:Key="Details">Details</system:String>
+    <system:String x:Key="AdditionalInfo">Additional Info</system:String>
+    <system:String x:Key="Delete">Delete</system:String>
+    <system:String x:Key="Search">Search</system:String>
+    <system:String x:Key="Actions">Actions</system:String>
+    <system:String x:Key="Toggle">Toggle</system:String>
+    <system:String x:Key="Remove">Remove</system:String>
+    <system:String x:Key="Leave">Leave</system:String>
+    <system:String x:Key="Skip">Skip</system:String>
+    <system:String x:Key="Stop">Stop</system:String>
+    <system:String x:Key="Generate">Generate</system:String>
+    
+    <system:String x:Key="Login">Login</system:String>
+    <system:String x:Key="Logout">Logout</system:String>
+    <system:String x:Key="Register">Register</system:String>
+    <system:String x:Key="LoginAsStaffMember">Login as Staff Member</system:String>
 
     <system:String x:Key="Settings">Settings</system:String>
-
-    <system:String x:Key="MinimalAllowedCellSize">Allowed minimal cell size:</system:String>
-
+    <system:String x:Key="MinimalAllowedCellSize">Allowed minimal cell size: </system:String>
     <system:String x:Key="ApplicationLanguage">Application language:</system:String>
-    
-    <system:String x:Key="Binary">BINARY ENG Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>
+    <system:String x:Key="SetAsMinimal">"Set as Minimal</system:String>
+    <system:String x:Key="CellSize">"Cell size</system:String>
 
-    <system:String x:Key="Sidewinder">SIDEWINDER ENG Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>
+    <system:String x:Key="TheseusHomeDescription">Application for conducting the digital version of the Porteus Test.</system:String>
+
+    <system:String x:Key="PatientInfo">Patient Info</system:String>
+    <system:String x:Key="StaffInfo">Staff Info</system:String>
+
+    <system:String x:Key="YourUsername">Your Username:</system:String>
+    <system:String x:Key="GroupName:">Group Name:</system:String>
+    <system:String x:Key="Username">Username</system:String>
+    <system:String x:Key="Group">Group</system:String>
+    <system:String x:Key="Age">Age</system:String>
+    <system:String x:Key="Gender">Gender</system:String>
+    <system:String x:Key="Education">Education</system:String>
+    <system:String x:Key="EducationLevel">Education Level</system:String>
+    <system:String x:Key="Profession">Profession</system:String>
+    <system:String x:Key="ProfessionType">Profession Type</system:String>
+
+    <system:String x:Key="DoNotDisclose">Do Not Disclose</system:String>
+    <system:String x:Key="Undisclosed">Undisclosed</system:String>
+
+    <system:String x:Key="Male">Male</system:String>
+    <system:String x:Key="Female">Female</system:String>
+
+    <system:String x:Key="Primary">Primary</system:String>
+    <system:String x:Key="LowerSecondary">Lower Secondary</system:String>
+    <system:String x:Key="Secondary">Secondary</system:String>
+    <system:String x:Key="Vocational">Vocational</system:String>
+    <system:String x:Key="Higher">Higher</system:String>
+
+    <system:String x:Key="None">None</system:String>
+    <system:String x:Key="Physical">Physical</system:String>
+    <system:String x:Key="Mental">Mental</system:String>
+
+    <system:String x:Key="FirstName">First Name</system:String>
+    <system:String x:Key="Name">Name</system:String>
+    <system:String x:Key="Surname">Surname</system:String>
+    <system:String x:Key="Email">Email</system:String>
+    <system:String x:Key="Password">Password</system:String>
+    <system:String x:Key="ConfirmPassword">Confirm Password</system:String>
+
+    <system:String x:Key="StaffMemberNotLoggedIn">Staff Member not logged in.</system:String>
+    <system:String x:Key="PleaseLoginToAccessTheProgram">Please log-in to access the program.</system:String>
+    <system:String x:Key="LastPatientLogins">Last patient log-ins:</system:String>
+
+    <system:String x:Key="ViewGroups">View Groups</system:String>
+    <system:String x:Key="CreateGroup">Create Group</system:String>
+
+    <system:String x:Key="Owner:">Owner: </system:String>
+    <system:String x:Key="AmountOfStaffMembers:">Amount of staff members: </system:String>
+    <system:String x:Key="AmountOfPatients:">Amount of patients: </system:String>
+    <system:String x:Key="AmountOfExamSets:">Amount of exam sets: </system:String>
+    <system:String x:Key="AmountOfMazes:">Amount of mazes: </system:String>
+
+    <system:String x:Key="LeavingGroup">Leaving Group</system:String>
+    <system:String x:Key="DoYouWantToLeaveThisGroup">Do you want to leave this group?</system:String>
+
+    <system:String x:Key="GroupDeletion">Group Deletion</system:String>
+    <system:String x:Key="DoYouWantToDeleteThisGroup">Do you want to delete this group? Included exam sets will remain.</system:String>
+
+    <system:String x:Key="StaffMembers">Staff Members</system:String>
+    <system:String x:Key="Patients">Patients</system:String>
+    <system:String x:Key="ExamSets">Exam Sets</system:String>
+
+    <system:String x:Key="Result">Result</system:String>
+    <system:String x:Key="NoResult">No result</system:String>
+
+    <system:String x:Key="AddPatient">Add Patient</system:String>
+    <system:String x:Key="AddStaffMember">Add Staff Member</system:String>
+
+    <system:String x:Key="ExamSetDetails">Exam Set Details</system:String>
+    <system:String x:Key="MazeDetails">Maze Details</system:String>
+
+    <system:String x:Key="GenerateSet">Generate a set</system:String>
+    <system:String x:Key="MazeAmount">Maze amount</system:String>
+    <system:String x:Key="Difficulty">Difficulty</system:String>
+    <system:String x:Key="MazeSizeRange">Maze size range</system:String>
+    
+    <system:String x:Key="CreateUsingMazeDatabase">Create using maze database</system:String>
+    <system:String x:Key="SetName:">Set name: </system:String>
+    <system:String x:Key="PlaceInExam:">Place in exam: </system:String>
+
+    <system:String x:Key="Easier">Easier</system:String>
+    <system:String x:Key="Standard">Standard</system:String>
+    <system:String x:Key="Difficult">Difficult</system:String>
+    <system:String x:Key="Custom">Custom</system:String>
+
+    <system:String x:Key="GenerateMaze">Generate a maze</system:String>
+    <system:String x:Key="Height">Height</system:String>
+    <system:String x:Key="Width">Width</system:String>
+    <system:String x:Key="PreventTooCloseExits">Prevent maze entry and exit from being too close to each other</system:String>
+    <system:String x:Key="RandomBorderCells">Random border cells</system:String>
+    <system:String x:Key="Dijkstra">Dijkstra (longest path)</system:String>
+
+    <system:String x:Key="ExamData">Exam Data</system:String>
+    <system:String x:Key="ViewRecentExams">View recent exams</system:String>
+    <system:String x:Key="Exams">Exams</system:String>
+
+    <system:String x:Key="AmountOfExamAttempts:">Amount of exam attempts: </system:String>
+    <system:String x:Key="LatestExam:">Latest exam: </system:String>
+    <system:String x:Key="SetName">Set Name</system:String>
+    <system:String x:Key="FinishedAt">Finished At</system:String>
+
+    <system:String x:Key="ChronologicalExams">Chronological Exams</system:String>
+    <system:String x:Key="ExamsOfPatient">Exams of Patient</system:String>
+
+    <system:String x:Key="ExamDeletion">Exam Deletion</system:String>
+    <system:String x:Key="DoYouWantToDeleteThisExam">Do you want to delete this exam?</system:String>
+
+    <system:String x:Key="Attempt#">Attempt #</system:String>
+    <system:String x:Key="CompletedMazes:">Completed mazes: </system:String>
+    <system:String x:Key="TotalTime:">Total time: </system:String>
+    <system:String x:Key="InputsMade:">Inputs made: </system:String>
+    <system:String x:Key="AmountOfAttemptsByOtherPatients:">Amount of attempts by other patients: </system:String>
+    <system:String x:Key="AmountOfAttemptsWithNoSkipsByOtherPatients:">Amount of attempts with no skips by other patients: </system:String>
+    <system:String x:Key="ComparisonToAverage:">Comparison to average: </system:String>
+    <system:String x:Key="ComparisonToPreviousAttemptOn:">Comparison to previous attempt on: </system:String>
+    <system:String x:Key="by">by</system:String>
+    <system:String x:Key="Better">Better</system:String>
+    <system:String x:Key="Worse">Worse</system:String>
+    <system:String x:Key="Lower">Lower</system:String>
+    <system:String x:Key="Prev">Prev</system:String>
+    <system:String x:Key="Avg">Avg</system:String>
+    <system:String x:Key="NoDifference">No difference.</system:String>
+    <system:String x:Key="NoPreviousAttemptsByThisPatient">No previous attempts by this patient.</system:String>
+    <system:String x:Key="OtherPatientsInGroupDidNotCompleteThisExamSet">Other patients in group did not complete this exam set.</system:String>
+
+    <system:String x:Key="Completed:">Completed: </system:String>
+    <system:String x:Key="TimeBeforeFirstInput:">Time before first input: </system:String>
+    <system:String x:Key="LongestInactivityTime:">Longest inactivity time: </system:String>
+
+    <system:String x:Key="AmountOfCompletedAttemptsByOtherPatients:">Amount of completed attempts by other patients: </system:String>
+    <system:String x:Key="TimesNotRecorded">Times not recorded (inputs were not made).</system:String>
+    <system:String x:Key="PreviousAttemptWasCompletedButThisOneWasNot">Previous attempt was completed but this one was not.</system:String>
+    <system:String x:Key="PreviousAttemptWasNotCompletedButThisOneWas">Previous attempt was not completed but this one was.</system:String>
+    <system:String x:Key="BothAttemptsWereNotCompleted">Both attempts were not completed.</system:String>
+    <system:String x:Key="BothAttemptsWereCompleted">Both attempts were completed.</system:String>
+    <system:String x:Key="Replay">Replay</system:String>
+    <system:String x:Key="CreateCsv">Create CSV</system:String>
+
+    <system:String x:Key="AmountOfSetsOmitted">Amount of sets omitted because of too small screen size: </system:String>
+    <system:String x:Key="YouCanChangeTheMinimalCellSize">You can change the minimal cell size by clicking the gear button in the navigation bar.</system:String>
+
+    <system:String x:Key="SolveMaze">Solve Maze</system:String>
+    <system:String x:Key="End">End</system:String>
+    <system:String x:Key="ExamFinished">Exam finished. Results were saved automatically.</system:String>
+
+    <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
+
+Properties:
+• around 25% of cells are dead ends,
+• shorter length solution,
+• around 25% of cells require making a decision.
+    </system:String>
+
+    <system:String x:Key="Sidewinder" xml:space="preserve">Sidewinder algorithm produces mazes that are heavily vertically-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
+
+Properties:
+• around 27% of cells are dead ends,
+• shorter length solution,
+• around 24% of cells require making a decision.
+    </system:String>
 
     <system:String x:Key="AldousBroder" xml:space="preserve">Aldous-Broder algorithm generates random mazes with no bias. As such, it's considered the average baseline for other algorithms.
 
 Properties:
-• around 30% of cells are dead ends,
+• around 29% of cells are dead ends,
 • medium length solution,
-• around 24% of cells require making a decision.  
+• around 25% of cells require making a decision.  
  </system:String>
 
     <system:String x:Key="HuntAndKill" xml:space="preserve">Hunt And Kill algorithm produces mazes that feature long, twisting passages. Its solution paths typically contain more cells than the average.
@@ -38,6 +215,12 @@ Properties:
 • around 9% of cells require making a decision.
     </system:String>
 
-    <system:String x:Key="Kruskal">KRUSKAL ENG Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nibh velit, congue id est non, dapibus dictum sapien. Nam aliquet sem tellus, non maximus mauris pulvinar non. Donec dapibus sit amet nibh rutrum lobortis.</system:String>
+    <system:String x:Key="Kruskal" xml:space="preserve">Kruskal algorithm produces mazes with more dead ends and more direction changes than other algorithms.
+    
+Properties:
+• around 31% of cells are dead ends,
+• high length solution,
+• around 26% of cells require making a decision.
+    </system:String>
 
 </ResourceDictionary>
