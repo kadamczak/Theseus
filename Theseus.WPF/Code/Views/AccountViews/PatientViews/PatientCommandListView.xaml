@@ -10,6 +10,8 @@
 
     <UserControl.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibility" True="Visible" False="Collapsed"/>
+        <converters:StringToResourceConverter x:Key="StringToResource"/>
+        <converters:NullableIntConverter x:Key="NullableInt"/>
     </UserControl.Resources>
 
     <Grid>
@@ -34,28 +36,28 @@
                             <GridViewColumn Header="{DynamicResource Age}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Age, TargetNullValue=Undisclosed}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Age, Converter={StaticResource NullableInt}}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="{DynamicResource Gender}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Sex}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.Sex, TargetNullValue=Undisclosed, Converter={StaticResource StringToResource}}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="{DynamicResource Education}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock  Margin="10 0 10 0" Text="{Binding Model.EducationLevel}"></TextBlock>
+                                    <TextBlock  Margin="10 0 10 0" Text="{Binding Model.EducationLevel, TargetNullValue=Undisclosed, Converter={StaticResource StringToResource}}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="{DynamicResource Profession}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.ProfessionType}"></TextBlock>
+                                    <TextBlock Margin="10 0 10 0" Text="{Binding Model.ProfessionType, TargetNullValue=Undisclosed, Converter={StaticResource StringToResource}}"></TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

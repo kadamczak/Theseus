@@ -10,6 +10,8 @@
 
     <UserControl.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibility" True="Visible" False="Collapsed"/>
+        <converters:StringToResourceConverter x:Key="StringToResource"/>
+        <converters:NullableIntConverter x:Key="NullableInt"/>
     </UserControl.Resources>
 
     <Grid>
@@ -46,22 +48,22 @@
                                     <StackPanel Margin="10 0 10 0" Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{DynamicResource Age:}"></TextBlock>
-                                            <TextBlock Text="{Binding Model.Patient.Age, TargetNullValue=Undisclosed}"></TextBlock>
+                                            <TextBlock Text="{Binding Model.Patient.Age, Converter={StaticResource NullableInt}}"></TextBlock>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                                             <TextBlock Text="{DynamicResource Gender:}"></TextBlock>
-                                            <TextBlock Text="{Binding Model.Patient.Sex}"></TextBlock>
+                                            <TextBlock Text="{Binding Model.Patient.Sex, TargetNullValue=Undisclosed, Converter={StaticResource StringToResource}}"></TextBlock>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal"  Margin="0 10 0 0">
                                             <TextBlock Text="{DynamicResource EducationLevel:}"></TextBlock>
-                                            <TextBlock Text="{Binding Model.Patient.EducationLevel}"></TextBlock>
+                                            <TextBlock Text="{Binding Model.Patient.EducationLevel, TargetNullValue=Undisclosed, Converter={StaticResource StringToResource}}"></TextBlock>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal"  Margin="0 10 0 0">
                                             <TextBlock Text="{DynamicResource ProfessionType:}"></TextBlock>
-                                            <TextBlock Text="{Binding Model.Patient.ProfessionType}"></TextBlock>
+                                            <TextBlock Text="{Binding Model.Patient.ProfessionType, TargetNullValue=Undisclosed, Converter={StaticResource StringToResource}}"></TextBlock>
                                         </StackPanel>
 
                                     </StackPanel>
