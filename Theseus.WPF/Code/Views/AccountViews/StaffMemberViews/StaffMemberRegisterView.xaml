@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="0" Content="{DynamicResource Register}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="47" FontFamily="Microsoft YaHei Light" />
+        <Label Grid.Row="0" Content="{DynamicResource RegisterNoun}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="47" FontFamily="Microsoft YaHei Light" />
 
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 8 0 0">
             <TextBlock Text="{DynamicResource Username}" FontSize="20" Margin="0 0 0 10"/>
@@ -58,6 +58,6 @@
 
         <TextBlock Margin="0 5 0 0" Grid.Row="6" HorizontalAlignment="Center" Text="{Binding RegistrationResponse, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Foreground="Black" TextWrapping="Wrap"/>
 
-        <Button Grid.Row="7" Style="{StaticResource Generic}" Margin="0 3 0 0" Content="{DynamicResource Register}" HorizontalAlignment="Center" Command="{Binding Register}"/>
+        <Button Grid.Row="7" Style="{StaticResource Generic}" Margin="0 3 0 0" Content="{DynamicResource RegisterVerb}" HorizontalAlignment="Center" Command="{Binding Register}"/>
     </Grid>
 </UserControl>

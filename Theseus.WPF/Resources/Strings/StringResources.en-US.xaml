@@ -27,10 +27,14 @@
     <system:String x:Key="Skip">Skip</system:String>
     <system:String x:Key="Stop">Stop</system:String>
     <system:String x:Key="Generate">Generate</system:String>
-    
-    <system:String x:Key="Login">Login</system:String>
-    <system:String x:Key="Logout">Logout</system:String>
-    <system:String x:Key="Register">Register</system:String>
+
+    <system:String x:Key="LoginNoun">Login</system:String>
+    <system:String x:Key="RegisterNoun">Register</system:String>
+
+    <system:String x:Key="LoginVerb">Login</system:String>
+    <system:String x:Key="LogoutVerb">Logout</system:String>
+    <system:String x:Key="RegisterVerb">Register</system:String>
+
     <system:String x:Key="LoginAsStaffMember">Login as Staff Member</system:String>
 
     <system:String x:Key="Settings">Settings</system:String>
@@ -64,7 +68,7 @@
     <system:String x:Key="ProfessionType">Profession Type</system:String>
     <system:String x:Key="ProfessionType:"  xml:space="preserve">Profession type: </system:String>
 
-    <system:String x:Key="DoNotDisclose">Do Not Disclose</system:String>
+    <system:String x:Key="DoNotDisclose">Do not disclose</system:String>
     <system:String x:Key="Undisclosed">Undisclosed</system:String>
 
     <system:String x:Key="Male">Male</system:String>
@@ -120,6 +124,7 @@
 
     <system:String x:Key="ExamSetDetails">Exam Set Details</system:String>
     <system:String x:Key="MazeDetails">Maze Details</system:String>
+    <system:String x:Key="PresentInExamSets:" xml:space="preserve">Present in exam sets: </system:String>
 
     <system:String x:Key="GenerateSet">Generate a set</system:String>
     <system:String x:Key="MazeAmount">Maze amount</system:String>
@@ -151,7 +156,7 @@
     <system:String x:Key="SetName">Set Name</system:String>
     <system:String x:Key="FinishedAt">Finished At</system:String>
 
-    <system:String x:Key="ChronologicalExams">Chronological Exams</system:String>
+    <system:String x:Key="ChronologicalExams">Chronological Exam List</system:String>
     <system:String x:Key="ExamsOfPatient">Exams of Patient</system:String>
 
     <system:String x:Key="ExamDeletion">Exam Deletion</system:String>
@@ -188,7 +193,7 @@
     <system:String x:Key="Replay">Replay</system:String>
     <system:String x:Key="CreateCsv">Create CSV</system:String>
 
-    <system:String x:Key="AmountOfSetsOmitted">Amount of sets omitted because of too small screen size: </system:String>
+    <system:String x:Key="AmountOfSetsOmitted" xml:space="preserve">Amount of sets omitted because of too small screen size: </system:String>
     <system:String x:Key="CantBeginTest">Can't begin test because patient is not logged in.</system:String>
     <system:String x:Key="YouCanChangeTheMinimalCellSize">You can change the minimal cell size by clicking the gear button in the navigation bar.</system:String>
 

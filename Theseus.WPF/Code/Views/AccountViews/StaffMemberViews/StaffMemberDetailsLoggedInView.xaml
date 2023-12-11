@@ -51,7 +51,7 @@
 
         <Button Grid.Row="4" Margin="0 25 0 0" Style="{StaticResource Generic}" Width="190" Content="{DynamicResource ViewGroups}" HorizontalAlignment="Center" Command="{Binding ShowGroups}"/>
 
-        <Button Grid.Row="5" Margin="0 40 0 0" Style="{StaticResource Generic}" Width="190" Content="{DynamicResource Logout}" HorizontalAlignment="Center" Command="{Binding Logout}"/>
+        <Button Grid.Row="5" Margin="0 40 0 0" Style="{StaticResource Generic}" Width="190" Content="{DynamicResource LogoutVerb}" HorizontalAlignment="Center" Command="{Binding Logout}"/>
 
     </Grid>
 </UserControl>
