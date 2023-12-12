@@ -68,17 +68,20 @@ namespace Theseus.WPF.Code.ViewModels
             if (!currentPatientStore.IsPatientLoggedIn)
                 return;
 
-            var examSets = GetAvailableFittedExamSets(currentPatientStore, getGroupQuery, getExamSetsQuery, getMazesOfExamSetQuery);
+            Group? patientGroup = getGroupQuery.GetGroup(currentPatientStore.Patient.Id);
+            if (patientGroup is null)
+                return;
+
+            var examSets = GetAvailableFittedExamSets(currentPatientStore, patientGroup!, getExamSetsQuery, getMazesOfExamSetQuery);
             AvailableExamSets = new ObservableCollection<ExamSet>(examSets);
             SelectedExamSet = AvailableExamSets.FirstOrDefault();
         }
 
         private List<ExamSet> GetAvailableFittedExamSets(ICurrentPatientStore currentPatientStore,
-                                                         IGetGroupByPatientQuery getGroupQuery,
+                                                         Group group,
                                                          IGetExamSetsOfGroupQuery getExamSetsQuery,
                                                          IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery)
         {
-            Group group = getGroupQuery.GetGroup(currentPatientStore.Patient.Id);
             var allAvailableExamSets = getExamSetsQuery.GetExamSets(group!.Id);
             var displayableExamSets = GetExamSetsCompatibleWithScreenSize(allAvailableExamSets, getMazesOfExamSetQuery);
 
