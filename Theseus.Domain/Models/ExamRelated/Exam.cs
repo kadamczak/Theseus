@@ -24,7 +24,7 @@ namespace Theseus.Domain.Models.ExamRelated
         public ExamSet ExamSet { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets the date when <c>Exam</c> was finished.
+        /// Gets or sets the <c>DateTime</c> when <c>Exam</c> was finished.
         /// </summary>
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

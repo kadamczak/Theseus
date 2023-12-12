@@ -17,9 +17,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
         }
 
         public abstract void GenerateSolutionInMaze(MazeWithSolution maze, int? rndSeed = null);
-        public Random CreateRandom(int? rndSeed = null) => (rndSeed is null) ? new Random() : new Random(rndSeed.Value);
+        protected Random CreateRandom(int? rndSeed = null) => (rndSeed is null) ? new Random() : new Random(rndSeed.Value);
 
-        public Direction ChooseRandomExitDirection(Cell cell, Random rnd) => GetAdjecentEmptySpaces(cell).GetRandomItem(rnd);
+        protected Direction ChooseRandomExitDirection(Cell cell, Random rnd) => GetAdjecentEmptySpaces(cell).GetRandomItem(rnd);
         private IEnumerable<Direction> GetAdjecentEmptySpaces(Cell cell) => cell.AdjecentCellSpaces.Where(c => c.Value == null).ToDictionary(x => x.Key, x => x.Value).Keys;
     }
 }

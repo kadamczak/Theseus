@@ -1,7 +1,7 @@
 ﻿namespace Theseus.Domain.Models.GroupRelated.Exceptions
 {
     /// <summary>
-    /// Exception thrown when the user inputs a <c>Group</c> name that does not correspond to the specified <c>Patient</c>.
+    /// Exception thrown when the user enters a <c>Group</c> name that does not correspond to the specified <c>Patient</c>.
     /// </summary>
     public class WrongGroupNameForPatientException : Exception
     {
