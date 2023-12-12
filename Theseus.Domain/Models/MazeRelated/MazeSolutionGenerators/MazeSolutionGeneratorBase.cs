@@ -5,10 +5,13 @@ using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
 {
+    /// <summary>
+    /// The <c>MazeSolutionDeneratorBase</c> is an abstract base class for classes that create solutions inside <c>MazeWithSolution</c> objects.
+    /// </summary>
     public abstract class MazeSolutionGeneratorBase
     {
-        public DistanceGridFactory DistanceGridFactory { get; }
-        public bool ShouldExcludeCellsCloseToRoot { get; }
+        protected DistanceGridFactory DistanceGridFactory { get; }
+        protected bool ShouldExcludeCellsCloseToRoot { get; }
 
         public MazeSolutionGeneratorBase(DistanceGridFactory distanceGridFactory, bool shouldExcludeCellsCloseToRoot)
         {

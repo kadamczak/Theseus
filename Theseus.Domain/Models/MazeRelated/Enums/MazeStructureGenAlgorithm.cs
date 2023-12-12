@@ -1,5 +1,8 @@
 ﻿namespace Theseus.Domain.Models.MazeRelated.Enums
 {
+    /// <summary>
+    /// Represents available algorithms for generating a maze structure.
+    /// </summary>
     public enum MazeStructureGenAlgorithm
     {
         AldousBroder = 0,

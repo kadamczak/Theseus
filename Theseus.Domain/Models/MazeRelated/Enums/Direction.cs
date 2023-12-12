@@ -1,5 +1,8 @@
 ﻿namespace Theseus.Domain.Models.MazeRelated.Enums
 {
+    /// <summary>
+    /// Represents cardinal directions.
+    /// </summary>
     public enum Direction
     {
         West = 8,

@@ -1,6 +1,4 @@
-﻿using Theseus.Domain.Models.UserRelated.Enums;
-
-namespace Theseus.Domain.Extensions
+﻿namespace Theseus.Domain.Extensions
 {
     public static class EnumExtension
     {
