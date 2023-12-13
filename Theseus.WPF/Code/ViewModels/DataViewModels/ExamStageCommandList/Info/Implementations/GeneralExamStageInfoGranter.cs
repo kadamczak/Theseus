@@ -14,15 +14,18 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
     public class GeneralExamStageInfoGranter : InfoGranter<ExamStageWithMazeViewModel>
     {
         private readonly DescriptiveValueComparer _valueComparer;
+        private readonly ExamSetStatCalculator _statCalculator;
         private readonly IGetExamStagesOfExamSetOfIndexQuery _getExamStagesQuery;
         private readonly IGetMazeOfExamStageQuery _getMazeOfExamStageQuery;
 
         public GeneralExamStageInfoGranter(DescriptiveValueComparer descriptiveValueComparer,
                                            IGetExamStagesOfExamSetOfIndexQuery getExamStagesQuery,
+                                           ExamSetStatCalculator statCalculator,
                                            IGetMazeOfExamStageQuery getMazeQuery)
         {
             _valueComparer = descriptiveValueComparer;
             _getExamStagesQuery = getExamStagesQuery;
+            _statCalculator = statCalculator;
             _getMazeOfExamStageQuery = getMazeQuery;
         }
 
@@ -98,6 +101,16 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                     $"{"TimeBeforeFirstInput:".Resource()}{Round(stats.Data.TimeBeforeFirstInput!.Value)} s",
                     $"{"LongestInactivityTime:".Resource()}{Round(stats.Data.LongestInactivityTime!.Value)} s",
                 });
+
+                if(stats.Completed)
+                {
+                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount, stats.Data.TotalTime!.Value);
+
+                    textSummary.AddRange(new List<string>
+                    {
+                        $"{"Score".Resource()}: {Math.Round(score, 2)}/100"
+                    });
+                }
             }
             else
             {

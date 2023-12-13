@@ -13,15 +13,18 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
     public class GeneralExamInfoGranter : InfoGranter<Exam>
     {
         private readonly ExamSetStatsStore _examSetStatsStore;
+        private readonly ExamSetStatCalculator _statCalculator;
         private readonly IGetExamsOfPatientQuery _getExamsOfPatientQuery;
         private readonly DescriptiveValueComparer _valueComparer;
 
         public GeneralExamInfoGranter(DescriptiveValueComparer valueComparer,
                                       IGetExamsOfPatientQuery getExamsOfPatientQuery,
+                                      ExamSetStatCalculator statCalculator,
                                       ExamSetStatsStore examSetStatsStore)
         {
             _valueComparer = valueComparer;
             _getExamsOfPatientQuery = getExamsOfPatientQuery;
+            _statCalculator = statCalculator;
             _examSetStatsStore = examSetStatsStore;
         }
 
@@ -29,6 +32,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
         {
             public Guid PatientId { get; set; }
             public DateTime CreatedAt { get; set; }
+            public double Score { get; set; }
             public int AttemptNumber { get; set; }
             public bool NoSkips { get; set; }
             public float TotalExamTime { get; set; }
@@ -60,6 +64,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             {
                 PatientId = exam.Patient.Id,
                 CreatedAt = exam.CreatedAt,
+                Score = _statCalculator.CalculateScoreForExam(exam),
                 AttemptNumber = CalculateAttemptNumber(exam),
                 NoSkips = examStages.All(e => e.Completed),
                 TotalExamTime = examSteps.Sum(e => e.TimeBeforeStep),
@@ -80,7 +85,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                "Attempt#".Resource() + currentExamStats.AttemptNumber,
                "CompletedMazes:".Resource() + $"{currentExamStats.CompletedMazeAmount}/{examSetStatSummary.MazeAmount}",
                "TotalTime:".Resource() + $"{Round(currentExamStats.TotalExamTime)} s",
-               "InputsMade:".Resource() + $"{currentExamStats.TotalInputs}/{examSetStatSummary.IdealStepAmount}"
+               "InputsMade:".Resource() + $"{currentExamStats.TotalInputs}/{examSetStatSummary.IdealStepAmount}",
+               $"{"Score".Resource()}: {Math.Round(currentExamStats.Score, 2)}/100"
             };
         }
 

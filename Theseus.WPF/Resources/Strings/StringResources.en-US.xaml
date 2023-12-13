@@ -28,6 +28,8 @@
     <system:String x:Key="Stop">Stop</system:String>
     <system:String x:Key="Generate">Generate</system:String>
 
+    <system:String x:Key="Score">Score</system:String>
+
     <system:String x:Key="Yes">Yes</system:String>
     <system:String x:Key="No">No</system:String>
 

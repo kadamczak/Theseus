@@ -13,6 +13,7 @@ namespace Theseus.WPF.Code.Services
     {
         private readonly ExamSetStatsStore _examSetStatsStore;
         private readonly SelectedModelListStore<Exam> _selectedExamListStore;
+        private readonly IGetMazeOfExamStageQuery _getMazeOfExamStageQuery;
 
         private readonly IGetExamsOfGroupOfExamSetQuery _getExamsQuery;
         private readonly IGetOrderedMazesWithSolutionOfExamSetQuery _getMazesQuery;
@@ -20,11 +21,13 @@ namespace Theseus.WPF.Code.Services
         public ExamSetStatCalculator(ExamSetStatsStore examSetStatsStore,
                                      SelectedModelListStore<Exam> selectedExamListStore,
                                      IGetExamsOfGroupOfExamSetQuery getExamsQuery,
+                                     IGetMazeOfExamStageQuery getMazeOfExamStageQuery,
                                      IGetOrderedMazesWithSolutionOfExamSetQuery getMazesQuery)
         {
             _examSetStatsStore = examSetStatsStore;
             _selectedExamListStore = selectedExamListStore;
             _getExamsQuery = getExamsQuery;
+            _getMazeOfExamStageQuery = getMazeOfExamStageQuery;
             _getMazesQuery = getMazesQuery;
         }
 
@@ -74,6 +77,44 @@ namespace Theseus.WPF.Code.Services
         }
 
         private bool ExamSetStatsInThisGroupAlreadyCalculated(List<ExamSetStatSummary> examSetStatsList, Guid examSetId, Guid groupId)
-            => examSetStatsList.Where(e => e.ExamSetId == examSetId && e.GroupId == groupId).Any();      
+            => examSetStatsList.Where(e => e.ExamSetId == examSetId && e.GroupId == groupId).Any();   
+        
+        public double CalculateScoreForExam(Exam exam)
+        {
+            int amountOfStages = exam.Stages.Count;
+            double scoreSum = 0;
+
+            foreach (var stage in exam.Stages)
+            {
+                if (stage.Completed)
+                {
+                    scoreSum += CalculateScoreForExamStage(stage);
+                }
+            }
+
+            return scoreSum / amountOfStages;
+        }
+        
+        public double CalculateScoreForExamStage(ExamStage stage)
+        {
+            var maze = _getMazeOfExamStageQuery.GetMaze(stage.Id);
+            int idealInputAmount = maze.SolutionPath.Count;
+            float totalTime = stage.Steps.Sum(s => s.TimeBeforeStep);
+            return CalculateScoreForExamStage(idealInputAmount, totalTime);
+        }
+
+        public double CalculateScoreForExamStage(int idealInputAmount, float totalTime)
+        {
+            double secondsPerCell = 0.00015 * idealInputAmount + 0.19;
+            double baseTimeForMaze = secondsPerCell * idealInputAmount;
+            double difference = totalTime - baseTimeForMaze;
+            if (difference < 0) difference = 0;
+
+            double score = 100 - (difference / (baseTimeForMaze * 3) * 100);
+            score = (score > 100) ? 100 : score;
+            score = (score < 0) ? 0 : score;
+
+            return score;
+        }
     }
 }
