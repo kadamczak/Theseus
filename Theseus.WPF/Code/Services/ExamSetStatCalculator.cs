@@ -100,21 +100,23 @@ namespace Theseus.WPF.Code.Services
             var maze = _getMazeOfExamStageQuery.GetMaze(stage.Id);
             int idealInputAmount = maze.SolutionPath.Count;
             float totalTime = stage.Steps.Sum(s => s.TimeBeforeStep);
-            return CalculateScoreForExamStage(idealInputAmount, totalTime);
+            int inputAmount = stage.Steps.Count();
+            return CalculateScoreForExamStage(idealInputAmount, inputAmount, totalTime);
         }
 
-        public double CalculateScoreForExamStage(int idealInputAmount, float totalTime)
+        public double CalculateScoreForExamStage(int idealInputAmount, int inputAmount, float totalTime)
         {
-            double secondsPerCell = 0.00015 * idealInputAmount + 0.19;
-            double baseTimeForMaze = secondsPerCell * idealInputAmount;
-            double difference = totalTime - baseTimeForMaze;
-            if (difference < 0) difference = 0;
+            int excessInputs = inputAmount - idealInputAmount;
+            double pointsForPrecision = 70 - 70 * (double)excessInputs / idealInputAmount - excessInputs * 2;
+            if (pointsForPrecision < 0) pointsForPrecision = 0;
 
-            double score = 100 - (difference / (baseTimeForMaze * 3) * 100);
-            score = (score > 100) ? 100 : score;
-            score = (score < 0) ? 0 : score;
+            double baseTimeForMaze = 0.25 * idealInputAmount;
+            double excessTime = totalTime - baseTimeForMaze;
+            if (excessTime < 0) excessTime = 0;
+            double pointsForTime = 30 - 30 * excessTime / baseTimeForMaze;
+            if (pointsForTime < 0) pointsForTime = 0;
 
-            return score;
+            return pointsForPrecision + pointsForTime;
         }
     }
 }

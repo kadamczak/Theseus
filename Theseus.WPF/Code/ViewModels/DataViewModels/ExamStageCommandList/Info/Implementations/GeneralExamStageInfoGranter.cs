@@ -104,7 +104,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
                 if(stats.Completed)
                 {
-                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount, stats.Data.TotalTime!.Value);
+                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount, Convert.ToInt32(stats.Data.TotalInputs), stats.Data.TotalTime!.Value);
 
                     textSummary.AddRange(new List<string>
                     {
