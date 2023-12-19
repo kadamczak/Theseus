@@ -58,7 +58,7 @@ namespace Theseus.WPF.Code.Commands.DataCommands
 
         private string CreateCsvForExamStage(ExamStage examStage)
         {
-            string csvContent = "TimeBeforeInput,InputDirection,Correct\n";
+            string csvContent = "TimeBeforeInput,InputDirection,Correct,HitWall\n";
             var sortedSteps = examStage.Steps.OrderBy(s => s.Index);
             var inputCorrectnessList = CreateInputCorrectnessList(examStage, sortedSteps);
 
@@ -67,13 +67,16 @@ namespace Theseus.WPF.Code.Commands.DataCommands
                 ExamStep step = sortedSteps.ElementAt(i);
                 csvContent += step.TimeBeforeStep.ToString(System.Globalization.CultureInfo.InvariantCulture) + ",";
                 csvContent += step.StepTaken.ToString() + ",";
-                csvContent += inputCorrectnessList[i].ToString() + "\n";
+                csvContent += inputCorrectnessList[i].Correct.ToString() + ",";
+                csvContent += inputCorrectnessList[i].HitWall.ToString() + "\n";
             }
 
             return csvContent;
         }
 
-        public List<bool> CreateInputCorrectnessList(ExamStage examStage, IEnumerable<ExamStep> steps)
+        public record StepAttributes(bool Correct, bool HitWall);
+
+        public List<StepAttributes> CreateInputCorrectnessList(ExamStage examStage, IEnumerable<ExamStep> steps)
         {
             MazeWithSolution maze = _getMazeQuery.GetMaze(examStage.Id);
             var patientCellPath = _inputConverter.ConvertInputListToTimedCellList(steps, maze).Select(e => e.Cell).ToList();
@@ -84,11 +87,12 @@ namespace Theseus.WPF.Code.Commands.DataCommands
             int currentCorrectCellIndex = 0;
             Cell currentCorrectCell = maze.SolutionPath.First();
 
-            List<bool> inputCorrectnessList = new List<bool>();
+            List<StepAttributes> inputCorrectnessList = new List<StepAttributes>();
 
             foreach (var step in steps)
             {
                 bool wasAlongTheCorrectPath = false;
+                bool hitWall = false;
 
                 if (steps.Last() == step && examStage.Completed)
                 {
@@ -105,8 +109,12 @@ namespace Theseus.WPF.Code.Commands.DataCommands
                     currentPatientCellPathIndex++;
                     currentPatientCell = patientCellPath[currentPatientCellPathIndex];
                 }
+                else
+                {
+                    hitWall = true;
+                }
 
-                inputCorrectnessList.Add(wasAlongTheCorrectPath);
+                inputCorrectnessList.Add(new StepAttributes(wasAlongTheCorrectPath, hitWall));
             }
 
             return inputCorrectnessList;
