@@ -49,6 +49,7 @@
     <system:String x:Key="CellSize">Rozmiar kratki</system:String>
 
     <system:String x:Key="TheseusHomeDescription">Aplikacja przeznaczona do prowadzenia elektronicznej wersji Testu Porteusa.</system:String>
+    <system:String x:Key="ViewCredits">Zobacz atrybucje</system:String>
 
     <system:String x:Key="PatientInfo">Dane Pacjenta</system:String>
     <system:String x:Key="StaffInfo">Dane Pracownika</system:String>

@@ -12,8 +12,9 @@
             
             <Label Content="Theseus" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="80" FontFamily="Microsoft YaHei Light"  />
 
-            <TextBlock TextWrapping="Wrap" Text="{DynamicResource TheseusHomeDescription}" MaxWidth="600" Foreground="DimGray" Margin="40 0 40 0" HorizontalAlignment="Center" FontSize="20"  TextAlignment="Center"/>
-            
+            <TextBlock TextWrapping="Wrap" Text="{DynamicResource TheseusHomeDescription}" MaxWidth="600" Foreground="DimGray" Margin="40 10 40 0" HorizontalAlignment="Center" FontSize="25"  TextAlignment="Center"/>
+
+            <Button Style="{StaticResource Generic}" Margin="0 20 0 0" FontSize="19" Content="{DynamicResource ViewCredits}" Command="{Binding ViewCredits}" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

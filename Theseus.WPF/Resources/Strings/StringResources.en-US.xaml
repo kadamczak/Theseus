@@ -49,6 +49,7 @@
     <system:String x:Key="CellSize">Cell size</system:String>
 
     <system:String x:Key="TheseusHomeDescription">Application for conducting the digital version of the Porteus Test.</system:String>
+    <system:String x:Key="ViewCredits">View Credits</system:String>
 
     <system:String x:Key="PatientInfo">Patient Info</system:String>
     <system:String x:Key="StaffInfo">Staff Info</system:String>
