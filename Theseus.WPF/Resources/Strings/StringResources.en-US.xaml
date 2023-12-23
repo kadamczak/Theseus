@@ -33,6 +33,8 @@
     <system:String x:Key="Yes">Yes</system:String>
     <system:String x:Key="No">No</system:String>
 
+    <system:String x:Key="PracticeMaze">Warm Up</system:String>
+
     <system:String x:Key="LoginNoun">Login</system:String>
     <system:String x:Key="RegisterNoun">Register</system:String>
 

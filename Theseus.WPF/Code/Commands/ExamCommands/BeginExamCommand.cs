@@ -16,19 +16,19 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
         private readonly CurrentExamStore _currentExamStore;
         private readonly ICurrentPatientStore _currentPatientStore;
         private readonly IGetOrderedMazesWithSolutionOfExamSetQuery _getMazesOfExamSetQuery;
-        private readonly NavigationService<ExamPageViewModel> _examPageNavigationService;
+        private readonly NavigationService<ExamPracticeViewModel> _examPracticeNavigationService;
 
         public BeginExamCommand(BeginTestViewModel beginTestViewModel,
                                 CurrentExamStore currentExamStore,
                                 ICurrentPatientStore currentPatientStore,
                                 IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
-                                NavigationService<ExamPageViewModel> examPageNavigationService)
+                                NavigationService<ExamPracticeViewModel> examPracticeNavigationService)
         {
             _beginTestViewModel = beginTestViewModel;
             _currentExamStore = currentExamStore;
             _currentPatientStore = currentPatientStore;
             _getMazesOfExamSetQuery = getMazesOfExamSetQuery;
-            _examPageNavigationService = examPageNavigationService;
+            _examPracticeNavigationService = examPracticeNavigationService;
 
             _beginTestViewModel.PropertyChanged += OnPropertyChanged;
         }
@@ -36,7 +36,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
         public override void Execute(object? parameter)
         {
             SetupExamStore();
-            _examPageNavigationService.Navigate();
+            _examPracticeNavigationService.Navigate();
         }
 
         private void SetupExamStore()

@@ -35,7 +35,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
             }
         }
 
-        public ExamMazeCanvasViewModel(MazeWithSolution mazeWithSolution, CurrentExamStore currentExamStore)
+        public ExamMazeCanvasViewModel(MazeWithSolution mazeWithSolution, CurrentExamStore currentExamStore, bool rememberSteps)
         {
             this.MazeWithSolutionCanvasViewModel = new MazeWithSolutionCanvasViewModel(mazeWithSolution);
             this.CurrentCell = GetMazeWithSolution().SolutionPath.First();
@@ -44,7 +44,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
             this.EndDirection = GetMazeWithSolution().EndDirection;
             this.UserSolution = new List<Cell>() { CurrentCell };
 
-            this.PerformMove = new PerformMoveCommand(this, currentExamStore);
+            this.PerformMove = new PerformMoveCommand(this, currentExamStore, rememberSteps);
         }
 
         public void OnSuccesfullyMoved()

@@ -1,8 +1,9 @@
-﻿using System.Linq;
-using System.Timers;
+﻿using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
+using Theseus.Domain.Models.MazeRelated.Enums;
+using Theseus.Domain.Models.MazeRelated.MazeCreators;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Commands.ExamCommands;
@@ -12,7 +13,7 @@ using Theseus.WPF.Code.ViewModels.Components;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class ExamPageViewModel : ExamViewModel
+    public class ExamPracticeViewModel : ExamViewModel
     {
         public ExamMazeCanvasViewModel ExamMazeCanvasViewModel { get; }
         public IGetMazeWithSolutionByIdQuery GetMazeById { get; }
@@ -32,15 +33,16 @@ namespace Theseus.WPF.Code.ViewModels
 
         private Timer _transitionTimer = new Timer() { Interval = 1000 };
 
-        public ExamPageViewModel(CurrentExamStore currentExamStore,
+        public ExamPracticeViewModel(CurrentExamStore currentExamStore,
                                  ICreateExamCommand createExamCommand,
+                                 MazeCreator mazeCreator,
                                  NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
                                  NavigationService<ExamEndViewModel> examEndNavigationService)
-        {      
-            MazeWithSolution currentMaze = currentExamStore.Mazes.ElementAt(currentExamStore.CurrentIndex);
-            ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze, currentExamStore, rememberSteps: true);
+        {
+            MazeWithSolution currentMaze = mazeCreator.CreateMazeWithSolution(4, 6, MazeStructureGenAlgorithm.AldousBroder, MazeSolutionGenAlgorithm.Dijkstra, true, 39);
+            ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze, currentExamStore, rememberSteps: false);
 
-            GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService, createExamCommand, saveStageInfo: true);
+            GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService, createExamCommand, saveStageInfo: false);
             ExamMazeCanvasViewModel.CompletedMaze += StartCountdown;
             _transitionTimer.Elapsed += new ElapsedEventHandler(ReduceCountdownValue);
 

@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Theseus.WPF.Code.Views.ExamPracticeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:canvases="clr-namespace:Theseus.WPF.Code.Views.Components.MazeCanvases"
+             xmlns:converters="clr-namespace:Theseus.WPF.Code.CustomUI.CustomConverters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="Boolean" />
+        <converters:BooleanVisibilityConverter x:Key="ReverseBoolean" True="Collapsed" False="Visible"/>
+    </UserControl.Resources>
+
+    <Grid Background="WhiteSmoke" Margin="40" SizeChanged="Grid_SizeChanged" FocusManager.FocusedElement="{Binding ElementName=ExamMazeCanvasView}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="0 0 0 40">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <Label Content="{DynamicResource PracticeMaze}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontFamily="Microsoft YaHei Light"/>
+                <Button Margin="40 0 0 0" Content="{DynamicResource Skip}" Command="{Binding GoToNextPage}" CommandParameter="False" Style="{StaticResource Generic}"/>
+                <Label Visibility="{Binding ExamMazeCanvasViewModel.MazeExamFinished, Converter={StaticResource ReverseBoolean}}" Content="{DynamicResource UseArrowKeys}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="30" FontFamily="Microsoft YaHei Light" Margin="25 0 0 0" />
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding ExamMazeCanvasViewModel.MazeExamFinished, Converter={StaticResource Boolean}}" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Label Content="{DynamicResource MazeFinished}" VerticalAlignment="Center" FontSize="22" FontFamily="Microsoft YaHei Light"/>
+                <Label Content="{Binding CountdownValue}" FontSize="32" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei Light"/>
+            </StackPanel>
+        </DockPanel>
+
+        <canvases:ExamMazeCanvasView FocusVisualStyle="{x:Null}" Grid.Row="1" x:Name="ExamMazeCanvasView" DataContext="{Binding ExamMazeCanvasViewModel}" Loaded="ExamMazeCanvasView_Loaded"/>
+    </Grid>
+</UserControl>

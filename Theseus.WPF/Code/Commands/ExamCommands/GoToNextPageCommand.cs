@@ -12,32 +12,36 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
 {
     public class GoToNextPageCommand : CommandBase
     {
-        private readonly ExamPageViewModel _viewModel;
+        private readonly ExamViewModel _viewModel;
         private readonly CurrentExamStore _currentExamStore;
         private readonly ICreateExamCommand _createExamCommand;
         private readonly NavigationService<ExamTransitionViewModel> _examTransitionNavigationService;
         private readonly NavigationService<ExamEndViewModel> _examEndNavigationService;
+        private readonly bool _saveStageInfo;
 
         public bool Active { get; set; } = true;
 
-        public GoToNextPageCommand(ExamPageViewModel viewModel,
+        public GoToNextPageCommand(ExamViewModel viewModel,
                                    CurrentExamStore currentExamStore,
                                    NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
                                    NavigationService<ExamEndViewModel> examEndNavigationService,
-                                   ICreateExamCommand createExamCommand)
+                                   ICreateExamCommand createExamCommand,
+                                   bool saveStageInfo)
         {
             _viewModel = viewModel;
             _currentExamStore = currentExamStore;
             _createExamCommand = createExamCommand;
             _examTransitionNavigationService = examTransitionNavigationService;
             _examEndNavigationService = examEndNavigationService;
+            _saveStageInfo = saveStageInfo;
 
             _viewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         public override void Execute(object? parameter)
         {
-            SaveStageCompletionStatus(parameter);
+            if(_saveStageInfo)
+                SaveStageCompletionStatus(parameter);
 
             if (LastMazeFinished())
             {
@@ -46,8 +50,11 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
             }
             else
             {
-                _currentExamStore.CurrentIndex++;
-                CreateNextExamStage();
+                if (_saveStageInfo)
+                {
+                    _currentExamStore.CurrentIndex++;
+                    CreateNextExamStage();
+                }
                 _examTransitionNavigationService.Navigate();
             }
         }

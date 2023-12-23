@@ -15,12 +15,15 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
     {
         private readonly ExamMazeCanvasViewModel _viewModel;
         private readonly CurrentExamStore _currentExamStore;
+        private readonly bool _rememberSteps;
 
         public PerformMoveCommand(ExamMazeCanvasViewModel examMazeCanvasViewModel,
-                                  CurrentExamStore currentExamStore)
+                                  CurrentExamStore currentExamStore,
+                                  bool rememberSteps)
         {
             _viewModel = examMazeCanvasViewModel;
             _currentExamStore = currentExamStore;
+            _rememberSteps = rememberSteps;
 
             _viewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -33,12 +36,14 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
 
         public override void Execute(object? parameter)
         {
-            _currentExamStore.TimeSinceLastStep.Stop();
+            if (_rememberSteps)
+                _currentExamStore.TimeSinceLastStep.Stop();
 
             string parameterText = (string)parameter!;
             Direction moveDirection = (Direction)int.Parse(parameterText);
 
-            SaveExamStep(moveDirection);
+            if (_rememberSteps)
+                SaveExamStep(moveDirection);
 
             Cell currentCell = _viewModel.CurrentCell;
             if (MazeCompleted(moveDirection))
@@ -53,7 +58,8 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
                 MoveTo(nextCell!);
             }
 
-            _currentExamStore.TimeSinceLastStep.Restart();
+            if (_rememberSteps)
+                _currentExamStore.TimeSinceLastStep.Restart();
         }
 
         private void SaveExamStep(Direction moveDirection)
