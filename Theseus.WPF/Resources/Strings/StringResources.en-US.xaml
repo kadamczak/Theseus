@@ -218,6 +218,9 @@
     <system:String x:Key="CantBeginTest">Can't begin test because patient is not logged in.</system:String>
     <system:String x:Key="YouCanChangeTheMinimalCellSize">You can change the minimal cell size by clicking the gear button in the navigation bar.</system:String>
 
+    <system:String x:Key="UseArrowKeys">Use arrow keys on your keyboard</system:String>
+    <system:String x:Key="UseArrowKeysLong">To move in the maze, use arrow keys on your keyboard.</system:String>
+
     <system:String x:Key="SolveMaze">Solve Maze</system:String>
     <system:String x:Key="MazeFinished"  xml:space="preserve">Maze finished! Next puzzle in: </system:String>
     <system:String x:Key="End">End</system:String>

@@ -19,11 +19,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Label Content="{DynamicResource BeginTest}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="45" FontFamily="Microsoft YaHei Light" Margin="0 0 0 50"/>
 
-        <ListBox Grid.Row="1" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableExamSets}" SelectedItem="{Binding SelectedExamSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="250" HorizontalAlignment="Left">
+        <ListBox Grid.Row="1" FontSize="25" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding AvailableExamSets}" SelectedItem="{Binding SelectedExamSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="250" MaxHeight="200" HorizontalAlignment="Left">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
@@ -31,11 +32,13 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Margin="0 50 0 0" Grid.Row="2" Content="{DynamicResource Begin}" Style="{StaticResource Generic}" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BeginExam}"/>
+        <TextBlock Text="{DynamicResource UseArrowKeysLong}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontFamily="Microsoft YaHei Light" Margin="0 40 0 0" Grid.Row="2" TextWrapping="Wrap"/>
 
-        <TextBlock Grid.Row="3" Text="{DynamicResource CantBeginTest}" FontSize="17" Margin="0 35 0 0" Visibility="{Binding IsPatientLoggedIn, Converter={StaticResource ReverseBooleanVisibility}}" />
+        <Button Margin="0 40 0 0" Grid.Row="3" Content="{DynamicResource Begin}" Style="{StaticResource Generic}" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BeginExam}"/>
 
-        <TextBlock Grid.Row="3" Text="{Binding ExamSetsOmittedDueToScreenSizeText}" FontSize="17" Margin="0 35 0 0" />
+        <TextBlock Grid.Row="4" Text="{DynamicResource CantBeginTest}" FontSize="17" Margin="0 35 0 0" Visibility="{Binding IsPatientLoggedIn, Converter={StaticResource ReverseBooleanVisibility}}" />
+
+        <TextBlock Grid.Row="4" Text="{Binding ExamSetsOmittedDueToScreenSizeText}" FontSize="17" Margin="0 35 0 0" />
     </Grid>
 
 </UserControl>

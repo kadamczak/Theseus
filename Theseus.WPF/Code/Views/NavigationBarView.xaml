@@ -35,7 +35,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Grid Grid.Row="2" Background="LightGray">
+        <Grid Grid.Row="2" Background="#242424">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0 7 0 7">
                 <custom:IconButton Command="{Binding NavigateToSettings}"  IsEnabled="{Binding NavigationEnabled}" ImageSource="/Resources/Icons/settings.png" />
                 <custom:IconButton Command="{Binding NavigateToHome}"  IsEnabled="{Binding NavigationEnabled}" Margin="15 0 0 0" ImageSource="/Resources/Icons/information.png" />

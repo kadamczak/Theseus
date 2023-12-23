@@ -217,6 +217,9 @@
     <system:String x:Key="CantBeginTest">Nie można zacząć testu, ponieważ pacjent nie jest zalogowany.</system:String>
     <system:String x:Key="YouCanChangeTheMinimalCellSize">Możesz zmienić minimalną wielkość kratki w ustawieniach programu (ikonka zębatki na pasku).</system:String>
 
+    <system:String x:Key="UseArrowKeys">Użyj strzałek na klawiaturze</system:String>
+    <system:String x:Key="UseArrowKeysLong">Aby poruszać się w labiryncie, użyj przycisków strzałek na klawiaturze.</system:String>
+
     <system:String x:Key="SolveMaze">Rozwiąż Labirynt</system:String>
     <system:String x:Key="MazeFinished"  xml:space="preserve">Labirynt ukończony! Następne zadanie za: </system:String>
     <system:String x:Key="End">Koniec</system:String>
