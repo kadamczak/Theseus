@@ -279,12 +279,20 @@ Właściwości:
 • około 10% kratek wymaga podjęcia decyzji.
     </system:String>
 
-    <system:String x:Key="Kruskal" xml:space="preserve">Algorytm Kruskala produkuje labirynty z większą ilością ślepych zaułków i większą częstością zmian kierunku ścieżki niż inne algorytmy.
+    <system:String x:Key="Kruskal" xml:space="preserve">Algorytm Kruskala produkuje labirynty z odrobine większą ilością ślepych zaułków niż inne algorytmy. Jest podobny w rezultatach do algorytmu Aldousa-Brodera.
     
 Właściwości:
 • około 31% kratek to ślepe zaułki,
 • wysoka długość rozwiązania,
 • około 26% kratek wymaga podjęcia decyzji.
+    </system:String>
+
+    <system:String x:Key="TruePrim" xml:space="preserve">Algorytm Prima produkuje labirynty o stanowczo większej ilości ślepych zaułków niż inne algorytmy. Posiada wyjątkowo dużo 4-stronowych rozgałęzień.
+    
+Właściwości:
+• około 44% kratek to ślepe zaułki,
+• średnia długość rozwiązania,
+• około 31% kratek wymaga podjęcia decyzji.
     </system:String>
 
 </ResourceDictionary>

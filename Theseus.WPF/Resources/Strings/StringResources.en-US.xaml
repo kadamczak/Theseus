@@ -280,12 +280,20 @@ Properties:
 • around 9% of cells require making a decision.
     </system:String>
 
-    <system:String x:Key="Kruskal" xml:space="preserve">Kruskal algorithm produces mazes with more dead ends and more direction changes than other algorithms.
+    <system:String x:Key="Kruskal" xml:space="preserve">Kruskal's algorithm produces mazes with slightly more dead ends than other algorithms. Is similar in results to Aldous-Broder.
     
 Properties:
 • around 31% of cells are dead ends,
-• high length solution,
+• medium length solution,
 • around 26% of cells require making a decision.
+    </system:String>
+
+    <system:String x:Key="TruePrim" xml:space="preserve">Prim's algorithm produces mazes with significantly more dead ends than other algorithms. Has a lot of 4-way intersections.
+    
+Properties:
+• around 44% of cells are dead ends,
+• medium length solution,
+• around 31% of cells require making a decision.
     </system:String>
 
 </ResourceDictionary>

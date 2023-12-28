@@ -8,7 +8,8 @@
         AldousBroder = 0,
         HuntAndKill = 1,
         Kruskal = 2,
-        Binary = 4,
-        Sidewinder = 3,
+        TruePrim = 3,
+        Binary = 5,
+        Sidewinder = 4,
     }
 }
