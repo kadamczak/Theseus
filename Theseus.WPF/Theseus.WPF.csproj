@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Icons\maze.ico</ApplicationIcon>
-    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
