@@ -161,7 +161,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_D28DB842428F439CAC0B683C4AB7026F"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -199,7 +199,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Theseus"
         "ProductCode" = "8:{EBE49FFD-A496-42C0-A1DF-7F74E90B50B9}"
-        "PackageCode" = "8:{E6738EE9-D98C-4656-8AD5-1AF04525E263}"
+        "PackageCode" = "8:{5EDFE127-E81F-4073-809E-AC1006FA866D}"
         "UpgradeCode" = "8:{011A982D-FFB8-4ECB-97A5-B015BBCC99FC}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -220,7 +220,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
