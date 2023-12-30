@@ -41,7 +41,9 @@
     <system:String x:Key="LoginVerb">Zaloguj</system:String>
     <system:String x:Key="LogoutVerb">Wyloguj</system:String>
     <system:String x:Key="RegisterVerb">Zarejestruj</system:String>
-    
+
+    <system:String x:Key="NoPastLogIns">Brak poprzednich logowań.</system:String>
+
     <system:String x:Key="LoginAsStaffMember">Zaloguj się jako Specjalista</system:String>
 
     <system:String x:Key="Settings">Ustawienia</system:String>

@@ -53,7 +53,7 @@
                 <Label Content="{Binding PastGroupSecond}" FontSize="15" Grid.Row="2" Grid.Column="1"/>
             </Grid>
 
-            <Label Content="No past logins." FontSize="17" Margin="20 0 0 0" Visibility="{Binding HasPastLogins, Converter={StaticResource ReverseBooleanVisibility}}" />
+            <Label Content="{DynamicResource NoPastLogIns}" FontSize="17" Margin="20 0 0 0" Visibility="{Binding HasPastLogins, Converter={StaticResource ReverseBooleanVisibility}}" />
 
         </StackPanel>
     </Grid>

@@ -42,7 +42,9 @@
     <system:String x:Key="LogoutVerb">Logout</system:String>
     <system:String x:Key="RegisterVerb">Register</system:String>
 
-    <system:String x:Key="LoginAsStaffMember">Login as Staff Member</system:String>
+    <system:String x:Key="NoPastLogIns">No past log-ins.</system:String>
+
+    <system:String x:Key="LoginAsStaffMember">Log-in as Staff Member</system:String>
 
     <system:String x:Key="Settings">Settings</system:String>
     <system:String x:Key="MinimalAllowedCellSize">Allowed minimal cell size: </system:String>
