@@ -5,6 +5,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Icons\maze.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
     <None Remove="Resources\Icons\person.png" />
     <None Remove="Resources\Icons\plus.png" />
     <None Remove="Resources\Icons\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Icons\maze.ico" />
   </ItemGroup>
 
   <ItemGroup>

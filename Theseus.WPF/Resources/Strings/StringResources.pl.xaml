@@ -42,7 +42,7 @@
     <system:String x:Key="LogoutVerb">Wyloguj</system:String>
     <system:String x:Key="RegisterVerb">Zarejestruj</system:String>
     
-    <system:String x:Key="LoginAsStaffMember">Zaloguj się jako Pracownik</system:String>
+    <system:String x:Key="LoginAsStaffMember">Zaloguj się jako Specjalista</system:String>
 
     <system:String x:Key="Settings">Ustawienia</system:String>
     <system:String x:Key="MinimalAllowedCellSize">Najmniejszy dozwolony rozmiar kratki:</system:String>
@@ -54,7 +54,7 @@
     <system:String x:Key="ViewCredits">Zobacz atrybucje</system:String>
 
     <system:String x:Key="PatientInfo">Dane Pacjenta</system:String>
-    <system:String x:Key="StaffInfo">Dane Pracownika</system:String>
+    <system:String x:Key="StaffInfo">Dane Specjalisty</system:String>
 
     <system:String x:Key="YourUsername:"  xml:space="preserve">Nazwa użytkownika: </system:String>
     <system:String x:Key="GroupName:"  xml:space="preserve">Nazwa grupy: </system:String>
@@ -99,7 +99,7 @@
     <system:String x:Key="Password">Hasło</system:String>
     <system:String x:Key="ConfirmPassword">Powtórz hasło</system:String>
 
-    <system:String x:Key="StaffMemberNotLoggedIn">Pracownik nie jest zalogowany.</system:String>
+    <system:String x:Key="StaffMemberNotLoggedIn">Specjalista nie jest zalogowany.</system:String>
     <system:String x:Key="PatientNotLoggedIn">Pacjent nie jest zalogowany.</system:String>
     <system:String x:Key="LoginAsPatient">Zaloguj jako pacjent</system:String>
     <system:String x:Key="PleaseLoginToAccessTheProgram">Proszę zalogować się, by użyć programu.</system:String>
@@ -109,7 +109,7 @@
     <system:String x:Key="CreateGroup">Stwórz grupę</system:String>
 
     <system:String x:Key="Owner:"  xml:space="preserve">Twórca: </system:String>
-    <system:String x:Key="AmountOfStaffMembers:"  xml:space="preserve">Ilość pracowników: </system:String>
+    <system:String x:Key="AmountOfStaffMembers:"  xml:space="preserve">Ilość specjalistów: </system:String>
     <system:String x:Key="AmountOfPatients:"  xml:space="preserve">Ilość pacjentów: </system:String>
     <system:String x:Key="AmountOfExamSets:"  xml:space="preserve">Ilość zestawów: </system:String>
     <system:String x:Key="AmountOfMazes:"  xml:space="preserve">Ilość labiryntów: </system:String>
@@ -121,19 +121,19 @@
     <system:String x:Key="DoYouWantToDeleteThisGroup">Czy na pewno chcesz usunąć tą grupę? Zestawy wchodzące w jej skład pozostaną dostępne.</system:String>
 
     <system:String x:Key="ExamSetRemoval">Usuwanie Zestawu</system:String>
-    <system:String x:Key="DoYouWantToRemoveExamSet">Czy na pewno chcesz wyrzucić zestaw z tej grupy?</system:String>
+    <system:String x:Key="DoYouWantToRemoveExamSet">Czy na pewno chcesz usunąć zestaw z tej grupy?</system:String>
 
     <system:String x:Key="PatientRemoval">Usuwanie Pacjenta</system:String>
-    <system:String x:Key="DoYouWantToRemovePatient">Czy na pewno chcesz wyrzucić pacjenta z tej grupy?</system:String>
+    <system:String x:Key="DoYouWantToRemovePatient">Czy na pewno chcesz usunąć pacjenta z tej grupy?</system:String>
 
-    <system:String x:Key="StaffMemberRemoval">Usuwanie Pracownika</system:String>
-    <system:String x:Key="DoYouWantToRemoveStaffMember">Czy na pewno chcesz wyrzucić pracownika z tej grupy?</system:String>
+    <system:String x:Key="StaffMemberRemoval">Usuwanie Specjalisty</system:String>
+    <system:String x:Key="DoYouWantToRemoveStaffMember">Czy na pewno chcesz usunąć specjalistę z tej grupy?</system:String>
 
     <system:String x:Key="MazeDeletion">Usuwanie Labiryntu</system:String>
     <system:String x:Key="DoYouWantToDeleteMaze">Czy na pewno chcesz usunąć ten labirynt?</system:String>
     <system:String x:Key="MazeCantBeDeleted">Labirynt nie może zostać usunięty bo jest wykorzystany w zestawach.</system:String>
 
-    <system:String x:Key="StaffMembers">Pracownicy</system:String>
+    <system:String x:Key="StaffMembers">Specjaliści</system:String>
     <system:String x:Key="Patients">Pacjenci</system:String>
     <system:String x:Key="ExamSets">Zestawy</system:String>
 
@@ -141,7 +141,7 @@
     <system:String x:Key="NoResult">Nie znaleziono.</system:String>
 
     <system:String x:Key="AddPatient">Dodaj Pacjenta</system:String>
-    <system:String x:Key="AddStaffMember">Dodaj Pracownika</system:String>
+    <system:String x:Key="AddStaffMember">Dodaj Specjalistę</system:String>
 
     <system:String x:Key="ExamSetDetails">Podgląd zestawu</system:String>
     <system:String x:Key="MazeDetails">Podgląd labiryntu</system:String>

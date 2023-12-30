@@ -25,7 +25,7 @@ namespace Theseus.WPF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
+        [global::System.Configuration.DefaultSettingValueAttribute("pl")]
         public string AppLanguage {
             get {
                 return ((string)(this["AppLanguage"]));
