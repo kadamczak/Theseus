@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Theseus.WPF/appsettings.json
+/Theseus.Infrastructure/DbContexts/TheseusDesignTimeDbContextFactory.cs
