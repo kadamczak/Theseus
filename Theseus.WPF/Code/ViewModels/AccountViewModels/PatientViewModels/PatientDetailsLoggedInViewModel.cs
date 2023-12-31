@@ -45,7 +45,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ObservableCollection<EducationLevelViewModel> EducationLevels { get; } = new ObservableCollection<EducationLevelViewModel> {
                                 new EducationLevelViewModel("DoNotDisclose".Resource(), EducationLevel.Undisclosed),
                                 new EducationLevelViewModel("Primary".Resource(), EducationLevel.Primary),
-                                new EducationLevelViewModel("Lower Secondary".Resource(), EducationLevel.LowerSecondary),
+                                new EducationLevelViewModel("LowerSecondary".Resource(), EducationLevel.LowerSecondary),
                                 new EducationLevelViewModel("Secondary".Resource(), EducationLevel.Secondary),
                                 new EducationLevelViewModel("Vocational".Resource(), EducationLevel.Vocational),
                                 new EducationLevelViewModel("Higher".Resource(), EducationLevel.Higher)

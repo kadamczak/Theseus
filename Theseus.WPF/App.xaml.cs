@@ -62,7 +62,7 @@ namespace Theseus.WPF
             _host.Start();
 
             LoadStringResources();
-            MigrateDatabase();
+            //MigrateDatabase();
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
