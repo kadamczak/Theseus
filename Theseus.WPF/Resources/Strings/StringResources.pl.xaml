@@ -55,8 +55,8 @@
     <system:String x:Key="TheseusHomeDescription">Aplikacja przeznaczona do prowadzenia elektronicznej wersji Testu Porteusa.</system:String>
     <system:String x:Key="ViewCredits">Zobacz atrybucje</system:String>
 
-    <system:String x:Key="PatientInfo">Dane Pacjenta</system:String>
-    <system:String x:Key="StaffInfo">Dane Specjalisty</system:String>
+    <system:String x:Key="PatientInfo">Pacjent</system:String>
+    <system:String x:Key="StaffInfo">Specjalista</system:String>
 
     <system:String x:Key="YourUsername:"  xml:space="preserve">Nazwa użytkownika: </system:String>
     <system:String x:Key="GroupName:"  xml:space="preserve">Nazwa grupy: </system:String>
