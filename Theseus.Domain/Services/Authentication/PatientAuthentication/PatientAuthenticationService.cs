@@ -43,22 +43,29 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
         {
             PatientRegistrationResult result = PatientRegistrationResult.Success;
 
-            Patient? patientWithSameUsername = await _getPatientByUsernameQuery.GetPatient(newAccount.Username);
-            if (patientWithSameUsername is not null)
+            try
             {
-                result = PatientRegistrationResult.UsernameAlreadyExists;
-            }
+                Patient? patientWithSameUsername = await _getPatientByUsernameQuery.GetPatient(newAccount.Username);
+                if (patientWithSameUsername is not null)
+                {
+                    result = PatientRegistrationResult.UsernameAlreadyExists;
+                }
 
-            Group? group = await _getGroupByNameQuery.GetGroup(groupName);
-            if (group is null)
-            {
-                result = PatientRegistrationResult.GroupDoesNotExist;
-            }
+                Group? group = await _getGroupByNameQuery.GetGroup(groupName);
+                if (group is null)
+                {
+                    result = PatientRegistrationResult.GroupDoesNotExist;
+                }
 
-            if (result == PatientRegistrationResult.Success)
+                if (result == PatientRegistrationResult.Success)
+                {
+                    newAccount.Group = group!;
+                    await _createPatientCommand.Create(newAccount);
+                }
+            }
+            catch(Exception)
             {
-                newAccount.Group = group!;
-                await _createPatientCommand.Create(newAccount);
+                return PatientRegistrationResult.ConnectionFailed;
             }
 
             return result;

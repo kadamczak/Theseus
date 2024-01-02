@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Text.RegularExpressions;
+using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -16,33 +18,31 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _patientUsername = value;
                 OnPropertyChanged(nameof(PatientUsername));
-
                 ClearErrors(nameof(PatientUsername));
 
-                if (string.IsNullOrWhiteSpace(PatientUsername))
+                if (!Regex.IsMatch(_patientUsername, @"^[\w_]+$"))
                 {
-                    AddError(nameof(PatientUsername), "Field can't be empty.");
+                    AddError(nameof(PatientUsername), "UsernameContainsInvalidCharacters".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanRegister));
             }
         }
 
-        private string _staffMemberUsername = string.Empty;
+        private string _groupName = string.Empty;
 
-        public string StaffMemberUsername
+        public string GroupName
         {
-            get => _staffMemberUsername;
+            get => _groupName;
             set
             {
-                _staffMemberUsername = value;
-                OnPropertyChanged(nameof(StaffMemberUsername));
+                _groupName = value;
+                OnPropertyChanged(nameof(GroupName));
+                ClearErrors(nameof(GroupName));
 
-                ClearErrors(nameof(StaffMemberUsername));
-
-                if (string.IsNullOrWhiteSpace(StaffMemberUsername))
+                if (!Regex.IsMatch(_groupName, @"^[\w-_]+$"))
                 {
-                    AddError(nameof(StaffMemberUsername), "Field can't be empty.");
+                    AddError(nameof(GroupName), "NameContainsInvalidCharacters".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanRegister));
@@ -60,20 +60,15 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
-        public bool CanRegister => !HasErrors;
+        public bool CanRegister => !HasErrors &&
+                                   !string.IsNullOrWhiteSpace(PatientUsername) &&
+                                   !string.IsNullOrWhiteSpace(GroupName);
 
         public ICommand Register { get; }
 
         public PatientRegisterViewModel(IPatientAuthenticator authenticator)
         {
-            ClearFields();
             Register = new RegisterPatientCommand(this, authenticator);
-        }
-
-        private void ClearFields()
-        {
-            PatientUsername = string.Empty;
-            StaffMemberUsername = string.Empty;
         }
     }
 }

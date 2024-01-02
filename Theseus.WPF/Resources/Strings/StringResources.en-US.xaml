@@ -58,6 +58,9 @@
     <system:String x:Key="PatientInfo">Patient Info</system:String>
     <system:String x:Key="StaffInfo">Staff Info</system:String>
 
+    <system:String x:Key="UsernameContainsInvalidCharacters">Username contains invalid characters.</system:String>
+    <system:String x:Key="NameContainsInvalidCharacters">Name contains invalid characters.</system:String>
+
     <system:String x:Key="YourUsername:"  xml:space="preserve">Your Username: </system:String>
     <system:String x:Key="GroupName:"  xml:space="preserve">Group Name: </system:String>
     <system:String x:Key="Username">Username</system:String>
@@ -241,6 +244,7 @@
     <system:String x:Key="SuccesfullyRegistered">Succesfully registered.</system:String>
     <system:String x:Key="PatientUsernameAlreadyExists">Patient username already exists.</system:String>
     <system:String x:Key="GroupDoesNotExist">Group does not exist.</system:String>
+    <system:String x:Key="RegistrationFailed">Registration failed.</system:String>
 
     <system:String x:Key="UsernameAlreadyExists">Username already exists.</system:String>
     <system:String x:Key="EmailAlreadyExists">Email already used.</system:String>

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Theseus.Domain.Models.GroupRelated.Exceptions;
-using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
@@ -48,8 +46,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
                 {
                     await _authenticator.Login(loggedInPatientUsername, loggedInGroup);
                 }
-                catch (Exception ex) when (ex is UserNotFoundException ||
-                                           ex is WrongGroupNameForPatientException)
+                catch (Exception)
                 {
                     ResetStoredLogInData();
                     _notLoggedInNavigationService.Navigate();

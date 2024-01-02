@@ -31,7 +31,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
                 Username = _patientRegisterViewModel.PatientUsername
             };
 
-            string staffMemberUsername = _patientRegisterViewModel.StaffMemberUsername;
+            string staffMemberUsername = _patientRegisterViewModel.GroupName;
 
             PatientRegistrationResult registrationResult = await _authenticator.Register(newPatient, staffMemberUsername);
             this._patientRegisterViewModel.RegistrationResponse = GetRegistrationResponse(registrationResult);
@@ -44,6 +44,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
                 PatientRegistrationResult.Success => "SuccesfullyRegistered".Resource(),
                 PatientRegistrationResult.UsernameAlreadyExists => "PatientUsernameAlreadyExists".Resource(),
                 PatientRegistrationResult.GroupDoesNotExist => "GroupDoesNotExist".Resource(),
+                PatientRegistrationResult.ConnectionFailed => "RegistrationFailed".Resource(),
                 _ => throw new ArgumentException("Invalid parameter.")
             };
         }

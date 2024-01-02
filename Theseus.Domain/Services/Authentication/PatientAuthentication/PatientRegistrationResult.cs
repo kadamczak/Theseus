@@ -4,6 +4,7 @@
     {
         Success,
         UsernameAlreadyExists,
-        GroupDoesNotExist
+        GroupDoesNotExist,
+        ConnectionFailed
     }
 }
