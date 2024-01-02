@@ -43,6 +43,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -73,10 +89,10 @@
                     "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.7.0.x86"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.7.0.x64"
                     {
-                    "Name" = "8:.NET Desktop Runtime 7.0.9 (x86)"
-                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.7.0.x86"
+                    "Name" = "8:.NET Desktop Runtime 7.0.9 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.7.0.x64"
                     }
                 }
             }
@@ -199,7 +215,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Theseus"
         "ProductCode" = "8:{EBE49FFD-A496-42C0-A1DF-7F74E90B50B9}"
-        "PackageCode" = "8:{5EDFE127-E81F-4073-809E-AC1006FA866D}"
+        "PackageCode" = "8:{E9810473-DFB8-4EBE-900E-D6EABB4C9958}"
         "UpgradeCode" = "8:{011A982D-FFB8-4ECB-97A5-B015BBCC99FC}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

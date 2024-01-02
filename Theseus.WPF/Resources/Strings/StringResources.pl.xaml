@@ -52,8 +52,8 @@
     <system:String x:Key="SetAsMinimal">Ustaw jako Minimum</system:String>
     <system:String x:Key="CellSize">Rozmiar kratki</system:String>
 
-    <system:String x:Key="TheseusHomeDescription">Aplikacja przeznaczona do prowadzenia elektronicznej wersji Testu Porteusa.</system:String>
-    <system:String x:Key="ViewCredits">Zobacz atrybucje</system:String>
+    <system:String x:Key="TheseusHomeDescription">Aplikacja przeznaczona do prowadzenia elektronicznego testu zdolności kognitywnych, inspirowanego Testem Labiryntów Porteusa.</system:String>
+    <system:String x:Key="ViewCredits">Zobacz źródła</system:String>
 
     <system:String x:Key="PatientInfo">Pacjent</system:String>
     <system:String x:Key="StaffInfo">Specjalista</system:String>
@@ -221,7 +221,7 @@
     <system:String x:Key="CantBeginTest">Nie można zacząć testu, ponieważ pacjent nie jest zalogowany.</system:String>
     <system:String x:Key="YouCanChangeTheMinimalCellSize">Możesz zmienić minimalną wielkość kratki w ustawieniach programu (ikonka zębatki na pasku).</system:String>
 
-    <system:String x:Key="UseArrowKeys">Użyj strzałek na klawiaturze</system:String>
+    <system:String x:Key="UseArrowKeys">Użyj strzałek klawiatury</system:String>
     <system:String x:Key="UseArrowKeysLong">Aby poruszać się w labiryncie, użyj przycisków strzałek na klawiaturze.</system:String>
 
     <system:String x:Key="SolveMaze">Rozwiąż Labirynt</system:String>

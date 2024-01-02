@@ -8,9 +8,11 @@ namespace Theseus.WPF.Code.Commands.SettingsCommands
     {
         public override async Task ExecuteAsync(object parameter)
         {
+            string fileName = "index-" + Properties.Settings.Default.AppLanguage + ".html";
+
             System.Diagnostics.Process.Start(new ProcessStartInfo
             {
-                FileName = "index.html",
+                FileName = fileName,
                 UseShellExecute = true
             });
         }

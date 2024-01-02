@@ -20,6 +20,6 @@
         <views:PatientLoginView Grid.Row="0" Grid.Column="0" DataContext="{Binding PatientLoginViewModel}" />
         <views:PatientRegisterView Grid.Row="0" Grid.Column="2" DataContext="{Binding PatientRegisterViewModel}" />
 
-        <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource Generic}" FontSize="22" Command="{Binding GoBack}" Content="Go Back" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource Generic}" FontSize="22" Command="{Binding GoBack}" Content="{DynamicResource GoBack}" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
     </Grid>
 </UserControl>

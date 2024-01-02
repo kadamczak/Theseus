@@ -24,7 +24,7 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <Label Content="{DynamicResource SolveMaze}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontFamily="Microsoft YaHei Light"/>
                 <Button Margin="40 0 0 0" Content="{DynamicResource Skip}" Command="{Binding GoToNextPage}" CommandParameter="False" Style="{StaticResource Generic}"/>
-                <Label Visibility="{Binding ExamMazeCanvasViewModel.MazeExamFinished, Converter={StaticResource ReverseBoolean}}" Content="{DynamicResource UseArrowKeys}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="30" FontFamily="Microsoft YaHei Light" Margin="25 0 0 0" />
+                <Label Visibility="{Binding ExamMazeCanvasViewModel.MazeExamFinished, Converter={StaticResource ReverseBoolean}}" Content="{DynamicResource UseArrowKeys}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="23" FontFamily="Microsoft YaHei Light" Margin="25 0 0 0" />
             </StackPanel>
 
             <StackPanel Visibility="{Binding ExamMazeCanvasViewModel.MazeExamFinished, Converter={StaticResource Boolean}}" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom">
