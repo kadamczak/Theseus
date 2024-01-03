@@ -1,7 +1,10 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Data.SqlClient;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
@@ -22,8 +25,19 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            _staffMemberDetailsLoggedInViewModel.UpdateCurrentStaffMemberInfoFromViewModel();
-            await _updateStaffMemberCommand.Update(_staffMemberDetailsLoggedInViewModel.CurrentStaffMember);
+            try
+            {
+                await _updateStaffMemberCommand.Update(_staffMemberDetailsLoggedInViewModel.CurrentStaffMember);
+                _staffMemberDetailsLoggedInViewModel.UpdateCurrentStaffMemberInfoFromViewModel();
+            }
+            catch (SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
         }
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

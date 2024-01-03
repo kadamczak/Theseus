@@ -88,7 +88,7 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
-        private string _endingMaxMazeDimension = "30";
+        private string _endingMaxMazeDimension = "23";
 
         public string EndingMaxMazeDimension
         {
@@ -130,7 +130,7 @@ namespace Theseus.WPF.Code.ViewModels
         private bool HasValueInRange(int value, int min, int max) => value >= min && value <= max;
 
         private readonly int[] _beginningMaxMazeDimensions = new int[3] { 8, 8, 12 };
-        private readonly int[] _endingMaxMazeDimensions = new int[3] { 20, 25, 35 };
+        private readonly int[] _endingMaxMazeDimensions = new int[3] { 20, 23, 25 };
 
         private bool _customDimensionsEnabled = false;
         public bool CustomDimensionsEnabled

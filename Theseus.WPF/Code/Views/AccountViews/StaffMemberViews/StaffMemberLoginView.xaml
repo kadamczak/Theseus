@@ -17,10 +17,10 @@
         
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0 8 0 0">
             <TextBlock Text="{DynamicResource Username}" FontSize="20" Margin="0 0 0 10"/>
-            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" Width="250" Style="{StaticResource GenericTextBox}"/>
+            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" MaxLength="16" Width="250" Style="{StaticResource GenericTextBox}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" Margin="0 8 0 0">
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" Margin="0 17 0 0">
             <TextBlock Text="{DynamicResource Password}" FontSize="20" Margin="0 0 0 10"/>
             <PasswordBox Style="{StaticResource GenericPasswordBox}" FontSize="22" PasswordChar="*" Width="250" PasswordChanged="PasswordBox_PasswordChanged" />
         </StackPanel>

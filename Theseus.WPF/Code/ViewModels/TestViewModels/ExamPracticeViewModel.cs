@@ -34,7 +34,6 @@ namespace Theseus.WPF.Code.ViewModels
         private Timer _transitionTimer = new Timer() { Interval = 1000 };
 
         public ExamPracticeViewModel(CurrentExamStore currentExamStore,
-                                 ICreateExamCommand createExamCommand,
                                  MazeCreator mazeCreator,
                                  NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
                                  NavigationService<ExamEndViewModel> examEndNavigationService)
@@ -42,7 +41,7 @@ namespace Theseus.WPF.Code.ViewModels
             MazeWithSolution currentMaze = mazeCreator.CreateMazeWithSolution(4, 6, MazeStructureGenAlgorithm.AldousBroder, MazeSolutionGenAlgorithm.Dijkstra, true, 39);
             ExamMazeCanvasViewModel = new ExamMazeCanvasViewModel(currentMaze, currentExamStore, rememberSteps: false);
 
-            GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService, createExamCommand, saveStageInfo: false);
+            GoToNextPage = new GoToNextPageCommand(this, currentExamStore, examTransitionNavigationService, examEndNavigationService, saveStageInfo: false);
             ExamMazeCanvasViewModel.CompletedMaze += StartCountdown;
             _transitionTimer.Elapsed += new ElapsedEventHandler(ReduceCountdownValue);
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
@@ -14,7 +13,6 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
     {
         private readonly ExamViewModel _viewModel;
         private readonly CurrentExamStore _currentExamStore;
-        private readonly ICreateExamCommand _createExamCommand;
         private readonly NavigationService<ExamTransitionViewModel> _examTransitionNavigationService;
         private readonly NavigationService<ExamEndViewModel> _examEndNavigationService;
         private readonly bool _saveStageInfo;
@@ -25,12 +23,10 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
                                    CurrentExamStore currentExamStore,
                                    NavigationService<ExamTransitionViewModel> examTransitionNavigationService,
                                    NavigationService<ExamEndViewModel> examEndNavigationService,
-                                   ICreateExamCommand createExamCommand,
                                    bool saveStageInfo)
         {
             _viewModel = viewModel;
             _currentExamStore = currentExamStore;
-            _createExamCommand = createExamCommand;
             _examTransitionNavigationService = examTransitionNavigationService;
             _examEndNavigationService = examEndNavigationService;
             _saveStageInfo = saveStageInfo;
@@ -43,9 +39,8 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
             if(_saveStageInfo)
                 SaveStageCompletionStatus(parameter);
 
-            if (LastMazeFinished())
+            if (_saveStageInfo && LastMazeFinished())
             {
-                _createExamCommand.Create(_currentExamStore.CurrentExam);
                 _examEndNavigationService.Navigate();
             }
             else

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
@@ -68,13 +70,29 @@ namespace Theseus.WPF.Code.ViewModels
             if (!currentPatientStore.IsPatientLoggedIn)
                 return;
 
-            Group? patientGroup = getGroupQuery.GetGroup(currentPatientStore.Patient.Id);
-            if (patientGroup is null)
-                return;
+            try
+            {
+                Group? patientGroup = getGroupQuery.GetGroup(currentPatientStore.Patient.Id);
+                if (patientGroup is null)
+                    return;
 
-            var examSets = GetAvailableFittedExamSets(currentPatientStore, patientGroup!, getExamSetsQuery, getMazesOfExamSetQuery);
-            AvailableExamSets = new ObservableCollection<ExamSet>(examSets);
-            SelectedExamSet = AvailableExamSets.FirstOrDefault();
+                var examSets = GetAvailableFittedExamSets(currentPatientStore, patientGroup!, getExamSetsQuery, getMazesOfExamSetQuery);
+                AvailableExamSets = new ObservableCollection<ExamSet>(examSets);
+                SelectedExamSet = AvailableExamSets.FirstOrDefault();
+            }
+            catch(SqlException)
+            {
+                DisplayConnectionFailedMessage();
+            }
+        }
+
+        private void DisplayConnectionFailedMessage()
+        {
+            string messageBoxText = "CouldNotConnectToDatabase".Resource();
+            string caption = "ActionFailed".Resource();
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Exclamation;
+            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
         }
 
         private List<ExamSet> GetAvailableFittedExamSets(ICurrentPatientStore currentPatientStore,

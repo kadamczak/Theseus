@@ -1,6 +1,7 @@
 ﻿using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
+using System.ComponentModel.DataAnnotations;
 
 namespace Theseus.Domain.Models.UserRelated
 {
@@ -20,26 +21,36 @@ namespace Theseus.Domain.Models.UserRelated
         /// <remarks>
         /// The username is unique across the entire <c>StaffMember</c> database.
         /// </remarks>
+        [Required]
+        [StringLength(16)]
+        [RegularExpression(@"^[\w_]+$")]
         public string Username { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the hashed password for this account.
         /// </summary>
+        [Required]
         public string PasswordHash { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the e-mail of <c>StaffMember</c> account owner.
         /// </summary>
+        [Required]
+        [EmailAddress]
         public string Email { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets first name of <c>StaffMember</c> account owner.
         /// </summary>
+        [Required]
+        [StringLength(30)]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets surname of <c>StaffMember</c> account owner.
         /// </summary>
+        [Required]
+        [StringLength(30)]
         public string Surname { get; set; } = default!;
 
         /// <summary>

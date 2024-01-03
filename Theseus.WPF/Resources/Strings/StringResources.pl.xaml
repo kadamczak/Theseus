@@ -67,6 +67,10 @@
     <system:String x:Key="Username:" xml:space="preserve">Nazwa użytkownika: </system:String>
     <system:String x:Key="Group">Grupa</system:String>
 
+    <system:String x:Key="PasswordReq" xml:space="preserve">Min. znaków: 6
+Małe i duże litery
+Liczby</system:String>
+
     <system:String x:Key="Age">Wiek</system:String>
     <system:String x:Key="Age:"  xml:space="preserve">Wiek: </system:String>
 
@@ -117,6 +121,7 @@
     <system:String x:Key="AmountOfStaffMembers:"  xml:space="preserve">Ilość specjalistów: </system:String>
     <system:String x:Key="AmountOfPatients:"  xml:space="preserve">Ilość pacjentów: </system:String>
     <system:String x:Key="AmountOfExamSets:"  xml:space="preserve">Ilość zestawów: </system:String>
+    <system:String x:Key="AmountOfExams:"  xml:space="preserve">Ilość testów: </system:String>
     <system:String x:Key="AmountOfMazes:"  xml:space="preserve">Ilość labiryntów: </system:String>
 
     <system:String x:Key="LeavingGroup">Opuszczanie Grupy</system:String>
@@ -230,7 +235,8 @@
     <system:String x:Key="SolveMaze">Rozwiąż Labirynt</system:String>
     <system:String x:Key="MazeFinished"  xml:space="preserve">Labirynt ukończony! Następne zadanie za: </system:String>
     <system:String x:Key="End">Koniec</system:String>
-    <system:String x:Key="ExamFinished">Test ukończony. Wyniki zostały zapisane automatycznie.</system:String>
+    <system:String x:Key="ExamFinished">Test ukończony.</system:String>
+    <system:String x:Key="ResultsWereSavedSuccesfully">Wyniki zostały zapisane automatycznie.</system:String>
 
     <system:String x:Key="AgeOutsideOfRange">Wiek poza poprawnym zakresem.</system:String>
     <system:String x:Key="AgeContainsInvalidCharacters">Nieprawidłowe znaki.</system:String>
@@ -254,6 +260,9 @@
 
     <system:String x:Key="ThisExamSetCantBeDeleted">Ten zestaw nie może być usunięty, ponieważ wykonano na nim testy.</system:String>
     <system:String x:Key="DoYouWantToDeleteThisExamSet">Czy na pewno chcesz usunąć zestaw? Labirynty wchodzące w jego skład nie zostaną usunięte.</system:String>
+
+    <system:String x:Key="ActionFailed">Niepowodzenie.</system:String>
+    <system:String x:Key="CouldNotConnectToDatabase">Nie udało się połączyć z bazą danych.</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Algorytm Binary Tree produkuje labirynty mocno faworyzujące przebieg kratek po przekątnej. Z tego powodu nie jest on używany w generatorze zestawów, ale może być przydatny w wyjątkowych przypadkach.
 

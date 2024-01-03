@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.Models.UserRelated.Enums;
 
@@ -14,8 +14,6 @@ namespace Theseus.Domain.Models.UserRelated
         /// </summary>
         public Guid Id { get; set; } = default!;
 
-        private string _username = string.Empty;
-
         /// <summary>
         /// Gets or sets the username of the account. Throws ArgumentException if username is empty/whitespace, is too long or contains
         /// invalid characters.
@@ -23,23 +21,10 @@ namespace Theseus.Domain.Models.UserRelated
         /// <remarks>
         /// The username is unique across the entire <c>Patient</c> database.
         /// </remarks>
-        public string Username
-        {
-            get => _username;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Username cannot be empty.");
-
-                if (value.Length > 16)
-                    throw new ArgumentException("Username is too long.");
-
-                if (!Regex.IsMatch(value, @"^[\w_]+$"))
-                    throw new ArgumentException("Invalid characters in username.");
-
-                _username = value;
-            }
-        }
+        [Required]
+        [StringLength(16)]
+        [RegularExpression(@"^[\w_]+$")]
+        public string Username { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the age of the <c>Patient</c>.
@@ -47,6 +32,7 @@ namespace Theseus.Domain.Models.UserRelated
         /// <remarks>
         /// Age does not have to be specified. It is represented as a null in that case.
         /// </remarks>
+        [Range(0, 125)]
         public int? Age { get; set; }
 
         /// <summary>

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
@@ -18,12 +20,11 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
-
                 ClearErrors(nameof(Username));
 
-                if (string.IsNullOrWhiteSpace(Username))
+                if (!Regex.IsMatch(_username, @"^[\w_]+$"))
                 {
-                    AddError(nameof(Username), "Field can't be empty.");
+                    AddError(nameof(Username), "UsernameContainsInvalidCharacters".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanLogin));
@@ -41,14 +42,7 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
-
                 ClearErrors(nameof(Password));
-
-                if (string.IsNullOrWhiteSpace(Password))
-                {
-                    AddError(nameof(Password), "Field can't be empty.");
-                }
-
                 OnPropertyChanged(nameof(CanLogin));
             }
         }
@@ -64,20 +58,13 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
-        public bool CanLogin => !HasErrors;
+        public bool CanLogin => !HasErrors && !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
 
         public ICommand Login { get; }
 
         public StaffMemberLoginViewModel(IStaffMemberAuthenticator authenticator, NavigationService<LoggedInViewModel> loggedInNavigationService)
         {
-            ClearFields();
             Login = new LoginStaffMemberCommand(this, authenticator, loggedInNavigationService);
-        }
-
-        private void ClearFields()
-        {
-            Username = string.Empty;
-            Password = string.Empty;
         }
     }
 }

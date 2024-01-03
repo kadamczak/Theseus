@@ -23,7 +23,7 @@
             <TextBox Style="{StaticResource GenericTextBox}" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" MaxLength="16"  HorizontalAlignment="Stretch" Margin="20 10 20 0"/>
 
             <Label Content="{DynamicResource GroupName:}" FontSize="20" Margin="20 10 20 0"/>
-            <TextBox Style="{StaticResource GenericTextBox}" Text="{Binding GroupName, UpdateSourceTrigger=PropertyChanged}" MaxLength="16"  HorizontalAlignment="Stretch" Margin="20 10 20 0"/>
+            <TextBox Style="{StaticResource GenericTextBox}" Text="{Binding GroupName, UpdateSourceTrigger=PropertyChanged}" MaxLength="19"  HorizontalAlignment="Stretch" Margin="20 10 20 0"/>
 
             <TextBlock Margin="0 7 0 0" Grid.Row="6" HorizontalAlignment="Center" Text="{Binding LoginResponse, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="20" Foreground="Black" TextWrapping="Wrap"/>
 

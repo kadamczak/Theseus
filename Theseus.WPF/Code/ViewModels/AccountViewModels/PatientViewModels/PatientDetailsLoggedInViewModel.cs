@@ -159,7 +159,7 @@ namespace Theseus.WPF.Code.ViewModels
             return currentPatientInfo != infoFromViewModel;
         }
 
-        private bool AgeHasValidValue(int age) => age > 0 && age <= 125;
+        private bool AgeHasValidValue(int age) => age >= 0 && age <= 125;
         private int? StringToNullableInt(string str) => (string.IsNullOrWhiteSpace(str)) ? null : int.Parse(str);
     }
 }

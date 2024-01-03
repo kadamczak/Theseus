@@ -6,6 +6,6 @@
         PasswordsDoNotMatch,
         EmailAlreadyExists,
         UsernameAlreadyExists,
-        UsernameNotAllowed
+        ConnectionFailed
     }
 }

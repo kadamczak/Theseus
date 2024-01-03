@@ -26,7 +26,7 @@ namespace Theseus.WPF.Code.ViewModels.ExamSetViewModels.ExamSetCommandList.Info.
 
             int numberOfMazes = _getMazes.GetMazesWithSolution(examSetId).Count();
             int numberOfExams = _getExams.GetExams(examSetId).Count();
-            return $"{"AmountOfMazes:".Resource()}{numberOfMazes}\n{"AmountOfExamSets:".Resource()}{numberOfExams}";
+            return $"{"AmountOfMazes:".Resource()}{numberOfMazes}\n{"AmountOfExams:".Resource()}{numberOfExams}";
         }
     }
 }

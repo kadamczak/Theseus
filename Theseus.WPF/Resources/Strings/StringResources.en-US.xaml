@@ -66,7 +66,11 @@
     <system:String x:Key="Username">Username</system:String>
     <system:String x:Key="Username:" xml:space="preserve">Username: </system:String>
     <system:String x:Key="Group">Group</system:String>
-    
+
+    <system:String x:Key="PasswordReq" xml:space="preserve"> Min. length: 6
+    Both cases
+    Numbers</system:String>
+
     <system:String x:Key="Age">Age</system:String>
     <system:String x:Key="Age:"  xml:space="preserve">Age: </system:String>
     
@@ -117,6 +121,7 @@
     <system:String x:Key="AmountOfStaffMembers:"  xml:space="preserve">Amount of staff members: </system:String>
     <system:String x:Key="AmountOfPatients:"  xml:space="preserve">Amount of patients: </system:String>
     <system:String x:Key="AmountOfExamSets:"  xml:space="preserve">Amount of exam sets: </system:String>
+    <system:String x:Key="AmountOfExams:"  xml:space="preserve">Amount of exams: </system:String>
     <system:String x:Key="AmountOfMazes:"  xml:space="preserve">Amount of mazes: </system:String>
 
     <system:String x:Key="LeavingGroup">Leaving Group</system:String>
@@ -231,7 +236,8 @@
     <system:String x:Key="SolveMaze">Solve Maze</system:String>
     <system:String x:Key="MazeFinished"  xml:space="preserve">Maze finished! Next puzzle in: </system:String>
     <system:String x:Key="End">End</system:String>
-    <system:String x:Key="ExamFinished">Exam finished. Results were saved automatically.</system:String>
+    <system:String x:Key="ExamFinished">Exam finished.</system:String>
+    <system:String x:Key="ResultsWereSavedSuccesfully">Results were saved automatically</system:String>
 
     <system:String x:Key="AgeOutsideOfRange">Age is outside of range.</system:String>
     <system:String x:Key="AgeContainsInvalidCharacters">Age contains invalid characters.</system:String>
@@ -255,6 +261,9 @@
 
     <system:String x:Key="ThisExamSetCantBeDeleted">This exam set can't be deleted because it has recorded exam attempts.</system:String>
     <system:String x:Key="DoYouWantToDeleteThisExamSet">Do you want to delete this exam set? Included mazes will still exist.</system:String>
+
+    <system:String x:Key="ActionFailed">Action Failed.</system:String>
+    <system:String x:Key="CouldNotConnectToDatabase">Could not connect to database.</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
 

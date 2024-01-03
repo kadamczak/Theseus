@@ -1,4 +1,5 @@
 ﻿
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
@@ -88,6 +89,23 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
+                ClearErrors(nameof(Password));
+
+                if (Password.Length < 6)
+                {
+                    AddError(nameof(Password), "Password too short.");
+                }
+
+                if (!Password.Any(c => char.IsDigit(c)))
+                {
+                    AddError(nameof(Password), "Password has no numbers.");
+                }
+
+                if (!Password.Any(c => char.IsLower(c)) || !Password.Any(c => char.IsUpper(c)))
+                {
+                    AddError(nameof(Password), "Password doesn't have both lower and upper case letters.");
+                }
+
                 OnPropertyChanged(nameof(CanRegister));
             }
         }
