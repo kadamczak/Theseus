@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 
@@ -18,12 +20,12 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
-
                 ClearErrors(nameof(Username));
 
-                if (string.IsNullOrWhiteSpace(Username))
+
+                if (!Regex.IsMatch(_username, @"^[\w_]+$"))
                 {
-                    AddError(nameof(Username), "Field can't be empty.");
+                    AddError(nameof(Username), "UsernameContainsInvalidCharacters".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanLogin));
@@ -39,12 +41,11 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _groupName = value;
                 OnPropertyChanged(nameof(GroupName));
-
                 ClearErrors(nameof(GroupName));
 
-                if (string.IsNullOrWhiteSpace(GroupName))
+                if (!Regex.IsMatch(_groupName, @"^[\w-_]+$"))
                 {
-                    AddError(nameof(GroupName), "Field can't be empty.");
+                    AddError(nameof(GroupName), "NameContainsInvalidCharacters".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanLogin));
@@ -109,22 +110,18 @@ namespace Theseus.WPF.Code.ViewModels
 
         public bool HasPastLogins { get; } = false;
 
-        public bool CanLogin => !HasErrors;
+        public bool CanLogin => !HasErrors &&
+                                   !string.IsNullOrWhiteSpace(Username) &&
+                                   !string.IsNullOrWhiteSpace(GroupName);
+
         public ICommand Login { get; }
 
         public PatientLoginViewModel(IPatientAuthenticator authenticator, NavigationService<BeginTestViewModel> beginTestNavigationService)
         {
-            ClearFields();
             LoadPastLogInInfo();
             HasPastLogins = !string.IsNullOrWhiteSpace(PastUsernameFirst);
 
             Login = new LoginPatientCommand(this, authenticator, beginTestNavigationService);
-        }
-
-        private void ClearFields()
-        {
-            Username = string.Empty;
-            GroupName = string.Empty;
         }
 
         private void LoadPastLogInInfo()

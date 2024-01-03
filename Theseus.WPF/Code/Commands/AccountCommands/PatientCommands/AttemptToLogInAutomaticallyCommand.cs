@@ -50,6 +50,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
                 {
                     ResetStoredLogInData();
                     _notLoggedInNavigationService.Navigate();
+                    return;
                 }
 
                 _loggedInNavigationService.Navigate();

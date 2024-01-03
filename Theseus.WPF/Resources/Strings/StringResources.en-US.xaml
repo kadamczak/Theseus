@@ -236,6 +236,8 @@
     <system:String x:Key="AgeOutsideOfRange">Age is outside of range.</system:String>
     <system:String x:Key="AgeContainsInvalidCharacters">Age contains invalid characters.</system:String>
 
+    <system:String x:Key="EmailInvalid">Invalid email.</system:String>
+
     <system:String x:Key="UsernameDoesNotExist">Username does not exist.</system:String>
     <system:String x:Key="IncorrectGroupName">Incorrect group name.</system:String>
     <system:String x:Key="LoginFailed">Login failed.</system:String>

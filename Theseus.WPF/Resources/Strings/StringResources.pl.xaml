@@ -235,6 +235,8 @@
     <system:String x:Key="AgeOutsideOfRange">Wiek poza poprawnym zakresem.</system:String>
     <system:String x:Key="AgeContainsInvalidCharacters">Nieprawidłowe znaki.</system:String>
 
+    <system:String x:Key="EmailInvalid">Nieprawidłowy email.</system:String>
+
     <system:String x:Key="UsernameDoesNotExist">Nazwa użytkownika nie istnieje.</system:String>
     <system:String x:Key="IncorrectGroupName">Nieprawidłowa nazwa grupy.</system:String>
     <system:String x:Key="LoginFailed">Logowanie nie powiodło się.</system:String>
