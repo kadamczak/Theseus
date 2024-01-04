@@ -271,6 +271,9 @@ Liczby</system:String>
     <system:String x:Key="SurnameCantBeEmpty">Nazwisko nie może być puste.</system:String>
     <system:String x:Key="EmailIsInvalid">Email jest nieprawidłowy.</system:String>
 
+    <system:String x:Key="ValueOutsideOfRange">Wartość spoza zakresu.</system:String>
+    <system:String x:Key="InvalidValue">Nieprawidłowa wartość.</system:String>
+
     <system:String x:Key="Binary" xml:space="preserve">Algorytm Binary Tree produkuje labirynty mocno faworyzujące przebieg kratek po przekątnej. Z tego powodu nie jest on używany w generatorze zestawów, ale może być przydatny w wyjątkowych przypadkach.
 
 Właściwości:

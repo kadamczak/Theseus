@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -16,7 +20,7 @@ using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class CreateSetManuallyViewModel : ViewModelBase
+    public class CreateSetManuallyViewModel : ErrorCheckingViewModel
     {
         public MazeCommandListViewModel AddToSetMazeCommandListViewModel { get; }
         
@@ -28,12 +32,18 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _examSetName = value;
                 OnPropertyChanged(nameof(ExamSetName));
-                OnPropertyChanged(nameof(ExamSetNameEntered));
+                ClearErrors(nameof(ExamSetName));
+
+                if (!Regex.IsMatch(ExamSetName, @"^[\w_]+$"))
+                {
+                    AddError(nameof(ExamSetName), "InvalidValue".Resource());
+                }
+
+                OnPropertyChanged(nameof(CanSave));
             }
         }
 
-        //public List<MazeWithSolution> SelectedMazes => AddToSetMazeCommandListViewModel.ToList();
-        public bool ExamSetNameEntered => !string.IsNullOrWhiteSpace(_examSetName);
+        public bool CanSave => !HasErrors && !string.IsNullOrWhiteSpace(_examSetName);
         public ICommand CreateSetManually { get; }
 
         public CreateSetManuallyViewModel(SelectedModelListStore<MazeWithSolutionCanvasViewModel> mazeListStore,
@@ -47,7 +57,19 @@ namespace Theseus.WPF.Code.ViewModels
             if (!currentStaffMemberStore.IsStaffMemberLoggedIn)
                 throw new StaffMemberNotLoggedInException();
 
-            LoadFullMazeListToStore(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
+            try
+            {
+                LoadFullMazeListToStore(getAllMazesWithSolutionOfStaffMemberQuery, currentStaffMemberStore.StaffMember!.Id, mazeListStore);
+            }
+            catch(SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
+
             this.CreateSetManually = new CreateExamSetManuallyCommand(this, createExamSetCommand, currentStaffMemberStore, mazesInExamSetStore, createSetNavigationService);
 
             this.AddToSetMazeCommandListViewModel = addToSetMazeCommandListViewModel.Create(MazeButtonCommand.AddToExamSet, MazeButtonCommand.None, MazeInfo.None);
@@ -66,10 +88,5 @@ namespace Theseus.WPF.Code.ViewModels
 
             mazeListStore.ModelList = mazeCanvases;
         }
-
-        //private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    OnPropertyChanged(nameof(CanCreate));
-        //}
     }
 }

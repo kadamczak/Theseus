@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
@@ -8,6 +9,7 @@ using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
 using Theseus.WPF.Code.Commands.NavigationCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.ExamSets;
@@ -17,7 +19,7 @@ using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class ExamSetGeneratorResultViewModel : ViewModelBase
+    public class ExamSetGeneratorResultViewModel : ErrorCheckingViewModel
     {
         public MazeCommandListViewModel ShowDetailsMazeCommandViewModel { get; }
 
@@ -29,10 +31,17 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _examSetName = value;
                 OnPropertyChanged(nameof(ExamSetName));
-                OnPropertyChanged(nameof(ExamSetNameEntered));
+                ClearErrors(nameof(ExamSetName));
+
+                if (!Regex.IsMatch(ExamSetName, @"^[\w_]+$"))
+                {
+                    AddError(nameof(ExamSetName), "InvalidValue".Resource());
+                }
+
+                OnPropertyChanged(nameof(CanSave));
             }
         }
-        public bool ExamSetNameEntered => !string.IsNullOrWhiteSpace(_examSetName);
+        public bool CanSave => !HasErrors && !string.IsNullOrWhiteSpace(ExamSetName);
 
         public ICommand GoBack { get; }
         public ICommand SaveExamSet { get; }

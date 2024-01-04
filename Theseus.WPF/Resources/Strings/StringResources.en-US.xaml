@@ -272,6 +272,10 @@
     <system:String x:Key="SurnameCantBeEmpty">Surname can't be empty.</system:String>
     <system:String x:Key="EmailIsInvalid">Email is invalid.</system:String>
 
+    <system:String x:Key="ValueOutsideOfRange">Value outside of range.</system:String>
+    <system:String x:Key="InvalidValue">Invalid value.</system:String>
+
+
     <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
 
 Properties:

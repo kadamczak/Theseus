@@ -15,7 +15,7 @@
         <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" Margin="0 0 0 30">
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Label Content="{DynamicResource SetName:}" FontSize="17" FontWeight="Bold" />
-                <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding ExamSetName, UpdateSourceTrigger=PropertyChanged}"  FontSize="17"/>
+                <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding ExamSetName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource GenericTextBox}"  FontSize="17" MaxLength="16"/>
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">

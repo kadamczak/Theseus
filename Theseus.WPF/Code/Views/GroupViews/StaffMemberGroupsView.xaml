@@ -14,7 +14,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label Content="{DynamicResource GroupName:}" FontSize="17" FontWeight="Bold" />
-            <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding GroupName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  FontSize="17"/>
+            <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding GroupName, UpdateSourceTrigger=PropertyChanged}"  FontSize="17" Style="{StaticResource GenericTextBox}" MaxLength="19"/>
         </StackPanel>
         
         <Button Grid.Row="0" FontSize="17" Margin="0 0 0 10" Style="{StaticResource Generic}" Content="{DynamicResource CreateGroup}" HorizontalAlignment="Right" Command="{Binding CreateGroup}"/>

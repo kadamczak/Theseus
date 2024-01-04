@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
-using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.GroupCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList;
@@ -14,7 +15,7 @@ using Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info;
 
 namespace Theseus.WPF.Code.ViewModels
 {
-    public class StaffMemberGroupsViewModel : ViewModelBase
+    public class StaffMemberGroupsViewModel : ErrorCheckingViewModel
     {
         public GroupCommandListViewModel ShowDetailsGroupCommandListViewModel { get; }
 
@@ -26,14 +27,21 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 _groupName = value;
                 OnPropertyChanged(nameof(GroupName));
+                ClearErrors(nameof(GroupName));
+
+                if (!Regex.IsMatch(_groupName, @"^[\w-_]+$"))
+                {
+                    AddError(nameof(GroupName), "NameContainsInvalidCharacters".Resource());
+                }
+
                 OnPropertyChanged(nameof(CanCreate));
             }
         }
 
         public ICommand CreateGroup { get; }
-        public bool CanCreate => !string.IsNullOrEmpty(GroupName);
+        public bool CanCreate => !HasErrors && !string.IsNullOrWhiteSpace(GroupName);
 
-        public StaffMemberGroupsViewModel(SelectedModelListStore<Group> selectedGroupListStore,
+        public StaffMemberGroupsViewModel(SelectedModelListStore<Domain.Models.GroupRelated.Group> selectedGroupListStore,
                                           IGetGroupsOfStaffMemberQuery getGroupsOfStaffMemberQuery,
                                           ICurrentStaffMemberStore currentStaffMemberStore,
                                           ICreateGroupCommand createGroupCommand,
@@ -49,7 +57,7 @@ namespace Theseus.WPF.Code.ViewModels
             ShowDetailsGroupCommandListViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadGroupsOfStaffMember(IGetGroupsOfStaffMemberQuery query, Guid staffMemberId, SelectedModelListStore<Group> selectedGroupListStore)
+        private void LoadGroupsOfStaffMember(IGetGroupsOfStaffMemberQuery query, Guid staffMemberId, SelectedModelListStore<Domain.Models.GroupRelated.Group> selectedGroupListStore)
         {
             var groupList = query.GetGroups(staffMemberId);
             selectedGroupListStore.ModelList = groupList;

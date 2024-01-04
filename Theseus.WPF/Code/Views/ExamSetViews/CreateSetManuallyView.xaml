@@ -15,7 +15,7 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Label Content="{DynamicResource SetName:}" FontSize="17" FontWeight="Bold" />
-                <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding ExamSetName, UpdateSourceTrigger=PropertyChanged}"  FontSize="17"/>
+                <TextBox Width="160" Margin="20 0 0 0" VerticalContentAlignment="Center" Text="{Binding ExamSetName, UpdateSourceTrigger=PropertyChanged}"  FontSize="17" Style="{StaticResource GenericTextBox}" MaxLength="16"/>
             </StackPanel>
             
             <Button Grid.Row="0" FontSize="17" Margin="0 0 0 10" Style="{StaticResource Generic}" Content="{DynamicResource CreateSet}" HorizontalAlignment="Right" Command="{Binding CreateSetManually}"/>

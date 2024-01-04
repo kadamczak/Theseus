@@ -1,10 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Data.SqlClient;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.MazeCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.ViewModels;
@@ -35,28 +38,39 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            _examSetDetailsStore.SelectedModel.Name = _resultViewModel.ExamSetName;
-            var mazes = _examSetDetailsStore.SelectedModel.ExamSetMazeIndexes.Select(m => m.MazeWithSolution);
-
-            foreach(var maze in mazes)
+            try
             {
-                await _createMazeCommand.Create(maze);
-            }
+                _examSetDetailsStore.SelectedModel.Name = _resultViewModel.ExamSetName;
+                var mazes = _examSetDetailsStore.SelectedModel.ExamSetMazeIndexes.Select(m => m.MazeWithSolution);
 
-            await _createExamSetCommand.CreateExamSet(_examSetDetailsStore.SelectedModel);
+                foreach (var maze in mazes)
+                {
+                    await _createMazeCommand.Create(maze);
+                }
+
+                await _createExamSetCommand.CreateExamSet(_examSetDetailsStore.SelectedModel);
+            }
+            catch(SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
 
             _generatorNavigationService.Navigate();
         }
 
         private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_resultViewModel.ExamSetNameEntered))
+            if (e.PropertyName == nameof(_resultViewModel.CanSave))
                 OnCanExecuteChanged();
         }
 
         public override bool CanExecute(object? parameter)
         {
-            return _resultViewModel.ExamSetNameEntered && base.CanExecute(parameter);
+            return _resultViewModel.CanSave && base.CanExecute(parameter);
         }
     }
 }

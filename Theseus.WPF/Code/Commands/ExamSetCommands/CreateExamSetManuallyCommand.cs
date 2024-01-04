@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.CommandInterfaces.ExamSetCommandInterfaces;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.Stores.Mazes;
@@ -55,7 +58,19 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
             examSet.ExamSetMazeIndexes = CreateMazeIndexesList(examSet);
 
-            await _createExamSetCommand.CreateExamSet(examSet);
+            try
+            {
+                await _createExamSetCommand.CreateExamSet(examSet);
+            }
+            catch(SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
+
             _createSetNavigationService.Navigate();
         }
 
@@ -72,7 +87,7 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_createSetManuallyViewModel.ExamSetNameEntered))
+            if (e.PropertyName == nameof(_createSetManuallyViewModel.CanSave))
                 OnCanExecuteChanged();
         }
 
@@ -83,7 +98,7 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
 
         public override bool CanExecute(object? parameter)
         {
-            return _createSetManuallyViewModel.ExamSetNameEntered && _mazesInExamSetStore.SelectedMazes.Any() && base.CanExecute(parameter);
+            return _createSetManuallyViewModel.CanSave && _mazesInExamSetStore.SelectedMazes.Any() && base.CanExecute(parameter);
         }
     }
 }

@@ -17,13 +17,17 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
+                StaffMemberDto staffMemberDto = context.StaffMembers.Include(s => s.GroupDtos).First(s => s.Id == staffMemberId);
+
+
                 IEnumerable<ExamDto> examDtos = context.Exams
                                                        .Include(e => e.ExamSetDto)
                                                        .Include(e => e.PatientDto)
                                                        .ThenInclude(p => p.GroupDto)
                                                        .Include(e => e.StageDtos)
                                                        .ThenInclude(e => e.StepDtos)
-                                                       .Where(e => e.ExamSetDto.GroupDtos.Where(g => g.StaffMemberDtos.Where(s => s.Id == staffMemberId).Any()).Any())
+                                                       .Where(e => staffMemberDto.GroupDtos.Contains(e.PatientDto.GroupDto))
+                                                       //.Where(e => e.ExamSetDto.GroupDtos.Where(g => g.StaffMemberDtos.Where(s => s.Id == staffMemberId).Any()).Any())
                                                        .OrderByDescending(e => e.CreatedAt)
                                                        .AsNoTracking();
                 return MapExams(examDtos);

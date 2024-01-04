@@ -18,7 +18,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
         private readonly NavigationService<MazeDetailsViewModel> _mazeDetailNavigationService;
 
         private const int MaxMazeDimension = 50;
-        private const int MinMazeDimension = 2;
+        private const int MinMazeDimension = 3;
 
         public GenerateMazeCommand(MazeGeneratorViewModel mazeGenViewModel,
                                    MazeCreator mazeCreator,

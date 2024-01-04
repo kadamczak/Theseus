@@ -6,6 +6,7 @@ using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.ExamSetRelated.Enums;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.ExamSetCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -16,10 +17,10 @@ namespace Theseus.WPF.Code.ViewModels
     public class ExamSetGeneratorViewModel : ErrorCheckingViewModel
     {
         public ObservableCollection<ExamSetDifficultyViewModel> ExamSetDifficulties { get; } = new ObservableCollection<ExamSetDifficultyViewModel>(){
-            new ExamSetDifficultyViewModel("Easier", ExamSetDifficulty.Easy),
-            new ExamSetDifficultyViewModel("Standard", ExamSetDifficulty.Standard),
-            new ExamSetDifficultyViewModel("Difficult", ExamSetDifficulty.Difficult),
-            new ExamSetDifficultyViewModel("Custom", ExamSetDifficulty.Custom)
+            new ExamSetDifficultyViewModel("Easier".Resource(), ExamSetDifficulty.Easy),
+            new ExamSetDifficultyViewModel("Standard".Resource(), ExamSetDifficulty.Standard),
+            new ExamSetDifficultyViewModel("Difficult".Resource(), ExamSetDifficulty.Difficult),
+            new ExamSetDifficultyViewModel("Custom".Resource(), ExamSetDifficulty.Custom)
         };
 
         private ExamSetDifficultyViewModel _selectedDifficulty;
@@ -37,11 +38,11 @@ namespace Theseus.WPF.Code.ViewModels
                 if (int.TryParse(MazeAmount, out int mazeAmountValue))
                 {
                     if (!HasValueInRange(mazeAmountValue, MinMazeAmount, MaxMazeAmount))
-                        AddError(nameof(MazeAmount), "Maze amount outside of range.");
+                        AddError(nameof(MazeAmount), "ValueOutsideOfRange".Resource());
                 }
                 else
                 {
-                    AddError(nameof(MazeAmount), "Maze amount contains invalid characters.");
+                    AddError(nameof(MazeAmount), "InvalidValue".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanGenerateSet));
@@ -71,7 +72,7 @@ namespace Theseus.WPF.Code.ViewModels
                 if (int.TryParse(BeginningMaxMazeDimension, out int beginningDimensionValue))
                 {
                     if (!HasValueInRange(beginningDimensionValue, MinMazeDimension, MaxMazeDimension))
-                        AddError(nameof(BeginningMaxMazeDimension), "Value outside of range.");
+                        AddError(nameof(BeginningMaxMazeDimension), "ValueOutsideOfRange".Resource());
 
                     if (int.TryParse(EndingMaxMazeDimension, out int endingDimensionValue))
                     {
@@ -81,7 +82,7 @@ namespace Theseus.WPF.Code.ViewModels
                 }
                 else
                 {
-                    AddError(nameof(BeginningMaxMazeDimension), "Value contains invalid characters.");
+                    AddError(nameof(BeginningMaxMazeDimension), "InvalidValue".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanGenerateSet));
@@ -102,7 +103,7 @@ namespace Theseus.WPF.Code.ViewModels
                 if (int.TryParse(EndingMaxMazeDimension, out int endingDimensionValue))
                 {
                     if (!HasValueInRange(endingDimensionValue, MinMazeDimension, MaxMazeDimension))
-                        AddError(nameof(EndingMaxMazeDimension), "Value outside of range.");
+                        AddError(nameof(EndingMaxMazeDimension), "ValueOutsideOfRange".Resource());
 
                     if (int.TryParse(BeginningMaxMazeDimension, out int beginningDimensionValue))
                     {
@@ -112,7 +113,7 @@ namespace Theseus.WPF.Code.ViewModels
                 }
                 else
                 {
-                    AddError(nameof(EndingMaxMazeDimension), "Value contains invalid characters.");
+                    AddError(nameof(EndingMaxMazeDimension), "InvalidValue".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanGenerateSet));
