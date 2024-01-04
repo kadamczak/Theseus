@@ -11,7 +11,9 @@
     <UserControl.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibility" True="Visible" False="Collapsed"/>
         <converters:BooleanVisibilityConverter x:Key="ReverseBooleanVisibility" True="Collapsed" False="Visible"/>
-        <converters:BooleanStringConverter x:Key="BooleanString" True="Already in a group" False="Not in a group"/>
+        <converters:BooleanStringConverter x:Key="BooleanString" True="✓" False="X"/>
+        <converters:StringToResourceConverter x:Key="StringToResource"/>
+        <converters:NullableIntConverter x:Key="NullableInt"/>
     </UserControl.Resources>
 
     <Grid Margin="40">
@@ -68,10 +70,10 @@
                 <Label Grid.Row="0" Grid.Column="5" Content="{DynamicResource Group}" FontWeight="Bold" FontSize="16" Margin="12 0"  HorizontalAlignment="Center"/>
 
                 <Label Grid.Row="1" Grid.Column="0" Content="{Binding Patient.Username, UpdateSourceTrigger=PropertyChanged}" FontSize="15"  HorizontalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Patient.Age, UpdateSourceTrigger=PropertyChanged, TargetNullValue=Undisclosed}" FontSize="15"  HorizontalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="2" Content="{Binding Patient.Sex, UpdateSourceTrigger=PropertyChanged}" FontSize="15"  HorizontalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="3" Content="{Binding Patient.EducationLevel, UpdateSourceTrigger=PropertyChanged}" FontSize="15"  HorizontalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="4" Content="{Binding Patient.ProfessionType, UpdateSourceTrigger=PropertyChanged}" FontSize="15"  HorizontalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Patient.Age, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableInt}}" FontSize="15"  HorizontalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="2" Content="{Binding Patient.Sex, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToResource}}" FontSize="15"  HorizontalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="3" Content="{Binding Patient.EducationLevel, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToResource}}" FontSize="15"  HorizontalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="4" Content="{Binding Patient.ProfessionType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToResource}}" FontSize="15"  HorizontalAlignment="Center"/>
                 <Label Grid.Row="1" Grid.Column="5" Content="{Binding PatientIsInGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanString}}" FontSize="15"  HorizontalAlignment="Center"/>
             </Grid>
             

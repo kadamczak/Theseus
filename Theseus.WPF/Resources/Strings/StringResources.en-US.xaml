@@ -178,6 +178,9 @@
     <system:String x:Key="RandomBorderCells">Random border cells</system:String>
     <system:String x:Key="Dijkstra">Dijkstra (longest path)</system:String>
 
+    <system:String x:Key="StructureAlgorithm">Structure algorithm</system:String>
+    <system:String x:Key="SolutionAlgorithm">Solution algorithm</system:String>
+
     <system:String x:Key="ExamData">Exam Data</system:String>
     <system:String x:Key="ViewRecentExams">View recent exams</system:String>
     <system:String x:Key="Exams">Exams</system:String>
@@ -264,6 +267,10 @@
 
     <system:String x:Key="ActionFailed">Action Failed.</system:String>
     <system:String x:Key="CouldNotConnectToDatabase">Could not connect to database.</system:String>
+
+    <system:String x:Key="NameCantBeEmpty">Name can't be empty.</system:String>
+    <system:String x:Key="SurnameCantBeEmpty">Surname can't be empty.</system:String>
+    <system:String x:Key="EmailIsInvalid">Email is invalid.</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
 

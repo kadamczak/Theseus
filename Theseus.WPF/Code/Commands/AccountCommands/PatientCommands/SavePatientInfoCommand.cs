@@ -27,8 +27,8 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
         {
             try
             {
-                await _updatePatientCommand.Update(_patientDetailsLoggedInViewModel.CurrentPatient);
                 _patientDetailsLoggedInViewModel.UpdateCurrentPatientInfoFromViewModel();
+                await _updatePatientCommand.Update(_patientDetailsLoggedInViewModel.CurrentPatient);
             }
             catch(SqlException)
             {

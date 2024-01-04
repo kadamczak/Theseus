@@ -174,9 +174,12 @@ Liczby</system:String>
     <system:String x:Key="GenerateMaze">Wygeneruj labirynt</system:String>
     <system:String x:Key="Height">Wysokość</system:String>
     <system:String x:Key="Width">Szerokość</system:String>
-    <system:String x:Key="PreventTooCloseExits">Nie dopuść by początek i koniec labiryntu były zbyt blisko siebie</system:String>
+    <system:String x:Key="PreventTooCloseExits">Nie dopuść by wejście i wyjście z labiryntu były zbyt blisko siebie</system:String>
     <system:String x:Key="RandomBorderCells">Losowe kratki brzegowe</system:String>
     <system:String x:Key="Dijkstra">Dijkstra (najdłuższa droga)</system:String>
+
+    <system:String x:Key="StructureAlgorithm">Algorytm struktury</system:String>
+    <system:String x:Key="SolutionAlgorithm">Algorytm wyboru rozwiązania</system:String>
 
     <system:String x:Key="ExamData">Podgląd Testów</system:String>
     <system:String x:Key="ViewRecentExams">Zobacz ostatnie testy</system:String>
@@ -263,6 +266,10 @@ Liczby</system:String>
 
     <system:String x:Key="ActionFailed">Niepowodzenie.</system:String>
     <system:String x:Key="CouldNotConnectToDatabase">Nie udało się połączyć z bazą danych.</system:String>
+
+    <system:String x:Key="NameCantBeEmpty">Imię nie może być puste.</system:String>
+    <system:String x:Key="SurnameCantBeEmpty">Nazwisko nie może być puste.</system:String>
+    <system:String x:Key="EmailIsInvalid">Email jest nieprawidłowy.</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Algorytm Binary Tree produkuje labirynty mocno faworyzujące przebieg kratek po przekątnej. Z tego powodu nie jest on używany w generatorze zestawów, ale może być przydatny w wyjątkowych przypadkach.
 

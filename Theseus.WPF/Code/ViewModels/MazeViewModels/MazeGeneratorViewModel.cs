@@ -32,8 +32,8 @@ namespace Theseus.WPF.Code.ViewModels
                                 new StructureAlgorithmViewModel("Sidewinder", MazeStructureGenAlgorithm.Sidewinder),
                                 new StructureAlgorithmViewModel("Aldous-Broder", MazeStructureGenAlgorithm.AldousBroder),
                                 new StructureAlgorithmViewModel("Hunt and Kill", MazeStructureGenAlgorithm.HuntAndKill),
-                                new StructureAlgorithmViewModel("Kruskal's", MazeStructureGenAlgorithm.Kruskal),
-                                new StructureAlgorithmViewModel("Prim's", MazeStructureGenAlgorithm.TruePrim)
+                                new StructureAlgorithmViewModel("Kruskal", MazeStructureGenAlgorithm.Kruskal),
+                                new StructureAlgorithmViewModel("Prim", MazeStructureGenAlgorithm.TruePrim)
                                 };
 
         public ObservableCollection<SolutionAlgorithmViewModel> AvailableSolutionAlgorithms { get; } = new ObservableCollection<SolutionAlgorithmViewModel> {

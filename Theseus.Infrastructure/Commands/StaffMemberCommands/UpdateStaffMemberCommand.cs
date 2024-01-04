@@ -16,6 +16,12 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
+                StaffMemberDto? staffMemberWithSameEmail = context.StaffMembers.FirstOrDefault(s => s.Email == staffMember.Email);
+                if (staffMemberWithSameEmail is not null && staffMemberWithSameEmail.Name != staffMember.Name)
+                {
+                    throw new ArgumentException("Email is already taken.");
+                }
+
                 StaffMemberDto staffMemberDto = new StaffMemberDto();
                 Mapper.Map(staffMember, staffMemberDto);
                 AttachRelatedEntities(staffMemberDto, context);

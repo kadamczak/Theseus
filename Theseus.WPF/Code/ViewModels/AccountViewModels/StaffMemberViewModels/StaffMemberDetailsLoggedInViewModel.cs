@@ -4,6 +4,7 @@ using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands;
 using Theseus.WPF.Code.Commands.NavigationCommands;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
@@ -37,7 +38,7 @@ namespace Theseus.WPF.Code.ViewModels
 
                 if (!_emailValidator.IsValid(Email))
                 {
-                    AddError(nameof(Email), "Email is invalid.");
+                    AddError(nameof(Email), "EmailIsInvalid".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanUpdateStaffMember));
@@ -58,7 +59,7 @@ namespace Theseus.WPF.Code.ViewModels
 
                 if (string.IsNullOrWhiteSpace(Name))
                 {
-                    AddError(nameof(Name), "Name can't be empty.");
+                    AddError(nameof(Name), "NameCantBeEmpty".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanUpdateStaffMember));
@@ -79,7 +80,7 @@ namespace Theseus.WPF.Code.ViewModels
                 
                 if(string.IsNullOrWhiteSpace(Surname))
                 {
-                    AddError(nameof(Surname), "Surname can't be empty.");
+                    AddError(nameof(Surname), "SurnameCantBeEmpty".Resource());
                 }
 
                 OnPropertyChanged(nameof(CanUpdateStaffMember));

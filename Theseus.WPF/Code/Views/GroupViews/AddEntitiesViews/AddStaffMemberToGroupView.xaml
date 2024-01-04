@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <converters:BooleanVisibilityConverter x:Key="BooleanVisibility" True="Visible" False="Collapsed"/>
         <converters:BooleanVisibilityConverter x:Key="ReverseBooleanVisibility" True="Collapsed" False="Visible"/>
-        <converters:BooleanStringConverter x:Key="BooleanString" True="Already in this group" False="Not in this group"/>
+        <converters:BooleanStringConverter x:Key="BooleanString" True="✓" False="X"/>
     </UserControl.Resources>
 
     <Grid Margin="40">
