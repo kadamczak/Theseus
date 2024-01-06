@@ -1,10 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Data.SqlClient;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
@@ -28,12 +31,23 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            StaffMember? staffMember = await _getStaffMemberByUsernameQuery.GetStaffMember(_addStaffMemberToGroupViewModel.EnteredUsername.Trim());
+            try
+            {
+                StaffMember? staffMember = await _getStaffMemberByUsernameQuery.GetStaffMember(_addStaffMemberToGroupViewModel.EnteredUsername.Trim());
 
-            if (staffMember is not null)
-                staffMember.Groups = _getGroupsOfStaffMemberQuery.GetGroups(staffMember.Id).ToList();
+                if (staffMember is not null)
+                    staffMember.Groups = _getGroupsOfStaffMemberQuery.GetGroups(staffMember.Id).ToList();
 
-            _addStaffMemberToGroupViewModel.StaffMember = staffMember;
+                _addStaffMemberToGroupViewModel.StaffMember = staffMember;
+            }
+            catch (SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
         }
 
         private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

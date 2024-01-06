@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,8 +41,20 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
             if (result == MessageBoxResult.Yes)
             {
                 Guid groupId = _groupCommandViewModel.Model.Id;
-                await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_currentStaffMemberStore.StaffMember, groupId);
-                _groupCommandList.Remove(_groupCommandViewModel);
+
+                try
+                {
+                    await _removeStaffMemberFromGroupCommand.RemoveFromGroup(_currentStaffMemberStore.StaffMember, groupId);
+                    _groupCommandList.Remove(_groupCommandViewModel);
+                }
+                catch(SqlException)
+                {
+                    string messageBoxText2 = "CouldNotConnectToDatabase".Resource();
+                    string caption2 = "ActionFailed".Resource();
+                    MessageBoxButton button2 = MessageBoxButton.OK;
+                    MessageBoxImage icon2 = MessageBoxImage.Exclamation;
+                    MessageBox.Show(messageBoxText2, caption2, button2, icon2, MessageBoxResult.OK);
+                }
             }
         }
     }

@@ -17,7 +17,7 @@ namespace Theseus.Infrastructure.Queries.PatientQueries
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                IEnumerable<PatientDto> patientDtos = context.Patients.AsNoTracking().Where(m => m.GroupDto.Id == groupId);
+                IEnumerable<PatientDto> patientDtos = context.Patients.AsNoTracking().Include(p => p.GroupDto).Where(m => m.GroupDto.Id == groupId);
                 return MapPatients(patientDtos);
             }
         }

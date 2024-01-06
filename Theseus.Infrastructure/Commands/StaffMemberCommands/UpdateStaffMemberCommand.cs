@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.DbContexts;
@@ -16,8 +17,8 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                StaffMemberDto? staffMemberWithSameEmail = context.StaffMembers.FirstOrDefault(s => s.Email == staffMember.Email);
-                if (staffMemberWithSameEmail is not null && staffMemberWithSameEmail.Name != staffMember.Name)
+                StaffMemberDto? staffMemberWithSameEmail = context.StaffMembers.AsNoTracking().FirstOrDefault(s => s.Email == staffMember.Email);
+                if (staffMemberWithSameEmail is not null && staffMemberWithSameEmail.Id != staffMember.Id)
                 {
                     throw new ArgumentException("Email is already taken.");
                 }

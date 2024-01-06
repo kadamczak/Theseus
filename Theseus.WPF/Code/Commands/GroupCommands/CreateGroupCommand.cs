@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 using Theseus.WPF.Code.ViewModels;
 
@@ -45,10 +48,28 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
                 StaffMembers = new List<StaffMember>() { _currentStaffMemberStore.StaffMember }
             };
 
-            _staffMemberGroupsViewModel.GroupName = string.Empty;
-            await _createGroupCommand.CreateGroup(group);
-
-            _staffMemberGroupsViewModel.ShowDetailsGroupCommandListViewModel.AddModelToActionableModels(group);
+            try
+            {
+                await _createGroupCommand.CreateGroup(group);
+                _staffMemberGroupsViewModel.GroupName = "";
+                _staffMemberGroupsViewModel.ShowDetailsGroupCommandListViewModel.AddModelToActionableModels(group);
+            }
+            catch(ArgumentException)
+            {
+                string messageBoxText = "GroupAlreadyExists".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
+            catch(SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
         }
 
         private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)

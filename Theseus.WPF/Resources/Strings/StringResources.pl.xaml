@@ -182,7 +182,7 @@ Liczby</system:String>
     <system:String x:Key="SolutionAlgorithm">Algorytm wyboru rozwiązania</system:String>
 
     <system:String x:Key="ExamData">Podgląd Testów</system:String>
-    <system:String x:Key="ViewRecentExams">Zobacz ostatnie testy</system:String>
+    <system:String x:Key="ViewRecentExams">Zobacz wszystkie testy</system:String>
     <system:String x:Key="Exams">Testy</system:String>
 
     <system:String x:Key="AmountOfExamAttempts:"  xml:space="preserve">Ilość testów: </system:String>
@@ -273,6 +273,11 @@ Liczby</system:String>
 
     <system:String x:Key="ValueOutsideOfRange">Wartość spoza zakresu.</system:String>
     <system:String x:Key="InvalidValue">Nieprawidłowa wartość.</system:String>
+
+    <system:String x:Key="GroupAlreadyExists">Grupa z tą nazwą już istnieje.</system:String>
+
+    <system:String x:Key="UsernameShort">Nazwa</system:String>
+    <system:String x:Key="PatientInfoLong">Dane pacjenta</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Algorytm Binary Tree produkuje labirynty mocno faworyzujące przebieg kratek po przekątnej. Z tego powodu nie jest on używany w generatorze zestawów, ale może być przydatny w wyjątkowych przypadkach.
 

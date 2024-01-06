@@ -23,7 +23,7 @@ namespace Theseus.WPF.Code.ViewModels
                 ClearErrors(nameof(Username));
 
 
-                if (!Regex.IsMatch(_username, @"^[\w_]+$"))
+                if (!Regex.IsMatch(_username, @"^[\w_]*"))
                 {
                     AddError(nameof(Username), "UsernameContainsInvalidCharacters".Resource());
                 }
@@ -43,7 +43,7 @@ namespace Theseus.WPF.Code.ViewModels
                 OnPropertyChanged(nameof(GroupName));
                 ClearErrors(nameof(GroupName));
 
-                if (!Regex.IsMatch(_groupName, @"^[\w-_]+$"))
+                if (!Regex.IsMatch(_groupName, @"^[\w-_]*$"))
                 {
                     AddError(nameof(GroupName), "NameContainsInvalidCharacters".Resource());
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,8 +48,19 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         private async Task DeleteGroup(Guid groupId)
         {
-            await _deleteGroupCommand.Delete(groupId);
-            _groupCommandList.Remove(_groupCommandViewModel);
+            try
+            {
+                await _deleteGroupCommand.Delete(groupId);
+                _groupCommandList.Remove(_groupCommandViewModel);
+            }
+            catch(SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
         }
     }
 }

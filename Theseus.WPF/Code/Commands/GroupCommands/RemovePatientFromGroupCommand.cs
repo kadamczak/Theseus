@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Data.SqlClient;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
@@ -30,7 +31,18 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
             if (result == MessageBoxResult.Yes)
             {
-                await RemovePatientFromGroup();
+                try
+                {
+                    await RemovePatientFromGroup();
+                }
+                catch(SqlException)
+                {
+                    string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                    string caption = "ActionFailed".Resource();
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Exclamation;
+                    MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+                }
             }
         }
 

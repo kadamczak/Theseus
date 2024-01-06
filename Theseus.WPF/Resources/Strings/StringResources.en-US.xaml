@@ -182,7 +182,7 @@
     <system:String x:Key="SolutionAlgorithm">Solution algorithm</system:String>
 
     <system:String x:Key="ExamData">Exam Data</system:String>
-    <system:String x:Key="ViewRecentExams">View recent exams</system:String>
+    <system:String x:Key="ViewRecentExams">View all exams</system:String>
     <system:String x:Key="Exams">Exams</system:String>
 
     <system:String x:Key="AmountOfExamAttempts:"  xml:space="preserve">Amount of exam attempts: </system:String>
@@ -275,6 +275,10 @@
     <system:String x:Key="ValueOutsideOfRange">Value outside of range.</system:String>
     <system:String x:Key="InvalidValue">Invalid value.</system:String>
 
+    <system:String x:Key="GroupAlreadyExists">Group with this name already exists.</system:String>
+
+    <system:String x:Key="UsernameShort">Username</system:String>
+    <system:String x:Key="PatientInfoLong">Patient Info</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
 

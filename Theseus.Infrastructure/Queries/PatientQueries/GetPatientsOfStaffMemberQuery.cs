@@ -19,6 +19,7 @@ namespace Theseus.Infrastructure.Queries.PatientQueries
             {
                 IEnumerable<PatientDto> patientDtos = context.Patients
                                                              .AsNoTracking()
+                                                             .Include(g => g.GroupDto)
                                                              .Where(m => m.GroupDto.StaffMemberDtos.Where(s => s.Id == staffMemberId).Any())
                                                              .OrderByDescending(m => m.ExamDtos.Max(e => e.CreatedAt));
                 return MapPatients(patientDtos);

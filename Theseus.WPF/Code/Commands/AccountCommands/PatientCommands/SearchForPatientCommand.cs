@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
@@ -28,12 +31,23 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            Patient? patient = await _getPatientByUsernameQuery.GetPatient(_addPatientToGroupViewModel.EnteredUsername.Trim());
-            
-            if (patient is not null)
-                patient.Group = _getGroupByPatientQuery.GetGroup(patient.Id);
+            try
+            {
+                Patient? patient = await _getPatientByUsernameQuery.GetPatient(_addPatientToGroupViewModel.EnteredUsername.Trim());
 
-            _addPatientToGroupViewModel.Patient = patient;
+                if (patient is not null)
+                    patient.Group = _getGroupByPatientQuery.GetGroup(patient.Id);
+
+                _addPatientToGroupViewModel.Patient = patient;
+            }
+            catch (SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
         }
 
         private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

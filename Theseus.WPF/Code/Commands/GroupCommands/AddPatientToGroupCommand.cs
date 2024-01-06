@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
 using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.WPF.Code.Bases;
+using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels;
 
@@ -28,11 +31,22 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            Patient patient = _addPatientToGroupViewModel.Patient!;
-            Guid groupId = _addPatientToGroupViewModel.SelectedGroupId;
+            try
+            {
+                Patient patient = _addPatientToGroupViewModel.Patient!;
+                Guid groupId = _addPatientToGroupViewModel.SelectedGroupId;
 
-            await _addPatientToGroupCommand.AddToGroup(patient, groupId);
-            _groupDetailsNavigationService.Navigate();
+                await _addPatientToGroupCommand.AddToGroup(patient, groupId);
+                _groupDetailsNavigationService.Navigate();
+            }
+            catch (SqlException)
+            {
+                string messageBoxText = "CouldNotConnectToDatabase".Resource();
+                string caption = "ActionFailed".Resource();
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Exclamation;
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
         }
 
         private void ViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)

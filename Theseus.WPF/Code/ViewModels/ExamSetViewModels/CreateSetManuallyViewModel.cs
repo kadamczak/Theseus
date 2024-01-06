@@ -34,7 +34,7 @@ namespace Theseus.WPF.Code.ViewModels
                 OnPropertyChanged(nameof(ExamSetName));
                 ClearErrors(nameof(ExamSetName));
 
-                if (!Regex.IsMatch(ExamSetName, @"^[\w_]+$"))
+                if (!Regex.IsMatch(ExamSetName, @"^[\w_]*$"))
                 {
                     AddError(nameof(ExamSetName), "InvalidValue".Resource());
                 }

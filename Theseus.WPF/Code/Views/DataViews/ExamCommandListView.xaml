@@ -34,7 +34,7 @@
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn Header="{DynamicResource Username}">
+                        <GridViewColumn Header="{DynamicResource UsernameShort}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Margin="10 0 10 0" Text="{Binding Model.Patient.Username}"></TextBlock>
@@ -42,7 +42,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="{DynamicResource PatientInfo}">
+                        <GridViewColumn Header="{DynamicResource PatientInfoLong}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="10 0 10 0" Orientation="Vertical">
