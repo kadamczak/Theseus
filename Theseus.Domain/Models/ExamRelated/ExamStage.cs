@@ -37,6 +37,11 @@
         public bool Completed { get; set; } = false;
 
         /// <summary>
+        /// Gets or sets the total time spent on the stage.
+        /// </summary>
+        public float TotalTime { get; set; } = default!;
+
+        /// <summary>
         /// Initializes <c>ExamStage</c> with no additional actions.
         /// </summary>
         public ExamStage() { }

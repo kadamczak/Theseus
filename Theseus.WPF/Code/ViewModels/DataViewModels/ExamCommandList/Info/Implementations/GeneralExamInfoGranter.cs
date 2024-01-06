@@ -67,7 +67,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 Score = _statCalculator.CalculateScoreForExam(exam),
                 AttemptNumber = CalculateAttemptNumber(exam),
                 NoSkips = examStages.All(e => e.Completed),
-                TotalExamTime = examSteps.Sum(e => e.TimeBeforeStep),
+                TotalExamTime = examStages.Sum(s => s.TotalTime),
                 CompletedMazeAmount = examStages.Where(s => s.Completed).Count(),
                 TotalInputs = examSteps.Count()
             };
@@ -123,7 +123,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
         }
 
         private float CalculateAverageCompletedMazes(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Count(s => s.Completed));
-        private float CalculateAverageTotalTime(IEnumerable<Exam> exams) => exams.Average(e => e.Stages.Sum(s => s.Steps.Sum(s => s.TimeBeforeStep)));
+        private float CalculateAverageTotalTime(IEnumerable<Exam> exams) => exams.Average(e => e.Stages.Sum(s => s.TotalTime));
         private float CalculateAverageTotalInputs(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Sum(s => s.Steps.Count));
 
         private List<string> CreateFullComparisonTextToOtherPatients(ExamStats currentExamStats, AverageExamStats otherPatientsStats)

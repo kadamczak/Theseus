@@ -43,7 +43,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
         public class ExamStageData
         {
             public float TotalInputs { get; set; }
-            public float? TotalTime { get; set; }
+            public float TotalTime { get; set; }
             public float? TimeBeforeFirstInput { get; set; }
             public float? LongestInactivityTime { get; set; }
         }
@@ -75,7 +75,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                 Data = new ExamStageData()
                 {
                     TotalInputs = examStage.Steps.Count,
-                    TotalTime = examStage.Steps.Any() ? examStage.Steps.Sum(s => s.TimeBeforeStep) : null,
+                    TotalTime = examStage.TotalTime,
                     TimeBeforeFirstInput = examStage.Steps.Any() ? examStage.Steps.First().TimeBeforeStep : null,
                     LongestInactivityTime = examStage.Steps.Any() ? examStage.Steps.Max(s => s.TimeBeforeStep) : null
                 }
@@ -91,20 +91,20 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             {
                 "Completed:".Resource() + (stats.Completed ? "Yes".Resource() : "No".Resource()),
                 $"{"InputsMade:".Resource()}{Round(stats.Data.TotalInputs)}/{idealInputAmount}",
+                $"{"TotalTime:".Resource()}{Round(stats.Data.TotalTime)} s",
             };
 
             if (stats.Data.TotalInputs > 0)
             {
                 textSummary.AddRange(new List<string>
                 {
-                    $"{"TotalTime:".Resource()}{Round(stats.Data.TotalTime!.Value)} s",
                     $"{"TimeBeforeFirstInput:".Resource()}{Round(stats.Data.TimeBeforeFirstInput!.Value)} s",
                     $"{"LongestInactivityTime:".Resource()}{Round(stats.Data.LongestInactivityTime!.Value)} s",
                 });
 
                 if(stats.Completed)
                 {
-                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount, Convert.ToInt32(stats.Data.TotalInputs), stats.Data.TotalTime!.Value);
+                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount, Convert.ToInt32(stats.Data.TotalInputs), stats.Data.TotalTime);
 
                     textSummary.AddRange(new List<string>
                     {
@@ -145,7 +145,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                 CompletedAttemptAmount = completedExamStages.Count(),
                 Data = new ExamStageData()
                 {
-                    TotalTime = completedExamStages.Any() ? CalculateAverageTotalTime(completedExamStages) : null,
+                    TotalTime = CalculateAverageTotalTime(completedExamStages),
                     TotalInputs = completedExamStages.Any() ? CalculateAverageTotalInputs(completedExamStages) : 0,
                     TimeBeforeFirstInput = completedExamStages.Any() ? CalculateAverageTimeBeforeFirstInput(completedExamStages) : null,
                     LongestInactivityTime = completedExamStages.Any() ? CalculateAverageLongestInactivityTime(completedExamStages) : null
@@ -153,7 +153,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             };
         }
 
-        private float CalculateAverageTotalTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Sum(e => e.TimeBeforeStep));
+        private float CalculateAverageTotalTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.TotalTime);
         private float CalculateAverageTotalInputs(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Count);
         private float CalculateAverageTimeBeforeFirstInput(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.First().TimeBeforeStep);
         private float CalculateAverageLongestInactivityTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Max(e => e.TimeBeforeStep));
@@ -179,12 +179,12 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
         private IEnumerable<string> CreateComparisonOfCompletedStages(ExamStageStats examStageStats, ExamStageData otherExamStageData, string valueType)
         {
-            string timeComparison = _valueComparer.Compare(examStageStats.Data.TotalTime!.Value, otherExamStageData.TotalTime, higherIsBetter: false);
+            string timeComparison = _valueComparer.Compare(examStageStats.Data.TotalTime, otherExamStageData.TotalTime, higherIsBetter: false);
             string inputComparison = _valueComparer.Compare(examStageStats.Data.TotalInputs, otherExamStageData.TotalInputs, higherIsBetter: false);
             string firstInputTimeComparison = _valueComparer.Compare(examStageStats.Data.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput!.Value, "Higher".Resource(), "Lower".Resource());
             string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.Data.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime!.Value, "Higher".Resource(), "Lower".Resource());
 
-            string timeFormatted = Round(otherExamStageData.TotalTime!.Value);
+            string timeFormatted = Round(otherExamStageData.TotalTime);
             string inputsFormatted = Round(otherExamStageData.TotalInputs);
             string firstInputTimeFormatted = Round(otherExamStageData.TimeBeforeFirstInput!.Value);
             string longestInactivityTimeFormatted = Round(otherExamStageData.LongestInactivityTime!.Value);

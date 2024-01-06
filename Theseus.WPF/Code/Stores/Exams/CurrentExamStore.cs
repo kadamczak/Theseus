@@ -11,5 +11,6 @@ namespace Theseus.WPF.Code.Stores.Exams
         public int CurrentIndex { get; set; } = 0;
         public Exam CurrentExam { get; set; }
         public Stopwatch TimeSinceLastStep { get; set; } = new Stopwatch();
+        public Stopwatch TimeSinceBeginningOfStage { get; set; } = new Stopwatch();
     }
 }

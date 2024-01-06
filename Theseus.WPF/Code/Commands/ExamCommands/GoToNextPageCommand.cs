@@ -61,6 +61,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
 
             ExamStage currentExamStage = _currentExamStore.CurrentExam.Stages.Last();
             currentExamStage.Completed = mazeCompleted;
+            currentExamStage.TotalTime = (float) _currentExamStore.TimeSinceBeginningOfStage.Elapsed.TotalSeconds;
         }
 
         private void CreateNextExamStage()

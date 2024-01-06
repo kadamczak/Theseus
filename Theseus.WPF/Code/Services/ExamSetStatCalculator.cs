@@ -70,7 +70,7 @@ namespace Theseus.WPF.Code.Services
             if (examsWithNoSkippedMazes.Any())
             {
                 statSummary.AverageTotalInputs = (float) examsWithNoSkippedMazes.Average(e => e.Stages.Sum(s => s.Steps.Count));
-                statSummary.AverageTotalTime = (float) examsWithNoSkippedMazes.Average(e => e.Stages.Sum(s => s.Steps.Sum(s => s.TimeBeforeStep)));
+                statSummary.AverageTotalTime = (float) examsWithNoSkippedMazes.Average(e => e.Stages.Sum(s => s.TotalTime));
             }
 
             return statSummary;
@@ -99,9 +99,8 @@ namespace Theseus.WPF.Code.Services
         {
             var maze = _getMazeOfExamStageQuery.GetMaze(stage.Id);
             int idealInputAmount = maze.SolutionPath.Count;
-            float totalTime = stage.Steps.Sum(s => s.TimeBeforeStep);
             int inputAmount = stage.Steps.Count();
-            return CalculateScoreForExamStage(idealInputAmount, inputAmount, totalTime);
+            return CalculateScoreForExamStage(idealInputAmount, inputAmount, stage.TotalTime);
         }
 
         public double CalculateScoreForExamStage(int idealInputAmount, int inputAmount, float totalTime)
@@ -110,7 +109,7 @@ namespace Theseus.WPF.Code.Services
             double pointsForPrecision = 70 - 70 * (double)excessInputs / idealInputAmount - excessInputs * 2;
             if (pointsForPrecision < 0) pointsForPrecision = 0;
 
-            double baseTimeForMaze = 0.25 * idealInputAmount;
+            double baseTimeForMaze = 0.9 * idealInputAmount;
             double excessTime = totalTime - baseTimeForMaze;
             if (excessTime < 0) excessTime = 0;
             double pointsForTime = 30 - 30 * excessTime / baseTimeForMaze;

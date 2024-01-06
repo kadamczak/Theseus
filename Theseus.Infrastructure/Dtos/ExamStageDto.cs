@@ -8,6 +8,7 @@
 
         public virtual ICollection<ExamStepDto> StepDtos { get; set; } = default!;
         public bool Completed { get; set; } = false;
+        public float TotalTime { get; set; } = default!;
 
         public ExamStageDto() { }
 

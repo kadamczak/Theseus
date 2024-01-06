@@ -2,7 +2,6 @@
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
-using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Commands.ExamCommands;
@@ -16,6 +15,7 @@ namespace Theseus.WPF.Code.ViewModels
     {
         public ExamMazeCanvasViewModel ExamMazeCanvasViewModel { get; }
         public IGetMazeWithSolutionByIdQuery GetMazeById { get; }
+        private readonly CurrentExamStore _currentExamStore;
 
         private int _countdownValue = 3;
         public int CountdownValue
@@ -43,12 +43,16 @@ namespace Theseus.WPF.Code.ViewModels
             ExamMazeCanvasViewModel.CompletedMaze += StartCountdown;
             _transitionTimer.Elapsed += new ElapsedEventHandler(ReduceCountdownValue);
 
+            _currentExamStore = currentExamStore;
+            currentExamStore.TimeSinceBeginningOfStage.Restart();
             currentExamStore.TimeSinceLastStep.Restart();
         }
 
         private void StartCountdown()
         {
             CanGoToNextPage = false;
+
+            _currentExamStore.TimeSinceBeginningOfStage.Stop();
             _transitionTimer.Start();
         }
 
