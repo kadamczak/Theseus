@@ -280,6 +280,9 @@
     <system:String x:Key="UsernameShort">Username</system:String>
     <system:String x:Key="PatientInfoLong">Patient Info</system:String>
 
+    <system:String x:Key="WrongCells:" xml:space="preserve">Wrong cells: </system:String>
+    <system:String x:Key="WallHits:" xml:space="preserve">Wall hits: </system:String>
+
     <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
 
 Properties:

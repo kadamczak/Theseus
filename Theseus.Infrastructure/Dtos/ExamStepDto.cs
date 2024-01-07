@@ -7,6 +7,8 @@
         public int Index { get; set; } = default!;
         public int StepTaken { get; set; } = default!;
         public float TimeBeforeStep { get; set; } = default!;
+        public bool Correct { get; set; } = default!;
+        public bool HitWall { get; set; } = default!;
 
         public ExamStepDto() { }
 

@@ -38,6 +38,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             public float TotalExamTime { get; set; }
             public int CompletedMazeAmount { get; set; }
             public int TotalInputs { get; set; }
+            public int WrongCells { get; set; }
+            public int WallHits { get; set; }
         }
 
         public override string GrantInfo(CommandViewModel<Exam> commandViewModel)
@@ -69,7 +71,9 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 NoSkips = examStages.All(e => e.Completed),
                 TotalExamTime = examStages.Sum(s => s.TotalTime),
                 CompletedMazeAmount = examStages.Where(s => s.Completed).Count(),
-                TotalInputs = examSteps.Count()
+                TotalInputs = examSteps.Count(),
+                WrongCells = examSteps.Where(s => !s.Correct && !s.HitWall).Count(),
+                WallHits = examSteps.Where(s => s.HitWall).Count()
             };
         }
 
@@ -86,6 +90,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                "CompletedMazes:".Resource() + $"{currentExamStats.CompletedMazeAmount}/{examSetStatSummary.MazeAmount}",
                "TotalTime:".Resource() + $"{Round(currentExamStats.TotalExamTime)} s",
                "InputsMade:".Resource() + $"{currentExamStats.TotalInputs}/{examSetStatSummary.IdealStepAmount}",
+               "WrongCells:".Resource() + $"{currentExamStats.WrongCells}",
+               "WallHits:".Resource() + $"{currentExamStats.WallHits}",
                $"{"Score".Resource()}: {Math.Round(currentExamStats.Score, 2)}/100"
             };
         }
@@ -105,6 +111,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             public float AverageCompletedMazes { get; set; }
             public float? AverageTotalTime { get; set; }
             public float? AverageTotalInputs { get; set; }
+            public float? AverageTotalWrongCells { get; set; }
+            public float? AverageTotalWallHits { get; set; }
         }
 
         private AverageExamStats CalculateAverageStats(IEnumerable<Exam> exams)
@@ -118,13 +126,18 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 ExamsWithNoSkipsAmount = examsByOtherPatientsWithNoSkips.Count(),
                 AverageCompletedMazes = CalculateAverageCompletedMazes(exams),
                 AverageTotalTime = anyCompletedExamsByOtherPatient ? CalculateAverageTotalTime(examsByOtherPatientsWithNoSkips) : null,
-                AverageTotalInputs = anyCompletedExamsByOtherPatient ? CalculateAverageTotalInputs(examsByOtherPatientsWithNoSkips) : null
+                AverageTotalInputs = anyCompletedExamsByOtherPatient ? CalculateAverageTotalInputs(examsByOtherPatientsWithNoSkips) : null,
+                AverageTotalWrongCells = anyCompletedExamsByOtherPatient ? CalculateAverageTotalWrongCells(examsByOtherPatientsWithNoSkips) : null,
+                AverageTotalWallHits = anyCompletedExamsByOtherPatient ? CalculateAverageTotalWallHits(examsByOtherPatientsWithNoSkips) : null,
             };
         }
 
         private float CalculateAverageCompletedMazes(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Count(s => s.Completed));
         private float CalculateAverageTotalTime(IEnumerable<Exam> exams) => exams.Average(e => e.Stages.Sum(s => s.TotalTime));
         private float CalculateAverageTotalInputs(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Sum(s => s.Steps.Count));
+        private float CalculateAverageTotalWrongCells(IEnumerable<Exam> exams) => (float)exams.Average(e => e.Stages.Sum(s => s.Steps.Where(s => !s.Correct && !s.HitWall).Count()));
+        private float CalculateAverageTotalWallHits(IEnumerable<Exam> exams) => (float)exams.Average(e => e.Stages.Sum(s => s.Steps.Where(s => s.HitWall).Count()));
+
 
         private List<string> CreateFullComparisonTextToOtherPatients(ExamStats currentExamStats, AverageExamStats otherPatientsStats)
         {
@@ -140,7 +153,12 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             };
 
             if (currentExamStats.NoSkips && otherPatientsStats.ExamsWithNoSkipsAmount > 0)
-                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, otherPatientsStats.AverageTotalTime.Value, otherPatientsStats.AverageTotalInputs.Value, "Avg".Resource()));
+                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats,
+                                                                           otherPatientsStats.AverageTotalTime.Value,
+                                                                           otherPatientsStats.AverageTotalInputs.Value,
+                                                                           otherPatientsStats.AverageTotalWrongCells.Value,
+                                                                           otherPatientsStats.AverageTotalWallHits.Value,
+                                                                           "Avg".Resource()));
 
             return comparisonText;
         }
@@ -169,23 +187,35 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             };
 
             if (currentExamStats.NoSkips && previousExamStats.NoSkips)
-                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats, previousExamStats.TotalExamTime, previousExamStats.TotalInputs, "Prev".Resource()));
+                comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats,
+                                                                           previousExamStats.TotalExamTime,
+                                                                           previousExamStats.TotalInputs,
+                                                                           previousExamStats.WrongCells,
+                                                                           previousExamStats.WallHits,
+                                                                           "Prev".Resource()));
 
             return comparisonText;
                
         }
 
-        private List<string> CreateComparisonTextForNoSkipExams(ExamStats currentExamStats, float time, float inputs, string valueType)
+        private List<string> CreateComparisonTextForNoSkipExams(ExamStats currentExamStats, float time, float inputs, float wrongCells, float wallHits, string valueType)
         {
             string timeComparison = _valueComparer.Compare(currentExamStats.TotalExamTime, time, higherIsBetter: false);
             string inputComparison = _valueComparer.Compare(currentExamStats.TotalInputs, inputs, higherIsBetter: false);
+            string wrongCellsComparison = _valueComparer.Compare(currentExamStats.WrongCells, wrongCells, higherIsBetter: false);
+            string wallHitsComparison = _valueComparer.Compare(currentExamStats.WallHits, wallHits, higherIsBetter: false);
+
             string timeFormatted = Round(time);
             string inputsFormatted = Round(inputs);
+            string wrongCellsFormatted = Round(wrongCells);
+            string wallHitsFormatted = Round(wallHits);
 
             return new List<string>
             {
                 $"\t{"TotalTime:".Resource()}{timeComparison} ({valueType}: {timeFormatted} s)",
-                $"\t{"InputsMade:".Resource()}{inputComparison} ({valueType}: {inputsFormatted})"
+                $"\t{"InputsMade:".Resource()}{inputComparison} ({valueType}: {inputsFormatted})",
+                $"\t{"WrongCells:".Resource()}{wrongCellsComparison} ({valueType}: {wrongCellsFormatted})",
+                $"\t{"WallHits:".Resource()}{wallHitsComparison} ({valueType}: {wallHitsFormatted})",
             };
         }
     }

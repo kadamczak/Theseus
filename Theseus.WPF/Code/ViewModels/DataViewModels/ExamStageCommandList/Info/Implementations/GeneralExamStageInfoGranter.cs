@@ -46,6 +46,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             public float TotalTime { get; set; }
             public float? TimeBeforeFirstInput { get; set; }
             public float? LongestInactivityTime { get; set; }
+            public float WrongCells { get; set; }
+            public float WallHits { get; set; }
         }
 
         public override string GrantInfo(CommandViewModel<ExamStageWithMazeViewModel> commandViewModel)
@@ -77,7 +79,9 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                     TotalInputs = examStage.Steps.Count,
                     TotalTime = examStage.TotalTime,
                     TimeBeforeFirstInput = examStage.Steps.Any() ? examStage.Steps.First().TimeBeforeStep : null,
-                    LongestInactivityTime = examStage.Steps.Any() ? examStage.Steps.Max(s => s.TimeBeforeStep) : null
+                    LongestInactivityTime = examStage.Steps.Any() ? examStage.Steps.Max(s => s.TimeBeforeStep) : null,
+                    WrongCells = examStage.Steps.Where(s => !s.Correct && !s.HitWall).Count(),
+                    WallHits = examStage.Steps.Where(s => s.HitWall).Count()
                 }
             };
         }
@@ -92,6 +96,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                 "Completed:".Resource() + (stats.Completed ? "Yes".Resource() : "No".Resource()),
                 $"{"InputsMade:".Resource()}{Round(stats.Data.TotalInputs)}/{idealInputAmount}",
                 $"{"TotalTime:".Resource()}{Round(stats.Data.TotalTime)} s",
+                $"{"WrongCells:".Resource()}{Round(stats.Data.WrongCells)}",
+                $"{"WallHits:".Resource()}{Round(stats.Data.WallHits)}",
             };
 
             if (stats.Data.TotalInputs > 0)
@@ -104,7 +110,10 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
                 if(stats.Completed)
                 {
-                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount, Convert.ToInt32(stats.Data.TotalInputs), stats.Data.TotalTime);
+                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount,
+                                                                              Convert.ToInt32(stats.Data.WrongCells),
+                                                                              Convert.ToInt32(stats.Data.WallHits),
+                                                                              stats.Data.TotalTime);
 
                     textSummary.AddRange(new List<string>
                     {
@@ -183,18 +192,24 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             string inputComparison = _valueComparer.Compare(examStageStats.Data.TotalInputs, otherExamStageData.TotalInputs, higherIsBetter: false);
             string firstInputTimeComparison = _valueComparer.Compare(examStageStats.Data.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput!.Value, "Higher".Resource(), "Lower".Resource());
             string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.Data.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime!.Value, "Higher".Resource(), "Lower".Resource());
+            string wrongCellsComparison = _valueComparer.Compare(examStageStats.Data.WrongCells, otherExamStageData.WrongCells, higherIsBetter: false);
+            string wallHitsComparison = _valueComparer.Compare(examStageStats.Data.WallHits, otherExamStageData.WallHits, higherIsBetter: false);
 
             string timeFormatted = Round(otherExamStageData.TotalTime);
             string inputsFormatted = Round(otherExamStageData.TotalInputs);
             string firstInputTimeFormatted = Round(otherExamStageData.TimeBeforeFirstInput!.Value);
             string longestInactivityTimeFormatted = Round(otherExamStageData.LongestInactivityTime!.Value);
+            string wrongCellsFormatted = Round(otherExamStageData.WrongCells);
+            string wallHitsFormatted = Round(otherExamStageData.WallHits);
 
             return new List<string>
             {
                 $"\t{"InputsMade:".Resource()}{inputComparison} ({valueType}: {inputsFormatted})",
                 $"\t{"TotalTime:".Resource()}{timeComparison} ({valueType}: {timeFormatted} s)",
                 $"\t{"TimeBeforeFirstInput:".Resource()}{firstInputTimeComparison} ({valueType}: {firstInputTimeFormatted} s)",
-                $"\t{"LongestInactivityTime:".Resource()}{longestInactivityTimeComparison} ({valueType}: {longestInactivityTimeFormatted} s)"
+                $"\t{"LongestInactivityTime:".Resource()}{longestInactivityTimeComparison} ({valueType}: {longestInactivityTimeFormatted} s)",
+                $"\t{"WrongCells:".Resource()}{wrongCellsComparison} ({valueType}: {wrongCellsFormatted})",
+                $"\t{"WallHits:".Resource()}{wallHitsComparison} ({valueType}: {wallHitsFormatted})",
             };
         }
 

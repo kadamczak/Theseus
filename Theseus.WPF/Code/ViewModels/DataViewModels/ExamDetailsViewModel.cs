@@ -25,7 +25,6 @@ namespace Theseus.WPF.Code.ViewModels
         public ExamDetailsViewModel(IGetExamStagesOfExamQuery getExamStagesQuery,
                                     IGetMazeOfExamStageQuery getMazeQuery,
                                     SelectedModelDetailsStore<Exam> examDetailsStore,
-                                    InputListToTimedCellPathConverter inputConverter,
                                     SelectedModelListStore<ExamStageWithMazeViewModel> examStageListStore,
                                     ExamStageCommandListViewModelFactory examStageCommandListViewModelFactory)
         {
@@ -34,7 +33,7 @@ namespace Theseus.WPF.Code.ViewModels
             ExamStageCommandListViewModel = examStageCommandListViewModelFactory.Create(ExamStageButtonCommand.ShowDetails, ExamStageButtonCommand.None, ExamStageInfo.GeneralInfo);
             ExamStageCommandListViewModel.CreateModelCommandViewModels();
 
-            SaveCsv = new SaveExamCsvCommand(examDetailsStore, getMazeQuery, inputConverter);
+            SaveCsv = new SaveExamCsvCommand(examDetailsStore);
         }
 
         private void LoadExamStagesOfExam(IGetExamStagesOfExamQuery query,

@@ -36,33 +36,41 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
 
         public override void Execute(object? parameter)
         {
-            if (_rememberSteps)
-                _currentExamStore.TimeSinceLastStep.Stop();
+            _currentExamStore.TimeSinceLastStep.Stop();
 
             string parameterText = (string)parameter!;
             Direction moveDirection = (Direction)int.Parse(parameterText);
 
-            if (_rememberSteps)
-                SaveExamStep(moveDirection);
-
             Cell currentCell = _viewModel.CurrentCell;
             if (MazeCompleted(moveDirection))
             {
-                _viewModel.OnCompletedMaze();
+                EndExamStage(moveDirection);
                 return;
             }
 
             Cell? nextCell = currentCell.AdjecentCellSpaces[moveDirection];
             if (currentCell.IsLinked(nextCell))
             {
-                MoveTo(nextCell!);
+                MoveTo(nextCell!, moveDirection);
+            }
+            else
+            {
+                if (_rememberSteps)
+                    SaveExamStep(moveDirection, false, true);
             }
 
-            if (_rememberSteps)
-                _currentExamStore.TimeSinceLastStep.Restart();
+            _currentExamStore.TimeSinceLastStep.Restart();
         }
 
-        private void SaveExamStep(Direction moveDirection)
+        private void EndExamStage(Direction moveDirection)
+        {
+            if (_rememberSteps)
+                SaveExamStep(moveDirection, true, false);
+
+            _viewModel.OnCompletedMaze();
+        }
+
+        private void SaveExamStep(Direction moveDirection, bool correct, bool hitWall)
         {
             ExamStage currentExamStage = _currentExamStore.CurrentExam.Stages.Last();
 
@@ -71,24 +79,43 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
                 Stage = currentExamStage,
                 StepTaken = moveDirection,
                 TimeBeforeStep = (float) _currentExamStore.TimeSinceLastStep.Elapsed.TotalSeconds,
-                Index = currentExamStage.Steps.Count
+                Index = currentExamStage.Steps.Count,
+                Correct = correct,
+                HitWall = hitWall
             };
 
             currentExamStage.Steps.Add(examStep);
         }
 
-        private void MoveTo(Cell nextCell)
+        private void MoveTo(Cell nextCell, Direction moveDirection)
         {
-            List<Cell> userSolution = _viewModel.UserSolution;
-
             Cell? previousCell = _viewModel.UserSolution.ElementAtOrDefault(_viewModel.UserSolution.Count - 2);
             if (nextCell == previousCell)
             {
                 _viewModel.MoveBack();
+
+                if (_rememberSteps)
+                    SaveExamStep(moveDirection, false, false);
             }
             else
             {
                 _viewModel.MoveFurther(nextCell!);
+
+                if (_rememberSteps)
+                    SaveForwardStep(nextCell, moveDirection);
+            }
+        }
+
+        private void SaveForwardStep(Cell nextCell, Direction moveDirection)
+        {
+            if (_viewModel.NextCorrectCellIndex is not null && nextCell == _viewModel.GetNextSolutionCell())
+            {
+                SaveExamStep(moveDirection, true, false);
+                _viewModel.UpdateNextCorrectCellIndex();
+            }
+            else
+            {
+                SaveExamStep(moveDirection, false, false);
             }
         }
 

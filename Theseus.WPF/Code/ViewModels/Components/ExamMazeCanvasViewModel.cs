@@ -16,6 +16,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
         public List<Cell> UserSolution { get; set; }
 
         public Cell CurrentCell { get; set; }
+        public int? NextCorrectCellIndex { get; set; }
         public Cell TargetCell { get; }
         public Direction StartDirection { get; }
         public Direction EndDirection { get; }
@@ -43,6 +44,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
             this.StartDirection = GetMazeWithSolution().StartDirection;
             this.EndDirection = GetMazeWithSolution().EndDirection;
             this.UserSolution = new List<Cell>() { CurrentCell };
+            this.NextCorrectCellIndex = 1;
 
             this.PerformMove = new PerformMoveCommand(this, currentExamStore, rememberSteps);
         }
@@ -66,6 +68,11 @@ namespace Theseus.WPF.Code.ViewModels.Components
             OnSuccesfullyMoved();
         }
 
+        public void UpdateNextCorrectCellIndex()
+        {
+            NextCorrectCellIndex = (NextCorrectCellIndex == GetMazeWithSolution().SolutionPath.Count) ? null : NextCorrectCellIndex + 1;
+        }
+
         public void OnCompletedMaze()
         {
             this.MazeExamFinished = true;
@@ -73,5 +80,6 @@ namespace Theseus.WPF.Code.ViewModels.Components
         }
 
         private MazeWithSolution GetMazeWithSolution() => MazeWithSolutionCanvasViewModel.MazeWithSolution;
+        public Cell GetNextSolutionCell() => MazeWithSolutionCanvasViewModel.MazeWithSolution.SolutionPath.ElementAt(NextCorrectCellIndex.Value);
     }
 }

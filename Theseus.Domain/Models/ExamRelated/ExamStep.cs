@@ -38,6 +38,9 @@ namespace Theseus.Domain.Models.ExamRelated
         /// </remarks>
         public float TimeBeforeStep { get; set; } = default!;
 
+        public bool Correct { get; set; } = default!;
+        public bool HitWall { get; set; } = default!;
+
         /// <summary>
         /// Initializes <c>ExamStep</c> with no additional actions.
         /// </summary>

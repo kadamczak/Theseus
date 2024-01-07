@@ -99,14 +99,14 @@ namespace Theseus.WPF.Code.Services
         {
             var maze = _getMazeOfExamStageQuery.GetMaze(stage.Id);
             int idealInputAmount = maze.SolutionPath.Count;
-            int inputAmount = stage.Steps.Count();
-            return CalculateScoreForExamStage(idealInputAmount, inputAmount, stage.TotalTime);
+            int wrongCellAmount = stage.Steps.Where(s => !s.Correct && !s.HitWall).Count();
+            int wallHitsAmount = stage.Steps.Where(s => s.HitWall).Count();
+            return CalculateScoreForExamStage(idealInputAmount, wrongCellAmount, wallHitsAmount, stage.TotalTime);
         }
 
-        public double CalculateScoreForExamStage(int idealInputAmount, int inputAmount, float totalTime)
+        public double CalculateScoreForExamStage(int idealInputAmount, int wrongCells, int wallHits, float totalTime)
         {
-            int excessInputs = inputAmount - idealInputAmount;
-            double pointsForPrecision = 70 - 70 * (double)excessInputs / idealInputAmount - excessInputs * 2;
+            double pointsForPrecision = 70 - wrongCells * (3 + 150 / idealInputAmount) - wallHits * 1;
             if (pointsForPrecision < 0) pointsForPrecision = 0;
 
             double baseTimeForMaze = 0.9 * idealInputAmount;

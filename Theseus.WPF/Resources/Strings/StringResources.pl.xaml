@@ -279,6 +279,9 @@ Liczby</system:String>
     <system:String x:Key="UsernameShort">Nazwa</system:String>
     <system:String x:Key="PatientInfoLong">Dane pacjenta</system:String>
 
+    <system:String x:Key="WrongCells:" xml:space="preserve">Błędne kratki: </system:String>
+    <system:String x:Key="WallHits:" xml:space="preserve">Uderzenia w ściany: </system:String>
+
     <system:String x:Key="Binary" xml:space="preserve">Algorytm Binary Tree produkuje labirynty mocno faworyzujące przebieg kratek po przekątnej. Z tego powodu nie jest on używany w generatorze zestawów, ale może być przydatny w wyjątkowych przypadkach.
 
 Właściwości:
