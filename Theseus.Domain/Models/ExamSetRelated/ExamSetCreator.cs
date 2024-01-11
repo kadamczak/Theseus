@@ -174,7 +174,6 @@ namespace Theseus.Domain.Models.ExamSetRelated
             var solutionAlgorithms = CreateShuffledEnumListForAllSegments(segmentLengths, rnd, _solutionAlgorithmClassProportions).Cast<MazeSolutionGenAlgorithm>().ToList();
             var mazeDimensions = CreateMazeDimensionList(mazeShapes, beginningMaxDimension, endingMaxDimension, rnd);
 
-            solutionAlgorithms[0] = MazeSolutionGenAlgorithm.RandomBorderCells;
             structureAlgorithms[structureAlgorithms.Count() - 1] = MazeStructureGenAlgorithm.HuntAndKill;
 
             List<MazeParameter> mazeParameters = new List<MazeParameter>();

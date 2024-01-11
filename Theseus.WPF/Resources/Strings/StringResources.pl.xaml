@@ -203,7 +203,7 @@ Liczby</system:String>
     <system:String x:Key="AmountOfAttemptsByOtherPatients:"  xml:space="preserve">Ilość podejść od innych pacjentów: </system:String>
     <system:String x:Key="AmountOfAttemptsWithNoSkipsByOtherPatients:"  xml:space="preserve">Ilość podejść bez pominięć od innych pacjentów: </system:String>
     <system:String x:Key="ComparisonToAverage:"  xml:space="preserve">Porównanie ze średnią: </system:String>
-    <system:String x:Key="ComparisonToPreviousAttemptOn:"  xml:space="preserve">Porównanie z poprzednim podejściem w dniu: </system:String>
+    <system:String x:Key="ComparisonToPreviousAttemptOn:"  xml:space="preserve">Porównanie z poprzednim podejściem w dniu </system:String>
     <system:String x:Key="by">o</system:String>
     <system:String x:Key="Better">Lepiej</system:String>
     <system:String x:Key="Worse">Gorzej</system:String>
@@ -236,7 +236,7 @@ Liczby</system:String>
     <system:String x:Key="UseArrowKeysLong">Aby poruszać się w labiryncie, użyj przycisków strzałek na klawiaturze.</system:String>
 
     <system:String x:Key="SolveMaze">Rozwiąż Labirynt</system:String>
-    <system:String x:Key="MazeFinished"  xml:space="preserve">Labirynt ukończony! Następne zadanie za: </system:String>
+    <system:String x:Key="MazeFinished"  xml:space="preserve">Następne zadanie za: </system:String>
     <system:String x:Key="End">Koniec</system:String>
     <system:String x:Key="ExamFinished">Test ukończony.</system:String>
     <system:String x:Key="ResultsWereSavedSuccesfully">Wyniki zostały zapisane automatycznie.</system:String>
@@ -279,8 +279,10 @@ Liczby</system:String>
     <system:String x:Key="UsernameShort">Nazwa</system:String>
     <system:String x:Key="PatientInfoLong">Dane pacjenta</system:String>
 
-    <system:String x:Key="WrongCells:" xml:space="preserve">Błędne kratki: </system:String>
+    <system:String x:Key="RedundantInputs:" xml:space="preserve">Nadmiarowe przejścia: </system:String>
     <system:String x:Key="WallHits:" xml:space="preserve">Uderzenia w ściany: </system:String>
+
+    <system:String x:Key="Support" xml:space="preserve">Wsparcie techniczne</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Algorytm Binary Tree produkuje labirynty mocno faworyzujące przebieg kratek po przekątnej. Z tego powodu nie jest on używany w generatorze zestawów, ale może być przydatny w wyjątkowych przypadkach.
 

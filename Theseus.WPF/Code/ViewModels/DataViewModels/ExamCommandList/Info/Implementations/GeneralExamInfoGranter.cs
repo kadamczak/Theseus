@@ -38,7 +38,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             public float TotalExamTime { get; set; }
             public int CompletedMazeAmount { get; set; }
             public int TotalInputs { get; set; }
-            public int WrongCells { get; set; }
+            public int RedundantInputs { get; set; }
             public int WallHits { get; set; }
         }
 
@@ -72,7 +72,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 TotalExamTime = examStages.Sum(s => s.TotalTime),
                 CompletedMazeAmount = examStages.Where(s => s.Completed).Count(),
                 TotalInputs = examSteps.Count(),
-                WrongCells = examSteps.Where(s => !s.Correct && !s.HitWall).Count(),
+                RedundantInputs = examSteps.Where(s => !s.Correct && !s.HitWall).Count(),
                 WallHits = examSteps.Where(s => s.HitWall).Count()
             };
         }
@@ -90,7 +90,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                "CompletedMazes:".Resource() + $"{currentExamStats.CompletedMazeAmount}/{examSetStatSummary.MazeAmount}",
                "TotalTime:".Resource() + $"{Round(currentExamStats.TotalExamTime)} s",
                "InputsMade:".Resource() + $"{currentExamStats.TotalInputs}/{examSetStatSummary.IdealStepAmount}",
-               "WrongCells:".Resource() + $"{currentExamStats.WrongCells}",
+               "RedundantInputs:".Resource() + $"{currentExamStats.RedundantInputs}",
                "WallHits:".Resource() + $"{currentExamStats.WallHits}",
                $"{"Score".Resource()}: {Math.Round(currentExamStats.Score, 2)}/100"
             };
@@ -111,8 +111,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             public float AverageCompletedMazes { get; set; }
             public float? AverageTotalTime { get; set; }
             public float? AverageTotalInputs { get; set; }
-            public float? AverageTotalWrongCells { get; set; }
-            public float? AverageTotalWallHits { get; set; }
+            public float? AverageReduntantInputs { get; set; }
+            public float? AverageWallHits { get; set; }
         }
 
         private AverageExamStats CalculateAverageStats(IEnumerable<Exam> exams)
@@ -127,15 +127,15 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 AverageCompletedMazes = CalculateAverageCompletedMazes(exams),
                 AverageTotalTime = anyCompletedExamsByOtherPatient ? CalculateAverageTotalTime(examsByOtherPatientsWithNoSkips) : null,
                 AverageTotalInputs = anyCompletedExamsByOtherPatient ? CalculateAverageTotalInputs(examsByOtherPatientsWithNoSkips) : null,
-                AverageTotalWrongCells = anyCompletedExamsByOtherPatient ? CalculateAverageTotalWrongCells(examsByOtherPatientsWithNoSkips) : null,
-                AverageTotalWallHits = anyCompletedExamsByOtherPatient ? CalculateAverageTotalWallHits(examsByOtherPatientsWithNoSkips) : null,
+                AverageReduntantInputs = anyCompletedExamsByOtherPatient ? CalculateAverageTotalReduntantInputs(examsByOtherPatientsWithNoSkips) : null,
+                AverageWallHits = anyCompletedExamsByOtherPatient ? CalculateAverageTotalWallHits(examsByOtherPatientsWithNoSkips) : null,
             };
         }
 
         private float CalculateAverageCompletedMazes(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Count(s => s.Completed));
         private float CalculateAverageTotalTime(IEnumerable<Exam> exams) => exams.Average(e => e.Stages.Sum(s => s.TotalTime));
         private float CalculateAverageTotalInputs(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Sum(s => s.Steps.Count));
-        private float CalculateAverageTotalWrongCells(IEnumerable<Exam> exams) => (float)exams.Average(e => e.Stages.Sum(s => s.Steps.Where(s => !s.Correct && !s.HitWall).Count()));
+        private float CalculateAverageTotalReduntantInputs(IEnumerable<Exam> exams) => (float)exams.Average(e => e.Stages.Sum(s => s.Steps.Where(s => !s.Correct && !s.HitWall).Count()));
         private float CalculateAverageTotalWallHits(IEnumerable<Exam> exams) => (float)exams.Average(e => e.Stages.Sum(s => s.Steps.Where(s => s.HitWall).Count()));
 
 
@@ -156,8 +156,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats,
                                                                            otherPatientsStats.AverageTotalTime.Value,
                                                                            otherPatientsStats.AverageTotalInputs.Value,
-                                                                           otherPatientsStats.AverageTotalWrongCells.Value,
-                                                                           otherPatientsStats.AverageTotalWallHits.Value,
+                                                                           otherPatientsStats.AverageReduntantInputs.Value,
+                                                                           otherPatientsStats.AverageWallHits.Value,
                                                                            "Avg".Resource()));
 
             return comparisonText;
@@ -190,7 +190,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                 comparisonText.AddRange(CreateComparisonTextForNoSkipExams(currentExamStats,
                                                                            previousExamStats.TotalExamTime,
                                                                            previousExamStats.TotalInputs,
-                                                                           previousExamStats.WrongCells,
+                                                                           previousExamStats.RedundantInputs,
                                                                            previousExamStats.WallHits,
                                                                            "Prev".Resource()));
 
@@ -198,23 +198,23 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
                
         }
 
-        private List<string> CreateComparisonTextForNoSkipExams(ExamStats currentExamStats, float time, float inputs, float wrongCells, float wallHits, string valueType)
+        private List<string> CreateComparisonTextForNoSkipExams(ExamStats currentExamStats, float time, float inputs, float redundantInputs, float wallHits, string valueType)
         {
             string timeComparison = _valueComparer.Compare(currentExamStats.TotalExamTime, time, higherIsBetter: false);
             string inputComparison = _valueComparer.Compare(currentExamStats.TotalInputs, inputs, higherIsBetter: false);
-            string wrongCellsComparison = _valueComparer.Compare(currentExamStats.WrongCells, wrongCells, higherIsBetter: false);
+            string redundantInputsComparison = _valueComparer.Compare(currentExamStats.RedundantInputs, redundantInputs, higherIsBetter: false);
             string wallHitsComparison = _valueComparer.Compare(currentExamStats.WallHits, wallHits, higherIsBetter: false);
 
             string timeFormatted = Round(time);
             string inputsFormatted = Round(inputs);
-            string wrongCellsFormatted = Round(wrongCells);
+            string redundantInputsFormatted = Round(redundantInputs);
             string wallHitsFormatted = Round(wallHits);
 
             return new List<string>
             {
                 $"\t{"TotalTime:".Resource()}{timeComparison} ({valueType}: {timeFormatted} s)",
                 $"\t{"InputsMade:".Resource()}{inputComparison} ({valueType}: {inputsFormatted})",
-                $"\t{"WrongCells:".Resource()}{wrongCellsComparison} ({valueType}: {wrongCellsFormatted})",
+                $"\t{"RedundantInputs:".Resource()}{redundantInputsComparison} ({valueType}: {redundantInputsFormatted})",
                 $"\t{"WallHits:".Resource()}{wallHitsComparison} ({valueType}: {wallHitsFormatted})",
             };
         }

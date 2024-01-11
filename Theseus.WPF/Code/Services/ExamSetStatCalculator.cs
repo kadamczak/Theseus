@@ -104,9 +104,9 @@ namespace Theseus.WPF.Code.Services
             return CalculateScoreForExamStage(idealInputAmount, wrongCellAmount, wallHitsAmount, stage.TotalTime);
         }
 
-        public double CalculateScoreForExamStage(int idealInputAmount, int wrongCells, int wallHits, float totalTime)
+        public double CalculateScoreForExamStage(int idealInputAmount, int redundantInputs, int wallHits, float totalTime)
         {
-            double pointsForPrecision = 70 - wrongCells * (3 + 110.0f / (double) idealInputAmount) - wallHits;
+            double pointsForPrecision = 70 - redundantInputs * (3 + 80.0f / (double) idealInputAmount) - 2.0f * wallHits;
             if (pointsForPrecision < 0) pointsForPrecision = 0;
 
             double baseTimeForMaze = 0.9 * idealInputAmount;

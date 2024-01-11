@@ -15,6 +15,9 @@
             <TextBlock TextWrapping="Wrap" Text="{DynamicResource TheseusHomeDescription}" MaxWidth="600" Foreground="DimGray" Margin="40 10 40 0" HorizontalAlignment="Center" FontSize="25"  TextAlignment="Center"/>
 
             <Button Style="{StaticResource Generic}" Margin="0 20 0 0" FontSize="19" Content="{DynamicResource ViewCredits}" Command="{Binding ViewCredits}" HorizontalAlignment="Center"/>
+
+            <Label HorizontalAlignment="Center" FontSize="20" Margin="0 25 0 0" Content="{DynamicResource Support}"/>
+            <Label HorizontalAlignment="Center" FontSize="17" Content="theseusstaff@gmail.com" />
         </StackPanel>
     </Grid>
 </UserControl>

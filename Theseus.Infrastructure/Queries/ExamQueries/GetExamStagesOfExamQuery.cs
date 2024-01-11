@@ -23,6 +23,7 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
                                                                  .ThenInclude(e => e.ExamSetDto)
                                                                  .Include(e => e.ExamDto)
                                                                  .ThenInclude(e => e.PatientDto)
+                                                                 .ThenInclude(e => e.GroupDto)
                                                                  .Where(e => e.ExamDto.Id == examId)
                                                                  .OrderBy(e => e.Index)
                                                                  .AsNoTracking();

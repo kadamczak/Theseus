@@ -41,9 +41,10 @@ namespace Theseus.WPF.Code.Commands.DataCommands
         {
             string patientUsername = exam.Patient.Username;
             string examSetName = exam.ExamSet.Name;
+            string patientGroup = exam.Patient.Group.Name;
             string examDate = exam.CreatedAt.ToString("yyyy-MM-dd-HH-mm");
 
-            return $"{patientUsername}_{examSetName}_{examDate}_";
+            return $"{patientUsername}_{examSetName}_{patientGroup}_{examDate}_";
         }
 
         private string CreateCsvForExamStage(ExamStage examStage)

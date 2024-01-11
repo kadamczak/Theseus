@@ -43,14 +43,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="{DynamicResource Username}" FontSize="17" Grid.Row="0" Grid.Column="0"/>
-                <Label Content="{DynamicResource Group}" FontSize="17" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="{DynamicResource Username}" FontSize="17" Grid.Row="0" Grid.Column="0" Margin="0 0 8 0"/>
+                <TextBlock Text="{DynamicResource Group}" FontSize="17" Grid.Row="0" Grid.Column="1"/>
 
-                <Label Content="{Binding PastUsernameFirst}" FontSize="15" Grid.Row="1" Grid.Column="0"/>
-                <Label Content="{Binding PastGroupFirst}" FontSize="15" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Text="{Binding PastUsernameFirst}" FontSize="15" Grid.Row="1" Grid.Column="0"/>
+                <TextBlock Text="{Binding PastGroupFirst}" FontSize="15" Grid.Row="1" Grid.Column="1"/>
 
-                <Label Content="{Binding PastUsernameSecond}" FontSize="15" Grid.Row="2" Grid.Column="0"/>
-                <Label Content="{Binding PastGroupSecond}" FontSize="15" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Text="{Binding PastUsernameSecond}" FontSize="15" Grid.Row="2" Grid.Column="0"/>
+                <TextBlock Text="{Binding PastGroupSecond}" FontSize="15" Grid.Row="2" Grid.Column="1"/>
             </Grid>
 
             <Label Content="{DynamicResource NoPastLogIns}" FontSize="17" Margin="20 0 0 0" Visibility="{Binding HasPastLogins, Converter={StaticResource ReverseBooleanVisibility}}" />

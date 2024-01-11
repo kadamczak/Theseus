@@ -12,19 +12,21 @@ namespace Theseus.Infrastructure.Queries.ExamQueries
         {
         }
 
-        public IEnumerable<ExamStage> GetExamStages(Guid examSetId, int index)
+        public IEnumerable<ExamStage> GetExamStages(Guid examSetId, int index, Guid groupId)
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 var examStages = context.ExamStages
                                         .AsNoTracking()
-                                        .Where(e => e.Index == index)
-                                        .Where(e => e.ExamDto.ExamSetDto.Id == examSetId)
                                         .Include(e => e.StepDtos)
                                         .Include(e => e.ExamDto)
                                         .ThenInclude(e => e.PatientDto)
+                                        .ThenInclude(e => e.GroupDto)
                                         .Include(e => e.ExamDto)
-                                        .ThenInclude(e => e.ExamSetDto);
+                                        .ThenInclude(e => e.ExamSetDto)
+                                        .Where(e => e.Index == index)
+                                        .Where(e => e.ExamDto.ExamSetDto.Id == examSetId)
+                                        .Where(e => e.ExamDto.PatientDto.GroupDto != null && e.ExamDto.PatientDto.GroupDto.Id == groupId);
 
                 return MapExamStages(examStages);
             }

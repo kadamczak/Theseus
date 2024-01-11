@@ -63,7 +63,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="{Binding Model.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Margin="30 0 0 0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Model.Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Margin="30 0 0 0"/>
 
                             <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" >
                                 <Button Style="{StaticResource Generic}" FontSize="17" Content="{Binding Button1.CommandName}" Command="{Binding Button1.Command}" Visibility="{Binding Button1.Show, Converter={StaticResource BooleanVisibility}}"  Padding="7" HorizontalAlignment="Center" Width="80"/>

@@ -32,6 +32,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
         public class ExamStageStats
         {
             public Guid PatientId { get; set; }
+            public Guid GroupId { get; set; }
             public Guid ExamStageId { get; set; }
             public Guid ExamSetId { get; set; }
             public int Index { get; set; }
@@ -43,11 +44,11 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
         public class ExamStageData
         {
             public float TotalInputs { get; set; }
-            public float TotalTime { get; set; }
+            public float? TotalTime { get; set; }
             public float? TimeBeforeFirstInput { get; set; }
             public float? LongestInactivityTime { get; set; }
-            public float WrongCells { get; set; }
-            public float WallHits { get; set; }
+            public float? RedundantInputs { get; set; }
+            public float? WallHits { get; set; }
         }
 
         public override string GrantInfo(CommandViewModel<ExamStageWithMazeViewModel> commandViewModel)
@@ -68,6 +69,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             return new ExamStageStats()
             {
                 PatientId = exam.Patient.Id,
+                GroupId = exam.Patient.Group!.Id,
                 ExamStageId = examStage.Id,
                 ExamSetId = exam.ExamSet.Id,
                 Index = examStage.Index,
@@ -80,7 +82,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                     TotalTime = examStage.TotalTime,
                     TimeBeforeFirstInput = examStage.Steps.Any() ? examStage.Steps.First().TimeBeforeStep : null,
                     LongestInactivityTime = examStage.Steps.Any() ? examStage.Steps.Max(s => s.TimeBeforeStep) : null,
-                    WrongCells = examStage.Steps.Where(s => !s.Correct && !s.HitWall).Count(),
+                    RedundantInputs = examStage.Steps.Where(s => !s.Correct && !s.HitWall).Count(),
                     WallHits = examStage.Steps.Where(s => s.HitWall).Count()
                 }
             };
@@ -95,25 +97,25 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             {
                 "Completed:".Resource() + (stats.Completed ? "Yes".Resource() : "No".Resource()),
                 $"{"InputsMade:".Resource()}{Round(stats.Data.TotalInputs)}/{idealInputAmount}",
-                $"{"TotalTime:".Resource()}{Round(stats.Data.TotalTime)} s",
-                $"{"WrongCells:".Resource()}{Round(stats.Data.WrongCells)}",
-                $"{"WallHits:".Resource()}{Round(stats.Data.WallHits)}",
+                $"{"TotalTime:".Resource()}{Round(stats.Data.TotalTime.Value, 2)} s",
+                $"{"RedundantInputs:".Resource()}{Round(stats.Data.RedundantInputs.Value)}",
+                $"{"WallHits:".Resource()}{Round(stats.Data.WallHits.Value)}",
             };
 
             if (stats.Data.TotalInputs > 0)
             {
                 textSummary.AddRange(new List<string>
                 {
-                    $"{"TimeBeforeFirstInput:".Resource()}{Round(stats.Data.TimeBeforeFirstInput!.Value)} s",
-                    $"{"LongestInactivityTime:".Resource()}{Round(stats.Data.LongestInactivityTime!.Value)} s",
+                    $"{"TimeBeforeFirstInput:".Resource()}{Round(stats.Data.TimeBeforeFirstInput!.Value, 3)} s",
+                    $"{"LongestInactivityTime:".Resource()}{Round(stats.Data.LongestInactivityTime!.Value, 3)} s",
                 });
 
                 if(stats.Completed)
                 {
                     double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount,
-                                                                              Convert.ToInt32(stats.Data.WrongCells),
+                                                                              Convert.ToInt32(stats.Data.RedundantInputs),
                                                                               Convert.ToInt32(stats.Data.WallHits),
-                                                                              stats.Data.TotalTime);
+                                                                              stats.Data.TotalTime.Value);
 
                     textSummary.AddRange(new List<string>
                     {
@@ -130,7 +132,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
         private IEnumerable<string> CreateComparisonTextToOtherPatients(ExamStageStats currentExamStageStats)
         {
-            var examStagesOfOtherPatients = _getExamStagesQuery.GetExamStages(currentExamStageStats.ExamSetId, currentExamStageStats.Index)
+            var examStagesOfOtherPatients = _getExamStagesQuery.GetExamStages(currentExamStageStats.ExamSetId, currentExamStageStats.Index, currentExamStageStats.GroupId)
                                                                .Where(e => e.Exam.Patient.Id != currentExamStageStats.PatientId);
 
             return examStagesOfOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStageStats, CalculateAverageStats(examStagesOfOtherPatients)) :
@@ -154,10 +156,12 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                 CompletedAttemptAmount = completedExamStages.Count(),
                 Data = new ExamStageData()
                 {
-                    TotalTime = CalculateAverageTotalTime(completedExamStages),
+                    TotalTime = completedExamStages.Any() ? CalculateAverageTotalTime(completedExamStages) : null,
                     TotalInputs = completedExamStages.Any() ? CalculateAverageTotalInputs(completedExamStages) : 0,
                     TimeBeforeFirstInput = completedExamStages.Any() ? CalculateAverageTimeBeforeFirstInput(completedExamStages) : null,
-                    LongestInactivityTime = completedExamStages.Any() ? CalculateAverageLongestInactivityTime(completedExamStages) : null
+                    LongestInactivityTime = completedExamStages.Any() ? CalculateAverageLongestInactivityTime(completedExamStages) : null,
+                    RedundantInputs = completedExamStages.Any() ? CalculateAverageRedundantInputs(completedExamStages) : null,
+                    WallHits = completedExamStages.Any() ? CalculateAverageWallHits(completedExamStages) : null
                 }
             };
         }
@@ -166,6 +170,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
         private float CalculateAverageTotalInputs(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Count);
         private float CalculateAverageTimeBeforeFirstInput(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.First().TimeBeforeStep);
         private float CalculateAverageLongestInactivityTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Max(e => e.TimeBeforeStep));
+        private float CalculateAverageRedundantInputs(IEnumerable<ExamStage> examStages) => (float)examStages.Average(e => e.Steps.Where(s => !s.Correct && !s.HitWall).Count());
+        private float CalculateAverageWallHits(IEnumerable<ExamStage> examStages) => (float)examStages.Average(e => e.Steps.Where(s => s.HitWall).Count());
 
         private List<string> CreateFullComparisonTextToOtherPatients(ExamStageStats examStageStats, AverageExamStageStats averageExamStageStats)
         {
@@ -188,19 +194,19 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
         private IEnumerable<string> CreateComparisonOfCompletedStages(ExamStageStats examStageStats, ExamStageData otherExamStageData, string valueType)
         {
-            string timeComparison = _valueComparer.Compare(examStageStats.Data.TotalTime, otherExamStageData.TotalTime, higherIsBetter: false);
+            string timeComparison = _valueComparer.Compare(examStageStats.Data.TotalTime.Value, otherExamStageData.TotalTime, higherIsBetter: false);
             string inputComparison = _valueComparer.Compare(examStageStats.Data.TotalInputs, otherExamStageData.TotalInputs, higherIsBetter: false);
             string firstInputTimeComparison = _valueComparer.Compare(examStageStats.Data.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput!.Value, "Higher".Resource(), "Lower".Resource());
             string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.Data.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime!.Value, "Higher".Resource(), "Lower".Resource());
-            string wrongCellsComparison = _valueComparer.Compare(examStageStats.Data.WrongCells, otherExamStageData.WrongCells, higherIsBetter: false);
-            string wallHitsComparison = _valueComparer.Compare(examStageStats.Data.WallHits, otherExamStageData.WallHits, higherIsBetter: false);
+            string redundantInputsComparison = _valueComparer.Compare(examStageStats.Data.RedundantInputs.Value, otherExamStageData.RedundantInputs, higherIsBetter: false);
+            string wallHitsComparison = _valueComparer.Compare(examStageStats.Data.WallHits.Value, otherExamStageData.WallHits, higherIsBetter: false);
 
-            string timeFormatted = Round(otherExamStageData.TotalTime);
+            string timeFormatted = Round(otherExamStageData.TotalTime.Value, 2);
             string inputsFormatted = Round(otherExamStageData.TotalInputs);
-            string firstInputTimeFormatted = Round(otherExamStageData.TimeBeforeFirstInput!.Value);
-            string longestInactivityTimeFormatted = Round(otherExamStageData.LongestInactivityTime!.Value);
-            string wrongCellsFormatted = Round(otherExamStageData.WrongCells);
-            string wallHitsFormatted = Round(otherExamStageData.WallHits);
+            string firstInputTimeFormatted = Round(otherExamStageData.TimeBeforeFirstInput!.Value, 3);
+            string longestInactivityTimeFormatted = Round(otherExamStageData.LongestInactivityTime!.Value, 3);
+            string redundantInputsFormatted = Round(otherExamStageData.RedundantInputs.Value);
+            string wallHitsFormatted = Round(otherExamStageData.WallHits.Value);
 
             return new List<string>
             {
@@ -208,14 +214,14 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                 $"\t{"TotalTime:".Resource()}{timeComparison} ({valueType}: {timeFormatted} s)",
                 $"\t{"TimeBeforeFirstInput:".Resource()}{firstInputTimeComparison} ({valueType}: {firstInputTimeFormatted} s)",
                 $"\t{"LongestInactivityTime:".Resource()}{longestInactivityTimeComparison} ({valueType}: {longestInactivityTimeFormatted} s)",
-                $"\t{"WrongCells:".Resource()}{wrongCellsComparison} ({valueType}: {wrongCellsFormatted})",
+                $"\t{"RedundantInputs:".Resource()}{redundantInputsComparison} ({valueType}: {redundantInputsFormatted})",
                 $"\t{"WallHits:".Resource()}{wallHitsComparison} ({valueType}: {wallHitsFormatted})",
             };
         }
 
         private IEnumerable<string> CreateComparisonTextToPreviousAttempt(ExamStageStats currentExamStageStats)
         {
-            var previousAttempt = _getExamStagesQuery.GetExamStages(currentExamStageStats.ExamSetId, currentExamStageStats.Index)
+            var previousAttempt = _getExamStagesQuery.GetExamStages(currentExamStageStats.ExamSetId, currentExamStageStats.Index, currentExamStageStats.GroupId)
                                                      .Where(e => e.Exam.Patient.Id == currentExamStageStats.PatientId)
                                                      .Where(e => e.Exam.CreatedAt < currentExamStageStats.CreatedAt)
                                                      .OrderByDescending(e => e.Exam.CreatedAt)
@@ -252,6 +258,6 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             return comparisonText;
         }
 
-        private string Round(float value) => Math.Round(value, 1).ToString();
+        private string Round(float value, int decimalPlaces = 1) => Math.Round(value, decimalPlaces).ToString();
     }
 }

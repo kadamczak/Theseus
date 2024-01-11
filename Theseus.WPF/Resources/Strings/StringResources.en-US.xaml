@@ -203,7 +203,7 @@
     <system:String x:Key="AmountOfAttemptsByOtherPatients:"  xml:space="preserve">Amount of attempts by other patients: </system:String>
     <system:String x:Key="AmountOfAttemptsWithNoSkipsByOtherPatients:"  xml:space="preserve">Amount of attempts with no skips by other patients: </system:String>
     <system:String x:Key="ComparisonToAverage:"  xml:space="preserve">Comparison to average: </system:String>
-    <system:String x:Key="ComparisonToPreviousAttemptOn:"  xml:space="preserve">Comparison to previous attempt on: </system:String>
+    <system:String x:Key="ComparisonToPreviousAttemptOn:"  xml:space="preserve">Comparison to previous attempt on </system:String>
     <system:String x:Key="by">by</system:String>
     <system:String x:Key="Better">Better</system:String>
     <system:String x:Key="Worse">Worse</system:String>
@@ -237,7 +237,7 @@
     <system:String x:Key="UseArrowKeysLong">To move in the maze, use arrow keys on your keyboard.</system:String>
 
     <system:String x:Key="SolveMaze">Solve Maze</system:String>
-    <system:String x:Key="MazeFinished"  xml:space="preserve">Maze finished! Next puzzle in: </system:String>
+    <system:String x:Key="MazeFinished"  xml:space="preserve">Next puzzle in: </system:String>
     <system:String x:Key="End">End</system:String>
     <system:String x:Key="ExamFinished">Exam finished.</system:String>
     <system:String x:Key="ResultsWereSavedSuccesfully">Results were saved automatically</system:String>
@@ -280,8 +280,10 @@
     <system:String x:Key="UsernameShort">Username</system:String>
     <system:String x:Key="PatientInfoLong">Patient Info</system:String>
 
-    <system:String x:Key="WrongCells:" xml:space="preserve">Wrong cells: </system:String>
+    <system:String x:Key="RedundantInputs:" xml:space="preserve">Redundant inputs: </system:String>
     <system:String x:Key="WallHits:" xml:space="preserve">Wall hits: </system:String>
+
+    <system:String x:Key="Support" xml:space="preserve">Support</system:String>
 
     <system:String x:Key="Binary" xml:space="preserve">Binary Tree algorithm produces mazes that are heavily diagonally-biased. As such, it is not included in the Exam Set generator, but can be used for special tests.
 

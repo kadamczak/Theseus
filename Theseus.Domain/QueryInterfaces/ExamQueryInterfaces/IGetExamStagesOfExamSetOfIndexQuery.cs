@@ -4,6 +4,6 @@ namespace Theseus.Domain.QueryInterfaces.ExamQueryInterfaces
 {
     public interface IGetExamStagesOfExamSetOfIndexQuery
     {
-        IEnumerable<ExamStage> GetExamStages(Guid examSetId, int index);
+        IEnumerable<ExamStage> GetExamStages(Guid examSetId, int index, Guid groupId);
     }
 }
