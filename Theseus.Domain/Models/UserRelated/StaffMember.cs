@@ -37,6 +37,7 @@ namespace Theseus.Domain.Models.UserRelated
         /// </summary>
         [Required]
         [EmailAddress]
+        [StringLength(255)]
         public string Email { get; set; } = default!;
 
         /// <summary>

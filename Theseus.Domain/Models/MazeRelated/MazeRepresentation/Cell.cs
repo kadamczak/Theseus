@@ -1,4 +1,6 @@
-﻿using Theseus.Domain.Models.MazeRelated.Enums;
+﻿using Theseus.Domain.Extensions;
+using Theseus.Domain.Models.MazeRelated.Enums;
+using Theseus.Domain.Models.MazeRelated.Exceptions;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 {
@@ -51,12 +53,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             ColumnIndex = colIndex;
         }
 
+
         /// <summary>
         /// Returns true if this <c>Cell</c> is linked to its neighbour in specified <c>Direction</c>.
         /// </summary>
         /// <param name="direction"><c>Direction</c> of the neighbour.</param>
         /// <returns>True if this <c>Cell</c> is linked to its neighbour in specified <c>Direction</c>.</returns>
-        public bool IsLinkedToNeighbour(Direction direction)
+        public bool IsLinkedToNeighbourInDirection(Direction direction)
         {
             return this.IsLinked(this.AdjecentCellSpaces[direction]);
         }

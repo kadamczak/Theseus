@@ -39,7 +39,7 @@ namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 
         private byte GetEnumValueIfLinkExists(Cell cell, Direction direction)
         {
-            return cell.IsLinkedToNeighbour(direction) ? (byte)direction : (byte)0;
+            return cell.IsLinkedToNeighbourInDirection(direction) ? (byte)direction : (byte)0;
         }
 
         private byte[] CreateSolutionByteArray(List<Cell> solutionPath)

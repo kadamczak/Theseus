@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.ExamSetRelated;
+﻿using System.ComponentModel.DataAnnotations;
+using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.Domain.Models.GroupRelated
@@ -17,6 +18,9 @@ namespace Theseus.Domain.Models.GroupRelated
         /// <summary>
         /// Gets or sets a displayable name of <c>Group</c>.
         /// </summary>
+        [Required]
+        [StringLength(16)]
+        [RegularExpression(@"^[\w_-]+$")]
         public string Name { get; set; } = default!;
 
         /// <summary>

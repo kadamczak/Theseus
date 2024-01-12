@@ -10,8 +10,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
         private readonly MazeStructureGeneratorFactory _mazeStructureGeneratorFactory;
         private readonly MazeSolutionGeneratorFactory _mazeSolutionGeneratorFactory;
 
-        public MazeCreator(MazeStructureGeneratorFactory mazeStructureGeneratorFactory,
-                           MazeSolutionGeneratorFactory mazeSolutionGeneratorFactory)
+        public MazeCreator(MazeStructureGeneratorFactory mazeStructureGeneratorFactory, MazeSolutionGeneratorFactory mazeSolutionGeneratorFactory)
         {
             this._mazeStructureGeneratorFactory = mazeStructureGeneratorFactory;
             this._mazeSolutionGeneratorFactory = mazeSolutionGeneratorFactory;
@@ -34,7 +33,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeCreators
             Maze maze = CreateMaze(height, width, structureAlgorithm, rndSeed);
 
             MazeWithSolution mazeWithSolution = new MazeWithSolution(maze);
-            GenerateMazeSolution(mazeWithSolution, solutionAlgorithm, shouldExcludeCellsCloseToRoot);
+            GenerateMazeSolution(mazeWithSolution, solutionAlgorithm, shouldExcludeCellsCloseToRoot, rndSeed);
             return mazeWithSolution;
         }
 

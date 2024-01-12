@@ -29,10 +29,10 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
             StaffMember newStaffMember = new StaffMember()
             {
                 Id = Guid.NewGuid(),
-                Username = _staffMemberRegisterViewModel.Username,
-                Email = _staffMemberRegisterViewModel.Email,
-                Name = _staffMemberRegisterViewModel.Name,
-                Surname = _staffMemberRegisterViewModel.Surname,
+                Username = _staffMemberRegisterViewModel.Username.Trim(),
+                Email = _staffMemberRegisterViewModel.Email.Trim(),
+                Name = _staffMemberRegisterViewModel.Name.Trim(),
+                Surname = _staffMemberRegisterViewModel.Surname.Trim(),
                 PasswordHash = _staffMemberRegisterViewModel.Password
             };
 

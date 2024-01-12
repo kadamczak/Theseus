@@ -28,7 +28,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
             Patient newPatient = new Patient()
             {
                 Id = Guid.NewGuid(),
-                Username = _patientRegisterViewModel.PatientUsername
+                Username = _patientRegisterViewModel.PatientUsername.Trim()
             };
 
             string staffMemberUsername = _patientRegisterViewModel.GroupName;

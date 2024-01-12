@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.ExamRelated;
+﻿using System.ComponentModel.DataAnnotations;
+using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 
@@ -17,6 +18,9 @@ namespace Theseus.Domain.Models.ExamSetRelated
         /// <summary>
         /// Gets or sets displayable name of <c>ExamSet</c>.
         /// </summary>
+        [Required]
+        [StringLength(16)]
+        [RegularExpression(@"^[\w_]+$")]
         public string Name { get; set; } = default!;
 
         /// <summary>

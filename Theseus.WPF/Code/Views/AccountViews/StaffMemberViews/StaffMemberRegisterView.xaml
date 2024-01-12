@@ -43,7 +43,7 @@
 
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0 8 0 0">
             <TextBlock Text="{DynamicResource Email}" FontSize="20" Margin="0 0 0 10"/>
-            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="210" Style="{StaticResource GenericTextBox}"  MaxLength="30" />
+            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="210" Style="{StaticResource GenericTextBox}"  MaxLength="255" />
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0 8 0 0">

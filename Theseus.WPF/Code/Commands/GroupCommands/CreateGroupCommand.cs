@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,7 +44,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
             Group group = new Group()
             {
                 Id = Guid.NewGuid(),
-                Name = _staffMemberGroupsViewModel.GroupName,
+                Name = _staffMemberGroupsViewModel.GroupName.Trim(),
                 Owner = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException(),
                 StaffMembers = new List<StaffMember>() { _currentStaffMemberStore.StaffMember }
             };
@@ -54,7 +55,7 @@ namespace Theseus.WPF.Code.Commands.GroupCommands
                 _staffMemberGroupsViewModel.GroupName = "";
                 _staffMemberGroupsViewModel.ShowDetailsGroupCommandListViewModel.AddModelToActionableModels(group);
             }
-            catch(ArgumentException)
+            catch(DbUpdateException)
             {
                 string messageBoxText = "GroupAlreadyExists".Resource();
                 string caption = "ActionFailed".Resource();

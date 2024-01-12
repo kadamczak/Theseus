@@ -137,7 +137,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         private void LoadCurrentPatientInfoToViewModel()
         {
-            this._username = CurrentPatient.Username;
+            this._username = CurrentPatient.Username.Trim();
             this._age = Convert.ToString(CurrentPatient.Age);
             this._selectedSex = Sexes.Where(a => a.Value == CurrentPatient.Sex).First();
             this._selectedEducationLevel = EducationLevels.Where(a => a.Value == CurrentPatient.EducationLevel).First();

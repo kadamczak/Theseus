@@ -47,6 +47,9 @@ namespace Theseus.WPF.Code.Commands.SettingsCommands
                 return false;
             }
 
+            if (number < 0)
+                return false;
+
             return base.CanExecute(parameter);
         }
     }

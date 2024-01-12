@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.Models.MazeRelated.Enums;
+﻿using Theseus.Domain.Extensions;
+using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.Exceptions
@@ -46,39 +47,8 @@ namespace Theseus.Domain.Models.MazeRelated.Exceptions
         /// <param name="cell">Existing <c>Cell</c>.</param>
         /// <param name="directionOfNeighbour"><c>Direction</c> from existing <c>Cell</c> in which a <c>Cell</c> caused an exception.</param>
         public CellException(string message, Cell cell, Direction directionOfNeighbour) : this(message,
-                                                                                               CalculateRow(cell.RowIndex, directionOfNeighbour),
-                                                                                               CalculateColumn(cell.ColumnIndex, directionOfNeighbour)) { }
+                                                                                               directionOfNeighbour.CalculateRow(cell.RowIndex),
+                                                                                               directionOfNeighbour.CalculateColumn(cell.ColumnIndex)) { }
 
-        /// <summary>
-        /// Calculates neighbour row index in the specified <c>Direction</c> from the original row.
-        /// </summary>
-        /// <param name="originalRow">Original row index.</param>
-        /// <param name="directionOfNeighbour">Relative neighbour <c>Direction</c>.</param>
-        /// <returns>Neighbour row index in the specified <c>Direction</c> from the original row.</returns>
-        protected static int CalculateRow(int originalRow, Direction directionOfNeighbour)
-        {
-            return directionOfNeighbour switch
-            {
-                Direction.North => originalRow--,
-                Direction.South => originalRow++,
-                _ => originalRow
-            };
-        }
-
-        /// <summary>
-        /// Calculates neighbour column index in the specified <c>Direction</c> from the original column.
-        /// </summary>
-        /// <param name="originalColumn">Original column index.</param>
-        /// <param name="directionOfNeighbour">Relative neighbour <c>Direction</c>.</param>
-        /// <returns>>Neighbour column index in the specified <c>Direction</c> from the original column.</returns>
-        protected static int CalculateColumn(int originalColumn, Direction directionOfNeighbour)
-        {
-            return directionOfNeighbour switch
-            {
-                Direction.West => originalColumn--,
-                Direction.East => originalColumn++,
-                _ => originalColumn
-            };
-        }
     }
 }

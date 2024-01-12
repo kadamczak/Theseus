@@ -5,7 +5,6 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
-using Theseus.Domain.Services.Authentication.PatientAuthentication;
 
 namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 {
@@ -32,11 +31,7 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 
         public async Task<StaffMember> Login(string username, string password)
         {
-            StaffMember? existingAccount = await _getStaffMemberByUsernameQuery.GetStaffMember(username);
-            if (existingAccount is null)
-            {
-                throw new UserNotFoundException(username);
-            }
+            StaffMember? existingAccount = await _getStaffMemberByUsernameQuery.GetStaffMember(username) ?? throw new UserNotFoundException(username);
 
             PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(existingAccount.PasswordHash, password);
             if (passwordResult != PasswordVerificationResult.Success)

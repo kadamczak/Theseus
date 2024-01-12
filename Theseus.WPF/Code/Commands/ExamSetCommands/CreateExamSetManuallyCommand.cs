@@ -52,7 +52,7 @@ namespace Theseus.WPF.Code.Commands.ExamSetCommands
         {
             ExamSet examSet = new ExamSet(Guid.NewGuid())
             {
-                Name = _createSetManuallyViewModel.ExamSetName,
+                Name = _createSetManuallyViewModel.ExamSetName.Trim(),
                 StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException()
             };
 
