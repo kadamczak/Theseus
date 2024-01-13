@@ -48,7 +48,7 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
                 return;
             }
 
-            Cell? nextCell = currentCell.AdjecentCellSpaces[moveDirection];
+            Cell? nextCell = currentCell.GetAdjecentCellSpace(moveDirection);
             if (currentCell.IsLinked(nextCell))
             {
                 MoveTo(nextCell!, moveDirection);

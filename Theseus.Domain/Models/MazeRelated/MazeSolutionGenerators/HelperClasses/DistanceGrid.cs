@@ -37,7 +37,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
         private Cell FindCloserCellThan(Cell currentCell)
         {
             int currentCellDistance = Distance[currentCell];
-            foreach (var linkedCell in currentCell.LinkedCells)
+            foreach (var linkedCell in currentCell.GetLinkedCells())
             {
                 if (Distance[linkedCell] < currentCellDistance)
                 {

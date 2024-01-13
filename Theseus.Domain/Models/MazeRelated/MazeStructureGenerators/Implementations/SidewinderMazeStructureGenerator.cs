@@ -50,7 +50,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
         private void EndCellRun(List<Cell> cellRun, Random rnd)
         {
             Cell randomCell = cellRun.GetRandomItem(rnd);
-            Cell? northCell = randomCell.AdjecentCellSpaces[Direction.North];
+            Cell? northCell = randomCell.GetAdjecentCellSpace(Direction.North);
 
             if (northCell is not null)
             {

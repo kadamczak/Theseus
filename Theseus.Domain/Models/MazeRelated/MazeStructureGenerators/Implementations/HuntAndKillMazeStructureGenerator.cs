@@ -27,7 +27,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
             }
         }
 
-        private bool HasBeenVisited(Cell cell) => cell.LinkedCells.Any();
+        private bool HasBeenVisited(Cell cell) => cell.GetLinkedCells().Any();
 
         private IEnumerable<Cell> GetNeighbours(Cell cell, Func<Cell, bool> predicate) => cell.GetAdjecentCells().Where(predicate);
 

@@ -1,4 +1,5 @@
 ﻿
+using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
@@ -28,7 +29,7 @@ namespace Theseus.Domain.Models.MazeRelated.Exceptions
         /// </summary>
         /// <param name="cell">Existing <c>Cell</c>.</param>
         /// <param name="directionOfNeighbour"><c>Direction</c> from existing <c>Cell</c> in which the missing <c>Cell</c> was expected to be found.</param>
-        public CellDoesNotExistException(Cell cell, Direction directionOfNeighbour) : this(CalculateRow(cell.RowIndex, directionOfNeighbour),
-                                                                                           CalculateColumn(cell.ColumnIndex, directionOfNeighbour)) { }
+        public CellDoesNotExistException(Cell cell, Direction directionOfNeighbour) : this(directionOfNeighbour.CalculateRow(cell.RowIndex),
+                                                                                           directionOfNeighbour.CalculateColumn(cell.ColumnIndex)) { }
     }
 }

@@ -24,7 +24,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             foreach (var cell in frontier)
             {
                 int distanceOfLinkedCells = distanceGrid.Distance[cell] + 1;
-                foreach (var linkedCell in cell.LinkedCells)
+                foreach (var linkedCell in cell.GetLinkedCells())
                 {
                     AddToNextFrontierIfFirstVisit(distanceGrid, linkedCell, distanceOfLinkedCells, nextFrontier);
                 }

@@ -31,6 +31,6 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
             return neighbours.GetRandomItem(rnd);
         }
 
-        private bool IsUnvisited(Cell cell) => !cell.LinkedCells.Any();
+        private bool IsUnvisited(Cell cell) => !cell.GetLinkedCells().Any();
     }
 }

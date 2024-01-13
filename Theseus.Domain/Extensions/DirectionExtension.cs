@@ -2,8 +2,17 @@
 
 namespace Theseus.Domain.Extensions
 {
+    /// <summary>
+    /// Class containing extension methods for the Direction enum.
+    /// </summary>
     public static class DirectionExtension
     {
+        /// <summary>
+        /// Returns opposite <c>Direction</c> to <paramref name="self"/> - for example North turns into South.
+        /// </summary>
+        /// <param name="self">Original direction.</param>
+        /// <returns>Direction opposite to the original direction.</returns>
+        /// <exception cref="ArgumentNullException">If self is null.</exception>
         public static Direction Reverse(this Direction self)
         {
             return self switch
@@ -26,8 +35,8 @@ namespace Theseus.Domain.Extensions
         {
             return directionOfNeighbour switch
             {
-                Direction.North => originalRow--,
-                Direction.South => originalRow++,
+                Direction.North => originalRow - 1,
+                Direction.South => originalRow + 1,
                 _ => originalRow
             };
         }
@@ -42,8 +51,8 @@ namespace Theseus.Domain.Extensions
         {
             return directionOfNeighbour switch
             {
-                Direction.West => originalColumn--,
-                Direction.East => originalColumn++,
+                Direction.West => originalColumn - 1,
+                Direction.East => originalColumn + 1,
                 _ => originalColumn
             };
         }

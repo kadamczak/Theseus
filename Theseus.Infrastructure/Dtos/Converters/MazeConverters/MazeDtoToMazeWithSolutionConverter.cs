@@ -72,7 +72,7 @@ namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
             foreach (byte directionToNextCell in solutionAsBytes)
             {
                 Direction direction = (Direction)directionToNextCell;
-                Cell nextCell = currentCell.AdjecentCellSpaces[direction] ?? throw new CellDoesNotExistException(currentCell, direction);
+                Cell nextCell = currentCell.GetAdjecentCellSpace(direction) ?? throw new CellDoesNotExistException(currentCell, direction);
 
                 if (!currentCell.IsLinked(nextCell))
                     throw new SolutionCellsNotLinkedException(currentCell, nextCell);

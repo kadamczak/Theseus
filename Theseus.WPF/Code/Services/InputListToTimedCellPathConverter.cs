@@ -29,9 +29,9 @@ namespace Theseus.WPF.Code.Services
             {
                 currentTime += input.TimeBeforeStep;
 
-                if (currentCell.IsLinkedToNeighbourInDirection(input.StepTaken))
+                if (currentCell.IsLinkedToNeighbour(input.StepTaken))
                 {
-                    Cell nextCell = currentCell.AdjecentCellSpaces[input.StepTaken]!;
+                    Cell nextCell = currentCell.GetAdjecentCellSpace(input.StepTaken)!;
                     patientInputPath.Add(new TimedCell(currentTime, nextCell));
 
                     currentTime = 0f;

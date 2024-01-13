@@ -55,10 +55,10 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             if (!cell.HasNeighbour(Direction.West))
                 _lineDrawer.DrawLine(start.X, start.Y, start.X, end.Y, tag: CreateWallTag(cellTag, Direction.West));
 
-            if (!cell.IsLinkedToNeighbourInDirection(Direction.East))
+            if (!cell.IsLinkedToNeighbour(Direction.East))
                 _lineDrawer.DrawLine(end.X, start.Y, end.X, end.Y, tag: CreateWallTag(cellTag, Direction.East));
 
-            if (!cell.IsLinkedToNeighbourInDirection(Direction.South))
+            if (!cell.IsLinkedToNeighbour(Direction.South))
                 _lineDrawer.DrawLine(start.X, end.Y, end.X, end.Y, tag: CreateWallTag(cellTag, Direction.South));
         }
 

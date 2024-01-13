@@ -88,10 +88,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
                 int row = cell.RowIndex;
                 int col = cell.ColumnIndex;
 
-                cell.AdjecentCellSpaces[Direction.North] = GetCell(row - 1, col);
-                cell.AdjecentCellSpaces[Direction.South] = GetCell(row + 1, col);
-                cell.AdjecentCellSpaces[Direction.West] = GetCell(row, col - 1);
-                cell.AdjecentCellSpaces[Direction.East] = GetCell(row, col + 1);
+                cell.SetCellAsAdjecent(Direction.North, GetCell(row - 1, col), false);
+                cell.SetCellAsAdjecent(Direction.South, GetCell(row + 1, col), false);
+                cell.SetCellAsAdjecent(Direction.West, GetCell(row, col - 1), false);
+                cell.SetCellAsAdjecent(Direction.East, GetCell(row, col + 1), false);
             }
         }
 
