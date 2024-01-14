@@ -16,10 +16,10 @@ namespace Theseus.Domain.Models.GroupRelated
         public Guid Id { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets a displayable name of <c>Group</c>.
+        /// Gets or sets a displayable name of <c>Group</c>. Has to be 1-16 characters and conform to ^[\w_-]+$ regex.
         /// </summary>
         [Required]
-        [StringLength(16)]
+        [StringLength(16, MinimumLength = 1)]
         [RegularExpression(@"^[\w_-]+$")]
         public string Name { get; set; } = default!;
 

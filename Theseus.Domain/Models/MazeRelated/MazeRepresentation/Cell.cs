@@ -60,10 +60,26 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             ColumnIndex = colIndex;
         }
 
+        /// <summary>
+        /// Returns neighbour <c>Cell</c> in the <paramref name="direction"/> specified or null if space is empty.
+        /// </summary>
+        /// <param name="direction"><c>Direction</c> of the neighbour.</param>
+        /// <returns>Neighbour <c>Cell</c> in the <paramref name="direction"/> specified or null if space is empty.</returns>
         public Cell? GetAdjecentCellSpace(Direction direction) => this._adjecentCellSpaces[direction];
 
+        /// <summary>
+        /// Returns read only dictionary of adjecent cell spaces.
+        /// </summary>
+        /// <returns>Read only dictionary of adjecent cell spaces.</returns>
         public ReadOnlyDictionary<Direction, Cell?> GetAdjecentCellSpaces() => this._adjecentCellSpaces.AsReadOnly();
 
+        /// <summary>
+        /// Sets <paramref name="anotherCell"/> as an adjecent <c>Cell</c> at specified <c>Direction</c> depending on <paramref name="direction"/>.
+        /// </summary>
+        /// <param name="direction"><c>Direction</c> of <paramref name="anotherCell"/> from this <c>Cell</c>.</param>
+        /// <param name="anotherCell">Neighbour <c>Cell</c>.</param>
+        /// <param name="bidirectional">True if this method should also be called on <paramref name="anotherCell"/>.</param>
+        /// <exception cref="CellException">Thrown when <paramref name="anotherCell"/> indexes do not match <paramref name="direction"/>.</exception>
         public void SetCellAsAdjecent(Direction direction, Cell? anotherCell, bool bidirectional = true)
         {
             if (anotherCell is null)
@@ -84,6 +100,12 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
                 anotherCell.SetCellAsAdjecent(direction.Reverse(), this, false);
         }
 
+        /// <summary>
+        /// Sets <paramref name="anotherCell"/> as an adjecent <c>Cell</c>, with <c>Direction</c> depending on <paramref name="anotherCell"/> row and column indexes.
+        /// </summary>
+        /// <param name="anotherCell">Neighbour <c>Cell</c>.</param>
+        /// <param name="bidirectional">True if this method should also be called on <paramref name="anotherCell"/>.</param>
+        /// <exception cref="CellException">Thrown when <paramref name="anotherCell"/> indexes are not adjecent.</exception>
         public void SetCellAsAdjecent(Cell anotherCell, bool bidirectional = true)
         {
             int rowDifference = anotherCell.RowIndex - this.RowIndex;
@@ -100,6 +122,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
                 anotherCell.SetCellAsAdjecent(direction.Reverse(), this, false);
         }
 
+        /// <summary>
+        /// Returns true if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>, edges including.
+        /// </summary>
+        /// <param name="value">Checked value.</param>
+        /// <param name="min">Beginning of range.</param>
+        /// <param name="max">End of range.</param>
+        /// <returns>True if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>, edges including.</returns>
         private bool IsInRange(int value, int min, int max) => value >= min && value <= max;
 
         /// <summary>
@@ -122,6 +151,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             };
         }
 
+        /// <summary>
+        /// Returns a read only list of cells linked to this cell.
+        /// </summary>
+        /// <returns>Read only list of cells linked to this cell.</returns>
         public IEnumerable<Cell> GetLinkedCells() => this._linkedCells.AsReadOnly();
 
         /// <summary>

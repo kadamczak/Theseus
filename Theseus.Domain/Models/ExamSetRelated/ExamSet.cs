@@ -16,10 +16,10 @@ namespace Theseus.Domain.Models.ExamSetRelated
         public Guid Id { get; set; } = default;
 
         /// <summary>
-        /// Gets or sets displayable name of <c>ExamSet</c>.
+        /// Gets or sets displayable name of <c>ExamSet</c>. Has to be 1-16 characters and conform to ^[\w_]+$ regex.
         /// </summary>
         [Required]
-        [StringLength(16)]
+        [StringLength(16, MinimumLength = 1)]
         [RegularExpression(@"^[\w_]+$")]
         public string Name { get; set; } = default!;
 

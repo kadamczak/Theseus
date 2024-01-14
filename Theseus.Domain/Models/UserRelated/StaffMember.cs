@@ -16,13 +16,13 @@ namespace Theseus.Domain.Models.UserRelated
         public Guid Id { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets the username of the account.
+        /// Gets or sets the username of the account. Has to be 1-16 characters and conform to ^[\w_]+$ regex.
         /// </summary>
         /// <remarks>
         /// The username is unique across the entire <c>StaffMember</c> database.
         /// </remarks>
         [Required]
-        [StringLength(16)]
+        [StringLength(16, MinimumLength = 1)]
         [RegularExpression(@"^[\w_]+$")]
         public string Username { get; set; } = default!;
 
@@ -33,7 +33,7 @@ namespace Theseus.Domain.Models.UserRelated
         public string PasswordHash { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets the e-mail of <c>StaffMember</c> account owner.
+        /// Gets or sets the e-mail of <c>StaffMember</c> account owner. Has to be 1-255 characters and be a valid email.
         /// </summary>
         [Required]
         [EmailAddress]
@@ -41,14 +41,14 @@ namespace Theseus.Domain.Models.UserRelated
         public string Email { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets first name of <c>StaffMember</c> account owner.
+        /// Gets or sets first name of <c>StaffMember</c> account owner. Has to be 1-30 characters.
         /// </summary>
         [Required]
         [StringLength(30)]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets surname of <c>StaffMember</c> account owner.
+        /// Gets or sets surname of <c>StaffMember</c> account owner. Has to be 1-30 characters.
         /// </summary>
         [Required]
         [StringLength(30)]

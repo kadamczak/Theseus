@@ -15,19 +15,18 @@ namespace Theseus.Domain.Models.UserRelated
         public Guid Id { get; set; } = default!;
 
         /// <summary>
-        /// Gets or sets the username of the account. Throws ArgumentException if username is empty/whitespace, is too long or contains
-        /// invalid characters.
+        /// Gets or sets the username of the account. Has to be 1-16 characters and conform to ^[\w_]+$ regex.
         /// </summary>
         /// <remarks>
         /// The username is unique across the entire <c>Patient</c> database.
         /// </remarks>
         [Required]
-        [StringLength(16)]
+        [StringLength(16, MinimumLength = 1)]
         [RegularExpression(@"^[\w_]+$")]
         public string Username { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the age of the <c>Patient</c>.
+        /// Gets or sets the age of the <c>Patient</c>. Has to be a null or an int between the values of 0 and 125, edges including.
         /// </summary>
         /// <remarks>
         /// Age does not have to be specified. It is represented as a null in that case.

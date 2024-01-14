@@ -12,7 +12,7 @@ namespace Theseus.Domain.Extensions
         /// </summary>
         /// <param name="self">Original direction.</param>
         /// <returns>Direction opposite to the original direction.</returns>
-        /// <exception cref="ArgumentNullException">If self is null.</exception>
+        /// <exception cref="NullReferenceException">If self is null.</exception>
         public static Direction Reverse(this Direction self)
         {
             return self switch
@@ -21,7 +21,7 @@ namespace Theseus.Domain.Extensions
                 Direction.South => Direction.North,
                 Direction.East => Direction.West,
                 Direction.West => Direction.East,
-                _ => throw new ArgumentNullException("Can't reverse null Direction.")
+                _ => throw new NullReferenceException("Can't reverse null Direction.")
             };
         }
 

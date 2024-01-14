@@ -38,7 +38,14 @@ namespace Theseus.Domain.Models.ExamRelated
         /// </remarks>
         public float TimeBeforeStep { get; set; } = default!;
 
+        /// <summary>
+        /// Gets or sets whether move was correct with the maze's solution.
+        /// </summary>
         public bool Correct { get; set; } = default!;
+
+        /// <summary>
+        /// Gets or sets whether move hit the maze's walls.
+        /// </summary>
         public bool HitWall { get; set; } = default!;
 
         /// <summary>
