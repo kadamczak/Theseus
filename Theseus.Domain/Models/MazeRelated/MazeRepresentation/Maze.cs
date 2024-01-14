@@ -27,9 +27,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         public int CellAmount { get; }
 
         /// <summary>
-        /// Gets a 2D matrix of <c>Cell</c> objects that form the <c>Maze</c>.
+        /// 2D matrix of <c>Cell</c> objects that form the <c>Maze</c>.
         /// </summary>
-        List<List<Cell>> CellMatrix { get; } = new List<List<Cell>>();
+        private List<List<Cell>> _cellMatrix = new List<List<Cell>>();
 
         /// <summary>
         /// Initializes <c>Maze</c> with an amount of rows and amount of columns.
@@ -54,13 +54,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         }
 
         /// <summary>
-        /// Initializes <see cref="CellMatrix"/>.
+        /// Initializes <see cref="_cellMatrix"/>.
         /// </summary>
         private void CreateCellMatrix()
         {
             for (int row = 0; row < RowAmount; row++)
             {
-                CellMatrix.Add(new List<Cell>());
+                _cellMatrix.Add(new List<Cell>());
                 FillRowWithCells(row);
             }
         }
@@ -74,7 +74,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             for (int col = 0; col < ColumnAmount; col++)
             {
                 Cell newCell = new Cell(row, col);
-                CellMatrix[row].Add(newCell);
+                _cellMatrix[row].Add(newCell);
             }
         }
 
@@ -96,15 +96,15 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         }
 
         /// <summary>
-        /// Yields a <c>Cell</c> from <see cref="CellMatrix"/>.
+        /// Yields a <c>Cell</c> from <see cref="_cellMatrix"/>.
         /// </summary>
         /// <remarks>
         /// Travels from left to right, top to bottom.
         /// </remarks>
-        /// <returns><c>Cell</c> from <see cref="CellMatrix"/>.</returns>
+        /// <returns><c>Cell</c> from <see cref="_cellMatrix"/>.</returns>
         public IEnumerator<Cell> GetEnumerator()
         {
-            foreach (var matrixRow in CellMatrix)
+            foreach (var matrixRow in _cellMatrix)
             {
                 foreach (var cell in matrixRow)
                 {
@@ -116,43 +116,43 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
-        /// Yields row of <see cref="CellMatrix"/>.
+        /// Yields row of <see cref="_cellMatrix"/>.
         /// </summary>
-        /// <returns><see cref="CellMatrix"/> row.</returns>
+        /// <returns><see cref="_cellMatrix"/> row.</returns>
         public IEnumerable<List<Cell>> IterateRows()
         {
-            foreach (List<Cell> row in CellMatrix)
+            foreach (List<Cell> row in _cellMatrix)
             {
                 yield return row;
             }
         }
 
         /// <summary>
-        /// Returns a <c>Cell</c> from <see cref="CellMatrix"/> with the specified coordinates.
+        /// Returns a <c>Cell</c> from <see cref="_cellMatrix"/> with the specified coordinates.
         /// </summary>
         /// <param name="coordinates">Coordinates consisting of row index and height index.</param>
-        /// <returns><c>Cell</c> from <see cref="CellMatrix"/> with the specified coordinates or null if it is not found.</returns>
+        /// <returns><c>Cell</c> from <see cref="_cellMatrix"/> with the specified coordinates or null if it is not found.</returns>
         public Cell? GetCell((int Row, int Column) coordinates) => this.GetCell(coordinates.Row, coordinates.Column);
 
         /// <summary>
-        /// Returns a <c>Cell</c> from <see cref="CellMatrix"/> with the specified coordinates.
+        /// Returns a <c>Cell</c> from <see cref="_cellMatrix"/> with the specified coordinates.
         /// </summary>
         /// <param name="row">Row index.</param>
         /// <param name="column">Column index.</param>
-        /// <returns><c>Cell</c> from <see cref="CellMatrix"/> with the specified coordinates or null if it is not found.</returns>
+        /// <returns><c>Cell</c> from <see cref="_cellMatrix"/> with the specified coordinates or null if it is not found.</returns>
         public Cell? GetCell(int row, int column)
         {
             if (row < 0 || row >= RowAmount) return null;
             if (column < 0 || column >= ColumnAmount) return null;
 
-            return CellMatrix[row][column];
+            return _cellMatrix[row][column];
         }
 
         /// <summary>
-        /// Gets a random <c>Cell</c> from <see cref="CellMatrix"/>.
+        /// Gets a random <c>Cell</c> from <see cref="_cellMatrix"/>.
         /// </summary>
         /// <param name="rnd">Random seed.</param>
-        /// <returns>Random <c>Cell</c> from <see cref="CellMatrix"/>.</returns>
+        /// <returns>Random <c>Cell</c> from <see cref="_cellMatrix"/>.</returns>
         public Cell GetRandomCell(Random rnd)
         {
             int rowIndex = rnd.Next(0, RowAmount);
@@ -162,10 +162,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         }
 
         /// <summary>
-        /// Gets <c>Cell</c>s from <see cref="CellMatrix"/> that are on the border of the <c>Maze</c>.
+        /// Gets <c>Cell</c>s from <see cref="_cellMatrix"/> that are on the border of the <c>Maze</c>.
         /// </summary>
-        /// <returns><c>Cell</c>s from <see cref="CellMatrix"/> that are on the border of the <c>Maze</c>.</returns>
-        public IEnumerable<Cell> GetBorderCells() => this.Where(c => c.IsOnBorder(RowAmount, CellAmount));
+        /// <returns><c>Cell</c>s from <see cref="_cellMatrix"/> that are on the border of the <c>Maze</c>.</returns>
+        public IEnumerable<Cell> GetBorderCells() => this.Where(c => c.IsOnBorder(RowAmount, ColumnAmount));
 
         /// <summary>
         /// Returns <paramref name="cellList"/> with the exclusion of <c>Cell</c>s that are too close to <paramref name="rootCell"/>.
