@@ -3,6 +3,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.DbContexts
 {
+    /// <summary>
+    /// Class defining communication with the Theseus database.
+    /// </summary>
     public class TheseusDbContext : DbContext
     {
         public TheseusDbContext(DbContextOptions options) : base(options) { }

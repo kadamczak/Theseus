@@ -6,6 +6,9 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 {
+    /// <summary>
+    /// Helper class for the IMapper. Converts <c>MazeDto</c> to <c>MazeWithSolution</c>.
+    /// </summary>
     public class MazeDtoToMazeWithSolutionConverter : ITypeConverter<MazeDto, MazeWithSolution>
     {
         Direction[] directions = new Direction[2] { Direction.South, Direction.East };

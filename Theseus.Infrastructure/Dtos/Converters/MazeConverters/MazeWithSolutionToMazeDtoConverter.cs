@@ -5,6 +5,10 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
 {
+    /// <summary>
+    /// Helper class for the IMapper. Converts <c>MazeWithSolution</c> to <c>MazeDto</c>.
+    /// Does not include Owner and ExamSetDto_MazeDto conversion.
+    /// </summary>
     public class MazeWithSolutionToMazeDtoConverter : ITypeConverter<MazeWithSolution, MazeDto>
     {
         readonly Direction[] directions = new Direction[4] { Direction.West, Direction.North, Direction.East, Direction.South };

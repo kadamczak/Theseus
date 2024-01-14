@@ -2,6 +2,9 @@
 
 namespace Theseus.Infrastructure.Dtos
 {
+    /// <summary>
+    /// Class representing <c>Group</c> structure as a database entry.
+    /// </summary>
     public class GroupDto
     {
         [Key]

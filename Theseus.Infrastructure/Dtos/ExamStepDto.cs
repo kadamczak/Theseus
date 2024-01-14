@@ -1,5 +1,8 @@
 ﻿namespace Theseus.Infrastructure.Dtos
 {
+    /// <summary>
+    /// Class representing <c>ExamStep</c> structure as a database entry.
+    /// </summary>
     public class ExamStepDto
     {
         public Guid Id { get; set; } = default!;

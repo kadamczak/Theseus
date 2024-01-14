@@ -2,6 +2,9 @@
 
 namespace Theseus.Infrastructure.Dtos
 {
+    /// <summary>
+    /// Class representing <c>Patient</c> structure as a database entry.
+    /// </summary>
     public class PatientDto
     {
         [Key]

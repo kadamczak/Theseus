@@ -9,6 +9,9 @@ using Theseus.Domain.Models.ExamRelated;
 
 namespace Theseus.Infrastructure.Mappings
 {
+    /// <summary>
+    /// Class defining IMapper configuration for Theseus database.
+    /// </summary>
     public class TheseusMappingProfile : Profile
     {
         public TheseusMappingProfile()

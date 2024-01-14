@@ -2,6 +2,9 @@
 
 namespace Theseus.Infrastructure.Dtos
 {
+    /// <summary>
+    /// Class representing <c>ExamSetMazeIndex</c> structure as a database entry.
+    /// </summary>
     public class ExamSetDto_MazeDto
     {
         [Key]

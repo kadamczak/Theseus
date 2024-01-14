@@ -3,6 +3,9 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Infrastructure.Dtos
 {
+    /// <summary>
+    /// Class representing <c>MazeWithSolution</c> structure as a database entry.
+    /// </summary>
     public class MazeDto
     {
         [Key]
@@ -20,31 +23,7 @@ namespace Theseus.Infrastructure.Dtos
 
         public virtual StaffMemberDto Owner { get; set; } = default!;
 
-
         public virtual ICollection<ExamSetDto_MazeDto> ExamSetDto_MazeDto { get; set; } = default!;
-        //public virtual IEnumerable<ExamSetDto> ExamSetDtos
-        //{
-        //    get { return ExamSetDto_MazeDto.Select(t => t.ExamSetDto); }
-        //}
-
-
-        public MazeDto(Guid? id)
-        {
-            Id = id;
-        }
-
-        public MazeDto(Guid? id, int height, int width, byte[] structure, int solutionStartRow, int solutionStartColumn, byte[] solution, byte startDirection, byte endDirection)
-        {
-            Id = id;
-            Height = height;
-            Width = width;
-            Structure = structure;
-            SolutionStartRow = solutionStartRow;
-            SolutionStartColumn = solutionStartColumn;
-            Solution = solution;
-            StartDirection = startDirection;
-            EndDirection = endDirection;
-        }
 
         public MazeDto(MazeWithSolution maze, byte[] structureAsBytes, byte[] solutionAsBytes)
         {
