@@ -6,11 +6,9 @@ using Theseus.Domain.Models.MazeRelated.Exceptions;
 namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
 {
     /// <summary>
-    /// The <c>Cell</c> cell represents a single cell in a <c>Maze</c>.
+    /// The <c>Cell</c> class represents a single cell in a <c>Maze</c>, which can be linked to other adjecent <c>Cell</c>s,
+    /// creating a travel path between them.
     /// </summary>
-    /// <remarks>
-    /// This class is responsible for creating/removing links between <c>Cell</c>s.
-    /// </remarks>
     public class Cell
     {
         /// <summary>

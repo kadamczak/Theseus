@@ -22,7 +22,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
         public abstract void GenerateSolutionInMaze(MazeWithSolution maze, int? rndSeed = null);
         protected Random CreateRandom(int? rndSeed = null) => (rndSeed is null) ? new Random() : new Random(rndSeed.Value);
 
-        protected Direction ChooseRandomExitDirection(Cell cell, Random rnd) => GetAdjecentEmptySpaces(cell).GetRandomItem(rnd);
-        private IEnumerable<Direction> GetAdjecentEmptySpaces(Cell cell) => cell.GetAdjecentCellSpaces().Where(c => c.Value == null).ToDictionary(x => x.Key, x => x.Value).Keys;
+        protected Direction ChooseRandomExitDirection(Cell cell, Random rnd) => GetAdjecentEmptySpaceDirections(cell).GetRandomItem(rnd);
+        private IEnumerable<Direction> GetAdjecentEmptySpaceDirections(Cell cell) => cell.GetAdjecentCellSpaces().Where(c => c.Value == null).ToDictionary(x => x.Key, x => x.Value).Keys;
     }
 }

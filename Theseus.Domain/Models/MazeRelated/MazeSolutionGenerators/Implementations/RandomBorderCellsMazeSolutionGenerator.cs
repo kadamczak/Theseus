@@ -4,6 +4,9 @@ using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementations
 {
+    /// <summary>
+    /// The <c>RandomBorderCellsMazeSolutionGenerator</c> class generates random solution in <c>MazeWithSolution</c>.
+    /// </summary>
     public class RandomBorderCellsMazeSolutionGenerator : MazeSolutionGeneratorBase
     {
         public RandomBorderCellsMazeSolutionGenerator(DistanceGridFactory distanceGridFactory, bool shouldExcludeCellsCloseToRoot)

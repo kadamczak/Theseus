@@ -4,6 +4,9 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
+    /// <summary>
+    /// The <c>KruskalMazeStructureGenerator</c> class applies Kruskal's algorithm on <c>Maze</c>.
+    /// </summary>
     public class KruskalMazeStructureGenerator : MazeStructureGeneratorBase
     {
         public override void GenerateMazeStructureInGrid(Maze mazeGrid, int? rndSeed = null)

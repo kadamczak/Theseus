@@ -4,6 +4,9 @@ using Theseus.Domain.Models.MazeRelated.MazeStructureGenerators;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeGenerators
 {
+    /// <summary>
+    /// The <c>MazeStructureGeneratorBase</c> creates objects of classes deriving from <c>MazeStructureGeneratorBase</c>.
+    /// </summary>
     public class MazeStructureGeneratorFactory
     {
         public MazeStructureGeneratorBase Create(MazeStructureGenAlgorithm algorithm)

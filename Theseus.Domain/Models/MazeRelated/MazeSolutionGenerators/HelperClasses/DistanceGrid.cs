@@ -2,6 +2,9 @@
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
+    /// <summary>
+    /// The <c>DistanceGrid</c> class contains distances of other <c>Cell</c>s in a <c>Maze</c> relative to a specific root <c>Cell</c>.
+    /// </summary>
     public class DistanceGrid
     {
         public Cell RootCell { get; }

@@ -8,6 +8,9 @@ using Theseus.Domain.QueryInterfaces.PatientQueryInterfaces;
 
 namespace Theseus.Domain.Services.Authentication.PatientAuthentication
 {
+    /// <summary>
+    /// The <c>PatientAuthenticationService</c> class implements <c>Patient</c> login and registration.
+    /// </summary>
     public class PatientAuthenticationService : IPatientAuthenticationService
     {
         private readonly IGetPatientByUsernameQuery _getPatientByUsernameQuery;

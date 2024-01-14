@@ -4,6 +4,9 @@ using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementations
 {
+    /// <summary>
+    /// The <c>DijkstraMazeSolutionGenerator</c> class generates longest possible path solution in <c>MazeWithSolution</c>.
+    /// </summary>
     public class DijkstraMazeSolutionGenerator : MazeSolutionGeneratorBase
     {
         public DijkstraMazeSolutionGenerator(DistanceGridFactory distanceGridFactory, bool shouldExcludeCellsCloseToRoot)

@@ -3,6 +3,9 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
+    /// <summary>
+    /// The <c>HuntAndKillMazeStructureGenerator</c> class applies the Hunt-and-Kill algorithm on <c>Maze</c>.
+    /// </summary>
     public class HuntAndKillMazeStructureGenerator : MazeStructureGeneratorBase
     {
         public override void GenerateMazeStructureInGrid(Maze mazeGrid, int? rndSeed = null)

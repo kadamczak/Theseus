@@ -8,6 +8,9 @@ using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
 
 namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 {
+    /// <summary>
+    /// The <c>StaffMemberAuthenticationService</c> class implements <c>StaffMember</c> login and registration.
+    /// </summary>
     public class StaffMemberAuthenticationService : IStaffMemberAuthenticationService
     {
         private readonly IGetStaffMemberByUsernameQuery _getStaffMemberByUsernameQuery;

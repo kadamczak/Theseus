@@ -5,6 +5,9 @@ using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeCreators
 {
+    /// <summary>
+    /// The <c>MazeCreator</c> class can create complete <c>Maze</c> and <c>MazeWithSolution</c> objects.
+    /// </summary>
     public class MazeCreator
     {
         private readonly MazeStructureGeneratorFactory _mazeStructureGeneratorFactory;

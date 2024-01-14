@@ -2,6 +2,9 @@
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
+    /// <summary>
+    /// The <c>DistanceGridFactory</c> class separates <c>DistanceGrid</c> creation logic.
+    /// </summary>
     public class DistanceGridFactory
     {
         public DistanceGrid CreateDistanceGrid(Cell rootCell)

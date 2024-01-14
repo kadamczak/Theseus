@@ -4,6 +4,9 @@ using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementations;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
 {
+    /// <summary>
+    /// The <c>MazeSolutionGeneratorFactory</c> creates objects of classes deriving from <c>MazeSolutionGeneratorBase</c>.
+    /// </summary>
     public class MazeSolutionGeneratorFactory
     {
         private readonly DistanceGridFactory _distanceGridFactory;

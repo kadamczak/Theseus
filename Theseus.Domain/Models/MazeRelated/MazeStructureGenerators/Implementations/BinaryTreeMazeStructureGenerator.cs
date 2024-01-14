@@ -4,6 +4,9 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementations
 {
+    /// <summary>
+    /// The <c>BinaryMazeStructureGenerator</c> class applies the Binary algorithm on <c>Maze</c>.
+    /// </summary>
     public class BinaryTreeMazeStructureGenerator : MazeStructureGeneratorBase
     {
         public override void GenerateMazeStructureInGrid(Maze mazeGrid, int? rndSeed = null)
