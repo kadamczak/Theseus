@@ -6,6 +6,11 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.ExamCommands
 {
+    /// <summary>
+    /// Class implementing <c>Exam</c> creation method,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// All objects linked by foreign key need to already exist in database.
+    /// </summary>
     public class CreateExamCommand : Command, ICreateExamCommand
     {
         public CreateExamCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

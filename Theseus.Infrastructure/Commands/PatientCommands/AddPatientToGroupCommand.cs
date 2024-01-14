@@ -6,6 +6,11 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.PatientCommands
 {
+    /// <summary>
+    /// Class implementing <c>Patient</c> addition to <c>Group</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// All objects linked by foreign key need to already exist in database.
+    /// </summary>
     public class AddPatientToGroupCommand : PatientCommand, IAddPatientToGroupCommand
     {
         public AddPatientToGroupCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

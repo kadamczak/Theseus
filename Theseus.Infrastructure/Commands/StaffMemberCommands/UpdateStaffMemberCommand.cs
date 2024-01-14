@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.DbContexts;
@@ -7,6 +6,11 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.StaffMemberCommands
 {
+    /// <summary>
+    /// Class implementing <c>StaffMember/c> data update method,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// All objects linked by foreign key need to already exist in database.
+    /// </summary>
     public class UpdateStaffMemberCommand : StaffMemberCommand, IUpdateStaffMemberCommand
     {
         public UpdateStaffMemberCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
@@ -17,12 +21,6 @@ namespace Theseus.Infrastructure.Commands.StaffMemberCommands
         {
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
-                StaffMemberDto? staffMemberWithSameEmail = context.StaffMembers.AsNoTracking().FirstOrDefault(s => s.Email == staffMember.Email);
-                if (staffMemberWithSameEmail is not null && staffMemberWithSameEmail.Id != staffMember.Id)
-                {
-                    throw new ArgumentException("Email is already taken.");
-                }
-
                 StaffMemberDto staffMemberDto = new StaffMemberDto();
                 Mapper.Map(staffMember, staffMemberDto);
                 AttachRelatedEntities(staffMemberDto, context);

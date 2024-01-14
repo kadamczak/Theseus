@@ -28,7 +28,7 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand GoBack { get; }
 
         public MazeDetailsViewModel(SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> mazeDetailsStore,
-                                    ICreateOrUpdateMazeWithSolutionCommand createMazeCommand,
+                                    ICreateMazeWithSolutionCommand createMazeCommand,
                                     MazeReturnServiceStore mazeReturnServiceStore)
         {
             CanSaveMaze = mazeDetailsStore.SelectedModel.MazeWithSolution.Id is null;

@@ -21,7 +21,6 @@ namespace Theseus.WPF.Code.HostBuilders
         {
             hostBuilder.ConfigureServices((context, services) =>
             {
-                services.AddSingleton<ICreateOrUpdateMazeWithSolutionCommand, CreateOrUpdateMazeWithSolutionCommand>();
                 services.AddSingleton<ICreateMazeWithSolutionCommand, CreateMazeWithSolutionCommand>();
                 services.AddSingleton<ICreateExamSetCommand, CreateExamSetCommand>();
                 services.AddSingleton<ICreateStaffMemberCommand, CreateStaffMemberCommand>();

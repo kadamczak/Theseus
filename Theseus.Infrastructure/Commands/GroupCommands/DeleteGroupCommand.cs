@@ -6,6 +6,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.GroupCommands
 {
+    /// <summary>
+    /// Class implementing <c>Group</c> deletion method,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class DeleteGroupCommand : GroupCommand, IDeleteGroupCommand
     {
         public DeleteGroupCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

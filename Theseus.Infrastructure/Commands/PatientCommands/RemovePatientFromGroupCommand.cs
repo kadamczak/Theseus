@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.PatientCommands
 {
+    /// <summary>
+    /// Class implementing method of <c>Patient</c> removal from <c>Group</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class RemovePatientFromGroupCommand : PatientCommand, IRemovePatientFromGroupCommand
     {
         public RemovePatientFromGroupCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

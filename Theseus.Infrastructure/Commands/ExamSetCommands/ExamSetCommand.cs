@@ -4,6 +4,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// Abstract class defining attachment of related entities to the <c>ExamSetDto</c>.
+    /// </summary>
     public abstract class ExamSetCommand : Command
     {
         protected ExamSetCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
@@ -16,28 +19,31 @@ namespace Theseus.Infrastructure.Commands.ExamSetCommands
                 context.Attach(examSetDto.Owner);
 
             if (examSetDto.ExamSetDto_MazeDto is not null)
-            {
-                foreach (var maze in examSetDto.ExamSetDto_MazeDto!)
-                {
-                    context.Attach(maze);
-                }
-            }
+                AttachExamSetDto_MazeDto(examSetDto, context);
 
             if (examSetDto.GroupDtos is not null)
-            {
-                foreach (var group in examSetDto.GroupDtos)
-                {
-                    context.Attach(group);
-                }
-            }
+                AttachGroupDtos(examSetDto, context);
 
             if (examSetDto.ExamDtos is not null)
-            {
-                foreach (var exam in examSetDto.ExamDtos)
-                {
-                    context.Attach(exam);
-                }
-            }
+                AttachExamDtos(examSetDto, context);
+        }
+
+        private void AttachExamSetDto_MazeDto(ExamSetDto examSetDto, TheseusDbContext context)
+        {
+            foreach (var maze in examSetDto.ExamSetDto_MazeDto!)
+                context.Attach(maze);
+        }
+
+        private void AttachGroupDtos(ExamSetDto examSetDto, TheseusDbContext context)
+        {
+            foreach (var group in examSetDto.GroupDtos)
+                context.Attach(group);
+        }
+
+        private void AttachExamDtos(ExamSetDto examSetDto, TheseusDbContext context)
+        {
+            foreach (var exam in examSetDto.ExamDtos)
+                context.Attach(exam);
         }
     }
 }

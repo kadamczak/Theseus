@@ -5,6 +5,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.MazeCommands
 {
+    /// <summary>
+    /// Class implementing <c>MazeWithSolution</c> deletion method,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class DeleteMazeWithSolutionCommand : MazeCommand, IDeleteMazeWithSolutionCommand
     {
         public DeleteMazeWithSolutionCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

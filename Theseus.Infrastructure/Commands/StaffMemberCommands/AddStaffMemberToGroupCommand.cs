@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.StaffMemberCommands
 {
+    /// <summary>
+    /// Class implementing <c>StaffMember</c> addition to <c>Group</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class AddStaffMemberToGroupCommand : StaffMemberCommand, IAddStaffMemberToGroupCommand
     {
         public AddStaffMemberToGroupCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

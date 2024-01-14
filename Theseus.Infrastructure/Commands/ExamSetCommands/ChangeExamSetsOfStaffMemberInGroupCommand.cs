@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// Class implementing change of <c>ExamSet</c> selection by <c>StaffMember</c> in <c>Group</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class ChangeExamSetsOfStaffMemberInGroupCommand : ExamSetCommand, IChangeExamSetsOfStaffMemberInGroupCommand
     {
         public ChangeExamSetsOfStaffMemberInGroupCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

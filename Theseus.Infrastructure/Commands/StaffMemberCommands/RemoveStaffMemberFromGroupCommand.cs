@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.StaffMemberCommands
 {
+    /// <summary>
+    /// Class implementing method of <c>StaffMember</c> removal from <c>Group</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class RemoveStaffMemberFromGroupCommand : StaffMemberCommand, IRemoveStaffMemberFromGroupCommand
     {
         public RemoveStaffMemberFromGroupCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

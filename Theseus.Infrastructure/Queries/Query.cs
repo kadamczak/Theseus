@@ -3,6 +3,9 @@ using Theseus.Infrastructure.DbContexts;
 
 namespace Theseus.Infrastructure.Queries
 {
+    /// <summary>
+    /// Abstract class defining usage of <c>TheseusDbContextFactory</c> and <c>IMapper</c>.
+    /// </summary>
     public abstract class Query
     {
         protected TheseusDbContextFactory DbContextFactory { get; }

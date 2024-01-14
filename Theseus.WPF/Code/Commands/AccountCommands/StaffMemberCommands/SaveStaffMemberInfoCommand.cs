@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
                 _staffMemberDetailsLoggedInViewModel.UpdateCurrentStaffMemberInfoFromViewModel();
                 await _updateStaffMemberCommand.Update(_staffMemberDetailsLoggedInViewModel.CurrentStaffMember);
             }
-            catch(ArgumentException)
+            catch(DbUpdateException)
             {
                 string messageBoxText = "EmailAlreadyExists".Resource();
                 string caption = "ActionFailed".Resource();

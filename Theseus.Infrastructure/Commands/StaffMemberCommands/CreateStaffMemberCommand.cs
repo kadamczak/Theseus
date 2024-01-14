@@ -6,6 +6,11 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.StaffMemberCommands
 {
+    /// <summary>
+    /// Class implementing <c>StaffMember</c> creation method,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// All objects linked by foreign key need to already exist in database.
+    /// </summary>
     public class CreateStaffMemberCommand : StaffMemberCommand, ICreateStaffMemberCommand
     {
         public CreateStaffMemberCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

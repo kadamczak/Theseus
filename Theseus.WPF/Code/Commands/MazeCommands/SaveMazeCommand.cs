@@ -14,13 +14,13 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
     {
         private readonly MazeDetailsViewModel _mazeDetailsViewModel;
         private readonly SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> _mazeDetailsStore;
-        private readonly ICreateOrUpdateMazeWithSolutionCommand _createOrUpdateMazeCommand;
+        private readonly ICreateMazeWithSolutionCommand _createMazeCommand;
 
-        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> mazeDetailsStore, ICreateOrUpdateMazeWithSolutionCommand createOrUpdateMazeCommand)
+        public SaveMazeCommand(MazeDetailsViewModel mazeDetailViewModel, SelectedModelDetailsStore<MazeWithSolutionCanvasViewModel> mazeDetailsStore, ICreateMazeWithSolutionCommand createOrUpdateMazeCommand)
         {
             _mazeDetailsViewModel = mazeDetailViewModel;
             _mazeDetailsStore = mazeDetailsStore;
-            _createOrUpdateMazeCommand = createOrUpdateMazeCommand;
+            _createMazeCommand = createOrUpdateMazeCommand;
 
             _mazeDetailsViewModel.PropertyChanged += ViewModelPropertyChanged;
         }
@@ -35,7 +35,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
         {
             try
             {
-                await _createOrUpdateMazeCommand.CreateOrUpdateMazeWithSolution(_mazeDetailsStore.SelectedModel.MazeWithSolution);
+                await _createMazeCommand.Create(_mazeDetailsStore.SelectedModel.MazeWithSolution);
             }
             catch(SqlException)
             {

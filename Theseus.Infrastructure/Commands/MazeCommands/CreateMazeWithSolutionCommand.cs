@@ -6,6 +6,11 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.MazeCommands
 {
+    /// <summary>
+    /// Class implementing <c>MazeWithSolution</c> creation method,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// All objects linked by foreign key need to already exist in database.
+    /// </summary>
     public class CreateMazeWithSolutionCommand : MazeCommand, ICreateMazeWithSolutionCommand
     {
         public CreateMazeWithSolutionCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

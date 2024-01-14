@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// Class implementing removal of <c>ExamSet</c> from <c>Group</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class RemoveExamSetFromGroupCommand : ExamSetCommand, IRemoveExamSetFromGroupCommand
     {
         public RemoveExamSetFromGroupCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

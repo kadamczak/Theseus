@@ -3,6 +3,9 @@ using Theseus.Infrastructure.DbContexts;
 
 namespace Theseus.Infrastructure.Commands
 {
+    /// <summary>
+    /// Abstract class defining usage of <c>TheseusDbContextFactory</c> and <c>IMapper</c>.
+    /// </summary>
     public abstract class Command
     {
         protected TheseusDbContextFactory DbContextFactory { get; }

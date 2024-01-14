@@ -5,6 +5,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.ExamCommands
 {
+    /// <summary>
+    /// Class implementing <c>Exam</c> deletion method,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class DeleteExamCommand : Command, IDeleteExamCommand
     {
         public DeleteExamCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

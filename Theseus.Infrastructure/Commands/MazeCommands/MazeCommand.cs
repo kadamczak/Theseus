@@ -4,6 +4,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.MazeCommands
 {
+    /// <summary>
+    /// Abstract class defining attachment of related entities to the <c>MazeDto</c>.
+    /// </summary>
     public abstract class MazeCommand : Command
     {
         protected MazeCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

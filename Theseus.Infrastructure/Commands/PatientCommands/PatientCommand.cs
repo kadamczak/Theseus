@@ -4,6 +4,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Commands.PatientCommands
 {
+    /// <summary>
+    /// Abstract class defining attachment of related entities to the <c>PatientDto</c>.
+    /// </summary>
     public abstract class PatientCommand : Command
     {
         protected PatientCommand(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
