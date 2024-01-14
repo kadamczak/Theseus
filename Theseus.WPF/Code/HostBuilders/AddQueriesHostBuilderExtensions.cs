@@ -39,16 +39,16 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IGetExamSetsWithMazeQuery, GetExamSetsWithMazeQuery>();
                 services.AddSingleton<IGetExamSetsOfStaffMemberInGroupQuery, GetExamSetsOfStaffMemberInGroupQuery>();
                 services.AddSingleton<IGetOwnerOfExamSetQuery, GetOwnerOfExamSetQuery>();
-                services.AddSingleton<IGetExamsOfStaffMemberQuery, GetExamsOfStaffMemberQuery>();
+                services.AddSingleton<IGetExamsOfStaffMemberWithFullIncludeQuery, GetExamsOfStaffMemberWithFullIncludeQuery>();
                 services.AddSingleton<IGetStepsOfExamQuery, GetStepsOfExamQuery>();
                 services.AddSingleton<IGetStagesOfExamQuery, GetStagesOfExamQuery>();
-                services.AddSingleton<IGetExamsOfGroupOfExamSetQuery, GetExamsOfGroupOfExamSetQuery>();
+                services.AddSingleton<IGetExamsOfGroupOfExamSetWithFullIncludeQuery, GetExamsOfGroupOfExamSetWithFullIncludeQuery>();
                 services.AddSingleton<IGetExamsOfExamSetQuery, GetExamsOfExamSetQuery>();
-                services.AddSingleton<IGetExamsOfPatientQuery, GetExamsOfPatientQuery>();
+                services.AddSingleton<IGetExamsOfPatientWithFullIncludeQuery, GetExamsOfPatientWithFullIncludeQuery>();
                 services.AddSingleton<IGetPatientsOfStaffMemberQuery, GetPatientsOfStaffMemberQuery>();
-                services.AddSingleton<IGetExamStagesOfExamQuery, GetExamStagesOfExamQuery>();
+                services.AddSingleton<IGetExamStagesOfExamWithFullIncludeQuery, GetExamStagesOfExamWithFullIncludeQuery>();
                 services.AddSingleton<IGetMazeOfExamStageQuery, GetMazeOfExamStageQuery>();
-                services.AddSingleton<IGetExamStagesOfExamSetOfIndexQuery, GetExamStageOfExamSetOfIndexQuery>();
+                services.AddSingleton<IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery, GetExamStageOfExamSetOfIndexWithFullIncludeQuery>();
             });
 
             return hostBuilder;

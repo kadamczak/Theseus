@@ -5,6 +5,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.PatientQueries
 {
+    /// <summary>
+    /// Abstract query class, with method for <c>PatientDto</c> to <c>Patient</c> mapping.
+    /// </summary>
     public abstract class PatientQuery : Query
     {
         protected PatientQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

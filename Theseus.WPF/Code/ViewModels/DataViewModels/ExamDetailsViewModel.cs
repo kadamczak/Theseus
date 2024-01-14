@@ -22,7 +22,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand SaveCsv { get; set; }
 
-        public ExamDetailsViewModel(IGetExamStagesOfExamQuery getExamStagesQuery,
+        public ExamDetailsViewModel(IGetExamStagesOfExamWithFullIncludeQuery getExamStagesQuery,
                                     IGetMazeOfExamStageQuery getMazeQuery,
                                     SelectedModelDetailsStore<Exam> examDetailsStore,
                                     SelectedModelListStore<ExamStageWithMazeViewModel> examStageListStore,
@@ -36,7 +36,7 @@ namespace Theseus.WPF.Code.ViewModels
             SaveCsv = new SaveExamCsvCommand(examDetailsStore);
         }
 
-        private void LoadExamStagesOfExam(IGetExamStagesOfExamQuery query,
+        private void LoadExamStagesOfExam(IGetExamStagesOfExamWithFullIncludeQuery query,
                                           IGetMazeOfExamStageQuery mazeQuery,
                                           Guid examId,
                                           SelectedModelListStore<ExamStageWithMazeViewModel> examStageListStore)

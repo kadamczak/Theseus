@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.ExamQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>ExamStep</c>s belonging to a specified <c>ExamStage</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetStepsOfExamQuery : ExamStepQuery, IGetStepsOfExamQuery
     {
         public GetStepsOfExamQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

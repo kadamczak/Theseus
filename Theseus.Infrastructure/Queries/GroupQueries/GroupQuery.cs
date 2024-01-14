@@ -5,6 +5,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.GroupQueries
 {
+    /// <summary>
+    /// Abstract query class, with method for <c>GroupDto</c> to <c>Group</c> mapping.
+    /// </summary>
     public abstract class GroupQuery : Query
     {
         protected GroupQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

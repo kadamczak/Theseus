@@ -14,11 +14,11 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
     {
         private readonly ExamSetStatsStore _examSetStatsStore;
         private readonly ExamSetStatCalculator _statCalculator;
-        private readonly IGetExamsOfPatientQuery _getExamsOfPatientQuery;
+        private readonly IGetExamsOfPatientWithFullIncludeQuery _getExamsOfPatientQuery;
         private readonly DescriptiveValueComparer _valueComparer;
 
         public GeneralExamInfoGranter(DescriptiveValueComparer valueComparer,
-                                      IGetExamsOfPatientQuery getExamsOfPatientQuery,
+                                      IGetExamsOfPatientWithFullIncludeQuery getExamsOfPatientQuery,
                                       ExamSetStatCalculator statCalculator,
                                       ExamSetStatsStore examSetStatsStore)
         {

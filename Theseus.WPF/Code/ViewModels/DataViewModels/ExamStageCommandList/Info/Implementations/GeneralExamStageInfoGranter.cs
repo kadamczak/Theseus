@@ -15,11 +15,11 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
     {
         private readonly DescriptiveValueComparer _valueComparer;
         private readonly ExamSetStatCalculator _statCalculator;
-        private readonly IGetExamStagesOfExamSetOfIndexQuery _getExamStagesQuery;
+        private readonly IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery _getExamStagesQuery;
         private readonly IGetMazeOfExamStageQuery _getMazeOfExamStageQuery;
 
         public GeneralExamStageInfoGranter(DescriptiveValueComparer descriptiveValueComparer,
-                                           IGetExamStagesOfExamSetOfIndexQuery getExamStagesQuery,
+                                           IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery getExamStagesQuery,
                                            ExamSetStatCalculator statCalculator,
                                            IGetMazeOfExamStageQuery getMazeQuery)
         {

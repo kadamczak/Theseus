@@ -15,12 +15,12 @@ namespace Theseus.WPF.Code.Services
         private readonly SelectedModelListStore<Exam> _selectedExamListStore;
         private readonly IGetMazeOfExamStageQuery _getMazeOfExamStageQuery;
 
-        private readonly IGetExamsOfGroupOfExamSetQuery _getExamsQuery;
+        private readonly IGetExamsOfGroupOfExamSetWithFullIncludeQuery _getExamsQuery;
         private readonly IGetOrderedMazesWithSolutionOfExamSetQuery _getMazesQuery;
 
         public ExamSetStatCalculator(ExamSetStatsStore examSetStatsStore,
                                      SelectedModelListStore<Exam> selectedExamListStore,
-                                     IGetExamsOfGroupOfExamSetQuery getExamsQuery,
+                                     IGetExamsOfGroupOfExamSetWithFullIncludeQuery getExamsQuery,
                                      IGetMazeOfExamStageQuery getMazeOfExamStageQuery,
                                      IGetOrderedMazesWithSolutionOfExamSetQuery getMazesQuery)
         {

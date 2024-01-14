@@ -6,9 +6,14 @@ using Theseus.Infrastructure.DbContexts;
 
 namespace Theseus.Infrastructure.Queries.ExamQueries
 {
-    public class GetExamStageOfExamSetOfIndexQuery : ExamStageQuery, IGetExamStagesOfExamSetOfIndexQuery
+    /// <summary>
+    /// Class defining retrieval of <c>ExamStage</c>s belonging to a specified <c>Exam</c> and of a particular stage index,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// Related entities are included.
+    /// </summary>
+    public class GetExamStageOfExamSetOfIndexWithFullIncludeQuery : ExamStageQuery, IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery
     {
-        public GetExamStageOfExamSetOfIndexQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        public GetExamStageOfExamSetOfIndexWithFullIncludeQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
         }
 

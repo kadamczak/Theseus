@@ -7,9 +7,14 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.ExamQueries
 {
-    public class GetExamsOfPatientQuery : ExamQuery, IGetExamsOfPatientQuery
+    /// <summary>
+    /// Interface defining retrieval of <c>Exam</c>s done by specified <c>Patient</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// Related entities are included.
+    /// </summary>
+    public class GetExamsOfPatientWithFullIncludeQuery : ExamQuery, IGetExamsOfPatientWithFullIncludeQuery
     {
-        public GetExamsOfPatientQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        public GetExamsOfPatientWithFullIncludeQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
         }
 

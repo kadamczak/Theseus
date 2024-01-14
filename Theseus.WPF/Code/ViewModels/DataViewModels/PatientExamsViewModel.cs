@@ -19,7 +19,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public PatientExamsViewModel(ExamCommandListViewModelFactory examCommandListViewModelFactory,
                                     SelectedModelDetailsStore<Patient> patientStore,
-                                    IGetExamsOfPatientQuery getExamsQuery,
+                                    IGetExamsOfPatientWithFullIncludeQuery getExamsQuery,
                                     ExamSetStatCalculator examSetStatCalculator,
                                     SelectedModelListStore<Exam> selectedExamListStore,
                                     NavigationService<ViewDataViewModel> viewDataNavigationService)
@@ -33,7 +33,7 @@ namespace Theseus.WPF.Code.ViewModels
             ExamCommandListViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadExamsOfCurrentStaffMember(IGetExamsOfPatientQuery getExamsQuery,
+        private void LoadExamsOfCurrentStaffMember(IGetExamsOfPatientWithFullIncludeQuery getExamsQuery,
                                                    SelectedModelDetailsStore<Patient> patientStore,
                                                    SelectedModelListStore<Exam> selectedExamListStore)
         {

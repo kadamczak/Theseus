@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
-using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.MazeQueries
 {
+    /// <summary>
+    /// Abstract query class, with method for <c>MazeDto</c> to <c>MazeWithSolution</c> mapping.
+    /// </summary>
     public abstract class MazeQuery : Query
     {
         protected MazeQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
@@ -25,16 +26,6 @@ namespace Theseus.Infrastructure.Queries.MazeQueries
 
         protected MazeWithSolution MapMazeWithSolution(MazeDto mazeDto)
         {
-            //if (mazeDto.ExamSetDtos is null)
-            //    return mazeWithSolution;
-
-            //foreach (var examSetDto in mazeDto.ExamSetDtos)
-            //{
-            //    ExamSet examSet = new ExamSet();
-            //    Mapper.Map(examSetDto, examSet);
-            //    mazeWithSolution.ExamSets.Add(examSet);
-            //}
-
             return Mapper.Map<MazeWithSolution>(mazeDto);
         }
     }

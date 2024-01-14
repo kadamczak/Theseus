@@ -9,9 +9,9 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.Patien
 {
     public class ExamPatientInfoGranter : InfoGranter<Patient>
     {
-        private readonly IGetExamsOfPatientQuery _getExamsQuery;
+        private readonly IGetExamsOfPatientWithFullIncludeQuery _getExamsQuery;
 
-        public ExamPatientInfoGranter(IGetExamsOfPatientQuery getExamsQuery)
+        public ExamPatientInfoGranter(IGetExamsOfPatientWithFullIncludeQuery getExamsQuery)
         {
             _getExamsQuery = getExamsQuery;
         }

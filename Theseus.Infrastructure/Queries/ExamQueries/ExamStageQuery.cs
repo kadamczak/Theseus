@@ -5,6 +5,9 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.ExamQueries
 {
+    /// <summary>
+    /// Abstract query class, with method for <c>ExamStageDto</c> to <c>ExamStage</c> mapping.
+    /// </summary>
     public abstract class ExamStageQuery : Query
     {
         protected ExamStageQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
