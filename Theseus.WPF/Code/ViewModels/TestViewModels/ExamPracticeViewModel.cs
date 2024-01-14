@@ -1,11 +1,9 @@
 ﻿using System.Timers;
 using System.Windows;
 using System.Windows.Input;
-using Theseus.Domain.CommandInterfaces.ExamCommandInterfaces;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeCreators;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Commands.ExamCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Exams;
@@ -16,7 +14,6 @@ namespace Theseus.WPF.Code.ViewModels
     public class ExamPracticeViewModel : ExamViewModel
     {
         public ExamMazeCanvasViewModel ExamMazeCanvasViewModel { get; }
-        public IGetMazeWithSolutionByIdQuery GetMazeById { get; }
 
         private int _countdownValue = 3;
         public int CountdownValue

@@ -13,12 +13,12 @@ namespace Theseus.WPF.Code.ViewModels.GroupViewModels.GroupCommandList.Info.Impl
     {
         private readonly IGetOwnerOfGroupQuery _getOwnerOfGroupQuery;
         private readonly IGetStaffMembersOfGroupQuery _getStaffMembersOfGroupQuery;
-        private readonly IGetPatientsOfGroupQuery _getPatientsOfGroupQuery;
+        private readonly IGetPatientsOfGroupWithFullIncludeQuery _getPatientsOfGroupQuery;
         private readonly IGetExamSetsOfGroupQuery _getExamSetsOfGroupQuery;
 
         public GeneralGroupInfoGranter(IGetOwnerOfGroupQuery getOwnerOfGroupQuery,
                                        IGetStaffMembersOfGroupQuery getStaffMembersOfGroupQuery,
-                                       IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
+                                       IGetPatientsOfGroupWithFullIncludeQuery getPatientsOfGroupQuery,
                                        IGetExamSetsOfGroupQuery getExamSetsOfGroupQuery)
         {
             _getOwnerOfGroupQuery = getOwnerOfGroupQuery;

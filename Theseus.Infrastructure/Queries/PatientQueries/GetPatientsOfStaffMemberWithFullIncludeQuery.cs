@@ -7,9 +7,14 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.PatientQueries
 {
-    public class GetPatientsOfStaffMemberQuery : PatientQuery, IGetPatientsOfStaffMemberQuery
+    /// <summary>
+    /// Class defining retrieval of <c>Patient</c>s belonging to the specified <c>StaffMember</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// Related entities are included.
+    /// </summary>
+    public class GetPatientsOfStaffMemberWithFullIncludeQuery : PatientQuery, IGetPatientsOfStaffMemberWithFullIncludeQuery
     {
-        public GetPatientsOfStaffMemberQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
+        public GetPatientsOfStaffMemberWithFullIncludeQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
         {
         }
 

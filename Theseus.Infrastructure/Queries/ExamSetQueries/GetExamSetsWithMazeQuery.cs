@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.ExamSetQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>ExamSet</c>s containing a specified <c>MazeWithSolution</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetExamSetsWithMazeQuery : ExamSetQuery, IGetExamSetsWithMazeQuery
     {
         public GetExamSetsWithMazeQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

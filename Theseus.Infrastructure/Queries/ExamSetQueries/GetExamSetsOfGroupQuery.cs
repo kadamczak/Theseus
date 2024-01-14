@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.ExamSetQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>ExamSet</c>s from a specified <c>Group</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetExamSetsOfGroupQuery : ExamSetQuery, IGetExamSetsOfGroupQuery
     {
         public GetExamSetsOfGroupQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

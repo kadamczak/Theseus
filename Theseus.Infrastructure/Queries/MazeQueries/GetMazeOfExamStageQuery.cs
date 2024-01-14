@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.MazeQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>MazeWithSolution</c>s used in a specific <c>ExamStage</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetMazeOfExamStageQuery : MazeQuery, IGetMazeOfExamStageQuery
     {
         public GetMazeOfExamStageQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

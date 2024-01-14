@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.ExamSetQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>ExamSet</c>s belonging to a specified <c>StaffMember</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetAllExamSetsOfStaffMemberQuery : ExamSetQuery, IGetAllExamSetsOfStaffMemberQuery
     {
         public GetAllExamSetsOfStaffMemberQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

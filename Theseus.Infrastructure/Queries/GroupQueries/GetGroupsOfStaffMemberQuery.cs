@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.GroupQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>Group</c>s of a specified <c>StaffMember</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetGroupsOfStaffMemberQuery : GroupQuery, IGetGroupsOfStaffMemberQuery
     {
         public GetGroupsOfStaffMemberQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

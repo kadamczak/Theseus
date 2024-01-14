@@ -14,7 +14,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels
     {
         public PatientCommandListViewModel PatientCommandListViewModel { get; set; }
 
-        public PatientsExamsSummaryViewModel(IGetPatientsOfStaffMemberQuery getPatientsQuery,
+        public PatientsExamsSummaryViewModel(IGetPatientsOfStaffMemberWithFullIncludeQuery getPatientsQuery,
                                              ICurrentStaffMemberStore currentStaffMemberStore,
                                              SelectedModelListStore<Patient> patientListStore,
                                              PatientCommandListViewModelFactory patientCommandListFactory)
@@ -24,7 +24,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels
             PatientCommandListViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadPatientsOfStaffMemberToStore(IGetPatientsOfStaffMemberQuery query,
+        private void LoadPatientsOfStaffMemberToStore(IGetPatientsOfStaffMemberWithFullIncludeQuery query,
                                                       Guid staffMemberId,
                                                       SelectedModelListStore<Patient> selectedPatientListStore)
         {

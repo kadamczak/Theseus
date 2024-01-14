@@ -20,7 +20,7 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels
         public ICommand AddPatient { get; }
 
         public PatientGroupDashboardViewModel(NavigationService<AddPatientToGroupViewModel> addPatientToGroupNavigationService,
-                                              IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
+                                              IGetPatientsOfGroupWithFullIncludeQuery getPatientsOfGroupQuery,
                                               SelectedModelListStore<Patient> selectedPatientListStore,
                                               PatientCommandListViewModelFactory removePatientCommandListViewModel,
                                               SelectedModelDetailsStore<Group> selectedGroupDetailsStore)
@@ -31,7 +31,7 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels
             AddPatient = new NavigateCommand<AddPatientToGroupViewModel>(addPatientToGroupNavigationService);
         }
 
-        private void CreatePatientCommandList(IGetPatientsOfGroupQuery getPatientsOfGroupQuery,
+        private void CreatePatientCommandList(IGetPatientsOfGroupWithFullIncludeQuery getPatientsOfGroupQuery,
                                               SelectedModelListStore<Patient> selectedPatientListStore,
                                               PatientCommandListViewModelFactory removePatientCommandListViewModel)
         {
@@ -40,7 +40,7 @@ namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels
             RemovePatientCommandListViewModel.CreateModelCommandViewModels();
         }
 
-        private void LoadPatientsFromGroupToStore(IGetPatientsOfGroupQuery query,
+        private void LoadPatientsFromGroupToStore(IGetPatientsOfGroupWithFullIncludeQuery query,
                                                  Guid groupId,
                                                  SelectedModelListStore<Patient> selectedPatientListStore)
         {

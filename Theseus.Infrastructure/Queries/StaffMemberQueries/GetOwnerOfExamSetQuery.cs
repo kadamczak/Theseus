@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.StaffMemberQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>StaffMember</c> that is the owner of an <c>ExamSet</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetOwnerOfExamSetQuery : StaffMemberQuery, IGetOwnerOfExamSetQuery
     {
         public GetOwnerOfExamSetQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

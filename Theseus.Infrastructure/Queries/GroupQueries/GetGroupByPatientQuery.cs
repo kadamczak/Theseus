@@ -4,10 +4,13 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.QueryInterfaces.GroupQueryInterfaces;
 using Theseus.Infrastructure.DbContexts;
 using Theseus.Infrastructure.Dtos;
-using Theseus.Infrastructure.Queries.PatientQueries;
 
 namespace Theseus.Infrastructure.Queries.GroupQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>Group</c> that has a specified <c>Patient</c>,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetGroupByPatientQuery : GroupQuery, IGetGroupByPatientQuery
     {
         public GetGroupByPatientQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)

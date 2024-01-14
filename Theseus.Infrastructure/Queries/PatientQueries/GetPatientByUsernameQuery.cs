@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.PatientQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>Patient</c> with the specified username,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetPatientByUsernameQuery : PatientQuery, IGetPatientByUsernameQuery
     {
         public GetPatientByUsernameQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }

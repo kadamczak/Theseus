@@ -21,9 +21,7 @@ namespace Theseus.WPF.Code.HostBuilders
         {
             hostBuilder.ConfigureServices((context, services) =>
             {
-                services.AddSingleton<IGetAllMazesWithSolutionQuery, GetAllMazesWithSolutionQuery>();
                 services.AddSingleton<IGetMazesWithSolutionOfStaffMemberQuery, GetMazesWithSolutionOfStaffMemberQuery>();
-                services.AddSingleton<IGetMazeWithSolutionByIdQuery, GetMazeWithSolutionByIdQuery>();
                 services.AddSingleton<IGetAllExamSetsOfStaffMemberQuery, GetAllExamSetsOfStaffMemberQuery>();
                 services.AddSingleton<IGetStaffMemberByUsernameQuery, GetStaffMemberByUsernameQuery>();
                 services.AddSingleton<IGetStaffMemberByEmailQuery, GetStaffMemberByEmailQuery>();
@@ -33,7 +31,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IGetOrderedMazesWithSolutionOfExamSetQuery, GetOrderedMazesWithSolutionOfExamSetQuery>();
                 services.AddSingleton<IGetGroupsOfStaffMemberQuery, GetGroupsOfStaffMemberQuery>();
                 services.AddSingleton<IGetExamSetsOfGroupQuery, GetExamSetsOfGroupQuery>();
-                services.AddSingleton<IGetPatientsOfGroupQuery, GetPatientsOfGroupQuery>();
+                services.AddSingleton<IGetPatientsOfGroupWithFullIncludeQuery, GetPatientsOfGroupWithFullIncludeQuery>();
                 services.AddSingleton<IGetStaffMembersOfGroupQuery, GetStaffMembersOfGroupQuery>();
                 services.AddSingleton<IGetOwnerOfGroupQuery, GetOwnerOfGroupQuery>();
                 services.AddSingleton<IGetExamSetsWithMazeQuery, GetExamSetsWithMazeQuery>();
@@ -45,7 +43,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IGetExamsOfGroupOfExamSetWithFullIncludeQuery, GetExamsOfGroupOfExamSetWithFullIncludeQuery>();
                 services.AddSingleton<IGetExamsOfExamSetQuery, GetExamsOfExamSetQuery>();
                 services.AddSingleton<IGetExamsOfPatientWithFullIncludeQuery, GetExamsOfPatientWithFullIncludeQuery>();
-                services.AddSingleton<IGetPatientsOfStaffMemberQuery, GetPatientsOfStaffMemberQuery>();
+                services.AddSingleton<IGetPatientsOfStaffMemberWithFullIncludeQuery, GetPatientsOfStaffMemberWithFullIncludeQuery>();
                 services.AddSingleton<IGetExamStagesOfExamWithFullIncludeQuery, GetExamStagesOfExamWithFullIncludeQuery>();
                 services.AddSingleton<IGetMazeOfExamStageQuery, GetMazeOfExamStageQuery>();
                 services.AddSingleton<IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery, GetExamStageOfExamSetOfIndexWithFullIncludeQuery>();

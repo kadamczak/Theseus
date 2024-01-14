@@ -3,7 +3,6 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
-using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.WPF.Code.Commands.ExamCommands;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Exams;
@@ -14,7 +13,6 @@ namespace Theseus.WPF.Code.ViewModels
     public class ExamPageViewModel : ExamViewModel
     {
         public ExamMazeCanvasViewModel ExamMazeCanvasViewModel { get; }
-        public IGetMazeWithSolutionByIdQuery GetMazeById { get; }
         private readonly CurrentExamStore _currentExamStore;
 
         private int _countdownValue = 3;

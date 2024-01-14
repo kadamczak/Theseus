@@ -7,6 +7,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.StaffMemberQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>StaffMember</c> with the specified email,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetStaffMemberByEmailQuery : StaffMemberQuery, IGetStaffMemberByEmailQuery
     {
         public GetStaffMemberByEmailQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper) { }

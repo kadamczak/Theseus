@@ -6,6 +6,10 @@ using Theseus.Infrastructure.Dtos;
 
 namespace Theseus.Infrastructure.Queries.MazeQueries
 {
+    /// <summary>
+    /// Class defining retrieval of <c>MazeWithSolution</c>s used in a specified <c>ExamSet</c> in the correct order,
+    /// using Entity Framework and <c>TheseusDbContextFactory</c>.
+    /// </summary>
     public class GetOrderedMazesWithSolutionOfExamSetQuery : MazeQuery, IGetOrderedMazesWithSolutionOfExamSetQuery
     {
         public GetOrderedMazesWithSolutionOfExamSetQuery(TheseusDbContextFactory dbContextFactory, IMapper mapper) : base(dbContextFactory, mapper)
