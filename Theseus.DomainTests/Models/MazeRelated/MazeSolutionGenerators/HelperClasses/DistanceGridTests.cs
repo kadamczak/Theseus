@@ -20,10 +20,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
         [Theory]
         [MemberData(nameof(FindFarthestCells_Data))]
         public void FindFarthestCells_ShouldFindFarthestCells(Maze maze,
-                                          int randomSeed,
-                                          (int rowIndex, int colIndex) rootCellCoordinates,
-                                          MazeStructureGenAlgorithm mazeStructureAlgorithm,
-                                          List<(int row, int col)> expectedFarthestCellCoordinates)
+                                                              int randomSeed,
+                                                              (int rowIndex, int colIndex) rootCellCoordinates,
+                                                              MazeStructureGenAlgorithm mazeStructureAlgorithm,
+                                                              List<(int row, int col)> expectedFarthestCellCoordinates)
         {
             //arrange
             var generatorFactory = new MazeStructureGeneratorFactory();
@@ -54,11 +54,11 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
         [Theory]
         [MemberData(nameof(FindPathTo_Data))]
         public void FindPathTo_ShouldFindCellPath(Maze maze,
-                                          int randomSeed,
-                                          (int rowIndex, int colIndex) rootCellCoordinates,
-                                          (int rowIndex, int colIndex) targetCellCoordinates,
-                                          MazeStructureGenAlgorithm mazeStructureAlgorithm,
-                                          List<(int row, int col)> expectedPathCellCoordinates)
+                                                  int randomSeed,
+                                                  (int rowIndex, int colIndex) rootCellCoordinates,
+                                                  (int rowIndex, int colIndex) targetCellCoordinates,
+                                                  MazeStructureGenAlgorithm mazeStructureAlgorithm,
+                                                  List<(int row, int col)> expectedPathCellCoordinates)
         {
             //arrange
             var generatorFactory = new MazeStructureGeneratorFactory();
