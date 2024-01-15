@@ -16,10 +16,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             Distance.Add(rootCell, 0);
         }
 
-        public bool DistanceAlreadyFound(Cell cell)
-        {
-            return this.Distance.ContainsKey(cell);
-        }
+        public bool DistanceAlreadyFound(Cell cell) => this.Distance.ContainsKey(cell);
 
         public List<Cell> FindPathTo(Cell endCell)
         {

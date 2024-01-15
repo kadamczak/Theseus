@@ -7,7 +7,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 {
     public class DistanceGridFactoryTests
     {
-        public static IEnumerable<object[]> GenerateMazeStructure_Data => new List<object[]>
+        public static IEnumerable<object[]> CreateDistanceGrid_Data => new List<object[]>
             {
                 new object[] { new Maze(8, 12), 44, (0, 0), MazeStructureGenAlgorithm.AldousBroder, new Dictionary<(int row, int col), int>()
                                                                                                     {
@@ -29,7 +29,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             };
 
         [Theory]
-        [MemberData(nameof(GenerateMazeStructure_Data))]
+        [MemberData(nameof(CreateDistanceGrid_Data))]
         public void CreateDistanceGrid_ShouldCreateDistanceGrid(Maze maze,
                                                                 int randomSeed,
                                                                 (int rowIndex, int colIndex) rootCellCoordinates,
