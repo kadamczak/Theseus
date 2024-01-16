@@ -27,24 +27,14 @@ namespace Theseus.WPF
         {
             _host = Host.CreateDefaultBuilder()
                 .AddDbContext()
-                .AddSingletonViewModels()
-                .AddNavbarViewModels()
-                .AddMazeViewModels()
-                .AddDataViewModels()
-                .AddExamSetViewModels()
-                .AddExamViewModels()
-                .AddAuthenticationViewModels()
-                .AddGroupViewModels()
+                .AddViewModels()
                 .AddStores()
                 .AddCommands()
                 .AddQueries()
                 .AddFactories()
                 .AddConverters()
                 .AddServices()
-                .AddCommandListFactories()
-                .AddGranterFactories()
-                .AddCommandGranters()
-                .AddInfoGranters()
+                .AddCommandLists()
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<IPasswordHasher, PasswordHasher>();
