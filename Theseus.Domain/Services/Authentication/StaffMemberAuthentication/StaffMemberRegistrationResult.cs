@@ -9,6 +9,7 @@
         PasswordsDoNotMatch,
         EmailAlreadyExists,
         UsernameAlreadyExists,
-        ConnectionFailed
+        ConnectionFailed,
+        StaffMemberDataNotValid
     }
 }

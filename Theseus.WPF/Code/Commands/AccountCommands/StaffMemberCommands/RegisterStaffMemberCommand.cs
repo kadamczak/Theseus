@@ -48,6 +48,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
                 StaffMemberRegistrationResult.EmailAlreadyExists => "EmailAlreadyExists".Resource(),
                 StaffMemberRegistrationResult.PasswordsDoNotMatch => "PasswordsDoNotMatch".Resource(),
                 StaffMemberRegistrationResult.ConnectionFailed => "RegistrationFailed".Resource(),
+                StaffMemberRegistrationResult.StaffMemberDataNotValid => "DataNotValid".Resource(),
                 _ => throw new ArgumentException("Invalid parameter.")
             };
         }

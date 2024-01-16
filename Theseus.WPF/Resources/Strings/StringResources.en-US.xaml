@@ -252,6 +252,8 @@
     <system:String x:Key="LoginFailed">Login failed.</system:String>
     <system:String x:Key="IncorrectPassword">Incorrect password.</system:String>
 
+    <system:String x:Key="DataNotValid">Data not valid.</system:String>
+
     <system:String x:Key="SuccesfullyRegistered">Succesfully registered.</system:String>
     <system:String x:Key="PatientUsernameAlreadyExists">Patient username already exists.</system:String>
     <system:String x:Key="GroupDoesNotExist">Group does not exist.</system:String>

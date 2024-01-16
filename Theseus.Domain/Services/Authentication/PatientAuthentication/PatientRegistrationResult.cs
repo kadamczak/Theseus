@@ -8,6 +8,7 @@
         Success,
         UsernameAlreadyExists,
         GroupDoesNotExist,
-        ConnectionFailed
+        ConnectionFailed,
+        PatientDataNotValid
     }
 }

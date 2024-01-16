@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
+using System.ComponentModel.DataAnnotations;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
+using Theseus.Domain.Services.Authentication.PatientAuthentication;
 
 namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 {
@@ -53,6 +55,13 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
             {
                 result = StaffMemberRegistrationResult.PasswordsDoNotMatch;
                 return result;
+            }
+
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(newAccount, null, null);
+            if (!Validator.TryValidateObject(newAccount, validationContext, validationResults, true))
+            {
+                return StaffMemberRegistrationResult.StaffMemberDataNotValid;
             }
 
             try

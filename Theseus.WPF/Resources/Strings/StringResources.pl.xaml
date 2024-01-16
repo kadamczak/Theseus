@@ -251,6 +251,8 @@ Liczby</system:String>
     <system:String x:Key="LoginFailed">Logowanie nie powiodło się.</system:String>
     <system:String x:Key="IncorrectPassword">Niewłaściwe hasło.</system:String>
 
+    <system:String x:Key="DataNotValid">Nieprawidłowe dane.</system:String>
+
     <system:String x:Key="SuccesfullyRegistered">Rejestracja powiodła się.</system:String>
     <system:String x:Key="PatientUsernameAlreadyExists">Nazwa pacjenta już istnieje.</system:String>
     <system:String x:Key="GroupDoesNotExist">Grupa nie istnieje.</system:String>

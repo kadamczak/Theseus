@@ -1,4 +1,5 @@
-﻿using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using Theseus.Domain.CommandInterfaces.PatientCommandInterfaces;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.GroupRelated.Exceptions;
 using Theseus.Domain.Models.UserRelated;
@@ -45,6 +46,13 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication
         public async Task<PatientRegistrationResult> Register(Patient newAccount, string groupName)
         {
             PatientRegistrationResult result = PatientRegistrationResult.Success;
+
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(newAccount, null, null);
+            if (!Validator.TryValidateObject(newAccount, validationContext, validationResults, true))
+            {
+                return PatientRegistrationResult.PatientDataNotValid;
+            }
 
             try
             {

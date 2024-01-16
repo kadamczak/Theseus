@@ -45,6 +45,7 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
                 PatientRegistrationResult.UsernameAlreadyExists => "PatientUsernameAlreadyExists".Resource(),
                 PatientRegistrationResult.GroupDoesNotExist => "GroupDoesNotExist".Resource(),
                 PatientRegistrationResult.ConnectionFailed => "RegistrationFailed".Resource(),
+                PatientRegistrationResult.PatientDataNotValid => "DataNotValid".Resource(),
                 _ => throw new ArgumentException("Invalid parameter.")
             };
         }
