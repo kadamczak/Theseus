@@ -5,9 +5,11 @@
         public Guid PatientId { get; set; }
         public Guid GroupId { get; set; }
         public Guid ExamSetId { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public double Score { get; set; }
         public int AttemptNumber { get; set; }
+
         public bool NoSkips { get; set; }
         public float TotalExamTime { get; set; }
         public int CompletedMazeAmount { get; set; }

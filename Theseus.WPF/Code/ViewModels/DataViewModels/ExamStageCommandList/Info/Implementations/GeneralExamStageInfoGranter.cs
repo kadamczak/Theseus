@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 using Theseus.Domain.Services.ExamDataServices.Summary;
+using Theseus.Domain.Services.ExamDataServices.Summary.ExamStageStats;
 using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -15,46 +15,27 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
     public class GeneralExamStageInfoGranter : InfoGranter<ExamStageWithMazeViewModel>
     {
         private readonly DescriptiveValueComparer _valueComparer;
-        private readonly ScoreCalculator _scoreCalculator;
         private readonly IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery _getExamStagesQuery;
         private readonly IGetMazeOfExamStageQuery _getMazeOfExamStageQuery;
+        private readonly ScoreCalculator _scoreCalculator;
+        private readonly ExamStageCalculator _examStageCalculator;
 
         public GeneralExamStageInfoGranter(DescriptiveValueComparer descriptiveValueComparer,
                                            IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery getExamStagesQuery,
                                            ScoreCalculator scoreCalculator,
+                                           ExamStageCalculator examStageCalculator,
                                            IGetMazeOfExamStageQuery getMazeQuery)
         {
             _valueComparer = descriptiveValueComparer;
             _getExamStagesQuery = getExamStagesQuery;
-            _scoreCalculator = scoreCalculator;
             _getMazeOfExamStageQuery = getMazeQuery;
-        }
-
-        public class ExamStageStats
-        {
-            public Guid PatientId { get; set; }
-            public Guid GroupId { get; set; }
-            public Guid ExamStageId { get; set; }
-            public Guid ExamSetId { get; set; }
-            public int Index { get; set; }
-            public DateTime CreatedAt { get; set; }
-            public bool Completed { get; set; }
-            public ExamStageData Data { get; set; }
-        }
-
-        public class ExamStageData
-        {
-            public float TotalInputs { get; set; }
-            public float? TotalTime { get; set; }
-            public float? TimeBeforeFirstInput { get; set; }
-            public float? LongestInactivityTime { get; set; }
-            public float? RedundantInputs { get; set; }
-            public float? WallHits { get; set; }
+            _scoreCalculator = scoreCalculator;
+            _examStageCalculator = examStageCalculator;
         }
 
         public override string GrantInfo(CommandViewModel<ExamStageWithMazeViewModel> commandViewModel)
         {
-            ExamStageStats currentExamStageStats = CalculateExamStageStats(commandViewModel.Model.ExamStage);
+            ExamStageStats currentExamStageStats = _examStageCalculator.CalculateExamStageStats(commandViewModel.Model.ExamStage);
 
             List<string> displayedInfoText = CreateBasicSummary(currentExamStageStats);
             displayedInfoText.AddRange(CreateComparisonTextToOtherPatients(currentExamStageStats));
@@ -62,32 +43,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
             return string.Join("\n", displayedInfoText.ToArray());
         }
-
-        private ExamStageStats CalculateExamStageStats(ExamStage examStage)
-        {
-            Exam exam = examStage.Exam;
-
-            return new ExamStageStats()
-            {
-                PatientId = exam.Patient.Id,
-                GroupId = exam.Patient.Group!.Id,
-                ExamStageId = examStage.Id,
-                ExamSetId = exam.ExamSet.Id,
-                Index = examStage.Index,
-                CreatedAt = exam.CreatedAt,
-                Completed = examStage.Completed,
-
-                Data = new ExamStageData()
-                {
-                    TotalInputs = examStage.Steps.Count,
-                    TotalTime = examStage.TotalTime,
-                    TimeBeforeFirstInput = examStage.Steps.Any() ? examStage.Steps.First().TimeBeforeStep : null,
-                    LongestInactivityTime = examStage.Steps.Any() ? examStage.Steps.Max(s => s.TimeBeforeStep) : null,
-                    RedundantInputs = examStage.Steps.Where(s => !s.Correct && !s.HitWall).Count(),
-                    WallHits = examStage.Steps.Where(s => s.HitWall).Count()
-                }
-            };
-        }
+      
 
         private List<string> CreateBasicSummary(ExamStageStats stats)
         {
@@ -97,26 +53,26 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             List<string> textSummary = new List<string>
             {
                 "Completed:".Resource() + (stats.Completed ? "Yes".Resource() : "No".Resource()),
-                $"{"InputsMade:".Resource()}{Round(stats.Data.TotalInputs)}/{idealInputAmount}",
-                $"{"TotalTime:".Resource()}{Round(stats.Data.TotalTime.Value, 2)} s",
-                $"{"RedundantInputs:".Resource()}{Round(stats.Data.RedundantInputs.Value)}",
-                $"{"WallHits:".Resource()}{Round(stats.Data.WallHits.Value)}",
+                $"{"InputsMade:".Resource()}{Round(stats.TotalInputs)}/{idealInputAmount}",
+                $"{"TotalTime:".Resource()}{Round(stats.TotalTime, 2)} s",
+                $"{"RedundantInputs:".Resource()}{Round(stats.RedundantInputs)}",
+                $"{"WallHits:".Resource()}{Round(stats.WallHits)}",
             };
 
-            if (stats.Data.TotalInputs > 0)
+            if (stats.TotalInputs > 0)
             {
                 textSummary.AddRange(new List<string>
                 {
-                    $"{"TimeBeforeFirstInput:".Resource()}{Round(stats.Data.TimeBeforeFirstInput!.Value, 3)} s",
-                    $"{"LongestInactivityTime:".Resource()}{Round(stats.Data.LongestInactivityTime!.Value, 3)} s",
+                    $"{"TimeBeforeFirstInput:".Resource()}{Round(stats.TimeBeforeFirstInput!.Value, 3)} s",
+                    $"{"LongestInactivityTime:".Resource()}{Round(stats.LongestInactivityTime!.Value, 3)} s",
                 });
 
                 if(stats.Completed)
                 {
                     double score = _scoreCalculator.CalculateScoreForExamStage(idealInputAmount,
-                                                                              Convert.ToInt32(stats.Data.RedundantInputs),
-                                                                              Convert.ToInt32(stats.Data.WallHits),
-                                                                              stats.Data.TotalTime.Value);
+                                                                              Convert.ToInt32(stats.RedundantInputs),
+                                                                              Convert.ToInt32(stats.WallHits),
+                                                                              stats.TotalTime);
 
                     textSummary.AddRange(new List<string>
                     {
@@ -136,43 +92,9 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             var examStagesOfOtherPatients = _getExamStagesQuery.GetExamStages(currentExamStageStats.ExamSetId, currentExamStageStats.Index, currentExamStageStats.GroupId)
                                                                .Where(e => e.Exam.Patient.Id != currentExamStageStats.PatientId);
 
-            return examStagesOfOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStageStats, CalculateAverageStats(examStagesOfOtherPatients)) :
+            return examStagesOfOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStageStats, _examStageCalculator.CalculateAverageStats(examStagesOfOtherPatients)) :
                                                      new List<string>() { "OtherPatientsInGroupDidNotCompleteThisMaze".Resource() };
         }
-
-        public class AverageExamStageStats
-        {
-            public int TotalAttemptAmount { get; set; }
-            public int CompletedAttemptAmount { get; set; }
-            public ExamStageData Data { get; set; }
-        }
-
-        private AverageExamStageStats CalculateAverageStats(IEnumerable<ExamStage> examStages)
-        {
-            var completedExamStages = examStages.Where(e => e.Completed);
-
-            return new AverageExamStageStats()
-            {
-                TotalAttemptAmount = examStages.Count(),
-                CompletedAttemptAmount = completedExamStages.Count(),
-                Data = new ExamStageData()
-                {
-                    TotalTime = completedExamStages.Any() ? CalculateAverageTotalTime(completedExamStages) : null,
-                    TotalInputs = completedExamStages.Any() ? CalculateAverageTotalInputs(completedExamStages) : 0,
-                    TimeBeforeFirstInput = completedExamStages.Any() ? CalculateAverageTimeBeforeFirstInput(completedExamStages) : null,
-                    LongestInactivityTime = completedExamStages.Any() ? CalculateAverageLongestInactivityTime(completedExamStages) : null,
-                    RedundantInputs = completedExamStages.Any() ? CalculateAverageRedundantInputs(completedExamStages) : null,
-                    WallHits = completedExamStages.Any() ? CalculateAverageWallHits(completedExamStages) : null
-                }
-            };
-        }
-
-        private float CalculateAverageTotalTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.TotalTime);
-        private float CalculateAverageTotalInputs(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Count);
-        private float CalculateAverageTimeBeforeFirstInput(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.First().TimeBeforeStep);
-        private float CalculateAverageLongestInactivityTime(IEnumerable<ExamStage> examStages) => (float) examStages.Average(e => e.Steps.Max(e => e.TimeBeforeStep));
-        private float CalculateAverageRedundantInputs(IEnumerable<ExamStage> examStages) => (float)examStages.Average(e => e.Steps.Where(s => !s.Correct && !s.HitWall).Count());
-        private float CalculateAverageWallHits(IEnumerable<ExamStage> examStages) => (float)examStages.Average(e => e.Steps.Where(s => s.HitWall).Count());
 
         private List<string> CreateFullComparisonTextToOtherPatients(ExamStageStats examStageStats, AverageExamStageStats averageExamStageStats)
         {
@@ -187,27 +109,76 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
             if (examStageStats.Completed && averageExamStageStats.CompletedAttemptAmount > 0)
             {
                 comparisonText.AddRange(new List<string>() { "ComparisonToAverage:".Resource() });
-                comparisonText.AddRange(CreateComparisonOfCompletedStages(examStageStats, averageExamStageStats.Data, "Avg".Resource()));
+                comparisonText.AddRange(CreateComparisonOfCompletedStages(examStageStats, averageExamStageStats, "Avg".Resource()));
             }
 
             return comparisonText;
         }
 
-        private IEnumerable<string> CreateComparisonOfCompletedStages(ExamStageStats examStageStats, ExamStageData otherExamStageData, string valueType)
+        private class StageData
         {
-            string timeComparison = _valueComparer.Compare(examStageStats.Data.TotalTime.Value, otherExamStageData.TotalTime, higherIsBetter: false);
-            string inputComparison = _valueComparer.Compare(examStageStats.Data.TotalInputs, otherExamStageData.TotalInputs, higherIsBetter: false);
-            string firstInputTimeComparison = _valueComparer.Compare(examStageStats.Data.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput!.Value, "Higher".Resource(), "Lower".Resource());
-            string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.Data.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime!.Value, "Higher".Resource(), "Lower".Resource());
-            string redundantInputsComparison = _valueComparer.Compare(examStageStats.Data.RedundantInputs.Value, otherExamStageData.RedundantInputs, higherIsBetter: false);
-            string wallHitsComparison = _valueComparer.Compare(examStageStats.Data.WallHits.Value, otherExamStageData.WallHits, higherIsBetter: false);
+            public float TotalInputs { get; set; }
+            public float TotalTime { get; set; }
+            public float TimeBeforeFirstInput { get; set; }
+            public float LongestInactivityTime { get; set; }
+            public float RedundantInputs { get; set; }
+            public float WallHits { get; set; }
+        }
 
-            string timeFormatted = Round(otherExamStageData.TotalTime.Value, 2);
+        private StageData ConvertToStageData(ExamStageStats stats)
+        {
+            return new StageData()
+            {
+                TotalInputs = stats.TotalInputs,
+                TotalTime = stats.TotalTime,
+                TimeBeforeFirstInput = stats.TimeBeforeFirstInput.Value,
+                LongestInactivityTime = stats.LongestInactivityTime.Value,
+                RedundantInputs = stats.RedundantInputs,
+                WallHits = stats.WallHits
+            };
+        }
+
+        private StageData ConvertToStageData(AverageExamStageStats stats)
+        {
+            return new StageData()
+            {
+                TotalInputs = stats.TotalInputs,
+                TotalTime = stats.TotalTime.Value,
+                TimeBeforeFirstInput = stats.TimeBeforeFirstInput.Value,
+                LongestInactivityTime = stats.LongestInactivityTime.Value,
+                RedundantInputs = stats.RedundantInputs.Value,
+                WallHits = stats.WallHits.Value
+            };
+        }
+
+        private IEnumerable<string> CreateComparisonOfCompletedStages(ExamStageStats examStageStats, ExamStageStats otherExamStageData, string valueType)
+        {
+            StageData data = ConvertToStageData(otherExamStageData);
+            return CreateComparisonOfCompletedStages(examStageStats, data, valueType);
+        }
+
+        private IEnumerable<string> CreateComparisonOfCompletedStages(ExamStageStats examStageStats, AverageExamStageStats otherExamStageData, string valueType)
+        {
+            StageData data = ConvertToStageData(otherExamStageData);
+            return CreateComparisonOfCompletedStages(examStageStats, data, valueType);
+        }
+
+
+        private IEnumerable<string> CreateComparisonOfCompletedStages(ExamStageStats examStageStats, StageData otherExamStageData, string valueType)
+        {
+            string timeComparison = _valueComparer.Compare(examStageStats.TotalTime, otherExamStageData.TotalTime, higherIsBetter: false);
+            string inputComparison = _valueComparer.Compare(examStageStats.TotalInputs, otherExamStageData.TotalInputs, higherIsBetter: false);
+            string firstInputTimeComparison = _valueComparer.Compare(examStageStats.TimeBeforeFirstInput!.Value, otherExamStageData.TimeBeforeFirstInput, "Higher".Resource(), "Lower".Resource());
+            string longestInactivityTimeComparison = _valueComparer.Compare(examStageStats.LongestInactivityTime!.Value, otherExamStageData.LongestInactivityTime, "Higher".Resource(), "Lower".Resource());
+            string redundantInputsComparison = _valueComparer.Compare(examStageStats.RedundantInputs, otherExamStageData.RedundantInputs, higherIsBetter: false);
+            string wallHitsComparison = _valueComparer.Compare(examStageStats.WallHits, otherExamStageData.WallHits, higherIsBetter: false);
+
+            string timeFormatted = Round(otherExamStageData.TotalTime, 2);
             string inputsFormatted = Round(otherExamStageData.TotalInputs);
-            string firstInputTimeFormatted = Round(otherExamStageData.TimeBeforeFirstInput!.Value, 3);
-            string longestInactivityTimeFormatted = Round(otherExamStageData.LongestInactivityTime!.Value, 3);
-            string redundantInputsFormatted = Round(otherExamStageData.RedundantInputs.Value);
-            string wallHitsFormatted = Round(otherExamStageData.WallHits.Value);
+            string firstInputTimeFormatted = Round(otherExamStageData.TimeBeforeFirstInput, 3);
+            string longestInactivityTimeFormatted = Round(otherExamStageData.LongestInactivityTime, 3);
+            string redundantInputsFormatted = Round(otherExamStageData.RedundantInputs);
+            string wallHitsFormatted = Round(otherExamStageData.WallHits);
 
             return new List<string>
             {
@@ -228,7 +199,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
                                                      .OrderByDescending(e => e.Exam.CreatedAt)
                                                      .FirstOrDefault();
 
-            return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStageStats, CalculateExamStageStats(previousAttempt)) :
+            return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStageStats, _examStageCalculator.CalculateExamStageStats(previousAttempt)) :
                                                    new List<string>() { "", "NoPreviousAttemptsByThisPatient".Resource() };
         }
 
@@ -241,7 +212,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
             if (currentExamStageStats.Completed && previousExamStageStats.Completed)
             {
-                comparisonText.AddRange(CreateComparisonOfCompletedStages(currentExamStageStats, previousExamStageStats.Data, "Prev".Resource()));
+                comparisonText.AddRange(CreateComparisonOfCompletedStages(currentExamStageStats, previousExamStageStats, "Prev".Resource()));
             }
             else if (currentExamStageStats.Completed)
             {

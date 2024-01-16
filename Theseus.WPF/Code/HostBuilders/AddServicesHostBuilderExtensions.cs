@@ -10,6 +10,7 @@ using Theseus.Domain.Services.ExamDataServices.Summary.ExamStats;
 using Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup;
 using Theseus.Infrastructure.Mappings;
 using Theseus.WPF.Code.Services;
+using Theseus.Domain.Services.ExamDataServices.Summary.ExamStageStats;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
@@ -22,6 +23,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<IPasswordHasher, PasswordHasher>();
                 services.AddSingleton<IEmailValidator, EmailValidator>();
                 services.AddSingleton<ScoreCalculator>();
+                services.AddSingleton<ExamStageCalculator>();
                 services.AddSingleton<ExamCalculator>();
                 services.AddSingleton<ExamSetGroupStatCalculator>();
                 services.AddSingleton<DescriptiveValueComparer>();

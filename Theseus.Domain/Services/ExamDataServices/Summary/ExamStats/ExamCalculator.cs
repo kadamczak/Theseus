@@ -7,6 +7,7 @@ namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamStats
     {
         private readonly ScoreCalculator _scoreCalculator;
         private readonly IGetExamsOfPatientWithFullIncludeQuery _getExamsOfPatientQuery;
+
         public ExamCalculator(ScoreCalculator scoreCalculator,
                               IGetExamsOfPatientWithFullIncludeQuery getExamsOfPatientQuery)
         {
