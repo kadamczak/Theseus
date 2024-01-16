@@ -2,44 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using Theseus.Domain.Models.ExamRelated;
-using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
+using Theseus.Domain.Services.ExamDataServices.Summary.ExamStats;
+using Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup;
 using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
-using Theseus.WPF.Code.Stores.Exams;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implementations
 {
     public class GeneralExamInfoGranter : InfoGranter<Exam>
     {
-        private readonly ExamSetStatsStore _examSetStatsStore;
-        private readonly ExamSetStatCalculator _statCalculator;
-        private readonly IGetExamsOfPatientWithFullIncludeQuery _getExamsOfPatientQuery;
+        private readonly ExamCalculator _examCalculator;
+        private readonly ExamSetGroupStatsList _examSetGroupStatsList;
         private readonly DescriptiveValueComparer _valueComparer;
 
         public GeneralExamInfoGranter(DescriptiveValueComparer valueComparer,
-                                      IGetExamsOfPatientWithFullIncludeQuery getExamsOfPatientQuery,
-                                      ExamSetStatCalculator statCalculator,
-                                      ExamSetStatsStore examSetStatsStore)
+                                      ExamCalculator examCalculator,
+                                      ExamSetGroupStatsList examSetGroupStatsList)
         {
             _valueComparer = valueComparer;
-            _getExamsOfPatientQuery = getExamsOfPatientQuery;
-            _statCalculator = statCalculator;
-            _examSetStatsStore = examSetStatsStore;
-        }
-
-        private class ExamStats
-        {
-            public Guid PatientId { get; set; }
-            public DateTime CreatedAt { get; set; }
-            public double Score { get; set; }
-            public int AttemptNumber { get; set; }
-            public bool NoSkips { get; set; }
-            public float TotalExamTime { get; set; }
-            public int CompletedMazeAmount { get; set; }
-            public int TotalInputs { get; set; }
-            public int RedundantInputs { get; set; }
-            public int WallHits { get; set; }
+            _examCalculator = examCalculator;
+            _examSetGroupStatsList = examSetGroupStatsList;
         }
 
         public override string GrantInfo(CommandViewModel<Exam> commandViewModel)
@@ -47,8 +30,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             Guid examSetId = commandViewModel.Model.ExamSet.Id;
             Guid groupId = commandViewModel.Model.Patient.Group.Id;
 
-            ExamSetStatSummary examSetStatSummary = _examSetStatsStore.ExamSetStatList.Where(e => e.GroupId == groupId && e.ExamSetId == examSetId).First();
-            ExamStats currentExamStats = CalculateExamStats(commandViewModel.Model);
+            ExamSetGroupStatSummary examSetStatSummary = _examSetGroupStatsList.ExamSetStatList.Where(e => e.GroupId == groupId && e.ExamSetId == examSetId).First();
+            ExamStats currentExamStats = _examCalculator.CalculateExamStats(commandViewModel.Model);
 
             List<string> displayedInfoText = CreateBasicTextSummary(currentExamStats, examSetStatSummary);
             displayedInfoText.AddRange(CreateComparisonTextToOtherPatients(currentExamStats, examSetStatSummary));
@@ -57,32 +40,8 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             return string.Join("\n", displayedInfoText.ToArray());
         }
 
-        private ExamStats CalculateExamStats(Exam exam)
-        {
-            var examStages = exam.Stages;
-            var examSteps = exam.Stages.SelectMany(s => s.Steps);
 
-            return new ExamStats()
-            {
-                PatientId = exam.Patient.Id,
-                CreatedAt = exam.CreatedAt,
-                Score = _statCalculator.CalculateScoreForExam(exam),
-                AttemptNumber = CalculateAttemptNumber(exam),
-                NoSkips = examStages.All(e => e.Completed),
-                TotalExamTime = examStages.Sum(s => s.TotalTime),
-                CompletedMazeAmount = examStages.Where(s => s.Completed).Count(),
-                TotalInputs = examSteps.Count(),
-                RedundantInputs = examSteps.Where(s => !s.Correct && !s.HitWall).Count(),
-                WallHits = examSteps.Where(s => s.HitWall).Count()
-            };
-        }
-
-        private int CalculateAttemptNumber(Exam exam) => _getExamsOfPatientQuery.GetExams(exam.Patient.Id)
-                                                                                .Where(e => e.ExamSet.Id == exam.ExamSet.Id)
-                                                                                .Where(e => e.CreatedAt < exam.CreatedAt)
-                                                                                .Count() + 1;
-
-        private List<string> CreateBasicTextSummary(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
+        private List<string> CreateBasicTextSummary(ExamStats currentExamStats, ExamSetGroupStatSummary examSetStatSummary)
         {
             return new List<string>
             {
@@ -96,48 +55,14 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
             };
         }
 
-        private List<string> CreateComparisonTextToOtherPatients(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
+        private List<string> CreateComparisonTextToOtherPatients(ExamStats currentExamStats, ExamSetGroupStatSummary examSetStatSummary)
         {
-            var examsByOtherPatients = examSetStatSummary.Exams.Where(e => e.Patient.Id != currentExamStats.PatientId);
+            var examsByOtherPatients = examSetStatSummary.Exams
+                                                         .Where(e => e.Patient.Id != currentExamStats.PatientId);
 
-            return examsByOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStats, CalculateAverageStats(examsByOtherPatients)) :
+            return examsByOtherPatients.Any() ? CreateFullComparisonTextToOtherPatients(currentExamStats, _examCalculator.CalculateAverageStats(examsByOtherPatients)) :
                                                 new List<string>() { "OtherPatientsInGroupDidNotCompleteThisExamSet".Resource() };
         }
-
-        public class AverageExamStats
-        {
-            public int TotalExamAmount { get; set; }
-            public int ExamsWithNoSkipsAmount { get; set; }
-            public float AverageCompletedMazes { get; set; }
-            public float? AverageTotalTime { get; set; }
-            public float? AverageTotalInputs { get; set; }
-            public float? AverageReduntantInputs { get; set; }
-            public float? AverageWallHits { get; set; }
-        }
-
-        private AverageExamStats CalculateAverageStats(IEnumerable<Exam> exams)
-        {
-            var examsByOtherPatientsWithNoSkips = exams.Where(e => !e.Stages.Where(s => !s.Completed).Any());
-            bool anyCompletedExamsByOtherPatient = examsByOtherPatientsWithNoSkips.Any();
-
-            return new AverageExamStats()
-            {
-                TotalExamAmount = exams.Count(),
-                ExamsWithNoSkipsAmount = examsByOtherPatientsWithNoSkips.Count(),
-                AverageCompletedMazes = CalculateAverageCompletedMazes(exams),
-                AverageTotalTime = anyCompletedExamsByOtherPatient ? CalculateAverageTotalTime(examsByOtherPatientsWithNoSkips) : null,
-                AverageTotalInputs = anyCompletedExamsByOtherPatient ? CalculateAverageTotalInputs(examsByOtherPatientsWithNoSkips) : null,
-                AverageReduntantInputs = anyCompletedExamsByOtherPatient ? CalculateAverageTotalReduntantInputs(examsByOtherPatientsWithNoSkips) : null,
-                AverageWallHits = anyCompletedExamsByOtherPatient ? CalculateAverageTotalWallHits(examsByOtherPatientsWithNoSkips) : null,
-            };
-        }
-
-        private float CalculateAverageCompletedMazes(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Count(s => s.Completed));
-        private float CalculateAverageTotalTime(IEnumerable<Exam> exams) => exams.Average(e => e.Stages.Sum(s => s.TotalTime));
-        private float CalculateAverageTotalInputs(IEnumerable<Exam> exams) => (float) exams.Average(e => e.Stages.Sum(s => s.Steps.Count));
-        private float CalculateAverageTotalReduntantInputs(IEnumerable<Exam> exams) => (float)exams.Average(e => e.Stages.Sum(s => s.Steps.Where(s => !s.Correct && !s.HitWall).Count()));
-        private float CalculateAverageTotalWallHits(IEnumerable<Exam> exams) => (float)exams.Average(e => e.Stages.Sum(s => s.Steps.Where(s => s.HitWall).Count()));
-
 
         private List<string> CreateFullComparisonTextToOtherPatients(ExamStats currentExamStats, AverageExamStats otherPatientsStats)
         {
@@ -165,15 +90,15 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamCommandList.Info.Implem
 
         private string Round(float value) => Math.Round(value, 1).ToString();
 
-        private IEnumerable<string> CreateComparisonTextToPreviousAttempt(ExamStats currentExamStats, ExamSetStatSummary examSetStatSummary)
+        private IEnumerable<string> CreateComparisonTextToPreviousAttempt(ExamStats currentExamStats, ExamSetGroupStatSummary examSetStatSummary)
         {
             var previousAttempt = examSetStatSummary.Exams
-                                                     .Where(e => e.Patient.Id == currentExamStats.PatientId)
-                                                     .Where(e => e.CreatedAt < currentExamStats.CreatedAt)
-                                                     .OrderByDescending(e => e.CreatedAt)
-                                                     .FirstOrDefault();
+                                                    .Where(e => e.Patient.Id == currentExamStats.PatientId)
+                                                    .Where(e => e.CreatedAt < currentExamStats.CreatedAt)
+                                                    .OrderByDescending(e => e.CreatedAt)
+                                                    .FirstOrDefault();
 
-            return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStats, CalculateExamStats(previousAttempt)) :
+            return (previousAttempt is not null) ? CreateFullComparisonTextToPreviousAttempt(currentExamStats, _examCalculator.CalculateExamStats(previousAttempt)) :
                                                    new List<string>() { "", "NoPreviousAttemptsByThisPatient".Resource() };
         }
 

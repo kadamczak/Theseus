@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Theseus.Domain.Models.ExamRelated;
+﻿using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
-namespace Theseus.WPF.Code.Services
+namespace Theseus.Domain.Services.ExamDataServices
 {
     public class TimedCell
     {

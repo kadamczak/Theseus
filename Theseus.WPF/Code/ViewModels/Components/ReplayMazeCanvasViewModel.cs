@@ -5,6 +5,7 @@ using System.Timers;
 using System.Windows;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+using Theseus.Domain.Services.ExamDataServices;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 

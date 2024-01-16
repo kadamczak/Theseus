@@ -4,6 +4,7 @@ using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
+using Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
@@ -32,7 +33,8 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<ExamSetsInGroupStore>();
 
                 services.AddSingleton<CurrentExamStore>();
-                services.AddSingleton<ExamSetStatsStore>();
+
+                services.AddSingleton<ExamSetGroupStatsList>();
 
                 services.AddSingleton<SelectedModelListStore<MazeWithSolutionCanvasViewModel>>();
                 services.AddSingleton<SelectedModelListStore<ExamSet>>();

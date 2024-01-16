@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Theseus.Domain.Models.ExamRelated;
+﻿using Theseus.Domain.Models.ExamRelated;
 
-namespace Theseus.WPF.Code.Stores.Exams
+namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup
 {
-    public class ExamSetStatSummary
+    public class ExamSetGroupStatSummary
     {
         public Guid ExamSetId { get; set; }
         public Guid GroupId { get; set; }
@@ -16,6 +14,8 @@ namespace Theseus.WPF.Code.Stores.Exams
 
         public float? AverageTotalTime { get; set; }
         public float? AverageTotalInputs { get; set; }
+        public float? AverageTotalRedundantInputs { get; set; }
+        public float? AverageTotalWallHits { get; set; }
         public float? AverageCompletedMazes { get; set; }
     }
 }

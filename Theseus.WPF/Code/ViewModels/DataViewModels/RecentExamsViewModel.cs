@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
+using Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
@@ -20,13 +21,13 @@ namespace Theseus.WPF.Code.ViewModels
 
         public RecentExamsViewModel(ExamCommandListViewModelFactory examCommandListViewModelFactory,
                                     ICurrentStaffMemberStore currentStaffMemberStore,
+                                    ExamSetGroupStatCalculator examSetStatCalculator,
                                     IGetExamsOfStaffMemberWithFullIncludeQuery getExamsQuery,
-                                    ExamSetStatCalculator examSetStatCalculator,
                                     SelectedModelListStore<Exam> selectedExamListStore,
                                     NavigationService<ViewDataViewModel> viewDataNavigationService)
         {
             LoadExamsOfCurrentStaffMember(getExamsQuery, currentStaffMemberStore, selectedExamListStore);
-            examSetStatCalculator.Calculate(calculateAverages: false);
+            examSetStatCalculator.Calculate(selectedExamListStore.ModelList, calculateAverages: false);
 
             GoBack = new NavigateCommand<ViewDataViewModel>(viewDataNavigationService);
 

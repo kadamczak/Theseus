@@ -4,6 +4,7 @@ using System.Linq;
 using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
+using Theseus.Domain.Services.ExamDataServices.Summary;
 using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
@@ -14,18 +15,18 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
     public class GeneralExamStageInfoGranter : InfoGranter<ExamStageWithMazeViewModel>
     {
         private readonly DescriptiveValueComparer _valueComparer;
-        private readonly ExamSetStatCalculator _statCalculator;
+        private readonly ScoreCalculator _scoreCalculator;
         private readonly IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery _getExamStagesQuery;
         private readonly IGetMazeOfExamStageQuery _getMazeOfExamStageQuery;
 
         public GeneralExamStageInfoGranter(DescriptiveValueComparer descriptiveValueComparer,
                                            IGetExamStagesOfExamSetOfIndexWithFullIncludeQuery getExamStagesQuery,
-                                           ExamSetStatCalculator statCalculator,
+                                           ScoreCalculator scoreCalculator,
                                            IGetMazeOfExamStageQuery getMazeQuery)
         {
             _valueComparer = descriptiveValueComparer;
             _getExamStagesQuery = getExamStagesQuery;
-            _statCalculator = statCalculator;
+            _scoreCalculator = scoreCalculator;
             _getMazeOfExamStageQuery = getMazeQuery;
         }
 
@@ -112,7 +113,7 @@ namespace Theseus.WPF.Code.ViewModels.DataViewModels.ExamStageCommandList.Info.I
 
                 if(stats.Completed)
                 {
-                    double score = _statCalculator.CalculateScoreForExamStage(idealInputAmount,
+                    double score = _scoreCalculator.CalculateScoreForExamStage(idealInputAmount,
                                                                               Convert.ToInt32(stats.Data.RedundantInputs),
                                                                               Convert.ToInt32(stats.Data.WallHits),
                                                                               stats.Data.TotalTime.Value);
