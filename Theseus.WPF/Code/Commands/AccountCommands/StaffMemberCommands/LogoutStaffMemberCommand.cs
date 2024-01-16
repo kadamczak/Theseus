@@ -5,6 +5,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 {
+    /// <summary>
+    /// The <c>LogoutStaffMemberCommand</c> class logs out a <c>StaffMember</c> using <c>IStaffMemberAuthenticator</c>.
+    /// </summary>
     public class LogoutStaffMemberCommand : CommandBase
     {
         private readonly IStaffMemberAuthenticator _authenticator;

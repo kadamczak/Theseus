@@ -7,6 +7,10 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.DataCommands
 {
+    /// <summary>
+    /// The <c>ShowPatientExamsCommand</c> class reads the <c>Patient</c> object stored in linked <c>CommandViewModel</c> instance,
+    /// saves it in <c>SelectedModelDetailsStore</c> and then opens the Patient's Exams Details View.
+    /// </summary>
     public class ShowPatientExamsCommand : CommandBase
     {
         private readonly CommandViewModel<Patient> _patientCommandViewModel;

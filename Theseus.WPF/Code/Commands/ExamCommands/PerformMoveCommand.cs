@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Theseus.Domain.Models.ExamRelated;
@@ -11,6 +10,10 @@ using Theseus.WPF.Code.ViewModels.Components;
 
 namespace Theseus.WPF.Code.Commands.ExamCommands
 {
+    /// <summary>
+    /// The <c>PerformMoveCommand</c> class handles keyboard inputs during <c>Exam</c>s
+    /// and registers them as <c>ExamStep</c>s.
+    /// </summary>
     public class PerformMoveCommand : CommandBase
     {
         private readonly ExamMazeCanvasViewModel _viewModel;

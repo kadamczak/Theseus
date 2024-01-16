@@ -6,7 +6,11 @@ using System.Linq;
 
 namespace Theseus.WPF.Code.Bases
 {
-    public class ErrorCheckingViewModel : ViewModelBase, INotifyDataErrorInfo
+    /// <summary>
+    /// The <c>ErrorCheckingViewModel</c> abstract class contains common <c>INotifyDataErrorInfo</c> implementation for <c>ViewModelBase</c> subclasses.
+    /// Helps with instant error checking in GUI.
+    /// </summary>
+    public abstract class ErrorCheckingViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary = new();
 

@@ -62,7 +62,7 @@ namespace Theseus.WPF.Code.ViewModels
             StopReplay = new StopMazeReplayCommand(this);
             GoBack = new NavigateCommand<ExamDetailsViewModel>(examDetailsNavigationService);
 
-            if (userSolution.Count == 1)
+            if (userSolution.Count() == 1)
                 StopMazeReplay();
         }
 

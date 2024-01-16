@@ -10,6 +10,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 {
+    /// <summary>
+    /// The <c>LoginStaffMemberCommand </c> class uses data from the <c>StaffMemberLoginViewModel</c> to login a <c>StaffMember</c>
+    /// through <c>IStaffMemberAuthenticator</c>.
+    /// </summary>
     public class LoginStaffMemberCommand : AsyncCommandBase
     {
         private readonly StaffMemberLoginViewModel _staffMemberLoginViewModel;

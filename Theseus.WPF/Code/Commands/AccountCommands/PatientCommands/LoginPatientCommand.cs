@@ -10,6 +10,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 {
+    /// <summary>
+    /// The <c>LoginPatientCommand</c> class uses data from the <c>PatientLoginViewModel</c> to login a <c>Patient</c>
+    /// through <c>IPatientAuthenticator</c>.
+    /// </summary>
     public class LoginPatientCommand : CommandBase
     {
         private readonly PatientLoginViewModel _patientLoginViewModel;

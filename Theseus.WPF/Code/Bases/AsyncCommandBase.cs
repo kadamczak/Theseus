@@ -2,6 +2,9 @@
 
 namespace Theseus.WPF.Code.Bases
 {
+    /// <summary>
+    /// The <c>AsyncCommandBase</c> abstract class defines basic execution logic for async commands.
+    /// </summary>
     public abstract class AsyncCommandBase : CommandBase
     {
         private bool _isExecuting;

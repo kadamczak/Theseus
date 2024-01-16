@@ -9,6 +9,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.ExamCommands
 {
+    /// <summary>
+    /// The <c>GoToNextPageCommand</c> class handles <c>CurrentExamStore</c> state update between <c>ExamStage</c>s
+    /// and navigates either to Exam Transition View or Exam End View, depending on <c>ExamSet</c> completion status.
+    /// </summary>
     public class GoToNextPageCommand : CommandBase
     {
         private readonly ExamViewModel _viewModel;

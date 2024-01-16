@@ -5,6 +5,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 {
+    /// <summary>
+    /// The <c>LogoutPatientCommand</c> class logs out the <c>Patient</c> and removes him/her from automatic login upon application start.
+    /// </summary>
     public class LogoutPatientCommand : CommandBase
     {
         private readonly IPatientAuthenticator _authenticator;

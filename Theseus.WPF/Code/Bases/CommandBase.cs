@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace Theseus.WPF.Code.Bases
 {
+    /// <summary>
+    /// The <c>CommandBase</c> abstract class defines basic execution logic for synchronous commands.
+    /// </summary>
     public abstract class CommandBase : ICommand
     {
         public event EventHandler? CanExecuteChanged;

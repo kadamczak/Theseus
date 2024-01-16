@@ -4,6 +4,22 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 namespace Theseus.Domain.Services.ExamDataServices
 {
     /// <summary>
+    /// The <c>TimedCell</c> class combines a <c>Cell</c> and a float value which tells how much time has passed between previous position in <c>Maze</c>
+    /// and movement to this <c>Cell</c>.
+    /// </summary>
+    public class TimedCell
+    {
+        public float TimeBeforeMove { get; set; }
+        public Cell Cell { get; set; }
+
+        public TimedCell(float timeBeforeMove, Cell cell)
+        {
+            TimeBeforeMove = timeBeforeMove;
+            Cell = cell;
+        }
+    }
+
+    /// <summary>
     /// The <c>InputListToTimedCellPathConverter</c> class has the ability to convert a collection of <c>ExamStep</c>s, which can contain wall hits,
     /// into a straightforward collection of <c>Cell</c>s and time intervals between them.
     /// </summary>
@@ -30,22 +46,6 @@ namespace Theseus.Domain.Services.ExamDataServices
             }
 
             return patientInputPath.AsReadOnly();
-        }
-    }
-
-    /// <summary>
-    /// The <c>TimedCell</c> class combines a <c>Cell</c> and a float value which tells how much time has passed between previous position in <c>Maze</c>
-    /// and movement to this <c>Cell</c>.
-    /// </summary>
-    public class TimedCell
-    {
-        public float TimeBeforeMove { get; set; }
-        public Cell Cell { get; set; }
-
-        public TimedCell(float timeBeforeMove, Cell cell)
-        {
-            TimeBeforeMove = timeBeforeMove;
-            Cell = cell;
         }
     }
 }

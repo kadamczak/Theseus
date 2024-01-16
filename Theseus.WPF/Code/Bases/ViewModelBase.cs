@@ -2,6 +2,9 @@
 
 namespace Theseus.WPF.Code.Bases
 {
+    /// <summary>
+    /// The <c>ViewModelBase</c> abstract class contains basic logic for view models in the MVVM pattern.
+    /// </summary>
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;

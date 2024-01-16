@@ -12,6 +12,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 {
+    /// <summary>
+    /// The <c>SearchForStaffMemberCommand</c> class attempts to return a <c>StaffMember</c>
+    /// with username corresponding to data stored in <c>AddStaffMemberToGroupViewModel</c>.
+    /// </summary>
     public class SearchForStaffMemberCommand : AsyncCommandBase
     {
         private readonly AddStaffMemberToGroupViewModel _addStaffMemberToGroupViewModel;

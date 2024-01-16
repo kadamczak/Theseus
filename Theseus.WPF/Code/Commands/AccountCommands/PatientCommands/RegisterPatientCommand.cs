@@ -10,6 +10,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 {
+    /// <summary>
+    /// The <c>RegisterPatientCommand</c> attempts to register a new <c>Patient</c> account using data from <c>PatientRegisterViewModel</c>.
+    /// </summary>
     public class RegisterPatientCommand : AsyncCommandBase
     {
         private readonly PatientRegisterViewModel _patientRegisterViewModel;

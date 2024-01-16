@@ -10,6 +10,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamCommands
 {
+    /// <summary>
+    /// The <c>DeleteExamCommand</c> class deletes the <c>Exam</c> instance linked to chosen <c>CommandViewModel</c>.
+    /// </summary>
     public class DeleteExamCommand : AsyncCommandBase
     {
         private readonly ObservableCollection<CommandViewModel<Exam>> _commandList;

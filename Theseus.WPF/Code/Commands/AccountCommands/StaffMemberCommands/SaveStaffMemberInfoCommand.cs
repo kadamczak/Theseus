@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +10,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 {
+    /// <summary>
+    /// The <c>SaveStaffMemberInfoCommand</c> class attempts to update <c>StaffMember</c> account info basing on data stored in <c>StaffMemberDetailsLoggedInViewModel</c>.
+    /// </summary>
     public class SaveStaffMemberInfoCommand : AsyncCommandBase
     {
         private readonly StaffMemberDetailsLoggedInViewModel _staffMemberDetailsLoggedInViewModel;

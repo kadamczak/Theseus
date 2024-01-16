@@ -18,6 +18,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// The <c>CreateExamSetManuallyCommand</c> class creates and saves a new <c>ExamSet</c> with <c>MazeWithSolution</c>s taken
+    /// from <c>MazesInExamSetStore</c>.
+    /// </summary>
     public class CreateExamSetManuallyCommand : AsyncCommandBase
     {
         private readonly CreateSetManuallyViewModel _createSetManuallyViewModel;

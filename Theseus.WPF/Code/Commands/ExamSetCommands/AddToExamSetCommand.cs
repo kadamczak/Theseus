@@ -9,6 +9,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// The <c>AddToExamSetCommand</c> class adds the chosen <c>MazeWithSolution</c> to <c>MazesInExamSetStore</c>.
+    /// </summary>
     public class AddToExamSetCommand : CommandBase
     {
         private readonly ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>> _mazeCommandList;

@@ -6,6 +6,9 @@ using Theseus.WPF.Code.Stores;
 
 namespace Theseus.WPF.Code.Commands.DataCommands
 {
+    /// <summary>
+    /// The <c>SaveExamCsvCommand</c> class opens a folder selection dialog and saves <c>ExamStage</c> .csv files in chosen location.
+    /// </summary>
     public class SaveExamCsvCommand : AsyncCommandBase
     {
         private readonly SelectedModelDetailsStore<Exam> _selectedExamStore;

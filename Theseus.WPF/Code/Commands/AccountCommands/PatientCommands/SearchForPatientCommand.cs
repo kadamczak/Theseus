@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +11,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 {
+    /// <summary>
+    /// The <c>SearchForPatientCommand</c> class attempts to return a <c>Patient</c>
+    /// with username corresponding to data stored in <c>AddPatientToGroupViewModel</c>.
+    /// </summary>
     public class SearchForPatientCommand : AsyncCommandBase
     {
         private readonly AddPatientToGroupViewModel _addPatientToGroupViewModel;

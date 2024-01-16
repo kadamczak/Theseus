@@ -7,6 +7,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 {
+    /// <summary>
+    /// The <c>AttemptToLogInAutomaticallyCommand</c> is called upon application start-up in order to automatically log-in the last <c>Patient</c>, if he/she
+    /// has not logged out.
+    /// </summary>
     public class AttemptToLogInAutomaticallyCommand : AsyncCommandBase
     {
         private readonly NavigationService<LoggedInViewModel> _loggedInNavigationService;
@@ -25,14 +29,6 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 
         public override async Task ExecuteAsync(object? parameter = null)
         {
-            //Properties.Settings.Default.LogInUsername = "";
-            //Properties.Settings.Default.LogInGroup = "";
-            //Properties.Settings.Default.PastGroupFirst = "";
-            //Properties.Settings.Default.PastGroupSecond = "";
-            //Properties.Settings.Default.PastUsernameFirst = "";
-            //Properties.Settings.Default.PastUsernameSecond = "";
-            //Properties.Settings.Default.Save();
-
             string loggedInPatientUsername = Properties.Settings.Default.LogInUsername;
             string loggedInGroup = Properties.Settings.Default.LogInGroup;
 

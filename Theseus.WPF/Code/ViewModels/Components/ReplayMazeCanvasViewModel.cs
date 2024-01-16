@@ -7,13 +7,12 @@ using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Services.ExamDataServices;
 using Theseus.WPF.Code.Bases;
-using Theseus.WPF.Code.Services;
 
 namespace Theseus.WPF.Code.ViewModels.Components
 {
     public class ReplayMazeCanvasViewModel : ViewModelBase
     {
-        private readonly List<TimedCell> _userSolutionWithTimes;
+        private readonly IEnumerable<TimedCell> _userSolutionWithTimes;
         private int _nextCellIndex = 1;
 
         public MazeWithSolutionCanvasViewModel MazeWithSolutionCanvasViewModel { get; }
@@ -36,7 +35,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
             InputTimer?.Dispose();
         }
 
-        public ReplayMazeCanvasViewModel(MazeWithSolution mazeWithSolution, List<TimedCell> userSolutionWithTimes, bool examStageCompleted)
+        public ReplayMazeCanvasViewModel(MazeWithSolution mazeWithSolution, IEnumerable<TimedCell> userSolutionWithTimes, bool examStageCompleted)
         {
             _userSolutionWithTimes = userSolutionWithTimes;
 
@@ -55,7 +54,7 @@ namespace Theseus.WPF.Code.ViewModels.Components
         {
             StopTimer();
 
-            Cell nextCell = _userSolutionWithTimes[_nextCellIndex].Cell;
+            Cell nextCell = _userSolutionWithTimes.ElementAt(_nextCellIndex).Cell;
             UserSolution.Add(nextCell);
 
             Application.Current.Dispatcher.Invoke(() => {
@@ -68,9 +67,9 @@ namespace Theseus.WPF.Code.ViewModels.Components
 
         private void StartTimerIfInputsLeft()
         {
-            if (_nextCellIndex < _userSolutionWithTimes.Count)
+            if (_nextCellIndex < _userSolutionWithTimes.Count())
             {
-                InputTimer = new Timer() { Interval = _userSolutionWithTimes[_nextCellIndex].TimeBeforeMove * 1000 };
+                InputTimer = new Timer() { Interval = _userSolutionWithTimes.ElementAt(_nextCellIndex).TimeBeforeMove * 1000 };
                 InputTimer.Elapsed += new ElapsedEventHandler(DrawNextStep);
                 InputTimer.Start();
                 return;

@@ -10,6 +10,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.ExamCommands
 {
+    /// <summary>
+    /// The <c>BeginExamCommand</c> class is called upon exam start in order to initialize <c>CurrentExamStore</c> state
+    /// and then navigate to Exam Practice View.
+    /// </summary>
     public class BeginExamCommand : CommandBase
     {
         private readonly BeginTestViewModel _beginTestViewModel;

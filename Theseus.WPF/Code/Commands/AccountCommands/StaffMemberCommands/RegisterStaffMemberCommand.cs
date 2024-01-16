@@ -10,6 +10,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
 {
+    /// <summary>
+    /// The <c>RegisterStaffMemberCommand</c> attempts to register a new <c>StaffMember</c> account using data from <c>StaffMemberRegisterViewModel</c>.
+    /// </summary>
     public class RegisterStaffMemberCommand : AsyncCommandBase
     {
         private readonly StaffMemberRegisterViewModel _staffMemberRegisterViewModel;

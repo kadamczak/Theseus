@@ -9,6 +9,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.AccountCommands.PatientCommands
 {
+    /// <summary>
+    /// The <c>SavePatientInfoCommand</c> class attempts to update <c>Patient</c> account info basing on data stored in <c>PatientDetailsLoggedInViewModel</c>.
+    /// </summary>
     public class SavePatientInfoCommand : AsyncCommandBase
     {
         private readonly PatientDetailsLoggedInViewModel _patientDetailsLoggedInViewModel;

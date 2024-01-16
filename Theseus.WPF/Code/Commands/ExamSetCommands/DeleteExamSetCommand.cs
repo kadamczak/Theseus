@@ -12,6 +12,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// The <c>DeleteExamSetCommand</c>
+    /// </summary>
     public class DeleteExamSetCommand : AsyncCommandBase
     {
         private readonly ObservableCollection<CommandViewModel<ExamSet>> _commandList;
