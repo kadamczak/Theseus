@@ -1,5 +1,8 @@
 ﻿namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamStageStats
 {
+    /// <summary>
+    /// The <c>AverageExamStats</c> class contains analysis info of multiple <c>ExamStage</c>s.
+    /// </summary>
     public class AverageExamStageStats
     {
         public int TotalAttemptAmount { get; set; }

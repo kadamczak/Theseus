@@ -6,7 +6,6 @@ using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
-using Theseus.Domain.Services.Authentication.PatientAuthentication;
 
 namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication
 {

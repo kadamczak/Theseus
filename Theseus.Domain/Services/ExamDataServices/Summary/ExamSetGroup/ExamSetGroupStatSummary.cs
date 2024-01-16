@@ -2,6 +2,9 @@
 
 namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup
 {
+    /// <summary>
+    /// The <c>ExamSetGroupStatSummary</c> class contains analysis info for a particular <c>ExamSet</c>, taking only one <c>Group</c> into account.
+    /// </summary>
     public class ExamSetGroupStatSummary
     {
         public Guid ExamSetId { get; set; }

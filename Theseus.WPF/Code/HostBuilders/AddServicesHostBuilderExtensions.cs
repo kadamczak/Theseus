@@ -28,6 +28,7 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<ExamSetGroupStatCalculator>();
                 services.AddSingleton<DescriptiveValueComparer>();
                 services.AddSingleton<InputListToTimedCellPathConverter>();
+                services.AddSingleton<ExamCsvWriter>();
                 services.AddSingleton<IStaffMemberAuthenticationService, StaffMemberAuthenticationService>();
                 services.AddSingleton<IPatientAuthenticationService, PatientAuthenticationService>();
 

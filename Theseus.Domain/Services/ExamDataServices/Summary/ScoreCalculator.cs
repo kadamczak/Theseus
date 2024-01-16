@@ -3,6 +3,9 @@ using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 
 namespace Theseus.Domain.Services.ExamDataServices.Summary
 {
+    /// <summary>
+    /// The <c>ScoreCalculator</c> can calculate <c>ExamStage</c> and <c>Exam</c> scores on scale from 0 to 100.
+    /// </summary>
     public class ScoreCalculator
     {
         private readonly IGetMazeOfExamStageQuery _getMazeOfExamStageQuery;

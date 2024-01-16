@@ -1,5 +1,8 @@
 ﻿namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamStats
 {
+    /// <summary>
+    /// The <c>ExamStats</c> class contains analysis info of one <c>Exam</c>.
+    /// </summary>
     public class ExamStats
     {
         public Guid PatientId { get; set; }

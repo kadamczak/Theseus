@@ -3,6 +3,9 @@ using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 
 namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamStats
 {
+    /// <summary>
+    /// The <c>ExamCalculator</c> class can calculate analysis info of a single <c>Exam</c> or calculate averages of multiple <c>Exam</c>s.
+    /// </summary>
     public class ExamCalculator
     {
         private readonly ScoreCalculator _scoreCalculator;

@@ -5,6 +5,7 @@ using Theseus.Domain.Models.ExamRelated;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.QueryInterfaces.ExamQueryInterfaces;
 using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
+using Theseus.Domain.Services.ExamDataServices;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.DataCommands;
 using Theseus.WPF.Code.Services;
@@ -24,6 +25,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ExamDetailsViewModel(IGetExamStagesOfExamWithFullIncludeQuery getExamStagesQuery,
                                     IGetMazeOfExamStageQuery getMazeQuery,
+                                    ExamCsvWriter examCsvWriter,
                                     SelectedModelDetailsStore<Exam> examDetailsStore,
                                     SelectedModelListStore<ExamStageWithMazeViewModel> examStageListStore,
                                     ExamStageCommandListViewModelFactory examStageCommandListViewModelFactory)
@@ -33,7 +35,7 @@ namespace Theseus.WPF.Code.ViewModels
             ExamStageCommandListViewModel = examStageCommandListViewModelFactory.Create(ExamStageButtonCommand.ShowDetails, ExamStageButtonCommand.None, ExamStageInfo.GeneralInfo);
             ExamStageCommandListViewModel.CreateModelCommandViewModels();
 
-            SaveCsv = new SaveExamCsvCommand(examDetailsStore);
+            SaveCsv = new SaveExamCsvCommand(examDetailsStore, examCsvWriter);
         }
 
         private void LoadExamStagesOfExam(IGetExamStagesOfExamWithFullIncludeQuery query,

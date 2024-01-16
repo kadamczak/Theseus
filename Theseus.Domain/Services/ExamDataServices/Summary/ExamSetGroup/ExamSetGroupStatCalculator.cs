@@ -4,9 +4,13 @@ using Theseus.Domain.QueryInterfaces.MazeQueryInterfaces;
 
 namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup
 {
+    /// <summary>
+    /// The <c>ExamSetGroupStatCalculator</c>s has the ability to calculate data inside <c>ExamSetGroupStatSummary</c> objects and save the most recent results in
+    /// <c>ExamSetGroupStatsList</c>.
+    /// </summary>
     public class ExamSetGroupStatCalculator
     {
-        private readonly ExamSetGroupStatsList _examSetSGroupStatsList;
+        private readonly ExamSetGroupStatsList _examSetGroupStatsList;
         private readonly IGetExamsOfGroupOfExamSetWithFullIncludeQuery _getExamsQuery;
         private readonly IGetOrderedMazesWithSolutionOfExamSetQuery _getMazesQuery;
 
@@ -14,24 +18,24 @@ namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamSetGroup
                                          IGetExamsOfGroupOfExamSetWithFullIncludeQuery getExamsQuery,
                                          IGetOrderedMazesWithSolutionOfExamSetQuery getMazesQuery)
         {
-            _examSetSGroupStatsList = examSetStatsStore;
+            _examSetGroupStatsList = examSetStatsStore;
             _getExamsQuery = getExamsQuery;
             _getMazesQuery = getMazesQuery;
         }
 
         public void Calculate(IEnumerable<Exam> examList, bool calculateAverages = true)
         {
-            _examSetSGroupStatsList.ExamSetStatList.Clear();
+            _examSetGroupStatsList.ExamSetStatList.Clear();
 
             foreach (var exam in examList)
             {
                 Guid examSetId = exam.ExamSet.Id;
                 Guid groupId = exam.Patient.Group.Id;
 
-                if (!ExamSetStatsInThisGroupAlreadyCalculated(_examSetSGroupStatsList.ExamSetStatList, examSetId, groupId))
+                if (!ExamSetStatsInThisGroupAlreadyCalculated(_examSetGroupStatsList.ExamSetStatList, examSetId, groupId))
                 {
                     ExamSetGroupStatSummary statSummary = CalculateSummaryForGroupForExamSet(examSetId, groupId, calculateAverages);
-                    _examSetSGroupStatsList.ExamSetStatList.Add(statSummary);
+                    _examSetGroupStatsList.ExamSetStatList.Add(statSummary);
                 }
             }
         }

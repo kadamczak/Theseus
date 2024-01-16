@@ -2,6 +2,9 @@
 
 namespace Theseus.Domain.Services.ExamDataServices.Summary.ExamStageStats
 {
+    /// <summary>
+    /// The <c>ExamStageCalculator</c> class can calculate analysis info of a single <c>ExamStage</c> or calculate averages of multiple <c>ExamStage</c>s.
+    /// </summary>
     public class ExamStageCalculator
     {
 
