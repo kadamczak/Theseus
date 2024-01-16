@@ -4,7 +4,6 @@ using NSubstitute.ExceptionExtensions;
 using NSubstitute.ReturnsExtensions;
 using Theseus.Domain.CommandInterfaces.GroupCommandInterfaces;
 using Theseus.Domain.CommandInterfaces.StaffMemberCommandInterfaces;
-using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Domain.Models.UserRelated.Exceptions;
 using Theseus.Domain.QueryInterfaces.StaffMemberQueryInterfaces;
@@ -14,11 +13,11 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication.Tests
 {
     public class StaffMemberAuthenticationServiceTests
     {
-        private IPasswordHasher? _mockPasswordHasher;
-        private IGetStaffMemberByUsernameQuery? _mockGetStaffMemberByUsernameQuery;
-        private IGetStaffMemberByEmailQuery? _mockGetStaffMemberByEmailQuery;
-        private ICreateStaffMemberCommand? _mockCreateStaffMemberCommand;
-        private ICreateGroupCommand? _mockCreateGroupCommand;
+        private IPasswordHasher _mockPasswordHasher;
+        private IGetStaffMemberByUsernameQuery _mockGetStaffMemberByUsernameQuery;
+        private IGetStaffMemberByEmailQuery _mockGetStaffMemberByEmailQuery;
+        private ICreateStaffMemberCommand _mockCreateStaffMemberCommand;
+        private ICreateGroupCommand _mockCreateGroupCommand;
 
         private StaffMemberAuthenticationService _staffMemberAuthenticationService;
 
