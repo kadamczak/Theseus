@@ -6,6 +6,9 @@ using Theseus.Infrastructure.DbContexts;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddDbContextHostBuilderExtensions</c> class registers DbContexts as singleton services.
+    /// </summary>
     public static class AddDbContextHostBuilderExtensions
     {
         public static IHostBuilder AddDbContext(this IHostBuilder hostBuilder)

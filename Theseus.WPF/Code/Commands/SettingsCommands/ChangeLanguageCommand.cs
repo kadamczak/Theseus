@@ -3,6 +3,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.SettingsCommands
 {
+    /// <summary>
+    /// The <c>ChangeLanguageCommand</c> class changes the used string resource file to the preferred language
+    /// and saves the setting for future application launches.
+    /// </summary>
     public class ChangeLanguageCommand : CommandBase
     {
         private readonly SettingsViewModel _settingsViewModel;

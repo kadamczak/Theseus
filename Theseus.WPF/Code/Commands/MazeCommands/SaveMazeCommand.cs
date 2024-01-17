@@ -10,6 +10,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.MazeCommands
 {
+    /// <summary>
+    /// The <c>SaveMazeCommand</c> class uses <c>ICreateMazeWithSolutionCommand</c>
+    /// to save <c>MazeWithSolution</c> stored in <c>SelectedModelDetailsStore</c>.
+    /// </summary>
     public class SaveMazeCommand : AsyncCommandBase
     {
         private readonly MazeDetailsViewModel _mazeDetailsViewModel;

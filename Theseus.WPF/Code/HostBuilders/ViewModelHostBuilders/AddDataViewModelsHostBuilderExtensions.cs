@@ -7,6 +7,10 @@ using Theseus.WPF.Code.ViewModels.DataViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders.ViewModelHostBuilders
 {
+    /// <summary>
+    /// The <c>AddDataViewModelsHostBuilderExtensions</c> class registers data view models and related classes
+    /// as services.
+    /// </summary>
     public static class AddDataViewModelsHostBuilderExtensions
     {
         public static IHostBuilder AddDataViewModels(this IHostBuilder hostBuilder)

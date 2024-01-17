@@ -6,6 +6,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.NavigationCommands
 {
+    /// <summary>
+    /// The <c>OpenAccountViewModelCommand</c> class opens Logged In View or Not Logged In View,
+    /// depending on whether any type of account (<c>Patient</c> or <c>StaffMember</c>) is currently logged-in.
+    /// </summary>
     public class OpenAccountViewModelCommand : CommandBase
     {
         private readonly NavigationService<LoggedInViewModel> _loggedInNavigationService;

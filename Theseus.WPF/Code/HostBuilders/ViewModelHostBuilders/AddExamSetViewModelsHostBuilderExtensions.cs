@@ -6,6 +6,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddExamSetViewModelsHostBuilderExtensions</c> class registers exam set view models and related classes
+    /// as services.
+    /// </summary>
     public static class AddExamSetViewModelsHostBuilderExtensions
     {
         public static IHostBuilder AddExamSetViewModels(this IHostBuilder hostBuilder)

@@ -10,6 +10,9 @@ using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.ButtonCommands.
 
 namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
 {
+    /// <summary>
+    /// The <c>CommandGranterHostBuilderExtension</c> class registers command granter classes as transient services.
+    /// </summary>
     public static class CommandGranterHostBuilderExtension
     {
         public static IHostBuilder AddCommandGranters(this IHostBuilder hostBuilder)

@@ -3,6 +3,10 @@ using Theseus.WPF.Code.Services;
 
 namespace Theseus.WPF.Code.Commands.NavigationCommands
 {
+    /// <summary>
+    /// The <c>NavigateCommand</c> class changes the active view.
+    /// </summary>
+    /// <typeparam name="TViewModel">View model assiociated with the chosen View.</typeparam>
     public class NavigateCommand<TViewModel> : CommandBase where TViewModel : ViewModelBase
     {
         private readonly NavigationService<TViewModel> _navigationService;

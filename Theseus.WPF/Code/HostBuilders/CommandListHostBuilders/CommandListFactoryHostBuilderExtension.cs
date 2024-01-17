@@ -10,6 +10,9 @@ using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList;
 
 namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
 {
+    /// <summary>
+    /// The <c>CommandListFactoryHostBuilderExtension</c> class registers command list view model factory classes as transient services.
+    /// </summary>
     public static class CommandListFactoryHostBuilderExtension
     {
         public static IHostBuilder AddCommandListFactories(this IHostBuilder hostBuilder)

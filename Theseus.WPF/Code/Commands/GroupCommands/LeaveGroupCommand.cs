@@ -12,6 +12,10 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>LeaveGroupCommand</c> class removes the currently logged in <c>StaffMember</c>
+    /// from <c>Group</c> instance linked to chosen <c>CommandViewModel</c>.
+    /// </summary>
     public class LeaveGroupCommand : AsyncCommandBase
     {
         private readonly ObservableCollection<CommandViewModel<Group>> _groupCommandList;

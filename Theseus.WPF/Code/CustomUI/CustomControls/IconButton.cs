@@ -5,6 +5,9 @@ using System.Windows.Controls.Primitives;
 
 namespace Theseus.WPF.Code.CustomUI.CustomControls
 {
+    /// <summary>
+    /// The <c>IconButton</c> class defines property fields of the IconButton control.
+    /// </summary>
     public class IconButton : ButtonBase
     {
         static IconButton()

@@ -6,6 +6,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddGroupViewModelsHostBuilderExtensions</c> class registers group view models and related classes
+    /// as services.
+    /// </summary>
     public static class AddGroupViewModelsHostBuilderExtensions
     {
         public static IHostBuilder AddGroupViewModels(this IHostBuilder hostBuilder)

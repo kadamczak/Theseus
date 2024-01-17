@@ -4,6 +4,9 @@ using Theseus.WPF.Code.Bases;
 
 namespace Theseus.WPF.Code.Commands.SettingsCommands
 {
+    /// <summary>
+    /// The <c>ViewCreditsCommand</c> class opens a local HTML file with listed icon etc. sources used by the application.
+    /// </summary>
     public class ViewCreditsCommand : AsyncCommandBase
     {
         public override async Task ExecuteAsync(object parameter)

@@ -9,6 +9,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.MazeCommands
 {
+    /// <summary>
+    /// The <c>GenerateMazeCommand</c> class uses <c>MazeCreator</c> to generate an <c>MazeWithSolution</c> following
+    /// settings saved in <c>MazeGeneratorViewModel</c>.
+    /// </summary>
     public class GenerateMazeCommand : CommandBase
     {
         private readonly MazeGeneratorViewModel _mazeGenViewModel;

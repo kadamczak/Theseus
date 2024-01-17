@@ -16,6 +16,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>CreateGroupCommand</c> class creates and saves a new <c>Group</c> with name
+    /// taken from <c>StaffMemberGroupsViewModel</c>.
+    /// </summary>
     public class CreateGroupCommand : AsyncCommandBase
     {
         private readonly StaffMemberGroupsViewModel _staffMemberGroupsViewModel;

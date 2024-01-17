@@ -3,6 +3,9 @@ using System.Windows.Controls;
 
 namespace Theseus.WPF.Code.CustomUI.CustomControls
 {
+    /// <summary>
+    /// The <c>FormField</c> class defines property fields of the FormField control.
+    /// </summary>
     public class FormField : TextBox
     {
         static FormField()

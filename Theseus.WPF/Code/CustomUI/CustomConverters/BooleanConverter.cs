@@ -5,6 +5,10 @@ using System.Windows.Data;
 
 namespace Theseus.WPF.Code.CustomUI.CustomConverters
 {
+    /// <summary>
+    /// The <c>BooleanConverter</c> converts bool values to values of another type.
+    /// </summary>
+    /// <typeparam name="T">Output type.</typeparam>
     public class BooleanConverter<T> : IValueConverter
     {
         public BooleanConverter(T trueValue, T falseValue)

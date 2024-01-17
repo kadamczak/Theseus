@@ -6,6 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace Theseus.WPF.Code.Commands.SettingsCommands
 {
+    /// <summary>
+    /// The <c>LoadStringResourcesCommand</c> class changes used string resource file.
+    /// </summary>
     public class LoadStringResourcesCommand : CommandBase
     {
         private readonly ResourceDictionary _applicationResources;

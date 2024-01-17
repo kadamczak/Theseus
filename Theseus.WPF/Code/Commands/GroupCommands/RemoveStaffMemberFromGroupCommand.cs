@@ -13,6 +13,10 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>RemoveStaffMemberFromGroupCommand</c> class deletes the <c>StaffMember</c> instance linked to chosen <c>CommandViewModel</c>
+    /// from <c>Group</c> selected in <c>SelectedModelDetailsStore</c>.
+    /// </summary>
     public class RemoveStaffMemberFromGroupCommand : AsyncCommandBase
     {
         private readonly ObservableCollection<CommandViewModel<StaffMember>> _staffMemberCommandListl;

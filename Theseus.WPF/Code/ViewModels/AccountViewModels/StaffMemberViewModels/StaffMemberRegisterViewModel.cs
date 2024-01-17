@@ -136,7 +136,7 @@ namespace Theseus.WPF.Code.ViewModels
             }
         }
 
-        private readonly IEmailValidator _emailValidator;
+        private readonly EmailValidator _emailValidator;
 
         public bool CanRegister => !HasErrors &&
                                    !string.IsNullOrWhiteSpace(Username) &&
@@ -148,7 +148,7 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand Register { get; }
 
-        public StaffMemberRegisterViewModel(IStaffMemberAuthenticator authenticator, IEmailValidator emailValidator)
+        public StaffMemberRegisterViewModel(IStaffMemberAuthenticator authenticator, EmailValidator emailValidator)
         {
             this._emailValidator = emailValidator;
             Register = new RegisterStaffMemberCommand(this, authenticator);

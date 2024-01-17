@@ -10,6 +10,9 @@ using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info.Implementa
 
 namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
 {
+    /// <summary>
+    /// The <c>InfoGranterHostBuilderExtension</c> class registers info granter classes as transient services.
+    /// </summary>
     public static class InfoGranterHostBuilderExtension
     {
         public static IHostBuilder AddInfoGranters(this IHostBuilder hostBuilder)

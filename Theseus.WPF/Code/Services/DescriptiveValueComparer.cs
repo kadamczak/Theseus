@@ -3,6 +3,9 @@ using Theseus.WPF.Code.Extensions;
 
 namespace Theseus.WPF.Code.Services
 {
+    /// <summary>
+    /// The <c>DescriptiveValueComparer</c> class returns a comparison between two values in string text form.
+    /// </summary>
     public class DescriptiveValueComparer
     {
         public string Compare(float examValue, float? possibleValue, string adjectiveWhenHigher, string adjectiveWhenLower)

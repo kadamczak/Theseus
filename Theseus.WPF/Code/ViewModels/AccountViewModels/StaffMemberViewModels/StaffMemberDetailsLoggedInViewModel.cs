@@ -93,11 +93,11 @@ namespace Theseus.WPF.Code.ViewModels
         public ICommand ShowGroups { get; }
         public ICommand Logout { get; }
 
-        private readonly IEmailValidator _emailValidator;
+        private readonly EmailValidator _emailValidator;
         public bool CanUpdateStaffMember => !HasErrors && FormHasChanges();
 
         public StaffMemberDetailsLoggedInViewModel(IStaffMemberAuthenticator authenticator,
-                                                   IEmailValidator emailValidator,
+                                                   EmailValidator emailValidator,
                                                    IUpdateStaffMemberCommand updateStaffMemberCommand,
                                                    NavigationService<StaffMemberGroupsViewModel> groupsNavigationService,
                                                    NavigationService<StaffMemberLoginRegisterViewModel> staffMemberLoginRegisterNavigationService)

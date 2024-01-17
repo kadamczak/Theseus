@@ -17,6 +17,9 @@ using Theseus.WPF.Code.ViewModels.MazeViewModels.MazeCommandList.Info;
 
 namespace Theseus.WPF.Code.HostBuilders.CommandListHostBuilders
 {
+    /// <summary>
+    /// The <c>GranterFactoryHostBuilderExtension</c> class registers granter factory classes as transient services.
+    /// </summary>
     public static class GranterFactoryHostBuilderExtension
     {
         public static IHostBuilder AddGranterFactories(this IHostBuilder hostBuilder)

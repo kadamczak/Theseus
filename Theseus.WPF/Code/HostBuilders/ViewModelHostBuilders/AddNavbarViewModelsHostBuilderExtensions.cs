@@ -6,6 +6,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddNavbarViewModelsHostBuilderExtensions</c> class registers navbar view models and related classes
+    /// as services.
+    /// </summary>
     public static class AddNavbarViewModelsHostBuilderExtensions
     {
         public static IHostBuilder AddNavbarViewModels(this IHostBuilder hostBuilder)

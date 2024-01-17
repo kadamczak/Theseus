@@ -7,6 +7,10 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// The <c>ShowExamSetDetailsCommand</c> class reads the <c>ExamSet</c> object stored in linked <c>CommandViewModel</c> instance,
+    /// saves it in <c>SelectedModelDetailsStore</c> and then opens the Exam Set Details View.
+    /// </summary>
     public class ShowExamSetDetailsCommand : CommandBase
     {
         private readonly CommandViewModel<ExamSet> _examSetCommandViewModel;

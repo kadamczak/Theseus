@@ -15,6 +15,9 @@ using Theseus.Infrastructure.Commands.StaffMemberCommands;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddCommandsHostBuilderExtensions</c> class registers Commands as singleton services.
+    /// </summary>
     public static class AddCommandsHostBuilderExtensions
     {
         public static IHostBuilder AddCommands(this IHostBuilder hostBuilder)

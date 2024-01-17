@@ -7,6 +7,10 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>ShowGroupDetailsCommand</c> class reads the <c>Group</c> object stored in linked <c>CommandViewModel</c> instance,
+    /// saves it in <c>SelectedModelDetailsStore</c> and then opens the Group Details View.
+    /// </summary>
     public class ShowGroupDetailsCommand : CommandBase
     {
         private readonly CommandViewModel<Group> _groupCommandViewModel;

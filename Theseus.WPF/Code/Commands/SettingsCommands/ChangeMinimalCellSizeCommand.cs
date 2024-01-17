@@ -5,6 +5,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.SettingsCommands
 {
+    /// <summary>
+    /// The <c>ChangeMinimalCellSizeCommand</c> class changes the <c>Cell</c> minimal size limitation
+    /// which affects <c>ExamSet</c>s selection shown to the <c>Patient</c>.
+    /// </summary>
     public class ChangeMinimalCellSizeCommand : CommandBase
     {
         private readonly MinimalCellSizeSetterViewModel _minimalCellSizeSetterViewModel;

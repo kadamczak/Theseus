@@ -7,6 +7,10 @@ using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddAuthenticationViewModelsHostBuilderExtensions</c> class registers authentication view models and related classes
+    /// as services.
+    /// </summary>
     public static class AddAuthenticationViewModelsHostBuilderExtensions
     {
         public static IHostBuilder AddAuthenticationViewModels(this IHostBuilder hostBuilder)

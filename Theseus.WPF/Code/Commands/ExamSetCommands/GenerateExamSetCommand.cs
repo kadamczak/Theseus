@@ -8,6 +8,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// The <c>GenerateExamSetCommand</c> class uses <c>ExamSetCreator</c> to generate an <c>ExamSet</c> following
+    /// settings saved in <c>ExamSetGeneratorViewModel</c>.
+    /// </summary>
     public class GenerateExamSetCommand : CommandBase
     {
         private readonly ExamSetGeneratorViewModel _examSetGeneratorViewModel;

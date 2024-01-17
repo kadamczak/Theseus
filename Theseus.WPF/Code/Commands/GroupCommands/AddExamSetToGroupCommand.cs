@@ -6,6 +6,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>AddExamSetToGroupCommand</c> class adds the chosen <c>ExamSet</c> to <c>MazesInExamSetStore</c>.
+    /// </summary>
     public class AddExamSetToGroupCommand : CommandBase
     {
         private readonly CommandViewModel<ExamSet> _examSetCommandViewModel;

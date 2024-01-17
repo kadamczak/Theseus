@@ -11,6 +11,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>DeleteGroupCommand</c> class deletes the <c>Group</c> instance linked to chosen <c>CommandViewModel</c>.
+    /// </summary>
     public class DeleteGroupCommand : AsyncCommandBase
     {
         private readonly ObservableCollection<CommandViewModel<Group>> _groupCommandList;

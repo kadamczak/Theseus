@@ -12,6 +12,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>AddStaffMemberToGroupCommand</c> class adds <c>StaffMember</c to <c>Group</c>, both taken from <c>AddStaffMemberToGroupViewModel</c>.
+    /// </summary>
     public class AddStaffMemberToGroupCommand : AsyncCommandBase
     {
         private readonly AddStaffMemberToGroupViewModel _addStaffMemberToGroupViewModel;

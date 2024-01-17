@@ -12,6 +12,9 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>AddPatientToGroupCommand</c> class adds <c>Patient</c to <c>Group</c>, both taken from <c>AddPatientToGroupViewModel</c>.
+    /// </summary>
     public class AddPatientToGroupCommand : AsyncCommandBase
     {
         private readonly AddPatientToGroupViewModel _addPatientToGroupViewModel;

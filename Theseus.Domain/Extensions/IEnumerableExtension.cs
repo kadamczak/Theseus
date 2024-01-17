@@ -1,7 +1,7 @@
 ﻿namespace Theseus.Domain.Extensions
 {
     /// <summary>
-    /// Class containing extension methods for IEnumerable.
+    /// The <c>IEnumerableExtension</c> class contains extension methods for IEnumerable.
     /// </summary>
     public static class IEnumerableExtension
     {

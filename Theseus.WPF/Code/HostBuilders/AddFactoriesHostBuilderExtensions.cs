@@ -8,6 +8,9 @@ using Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddFactoriesHostBuilderExtensions</c> class registers domain factories as singleton services.
+    /// </summary>
     public static class AddFactoriesHostBuilderExtensions
     {
         public static IHostBuilder AddFactories(this IHostBuilder hostBuilder)

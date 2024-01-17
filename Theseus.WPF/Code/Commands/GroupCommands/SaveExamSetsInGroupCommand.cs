@@ -17,6 +17,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>SaveExamSetsInGroupCommand</c> class changes the currently logged-in <c>StaffMember</c>'s selection of <c>ExamSet</c>s in <c>Group</c>
+    /// selected by <c>SelectedModelDetailsStore</c>.
+    /// </summary>
     public class SaveExamSetsInGroupCommand : AsyncCommandBase
     {
         private readonly IChangeExamSetsOfStaffMemberInGroupCommand _changeExamSetsOfUserInGroupCommand;

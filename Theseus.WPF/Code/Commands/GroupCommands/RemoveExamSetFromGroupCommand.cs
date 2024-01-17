@@ -13,6 +13,10 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.GroupCommands
 {
+    /// <summary>
+    /// The <c>RemoveExamSetFromGroupCommand</c> class deletes the <c>ExamSet</c> instance linked to chosen <c>CommandViewModel</c>
+    /// from <c>Group</c> selected in <c>SelectedModelDetailsStore</c>.
+    /// </summary>
     public class RemoveExamSetFromGroupCommand : AsyncCommandBase
     {
         private readonly ObservableCollection<CommandViewModel<ExamSet>> _commandList;

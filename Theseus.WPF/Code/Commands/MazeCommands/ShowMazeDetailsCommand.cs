@@ -6,6 +6,10 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.MazeCommands
 {
+    /// <summary>
+    /// The <c>ShowMazeDetailsCommand</c> class reads the <c>MazeWithSolution</c> object stored in linked <c>CommandViewModel</c> instance,
+    /// saves it in <c>SelectedModelDetailsStore</c> and then opens the Maze Details View.
+    /// </summary>
     public class ShowMazeDetailsCommand : CommandBase
     {
         private readonly CommandViewModel<MazeWithSolutionCanvasViewModel> _mazeWithSolutionCommandViewModel;

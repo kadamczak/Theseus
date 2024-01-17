@@ -15,6 +15,9 @@ using Theseus.Infrastructure.Queries.StaffMemberQueries;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddQueriesHostBuilderExtensions</c> class registers queries as singleton services.
+    /// </summary>
     public static class AddQueriesHostBuilderExtensions
     {
         public static IHostBuilder AddQueries(this IHostBuilder hostBuilder)

@@ -3,7 +3,7 @@
 namespace Theseus.Domain.Extensions
 {
     /// <summary>
-    /// Class containing extension methods for the Direction enum.
+    /// The <c>DirectionExtension</c> class contains extension methods for the Direction enum.
     /// </summary>
     public static class DirectionExtension
     {

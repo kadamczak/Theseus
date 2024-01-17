@@ -14,6 +14,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
+    /// <summary>
+    /// The <c>SaveGeneratedExamSetCommand</c> class uses <c>ICreateExamSetCommand</c> and <c>ICreateMazeWithSolutionCommand</c>
+    /// to save <c>ExamSet</c> stored in <c>SelectedModelDetailsStore</c>.
+    /// </summary>
     public class SaveGeneratedExamSetCommand : AsyncCommandBase
     {
         private readonly ExamSetGeneratorResultViewModel _resultViewModel;

@@ -6,6 +6,10 @@ using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddMazeViewModelsHostBuilderExtensions</c> class registers maze view models and related classes
+    /// as services.
+    /// </summary>
     public static class AddMazeViewModelsHostBuilderExtensions
     {
         public static IHostBuilder AddMazeViewModels(this IHostBuilder hostBuilder)

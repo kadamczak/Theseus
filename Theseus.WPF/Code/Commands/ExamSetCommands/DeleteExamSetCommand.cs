@@ -13,7 +13,7 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 namespace Theseus.WPF.Code.Commands.ExamSetCommands
 {
     /// <summary>
-    /// The <c>DeleteExamSetCommand</c>
+    /// The <c>DeleteExamSetCommand</c> class deletes the <c>ExamSet</c> instance linked to chosen <c>CommandViewModel</c>.
     /// </summary>
     public class DeleteExamSetCommand : AsyncCommandBase
     {

@@ -14,6 +14,9 @@ using Theseus.Domain.Services.ExamDataServices.Summary.ExamStageStats;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddServicesHostBuilderExtensions</c> class registers service classes as singleton services.
+    /// </summary>
     public static class AddServicesHostBuilderExtensions
     {
         public static IHostBuilder AddServices(this IHostBuilder hostBuilder)
@@ -21,7 +24,7 @@ namespace Theseus.WPF.Code.HostBuilders
             hostBuilder.ConfigureServices((context, services) =>
             {
                 services.AddSingleton<IPasswordHasher, PasswordHasher>();
-                services.AddSingleton<IEmailValidator, EmailValidator>();
+                services.AddSingleton<EmailValidator>();
                 services.AddSingleton<ScoreCalculator>();
                 services.AddSingleton<ExamStageCalculator>();
                 services.AddSingleton<ExamCalculator>();

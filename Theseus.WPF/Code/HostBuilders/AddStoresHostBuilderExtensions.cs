@@ -16,6 +16,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.ExamBindings;
 
 namespace Theseus.WPF.Code.HostBuilders
 {
+    /// <summary>
+    /// The <c>AddStoresHostBuilderExtensions</c> class registers stores as singleton services.
+    /// </summary>
     public static class AddStoresHostBuilderExtensions
     {
         public static IHostBuilder AddStores(this IHostBuilder hostBuilder)

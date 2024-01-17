@@ -12,6 +12,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.Commands.MazeCommands
 {
+    /// <summary>
+    /// The <c>DeleteMazeCommand</c> class deletes the <c>MazeWithSolution</c> instance linked to chosen <c>CommandViewModel</c>.
+    /// </summary>
     public class DeleteMazeCommand : AsyncCommandBase
     {
         private readonly ObservableCollection<CommandViewModel<MazeWithSolutionCanvasViewModel>> _collection;

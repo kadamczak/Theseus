@@ -1,7 +1,7 @@
 ﻿namespace Theseus.Domain.Extensions
 {
     /// <summary>
-    /// Class containing extension methods for Lists.
+    /// The <c>ListExtension</c> class contains extension methods for Lists.
     /// </summary>
     public static class ListExtension
     {

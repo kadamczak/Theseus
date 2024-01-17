@@ -5,6 +5,9 @@ using System.Windows.Media;
 
 namespace Theseus.WPF.Code.CustomUI.CustomControls
 {
+    /// <summary>
+    /// The <c>IconTextButton</c> class defines property fields of the IconTextButton control.
+    /// </summary>
     public class IconTextButton : ButtonBase
     {
         static IconTextButton()
