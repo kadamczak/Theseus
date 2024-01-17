@@ -10,6 +10,9 @@ using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>StaffMemberDetailsLoggedInViewModel</c> class contains bindings for StaffMember Details Logged In View.
+    /// </summary>
     public class StaffMemberDetailsLoggedInViewModel : ErrorCheckingViewModel
     {
         private string _username = string.Empty;

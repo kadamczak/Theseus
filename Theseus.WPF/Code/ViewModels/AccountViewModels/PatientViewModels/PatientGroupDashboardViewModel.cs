@@ -13,6 +13,9 @@ using Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels.PatientCom
 
 namespace Theseus.WPF.Code.ViewModels.AccountViewModels.PatientViewModels
 {
+    /// <summary>
+    /// The <c>PatientGroupDashboardViewModel</c> class contains bindings for Patient Group Dashboard View.
+    /// </summary>
     public class PatientGroupDashboardViewModel : ViewModelBase
     {
         public Group CurrentGroup { get; }

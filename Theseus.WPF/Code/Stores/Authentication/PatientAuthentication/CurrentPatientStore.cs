@@ -3,6 +3,9 @@ using Theseus.Domain.Models.UserRelated;
 
 namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
 {
+    /// <summary>
+    /// The <c>CurrentPatientStore</c> class stores the currently logged-in <c>Patient</c>.
+    /// </summary>
     public class CurrentPatientStore : ICurrentPatientStore
     {
         private Patient? _patient;

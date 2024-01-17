@@ -5,6 +5,9 @@ using Theseus.WPF.Code.Services;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>PatientDetailsNotLoggedInViewModel</c> class contains bindings for Patient Details Not Logged In View.
+    /// </summary>
     public class PatientDetailsNotLoggedInViewModel : ViewModelBase
     {
         public ICommand NavigateToPatientLoginRegister { get; }

@@ -5,6 +5,10 @@ using Theseus.Domain.Services.Authentication.PatientAuthentication;
 
 namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
 {
+    /// <summary>
+    /// The <c>PatientAuthenticator</c> class defines login/register logic for <c>Patient</c> accounts.
+    /// It manipulates the <c>ICurrentPatientStore</c> according to <c>IPatientAuthenticationService</c> response.
+    /// </summary>
     public class PatientAuthenticator : IPatientAuthenticator
     {
         private readonly IPatientAuthenticationService _patientAuthenticationService;

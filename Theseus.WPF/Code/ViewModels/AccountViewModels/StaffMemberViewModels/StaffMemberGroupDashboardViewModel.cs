@@ -14,6 +14,9 @@ using Theseus.WPF.Code.ViewModels.AccountViewModels.StaffMemberViewModels.StaffM
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>StaffMemberGroupDashboardViewModel</c> class contains bindings for StaffMember Group Dashboard View.
+    /// </summary>
     public class StaffMemberGroupDashboardViewModel : ViewModelBase
     {
         public Group CurrentGroup { get; }

@@ -5,6 +5,10 @@ using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication
 {
+    /// <summary>
+    /// The <c>StaffMemberAuthenticator</c> class defines login/register logic for <c>StaffMember</c> accounts.
+    /// It manipulates the <c>ICurrentStaffMemberStore</c> according to <c>IStaffMemberAuthenticationService</c> response.
+    /// </summary>
     public class StaffMemberAuthenticator : IStaffMemberAuthenticator
     {
         private readonly IStaffMemberAuthenticationService _staffMemberAuthenticationService;

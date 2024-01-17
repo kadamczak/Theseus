@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Services;
@@ -9,6 +8,9 @@ using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>NavigationBarViewModel</c> class contains bindings for Navigation Bar.
+    /// </summary>
     public class NavigationBarViewModel : ViewModelBase
     {
         private readonly ICurrentStaffMemberStore _currentStaffMemberStore;

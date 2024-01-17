@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
@@ -9,6 +8,9 @@ using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>PatientLoginViewModel</c> class contains bindings for Patient Login View.
+    /// </summary>
     public class PatientLoginViewModel : ErrorCheckingViewModel
     {
         private string _username = string.Empty;

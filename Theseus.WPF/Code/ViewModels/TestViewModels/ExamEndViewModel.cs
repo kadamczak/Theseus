@@ -7,6 +7,7 @@ using Theseus.WPF.Code.Commands.NavigationCommands;
 using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Exams;
+using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -17,8 +18,11 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ExamEndViewModel(ICreateExamCommand createExamCommand,
                                 CurrentExamStore currentExamStore,
+                                NavigationEnabledStore navigationEnabledStore,
                                 NavigationService<BeginTestViewModel> navigationService)
         {
+            navigationEnabledStore.NavigationEnabled = true;
+
             try
             {
                 createExamCommand.Create(currentExamStore.CurrentExam);

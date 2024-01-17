@@ -5,6 +5,9 @@ using Theseus.Domain.Services.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication
 {
+    /// <summary>
+    /// The <c>IStaffMemberAuthenticator</c> interface defines login/register methods for <c>StaffMember</c>.
+    /// </summary>
     public interface IStaffMemberAuthenticator
     {
         StaffMember? CurrentStaffMember { get; }

@@ -6,6 +6,7 @@ using Theseus.WPF.Code.Bases;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Exams;
+using Theseus.WPF.Code.Stores.Mazes;
 using Theseus.WPF.Code.ViewModels;
 
 namespace Theseus.WPF.Code.Commands.ExamCommands
@@ -21,18 +22,21 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
         private readonly ICurrentPatientStore _currentPatientStore;
         private readonly IGetOrderedMazesWithSolutionOfExamSetQuery _getMazesOfExamSetQuery;
         private readonly NavigationService<ExamPracticeViewModel> _examPracticeNavigationService;
+        private readonly NavigationEnabledStore _navigationEnabledStore;
 
         public BeginExamCommand(BeginTestViewModel beginTestViewModel,
                                 CurrentExamStore currentExamStore,
                                 ICurrentPatientStore currentPatientStore,
                                 IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
-                                NavigationService<ExamPracticeViewModel> examPracticeNavigationService)
+                                NavigationService<ExamPracticeViewModel> examPracticeNavigationService,
+                                NavigationEnabledStore navigationEnabledStore)
         {
             _beginTestViewModel = beginTestViewModel;
             _currentExamStore = currentExamStore;
             _currentPatientStore = currentPatientStore;
             _getMazesOfExamSetQuery = getMazesOfExamSetQuery;
             _examPracticeNavigationService = examPracticeNavigationService;
+            _navigationEnabledStore = navigationEnabledStore;
 
             _beginTestViewModel.PropertyChanged += OnPropertyChanged;
         }
@@ -40,6 +44,9 @@ namespace Theseus.WPF.Code.Commands.ExamCommands
         public override void Execute(object? parameter)
         {
             SetupExamStore();
+
+            _navigationEnabledStore.NavigationEnabled = false;
+
             _examPracticeNavigationService.Navigate();
         }
 

@@ -7,6 +7,9 @@ using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>PatientRegisterViewModel</c> class contains bindings for Patient Register View.
+    /// </summary>
     public class PatientRegisterViewModel : ErrorCheckingViewModel
     {
         private string _patientUsername = string.Empty;

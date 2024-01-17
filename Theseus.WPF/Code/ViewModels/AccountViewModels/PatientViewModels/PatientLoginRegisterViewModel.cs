@@ -7,6 +7,9 @@ using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>PatientLoginRegisterViewModel</c> class contains bindings for Patient Login Register View.
+    /// </summary>
     public class PatientLoginRegisterViewModel : ViewModelBase
     {
         public PatientLoginViewModel PatientLoginViewModel { get; }

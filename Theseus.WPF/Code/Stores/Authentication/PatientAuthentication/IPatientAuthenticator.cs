@@ -5,6 +5,9 @@ using Theseus.Domain.Services.Authentication.PatientAuthentication;
 
 namespace Theseus.WPF.Code.Stores.Authentication.PatientAuthentication
 {
+    /// <summary>
+    /// The <c>IPatientAuthenticator</c> interface defines login/register methods for <c>Patient</c>.
+    /// </summary>
     public interface IPatientAuthenticator
     {
         Patient? CurrentPatient { get; }

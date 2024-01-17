@@ -5,6 +5,9 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 
 namespace Theseus.WPF.Code.Stores.Exams
 {
+    /// <summary>
+    /// The <c>CurrentExamStore</c> class stores info about the currently ongoing <c>Exam</c> attempt.
+    /// </summary>
     public class CurrentExamStore
     {
         public IEnumerable<MazeWithSolution> Mazes { get; set; }

@@ -2,6 +2,9 @@
 
 namespace Theseus.WPF.Code.Stores.Mazes
 {
+    /// <summary>
+    /// The <c>LastMazeGeneratorInputStore</c> class stores last user settings in <c>MazeWithSolution</c> generator.
+    /// </summary>
     public class LastMazeGeneratorInputStore
     {
         public string Height { get; set; } = "15";

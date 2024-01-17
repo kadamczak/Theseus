@@ -3,6 +3,9 @@ using Theseus.WPF.Code.Bases;
 
 namespace Theseus.WPF.Code.Stores
 {
+    /// <summary>
+    /// The <c>NavigationStore</c> class contains currently used view model.
+    /// </summary>
     public class NavigationStore
     {
         private ViewModelBase _currentViewModel;

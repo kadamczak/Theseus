@@ -4,6 +4,9 @@ using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>LoggedInViewModel</c> class contains bindings for Logged In View.
+    /// </summary>
     public class LoggedInViewModel : ViewModelBase
     {
         public ViewModelBase PatientDetailsViewModel { get; }

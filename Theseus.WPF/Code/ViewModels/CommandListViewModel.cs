@@ -6,6 +6,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.CommandViewModel;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>CommandListViewModel</c> generic class defines standard command list functionality.
+    /// </summary>
     public class CommandListViewModel<TModel, TEnumCommand, TEnumInfo> : ViewModelBase
         where TModel : class
         where TEnumCommand : struct, IConvertible

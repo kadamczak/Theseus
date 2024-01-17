@@ -15,6 +15,9 @@ using Theseus.WPF.Code.ViewModels.Bindings.AccountBindings;
 
 namespace Theseus.WPF.Code.ViewModels
 {
+    /// <summary>
+    /// The <c>PatientDetailsLoggedInViewModel</c> class contains bindings for Patient Details Logged In View.
+    /// </summary>
     public class PatientDetailsLoggedInViewModel : ErrorCheckingViewModel
     {
         private string _username = string.Empty;

@@ -15,6 +15,7 @@ using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores.Authentication.PatientAuthentication;
 using Theseus.WPF.Code.Stores.Exams;
+using Theseus.WPF.Code.Stores.Mazes;
 
 namespace Theseus.WPF.Code.ViewModels
 {
@@ -61,11 +62,12 @@ namespace Theseus.WPF.Code.ViewModels
                                   ICurrentPatientStore currentPatientStore,
                                   IGetGroupByPatientQuery getGroupQuery,
                                   IGetExamSetsOfGroupQuery getExamSetsQuery,
+                                  NavigationEnabledStore navigationEnabledStore,
                                   IGetOrderedMazesWithSolutionOfExamSetQuery getMazesOfExamSetQuery,
                                   NavigationService<ExamPracticeViewModel> examPracticeNavigationService)
         {
             IsPatientLoggedIn = currentPatientStore.IsPatientLoggedIn;
-            BeginExam = new BeginExamCommand(this, currentExamStore, currentPatientStore, getMazesOfExamSetQuery, examPracticeNavigationService);
+            BeginExam = new BeginExamCommand(this, currentExamStore, currentPatientStore, getMazesOfExamSetQuery, examPracticeNavigationService, navigationEnabledStore);
 
             if (!currentPatientStore.IsPatientLoggedIn)
                 return;
