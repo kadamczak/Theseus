@@ -28,6 +28,8 @@ namespace Theseus.WPF.Code.HostBuilders
                 services.AddSingleton<NavigationStore>();
                 services.AddSingleton<NavigationEnabledStore>();
 
+                services.AddSingleton<LastExamSetGeneratorInputStore>();
+
                 services.AddSingleton<LastMazeGeneratorInputStore>();
                 services.AddSingleton<MazeReturnServiceStore>();
                 services.AddSingleton<MazesInExamSetStore>();

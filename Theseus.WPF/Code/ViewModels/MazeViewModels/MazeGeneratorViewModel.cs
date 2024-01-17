@@ -143,21 +143,13 @@ namespace Theseus.WPF.Code.ViewModels
                 _lastMazeGeneratorSettingsStore.StructureAlgorithm = SelectedStructureAlgorithm.Value;
             }
             else if (e.PropertyName == nameof(SelectedSolutionAlgorithm))
-            {
                 _lastMazeGeneratorSettingsStore.SolutionAlgorithm = SelectedSolutionAlgorithm.Value;
-            }
             else if (e.PropertyName == nameof(ShouldExcludeCellsCloseToRoot))
-            {
                 _lastMazeGeneratorSettingsStore.ShouldExcludeCellsCloseToRoot = ShouldExcludeCellsCloseToRoot;
-            }
             else if (e.PropertyName == nameof(MazeHeight))
-            {
                 _lastMazeGeneratorSettingsStore.Height = MazeHeight;
-            }
             else if (e.PropertyName == nameof(MazeWidth))
-            {
                 _lastMazeGeneratorSettingsStore.Width = MazeWidth;
-            }
         }
 
         private void UpdateAlgorithmDescription()

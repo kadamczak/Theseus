@@ -10,6 +10,7 @@ using Theseus.WPF.Code.Extensions;
 using Theseus.WPF.Code.Services;
 using Theseus.WPF.Code.Stores;
 using Theseus.WPF.Code.Stores.Authentication.StaffMemberAuthentication;
+using Theseus.WPF.Code.Stores.ExamSets;
 using Theseus.WPF.Code.ViewModels.Bindings.ExamSetBindings;
 
 namespace Theseus.WPF.Code.ViewModels
@@ -148,20 +149,27 @@ namespace Theseus.WPF.Code.ViewModels
 
         public ICommand Generate { get; }
 
+        private readonly LastExamSetGeneratorInputStore _lastExamSetGeneratorInputStore;
+
         public ExamSetGeneratorViewModel(ExamSetCreator examSetCreator,
                                          ICurrentStaffMemberStore currentStaffMemberStore,
+                                         LastExamSetGeneratorInputStore lastExamSetGeneratorInputStore,
                                          SelectedModelDetailsStore<ExamSet> examSetDetailsStore,
                                          NavigationService<ExamSetGeneratorResultViewModel> examSetResultNavigationService)
         {
-            SetStartSelection();
             Generate = new GenerateExamSetCommand(this, examSetCreator, currentStaffMemberStore, examSetDetailsStore, examSetResultNavigationService);
+            this._lastExamSetGeneratorInputStore = lastExamSetGeneratorInputStore;
 
             PropertyChanged += HandlePropertyChange;
+            GetStartValuesFromStore();
         }
 
-        private void SetStartSelection()
+        private void GetStartValuesFromStore()
         {
-            this.SelectedDifficulty = ExamSetDifficulties.Where(d => d.Value == ExamSetDifficulty.Standard).First();
+            this.MazeAmount = this._lastExamSetGeneratorInputStore.MazeAmount;
+            this.SelectedDifficulty = ExamSetDifficulties.Where(d => d.Value == _lastExamSetGeneratorInputStore.SelectedDifficulty).First();
+            this.BeginningMaxMazeDimension = this._lastExamSetGeneratorInputStore.BeginningMaxMazeDimension;
+            this.EndingMaxMazeDimension = this._lastExamSetGeneratorInputStore.EndingMaxMazeDimension;
         }
 
         protected override void Dispose()
@@ -176,6 +184,15 @@ namespace Theseus.WPF.Code.ViewModels
             {
                 HandleDifficultyChange();
             }
+
+            if (e.PropertyName == nameof(MazeAmount))
+                this._lastExamSetGeneratorInputStore.MazeAmount = MazeAmount;
+            else if (e.PropertyName == nameof(SelectedDifficulty))
+                this._lastExamSetGeneratorInputStore.SelectedDifficulty = SelectedDifficulty.Value;
+            else if (e.PropertyName == nameof(BeginningMaxMazeDimension))
+                this._lastExamSetGeneratorInputStore.BeginningMaxMazeDimension = BeginningMaxMazeDimension;
+            else if (e.PropertyName == nameof(EndingMaxMazeDimension))
+                this._lastExamSetGeneratorInputStore.EndingMaxMazeDimension = EndingMaxMazeDimension;
         }
 
         private void HandleDifficultyChange()
