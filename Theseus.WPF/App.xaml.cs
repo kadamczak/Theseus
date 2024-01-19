@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using System.Windows;
-using Theseus.Infrastructure.DbContexts;
 using Theseus.WPF.Code.Commands.AccountCommands.PatientCommands;
 using Theseus.WPF.Code.Commands.SettingsCommands;
 using Theseus.WPF.Code.HostBuilders;
@@ -52,7 +50,6 @@ namespace Theseus.WPF
             _host.Start();
 
             LoadStringResources();
-            //MigrateDatabase();
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
@@ -66,15 +63,6 @@ namespace Theseus.WPF
         {
             LoadStringResourcesCommand loadStringResourcesCommand = new LoadStringResourcesCommand();
             loadStringResourcesCommand.Execute();
-        }
-
-        private void MigrateDatabase()
-        {
-            TheseusDbContextFactory theseusDbContextFactory = _host.Services.GetRequiredService<TheseusDbContextFactory>();
-            using (TheseusDbContext context = theseusDbContextFactory.CreateDbContext())
-            {
-                context.Database.Migrate();
-            }
         }
 
         private async Task AttemptToLogInPatientAutomatically()
