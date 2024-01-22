@@ -11,7 +11,7 @@ namespace Theseus.WPF.Code.Commands.SettingsCommands
     {
         public override async Task ExecuteAsync(object parameter)
         {
-            string fileName = "index-" + Properties.Settings.Default.AppLanguage + ".html";
+            string fileName = @"Resources\Pages\index-" + Properties.Settings.Default.AppLanguage + ".html";
 
             System.Diagnostics.Process.Start(new ProcessStartInfo
             {
