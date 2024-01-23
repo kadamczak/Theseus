@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,8 +34,6 @@ namespace Theseus.WPF
                 .AddCommandLists()
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton<IPasswordHasher, PasswordHasher>();
-
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {
                         DataContext = services.GetRequiredService<MainViewModel>()
@@ -67,8 +64,8 @@ namespace Theseus.WPF
 
         private async Task AttemptToLogInPatientAutomatically()
         {
-            NavigationService<LoggedInViewModel> loggedInNavigationService = _host.Services.GetRequiredService<NavigationService<LoggedInViewModel>>();
-            NavigationService<NotLoggedInViewModel> notLoggedInNavigationService = _host.Services.GetRequiredService<NavigationService<NotLoggedInViewModel>>();
+            var loggedInNavigationService = _host.Services.GetRequiredService<NavigationService<LoggedInViewModel>>();
+            var notLoggedInNavigationService = _host.Services.GetRequiredService<NavigationService<NotLoggedInViewModel>>();
             IPatientAuthenticator patientAuthenticator = _host.Services.GetRequiredService<IPatientAuthenticator>();
 
             AttemptToLogInAutomaticallyCommand automaticLogInCommand = new AttemptToLogInAutomaticallyCommand(loggedInNavigationService,

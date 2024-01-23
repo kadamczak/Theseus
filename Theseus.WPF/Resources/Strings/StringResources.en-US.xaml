@@ -67,9 +67,9 @@
     <system:String x:Key="Username:" xml:space="preserve">Username: </system:String>
     <system:String x:Key="Group">Group</system:String>
 
-    <system:String x:Key="PasswordReq" xml:space="preserve"> Min. length: 6
-    Both cases
-    Numbers</system:String>
+    <system:String x:Key="PasswordReq" xml:space="preserve">Min. length: 6
+Both cases
+Numbers</system:String>
 
     <system:String x:Key="Age">Age</system:String>
     <system:String x:Key="Age:"  xml:space="preserve">Age: </system:String>
