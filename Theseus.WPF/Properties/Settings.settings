@@ -6,7 +6,7 @@
       <Value Profile="(Default)">pl</Value>
     </Setting>
     <Setting Name="MinimalCellSize" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">43</Value>
+      <Value Profile="(Default)">54</Value>
     </Setting>
     <Setting Name="LogInUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

@@ -5,7 +5,7 @@
     /// </summary>
     public class BooleanStringConverter : BooleanConverter<string>
     {
-        public BooleanStringConverter() : base("Yes", "No")
+        public BooleanStringConverter() : base((string)App.Current.Resources["Yes"], (string)App.Current.Resources["No"])
         {
         }
     }

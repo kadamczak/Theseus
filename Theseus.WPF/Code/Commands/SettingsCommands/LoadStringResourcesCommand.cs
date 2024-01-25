@@ -3,6 +3,7 @@ using System;
 using Theseus.WPF.Code.Bases;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Theseus.WPF.Code.Commands.SettingsCommands
 {
@@ -12,7 +13,8 @@ namespace Theseus.WPF.Code.Commands.SettingsCommands
     public class LoadStringResourcesCommand : CommandBase
     {
         private readonly ResourceDictionary _applicationResources;
-        private const string stringFolderPath = @"..\..\Resources\Strings";
+        private const string StringFolderPath = @"..\..\Resources\Strings";
+        private readonly Regex _stringResourceRegex = new Regex(@$"StringResources\..+\.xaml$");
 
         public LoadStringResourcesCommand()
         {
@@ -29,19 +31,18 @@ namespace Theseus.WPF.Code.Commands.SettingsCommands
 
         private void RemovePreviousStringResourceDictionary()
         {
-            Regex stringResourceRegex = new Regex(@$"StringResources\..+\.xaml$");
-            var stringResourceDictionaries = _applicationResources.MergedDictionaries.Where(d => stringResourceRegex.IsMatch(d.Source.OriginalString));
+            var stringResourceDictionary = _applicationResources.MergedDictionaries.FirstOrDefault(d => _stringResourceRegex.IsMatch(d.Source.OriginalString));
 
-            foreach (var dictionary in stringResourceDictionaries)
-            {
-                _applicationResources.Remove(dictionary);
-            }
+            if (stringResourceDictionary is null)
+                return;
+
+            _applicationResources.Remove(stringResourceDictionary);
         }
 
         private ResourceDictionary SelectStringResourceDictionary()
         {
             string chosenLanguage = Properties.Settings.Default.AppLanguage;
-            string fileName = @$"{stringFolderPath}\StringResources.{chosenLanguage}.xaml";
+            string fileName = @$"{StringFolderPath}\StringResources.{chosenLanguage}.xaml";
             return new ResourceDictionary() { Source = new Uri(fileName, UriKind.Relative) };
         }
     }

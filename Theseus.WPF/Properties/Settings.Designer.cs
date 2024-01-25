@@ -37,7 +37,7 @@ namespace Theseus.WPF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("43")]
+        [global::System.Configuration.DefaultSettingValueAttribute("54")]
         public float MinimalCellSize {
             get {
                 return ((float)(this["MinimalCellSize"]));
