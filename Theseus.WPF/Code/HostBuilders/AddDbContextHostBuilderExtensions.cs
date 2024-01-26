@@ -16,7 +16,6 @@ namespace Theseus.WPF.Code.HostBuilders
             hostBuilder.ConfigureServices((context, services) =>
             {
                 string connectionString = context.Configuration.GetConnectionString("TheseusDb");
-
                 services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options);
                 services.AddSingleton<TheseusDbContextFactory>();
             });

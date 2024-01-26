@@ -16,9 +16,6 @@ namespace Theseus.WPF.Code.Commands.NavigationCommands
             _navigationService = navigationService;
         }
 
-        public override void Execute(object? parameter)
-        {
-            _navigationService.Navigate();
-        }
+        public override void Execute(object? parameter) => _navigationService.Navigate();
     }
 }

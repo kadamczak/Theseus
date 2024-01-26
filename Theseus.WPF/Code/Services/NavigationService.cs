@@ -19,9 +19,6 @@ namespace Theseus.WPF.Code.Services
             _createViewModel = createViewModel;
         }
 
-        public void Navigate()
-        {
-            _navigationStore.CurrentViewModel = _createViewModel();
-        }
+        public void Navigate() => _navigationStore.CurrentViewModel = _createViewModel();
     }
 }

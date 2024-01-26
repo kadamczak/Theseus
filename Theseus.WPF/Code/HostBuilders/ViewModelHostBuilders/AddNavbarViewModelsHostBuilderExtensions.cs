@@ -36,7 +36,6 @@ namespace Theseus.WPF.Code.HostBuilders
 
             services.AddTransient<HomeViewModel>();
             services.AddTransient<SettingsViewModel>();
-            services.AddTransient<AccountViewModel>();
         }
 
         private static void AddViewModelFactories(IServiceCollection services)
@@ -50,7 +49,6 @@ namespace Theseus.WPF.Code.HostBuilders
 
             services.AddSingleton<Func<HomeViewModel>>((s) => () => s.GetRequiredService<HomeViewModel>());
             services.AddSingleton<Func<SettingsViewModel>>((s) => () => s.GetRequiredService<SettingsViewModel>());
-            services.AddSingleton<Func<AccountViewModel>>((s) => () => s.GetRequiredService<AccountViewModel>());
         }
 
         private static void AddNavigationServices(IServiceCollection services)
@@ -64,7 +62,6 @@ namespace Theseus.WPF.Code.HostBuilders
 
             services.AddSingleton<NavigationService<HomeViewModel>>();
             services.AddSingleton<NavigationService<SettingsViewModel>>();
-            services.AddSingleton<NavigationService<AccountViewModel>>();
         }
     }
 }

@@ -11,19 +11,19 @@ namespace Theseus.WPF.Code.Commands.AccountCommands.StaffMemberCommands
     public class LogoutStaffMemberCommand : CommandBase
     {
         private readonly IStaffMemberAuthenticator _authenticator;
-        private readonly NavigationService<StaffMemberLoginRegisterViewModel> _staffMemberLoginRegisterNavigationService;
+        private readonly NavigationService<StaffMemberLoginRegisterViewModel> _staffMemberNavigationService;
 
         public LogoutStaffMemberCommand(IStaffMemberAuthenticator authenticator,
-                                        NavigationService<StaffMemberLoginRegisterViewModel> staffMemberLoginRegisterNavigationService)
+                                        NavigationService<StaffMemberLoginRegisterViewModel> staffMemberNavigationService)
         {
             _authenticator = authenticator;
-            _staffMemberLoginRegisterNavigationService = staffMemberLoginRegisterNavigationService;
+            _staffMemberNavigationService = staffMemberNavigationService;
         }
 
         public override void Execute(object? parameter)
         {
             _authenticator.Logout();
-            _staffMemberLoginRegisterNavigationService.Navigate();
+            _staffMemberNavigationService.Navigate();
         }
     }
 }

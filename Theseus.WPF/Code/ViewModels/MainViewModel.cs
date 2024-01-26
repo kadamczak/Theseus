@@ -20,9 +20,6 @@ namespace Theseus.WPF.Code.ViewModels
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
-        private void OnCurrentViewModelChanged()
-        {
-            OnPropertyChanged(nameof(CurrentViewModel));
-        }
+        private void OnCurrentViewModelChanged() => OnPropertyChanged(nameof(CurrentViewModel));
     }
 }
