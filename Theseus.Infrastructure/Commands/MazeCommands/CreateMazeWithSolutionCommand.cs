@@ -22,7 +22,7 @@ namespace Theseus.Infrastructure.Commands.MazeCommands
             using (TheseusDbContext context = DbContextFactory.CreateDbContext())
             {
                 MazeDto mazeDto = Mapper.Map<MazeDto>(maze);
-                mazeDto.Owner = Mapper.Map<StaffMemberDto>(maze.StaffMember);
+                mazeDto.Owner = Mapper.Map<StaffMemberDto>(maze.Owner);
                 mazeDto.ExamSetDto_MazeDto = new List<ExamSetDto_MazeDto>();
 
                 AttachRelatedEntities(mazeDto, context);

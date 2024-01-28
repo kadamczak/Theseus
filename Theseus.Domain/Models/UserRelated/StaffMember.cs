@@ -75,7 +75,7 @@ namespace Theseus.Domain.Models.UserRelated
         /// <summary>
         /// Gets or sets a list of <c>MazeWithSolution</c>s that this <c>StaffMember</c> created.
         /// </summary>
-        public List<MazeWithSolution> MazesWithSolutions { get; set; } = new List<MazeWithSolution>();
+        public List<MazeWithSolution> MazesWithSolution { get; set; } = new List<MazeWithSolution>();
 
         /// <summary>
         /// Gets or sets a list of <c>ExamSet</c>s that this <c>StaffMember</c> created.

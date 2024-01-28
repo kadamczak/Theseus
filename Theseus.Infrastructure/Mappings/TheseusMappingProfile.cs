@@ -44,26 +44,26 @@ namespace Theseus.Infrastructure.Mappings
 
             CreateMap<ExamSetDto, ExamSet>()
                .ForMember(p => p.ExamSetMazeIndexes, c => c.MapFrom(p => p.ExamSetDto_MazeDto))
-               .ForMember(p => p.StaffMember, c => c.MapFrom(p => p.Owner))
+               .ForMember(p => p.Owner, c => c.MapFrom(p => p.Owner))
                .ForMember(p => p.Exams, c => c.MapFrom(c => c.ExamDtos))
                .ForMember(p => p.Groups, c => c.MapFrom(p => p.GroupDtos));
 
             CreateMap<ExamSet, ExamSetDto>()
                 .ForMember(p => p.ExamSetDto_MazeDto, c => c.MapFrom(p => p.ExamSetMazeIndexes))
-                .ForMember(p => p.Owner, c => c.MapFrom(p => p.StaffMember))
+                .ForMember(p => p.Owner, c => c.MapFrom(p => p.Owner))
                 .ForMember(p => p.ExamDtos, c => c.MapFrom(p => p.Exams))
                 .ForMember(p => p.GroupDtos, c => c.MapFrom(p => p.Groups));
 
             CreateMap<StaffMemberDto, StaffMember>()
                 .ForMember(p => p.OwnedGroups, c => c.MapFrom(p => p.OwnedGroupDtos))
                 .ForMember(p => p.Groups, c => c.MapFrom(p => p.GroupDtos))
-                .ForMember(p => p.MazesWithSolutions, c => c.MapFrom(p => p.MazeDtos))
+                .ForMember(p => p.MazesWithSolution, c => c.MapFrom(p => p.MazeDtos))
                 .ForMember(p => p.ExamSets, c => c.MapFrom(p => p.ExamSetDtos));
 
             CreateMap<StaffMember, StaffMemberDto>()
                 .ForMember(p => p.OwnedGroupDtos, c => c.MapFrom(p => p.OwnedGroups))
                 .ForMember(p => p.GroupDtos, c => c.MapFrom(p => p.Groups))
-                .ForMember(p => p.MazeDtos, c => c.MapFrom(p => p.MazesWithSolutions))
+                .ForMember(p => p.MazeDtos, c => c.MapFrom(p => p.MazesWithSolution))
                 .ForMember(p => p.ExamSetDtos, c => c.MapFrom(p => p.ExamSets));
 
             CreateMap<PatientDto, Patient>()

@@ -45,14 +45,14 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// </summary>
         /// <param name="rowIndex">Row index in <c>Maze</c>.</param>
         /// <param name="colIndex">Column index in <c>Maze</c>.</param>
-        /// <exception cref="ArgumentException">Thrown when rowIndex or colIndex are below 0.</exception>
+        /// <exception cref="ArgumentException">Thrown when rowIndex or colIndex are less than 0 or more than 49.</exception>
         public Cell(int rowIndex, int colIndex)
         {
-            if (rowIndex < 0)
-                throw new ArgumentException("Row index in a cell must be equal or above 0.");
+            if (rowIndex < 0 || rowIndex >= 50)
+                throw new ArgumentException("Row index is not in correct range.");
 
-            if (colIndex < 0)
-                throw new ArgumentException("Column index in a cell must be equal or above 0.");
+            if (colIndex < 0 || colIndex >= 50)
+                throw new ArgumentException("Column index is not in correct range.");
 
             RowIndex = rowIndex;
             ColumnIndex = colIndex;
@@ -78,7 +78,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// <param name="anotherCell">Neighbour <c>Cell</c>.</param>
         /// <param name="bidirectional">True if this method should also be called on <paramref name="anotherCell"/>.</param>
         /// <exception cref="CellException">Thrown when <paramref name="anotherCell"/> indexes do not match <paramref name="direction"/>.</exception>
-        public void SetCellAsAdjecent(Direction direction, Cell? anotherCell, bool bidirectional = true)
+        public void SetCellAsNeighbour(Direction direction, Cell? anotherCell, bool bidirectional = true)
         {
             if (anotherCell is null)
             {
@@ -95,7 +95,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             this._adjecentCellSpaces[direction] = anotherCell;
 
             if (bidirectional)
-                anotherCell.SetCellAsAdjecent(direction.Reverse(), this, false);
+                anotherCell.SetCellAsNeighbour(direction.Reverse(), this, false);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// <param name="anotherCell">Neighbour <c>Cell</c>.</param>
         /// <param name="bidirectional">True if this method should also be called on <paramref name="anotherCell"/>.</param>
         /// <exception cref="CellException">Thrown when <paramref name="anotherCell"/> indexes are not adjecent.</exception>
-        public void SetCellAsAdjecent(Cell anotherCell, bool bidirectional = true)
+        public void SetCellAsNeighbour(Cell anotherCell, bool bidirectional = true)
         {
             int rowDifference = anotherCell.RowIndex - this.RowIndex;
             int columnDifference = anotherCell.ColumnIndex - this.ColumnIndex;
@@ -117,7 +117,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
             this._adjecentCellSpaces[direction] = anotherCell;
 
             if (bidirectional)
-                anotherCell.SetCellAsAdjecent(direction.Reverse(), this, false);
+                anotherCell.SetCellAsNeighbour(direction.Reverse(), this, false);
         }
 
         /// <summary>
@@ -160,10 +160,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// </summary>
         /// <param name="direction"><c>Direction</c> of the neighbour.</param>
         /// <returns>True if this <c>Cell</c> is linked to its neighbour in specified <c>Direction</c>.</returns>
-        public bool IsLinkedToNeighbour(Direction direction)
-        {
-            return this.IsLinked(this._adjecentCellSpaces[direction]);
-        }
+        public bool IsLinked(Direction direction) => this.IsLinked(this._adjecentCellSpaces[direction]);
 
         /// <summary>
         /// Returns true if this <c>Cell</c> is linked to <paramref name="anotherCell"/>.
@@ -186,7 +183,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// </summary>
         /// <param name="direction">The <c>Direction</c> of the neighbour <c>Cell</c>.</param>
         /// <exception cref="ArgumentNullException">Thrown when this <c>Cell</c> has no neighbour in specified <c>Direction</c>.</exception>
-        public void LinkToNeighbour(Direction direction)
+        public void LinkTo(Direction direction)
         {
             Cell? neighbourCell = this._adjecentCellSpaces[direction];
             this.LinkTo(neighbourCell);
@@ -218,7 +215,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// </summary>
         /// <param name="direction">The <c>Direction</c> of the neighbour <c>Cell</c>.</param>
         /// <exception cref="ArgumentNullException">Thrown when this <c>Cell</c> has no neighbour in specified <c>Direction</c>.</exception>
-        public void UnlinkFromNeighbour(Direction direction)
+        public void UnlinkFrom(Direction direction)
         {
             Cell? neighbourCell = this._adjecentCellSpaces[direction];
             this.UnlinkFrom(neighbourCell);
@@ -245,14 +242,14 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// Returns a collection of this <c>Cell</c>'s neighbours.
         /// </summary>
         /// <returns>Collection of this <c>Cell</c>'s neighbours.</returns>
-        public IEnumerable<Cell> GetAdjecentCells() => _adjecentCellSpaces.Values.Where(c => c is not null).Select(c => c!);
+        public IEnumerable<Cell> GetNeighbours() => _adjecentCellSpaces.Values.Where(c => c is not null).Select(c => c!);
 
         /// <summary>
         /// Returns a collection of this <c>Cell</c>'s neighbours in <c>Direction</c>s included in <paramref name="directions"/>.
         /// </summary>
         /// <param name="directions">Array containing the included <c>Direction</c>s.</param>
         /// <returns>Collection of this <c>Cell</c>'s neighbours in <c>Direction</c>s included in <paramref name="directions"/>.</returns>
-        public IEnumerable<Cell> GetAdjecentCells(params Direction[] directions) => _adjecentCellSpaces.Where(c => directions.Contains(c.Key))
+        public IEnumerable<Cell> GetNeighbours(params Direction[] directions) => _adjecentCellSpaces.Where(c => directions.Contains(c.Key))
                                                                                                       .Where(c => c.Value is not null)
                                                                                                       .Select(c => c.Value!);
 

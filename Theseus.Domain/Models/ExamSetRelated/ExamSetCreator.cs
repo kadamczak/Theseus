@@ -120,7 +120,7 @@ namespace Theseus.Domain.Models.ExamSetRelated
         public ExamSet Create(int fullMazeAmount, int beginningMaxDimension, int endingMaxDimension, StaffMember owner)
         {
             ExamSet examSet = new ExamSet(Guid.NewGuid());
-            examSet.StaffMember = owner;
+            examSet.Owner = owner;
 
             var segmentLengths = CalculateDifficultySegmentLengths(fullMazeAmount);
             Random rnd = new Random();
@@ -131,7 +131,7 @@ namespace Theseus.Domain.Models.ExamSetRelated
             {
                 MazeWithSolution maze = CreateMaze(mazeParameters[i]);
                 maze.Id = Guid.NewGuid();
-                maze.StaffMember = owner;
+                maze.Owner = owner;
 
                 ExamSetMazeIndex mazeIndex = new ExamSetMazeIndex(Guid.NewGuid(), examSet, maze, i);
                 examSet.ExamSetMazeIndexes.Add(mazeIndex);

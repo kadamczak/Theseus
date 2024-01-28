@@ -31,7 +31,7 @@ namespace Theseus.Domain.Models.ExamSetRelated
         /// <summary>
         /// Gets or sets the owner of the <c>ExamSet</c>.
         /// </summary>
-        public StaffMember StaffMember { get; set; } = default!;
+        public StaffMember Owner { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets a list of <c>Group</c>s which <c>Patient</c>s can use this <c>ExamSet</c>.

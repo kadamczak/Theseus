@@ -60,7 +60,7 @@ namespace Theseus.WPF.Code.Commands.MazeCommands
                                                                        solutionAlgorithm,
                                                                        shouldExcludeCellsCloseToRoot);
 
-            mazeWithSolution.StaffMember = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException();
+            mazeWithSolution.Owner = _currentStaffMemberStore.StaffMember ?? throw new StaffMemberNotLoggedInException();
             _mazeDetailsStore.SelectedModel = new MazeWithSolutionCanvasViewModel(mazeWithSolution);
             _mazeDetailNavigationService.Navigate();
         }

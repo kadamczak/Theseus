@@ -45,7 +45,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(direction, neighbourCell);
+            cell.SetCellAsNeighbour(direction, neighbourCell);
 
             //act
             Cell? obtainedCell = cell.GetAdjecentCellSpace(direction);
@@ -70,17 +70,17 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         }
 
         //=======================================================================
-        //void SetCellAsAdjecent(Direction direction, Cell? anotherCell, bool bidirectional = true)
+        //void SetCellAsNeighbour(Direction direction, Cell? anotherCell, bool bidirectional = true)
         //=======================================================================
 
         [Fact()]
-        public void SetCellAsAdjecent_ShouldSetAdjecentSpaceAsNull_WhenNullArgument()
+        public void SetCellAsNeighbour_ShouldSetAdjecentSpaceAsNull_WhenNullArgument()
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            cell.SetCellAsAdjecent(Direction.North, null);
+            cell.SetCellAsNeighbour(Direction.North, null);
 
             //assert
             Assert.Null(cell.GetAdjecentCellSpace(Direction.North));
@@ -88,13 +88,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void SetCellAsAdjecent_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
+        public void SetCellAsNeighbour_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            cell.SetCellAsAdjecent(direction, neighbourCell);
+            cell.SetCellAsNeighbour(direction, neighbourCell);
 
             //assert
             Assert.Equal(neighbourCell, cell.GetAdjecentCellSpace(direction));
@@ -113,31 +113,31 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(WrongNeighbourCells_Data))]
-        public void SetCellAsAdjecent_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Direction direction, Cell wrongCell)
+        public void SetCellAsNeighbour_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Direction direction, Cell wrongCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            Action action = () => cell.SetCellAsAdjecent(direction, wrongCell);
+            Action action = () => cell.SetCellAsNeighbour(direction, wrongCell);
 
             //assert
             action.Invoking(e => e.Invoke()).Should().Throw<CellException>();
         }
 
         //=======================================================================
-        //void SetCellAsAdjecent(Cell anotherCell, bool bidirectional = true)
+        //void SetCellAsNeighbour(Cell anotherCell, bool bidirectional = true)
         //=======================================================================
 
         [Fact()]
-        public void SetCellAsAdjecentWithoutDirection_ShouldThrowNullReferenceException_WhenNullArgument()
+        public void SetCellAsNeighbourWithoutDirection_ShouldThrowNullReferenceException_WhenNullArgument()
         {
             //arrange
             Cell cell = new Cell(1, 1);
             Cell nullCell = null;
 
             //act
-            Action action = () => cell.SetCellAsAdjecent(nullCell);
+            Action action = () => cell.SetCellAsNeighbour(nullCell);
 
             //assert
             action.Invoking(e => e.Invoke()).Should().Throw<NullReferenceException>();
@@ -145,13 +145,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void SetCellAsAdjecentWithoutDirection_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
+        public void SetCellAsNeighbourWithoutDirection_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            cell.SetCellAsAdjecent(neighbourCell);
+            cell.SetCellAsNeighbour(neighbourCell);
 
             //assert
             Assert.Equal(neighbourCell, cell.GetAdjecentCellSpace(direction));
@@ -169,13 +169,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(WrongNeighbourCellsNoDirection_Data))]
-        public void SetCellAsAdjecentWithoutDirection_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Cell wrongCell)
+        public void SetCellAsNeighbourWithoutDirection_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Cell wrongCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            Action action = () => cell.SetCellAsAdjecent(wrongCell);
+            Action action = () => cell.SetCellAsNeighbour(wrongCell);
 
             //assert
             action.Invoking(e => e.Invoke()).Should().Throw<CellException>();
@@ -206,8 +206,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             Cell onedirectionallyLinkedNeighbourCell = new Cell(0, 1);
             Cell awayCell = new Cell(5, 5);
 
-            cell.SetCellAsAdjecent(notLinkedNeighbourCell);
-            cell.SetCellAsAdjecent(onedirectionallyLinkedNeighbourCell);
+            cell.SetCellAsNeighbour(notLinkedNeighbourCell);
+            cell.SetCellAsNeighbour(onedirectionallyLinkedNeighbourCell);
 
             cell.LinkTo(onedirectionallyLinkedNeighbourCell, false);
 
@@ -229,7 +229,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             Cell cell = new Cell(1, 1);
             Cell bidirectionallyLinkedNeighbourCell = new Cell(1, 2);
 
-            cell.SetCellAsAdjecent(bidirectionallyLinkedNeighbourCell);
+            cell.SetCellAsNeighbour(bidirectionallyLinkedNeighbourCell);
             cell.LinkTo(bidirectionallyLinkedNeighbourCell);
 
             //act
@@ -242,19 +242,19 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         }
 
         //=======================================================================
-        //bool IsLinkedToNeighbour(Direction direction)
+        //bool IsLinked(Direction direction)
         //=======================================================================
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void IsLinkedToNeighbour_ShouldReturnTrue_WhenLinked(Direction direction, Cell neighbourCell)
+        public void IsLinked_ShouldReturnTrue_WhenLinked(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(direction, neighbourCell);
+            cell.SetCellAsNeighbour(direction, neighbourCell);
             cell.LinkTo(neighbourCell);
 
             //act
-            bool isLinked = cell.IsLinkedToNeighbour(direction);
+            bool isLinked = cell.IsLinked(direction);
 
             //assert
             Assert.True(isLinked);
@@ -262,14 +262,14 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void IsLinkedToNeighbour_ShouldReturnFalse_WhenNotLinkedToExistingNeighbour(Direction direction, Cell neighbourCell)
+        public void IsLinked_ShouldReturnFalse_WhenNotLinkedToExistingNeighbour(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(direction, neighbourCell);
+            cell.SetCellAsNeighbour(direction, neighbourCell);
 
             //act
-            bool isLinked = cell.IsLinkedToNeighbour(direction);
+            bool isLinked = cell.IsLinked(direction);
 
             //assert
             Assert.False(isLinked);
@@ -277,7 +277,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(Directions_Data))]
-        public void IsLinkedToNeighbour_ShouldReturnFalse_WhenNeighbourDoesNotExist(Direction direction)
+        public void IsLinked_ShouldReturnFalse_WhenNeighbourDoesNotExist(Direction direction)
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -286,23 +286,23 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             //not needed
 
             //assert
-            Assert.False(cell.IsLinkedToNeighbour(direction));
+            Assert.False(cell.IsLinked(direction));
         }
 
         //=======================================================================
-        //void LinkToNeighbour(Direction direction)
+        //void LinkTo(Direction direction)
         //=======================================================================
 
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void LinkToNeighbour_ShouldLink_WhenAdjecentSpaceHasCell(Direction direction, Cell neighbourCell)
+        public void LinkTo_ShouldLink_WhenAdjecentSpaceHasCell(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(neighbourCell);
+            cell.SetCellAsNeighbour(neighbourCell);
 
             //act
-            cell.LinkToNeighbour(direction);
+            cell.LinkTo(direction);
 
             //assert
             Assert.True(cell.IsLinked(neighbourCell));
@@ -310,13 +310,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         }
 
         [Fact()]
-        public void LinkToNeighbour_ShouldThrowArgumentNullException_WhenAdjecentSpaceHasNoCell()
+        public void LinkTo_ShouldThrowArgumentNullException_WhenAdjecentSpaceHasNoCell()
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            Action action = () => cell.LinkToNeighbour(Direction.North);
+            Action action = () => cell.LinkTo(Direction.North);
 
             //assert
             action.Invoking(e => e.Invoke()).Should().Throw<ArgumentNullException>();
@@ -331,7 +331,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(neighbourCell);
+            cell.SetCellAsNeighbour(neighbourCell);
 
             //act
             cell.LinkTo(neighbourCell);
@@ -347,7 +347,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(neighbourCell);
+            cell.SetCellAsNeighbour(neighbourCell);
 
             //act
             cell.LinkTo(neighbourCell);
@@ -374,20 +374,20 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         }
 
         //=======================================================================
-        //void UnlinkFromNeighbour(Direction direction)
+        //void UnlinkFrom(Direction direction)
         //=======================================================================
 
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void UnlinkFromNeighbour_ShouldUnlink_WhenLinked(Direction direction, Cell neighbourCell)
+        public void UnlinkFrom_Direction_ShouldUnlink_WhenLinked(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(neighbourCell);
+            cell.SetCellAsNeighbour(neighbourCell);
             cell.LinkTo(neighbourCell);
 
             //act
-            cell.UnlinkFromNeighbour(direction);
+            cell.UnlinkFrom(direction);
 
             //assert
             Assert.False(cell.IsLinked(neighbourCell));
@@ -395,13 +395,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         }
 
         [Fact()]
-        public void UnlinkFromNeighbour_ShouldThrowArgumentNullException_WhenAdjecentSpaceHasNoCell()
+        public void UnlinkFrom_Direction_ShouldThrowArgumentNullException_WhenAdjecentSpaceHasNoCell()
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            Action action = () => cell.UnlinkFromNeighbour(Direction.North);
+            Action action = () => cell.UnlinkFrom(Direction.North);
 
             //assert
             action.Invoking(e => e.Invoke()).Should().Throw<ArgumentNullException>();
@@ -416,7 +416,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(neighbourCell);
+            cell.SetCellAsNeighbour(neighbourCell);
             cell.LinkTo(neighbourCell);
 
             //act
@@ -433,7 +433,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         {
             //arrange
             Cell cell = new Cell(1, 1);
-            cell.SetCellAsAdjecent(neighbourCell);
+            cell.SetCellAsNeighbour(neighbourCell);
             cell.LinkTo(neighbourCell);
 
             //act
@@ -446,49 +446,49 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         }
 
         //=======================================================================
-        //IEnumerable<Cell> GetAdjecentCells()
+        //IEnumerable<Cell> GetNeighbours()
         //=======================================================================
         [Fact()]
-        public void GetAdjecentCells_ShouldReturnOnlyNonNullCells_WhenNotAllAdjecentSpacesAreFilled()
+        public void GetNeighbours_ShouldReturnOnlyNonNullCells_WhenNotAllAdjecentSpacesAreFilled()
         {
             //arrange
             Cell cell = new Cell(1, 1);
             Cell westCell = new Cell(1, 0);
             Cell eastCell = new Cell(1, 2);
 
-            cell.SetCellAsAdjecent(westCell);
-            cell.SetCellAsAdjecent(eastCell);
+            cell.SetCellAsNeighbour(westCell);
+            cell.SetCellAsNeighbour(eastCell);
             cell.LinkTo(westCell);
             cell.LinkTo(eastCell);
 
             var expectedResult = new List<Cell>() { eastCell, westCell };
 
             //act
-            var cells = cell.GetAdjecentCells();
+            var cells = cell.GetNeighbours();
 
             //assert
             Assert.True(Enumerable.SequenceEqual(expectedResult, cells));
         }
 
         [Fact()]
-        public void GetAdjecentCells_ShouldReturnEmptyList_IfNoAdjecentCells()
+        public void GetNeighbours_ShouldReturnEmptyList_IfNoAdjecentCells()
         {
             //arrange
             Cell cell = new Cell(1, 1);
 
             //act
-            var cells = cell.GetAdjecentCells();
+            var cells = cell.GetNeighbours();
 
             //assert
             Assert.Empty(cells);
         }
 
         //=======================================================================
-        //IEnumerable<Cell> GetAdjecentCells(params Direction[] directions)
+        //IEnumerable<Cell> GetNeighbours(params Direction[] directions)
         //=======================================================================
 
         [Fact()]
-        public void GetAdjecentCells_ShouldReturnOnlyCellsFromSpecifiedDirections_WhenCellsInSpecifiedDirectionsExist()
+        public void GetNeighbours_ShouldReturnOnlyCellsFromSpecifiedDirections_WhenCellsInSpecifiedDirectionsExist()
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -496,9 +496,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             Cell eastCell = new Cell(1, 2);
             Cell northCell = new Cell(0, 1);
 
-            cell.SetCellAsAdjecent(westCell);
-            cell.SetCellAsAdjecent(northCell);
-            cell.SetCellAsAdjecent(eastCell);
+            cell.SetCellAsNeighbour(westCell);
+            cell.SetCellAsNeighbour(northCell);
+            cell.SetCellAsNeighbour(eastCell);
 
             cell.LinkTo(westCell);
             cell.LinkTo(northCell);
@@ -507,14 +507,14 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             var expectedResult = new List<Cell>() { eastCell, westCell };
 
             //act
-            var cells = cell.GetAdjecentCells(Direction.East, Direction.West);
+            var cells = cell.GetNeighbours(Direction.East, Direction.West);
 
             //assert
             Assert.True(Enumerable.SequenceEqual(expectedResult, cells));
         }
 
         [Fact()]
-        public void GetAdjecentCells_ShouldReturnEmptyList_WhenCellsInSpecifiedDirectionsDoNotExist()
+        public void GetNeighbours_ShouldReturnEmptyList_WhenCellsInSpecifiedDirectionsDoNotExist()
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -522,16 +522,16 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             Cell eastCell = new Cell(1, 2);
             Cell northCell = new Cell(0, 1);
 
-            cell.SetCellAsAdjecent(westCell);
-            cell.SetCellAsAdjecent(northCell);
-            cell.SetCellAsAdjecent(eastCell);
+            cell.SetCellAsNeighbour(westCell);
+            cell.SetCellAsNeighbour(northCell);
+            cell.SetCellAsNeighbour(eastCell);
 
             cell.LinkTo(westCell);
             cell.LinkTo(northCell);
             cell.LinkTo(eastCell);
 
             //act
-            var cells = cell.GetAdjecentCells(Direction.South);
+            var cells = cell.GetNeighbours(Direction.South);
 
             //assert
             Assert.Empty(cells);
@@ -548,8 +548,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             Cell westNeighbour = new Cell(1, 0);
             Cell northNeighbour = new Cell(0, 1);
 
-            cell.SetCellAsAdjecent(westNeighbour);
-            cell.SetCellAsAdjecent(northNeighbour);
+            cell.SetCellAsNeighbour(westNeighbour);
+            cell.SetCellAsNeighbour(northNeighbour);
             cell.LinkTo(westNeighbour);
 
             //act
@@ -569,8 +569,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             Cell westNeighbour = new Cell(1, 0);
             Cell northNeighbour = new Cell(0, 1);
 
-            cell.SetCellAsAdjecent(westNeighbour);
-            cell.SetCellAsAdjecent(northNeighbour);
+            cell.SetCellAsNeighbour(westNeighbour);
+            cell.SetCellAsNeighbour(northNeighbour);
             cell.LinkTo(westNeighbour);
 
             //act
@@ -590,8 +590,8 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
             Cell westNeighbour = new Cell(1, 0);
             Cell northNeighbour = new Cell(0, 1);
 
-            cell.SetCellAsAdjecent(westNeighbour);
-            cell.SetCellAsAdjecent(northNeighbour);
+            cell.SetCellAsNeighbour(westNeighbour);
+            cell.SetCellAsNeighbour(northNeighbour);
 
             //act
             Direction directionWest = cell.GetNeighbourDirection(westNeighbour);

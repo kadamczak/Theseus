@@ -32,7 +32,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 
         private bool HasBeenVisited(Cell cell) => cell.GetLinkedCells().Any();
 
-        private IEnumerable<Cell> GetNeighbours(Cell cell, Func<Cell, bool> predicate) => cell.GetAdjecentCells().Where(predicate);
+        private IEnumerable<Cell> GetNeighbours(Cell cell, Func<Cell, bool> predicate) => cell.GetNeighbours().Where(predicate);
 
         private Cell? HuntForNewCurrentCell(Maze mazeGrid, Random rnd)
         {

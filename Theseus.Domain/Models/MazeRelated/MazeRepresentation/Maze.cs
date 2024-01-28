@@ -36,14 +36,14 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// </summary>
         /// <param name="rows">Amount of rows.</param>
         /// <param name="columns">Amount of columns.</param>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="rows"/> or <paramref name="columns"/> is less than 2.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="rows"/> or <paramref name="columns"/> is less than 3 or more than 50.</exception>
         public Maze(int rows, int columns)
         {
-            if (rows < 2)
-                throw new ArgumentException("Row amount must be at least 2.");
+            if (rows < 3 || rows > 50)
+                throw new ArgumentException("Row amount is not in correct range.");
 
-            if (columns < 2)
-                throw new ArgumentException("Column amount must be at least 2.");
+            if (columns < 3 || columns > 50)
+                throw new ArgumentException("Column amount is not in correct range.");
 
             RowAmount = rows;
             ColumnAmount = columns;
@@ -88,10 +88,10 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
                 int row = cell.RowIndex;
                 int col = cell.ColumnIndex;
 
-                cell.SetCellAsAdjecent(Direction.North, GetCell(row - 1, col), false);
-                cell.SetCellAsAdjecent(Direction.South, GetCell(row + 1, col), false);
-                cell.SetCellAsAdjecent(Direction.West, GetCell(row, col - 1), false);
-                cell.SetCellAsAdjecent(Direction.East, GetCell(row, col + 1), false);
+                cell.SetCellAsNeighbour(Direction.North, GetCell(row - 1, col), false);
+                cell.SetCellAsNeighbour(Direction.South, GetCell(row + 1, col), false);
+                cell.SetCellAsNeighbour(Direction.West, GetCell(row, col - 1), false);
+                cell.SetCellAsNeighbour(Direction.East, GetCell(row, col + 1), false);
             }
         }
 

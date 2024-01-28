@@ -57,7 +57,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 
             private void SaveNeighbourPairsOfCell(Cell currentCell)
             {
-                var neighbours = currentCell.GetAdjecentCells(Direction.South, Direction.East);
+                var neighbours = currentCell.GetNeighbours(Direction.South, Direction.East);
 
                 foreach (var neighbour in neighbours)
                 {

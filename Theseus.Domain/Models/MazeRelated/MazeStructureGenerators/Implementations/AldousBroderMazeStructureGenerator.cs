@@ -30,7 +30,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 
         private Cell GetRandomNeighbour(Cell cell, Random rnd)
         {
-            var neighbours = cell.GetAdjecentCells();
+            var neighbours = cell.GetNeighbours();
             return neighbours.GetRandomItem(rnd);
         }
 

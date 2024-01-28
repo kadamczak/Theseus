@@ -37,26 +37,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation
         /// <summary>
         /// Gets or sets the owner of the <c>MazeWithSolution</c>.
         /// </summary>
-        public StaffMember StaffMember { get; set; }
-
-        /// <summary>
-        /// Gets a list of <c>ExamSet</c>s that feature this <c>MazeWithSolution</c>.
-        /// </summary>
-        public List<ExamSet> ExamSets { get; } = new List<ExamSet>();
-
-        /// <summary>
-        /// Initializes <c>MazeWithSolution</c> with no additional actions.
-        /// </summary>
-        public MazeWithSolution() { }
-
-        /// <summary>
-        /// Initializes <c>MazeWithSolution</c> with ID.
-        /// </summary>
-        /// <param name="id"><c>MazeWithSolution</c> ID.</param>
-        public MazeWithSolution(Guid id)
-        {
-            Id = id;
-        }
+        public StaffMember Owner { get; set; }
 
         /// <summary>
         /// Initializes <c>MazeWithSolution</c> with <c>Maze</c> and potential ID.

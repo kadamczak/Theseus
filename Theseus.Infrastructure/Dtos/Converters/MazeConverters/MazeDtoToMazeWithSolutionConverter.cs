@@ -41,7 +41,7 @@ namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
             {
                 if (IsBitSetToOne(cellValue, bitPosition))
                 {
-                    cell.LinkToNeighbour(direction);
+                    cell.LinkTo(direction);
                 }
 
                 bitPosition++;

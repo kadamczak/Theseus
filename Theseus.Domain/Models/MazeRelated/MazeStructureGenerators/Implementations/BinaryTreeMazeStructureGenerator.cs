@@ -14,7 +14,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
             Random rnd = CreateRandom(rndSeed);
             foreach (var cell in mazeGrid)
             {
-                var cellNeighbours = cell.GetAdjecentCells(Direction.North, Direction.East);
+                var cellNeighbours = cell.GetNeighbours(Direction.North, Direction.East);
 
                 if (cellNeighbours.Any())
                 {

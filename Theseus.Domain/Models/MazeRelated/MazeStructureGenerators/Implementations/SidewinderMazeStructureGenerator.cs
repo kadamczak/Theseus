@@ -27,7 +27,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
                     }
                     else
                     {
-                        cell.LinkToNeighbour(Direction.East);
+                        cell.LinkTo(Direction.East);
                     }
                 }
             }

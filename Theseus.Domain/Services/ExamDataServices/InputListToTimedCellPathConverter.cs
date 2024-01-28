@@ -35,7 +35,7 @@ namespace Theseus.Domain.Services.ExamDataServices
             {
                 currentTime += input.TimeBeforeStep;
 
-                if (currentCell.IsLinkedToNeighbour(input.StepTaken))
+                if (currentCell.IsLinked(input.StepTaken))
                 {
                     Cell nextCell = currentCell.GetAdjecentCellSpace(input.StepTaken)!;
                     patientInputPath.Add(new TimedCell(currentTime, nextCell));

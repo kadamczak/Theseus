@@ -17,7 +17,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
             while(activeCells.Any())
             {
                 Cell currentCell = GetMinimumCostCell(activeCells, cellCosts, rnd);
-                var notLinkedNeighbours = currentCell.GetAdjecentCells().Where(n => !n.GetLinkedCells().Any());
+                var notLinkedNeighbours = currentCell.GetNeighbours().Where(n => !n.GetLinkedCells().Any());
 
                 if(notLinkedNeighbours.Any())
                 {
