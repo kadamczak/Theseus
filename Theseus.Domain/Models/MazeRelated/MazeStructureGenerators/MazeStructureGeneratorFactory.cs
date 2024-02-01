@@ -19,7 +19,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeGenerators
                 MazeStructureGenAlgorithm.HuntAndKill => new HuntAndKillMazeStructureGenerator(),
                 MazeStructureGenAlgorithm.Kruskal => new KruskalMazeStructureGenerator(),
                 MazeStructureGenAlgorithm.TruePrim => new TruePrimMazeStructureGenerator(),
-                _ => throw new NotImplementedException("Asked to generate a maze with algorithm that has not been implemented yet."),
+                _ => throw new NotImplementedException("Asked to generate a maze with algorithm that has not been implemented."),
             };
         }
     }

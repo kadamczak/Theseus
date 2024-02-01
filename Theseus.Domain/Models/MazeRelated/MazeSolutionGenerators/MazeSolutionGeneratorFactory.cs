@@ -21,7 +21,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators
             {
                 MazeSolutionGenAlgorithm.Dijkstra => new DijkstraMazeSolutionGenerator(_distanceGridFactory, shouldExcludeCellsCloseToRoot),
                 MazeSolutionGenAlgorithm.RandomBorderCells => new RandomBorderCellsMazeSolutionGenerator(_distanceGridFactory, shouldExcludeCellsCloseToRoot),
-                _ => throw new NotImplementedException("Asked to generate a maze solution with algorithm that has not been implemented yet."),
+                _ => throw new NotImplementedException("Asked to generate a maze solution with algorithm that has not been implemented."),
             };
         }
     }

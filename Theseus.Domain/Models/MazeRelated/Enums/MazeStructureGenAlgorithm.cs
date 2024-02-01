@@ -7,9 +7,9 @@
     {
         AldousBroder = 0,
         HuntAndKill = 1,
-        Kruskal = 3,
         TruePrim = 2,
-        Binary = 5,
+        Kruskal = 3,
         Sidewinder = 4,
+        Binary = 5
     }
 }
