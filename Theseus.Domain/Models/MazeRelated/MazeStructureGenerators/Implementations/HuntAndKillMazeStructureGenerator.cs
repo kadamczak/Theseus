@@ -15,7 +15,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 
             while (currentCell is not null)
             {
-                var unvisitedNeighbours = GetNeighbours(currentCell, predicate: neighbour => !HasBeenVisited(neighbour));
+                var unvisitedNeighbours = currentCell.GetNeighbours().Where(neighbour => !HasBeenVisited(neighbour));
 
                 if (unvisitedNeighbours.Any())
                 {
@@ -32,15 +32,13 @@ namespace Theseus.Domain.Models.MazeRelated.MazeStructureGenerators.Implementati
 
         private bool HasBeenVisited(Cell cell) => cell.GetLinkedCells().Any();
 
-        private IEnumerable<Cell> GetNeighbours(Cell cell, Func<Cell, bool> predicate) => cell.GetNeighbours().Where(predicate);
-
         private Cell? HuntForNewCurrentCell(Maze mazeGrid, Random rnd)
         {
             foreach (var cell in mazeGrid)
             {
                 if (!HasBeenVisited(cell))
                 {
-                    var visitedNeighbours = GetNeighbours(cell, predicate: HasBeenVisited);
+                    var visitedNeighbours = cell.GetNeighbours().Where(HasBeenVisited);
 
                     if(visitedNeighbours.Any())
                     {
