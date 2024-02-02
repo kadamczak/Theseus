@@ -18,20 +18,20 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.Implementatio
             Random rnd = CreateRandom(rndSeed);
 
             List<Cell> borderCells = maze.Grid.GetBorderCells().ToList();
-            Cell rootCell = FindRootCell(maze, rnd, borderCells);
-            var distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell);
+            Cell startCell = FindStartCell(maze, rnd, borderCells);
+            var distanceGrid = DistanceGridFactory.CreateDistanceGrid(startCell);
 
             if (ShouldExcludeCellsCloseToRoot)
-                borderCells = maze.Grid.ExcludeCellsCloseTo(rootCell, borderCells).ToList();
+                borderCells = maze.Grid.ExcludeCellsCloseTo(startCell, borderCells).ToList();
 
             Cell endCell = distanceGrid.FindFarthestCells(borderCells).GetRandomItem(rnd);
 
             maze.SolutionPath = distanceGrid.FindPathTo(endCell);
-             maze.StartDirection = ChooseRandomExitDirection(rootCell, rnd);
+             maze.StartDirection = ChooseRandomExitDirection(startCell, rnd);
             maze.EndDirection = ChooseRandomExitDirection(endCell, rnd);
         }
 
-        private Cell FindRootCell(MazeWithSolution maze, Random rnd, List<Cell> borderCells)
+        private Cell FindStartCell(MazeWithSolution maze, Random rnd, List<Cell> borderCells)
         {
             Cell firstCell = maze.Grid.GetCell(0, 0)!;
             var distanceGrid = DistanceGridFactory.CreateDistanceGrid(rootCell: firstCell);

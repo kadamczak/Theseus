@@ -112,22 +112,22 @@ namespace Theseus.Domain.Models.ExamSetRelated
         /// <summary>
         /// Generates a random <c>ExamSet</c> following the parameters passed into the method.
         /// </summary>
-        /// <param name="fullMazeAmount">Amount of mazes in the resulting <c>ExamSet</c>.</param>
+        /// <param name="mazeAmount">Amount of mazes in the resulting <c>ExamSet</c>.</param>
         /// <param name="beginningMaxDimension">Max allowed maze width and height for the first <c>MazeWithSolution</c> included in the resulting <c>ExamSet</c>.</param>
         /// <param name="endingMaxDimension">Max allowed maze width and height for the last <c>MazeWithSolution</c> included in the resulting <c>ExamSet</c>.</param>
         /// <param name="owner">The <c>StaffMember</c> that will be the owner of the resulting <c>ExamSet</c>.</param>
         /// <returns>Random <c>ExamSet</c> following the parameters passed into the method.</returns>
-        public ExamSet Create(int fullMazeAmount, int beginningMaxDimension, int endingMaxDimension, StaffMember owner)
+        public ExamSet Create(int mazeAmount, int beginningMaxDimension, int endingMaxDimension, StaffMember owner)
         {
             ExamSet examSet = new ExamSet(Guid.NewGuid());
             examSet.Owner = owner;
 
-            var segmentLengths = CalculateDifficultySegmentLengths(fullMazeAmount);
+            var segmentLengths = CalculateDifficultySegmentLengths(mazeAmount);
             Random rnd = new Random();
 
             List<MazeParameter> mazeParameters = GenerateMazeParameters(segmentLengths, beginningMaxDimension, endingMaxDimension, rnd);
 
-            for (int i = 0; i < fullMazeAmount; i++)
+            for (int i = 0; i < mazeAmount; i++)
             {
                 MazeWithSolution maze = CreateMaze(mazeParameters[i]);
                 maze.Id = Guid.NewGuid();
@@ -368,7 +368,7 @@ namespace Theseus.Domain.Models.ExamSetRelated
         /// <summary>
         /// Dictionary that assings a base multiplier value for possible <c>MazeShape</c>s that is used to calculate height based on maze width.
         /// </summary>
-        private Dictionary<MazeShape, float> _shapeMultiplier = new Dictionary<MazeShape, float>
+        private readonly Dictionary<MazeShape, float> _shapeMultipliers = new Dictionary<MazeShape, float>
         {
             [MazeShape.HorizontalRectangle] = 0.5f,
             [MazeShape.VerticalRectangle] = 1.6f,
@@ -385,7 +385,7 @@ namespace Theseus.Domain.Models.ExamSetRelated
         private (int Height, int Width) CalculateMazeHeightWidth(int largerDimension, MazeShape shapeType, Random rnd)
         {
             float multiplierRandomness = (rnd.Next(0, 20) / 100f) - 0.1f;
-            float multiplierValue = _shapeMultiplier[shapeType] + multiplierRandomness;
+            float multiplierValue = _shapeMultipliers[shapeType] + multiplierRandomness;
             bool widthIsLarger = shapeType != MazeShape.VerticalRectangle;
 
             if (widthIsLarger)
