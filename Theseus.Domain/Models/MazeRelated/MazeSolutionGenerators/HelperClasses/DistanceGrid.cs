@@ -25,7 +25,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
 
             while (currentCell != RootCell)
             {
-                Cell closerCell = FindCloserCellThan(currentCell);
+                Cell closerCell = FindCloserLinkedCell(currentCell);
                 path.Add(closerCell);
                 currentCell = closerCell;
             }
@@ -34,7 +34,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeSolutionGenerators.HelperClasses
             return path;
         }
 
-        private Cell FindCloserCellThan(Cell currentCell)
+        private Cell FindCloserLinkedCell(Cell currentCell)
         {
             int currentCellDistance = Distance[currentCell];
             foreach (var linkedCell in currentCell.GetLinkedCells())
