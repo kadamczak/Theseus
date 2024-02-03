@@ -34,13 +34,13 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public void DrawScaledMazeWithVisibleSolutionPath(float minCellSize, bool centerMaze = true, bool drawArrows = true)
         {
-            float cellSize = CalculateCellSize(minCellSize);
+            float cellSize = CalculateCellSize();
             DrawMazeWithVisibleSolutionPath(cellSize, centerMaze, drawArrows);
         }
 
-        public void DrawScaledMaze(float minCellSize, bool centerMaze = true, bool drawArrows = true)
+        public void DrawScaledMaze(bool centerMaze = true, bool drawArrows = true)
         {
-            float cellSize = CalculateCellSize(minCellSize);
+            float cellSize = CalculateCellSize();
             DrawMaze(cellSize, centerMaze, drawArrows);
         }
 
@@ -62,7 +62,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             this.Margin = (centerMaze) ? CalculateCenterMargin(cellSize) : new Thickness(0);
         }
 
-        public float CalculateCellSize(float minCellSize) => this._mazeCanvasView.CalculateCellSize(minCellSize);
+        public float CalculateCellSize() => this._mazeCanvasView.CalculateCellSize();
 
         public Thickness CalculateCenterMargin(float cellSize)
         {

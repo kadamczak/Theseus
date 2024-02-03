@@ -91,9 +91,9 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         //=======================================================================
         public static IEnumerable<object[]> GetBorderCells_Data => new List<object[]>
             {
-                new object[] { 2, 4 },
+                new object[] { 3, 4 },
                 new object[] { 3, 3 },
-                new object[] { 2, 13 },
+                new object[] { 4, 13 },
                 new object[] { 7, 3 }
             };
 

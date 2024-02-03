@@ -43,7 +43,7 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         public void DrawScaledExamMaze(float minCellSize)
         {
-            this._cellSize = this._mazeWithSolutionCanvasView.CalculateCellSize(minCellSize);
+            this._cellSize = this._mazeWithSolutionCanvasView.CalculateCellSize();
             Thickness margin = this._mazeWithSolutionCanvasView.CalculateCenterMargin(_cellSize);
 
             this._mazeWithSolutionCanvasView.DrawMaze(_cellSize, centerMaze: false);

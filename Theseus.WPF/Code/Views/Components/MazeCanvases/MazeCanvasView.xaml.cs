@@ -22,9 +22,9 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
             this._lineDrawer = new LineDrawer(this.Canvas!);
         }
 
-        public void DrawScaledMaze(float minCellSize)
+        public void DrawScaledMaze()
         {
-            float cellSize = CalculateCellSize(minCellSize);
+            float cellSize = CalculateCellSize();
             DrawMaze(cellSize);
         }
 
@@ -64,18 +64,13 @@ namespace Theseus.WPF.Code.Views.Components.MazeCanvases
 
         private string CreateWallTag(string cellTag, Direction direction) => cellTag + "-" + (int)direction;
 
-        public float CalculateCellSize(float minCellSize)
+        public float CalculateCellSize()
         {
             Maze maze = GetMazeFromDataContext();
             bool resizeToHeight = maze.RowAmount > maze.ColumnAmount;
             float cellSize = CalculateCellSizeBasingOnDimension(maze, resizeToHeight);
             cellSize = RecalculateCellSizeIfOtherDimensionDoesntFit(maze, resizeToHeight, cellSize);
 
-            if (cellSize < minCellSize)
-            {
-                cellSize = minCellSize;
-                //TODO
-            }
             return cellSize;
         }
 
