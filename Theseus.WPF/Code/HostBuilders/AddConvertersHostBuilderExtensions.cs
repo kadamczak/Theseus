@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
+using Theseus.Infrastructure.Mappings.Converters.MazeConverters;
 
 namespace Theseus.WPF.Code.HostBuilders
 {

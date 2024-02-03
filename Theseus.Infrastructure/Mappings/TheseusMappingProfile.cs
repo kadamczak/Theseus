@@ -3,9 +3,9 @@ using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
 using Theseus.Domain.Models.ExamSetRelated;
 using Theseus.Domain.Models.UserRelated;
 using Theseus.Infrastructure.Dtos;
-using Theseus.Infrastructure.Dtos.Converters.MazeConverters;
 using Theseus.Domain.Models.GroupRelated;
 using Theseus.Domain.Models.ExamRelated;
+using Theseus.Infrastructure.Mappings.Converters.MazeConverters;
 
 namespace Theseus.Infrastructure.Mappings
 {

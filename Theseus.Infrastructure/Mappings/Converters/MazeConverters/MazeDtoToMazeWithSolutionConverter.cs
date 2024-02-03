@@ -3,8 +3,9 @@ using Theseus.Domain.Extensions;
 using Theseus.Domain.Models.MazeRelated.Enums;
 using Theseus.Domain.Models.MazeRelated.Exceptions;
 using Theseus.Domain.Models.MazeRelated.MazeRepresentation;
+using Theseus.Infrastructure.Dtos;
 
-namespace Theseus.Infrastructure.Dtos.Converters.MazeConverters
+namespace Theseus.Infrastructure.Mappings.Converters.MazeConverters
 {
     /// <summary>
     /// Helper class for the IMapper. Converts <c>MazeDto</c> to <c>MazeWithSolution</c>.
