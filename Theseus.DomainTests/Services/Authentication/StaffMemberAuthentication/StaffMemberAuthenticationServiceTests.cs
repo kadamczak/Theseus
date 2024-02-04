@@ -194,9 +194,6 @@ namespace Theseus.Domain.Services.Authentication.StaffMemberAuthentication.Tests
             //arrange
             string confirmPassword = "9999999bB";
 
-            _mockGetStaffMemberByEmailQuery.GetStaffMember(newAccount.Email).ReturnsNull();
-            _mockGetStaffMemberByUsernameQuery.GetStaffMember(newAccount.Username).ReturnsNull();
-
             //act
             StaffMemberRegistrationResult result = await _staffMemberAuthenticationService.Register(newAccount, confirmPassword);
 

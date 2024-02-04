@@ -32,7 +32,7 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication.Tests
         }
 
         //=======================================================================
-        //async Task<StaffMemberRegistrationResult> Register(StaffMember newAccount, string confirmPassword)
+        //async Task<Patient> Login(string username, string groupName)
         //=======================================================================
         [Fact()]
         public async Task Login_ShouldReturnSuccess_WhenUniqueUsernameAndGroupExistsAndDataPassesDataAnnotationChecks()
@@ -125,7 +125,7 @@ namespace Theseus.Domain.Services.Authentication.PatientAuthentication.Tests
             }
         }
         //=======================================================================
-        //async Task<StaffMemberRegistrationResult> Register(StaffMember newAccount, string confirmPassword)
+        //async Task<PatientRegistrationResult> Register(Patient newAccount, string groupName)
         //=======================================================================
 
         [Fact()]

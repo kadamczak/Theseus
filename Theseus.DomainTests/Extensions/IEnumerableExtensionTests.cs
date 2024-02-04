@@ -33,7 +33,7 @@ namespace Theseus.Domain.Extensions.Tests
         }
 
         [Fact()]
-        public void GetRandomItem_ShouldThrowException_WhenContainsNoItems()
+        public void GetRandomItem_ShouldThrowArgumentOutOfRangeException_WhenContainsNoItems()
         {
             //arrange
             Random rnd = new Random(46);

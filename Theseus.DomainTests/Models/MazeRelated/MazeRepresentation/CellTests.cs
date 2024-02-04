@@ -74,7 +74,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         //=======================================================================
 
         [Fact()]
-        public void SetCellAsNeighbour_ShouldSetAdjecentSpaceAsNull_WhenNullArgument()
+        public void SetCellAsNeighbour_Direction_ShouldSetAdjecentSpaceAsNull_WhenNullArgument()
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -88,7 +88,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void SetCellAsNeighbour_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
+        public void SetCellAsNeighbour_Direction_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -113,7 +113,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(WrongNeighbourCells_Data))]
-        public void SetCellAsNeighbour_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Direction direction, Cell wrongCell)
+        public void SetCellAsNeighbour_Direction_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Direction direction, Cell wrongCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -130,7 +130,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
         //=======================================================================
 
         [Fact()]
-        public void SetCellAsNeighbourWithoutDirection_ShouldThrowNullReferenceException_WhenNullArgument()
+        public void SetCellAsNeighbour_ShouldThrowNullReferenceException_WhenNullArgument()
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -145,7 +145,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(NeighbourCellsWithDirection_Data))]
-        public void SetCellAsNeighbourWithoutDirection_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
+        public void SetCellAsNeighbour_ShouldSetAdjecentSpaceToCell_WhenCellArgumentWithCorrectIndexes(Direction direction, Cell neighbourCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
@@ -169,7 +169,7 @@ namespace Theseus.Domain.Models.MazeRelated.MazeRepresentation.Tests
 
         [Theory]
         [MemberData(nameof(WrongNeighbourCellsNoDirection_Data))]
-        public void SetCellAsNeighbourWithoutDirection_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Cell wrongCell)
+        public void SetCellAsNeighbour_ShouldThrowCellException_WhenCellArgumentWithIncorrectIndexes(Cell wrongCell)
         {
             //arrange
             Cell cell = new Cell(1, 1);
