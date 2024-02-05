@@ -32,7 +32,7 @@ namespace Theseus.WPF.Code.ViewModels
                                                                               MazeStructureGenAlgorithm.HuntAndKill,
                                                                               MazeSolutionGenAlgorithm.Dijkstra,
                                                                               shouldExcludeCellsCloseToRoot: true,
-                                                                              rndSeed: 44);
+                                                                              rndSeed: 66);
 
             MazeWithSolutionCanvasViewModel = new MazeWithSolutionCanvasViewModel(exampleMaze);
             ChangeMinimalCellSize = new ChangeMinimalCellSizeCommand(this, navigationService);
