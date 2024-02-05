@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /Theseus.WPF/appsettings.json
 /Theseus.Infrastructure/DbContexts/TheseusDesignTimeDbContextFactory.cs
+/Theseus.WPF/appsettings.json
